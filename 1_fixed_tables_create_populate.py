@@ -136,4 +136,4 @@ cur.execute('COMMIT')
 # Close the database and report back
 cal.close()
 
-x = input('\n   All done... Press Enter to exit')
+print('Finished stage 1')

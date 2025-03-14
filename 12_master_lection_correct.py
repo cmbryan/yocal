@@ -93,4 +93,4 @@ cal.close()
 if len(no_mod) < 50 and len(no_mod) > 1: print(no_mod,'\n')
 print('\033[A   ... All done\n')
 
-x = input('   ... Press Enter to exit')
+print('Finished stage 12')

@@ -120,4 +120,4 @@ cur.execute("COMMIT")
 
 cal.close()
 
-x = input('\n   All done... Press Enter to exit')
+print('Finished stage 3')
