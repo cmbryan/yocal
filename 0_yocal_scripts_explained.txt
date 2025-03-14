@@ -1,0 +1,59 @@
+York Orthodox Calendar Project
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The scripts create and use two SQLite databases: 'YOCal.db' and 'YOCal_Master.db'.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+YOCal.db is the basic reference for the project. 
+     The first four tables to be created contain fixed data:
+        A_Lections: The Apostle reading references for the Pascha, Pentecost, and Lenten cycles.
+        G_Lections: The Gospel cycle references and also the Extra readings, e.g. For the Departed.
+        Menaion: All data of fixed date - their commemorations, readings, and much else.
+        Pascha: The dates of Pascha. The capability of the database is limited by the dates provided.
+
+        The data for these tables are provided by four tab-delimited text files. 
+
+   Script 1 creates the database and populates the four fixed tables from their text files.
+   
+   Script 2 creates a series of year table. 100 tables covering 2000-2099 is currently possible.
+   
+   Scripts 3-7 populate these year tables. The complex relationship between the Paschalion and 
+               Menaion cycles requires that they be run in order.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+YOCal_Master.db is the portable working database which is queried for each day's data.
+     It has two tables: 'yocal_main' and 'yocal_lections'.
+        yocal_main has one record for each calendar date containing everything except 
+                   the text of the readings.
+        yocal_lections has the text of each reading, referenced by code. The code refers either
+                       to the Apostle/Gospel cycle or to a fixed date of the Menaion.
+
+   Script 8 creates the database and its tables.
+
+   Script 9 populates yocal_main with data for one or more years by querying YOCal.db. 
+            Selecting a range of six or seven years results in a DB of around 5mb.
+
+   Script 10 populates yocal_lections by importing the bible text for each reference.
+             The text is taken from WEBBE_NTv3.txt or LXXv2.txt as appropriate.
+
+   Script 11 is needed because of anomalies in lection references and verse boundaries.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Querying YOCal_Master.db and other utility scripts
+
+   Script 20 writes new copies of the tables of fixed data in YOCal.db to csv text files.
+
+   Script 21 dumps the table yocal_lections to a MySQL file suitable for importing into a web DB.
+
+   Script 22 dumps the table yocal_main to a similar MySQL file.
+
+   Script 91 creates a formatted HTML file suitable for printing with data for one month or more.
+
+   Script 92 modifies the 'Fathers' doc text so it is suitable for uploading to the website.
+
+   template_ss_rdgs.php is a Wordpress page template which diplays the daily data and readings.
+      
+       

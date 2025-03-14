@@ -1,0 +1,365 @@
+J1Sun		John 1:1-17		1
+J1Mon		John 1:18-28		2
+J1Tue		Luke 24:12-35		3
+J1Wed		John 1:35-51		4
+J1Thu		John 3:1-15		5
+J1Fri		John 2:12-22		6
+J1Sat		John 3:22-33		7
+J2Sun		John 20:19-31		8
+J2Mon		John 2:1-11		9
+J2Tue		John 3:16-21		10
+J2Wed		John 5:17-24		11
+J2Thu		John 5:24-30		12
+J2Fri		John 5:30-6:2		13
+J2Sat		John 6:14-27		14
+J3Sun		Mark 15:43-16:8		15
+J3Mon		John 4:46-54		16
+J3Tue		John 6:27-33		17
+J3Wed		John 6:35-39		18
+J3Thu		John 6:40-44		19
+J3Fri		John 6:48-54		20
+J3Sat		John 15:17-16:2		21
+J4Sun		John 5:1-15		22
+J4Mon		John 6:56-69		23
+J4Tue		John 7:1-13		24
+J4Wed		John 7:14-30		25
+J4Thu		John 8:12-20		26
+J4Fri		John 8:21-30		27
+J4Sat		John 8:31-42		28
+J5Sun		John 4:5-42		29
+J5Mon		John 8:42-51		30
+J5Tue		John 8:51-59		31
+J5Wed		John 6:5-14		32
+J5Thu		John 9:39-10:9		33
+J5Fri		John 10:17-28		34
+J5Sat		John 10:27-38		35
+J6Sun		John 9:1-38		36
+J6Mon		John 11:47-54		37
+J6Tue		John 12:19-36		38
+J6Wed		John 12:36-47		39
+J6Thu		Luke 24:36-53		40
+J6Fri		John 14:1-11		41
+J6Sat		John 14:10-21		42
+J7Sun		John 17:1-13		43
+J7Mon		John 14:27-15:7		44
+J7Tue		John 16:2-13		45
+J7Wed		John 16:15-23		46
+J7Thu		John 16:23-33		47
+J7Fri		John 17:18-26		48
+J7Sat		John 21:14-25		49
+J8Sun		John 7:37-52,8:12		50
+M1Mon		Matthew 18:10-20		51
+M1Tue		Matthew 4:25-5:13		52
+M1Wed		Matthew 5:20-26		53
+M1Thu		Matthew 5:27-32		54
+M1Fri		Matthew 5:33-41		55
+M1Sat		Matthew 5:42-48		56
+M1Sun	1st of Matthew, Sunday of All Saints	Matthew 10:32-33, 37-38,19:27-30		57
+M2Mon		Matthew 6:31-34,7:9-11		58
+M2Tue		Matthew 7:15-21		59
+M2Wed		Matthew 7:21-23		60
+M2Thu		Matthew 8:23-27		61
+M2Fri		Matthew 9:14-17		62
+M2Sat		Matthew 7:1-8		63
+M2Sun	2nd of Matthew, Sunday of All Saints of Antioch and All Saints of the British Isles and Ireland	Matthew 4:18-23		64
+M3Mon		Matthew 9:36-10:8		65
+M3Tue		Matthew 10:9-15		66
+M3Wed		Matthew 10:16-22		67
+M3Thu		Matthew 10:23-31		68
+M3Fri		Matthew 10:32-36,11:1		69
+M3Sat		Matthew 7:24-8:4		70
+M3Sun	3rd of Matthew	Matthew 6:22-33		71
+M4Mon		Matthew 11:2-15		72
+M4Tue		Matthew 11:16-20		73
+M4Wed		Matthew 11:20-26		74
+M4Thu		Matthew 11:27-30		75
+M4Fri		Matthew 12:1-8		76
+M4Sat		Matthew 8:14-23		77
+M4Sun	4th of Matthew	Matthew 8:5-13		78
+M5Mon		Matthew 12:9-13		79
+M5Tue		Matthew 12:14-16, 22-30		80
+M5Wed		Matthew 12:38-45		81
+M5Thu		Matthew 12:46-13:3		82
+M5Fri		Matthew 13:3-9		83
+M5Sat		Matthew 9:9-13		84
+M5Sun	5th of Matthew	Matthew 8:28-9:1		85
+M6Mon		Matthew 13:10-23		86
+M6Tue		Matthew 13:24-30		87
+M6Wed		Matthew 13:31-36		88
+M6Thu		Matthew 13:36-43		89
+M6Fri		Matthew 13:44-54		90
+M6Sat		Matthew 9:18-26		91
+M6Sun	6th of Matthew	Matthew 9:1-8		92
+M7Mon		Matthew 13:54-58		93
+M7Tue		Matthew 14:1-13		94
+M7Wed		Matthew 14:35-15:11		95
+M7Thu		Matthew 15:12-21		96
+M7Fri		Matthew 15:29-31		97
+M7Sat		Matthew 10:37-11:1		98
+M7Sun	7th of Matthew	Matthew 9:27-35		99
+M8Mon		Matthew 16:1-6		100
+M8Tue		Matthew 16:6-12		101
+M8Wed		Matthew 16:20-24		102
+M8Thu		Matthew 16:24-28		103
+M8Fri		Matthew 17:10-18		104
+M8Sat		Matthew 12:30-37		105
+M8Sun	8th of Matthew	Matthew 14:14-22		106
+M9Mon		Matthew 18:1-11		107
+M9Tue		Matthew 18:18-22,19:1-2,13-15		108
+M9Wed		Matthew 20:1-16		109
+M9Thu		Matthew 20:17-28		110
+M9Fri		Matthew 21:12-14,17-20		111
+M9Sat		Matthew 15:32-39		112
+M9Sun	9th of Matthew	Matthew 14:22-34		113
+M10Mon		Matthew 21:18-22		114
+M10Tue		Matthew 21:23-27		115
+M10Wed		Matthew 21:28-32		116
+M10Thu		Matthew 21:43-46		117
+M10Fri		Matthew 22:23-33		118
+M10Sat		Matthew 17:24-18:4		119
+M10Sun	10th of Matthew	Matthew 17:14-23		120
+M11Mon		Matthew 23:13-22		121
+M11Tue		Matthew 23:23-28		122
+M11Wed		Matthew 23:29-39		123
+M11Thu		Matthew 24:13-28		124
+M11Fri		Matthew 24:27-33,42-51		125
+M11Sat		Matthew 19:3-12		126
+M11Sun	11th of Matthew	Matthew 18:23-35		127
+M12Mon		Mark 1:9-15		128
+M12Tue		Mark 1:16-22		129
+M12Wed		Mark 1:23-28		130
+M12Thu		Mark 1:29-35		131
+M12Fri		Mark 2:18-22		132
+M12Sat		Matthew 20:29-34		133
+M12Sun	12th of Matthew	Matthew 19:16-26		134
+M13Mon		Mark 3:6-12		135
+M13Tue		Mark 3:13-21		136
+M13Wed		Mark 3:20-27		137
+M13Thu		Mark 3:28-35		138
+M13Fri		Mark 4:1-9		139
+M13Sat		Matthew 22:15-22		140
+M13Sun	13th of Matthew	Matthew 21:33-42		141
+M14Mon		Mark 4:10-23		142
+M14Tue		Mark 4:24-34		143
+M14Wed		Mark 4:35-41		144
+M14Thu		Mark 5:1-20		145
+M14Fri		Mark 5:22-24,35-6:1		146
+M14Sat		Matthew 23:1-12		147
+M14Sun	14th of Matthew	Matthew 22:2-14		148
+M15Mon		Mark 5:24-34		149
+M15Tue		Mark 6:1-7		150
+M15Wed		Mark 6:7-13		151
+M15Thu		Mark 6:30-45		152
+M15Fri		Mark 6:45-53		153
+M15Sat		Matthew 24:1-13		154
+M15Sun	15th of Matthew	Matthew 22:35-46		155
+M16Mon		Mark 6:54-7:8		156
+M16Tue		Mark 7:5-16		157
+M16Wed		Mark 7:14-24		158
+M16Thu		Mark 7:24-30		159
+M16Fri		Mark 8:1-10		160
+M16Sat		Matthew 24:34-44		161
+M16Sun	16th of Matthew	Matthew 25:14-30; Luke 8:8		162
+M17Mon		Mark 10:46-52		163
+M17Tue		Mark 11:11-23		164
+M17Wed		Mark 11:23-26		165
+M17Thu		Mark 11:27-33		166
+M17Fri		Mark 12:1-12		167
+M17Sat		Matthew 25:1-13		168
+M17Sun	17th of Matthew	Matthew 15:21-28		169
+L1Mon		Luke 3:19-22		170
+L1Tue		Luke 3:23-4:1		171
+L1Wed		Luke 4:1-15		172
+L1Thu		Luke 4:16-22		173
+L1Fri		Luke 4:22-30		174
+L1Sat		Luke 4:31-36		175
+L1Sun	1st of Luke	Luke 5:1-11		176
+L2Mon		Luke 4:37-44		177
+L2Tue		Luke 5:12-16		178
+L2Wed		Luke 5:33-39		179
+L2Thu		Luke 6:12-19		180
+L2Fri		Luke 6:17-23		181
+L2Sat		Luke 5:17-26		182
+L2Sun	2nd of Luke	Luke 6:31-36		183
+L3Mon		Luke 6:24-30		184
+L3Tue		Luke 6:37-45		185
+L3Wed		Luke 6:46-7:1		186
+L3Thu		Luke 7:17-30		187
+L3Fri		Luke 7:31-35		188
+L3Sat		Luke 5:27-32		189
+L3Sun	3rd of Luke	Luke 7:11-16		190
+L4Mon		Luke 7:36-50		191
+L4Tue		Luke 8:1-3		192
+L4Wed		Luke 8:22-25		193
+L4Thu		Luke 9:7-11		194
+L4Fri		Luke 9:12-18		195
+L4Sat		Luke 6:1-10		196
+L4Sun	4th of Luke	Luke 8:5-8a,9-15,8b		197
+L5Mon		Luke 9:18-22		198
+L5Tue		Luke 9:23-27		199
+L5Wed		Luke 9:44-50		200
+L5Thu		Luke 9:49-56		201
+L5Fri		Luke 10:1-15		202
+L5Sat		Luke 7:1-10		203
+L5Sun	5th of Luke	Luke 16:19-31		204
+L6Mon		Luke 10:22-24		205
+L6Tue		Luke 11:1-10		206
+L6Wed		Luke 11:9-13		207
+L6Thu		Luke 11:14-23		208
+L6Fri		Luke 11:23-26		209
+L6Sat		Luke 8:16-21		210
+L6Sun	6th of Luke	Luke 8:26-39		211
+L7Mon		Luke 11:29-33		212
+L7Tue		Luke 11:34-41		213
+L7Wed		Luke 11:42-46		214
+L7Thu		Luke 11:47-12:1		215
+L7Fri		Luke 12:2-12		216
+L7Sat		Luke 9:1-6		217
+L7Sun	7th of Luke	Luke 8:41-56		218
+L8Mon		Luke 12:13-15,22-31		219
+L8Tue		Luke 12:42-48		220
+L8Wed		Luke 12:48-59		221
+L8Thu		Luke 13:1-9		222
+L8Fri		Luke 13:31-35		223
+L8Sat		Luke 9:37-43		224
+L8Sun	8th of Luke	Luke 10:25-37		225
+L9Mon		Luke 14:1,12-15		226
+L9Tue		Luke 14:25-35		227
+L9Wed		Luke 15:1-10		228
+L9Thu		Luke 16:1-9		229
+L9Fri		Luke 16:15-18,17:1-4		230
+L9Sat		Luke 9:57-62		231
+L9Sun	9th of Luke	Luke 12:16-21,8:8		232
+L10Mon		Luke 17:20-25		233
+L10Tue		Luke 17:26-37		234
+L10Wed		Luke 18:15-17,26-30		235
+L10Thu		Luke 18:31-34		236
+L10Fri		Luke 19:12-28		237
+L10Sat		Luke 10:19-21		238
+L10Sun	10th of Luke	Luke 13:10-17		239
+L11Mon		Luke 19:37-44		240
+L11Tue		Luke 19:45-48		241
+L11Wed		Luke 20:1-8		242
+L11Thu		Luke 20:9-18		243
+L11Fri		Luke 20:19-26		244
+L11Sat		Luke 12:32-40		245
+L11Sun	11th of Luke	Luke 14:16-24; Matthew 22:14		246
+L12Mon		Luke 20:27-44		247
+L12Tue		Luke 21:12-19		248
+L12Wed		Luke 21:5-8, 10-11, 20-24		249
+L12Thu		Luke 21:28-33		250
+L12Fri		Luke 21:37-22:8		251
+L12Sat		Luke 13:18-29		252
+L12Sun	12th of Luke	Luke 17:12-19		253
+L13Mon		Mark 8:11-21		254
+L13Tue		Mark 8:22-26		255
+L13Wed		Mark 8:30-34		256
+L13Thu		Mark 9:10-15		257
+L13Fri		Mark 9:33-41		258
+L13Sat		Luke 14:1-11		259
+L13Sun	13th of Luke	Luke 18:18-27		260
+L14Mon		Mark 9:42-10:1		261
+L14Tue		Mark 10:2-12		262
+L14Wed		Mark 10:11-16		263
+L14Thu		Mark 10:17-27		264
+L14Fri		Mark 10:24-32		265
+L14Sat		Luke 16:10-15		266
+L14Sun	14th of Luke	Luke 18:35-43		267
+L15Mon		Mark 10:46-52		268
+L15Tue		Mark 11:11-23		269
+L15Wed		Mark 11:22-26		270
+L15Thu		Mark 11:27-33		271
+L15Fri		Mark 12:1-12		272
+L15Sat		Luke 17:3-10		273
+L15Sun	15th of Luke	Luke 19:1-10		274
+L16Mon		Mark 12:13-17		275
+L16Tue		Mark 12:18-27		276
+L16Wed		Mark 12:28-37		277
+L16Thu		Mark 12:38-44		278
+L16Fri		Mark 13:1-8		279
+L16Sat		Luke 18:2-8		280
+L16Sun	16th of Luke, Sunday of the Publican and the Pharisee	Luke 18:10-14		281
+L17Mon		Mark 13:9-13		282
+L17Tue		Mark 13:14-23		283
+L17Wed		Mark 13:24-31		284
+L17Thu		Mark 13:31-14:2		285
+L17Fri		Mark 14:3-9		286
+L17Sat		Luke 20:46-21:4		287
+L17Sun	17th of Luke, Sunday of the Prodigal Son	Luke 15:11-32		288
+L18Mon		Mark 11:1-11		289
+L18Tue		Mark 14:10-42		290
+L18Wed		Mark 14:43-15:1		291
+L18Thu		Mark 15:1-15		292
+L18Fri		Mark 15:22-25, 33-41		293
+L18Sat		Luke 21:8-9, 25-27, 33-36	For the Departed: 1 Thessalonians 4:13-17; John 5:24-30	294
+L18Sun	18th of Luke, Meatfare or Judgement Sunday	Matthew 25:31-46		295
+L19Mon		Luke 19:29-40,22:7-39		296
+L19Tue		Luke 22:39-42,45-23:1		297
+L19Wed				298
+L19Thu		Luke 23:2-34, 44-56		299
+L19Fri				300
+L19Sat		Matthew 6:1-13		301
+L19Sun	19th of Luke, Cheesefare or Forgiveness Sunday	Matthew 6:14-21		302
+G1Mon		Great Compline: Luke 21:8-36		303
+G1Tue		Great Compline: Matthew 6:1-13		304
+G1Wed		Great Compline: Mark 11:22-26; Matthew 7:7-8		305
+G1Thu		Great Compline: Matthew 7:7-11		306
+G1Fri		Little Compline: John 15:1-7		307
+G1Sat		Mark 2:23-3:5		308
+G1Sun		John 1:43-51		309
+G2Mon				310
+G2Tue				311
+G2Wed				312
+G2Thu				313
+G2Fri				314
+G2Sat		Mark 1:35-44		315
+G2Sun		Mark 2:1-12		316
+G3Mon				317
+G3Tue				318
+G3Wed				319
+G3Thu				320
+G3Fri				321
+G3Sat		Mark 2:14-17		322
+G3Sun		Mark 8:34-9:1		323
+G4Mon				324
+G4Tue				325
+G4Wed				326
+G4Thu				327
+G4Fri				328
+G4Sat		Mark 7:31-37		329
+G4Sun		Mark 9:17-31		330
+G5Mon				331
+G5Tue				332
+G5Wed				333
+G5Thu				334
+G5Fri				335
+G5Sat		Mark 8:27-31		336
+G5Sun		Mark 10:32-45		337
+G6Mon				338
+G6Tue				339
+G6Wed				340
+G6Thu				341
+G6Fri				342
+G6Sat		John 11:1-45		343
+G6Sun		John 12:1-18		344
+G7Mon		<br>Liturgy of the Presanctified Gifts: Exodus 1:1-20; Job 1:1-12; Matthew 24:3-35		345
+G7Tue		<br>Liturgy of the Presanctified Gifts: Exodus 2:5-10; Job 1:13-22; Matthew 24:36-26:2		346
+G7Wed		<br>Liturgy of the Presanctified Gifts: Exodus 2:11-22; Job 2:1-10; Matthew 26:6-16	Office of Holy Unction: James 5:10-16; Luke 10:25-37; Romans 15:1-7; Luke 19:1-10; 1 Corinthians 12:27-31,13:1-8; Matthew 10:1,5-8; 2 Corinthians 6:16-7:1; Matthew 8:14-23; 2 Corinthians 8:1-11; Matthew 25:1-13; Galatians 5:22-6:1-2; Matthew 15:21-28; 1 Thessalonians 5:14-23; Matthew 9:9-13	347
+G7Thu		<br>Vesperal Divine Liturgy: Exodus 19:10-19; Job 38:1-23,42:1-5; Isaiah 50:4-11; 1 Corinthians 11:23-32; Matthew 26:2-20; John 13:3-17; Matthew 26:21-39; Luke 22:43-45; Matthew 26:40-27:2		348
+G7Fri		<br>The Royal Hours<br>1st Hour: Zechariah 11:10-13; Galatians 6:14-18; Matthew 27:1-56; <br>3rd Hour: Isaiah 50:4-11; Romans 5:6-11; Mark 15:16-41; <br>6th Hour: Isaiah 52:13-53:12; Hebrews 2:11-18; Luke 23:32-49; <br>9th Hour: Jeremiah 11:18-12:5,9-11,14-15; Hebrews 10:19-31; John 18:28-19:37; <br>Great Vespers: Exodus 33:11-23; Job 42:12-17; Isaiah 52:13-54:1; 1 Corinthians 1:18-2:2; Matthew 27:1-38; Luke 23:39-43; Matthew 27:39-54; John 19:31-37; Matthew 27:55-61		349
+G7Sat		<br>Vesperal Divine Liturgy: Genesis 1:1-13; Isaiah 60:1-16; Exodus 12:1-11; Jonah 1:1-4:11; Joshua 5:10-15; Exodus 13:20-15:19; Zephaniah 3:8-15; 3 Kingdoms 17:8-24; Isaiah 61:10-62:5; Genesis 22:1-18; Isaiah 61:1-9; 4 Kingdoms 4:8-37; Isaiah 63:11-64:6; Jeremiah 38:31-34; Daniel 3:1-90; Romans 6:3-11; Matthew 28:1-20		350
+SatBX		Matthew 10:37-11:1		351
+SunBX		John 3:13-17		352
+SatAX		John 8:21-30		353
+SunAX		Mark 8:34-9:1		354
+F4EC		Matthew 5:14-19		355
+F7EC		Matthew 5:14-19		356
+SFF	11th of Luke	Luke 14:16-24; Matthew 22:14		357
+SatBN		Luke 13:18-29		358
+SunBN		Matthew 1:1-25		359
+SatAN		Matthew 12:15-21		360
+SunAN		Matthew 2:13-23		361
+SatBT		Matthew 3:1-6		362
+SunBT		Mark 1:1-8		363
+SatAT		Matthew 4:1-11		364
+SunAT		Matthew 4:12-17		365
