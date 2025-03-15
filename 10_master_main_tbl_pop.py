@@ -7,6 +7,10 @@
 # Populate the yocal_main table of YOCal_master.db from the Year tables of YOCal.db
 
 import apsw
+import sys
+
+yr = int(sys.argv[1]) if len(sys.argv) > 1 else None
+yr_final = int(sys.argv[2]) if len(sys.argv) > 2 else None
 
 cal = apsw.Connection('YOCal.db')
 cur = cal.cursor()
@@ -32,22 +36,19 @@ while name == '' and yr_last > 1999:
    name = cur.fetchone()
    if not name: name = ''
 
-yr_ = input('Please enter the start year for the new database: ')
-yr = int(yr_)
-if yr < yr_first or yr > yr_last: 
-   yr_ = input('That is not a valid response. One more try: ')
-   yr = int(yr_)
-   if yr < yr_first or yr > yr_last: sys.exit
+if yr is None:
+   # Get the range of years for which tables will be created
+   print('A continuous series of year tables can be created betwenn 2000 and 2099') 
+   yr = int(input('Please enter the start year: '))
 
-yr_final_ = input('Please enter the final year for the new database: ')
-yr_final = int(yr_final_)
-if yr_final < yr or yr_final > yr_last: 
-   yr_final_ = input('That is not a valid response. One more try: ')
-   yr_final = int(yr_final_)
+assert yr_first <= yr <= yr_last, f'Please enter a starting year between {yr_first} and {yr_last}'
 
-   if yr_final < yr or yr_final > yr_last: sys.exit
+if yr_final is None:
+   yr_final_ = int(input('Please enter the final year for the new database: '))
 
-print('Tables for the years '+yr_+'-'+yr_final_+' will be populated')
+assert yr <= yr_final <= yr_last, f'Please enter a final year between {yr} and {yr_last}'
+
+print(f'Tables for the years {yr}-{yr_final} will be populated')
 
 # Attach the YOCal_Master.db
 
@@ -79,4 +80,4 @@ cur.execute('''DETACH master''')
 
 cal.close()
 
-x = input('\n   All done... Press Enter to exit')
+print('Finished stage 10')

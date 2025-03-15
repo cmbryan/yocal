@@ -8,7 +8,10 @@
 
 import os
 import re
+import sys
 import apsw
+
+mods = sys.argv[1] if len(sys.argv) > 1 else None
 
 # Open the database as 'cal' and set the cursor to 'cur'
 # and attach YOCal_Master.db as master:
@@ -464,7 +467,9 @@ while entry <= end:
    entry += 1
 
 # Are the mods columns to be updated?
-mods = input('\nDo you want to update the modification columns from mods.csv? ')
+if mods is None:
+   mods = input('\nDo you want to update the modification columns from mods.csv? (y/N): ')
+
 if mods == 'y' or mods == 'Y':
    # Open the csv file and read the text 
    f = open('mods.csv','r')
@@ -488,4 +493,4 @@ cal.close()
 print()
 print("The Text fields have now been populated.\nIf the Mod fields are also populated, please run the script\n '11_master_lection_correct.py' for required changes")
 
-x = input('   ... Press Enter to exit')
+print('Finished stage 11')

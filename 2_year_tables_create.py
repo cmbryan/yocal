@@ -17,24 +17,22 @@
 import apsw
 import sys
 
-# Get the range of years for which tables will be created
+yr = int(sys.argv[1]) if len(sys.argv) > 1 else None
+yr_final = int(sys.argv[2]) if len(sys.argv) > 2 else None
 
-print('A continuous series of year tables can be created betwenn 2000 and 2099') 
-yr_ = input('Please enter the start year: ')
-yr = int(yr_)
-if yr < 2000 or yr > 2099: 
-   yr_ = input('That is not a valid response. One more try: ')
-   yr = int(yr_)
-   if yr < 2000 or yr > 2099: sys.exit
+if yr is None:
+   # Get the range of years for which tables will be created
+   print('A continuous series of year tables can be created betwenn 2000 and 2099') 
+   yr = int(input('Please enter the start year: '))
 
-yr_final_ = input('Please enter the final year: ')
-yr_final = int(yr_final_)
-if yr_final < yr or yr_final > 2099: 
-   yr_final_ = input('That is not a valid response. One more try: ')
-   yr_final = int(yr_final_)
-   if yr_final < yr or yr_final > 2099: sys.exit
+assert 2000 <= yr <= 2099, 'Please enter a year between 2000 and 2099'
 
-print('Tables for the years '+yr_+'-'+yr_final_+' will be created')
+if yr_final is None:
+   yr_final = int(input('Please enter the final year: '))
+
+assert yr <= yr_final <= 2099, 'Please enter a year between 2000 and 2099'
+
+print(f'Tables for the years {yr}-{yr_final} will be created')
 
 # Open the database as 'cal' and set the cursor to 'cur':
 cal = apsw.Connection('YOCal.db')
