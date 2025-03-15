@@ -1,8 +1,9 @@
 from datetime import datetime
 import os
 import sqlite3
+from typing import Dict
 
-from flask import jsonify
+from flask import jsonify, request
 from . import create_app
 
 
@@ -19,22 +20,28 @@ def hello_world():
 
 @app.route("/")
 def get_today():
-    today_date = datetime.now()
+    return jsonify(_get_data(datetime.now()))
+
+
+@app.route("/date")
+def get_date():
+    year = request.args.get('year', type=int)
+    month = request.args.get('month', type=int)
+    day = request.args.get('day', type=int)
+
+    return jsonify(_get_data(datetime(year, month, day)))
+
+
+def _get_data(date: datetime.date) -> Dict:
     with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
-        cursor.execute(f"SELECT * FROM Year_{today_date.year}"
+        cursor.execute(f"SELECT * FROM Year_{date.year}"
                         " WHERE date = ?",
-                        (today_date.strftime("%Y-%m-%d"),))
+                        (date.strftime("%Y-%m-%d"),))
         result = cursor.fetchone()
         column_names = [description[0] for description in cursor.description]
     
     if result:
-        result_dict = dict(zip(column_names, result))
-        return jsonify(result_dict)
+        return dict(zip(column_names, result))
     else:
-        return jsonify({"error": f"No data found for {today_date.strftime('%Y-%m-%d')}"})
-
-
-@app.route("/date/<int:year>/<int:month>/<int:day>")
-def get_date(year, month, day):
-    return f"<p>Year: {year}, Month: {month}, Day: {day}</p>"
+        return {"error": f"No data found for {date.strftime('%Y-%m-%d')}"}
