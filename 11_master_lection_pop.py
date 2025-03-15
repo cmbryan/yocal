@@ -214,7 +214,12 @@ def lect_txt(lection):
          f_name = f'USFM/{bk_num}{bk_code}OBBE.SFM'
          if not os.path.exists(f_name):
             f_name = f'USFM/{bk_num}{bk_code}_obbe.SFM'
-         f = open(f_name,'r')
+         try:
+            f = open(f_name,'r')
+         except FileNotFoundError:
+            import sys
+            print(f"ERROR: {f_name} not found\n", file=sys.stderr)
+            return ""
       # Split up the ref so that each fragment can be retrieved.  
       # The initial chapter num is followed by ':', so split it off.
          chap = ref.split(':')[0]
