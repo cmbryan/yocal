@@ -17,7 +17,7 @@ def hello_world():
     return "<p>Hello, World!</p>"
 
 
-@app.route("/today")
+@app.route("/")
 def get_today():
     today_date = datetime.now()
     with sqlite3.connect(db_path) as conn:
