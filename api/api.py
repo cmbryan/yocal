@@ -1,10 +1,13 @@
 from copy import copy
 from datetime import date, datetime
 import os
+from pydoc import text
 import sqlite3
 from typing import Dict
 
-from flask import jsonify, request
+from click import File
+from flask import jsonify, render_template, request
+from jinja2 import Environment, FileSystemLoader
 from . import create_app
 
 
@@ -23,16 +26,44 @@ def hello_world():
 
 @app.route("/")
 def get_today():
-    return jsonify(_get_data(datetime.now()))
+    return jsonify(_get_date(datetime.now()))
 
 
 @app.route("/date")
 def get_date():
-    year = request.args.get('year', type=int)
-    month = request.args.get('month', type=int)
-    day = request.args.get('day', type=int)
-    date_obj = date(year, month, day)
+    return jsonify(
+        _get_date(
+            date(
+                request.args.get('year', type=int),
+                request.args.get('month', type=int),
+                request.args.get('day', type=int)
+            )
+        )
+    )
 
+
+@app.route("/test-display")
+def get_test_display():
+    date_obj = date(
+        request.args.get('year', type=int),
+        request.args.get('month', type=int),
+        request.args.get('day', type=int)
+    ) if request.args.get('year') \
+    else datetime.now().date()
+    
+    data = _get_date(date_obj)
+
+    if data.keys() == {"error"}:
+        return jsonify(data), 404
+
+    env = Environment(loader=FileSystemLoader('api/templates'))
+    template = env.get_template('test_display.html')
+    template.globals.update({"embolden_liturgy_lects": lambda x, y: f"<b>{x}</b>" if x in y else x})
+
+    return template.render(data=data)
+
+
+def _get_date(date_obj: datetime.date) -> Dict:
     data = _get_data(date_obj)
     
     if not data:
@@ -68,7 +99,7 @@ def get_date():
         "text_1": None,
         "lect_2": None,
         "text_2": None,
-        "primary": None,
+        "primary": [],
     }
     g_data = copy(a_data)
     c_data = copy(a_data)
@@ -76,58 +107,75 @@ def get_date():
 
     if a_code:
         a_data = _get_lections(a_code)
-        a_data["primary"] = None
+        a_data["primary"] = []
 
     if g_code:
         g_data = _get_lections(g_code)
-        g_data["primary"] = None
+        g_data["primary"] = []
 
     if data["x_code"]:
         x_data = _get_lections(data["x_code"])
-        x_data["primary"] = None
+        x_data["primary"] = []
 
     if data["c_code"]:
         c_data = _get_lections(data["c_code"])
-        c_data["primary"] = None
+        c_data["primary"] = []
 
     # Commemorations
     if data["c_code"]:
         # Primary lect 1
         if data["is_comm_apos"]:
-            c_data["primary"] = "lect_1"
+            c_data["primary"].append("lect_1")
         elif a_code:
-            a_data["primary"] = "lect_1"
+            a_data["primary"].append("lect_1")
 
         # Primary lect 2
         if data["is_comm_gosp"]:
-            c_data["primary"] = "lect_2"
+            c_data["primary"].append("lect_2")
         elif a_code and a_data["lect_2"]:
-            a_data["primary"] = "lect_2"
+            a_data["primary"].append("lect_2")
         elif g_code and g_data["lect_2"]:
-            g_data["primary"] = "lect_2"
+            g_data["primary"].append("lect_2")
 
     # Non-commemoration
     else:
-        a_data["primary"] = "lect_1"
+        a_data["primary"].append("lect_1")
         if a_data["lect_2"]:
-            a_data["primary"] = "lect_2"
+            a_data["primary"].append("lect_2")
         elif g_data["lect_2"]:
-            g_data["primary"] = "lect_2"
-
-    result["lections"] = {
-        "a": a_data,
-        "g": g_data,
-        "x": x_data,
-        "c": c_data,
-    }
+            g_data["primary"].append("lect_2")
 
     # As there is no Liturgy Mon-Fri in Lent, or on Holy Saturday, or on Wed and Fri of Cheesefare Week, remove the bold tags from the lections
-    if a_code[0] == "G" and a_code[2] == "G":
-        for section in result["lections"].values():
-            section["primary"] = None
+    if a_code[0] == "G" \
+            and (a_code[2] != "S" or a_code in ["G7Sat", "E36Wed", "E36Fri"]):
+        for section in [a_data, g_data, c_data, x_data]:
+            section["primary"] = []
 
+    result["lections"] = {}
+    result["lections"]["basic"] = []
+    result["lections"]["commem"] = []
+    result["lections"]["liturgy"] = []
+    result["texts"] = []
 
-    return jsonify(result)
+    for idx in range(1, 3):
+        lect_idx = f"lect_{idx}"
+        text_idx = f"text_{idx}"
+
+        for data in [a_data, g_data]:
+            if data[lect_idx]:
+                result["lections"]["basic"].append(data[lect_idx])
+                result["texts"].append(data[text_idx])
+                if lect_idx in data["primary"]:
+                    result["lections"]["liturgy"].append(data[lect_idx])
+
+        for data in [c_data, x_data]:
+            if data[lect_idx]:
+                result["lections"]["commem"].append(data[lect_idx])
+                result["texts"].append(data[text_idx])
+                if lect_idx in data["primary"]:
+                    result["lections"]["liturgy"].append(data[lect_idx])
+
+    return result
 
 
 def _get_lections(code: str) -> Dict:
