@@ -10,8 +10,14 @@
     <p>
         <h2>{{ data["day_name"] }} {{ data["day_ord"] }} {{ data["month"] }} {{ data["year"] }}</h2>
         {{ data["fast"] }}
-        <br/>
-        {{ data["tone"] }}&mdash;{{ data["eothinon"] }}
+        {% if data["tone"] %}
+            <br/>
+            {{ data["tone"] }}&mdash;{{ data["eothinon"] }}
+        {% endif %}
+        {% if data["liturgy"] %}
+            <br/>
+            {{ data["liturgy"] }}
+        {% endif %}
         <br/>
         {{ data["basil"] }}
         <h3>{{ data["desig"] }}</h3>
@@ -27,22 +33,22 @@
     </p>
     <p>
         <em>Today's readings:</em>
-        <br/>
         {% for lect in data["lections"]["basic"] %}
+            <br/>
             {{ embolden_liturgy_lects(lect, data["lections"]["liturgy"]) }}{% if not loop.last %}; {% endif %}
-            <br/>
         {% endfor %}
-        <br/>
         {% if data["lections"]["commem"] %}
-            <em>For the commemmoration:</em>
             <br/>
+            <em>For the commemmoration:</em>
             {% for lect in data["lections"]["commem"] %}
-                {{ embolden_liturgy_lects(lect, data["lections"]["liturgy"]) }}{% if not loop.last %}; {% endif %}
                 <br/>
+                {{ embolden_liturgy_lects(lect, data["lections"]["liturgy"]) }}{% if not loop.last %}; {% endif %}
             {% endfor %}
         {% endif %}
-        <br/>
-        <em>Readings in <b>bold type</b> are those appointed by the Typikon for use at the Liturgy</em>
+        {% if data["liturgy"] %}
+            <br/>
+            <em>Readings in <b>bold type</b> are those appointed by the Typikon for use at the Liturgy</em>
+        {% endif %}
     </p>
     <p>
         {% for text in data["texts"] %}
@@ -50,6 +56,8 @@
             <br/>
         {% endfor %}
     </p>
+
+    Debug:<br/>
     <textarea rows="50" cols="100">
         {{ data | pprint }}
     </textarea>

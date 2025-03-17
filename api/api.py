@@ -63,6 +63,9 @@ def get_test_display():
     return template.render(data=data)
 
 
+def liturgy_allowed(a_code: str) -> bool:
+    return a_code[0] == "G" and (a_code[2] != "S" or a_code in ["G7Sat", "E36Wed", "E36Fri"])
+
 def _get_date(date_obj: datetime.date) -> Dict:
     data = _get_data(date_obj)
     
@@ -73,7 +76,7 @@ def _get_date(date_obj: datetime.date) -> Dict:
     desig_a = data["desig_a"]
     desig_g = data["desig_g"]
     desig = ", ".join([desig_a, desig_g]) if desig_a and desig_g \
-        else desig_a if desig_a else None
+        else desig_a if desig_a else ""
 
     result = {
         "day_name": data["day_name"],
@@ -83,7 +86,9 @@ def _get_date(date_obj: datetime.date) -> Dict:
         "fast": data["fast"],
         "tone": data["tone"],
         "eothinon": data["eothinon"],
-        "basil": data["basil"],  # TODO replace with enum for Basil, Chrysostom, on None
+        "liturgy": data["basil"] if data["basil"]
+            else "" if liturgy_allowed(data["a_code"])
+            else "Liturgy of St John Chrysostom",
         "desig": desig,
         "commem": data["major_commem"],
         "fore_after": data["fore_after"],
@@ -146,8 +151,7 @@ def _get_date(date_obj: datetime.date) -> Dict:
             g_data["primary"].append("lect_2")
 
     # As there is no Liturgy Mon-Fri in Lent, or on Holy Saturday, or on Wed and Fri of Cheesefare Week, remove the bold tags from the lections
-    if a_code[0] == "G" \
-            and (a_code[2] != "S" or a_code in ["G7Sat", "E36Wed", "E36Fri"]):
+    if liturgy_allowed(a_code):
         for section in [a_data, g_data, c_data, x_data]:
             section["primary"] = []
 
