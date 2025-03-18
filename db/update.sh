@@ -14,7 +14,7 @@ echo "\n*** Please review 'Changes to be committed' above ***"
 read -p "Do you want to commit and upload these changes? (y/N): " answer
 if [ "$answer" = "y" ]; then
     read -p "Please describe these changes: " commit_msg
-    git commit -m "Update changes"
+    git commit -m "$commit_msg"
     git push
     echo "\nSuccess! Changes have been committed and pushed.\n"
 fi
