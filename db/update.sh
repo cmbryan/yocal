@@ -1,4 +1,5 @@
 #!/bin/env sh
+set -e
  
 # Pull changes from remote repository
 git pull
@@ -15,4 +16,5 @@ if [ "$answer" = "y" ]; then
     read -p "Please describe these changes: " commit_msg
     git commit -m "Update changes"
     git push
+    echo "\nSuccess! Changes have been committed and pushed.\n"
 fi
