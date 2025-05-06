@@ -22,7 +22,7 @@ J3Sat		<br>‘These|<br>The Lord said to his disciples, ‘These
 J4Sun		<br>After this there was a feast of the Jews, and|<br>At that time
 J4Mon		<br>‘Those|<br>The Lord said to the Jews who believed in him, ‘Those
 J4Tue		<br>After this Jesus|<br>At that time Jesus
-J4Wed		
+J4Wed		<br>It was now the middle of the feast. Jesus|<br>In the middle of the feast Jesus
 J4Thu		<br>Once again Jesus spoke to them, saying,|<br>The Lord said to the Jews who came to him,
 J4Fri		<br>Once more Jesus spoke to them.|<br>The Lord said to the Jews who believed in him,
 J4Sat		<br>Jesus|<br>The Lord
@@ -74,7 +74,7 @@ M4Tue		<br>‘To|<br>The Lord said, ‘To
 M4Wed		<br>Then he|<br>At that time Jesus
 M4Thu		<br>‘Everything|<br>The Lord said to his disciples ‘Everything
 M4Fri		<br>It was then that Jesus|<br>At that time Jesus
-M4Sat		<br>When|<br>At that time when
+M4Sat		<br>When|<br>At that time, when
 M4Sun		<br>When he|<br>At that time, when Jesus
 M5Mon		<br>Then, moving on from there, he|<br>At that time Jesus
 M5Tue		The Pharisees went outside and conspired against him|At that time the Pharisees conspired against Jesus
@@ -686,7 +686,7 @@ xG7Wed	<br>One of the lawyers then stood up to test him|<br>One of the lawyers s
 11-01		<br>He|<br>At that time Jesus
 11-03		<br>‘These|<br>The Lord said to his disciples, ‘These
 11-08	<br>For if|<br>If	<br>‘Whoever|<br>The Lord said to his disciples, ‘Whoever
-11-09	<br>for you|<br>You	
+11-09	<br>for you|<br>You	<br>Great crowds from Galilee and the Ten Towns and Jerusalem and Judaea and from beyond the Jordan followed him.|<br>At that time great crowds followed Jesus from Galilee and the Ten Towns and Jerusalem and Judaea and from beyond the Jordan. 
 11-11	<br>because God|<br>God,	<br>‘Understand|<br>The Lord said to his disciples, ‘Understand
 11-12	<br>Then there is this: the|<br>The	<br>‘You|<br>The Lord said to his disciples, ‘You
 11-13		<br>‘I am the Gate|<br>The Lord said, ‘I am the Gate
@@ -821,7 +821,7 @@ v-G7Fri	<br>It is true that the|<br>The
 m-G7Sat		
 l-G7Sat	<br>Or do|<br>Do	
 m-09-08		Holy is his name,’|Holy is his name.’
-m-09-14		<br>‘|<br>The Lord said … ‘
+m-09-14		<br>‘|<br>The Lord said, ‘
 m-11-21		Holy is his name,’|Holy is his name.’
 f-12-24		
 t-12-24		
@@ -838,7 +838,7 @@ b-01-05
 m-01-06		
 m-02-02		<br>Now there|<br>At that time there
 m-03-25		Holy is his name,’|Holy is his name.’
-m-08-06		<br>About eight days after saying these things, he|<br>About eight days after saying these things, Jesus
+m-08-06		<br>About eight days after saying these things, he|<br>At that time Jesus
 m-08-15		Holy is his name,’|Holy is his name.’
 m-Theo		Holy is his name,’|Holy is his name.’
 #1-Theo		<br>As they were travelling along, he|<br>At that time Jesus
@@ -868,9 +868,9 @@ m-Theo		Holy is his name,’|Holy is his name.’
 #1-Conf		<br>‘I tell you that everyone|<br>The Lord said to his disciples, ‘Everyone
 #2-Conf		<br>He came down with them|<br>At that time Jesus came down
 #-Unme		<br>He|<br>At that time Jesus
-#-Bapt		<br>And the|<br>The
-#-Matr		
+#-Bapt		<br>And the|<br>At that time the
+#-Matr		<br>On the third day there|<br>At that time there
 #-Fune		<br>‘Truly|<br>The Lord said to the Jews who came to him, ‘Truly
-#-PFun		<br>‘Truly|<br>The Lord said to the Jews who came to him, ‘Truly%<br>‘This is the will|<br><br>Jesus told them, ‘This is the will%<br>‘I am the Bread|<br>Jesus told them, ‘I am the Bread
-#-CFun		<br>They were bringing babies to him|<br>They were bringing children to Jesus
-#-Unct		<br>One of the lawyers then stood up to test him|<br>One of the lawyers stood up to test Jesus%<br>He entered Jericho|<br>Jesus entered Jericho%<br>He called|<br>At that time Jesus called%<br>‘At that time the Kingdom|<br>The Lord told this parable. ‘The Kingdom%<br>Jesus left that place and withdrew|<br>At that time Jesus withdrew%<br>As Jesus passed on from there|<br>At that time, as Jesus passed by
+#-PFun		<br>‘Truly|<br>The Lord said to the Jews who came to him, ‘Truly%<br>Jesus told them, ‘My|<br>The Lord said to the Jews who came to him, ‘My%<br>Jesus told them, ‘I am the Bread|<br>The Lord said to the Jews who believed in him, ‘I am the Bread%<br>‘This|<br>The Lord said to the Jews who believed in him, ‘This%<br>‘I am|<br>The Lord said to the Jews who believed in him, ‘I am
+#-CFun		<br>They were bringing babies to him|<br>At that time they were bringing children to Jesus
+#-Unct		<br>One of the lawyers then stood up to test him|<br>At that time one of the lawyers stood up to test Jesus%<br>He entered Jericho|<br>At that time Jesus entered Jericho%<br>He called|<br>At that time Jesus called%<br>When|<br>At that time, when%<br>‘At that time the Kingdom|<br>The Lord told this parable. ‘The Kingdom%<br>Jesus left that place and withdrew|<br>At that time Jesus withdrew%<br>As Jesus passed on from there|<br>At that time, as Jesus passed by
