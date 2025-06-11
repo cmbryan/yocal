@@ -51,7 +51,11 @@
         {% endif %}
     </p>
     <p>
-        {% for text in data["texts"] %}
+        {% for text in data["texts"]["basic"] %}
+            {{ text }}
+            <br/>
+        {% endfor %}
+        {% for text in data["texts"]["commem"] %}
             {{ text }}
             <br/>
         {% endfor %}
