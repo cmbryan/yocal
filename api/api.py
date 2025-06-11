@@ -159,7 +159,9 @@ def _get_date(date_obj: datetime.date) -> Dict:
     result["lections"]["basic"] = []
     result["lections"]["commem"] = []
     result["lections"]["liturgy"] = []
-    result["texts"] = []
+    result["texts"] = {}
+    result["texts"]["basic"] = []
+    result["texts"]["commem"] = []
 
     for idx in range(1, 3):
         lect_idx = f"lect_{idx}"
@@ -168,14 +170,14 @@ def _get_date(date_obj: datetime.date) -> Dict:
         for data in [a_data, g_data]:
             if data[lect_idx]:
                 result["lections"]["basic"].append(data[lect_idx])
-                result["texts"].append(data[text_idx])
+                result["texts"]["basic"].append(data[text_idx])
                 if lect_idx in data["primary"]:
                     result["lections"]["liturgy"].append(data[lect_idx])
 
         for data in [c_data, x_data]:
             if data[lect_idx]:
                 result["lections"]["commem"].append(data[lect_idx])
-                result["texts"].append(data[text_idx])
+                result["texts"]["commem"].append(data[text_idx])
                 if lect_idx in data["primary"]:
                     result["lections"]["liturgy"].append(data[lect_idx])
 
