@@ -49,14 +49,22 @@
         <em>Today's readings:</em>
         {% for lect in data["lections"]["basic"] %}
             <br/>
-            {{ embolden_liturgy_lects(lect, data["lections"]["liturgy"]) }}{% if not loop.last %}; {% endif %}
+            {% if data["lections"]["commem"] %}
+                {{ embolden_liturgy_lects(lect, data["lections"]["liturgy"]) }}{% if not loop.last %}; {% endif %}
+            {% else %}
+                {{ lect }}{% if not loop.last %}; {% endif %}
+            {% endif %}
         {% endfor %}
         {% if data["lections"]["commem"] %}
             <br/>
             <em>For the commemmoration:</em>
             {% for lect in data["lections"]["commem"] %}
                 <br/>
-                {{ embolden_liturgy_lects(lect, data["lections"]["liturgy"]) }}{% if not loop.last %}; {% endif %}
+                {% if data["lections"]["commem"] %}
+                    {{ embolden_liturgy_lects(lect, data["lections"]["liturgy"]) }}{% if not loop.last %}; {% endif %}
+                {% else %}
+                    {{ lect }}{% if not loop.last %}; {% endif %}
+                {% endif %}
             {% endfor %}
         {% endif %}
         {% if data["liturgy"] and data["lections"]["commem"] %}
