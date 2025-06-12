@@ -4,8 +4,14 @@ from flask import Flask
 from jinja2 import Environment, FileSystemLoader
 from .api import _get_date, get_test_display
 
+
 def test_get_date_june_11_2025():
-    # Test date: June 11, 2025
+    """
+    Test the _get_date function for June 11, 2025
+
+    This is a day with a commemoration, a fore-feast, and a liturgy.
+
+    """
     test_date = date(2025, 6, 11)
     result = _get_date(test_date)
     
@@ -47,30 +53,58 @@ def test_get_date_june_11_2025():
     assert result["texts"]["commem"][1].startswith('<em>Luke')
 
 
-def test_test_display_template():
+def test_get_date_june_12_2025():
+    """
+    Test the _get_date function for June 12, 2025
+
+    This is a day without a commemoration
+
+    """
+    test_date = date(2025, 6, 12)
+    result = _get_date(test_date)
+    
+    assert isinstance(result, dict)
+    
+    # Check the structure of lections
+    assert isinstance(result["lections"], dict)
+    assert "basic" in result["lections"]
+    assert "commem" in result["lections"]
+    assert "liturgy" in result["lections"]
+
+    assert result["lections"]["basic"] == ['Romans 1:28-2:9', 'Matthew 5:27-32']
+    assert not result["lections"]["commem"]
+    assert result["lections"]["liturgy"] == result["lections"]["basic"]
+    assert result["texts"]["basic"][0].startswith('<em>Romans')
+    assert result["texts"]["basic"][1].startswith('<em>Matthew')
+    assert not result["texts"]["commem"]
+
+
+@pytest.mark.parametrize("test_date,expected_file", [
+    (date(2025, 6, 11), 'api/test_res/test_api_output_june_11.html'),
+    (date(2025, 6, 12), 'api/test_res/test_api_output_june_12.html'),
+])
+def test_test_display_template(test_date, expected_file):
     # Create test data
-    test_date = date(2025, 6, 11)
     data = _get_date(test_date)
     
     # Create a Flask app for testing
     app = Flask(__name__)
-    with app.test_request_context('/test-display?year=2025&month=6&day=11'):
+    with app.test_request_context(f'/test-display?year={test_date.year}&month={test_date.month}&day={test_date.day}'):
         # Get the rendered template
         response = get_test_display()
         
         # Read the expected output file
-        with open('api/test_res/test_api_output.html', 'r') as f:
+        with open(expected_file, 'r') as f:
             expected_output = f.read()
             
         # Compare the response with expected output
         if response.strip() != expected_output.strip():
             # Write the actual response to a file for comparison
-            with open('api/test_res/test_api_output_actual.html', 'w') as f:
+            actual_file = expected_file.replace('.html', '_actual.html')
+            with open(actual_file, 'w') as f:
                 f.write(response)
             
             # Assert that they match
             assert response.strip() == expected_output.strip(), \
-                "Template output does not match expected output." \
-                " diff api/test_res/test_api_output.html api/test_res/test_api_output_actual.html " \
-                " for more details"
-        
+                f"Template output does not match expected output for {test_date}." \
+                f" diff {expected_file} {actual_file} for more details"

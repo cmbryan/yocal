@@ -9,8 +9,10 @@
     <h1>Test Display</h1>
     <p>
         <h2>{{ data["day_name"] }} {{ data["day_ord"] }} {{ data["month"] }} {{ data["year"] }}</h2>
-        {{ data["fast"] }}
-        {% if data["commem"] %}
+        {% if data["fast"] is not none %}
+            {{ data["fast"] }}
+        {% endif %}
+        {% if data["commem"] is not none %}
             <br/>
             <h3>{{ data["commem"] }}</h3>
         {% endif %}
@@ -18,15 +20,15 @@
             <br/>
             <h3>{{ data["fore_after"] }}</h3>
         {% endif %}
-        {% if data["tone"] %}
+        {% if data["tone"] is not none %}
             <br/>
             {{ data["tone"] }}&mdash;{{ data["eothinon"] }}
         {% endif %}
-        {% if data["tone"] %}
+        {% if data["tone"] is not none %}
             <br/>
             {{ data["tone"] }}&mdash;{{ data["eothinon"] }}
         {% endif %}
-        {% if data["liturgy"] %}
+        {% if data["liturgy"] is not none %}
             <br/>
             {{ data["liturgy"] }}
         {% endif %}
@@ -57,7 +59,7 @@
                 {{ embolden_liturgy_lects(lect, data["lections"]["liturgy"]) }}{% if not loop.last %}; {% endif %}
             {% endfor %}
         {% endif %}
-        {% if data["liturgy"] %}
+        {% if data["liturgy"] and data["lections"]["commem"] %}
             <br/>
             <em>Readings in <b>bold type</b> are those appointed by the Typikon for use at the Liturgy</em>
         {% endif %}
