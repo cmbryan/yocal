@@ -10,6 +10,18 @@
     <p>
         <h2>{{ data["day_name"] }} {{ data["day_ord"] }} {{ data["month"] }} {{ data["year"] }}</h2>
         {{ data["fast"] }}
+        {% if data["commem"] %}
+            <br/>
+            <h3>{{ data["commem"] }}</h3>
+        {% endif %}
+        {% if data["fore_after"] %}
+            <br/>
+            <h3>{{ data["fore_after"] }}</h3>
+        {% endif %}
+        {% if data["tone"] %}
+            <br/>
+            {{ data["tone"] }}&mdash;{{ data["eothinon"] }}
+        {% endif %}
         {% if data["tone"] %}
             <br/>
             {{ data["tone"] }}&mdash;{{ data["eothinon"] }}
