@@ -664,7 +664,19 @@ while yr <= yr_final:
                 ''' % tn, (code, code, code, code, code, code)) 
     
 
-    # There is one exception from earlier in the year that needs addressing. 
+    # There are exceptions from earlier in the year that need addressing. 
+ 
+    # The Third Sunday after Pentecost is normally for All Saints of Britain & Ireland, but if this coincides with SS Peter & Paul (Jun 29) or the Sunday of the Fathers of the 4th EC, it is deferred to the 4th after Pentecost.
+
+    print(pascha.strftime("%m-%d"))
+    if pascha.strftime("%m-%d") in ['04-20','05-03','05-04','05-05','05-06']:
+        cur.execute('''UPDATE %s SET
+                desig_g = "3rd of Matthew" 
+                WHERE desig_a = "3rd after Pentecost"''' % tn)
+        cur.execute('''UPDATE %s SET
+                desig_g = "4th of Matthew, Sunday of All Saints of Britain & Ireland" 
+                WHERE desig_a = "4th after Pentecost"''' % tn)
+                
     # The Sunday between July 13-19 is observed as the Sunday of the Fathers of the 4th EC (F4EC)
 
     cur.execute('''UPDATE %s SET
@@ -675,6 +687,7 @@ while yr <= yr_final:
                 gosp = (SELECT lection FROM G_Lections WHERE G_Lections.code = "F4EC"),
                 g_code = "F4EC"
                 WHERE month = "July" AND day_name = "Sunday" AND day_num BETWEEN 13 AND 19''' % tn)
+
     
     # The four fixed-date feasts of Our Lord, viz, the Exaltation of the Cross, the Nativity
     # the Theophany and the Transifiguration, need no daily readings. All the data will be
@@ -744,4 +757,4 @@ cur.execute("COMMIT")
 
 cal.close()
 
-print('Finished stage 4')
+x = input('\n   All done... Press Enter to exit')
