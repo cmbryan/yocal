@@ -668,7 +668,6 @@ while yr <= yr_final:
  
     # The Third Sunday after Pentecost is normally for All Saints of Britain & Ireland, but if this coincides with SS Peter & Paul (Jun 29) or the Sunday of the Fathers of the 4th EC, it is deferred to the 4th after Pentecost.
 
-    print(pascha.strftime("%m-%d"))
     if pascha.strftime("%m-%d") in ['04-20','05-03','05-04','05-05','05-06']:
         cur.execute('''UPDATE %s SET
                 desig_g = "3rd of Matthew" 
