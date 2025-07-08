@@ -1,0 +1,44 @@
+name: Deploy Generated File via FTP
+
+on:
+  push:
+    branches:
+      - main # Or the branch you want this to run on
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up environment (if needed for your script)
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run script to generate file
+      run: |
+        make db-build
+
+    - name: Deploy file to FTP
+      uses: samuelmeuli/action-ftp@v3
+      with:
+        host: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        # port: ${{ secrets.FTP_PORT }} # Optional, remove if using default 21
+        local-dir: './' # The local directory where your generated file is
+        remote-dir: '/httpdocs/wp/wp-content/uploads/' # The remote path on your FTP server
+        # The `include` and `exclude` options are useful for specifying which files to upload.
+        # If you only have one file, you can specify it directly.
+        include: 'YOCal.db' # The specific file you want to upload
+        # exclude: 'node_modules/, .git/' # Example of files to exclude
+        delete: false # Set to true if you want to delete remote files not present locally
+        overwrite: true # Overwrite existing files on the server
