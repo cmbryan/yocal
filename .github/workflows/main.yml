@@ -27,18 +27,17 @@ jobs:
       run: |
         make db-build
 
+    - name: Copy to staging directory
+      run: |
+        mkdir -p db/out
+        cp db/YOCal.db db/out/YOCal.db
+
     - name: Deploy file to FTP
-      uses: samuelmeuli/action-ftp@v3
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        host: ${{ secrets.FTP_SERVER }}
+        server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         # port: ${{ secrets.FTP_PORT }} # Optional, remove if using default 21
-        local-dir: './' # The local directory where your generated file is
-        remote-dir: '/httpdocs/wp/wp-content/uploads/' # The remote path on your FTP server
-        # The `include` and `exclude` options are useful for specifying which files to upload.
-        # If you only have one file, you can specify it directly.
-        include: 'YOCal.db' # The specific file you want to upload
-        # exclude: 'node_modules/, .git/' # Example of files to exclude
-        delete: false # Set to true if you want to delete remote files not present locally
-        overwrite: true # Overwrite existing files on the server
+        local-dir: './db/out/' # The local directory where your generated file is
+        server-dir: '/httpdocs/wp/wp-content/uploads/yocal/' # The remote path on your FTP server
