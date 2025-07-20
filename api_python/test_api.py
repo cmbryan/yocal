@@ -80,8 +80,8 @@ def test_get_date_june_12_2025():
 
 
 @pytest.mark.parametrize("test_date,expected_file", [
-    (date(2025, 6, 11), 'api/test_res/test_api_output_june_11.html'),
-    (date(2025, 6, 12), 'api/test_res/test_api_output_june_12.html'),
+    (date(2025, 6, 11), 'api_python/test_res/test_api_output_june_11.html'),
+    (date(2025, 6, 12), 'api_python/test_res/test_api_output_june_12.html'),
 ])
 def test_test_display_template(test_date, expected_file):
     # Create test data

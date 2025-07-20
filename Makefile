@@ -2,20 +2,22 @@ db-build:
 	cd db && ./build.sh
 
 .venv:
-	rm -rf .venv && \
 	python -m venv .venv && \
 	. .venv/bin/activate && \
 	python -m pip install -r requirements.txt && \
 	python -m pip install -r requirements_dev.txt
 
-api-debug: .venv
+api-python-debug: .venv
 	. .venv/bin/activate && \
-	python -m flask --app api.api --debug run
+	python -m flask --app api_python.api --debug run
 
-api-production: .venv
+api-python-production: .venv
 	. .venv/bin/activate && \
-	python -m gunicorn 'api.api:app'
+	python -m gunicorn 'api_python.api:app'
 
-api-test: .venv
+api-python-test: .venv
 	. .venv/bin/activate && \
 	python -m pytest -v
+
+api-php-test:
+	make -C api_php run-unit-tests

@@ -56,7 +56,7 @@ def get_test_display():
     if data.keys() == {"error"}:
         return jsonify(data), 404
 
-    env = Environment(loader=FileSystemLoader('api/templates'))
+    env = Environment(loader=FileSystemLoader('api_python/templates'))
     template = env.get_template('test_display.html')
     template.globals.update({"embolden_liturgy_lects": lambda x, y: f"<b>{x}</b>" if x in y else x})
 

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Display</title>
+</head>
+<body>
+    <h1>Test Display</h1>
+    <p>
+        <h2>{{ data["day_name"] }} {{ data["day_ord"] }} {{ data["month"] }} {{ data["year"] }}</h2>
+        {% if data["fast"] is not none %}
+            {{ data["fast"] }}
+        {% endif %}
+        {% if data["commem"] is not none %}
+            <br/>
+            <h3>{{ data["commem"] }}</h3>
+        {% endif %}
+        {% if data["fore_after"] %}
+            <br/>
+            <h3>{{ data["fore_after"] }}</h3>
+        {% endif %}
+        {% if data["tone"] is not none %}
+            <br/>
+            {{ data["tone"] }}&mdash;{{ data["eothinon"] }}
+        {% endif %}
+        {% if data["tone"] is not none %}
+            <br/>
+            {{ data["tone"] }}&mdash;{{ data["eothinon"] }}
+        {% endif %}
+        {% if data["liturgy"] is not none %}
+            <br/>
+            {{ data["liturgy"] }}
+        {% endif %}
+        <br/>
+        {{ data["basil"] }}
+        <h3>{{ data["desig"] }}</h3>
+    </p>
+    <p>
+        <em>Today we commemorate:</em>
+        <br/>
+        {{ data["global_saints"] }}
+        <br/>
+        <em>British Isles and Ireland:</em>
+        <br/>
+        {{ data["british_saints"] }}
+    </p>
+    <p>
+        <em>Today's readings:</em>
+        {% for lect in data["lections"]["basic"] %}
+            <br/>
+            {% if data["lections"]["commem"] %}
+                {{ embolden_liturgy_lects(lect, data["lections"]["liturgy"]) | raw }}{% if not loop.last %}; {% endif %}
+            {% else %}
+                {{ lect }}{% if not loop.last %}; {% endif %}
+            {% endif %}
+        {% endfor %}
+        {% if data["lections"]["commem"] %}
+            <br/>
+            <em>For the commemmoration:</em>
+            {% for lect in data["lections"]["commem"] %}
+                <br/>
+                {% if data["lections"]["commem"] %}
+                    {{ embolden_liturgy_lects(lect, data["lections"]["liturgy"]) | raw }}{% if not loop.last %}; {% endif %}
+                {% else %}
+                    {{ lect }}{% if not loop.last %}; {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        {% if data["liturgy"] and data["lections"]["commem"] %}
+            <br/>
+            <em>Readings in <b>bold type</b> are those appointed by the Typikon for use at the Liturgy</em>
+        {% endif %}
+    </p>
+    <p>
+        {% for text in data["texts"]["basic"] %}
+            {{ text | raw }}
+            <br/>
+        {% endfor %}
+        {% for text in data["texts"]["commem"] %}
+            {{ text | raw }}
+            <br/>
+        {% endfor %}
+    </p>
+
+    Debug:<br/>
+    <textarea rows="50" cols="100">
+        {{ data | print_r }}
+    </textarea>
+</body>
+</html>
