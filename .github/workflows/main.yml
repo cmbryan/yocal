@@ -30,7 +30,7 @@ jobs:
     - name: Copy to staging directory
       run: |
         mkdir -p db/out
-        cp db/YOCal.db db/out/YOCal.db
+        cp db/YOCal_Master.db db/out/YOCal_Master.db
 
     - name: Deploy file to FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
