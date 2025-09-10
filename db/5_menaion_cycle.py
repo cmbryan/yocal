@@ -150,13 +150,16 @@ while yr <= yr_final:
                 WHERE date_key = ?
                 ''' % (tn, is_apos, is_gosp), (major, d_key, d_key, d_key, d_key, d_key, d_key))
 
-# Override is_apos and is_gosp on the Saturdays before and after the Theophany
+# Override is_apos and is_gosp on the Saturdays before and after the Theophany and the Saturday before the Elevation of the Cross
                cur.execute('''UPDATE %s SET 
                 is_comm_apos = 0, is_comm_gosp = 0
                 WHERE a_code = "SatBT"''' % tn)
                cur.execute('''UPDATE %s SET
                 is_comm_apos = 0, is_comm_gosp = 0
                 WHERE a_code = "SatAT"''' % tn)
+               cur.execute('''UPDATE %s SET
+                is_comm_apos = 0, is_comm_gosp = 0
+                WHERE a_code = "SatBX"''' % tn)
 
         row += 1
 
