@@ -15,7 +15,7 @@ app = create_app()
 
 yocal_path = 'db/YOCal.db'
 assert os.path.exists(yocal_path), f"{yocal_path} not found"
-yocal_master_path = 'db/YOCal_Master.db'
+yocal_master_path = 'db/yocal/YOCal_Master.db'
 assert os.path.exists(yocal_master_path), f"{yocal_master_path} not found"
 
 

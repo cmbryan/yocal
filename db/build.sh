@@ -16,3 +16,6 @@ python ./9_master_lection_create.py
 python ./10_master_main_tbl_pop.py 2000 2099
 python ./11_master_lection_pop.py Y
 python ./12_master_lection_correct.py
+
+mkdir yocal
+mv *.db yocal

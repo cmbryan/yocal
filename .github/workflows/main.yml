@@ -27,11 +27,6 @@ jobs:
       run: |
         make db-build
 
-    - name: Copy to staging directory
-      run: |
-        mkdir -p db/out
-        cp db/YOCal_Master.db db/out/YOCal_Master.db
-
     - name: Deploy file to FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
@@ -39,5 +34,5 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         # port: ${{ secrets.FTP_PORT }} # Optional, remove if using default 21
-        local-dir: './db/out/' # The local directory where your generated file is
+        local-dir: './db/yocal/' # The local directory where your generated file is
         server-dir: '/httpdocs/wp/wp-content/uploads/yocal/' # The remote path on your FTP server
