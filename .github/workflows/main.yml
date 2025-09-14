@@ -18,9 +18,13 @@ jobs:
       with:
         python-version: '3.12'
 
-    - name: Run script to generate file
+    - name: Run script to generate database
       run: |
         make db-build
+
+    - name: PHP tests
+      run: |
+        make php-test
 
     - name: Deploy file to FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5

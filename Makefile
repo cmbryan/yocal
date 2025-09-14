@@ -1,6 +1,10 @@
 db-build:
 	cd db && ./build.sh
 
+php-test:
+	# This confirms that the database is working, and also that the webpage display is working
+	cd wp_plugin && php tests.php
+
 # .venv:
 # 	rm -rf .venv && \
 # 	python -m venv .venv && \

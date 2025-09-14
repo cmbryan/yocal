@@ -44,7 +44,7 @@ if (!function_exists('wp_enqueue_style')) {
 
 if (!function_exists('wp_upload_dir')) {
     function wp_upload_dir() {
-        return __DIR__ . '../db/';
+        return ['basedir' => __DIR__ . '/../db'];
     }
 }
 
