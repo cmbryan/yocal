@@ -32,7 +32,7 @@ get_header();
    <main id="main" class="site-main" role="main">
    <form action="" method="post" id="d-form">
    <h2>Saints and Readings</h2>
-   <b><blockquote> for TODAY...&#160;&#160;&#160;or Select Date&#160;&#160;<input type="text" class="datepicker" name="mydate" value = "" size = 12>
+   <b><blockquote> for TODAY...&#160;&#160;&#160;or&#160;&#160;<input type="text" class="datepicker" name="mydate" value = " Select Date" size = 12>
 </blockquote></b>
         </form>
          <script>
