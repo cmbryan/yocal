@@ -159,4 +159,38 @@ if ($all_found) {
     echo "Test Case 3 FAILED.\n";
 }
 
+
+// --- Test Case 4: Next month ---
+echo "--- Testing next month ---\n";
+// Unset the post variable to simulate the initial page load
+
+// Capture output to prevent it from cluttering the test results
+ob_start();
+include 'next_month_template.php';
+$output = ob_get_clean();
+
+// Define expected content
+$expected_strings = [
+    '<h2>Next Month\'s Saints and Readings</h2>',
+    '<em>Commemorations:</em>',
+];
+
+$all_found = true;
+foreach ($expected_strings as $expected) {
+    if (strpos($output, $expected) === false) {
+        $all_found = false;
+        $error_file = __DIR__ . '/test_output_failed.html';
+        file_put_contents($error_file, $output);
+        echo "Assertion Failed: Did not find expected string '{$expected}' in the output.\n";
+        echo "The full output has been saved to: {$error_file}\n";
+        break; // Stop on first failure
+    }
+}
+
+if ($all_found) {
+    echo "Test Case 4 PASSED: All expected content was found.\n";
+} else {
+    echo "Test Case 4 FAILED.\n";
+}
+
 ?>
