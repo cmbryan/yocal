@@ -48,16 +48,16 @@ if (!function_exists('wp_upload_dir')) {
     }
 }
 
-echo "--- Running Test for new_template.php ---\n\n";
+echo "--- Running Test for daily_template.php ---\n\n";
 
-// --- Test Case 1: Specific Date ---
+// --- Test Case 1: Daily with Specific Date ---
 echo "--- Testing with date 2025-07-20 ---\n";
 // Simulate a form submission by setting the $_POST variable
 $_POST['mydate'] = '2025-07-20';
 
 // Capture the output of the included file
 ob_start();
-include 'new_template.php';
+include 'daily_template.php';
 $output = ob_get_clean();
 
 // Define expected content
@@ -90,14 +90,14 @@ if ($all_found) {
 echo "\n";
 
 
-// --- Test Case 2: Today's Date (empty post) ---
+// --- Test Case 2: Daily for Today's Date (empty post) ---
 echo "--- Testing with today's date (empty \$_POST) ---\n";
 // Unset the post variable to simulate the initial page load
 unset($_POST['mydate']);
 
 // Capture output to prevent it from cluttering the test results
 ob_start();
-include 'new_template.php';
+include 'daily_template.php';
 $output = ob_get_clean();
 
 // Define expected content
@@ -123,6 +123,40 @@ if ($all_found) {
     echo "Test Case 2 PASSED: All expected content was found.\n";
 } else {
     echo "Test Case 2 FAILED.\n";
+}
+
+
+// --- Test Case 3: This month ---
+echo "--- Testing this month ---\n";
+// Unset the post variable to simulate the initial page load
+
+// Capture output to prevent it from cluttering the test results
+ob_start();
+include 'this_month_template.php';
+$output = ob_get_clean();
+
+// Define expected content
+$expected_strings = [
+    '<h2>This Month\'s Saints and Readings</h2>',
+    '<em>Commemorations:</em>',
+];
+
+$all_found = true;
+foreach ($expected_strings as $expected) {
+    if (strpos($output, $expected) === false) {
+        $all_found = false;
+        $error_file = __DIR__ . '/test_output_failed.html';
+        file_put_contents($error_file, $output);
+        echo "Assertion Failed: Did not find expected string '{$expected}' in the output.\n";
+        echo "The full output has been saved to: {$error_file}\n";
+        break; // Stop on first failure
+    }
+}
+
+if ($all_found) {
+    echo "Test Case 3 PASSED: All expected content was found.\n";
+} else {
+    echo "Test Case 3 FAILED.\n";
 }
 
 ?>
