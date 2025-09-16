@@ -297,8 +297,8 @@ if (!function_exists('format_lect')) {
 
 
         // Display the link to view the following month
-        $following = "https://www.yorkorthodox.org/next-month/";
-        echo "<a href=$following>... or view next month's Saints and Readings</a><br>";
+        $following = "https://www.yorkorthodox.org/this-month/";
+        echo "<a href=$following>... or view this month's Saints and Readings</a><br>";
 
         // Display the heading: Month and Year
         $header = "<h2>".date('F Y')."</h2>";
