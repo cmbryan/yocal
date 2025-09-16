@@ -288,9 +288,13 @@ if (!function_exists('format_lect')) {
         // ==============================
 
         // Get the date variables
-        $Yr = date('Y');
+        $thismonth = strtotime(date('Y-m')."-01");
+        $nextmonth = strtotime("+1 month", $thismonth);
+        $Yr = date('Y', $nextmonth);
         $Y = (int)$Yr;
-        $M = date('F');
+        $M = date('F', $nextmonth);
+        $Mn = date('m', $nextmonth);        
+
 
         // Display the link to view the following month
         $following = "https://www.yorkorthodox.org/next-month/";
