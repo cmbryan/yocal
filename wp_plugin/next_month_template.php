@@ -301,7 +301,7 @@ if (!function_exists('format_lect')) {
         echo "<a href=$following>... or view this month's Saints and Readings</a><br>";
 
         // Display the heading: Month and Year
-        $header = "<h2>".date('F Y')."</h2>";
+        $header = "<h2>".$M." ".$Yr."</h2>";
         echo $header;
         
         // Display 'From the Fathers' text if available
