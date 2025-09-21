@@ -305,7 +305,7 @@ if (!function_exists('format_lect')) {
         echo $header;
         
         // Display 'From the Fathers' text if available
-        $ffile = "documents/".$Yr."-".$Mn.'_fathers.txt';
+        $ffile = $upload_path."/".$Yr."-".$Mn.'_fathers.txt';
         if (file_exists($ffile)) {
            $fathers = fopen($ffile, "r");
            echo fread($fathers,filesize($ffile));
@@ -336,14 +336,14 @@ Some seafoods, e.g. squid, crab, roe and prawn, are permitted.<br><br>";
         echo $all_txt;
 
         // Display PDF links if the files are available
-        $A4file = "https://www.yorkorthodox.org/documents/".$Yr."-".$Mn.'_A4.pdf';
-        $A5file = "https://www.yorkorthodox.org/documents/".$Yr."-".$Mn.'_A5.pdf';
-        if (file_exists("documents/".date('Y-m').'_A4.pdf')) {
+        $A4file = "https://www.yorkorthodox.org/wp/wp-content/uploads/".$Yr."-".$Mn.'_A4.pdf';
+        $A5file = "https://www.yorkorthodox.org/wp/wp-content/uploads/".$Yr."-".$Mn.'_A5.pdf';
+        if (file_exists($upload_path."/".$Yr."-".$Mn.'_A4.pdf')) {
            echo "A copy of this calendar, suitable for printing, is available <a href=$A4file>here</a> in PDF format. For those with appropriate printing facilities a version is available <a href=$A5file>here</a> as an A5 booklet.<br><br>";
         }
 
         // Display the Acknowledgements text if available
-        $Ackfile = "documents/Acknowledgements.txt";
+        $Ackfile = $upload_path."/Acknowledgements.txt";
         if (file_exists($Ackfile)) {
            $Ack = fopen($Ackfile, "r");
            echo fread($Ack,filesize($Ackfile));
