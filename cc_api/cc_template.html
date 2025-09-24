@@ -10,37 +10,42 @@
 <p>Tone of the week: {{ tone }}</p>
 
 <h3>1st Antiphon</h3>
-{% if antiphons %}
 <p>
+{% if antiphons %}
 {% for verse in antiphons[0].verses %}
 <br/>V: {{ verse }}
 <br/>Ch: {{ antiphons[0].chorus }}
 {% endfor %}
-</p>
 {% else %}
-<p><em>Psalm 102</em></p>
+<em>Psalm 102</em>
 {% endif %}
+</p>
 
 <h3>2nd Antiphon</h3>
-{% if antiphons %}
 <p>
+{% if antiphons %}
 {% for verse in antiphons[1].verses %}
 <br/>V: {{ verse }}
 <br/>Ch: {{ antiphons[1].chorus }}
 {% endfor %}
-</p>
 {% else %}
-<p><em>Psalm 145</em></p>
+<em>Psalm 145</em>
 {% endif %}
+</p>
 
 <h3>3rd Antiphon</h3>
-{% if antiphons %}
 <p>
+{% if antiphons %}
 {% for verse in antiphons[2].verses %}
 <br/>V: {{ verse }}
 <br/>Ch: {{ antiphons[2].chorus }}
 {% endfor %}
-</p>
 {% else %}
-<p><em>The Beatitudes</em></p>
+<em>The Beatitudes</em>
+{% endif %}
+</p>
+
+{% if entrance_hymn %}
+<h3>Entrance Hymn</h3>
+<p>{{ entrance_hymn }}</p>
 {% endif %}

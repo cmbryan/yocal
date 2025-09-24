@@ -43,6 +43,16 @@ def get_antiphons(cursor, target_date):
     return antiphons
 
 
+def get_entrance_hymn(cursor, target_date):
+    cursor.execute("""
+        SELECT T.Content FROM Entrance_Hymns EH
+        JOIN Texts T ON EH.Content_Ref = T.rowid
+        WHERE Menaion_Ref = (SELECT rowid FROM Menaion WHERE date_key = ?)
+    """, (target_date.strftime("%m-%d"),))
+    result = cursor.fetchone()
+    return result[0] if result else None
+
+
 def main():
     """Main function to get tone and render the template."""
     parser = argparse.ArgumentParser(description='Get the tone of the week for a given date.')
@@ -64,8 +74,8 @@ def main():
         data = get_data(main_cur, target_date)
 
         # Derive additional Kliros elements from festal data
-        antiphons = get_antiphons(static_cur, target_date)
-        data['antiphons'] = antiphons
+        data['antiphons'] = get_antiphons(static_cur, target_date)
+        data['entrance_hymn'] = get_entrance_hymn(static_cur, target_date)
     
     # Set up Jinja2 environment
     script_dir = os.path.dirname(os.path.abspath(__file__))
