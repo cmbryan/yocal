@@ -9,6 +9,7 @@
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 # First import the SQLite wrapper for Python:
 import apsw
+import csv
 
 # Open the database as 'cal' and set the cursor to 'cur':
 cal = apsw.Connection('YOCal.db')
@@ -68,6 +69,43 @@ for row in f:
                items[5], items[6], items[7], items[8], items[9],
                items[10], items[11]))
 f.close()
+
+
+# Table "Texts"
+# A place to define texts once for re-use
+# ========================
+cur.execute("""CREATE TABLE Texts (
+    Content TEXT
+)""")
+
+# Table "Festal_Antiphons"
+# ========================
+cur.execute("""CREATE TABLE Festal_Antiphons (
+    Menaion_Ref INTEGER REFERENCES Menaion(rowid),
+    Number INTEGER CHECK (Number IN (1, 2, 3)),
+    Is_Chorus BOOLEAN CHECK (Is_Chorus IN (0, 1)),
+    Content_Ref INTEGER REFERENCES Texts(rowid)
+)""")
+
+with open('festal_antiphons.csv') as fh:
+    reader = csv.DictReader(fh, delimiter='|')
+    for row in reader:
+        rowid = cur.execute('''
+            INSERT INTO Texts (Content) VALUES (?)
+        ''', (row['Text'],))
+        content_rowid = cal.last_insert_rowid()
+
+        menaion_ids = cur.execute('''
+            SELECT rowid FROM Menaion
+            WHERE major = ? OR fore_after = ?
+        ''', (row['Feast'], row['Feast'])).fetchall()
+
+        for menaion_row in menaion_ids:
+            menaion_id = menaion_row[0]
+            cur.execute('''
+                INSERT INTO Festal_Antiphons (Menaion_Ref, Number, Is_Chorus, Content_Ref)
+                VALUES (?,?,?,?)
+            ''', (menaion_id, row['Number'], row['IsChorus'], content_rowid))
 
 
 # Table "A_Lections" - Apostle and Old Testament Readings

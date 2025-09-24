@@ -1,0 +1,46 @@
+<h1>Choir Cues</h1>
+<h2>{{ date }}</h2>
+
+{% if major_commem %}
+<h2>{{ major_commem }}</h2>
+{% elif fore_after %}
+<h2>{{ fore_after }}</h2>
+{% endif %}
+
+<p>Tone of the week: {{ tone }}</p>
+
+<h3>1st Antiphon</h3>
+{% if antiphons %}
+<p>
+{% for verse in antiphons[0].verses %}
+<br/>V: {{ verse }}
+<br/>Ch: {{ antiphons[0].chorus }}
+{% endfor %}
+</p>
+{% else %}
+<p><em>Psalm 102</em></p>
+{% endif %}
+
+<h3>2nd Antiphon</h3>
+{% if antiphons %}
+<p>
+{% for verse in antiphons[1].verses %}
+<br/>V: {{ verse }}
+<br/>Ch: {{ antiphons[1].chorus }}
+{% endfor %}
+</p>
+{% else %}
+<p><em>Psalm 145</em></p>
+{% endif %}
+
+<h3>3rd Antiphon</h3>
+{% if antiphons %}
+<p>
+{% for verse in antiphons[2].verses %}
+<br/>V: {{ verse }}
+<br/>Ch: {{ antiphons[2].chorus }}
+{% endfor %}
+</p>
+{% else %}
+<p><em>The Beatitudes</em></p>
+{% endif %}
