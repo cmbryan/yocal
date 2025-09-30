@@ -87,13 +87,6 @@ cur.execute("""CREATE TABLE Festal_Antiphons (
     Content_Ref INTEGER REFERENCES Texts(rowid)
 )""")
 
-# Table "Entrance_Hymns"
-# ========================
-cur.execute("""CREATE TABLE Entrance_Hymns (
-    Menaion_Ref INTEGER REFERENCES Menaion(rowid),
-    Content_Ref INTEGER REFERENCES Texts(rowid)
-)""")
-
 with open('festal_antiphons.csv') as fh:
     reader = csv.DictReader(fh, delimiter='|')
     for row in reader:
@@ -113,6 +106,13 @@ with open('festal_antiphons.csv') as fh:
                 INSERT INTO Festal_Antiphons (Menaion_Ref, Number, Is_Chorus, Content_Ref)
                 VALUES (?,?,?,?)
             ''', (menaion_id, row['Number'], row['IsChorus'], content_rowid))
+
+# Table "Entrance_Hymns"
+# ========================
+cur.execute("""CREATE TABLE Entrance_Hymns (
+    Menaion_Ref INTEGER REFERENCES Menaion(rowid),
+    Content_Ref INTEGER REFERENCES Texts(rowid)
+)""")
 
 with open('entrance_hymns.csv') as fh:
     reader = csv.DictReader(fh, delimiter='|')
@@ -134,6 +134,25 @@ with open('entrance_hymns.csv') as fh:
                 VALUES (?,?)
             ''', (menaion_id, content_rowid))
 
+# Table "Troparia"
+# ========================
+cur.execute("""CREATE TABLE Troparia (
+    Title INTEGER,
+    Content_Ref INTEGER REFERENCES Texts(rowid)
+)""")
+
+with open('troparia.csv') as fh:
+    reader = csv.DictReader(fh, delimiter='|')
+    for row in reader:
+        rowid = cur.execute('''
+            INSERT INTO Texts (Content) VALUES (?)
+        ''', (row['Text'],))
+        content_rowid = cal.last_insert_rowid()
+
+        cur.execute('''
+            INSERT INTO Troparia (Title, Content_Ref)
+            VALUES (?,?)
+        ''', (row['Title'], content_rowid))
 
 # Table "A_Lections" - Apostle and Old Testament Readings
 # ====================================================

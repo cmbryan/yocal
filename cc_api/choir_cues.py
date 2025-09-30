@@ -53,6 +53,33 @@ def get_entrance_hymn(cursor, target_date):
     return result[0] if result else None
 
 
+def get_apolytikia(cursor, data):
+    apolytikia = ([], [])
+
+    # Resurrectional troparia
+    if data['day_name'] == 'Sunday':
+        res = cursor.execute("""
+            SELECT RT.Title, T.Content FROM Troparia RT
+            JOIN Texts T ON RT.Content_Ref = T.rowid
+            WHERE Title=?
+        """, (f"Resurrectional Troparion, {data['tone'].lower()}",)).fetchone()
+        # Only has a result if the tone is not 'Tone of the feast'
+        if res:
+            apolytikia[0].append(res)
+
+    # Major feasts
+    festal_key = data["major_commem"] or data["fore_after"]
+    res = cursor.execute("""
+        SELECT T.Content FROM Troparia RT
+        JOIN Texts T ON RT.Content_Ref = T.rowid
+        WHERE Title=?
+    """, (festal_key,)).fetchone()
+    if res:
+        apolytikia[0].append((f"For the {festal_key}", res[0]))
+
+    return apolytikia
+
+
 def main():
     """Main function to get tone and render the template."""
     parser = argparse.ArgumentParser(description='Get the tone of the week for a given date.')
@@ -76,6 +103,7 @@ def main():
         # Derive additional Kliros elements from festal data
         data['antiphons'] = get_antiphons(static_cur, target_date)
         data['entrance_hymn'] = get_entrance_hymn(static_cur, target_date)
+        data['apolytikia'] = get_apolytikia(static_cur, data)
     
     # Set up Jinja2 environment
     script_dir = os.path.dirname(os.path.abspath(__file__))

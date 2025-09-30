@@ -49,3 +49,8 @@
 <h3>Entrance Hymn</h3>
 <p>{{ entrance_hymn }}</p>
 {% endif %}
+
+{% for apolytikion in apolytikia[0] %}
+<h3>{{ apolytikion[0] }}</h3>
+<p>{{ apolytikion[1] }}</p>
+{% endfor %}
