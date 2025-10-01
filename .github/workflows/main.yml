@@ -26,6 +26,10 @@ jobs:
       run: |
         make php-test
 
+    - name: Choir Cues tests
+      run: |
+        make cc-test
+
     - name: Deploy file to FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
