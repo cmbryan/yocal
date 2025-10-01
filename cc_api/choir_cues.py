@@ -88,8 +88,11 @@ def main():
 
     target_date = datetime.strptime(args.date, '%Y-%m-%d').date() if args.date else date.today()
 
-    main_db_path = '/home/chris/Documents/yocal/db/yocal/YOCal_Master.db'
-    static_db_path = '/home/chris/Documents/yocal/db/yocal/YOCal.db'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.abspath(os.path.join(script_dir, '..'))
+    main_db_path = os.path.join(project_root, 'db', 'yocal', 'YOCal_Master.db')
+    static_db_path = os.path.join(project_root, 'db', 'yocal', 'YOCal.db')
+
     with sqlite3.connect(main_db_path) as main_conn, \
             sqlite3.connect(static_db_path) as static_conn:
         main_conn.row_factory = sqlite3.Row
@@ -106,7 +109,6 @@ def main():
         data['apolytikia'] = get_apolytikia(static_cur, data)
     
     # Set up Jinja2 environment
-    script_dir = os.path.dirname(os.path.abspath(__file__))
     env = Environment(loader=FileSystemLoader(script_dir))
     template = env.get_template("cc_template.html")
     
