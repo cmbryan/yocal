@@ -7,14 +7,16 @@ from unittest.mock import MagicMock, patch
 # Assuming choir_cues.py is in the same directory or accessible
 from cc_api.choir_cues import (
     Antiphon,
+    create_content,
     get_data,
     get_antiphons,
     get_entrance_hymn,
     get_apolytikia,
-    main
+    main,
+    write_to_file,
 )
 
-class TestChoirCues(unittest.TestCase):
+class TestChoirCuesFunctions(unittest.TestCase):
 
     def setUp(self):
         # Set up connections to the actual databases
@@ -131,23 +133,14 @@ class TestChoirCues(unittest.TestCase):
             " belly of Hades, He has rescued us, and to the world He has granted the great mercy."
         )
 
-    @patch('cc_api.choir_cues.argparse.ArgumentParser')
     @patch('cc_api.choir_cues.sqlite3')
     @patch('cc_api.choir_cues.Environment')
     @patch('cc_api.choir_cues.get_data')
     @patch('cc_api.choir_cues.get_antiphons')
     @patch('cc_api.choir_cues.get_entrance_hymn')
     @patch('cc_api.choir_cues.get_apolytikia')
-    @patch('builtins.print')
-    def test_main(self, mock_print, mock_get_apolytikia, mock_get_entrance_hymn,
-                  mock_get_antiphons, mock_get_data, mock_env, mock_sqlite, mock_argparse):
-        # Mock argparse
-        mock_args = MagicMock()
-        mock_args.date = '2023-12-25'
-        mock_parser = MagicMock()
-        mock_parser.parse_args.return_value = mock_args
-        mock_argparse.return_value = mock_parser
-
+    def test_create_content(self, mock_get_apolytikia, mock_get_entrance_hymn,
+                            mock_get_antiphons, mock_get_data, mock_env, mock_sqlite):
         # Mock sqlite connections and cursors
         mock_main_conn = MagicMock()
         mock_static_conn = MagicMock()
@@ -169,15 +162,15 @@ class TestChoirCues(unittest.TestCase):
         mock_loader = MagicMock()
         mock_env.return_value = mock_loader
         mock_loader.get_template.return_value = mock_template
+        mock_template.render.return_value = "<html></html>"
 
-        main()
+        target_date = date(2023, 12, 25)
+        output = create_content(target_date)
 
         # Assertions
-        mock_argparse.assert_called_once()
         mock_sqlite.connect.assert_any_call(self.main_db_path)
         mock_sqlite.connect.assert_any_call(self.static_db_path)
 
-        target_date = date(2023, 12, 25)
         mock_get_data.assert_called_once_with(mock_main_cur, target_date)
         mock_get_antiphons.assert_called_once_with(mock_static_cur, target_date)
         mock_get_entrance_hymn.assert_called_once_with(mock_static_cur, target_date)
@@ -193,7 +186,84 @@ class TestChoirCues(unittest.TestCase):
             'apolytikia': 'apolytikia'
         }
         mock_template.render.assert_called_once_with(**expected_render_data)
-        mock_print.assert_called_once_with(mock_template.render.return_value)
+        self.assertEqual(output, "<html></html>")
+
+    @patch('cc_api.choir_cues.argparse.ArgumentParser')
+    @patch('cc_api.choir_cues.create_content')
+    @patch('builtins.print')
+    def test_main_prints_to_stdout(self, mock_print, mock_create_content, mock_argparse):
+        # Mock argparse
+        mock_args = MagicMock()
+        mock_args.date = '2023-12-25'
+        mock_args.output = None
+        mock_parser = MagicMock()
+        mock_parser.parse_args.return_value = mock_args
+        mock_argparse.return_value = mock_parser
+
+        mock_create_content.return_value = "<html>output</html>"
+
+        main()
+
+        mock_argparse.assert_called_once()
+        target_date = date(2023, 12, 25)
+        mock_create_content.assert_called_once_with(target_date)
+        mock_print.assert_called_once_with("<html>output</html>")
+
+    @patch('cc_api.choir_cues.argparse.ArgumentParser')
+    @patch('cc_api.choir_cues.create_content')
+    @patch('cc_api.choir_cues.write_to_file')
+    def test_main_writes_to_file(self, mock_write_to_file, mock_create_content, mock_argparse):
+        # Mock argparse
+        mock_args = MagicMock()
+        mock_args.date = '2023-12-25'
+        mock_args.output = 'test.html'
+        mock_parser = MagicMock()
+        mock_parser.parse_args.return_value = mock_args
+        mock_argparse.return_value = mock_parser
+
+        mock_create_content.return_value = "<html>output</html>"
+
+        main()
+
+        mock_argparse.assert_called_once()
+        target_date = date(2023, 12, 25)
+        mock_create_content.assert_called_once_with(target_date)
+        mock_write_to_file.assert_called_once_with("<html>output</html>", 'test.html')
+
+    @patch("builtins.open", new_callable=unittest.mock.mock_open)
+    def test_write_to_file(self, mock_open):
+        content = "some content"
+        output_file = "some/file.txt"
+        write_to_file(content, output_file)
+        mock_open.assert_called_once_with(output_file, 'w')
+        mock_open().write.assert_called_once_with(content)
+
+
+class TestChoirCuesOutput(unittest.TestCase):
+    def setUp(self):
+        self.script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.test_res_dir = os.path.join(self.script_dir, 'test_res')
+
+    def _run_test_for_date(self, test_date, reference_file):
+        output = create_content(test_date)
+        with open(os.path.join(self.test_res_dir, reference_file)) as f:
+            reference_output = f.read()
+        self.assertEqual(output, reference_output)
+
+    def test_output_before_forefeast(self):
+        self._run_test_for_date(date(2023, 9, 12), 'elevation_before_forefeast.html')
+
+    def test_output_forefeast(self):
+        self._run_test_for_date(date(2023, 9, 13), 'elevation_forefeast.html')
+
+    def test_output_feast(self):
+        self._run_test_for_date(date(2023, 9, 14), 'elevation_feast.html')
+
+    def test_output_afterfeast(self):
+        self._run_test_for_date(date(2023, 9, 15), 'elevation_afterfeast.html')
+
+    def test_output_after_afterfeast(self):
+        self._run_test_for_date(date(2023, 9, 22), 'elevation_after_afterfeast.html')
 
 
 if __name__ == '__main__':

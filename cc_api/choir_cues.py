@@ -80,14 +80,8 @@ def get_apolytikia(cursor, data):
     return apolytikia
 
 
-def main():
-    """Main function to get tone and render the template."""
-    parser = argparse.ArgumentParser(description='Get the tone of the week for a given date.')
-    parser.add_argument('--date', help='Date in YYYY-MM-DD format')
-    args = parser.parse_args()
-
-    target_date = datetime.strptime(args.date, '%Y-%m-%d').date() if args.date else date.today()
-
+def create_content(target_date):
+    """Creates the HTML content for the choir cues."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.abspath(os.path.join(script_dir, '..'))
     main_db_path = os.path.join(project_root, 'db', 'yocal', 'YOCal_Master.db')
@@ -107,17 +101,37 @@ def main():
         data['antiphons'] = get_antiphons(static_cur, target_date)
         data['entrance_hymn'] = get_entrance_hymn(static_cur, target_date)
         data['apolytikia'] = get_apolytikia(static_cur, data)
-    
+
     # Set up Jinja2 environment
     env = Environment(loader=FileSystemLoader(script_dir))
     template = env.get_template("cc_template.html")
     
     # Render the template
-    output = template.render(
-        **data,
-    )
-    
-    print(output)
+    return template.render(**data)
+
+
+def write_to_file(content, output_file):
+    """Writes the content to a file."""
+    with open(output_file, 'w') as f:
+        f.write(content)
+
+
+def main():
+    """Main function to get tone and render the template."""
+    parser = argparse.ArgumentParser(description='Get the tone of the week for a given date.')
+    parser.add_argument('--date', help='Date in YYYY-MM-DD format')
+    parser.add_argument('--output', help='Output file path')
+    args = parser.parse_args()
+
+    target_date = datetime.strptime(args.date, '%Y-%m-%d').date() if args.date else date.today()
+
+    output = create_content(target_date)
+
+    if args.output:
+        write_to_file(output, args.output)
+    else:
+        print(output)
+
 
 if __name__ == "__main__":
     main()
