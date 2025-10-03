@@ -20,11 +20,12 @@ class TestChoirCues(unittest.TestCase):
         # Set up connections to the actual databases
         script_dir = os.path.dirname(os.path.abspath(__file__))
         project_root = os.path.abspath(os.path.join(script_dir, '..'))
-        main_db_path = os.path.join(project_root, 'db', 'yocal', 'YOCal_Master.db')
-        static_db_path = os.path.join(project_root, 'db', 'yocal', 'YOCal.db')
 
-        self.main_conn = sqlite3.connect(main_db_path)
-        self.static_conn = sqlite3.connect(static_db_path)
+        self.main_db_path = os.path.join(project_root, 'db', 'yocal', 'YOCal_Master.db')
+        self.static_db_path = os.path.join(project_root, 'db', 'yocal', 'YOCal.db')
+
+        self.main_conn = sqlite3.connect(self.main_db_path)
+        self.static_conn = sqlite3.connect(self.static_db_path)
         self.main_conn.row_factory = sqlite3.Row
         self.static_conn.row_factory = sqlite3.Row
         self.main_cur = self.main_conn.cursor()
@@ -173,8 +174,8 @@ class TestChoirCues(unittest.TestCase):
 
         # Assertions
         mock_argparse.assert_called_once()
-        mock_sqlite.connect.assert_any_call('/home/chris/Documents/yocal/db/yocal/YOCal_Master.db')
-        mock_sqlite.connect.assert_any_call('/home/chris/Documents/yocal/db/yocal/YOCal.db')
+        mock_sqlite.connect.assert_any_call(self.main_db_path)
+        mock_sqlite.connect.assert_any_call(self.static_db_path)
 
         target_date = date(2023, 12, 25)
         mock_get_data.assert_called_once_with(mock_main_cur, target_date)
