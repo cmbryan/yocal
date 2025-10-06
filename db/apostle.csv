@@ -1,7 +1,7 @@
 A1Sun	Great & Holy Pascha	Acts 1:1-8	1
 A1Mon	Bright Monday	Acts 1:12-17, 21-26	2
 A1Tue	Bright Tuesday	Acts 2:14-21	3
-A1Wed	Bright Wednesday	Acts 2:22-36	4
+A1Wed	Bright Wednesday	Acts 2:22-38	4
 A1Thu	Bright Thursday	Acts 2:38-43	5
 A1Fri	Bright Friday	Acts 3:1-8	6
 A1Sat	Bright Saturday	Acts 3:11-16	7
@@ -11,7 +11,7 @@ A2Tue		Acts 4:1-10	10
 A2Wed		Acts 4:13-22	11
 A2Thu		Acts 4:23-31	12
 A2Fri		Acts 5:1-11	13
-A2Sat		Acts 5:21-33	14
+A2Sat		Acts 5:21-32	14
 A3Sun	3rd of Pascha, Sunday of the Myrrhbearing Women	Acts 6:1-7	15
 A3Mon		Acts 6:8-7:5, 47-60	16
 A3Tue		Acts 8:5-17	17
@@ -48,11 +48,11 @@ A7Thu		Acts 25:13-19	47
 A7Fri		Acts 27:1-28:1	48
 A7Sat	Soul Sabbath	Acts 28:1-31	49
 A8Sun	Sunday of Pentecost	Acts 2:1-11	50
-E1Mon	Monday of the Holy Spirit	Ephesians 5:9-19	51
+E1Mon	Monday of the Holy Spirit	Ephesians 5:8-19	51
 E1Tue	Third Day of the Holy Trinity	Romans 1:1-7, 13-17	52
 E1Wed		Romans 1:18-27	53
 E1Thu		Romans 1:28-2:9	54
-E1Fri		Romans 2:14-29	55
+E1Fri		Romans 2:14-28	55
 E1Sat		Romans 1:7-12	56
 E1Sun	1st after Pentecost	Hebrews 11:33-12:2	57
 E2Mon		Romans 2:28-3:18	58
@@ -101,7 +101,7 @@ E8Mon		1 Corinthians 9:13-18	100
 E8Tue		1 Corinthians 10:5-12	101
 E8Wed		1 Corinthians 10:12-22	102
 E8Thu		1 Corinthians 10:28-11:8	103
-E8Fri		1 Corinthians 11:8-22	104
+E8Fri		1 Corinthians 11:8-23	104
 E8Sat		Romans 13:1-10	105
 E8Sun	8th after Pentecost	1 Corinthians 1:10-17	106
 E9Mon		1 Corinthians 11:31-12:6	107
