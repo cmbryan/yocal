@@ -45,13 +45,13 @@ f-12-24|Hebrews 1:1-12|Matthew 1:18-25
 t-12-24|Galatians 3:23-4:5|Luke 2:1-20
 s-12-24|Hebrews 1:10-2:3|Matthew 2:1-12
 n-12-24|Hebrews 2:11-18|Matthew 2:13-23
-v-12-24|Hebrews 1:1-12|Luke 2:1-20
+V-12-24|Hebrews 1:1-12|Luke 2:1-20
 m-12-25||Matthew 1:18-25
 f-01-05|Acts 13:25-33|Matthew 3:1-6
 t-01-05|Acts 19:1-8|Mark 1:1-8
 s-01-05|Romans 6:3-11|Mark 1:9-11
 n-01-05|Titus 2:11-14,3:4-7|Luke 3:1-18
-v-01-05|1 Corinthians 9:19-27|Luke 3:1-18
+V-01-05|1 Corinthians 9:19-27|Luke 3:1-18
 b-01-05|1 Corinthians 10:1-4|Mark 1:9-11
 m-01-06||Mark 1:9-11
 m-02-02||Luke 2:25-32
@@ -59,36 +59,53 @@ m-03-25||Luke 1:39-49,56
 m-08-06||Luke 9:28-36
 m-08-15||Luke 1:39-49,56
 m-Theo||Luke 1:39-49,56
-#1-Theo||Luke 10:38-42,11:27-28
-#2-Theo||Luke 1:24-38
-#1-Bapt||Matthew 11:2-15
-#2-Bapt||John 1:29-34
-#-Angl||Luke 10:16-21
-#-Ancs||Luke 8:16-21
-#1-Prph||Luke 11:47-12:1
-#2-Prph||Luke 4:22-30
-#1-Apos||Luke 10:16-21
-#2-Apos||Matthew 9:36-10:8
-#1-Hier||John 10:9-16
-#2-Hier||Matthew 5:14-19
-#3-Hier||John 10:1-9
-#1-Mart||John 15:17-16:2
-#2-Mart||Matthew 10:32-36,11:1
-#3-Mart||Mark 2:23-3:5
-#4-Mart||Matthew 7:12-21
-#5-Mart||Mark 9:33-41
-#1-WMar||Mark 5:24-34
+#1-Theo|Philippians 2:5-11|Luke 10:38-42,11:27-28
+#2-Theo|Hebrews 2:11-18|Luke 1:24-38
+#3-Theo|Hebrews 9:1-7||
+#1-Bapt|Acts 19:1-8|Matthew 11:2-15
+#2-Bapt|Acts 13:25-32|John 1:29-34
+#3-Bapt|Romans 13:11-14:4||
+#4-Bapt|2 Corinthians 4:6-15||
+#5-Bapt|Galatians 4:22-27||
+#-Angl|Hebrews 2:1-10|Luke 10:16-21
+#-Ancs|Galatians 4:22-27|Luke 8:16-21
+#1-Prph|Hebrews 11:33-12:2|Luke 11:47-12:1
+#2-Prph|James 5:10-20|Luke 4:22-30
+#1-Apos|Acts 1:12-17,21-26|Luke 10:16-21
+#2-Apos|Acts 9:10-19|Matthew 9:36-10:8
+#3-Apos|Acts 11:19-30||
+#4-Apos|1 Corinthians 4:9-16|
+#5-Apos|Colossians 4:5-11,14,18|
+#6-Apos|1 Peter 5:6-14||
+#1-Hier|Hebrews 7:26-8:2|John 10:9-16
+#2-Hier|Hebrews 13:7-16|Matthew 5:14-19
+#3-Hier|Acts 2:1,12-20|John 10:1-9
+#4-Hier|Romans 6:3-11||
+#5-Hier|2 Corinthians 9:6-11|
+#6-Hier|Ephesians 5:8-19|
+#7-Hier|Titus 1:1-5,2:15-3:2,12-15|
+#8-Hier|Titus 3:8-15||
+#1-Mart|Acts 12:1-11|John 15:17-16:2
+#2-Mart|Philippians 3:20-4:3|Matthew 10:32-36,11:1
+#3-Mart|2 Timothy 1:8-18|Mark 2:23-3:5
+#4-Mart|2 Timothy 2:1-10|Matthew 7:12-21
+#5-Mart|Hebrews 10:32-38|Mark 9:33-41
+#6-Mart|Hebrews 10:35-11:7||
+#7-Mart|Hebrews 12:1-10||
+#1-WMar|Galatians 3:23-4:5|Mark 5:24-34
 #2-WMar||Matthew 15:21-28
-#1-Monk||Matthew 11:27-30
-#2-Monk||Luke 12:32-40
-#1-Nuns||Matthew 25:1-13
-#2-Nuns||Luke 7:36-50
-#1-Conf||Luke 12:8-12
-#2-Conf||Luke 6:17-23
-#-Unme||Matthew 10:1,5-8
-#-Bapt||Matthew 28:16-20
-#-Matr||John 2:1-11
-#-Fune||John 5:24-30
-#-PFun||John 5:24-30; John 5:17-24; John 6:35-40; John 6:40-44; John 6:48-54
-#-CFun||Luke 18:15-17,26-27
-#-Unct||Luke 10:25-37; Luke 19:1-10; Matthew 10:1,5-8; Matthew 8:14-23; Matthew 25:1-13; Matthew 15:21-28; Matthew 9:9-13
+#1-Monk|Galatians 5:22-6:2|Matthew 11:27-30
+#2-Monk|Hebrews 13:7-16|Luke 12:32-40
+#1-Nuns|2 Corinthians 6:1-10|Matthew 25:1-13
+#2-Nuns|2 Timothy 3:10-15|Luke 7:36-50
+#1-Conf|2 Corinthians 4:6-15|Luke 12:8-12
+#2-Conf|Galatians 5:22-6:2|Luke 6:17-23
+#3-Conf|Philippians 3:20-4:3||
+#4-Conf|Hebrews 13:17-21||
+#-Unme|1 Corinthians 12:27-13:8|Matthew 10:1,5-8
+#-Bapt|Romans 6:3-11|Matthew 28:16-20
+#-Matr|Ephesians 5:20-33|John 2:1-11
+#-Fune|1 Thessalonians 4:13-17|John 5:24-30
+#-PFun|1 Thessalonians 4:13-17; Romans 5:12-21; 1 Corinthians 15:1-10; 1 Corinthians 15:20-28; Romans 14:6-19|John 5:24-30; John 5:17-24; John 6:35-40; John 6:40-44; John 6:48-54
+#-CFun|Romans 6:9-11|Luke 18:15-17,26-27
+#-Unct|James 5:10-16; Romans 15:1-7; 1 Corinthians 12:27-13:8; 2 Corinthians 6:16-7:1; Galatians 1:11-19; Ephesians 6:10-17; 1 Timothy 4:9-15|Luke 10:25-37; Luke 19:1-10; Matthew 10:1,5-8; Matthew 8:14-23; Matthew 25:1-13; Matthew 15:21-28; Matthew 9:9-13
