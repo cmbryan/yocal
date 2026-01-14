@@ -139,7 +139,7 @@ while yr <= yr_final:
         if d_key not in ("02-10","02-24","04-23","04-25","04-30","05-02","05-08"):
             cur.execute('''SELECT major FROM Menaion WHERE date_key = ?''', (d_key,))
             major = cur.fetchone()[0]
-            if major != "": #or d_key.split("-")[0] == "01" or d_key == "02-03":
+            if major != "" or d_key == "01-14": #or d_key.split("-")[0] == "01" or d_key == "02-03":
                cur.execute('''UPDATE %s SET
                 major_commem = ?,
                 apos_comm = (SELECT apostle FROM Menaion WHERE date_key = ?),
