@@ -39,7 +39,8 @@ cur.execute('''CREATE TABLE yocal_main (
             c_code TEXT,
             x_code TEXT,
             is_comm_apos INTEGER, 
-            is_comm_gosp INTEGER
+            is_comm_gosp INTEGER,
+            explanatory_notes TEXT
             )''')
 
 # Create the Lection table:
