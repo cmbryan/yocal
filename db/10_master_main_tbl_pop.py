@@ -77,12 +77,13 @@ while yr <= yr_final:
 # Add explanatory notes
 with open('explanatory_notes.csv','r') as fh:
     for row in fh:
-        date, text = row.split('|')
-        cur.execute('''
-            UPDATE master.yocal_main
-            SET explanatory_notes = ?
-            WHERE date = ?
-        ''', (text.rstrip(), date))
+        if row:
+            date, text = row.split('|')
+            cur.execute('''
+                UPDATE master.yocal_main
+                SET explanatory_notes = ?
+                WHERE date = ?
+            ''', (text.rstrip(), date))
 
 cur.execute("COMMIT")
 
