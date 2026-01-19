@@ -339,8 +339,11 @@ if (!function_exists('format_lect')) {
         $ret = read_data($date);
         $data = format_data($ret);
         $data2 = format_lect($ret);
+        $data3 = $ret->explanatory_notes;
+
         echo $data;
         echo $data2;
+        echo "\n\n".$data3."<br/>\n";
   ?>
        
 

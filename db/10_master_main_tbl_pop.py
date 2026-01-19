@@ -64,15 +64,25 @@ while yr <= yr_final:
 
     tn = "Year_" + str(yr)
 
+    # Add everything except explanatory_notes
     cur.execute('''INSERT INTO master.yocal_main
                SELECT 
                date, day_name, day_num, ord, month, year, fast, tone, eothinon, desig_a, desig_g,
                major_commem, fore_after, basil, class_5, british,
-               a_code, g_code, c_code, x_code, is_comm_apos, is_comm_gosp
+               a_code, g_code, c_code, x_code, is_comm_apos, is_comm_gosp, NULL
                FROM %s''' % tn)
 
     yr += 1
 
+# Add explanatory notes
+with open('explanatory_notes.csv','r') as fh:
+    for row in fh:
+        date, text = row.split('|')
+        cur.execute('''
+            UPDATE master.yocal_main
+            SET explanatory_notes = ?
+            WHERE date = ?
+        ''', (text.rstrip(), date))
 
 cur.execute("COMMIT")
 
