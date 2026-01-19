@@ -205,7 +205,7 @@ $output = ob_get_clean();
 
 // Define expected content
 $expected_strings = [
-    'The Gospel for the Liturgy shown above accords with the normal sequence, but on this occasion it should be replaced'
+    'on this occasion the appointed Gospel for the Liturgy is that for the Fourteenth Sunday of Luke'
 ];
 
 $all_found = true;
