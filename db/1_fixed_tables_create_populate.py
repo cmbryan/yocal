@@ -138,6 +138,7 @@ with open('entrance_hymns.csv') as fh:
 # ========================
 cur.execute("""CREATE TABLE Troparia (
     Title INTEGER,
+    Date TEXT,
     Content_Ref INTEGER REFERENCES Texts(rowid)
 )""")
 
@@ -150,9 +151,9 @@ with open('troparia.csv') as fh:
         content_rowid = cal.last_insert_rowid()
 
         cur.execute('''
-            INSERT INTO Troparia (Title, Content_Ref)
-            VALUES (?,?)
-        ''', (row['Title'], content_rowid))
+            INSERT INTO Troparia (Title, Date, Content_Ref)
+            VALUES (?,?,?)
+        ''', (row['Title'], row['Date'], content_rowid))
 
 # Table "A_Lections" - Apostle and Old Testament Readings
 # ====================================================

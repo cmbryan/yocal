@@ -70,12 +70,21 @@ def get_apolytikia(cursor, data):
     # Major feasts
     festal_key = data["major_commem"] or data["fore_after"]
     res = cursor.execute("""
-        SELECT T.Content FROM Troparia RT
-        JOIN Texts T ON RT.Content_Ref = T.rowid
+        SELECT T.Content FROM Troparia Tr
+        JOIN Texts T ON Tr.Content_Ref = T.rowid
         WHERE Title=?
     """, (festal_key,)).fetchone()
     if res:
         apolytikia[0].append((f"For the {festal_key}", res[0]))
+
+    # Other commemorations
+    res = cursor.execute("""
+        SELECT Tr.Title, T.Content FROM Troparia Tr
+        JOIN Texts T ON Tr.Content_Ref = T.rowid
+        WHERE Date=?
+    """, (data['c_code'],)).fetchone()
+    if res:
+        apolytikia[0].append(tuple(res))
 
     return apolytikia
 

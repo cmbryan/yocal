@@ -243,6 +243,7 @@ class TestChoirCuesOutput(unittest.TestCase):
     def setUp(self):
         self.script_dir = os.path.dirname(os.path.abspath(__file__))
         self.test_res_dir = os.path.join(self.script_dir, 'test_res')
+        self.maxDiff = None
 
     def _run_test_for_date(self, test_date, reference_file):
         output = create_content(test_date)
@@ -264,6 +265,9 @@ class TestChoirCuesOutput(unittest.TestCase):
 
     def test_output_after_afterfeast(self):
         self._run_test_for_date(date(2023, 9, 22), 'elevation_after_afterfeast.html')
+
+    def test_troparion_with_date_key(self):
+        self._run_test_for_date(date(2025, 10, 1), '10_01_ananias_and_romanos.html')
 
 
 if __name__ == '__main__':
