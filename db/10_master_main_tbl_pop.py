@@ -95,13 +95,13 @@ with open('lection_exceptions.csv','r') as fh:
                     UPDATE master.yocal_main
                     SET a_code = ?
                     WHERE date = ?
-                ''', (apos, date))
+                ''', (apos.rstrip(), date))
             if gosp:
                 cur.execute('''
                     UPDATE master.yocal_main
                     SET g_code = ?
                     WHERE date = ?
-                ''', (gosp, date))
+                ''', (gosp.rstrip(), date))
 
 
 
