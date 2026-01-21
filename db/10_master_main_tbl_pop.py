@@ -85,6 +85,26 @@ with open('explanatory_notes.csv','r') as fh:
                 WHERE date = ?
             ''', (text.rstrip(), date))
 
+# Modify for Lection Exceptions
+with open('lection_exceptions.csv','r') as fh:
+    for row in fh:
+        if row:
+            date, apos, gosp = row.split('|')
+            if apos:
+                cur.execute('''
+                    UPDATE master.yocal_main
+                    SET a_code = ?
+                    WHERE date = ?
+                ''', (apos, date))
+            if gosp:
+                cur.execute('''
+                    UPDATE master.yocal_main
+                    SET g_code = ?
+                    WHERE date = ?
+                ''', (gosp, date))
+
+
+
 cur.execute("COMMIT")
 
 cur.execute('''DETACH master''')
