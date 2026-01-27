@@ -38,8 +38,8 @@ cur.execute('BEGIN TRANSACTION')
 # We need the lection table ids for:
 #        Pascha (A1Sun, J1Sun), 
 #        The start of the Triodion (E33Sun, L16Sun)
-#        E16Sat and M16Sat for the Saturday before the Tiodion.
-#        Also E33Sat and L16Sat. These ids can be taken from the Triodion ids
+#        E16Sat and M16Sat for the Saturday eight days before the Tiodion.
+#        Also E32Sat and L15Sat. These ids can be taken from the Triodion ids
 #            as come immediately before the Triodion ids in the Lection tables
 #        Holy Saturday which has the code G7Sat
 # We can get all of these from the G_Lections table as those ids will hold good for the A_Lections table also: 
@@ -185,10 +185,10 @@ while yr <= yr_final:
 # Triodion follow one of several patterns governed by the number of Sundays which need 
 # to be filled.
 
-# Meanwhile the DAILY lections follow the Epistle cycle until the Saturday of the 33rd week,
-# and the Gospel cycle is followed until the Saturday of the 16th week of Luke.
+# Meanwhile the DAILY lections follow the Epistle cycle until the Saturday of the 32nd week,
+# and the Gospel cycle is followed until the Saturday of the 15th week of Luke.
 # The remaining days are filled by repeating a section of the Epistle cycle and of the 
-# Matthew cycle so that the Saturday of the 16th week of each cycle is reached on the day
+# Matthew cycle so that the Saturday of the 16th week of each cycle is reached eight days
 # before the Triodion begins.
 
 
@@ -235,11 +235,11 @@ while yr <= yr_final:
     # First we tackle the WEEKDAY EPISTLES. The Sundays will be overwritten later.
     #
     
-    # Get and write the data up to E33Sat first setting the counters.
+    # Get and write the data up to E32Sat first setting the counters.
 
     yr_tbl_id = 1
     
-    while a_id < lect_id_triod:
+    while a_id < (lect_id_triod-7):
 
         cur.execute('''UPDATE %s SET
                 desig_a = (SELECT designation FROM A_Lections WHERE A_Lections.a_id = ?), 
@@ -252,17 +252,17 @@ while yr <= yr_final:
         yr_tbl_id += 1
         a_id += 1
 
-    # We can now backfill the remaining dates starting with the day before the Triodion
+    # We can now backfill the remaining dates starting with the eighth day before the Triodion
     # which is always E16Sat.
 
-    # We need to backfill until the day after E33Sat
+    # We need to backfill until the day after E32Sat
     # The variable yr_tbl_id is currently set to that value, so we save it
 
     yr_tbl_id_done = yr_tbl_id
 
     # Now set the counters to their new initial values:
 
-    yr_tbl_id = triod_id -1
+    yr_tbl_id = triod_id -8
     a_id = lect_id_sat_b_triod 
 
     while yr_tbl_id >= yr_tbl_id_done:
@@ -282,11 +282,11 @@ while yr <= yr_final:
     #The process is now repeated for the WEEKDAY GOSPEL lections:
     #
 
-    # Get and write the data up to L16Sat, first setting the counters.
+    # Get and write the data up to L15Sat, first setting the counters.
 
     yr_tbl_id = 1
     
-    while g_id < lect_id_triod:
+    while g_id < (lect_id_triod-7):
 
         cur.execute('''UPDATE %s SET
                 desig_g = (SELECT designation FROM G_Lections WHERE G_Lections.g_id = ?), 
@@ -299,10 +299,10 @@ while yr <= yr_final:
         yr_tbl_id += 1
         g_id += 1
 
-    # We can now backfill the remaining dates starting with the day before the Triodion
+    # We can now backfill the remaining dates starting with the eighth day before the Triodion
     # which is always M16Sat.
 
-    # We need to backfill until the day after L16Sat
+    # We need to backfill until the day after L15Sat
     # The variable yr_table_id is currently set to that value, so we save it
 
     yr_tbl_id_done = yr_tbl_id
@@ -427,11 +427,11 @@ while yr <= yr_final:
     
 # This presents less of a challenge.
 #
-# First we find the data for every day from the Sunday of the Publican and the 
+# First we find the data for every day from the Monday before the Sunday of the Publican and the 
 # Pharisee (start of the Triodion) to Great and Holy Saturday 
 #
-    day_id = triod_id
-    lect_id = lect_id_triod
+    day_id = triod_id-6
+    lect_id = lect_id_triod-6
     
     while day_id < pascha_id:
 
