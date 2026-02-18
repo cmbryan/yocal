@@ -129,7 +129,7 @@ while yr <= yr_final:
     # RULE: The third week of the Tiodion is Cheesefare week:
 
     cur.execute(
-            '''UPDATE %s SET fast = "Cheesefare week: dairy, eggs and fish allowed" 
+            '''UPDATE %s SET fast = "Cheesefare week:  abstain only from meat" 
             WHERE id BETWEEN ? AND ?''' % tn, (triod_id+15, triod_id+21))
 
 
