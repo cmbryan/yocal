@@ -45,3 +45,5 @@ jobs:
         # port: ${{ secrets.FTP_PORT }} # Optional, remove if using default 21
         local-dir: './api-php/' # The local directory
         server-dir: '/httpdocs/api-php/' # The remote path
+        exclude: |
+          **/.htaccess
