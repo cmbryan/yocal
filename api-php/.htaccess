@@ -1,0 +1,10 @@
+RewriteEngine On
+# Must match name of parent folder
+RewriteBase /api-php/
+
+# If the request is for a real file or directory, serve it normally
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Otherwise, send EVERYTHING to index.php
+RewriteRule ^(.*)$ index.php [QSA,L]
