@@ -47,5 +47,4 @@ jobs:
         server-dir: '/httpdocs/api-php/' # The remote path
         exclude: |
           **/.htaccess
-          **/*.php
           **/*.sh
