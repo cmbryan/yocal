@@ -8,6 +8,15 @@ require_once __DIR__ . "/lib.php";
 $db = connect_sqlite($yocalPath);
 $masterDb = connect_sqlite($masterPath);
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
+if (($_SERVER["REQUEST_METHOD"] ?? "GET") === "OPTIONS") {
+    http_response_code(204);
+    exit;
+}
+
 function json_response(array $payload, int $status = 200): void
 {
     http_response_code($status);
