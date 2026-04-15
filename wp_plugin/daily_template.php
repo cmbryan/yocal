@@ -343,7 +343,10 @@ if (!function_exists('format_lect')) {
 
         echo $data;
         echo $data2;
-        echo "\n\n".$data3."<br/>\n";
+	    if (!empty($data3)) {
+			echo "\n<hr>\n".$data3."<br/>\n";
+		}
+
   ?>
        
 
