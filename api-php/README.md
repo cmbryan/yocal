@@ -58,3 +58,7 @@ This checks the same June 11/12, 2025 cases as the Python and JS versions.
 - `api-php/lib.php`: data access and date/lection assembly logic
 - `api-php/template.php`: HTML view used by `/test-display`
 - `api-php/test_api.php`: lightweight parity checks
+
+## Uploading to Production
+
+This is handled automatically by [Github Actions](../.github/workflows/main.yml). However, note that `.htaccess` and `*.sh` are excluded because they are blocked from upload by the host fol security reasons.
