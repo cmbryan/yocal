@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "yocal-mobile",
+    "name": "Orthodox Christian Calendar UK",
     "slug": "yocal-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -16,6 +16,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "org.cmbryan.yocal",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -28,6 +29,11 @@
     },
     "plugins": [
       "@react-native-community/datetimepicker"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e7d1ea4c-c22a-4f3a-b123-72b1f6bf8eb2"
+      }
+    }
   }
 }
