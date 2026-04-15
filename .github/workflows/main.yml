@@ -48,3 +48,4 @@ jobs:
         exclude: |
           **/.htaccess
           **/*.php
+          **/*.sh
