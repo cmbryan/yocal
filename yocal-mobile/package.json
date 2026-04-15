@@ -1,0 +1,45 @@
+{
+  "name": "yocal-mobile",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "test:ci": "jest --ci --runInBand --coverage"
+  },
+  "dependencies": {
+    "@react-native-community/datetimepicker": "^9.1.0",
+    "expo": "~54.0.33",
+    "expo-status-bar": "~3.0.9",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-native": "0.81.5",
+    "react-native-web": "^0.21.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-native": "5.4.3",
+    "@testing-library/react-native": "13.2.0",
+    "@types/jest": "29.5.14",
+    "@types/react": "~19.1.0",
+    "jest": "29.7.0",
+    "jest-expo": "~54.0.12",
+    "react-test-renderer": "19.1.0",
+    "typescript": "~5.9.2"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.ts"
+    ],
+    "collectCoverageFrom": [
+      "App.tsx",
+      "src/lib/**/*.ts"
+    ]
+  },
+  "private": true,
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}
