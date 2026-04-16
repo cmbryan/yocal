@@ -37,7 +37,15 @@ export default function DonationScreen() {
         </Text>
 
         <Text style={styles.note}>
-          [Troparion to St Constantine]
+          <Text style={{ fontWeight: "600" }}>Troparion to St Constantine</Text>
+          {"\n\n"}
+          Constantine, who is Your apostle among kings, O Lord,{"\n"}
+          Having beheld with his own eyes the sign of Your Cross in heaven,{"\n"}
+          And, like Paul, having accepted Your call not from man,{"\n"}
+          Entrusted the reigning city into Your hands,{"\n"}
+          Having delivered it with safety for all time{"\n"}
+          Through the intercessions of the Theotokos,{"\n"}
+          O only lover of mankind.
         </Text>
 
         <View style={styles.buttonWrapper}>
