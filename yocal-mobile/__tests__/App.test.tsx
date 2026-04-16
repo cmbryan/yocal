@@ -125,6 +125,43 @@ describe("App", () => {
     });
   });
 
+  test("shows donate tab and donation button", async () => {
+    mockedFetchDailyData.mockResolvedValue({
+      day_name: "Monday",
+      day_ord: "2nd",
+      month: "June",
+      year: 2025,
+      fast: "Fast free",
+      tone: null,
+      eothinon: null,
+      liturgy: "Liturgy of St John Chrysostom",
+      desig: "Afterfeast",
+      commem: "Some Commemoration",
+      fore_after: "Forefeast",
+      global_saints: "Saint A",
+      british_saints: "Saint B",
+      lections: {
+        basic: ["Romans 1:1"],
+        commem: [],
+        liturgy: ["Romans 1:1"],
+      },
+      texts: {
+        basic: ["<em>Romans 1:1</em><br>Some text"],
+        commem: [],
+      },
+    });
+
+    render(<App />);
+
+    const donateTab = screen.getByText("Donate");
+    fireEvent.press(donateTab);
+
+    await waitFor(() => {
+      expect(screen.getAllByText("Donate").length).toBeGreaterThanOrEqual(1);
+      expect(screen.getByText(/The Antiochian Orthodox Parish of St Constantine the Great/i)).toBeTruthy();
+    });
+  });
+
   test("shows friendly CORS message for fetch failure", async () => {
     mockedFetchDailyData.mockRejectedValue(new Error("Failed to fetch"));
 

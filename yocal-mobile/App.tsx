@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "./src/screens/HomeScreen";
 import CommemorateScreen from "./src/screens/CommemorateScreen";
 import ReadingsScreen from "./src/screens/ReadingsScreen";
+import DonationScreen from "./src/screens/DonationScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -49,6 +50,12 @@ export default function App() {
           options={{ title: "Readings" }}
         >
           {(props) => <ReadingsScreen {...props} activeDate={activeDate} />}
+        </Tab.Screen>
+        <Tab.Screen
+          name="Donation"
+          options={{ title: "Donate" }}
+        >
+          {(props) => <DonationScreen {...props} />}
         </Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
