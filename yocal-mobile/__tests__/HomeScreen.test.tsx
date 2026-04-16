@@ -26,7 +26,7 @@ describe("HomeScreen", () => {
 
     render(<HomeScreen activeDate={new Date(2025, 5, 2)} setActiveDate={() => {}} />);
 
-    expect(screen.getByText("Home")).toBeTruthy();
+    expect(screen.getByText("Select Date")).toBeTruthy();
     expect(screen.getAllByText("2025-06-02")[0]).toBeTruthy();
   });
 
