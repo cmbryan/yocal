@@ -35,6 +35,12 @@ export default function DonationScreen(_props: any) {
           If you enjoy using this app, please consider making a donation to help us achieve this milestone!
         </Text>
 
+        <View style={styles.buttonWrapper}>
+          <Pressable style={styles.buttonPrimary} onPress={() => void WebBrowser.openBrowserAsync(DONATION_URL)}>
+            <Text style={styles.buttonPrimaryText}>Donate</Text>
+          </Pressable>
+        </View>
+
         <Text style={styles.note}>
           <Text style={{ fontWeight: "600" }}>Troparion to St Constantine</Text>
           {"\n"}
@@ -46,12 +52,6 @@ export default function DonationScreen(_props: any) {
           Through the intercessions of the Theotokos,{"\n"}
           O only lover of mankind.
         </Text>
-
-        <View style={styles.buttonWrapper}>
-          <Pressable style={styles.buttonPrimary} onPress={() => void WebBrowser.openBrowserAsync(DONATION_URL)}>
-            <Text style={styles.buttonPrimaryText}>Donate</Text>
-          </Pressable>
-        </View>
       </ScrollView>
     </SafeAreaView>
   );
