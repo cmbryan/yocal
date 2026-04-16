@@ -43,6 +43,30 @@ Then choose:
 - `i` for iOS
 - `w` for Web
 
+## Building for Production
+
+Use EAS Build to create signed Android App Bundles (AAB) for Google Play Store submission.
+
+### Local Build
+
+Build locally on your machine:
+
+```bash
+npx eas-cli build --platform android --local
+```
+
+This creates a signed AAB in the `dist` folder.
+
+### Remote Build
+
+Build in the cloud (recommended for consistency):
+
+```bash
+npx eas-cli build --platform android
+```
+
+The build will be uploaded to EAS servers and you'll receive a download link when complete.
+
 ## Automated Regression Tests
 
 Run:
