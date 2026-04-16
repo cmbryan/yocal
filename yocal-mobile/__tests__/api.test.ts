@@ -47,4 +47,13 @@ describe("api utilities", () => {
 
     await expect(fetchDailyData("2025-06-02", fetchImpl)).rejects.toThrow("No data found");
   });
+
+  test("fetchDailyData throws payload errors", async () => {
+    const fetchImpl = jest.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ error: "Payload error" }),
+    });
+
+    await expect(fetchDailyData("2025-06-02", fetchImpl)).rejects.toThrow("Payload error");
+  });
 });

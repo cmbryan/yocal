@@ -18,9 +18,19 @@ describe("date utilities", () => {
     expect(parseDateFromKey("2025-02-31")).toBeNull();
   });
 
+  test("parseDateFromKey rejects invalid format", () => {
+    expect(parseDateFromKey("not-a-date")).toBeNull();
+    expect(parseDateFromKey("2025-abc-01")).toBeNull();
+  });
+
   test("htmlToText strips and normalizes basic markup", () => {
     const html = "<em>Romans 1:1</em><br>Text &amp; more&#39;s";
     expect(htmlToText(html)).toBe("Romans 1:1\nText & more's");
+  });
+
+  test("htmlToText strips bold tags", () => {
+    const html = "<b>Bold text</b>";
+    expect(htmlToText(html)).toBe("Bold text");
   });
 
   test("joinList removes blank entries", () => {

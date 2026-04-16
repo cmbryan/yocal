@@ -41,7 +41,8 @@
     ],
     "collectCoverageFrom": [
       "App.tsx",
-      "src/lib/**/*.ts"
+      "src/lib/**/*.ts",
+      "src/screens/**/*.tsx"
     ]
   },
   "private": true,
