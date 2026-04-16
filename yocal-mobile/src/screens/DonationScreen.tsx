@@ -12,7 +12,7 @@ function LinkText({ children, url }: { children: string; url: string }) {
   );
 }
 
-export default function DonationScreen() {
+export default function DonationScreen(_props: any) {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.scroll} contentContainerStyle={styles.content}>
