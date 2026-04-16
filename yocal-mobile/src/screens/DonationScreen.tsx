@@ -16,7 +16,6 @@ export default function DonationScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.scroll} contentContainerStyle={styles.content}>
-        <Text style={styles.header}>Donation</Text>
 
         <Text style={styles.paragraph}>
           The Antiochian Orthodox Parish of St Constantine the Great, based in the city of York, has been serving the North of England since ____ through worship, fellowship, and evangelism. We are part of the
@@ -38,7 +37,7 @@ export default function DonationScreen() {
 
         <Text style={styles.note}>
           <Text style={{ fontWeight: "600" }}>Troparion to St Constantine</Text>
-          {"\n\n"}
+          {"\n"}
           Constantine, who is Your apostle among kings, O Lord,{"\n"}
           Having beheld with his own eyes the sign of Your Cross in heaven,{"\n"}
           And, like Paul, having accepted Your call not from man,{"\n"}

@@ -58,8 +58,6 @@ export default function ReadingsScreen({ activeDate }: ReadingsScreenProps) {
           <RefreshControl refreshing={refreshing} onRefresh={() => void reload(true)} />
         }
       >
-        <Text style={styles.header}>Readings</Text>
-
         {!loading && !error && (
           <>
             <SectionCard title="Today's Readings">

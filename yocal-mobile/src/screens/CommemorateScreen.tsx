@@ -52,8 +52,6 @@ export default function CommemorateScreen({ activeDate }: CommemorateScreenProps
           <RefreshControl refreshing={refreshing} onRefresh={() => void reload(true)} />
         }
       >
-        <Text style={styles.header}>Commemorations</Text>
-
         <SectionCard title="Today We Commemorate">
           {loading ? (
             <ActivityIndicator />

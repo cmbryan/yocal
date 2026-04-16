@@ -74,8 +74,6 @@ export default function HomeScreen({ activeDate, setActiveDate }: HomeScreenProp
           <RefreshControl refreshing={refreshing} onRefresh={() => void reload(true)} />
         }
       >
-        <Text style={styles.header}>Home</Text>
-
         {Platform.OS === "web" ? (
           <View style={styles.datePickerRow}>
             <input
