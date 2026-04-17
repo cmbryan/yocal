@@ -87,8 +87,10 @@ export default function ReadingsScreen({ activeDate }: ReadingsScreenProps) {
 
   const readingsTitle = selectedTab === "liturgy" ? "At Church" : "At Home";
 
+  const noLiturgy = selectedTab === "liturgy" && data && data.liturgy == "";
+
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <ScrollView
         style={styles.scroll}
         contentContainerStyle={styles.content}
@@ -134,26 +136,32 @@ export default function ReadingsScreen({ activeDate }: ReadingsScreenProps) {
             </View>
 
             <SectionCard title={readingsTitle}>
-              {readingRefs.map((reading) => (
-                <Text key={reading} style={styles.lineItem}>
-                  {reading}
-                </Text>
-              ))}
+              {noLiturgy ? (
+                <Text style={styles.italicText} accessible={true}>There is no liturgy on this day.</Text>
+              ) : (
+                readingRefs.map((reading) => (
+                  <Text key={reading} style={styles.lineItem} accessible={true}>
+                    {reading}
+                  </Text>
+                ))
+              )}
             </SectionCard>
 
-            <SectionCard title="Texts">
-              {readingTexts.map((text, idx) => (
-                <Text key={`${idx}-${text.slice(0, 32)}`} style={styles.readingText}>
-                  {text}
-                </Text>
-              ))}
-            </SectionCard>
+            {!noLiturgy && (
+              <SectionCard title="Texts">
+                {readingTexts.map((text, idx) => (
+                  <Text key={`${idx}-${text.slice(0, 32)}`} style={styles.readingText} accessible={true}>
+                    {text}
+                  </Text>
+                ))}
+              </SectionCard>
+            )}
           </>
         )}
         {loading && <ActivityIndicator />}
         {error && <Text style={styles.errorText}>{error}</Text>}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -234,6 +242,12 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: "#b91c1c",
+    fontSize: 15,
+    lineHeight: 22,
+  },
+  italicText: {
+    fontStyle: "italic",
+    color: "#374151",
     fontSize: 15,
     lineHeight: 22,
   },
