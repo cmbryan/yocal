@@ -33,85 +33,89 @@ export default function App() {
   return (
     <NavigationContainer>
       <StatusBar style="dark" />
-      <Tab.Navigator
-        screenOptions={{
-          tabBarActiveTintColor: "#1d4ed8",
-          tabBarInactiveTintColor: "#6b7280",
-          tabBarStyle: {
-            backgroundColor: "#ffffff",
-            borderTopColor: "#e5e7eb",
-            borderTopWidth: 1,
-          },
-          headerStyle: {
-            backgroundColor: "#f3f4f6",
-          },
-          headerTintColor: "#111827",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-          headerRight: () => (
-            <View style={styles.headerDatePickerRow}>
-              {Platform.OS === "web" ? (
-                <input
-                  type="date"
-                  value={activeDateKey}
-                  onChange={(event) => {
-                    const selected = parseDateFromKey(event.target.value);
-                    if (selected) {
-                      setActiveDate(selected);
-                    }
-                  }}
-                  style={styles.webDatePicker as unknown as Record<string, string | number>}
-                />
-              ) : (
-                <>
-                  <Pressable
-                    style={styles.buttonPrimary}
-                    onPress={() => setShowPicker(true)}
-                  >
-                    <Text style={styles.buttonPrimaryText}>Select Date</Text>
-                  </Pressable>
-                  <Text style={styles.headerDateLabel}>{activeDateKey}</Text>
-                </>
-              )}
-            </View>
-          ),
-        }}
-      >
-        <Tab.Screen
-          name="Home"
-          options={{ title: "Home" }}
-        >
-          {(props) => <HomeScreen {...props} activeDate={activeDate} setActiveDate={setActiveDate} />}
-        </Tab.Screen>
-        <Tab.Screen
-          name="Commemorate"
-          options={{ title: "Commemorations" }}
-        >
-          {(props) => <CommemorateScreen {...props} activeDate={activeDate} />}
-        </Tab.Screen>
-        <Tab.Screen
-          name="Readings"
-          options={{ title: "Readings" }}
-        >
-          {(props) => <ReadingsScreen {...props} activeDate={activeDate} />}
-        </Tab.Screen>
-        <Tab.Screen
-          name="Donation"
-          options={{ title: "Donate" }}
-        >
-          {(props) => <DonationScreen {...props} />}
-        </Tab.Screen>
-      </Tab.Navigator>
-        {Platform.OS !== "web" && showPicker ? (
-          <DateTimePicker
-            mode="date"
-            value={activeDate}
-            display={Platform.OS === "ios" ? "inline" : "default"}
-            onChange={onNativeDateChange}
-          />
-        ) : null}
-      </NavigationContainer>
+      <View style={styles.appContainer}>
+        <View style={styles.appLayout}>
+          <Tab.Navigator
+            screenOptions={{
+              tabBarActiveTintColor: "#1d4ed8",
+              tabBarInactiveTintColor: "#6b7280",
+              tabBarStyle: {
+                backgroundColor: "#ffffff",
+                borderTopColor: "#e5e7eb",
+                borderTopWidth: 1,
+              },
+              headerStyle: {
+                backgroundColor: "#f3f4f6",
+              },
+              headerTintColor: "#111827",
+              headerTitleStyle: {
+                fontWeight: "bold",
+              },
+              headerRight: () => (
+                <View style={styles.headerDatePickerRow}>
+                  {Platform.OS === "web" ? (
+                    <input
+                      type="date"
+                      value={activeDateKey}
+                      onChange={(event) => {
+                        const selected = parseDateFromKey(event.target.value);
+                        if (selected) {
+                          setActiveDate(selected);
+                        }
+                      }}
+                      style={styles.webDatePicker as unknown as Record<string, string | number>}
+                    />
+                  ) : (
+                    <>
+                      <Pressable
+                        style={styles.buttonPrimary}
+                        onPress={() => setShowPicker(true)}
+                      >
+                        <Text style={styles.buttonPrimaryText}>Select Date</Text>
+                      </Pressable>
+                      <Text style={styles.headerDateLabel}>{activeDateKey}</Text>
+                    </>
+                  )}
+                </View>
+              ),
+            }}
+          >
+            <Tab.Screen
+              name="Home"
+              options={{ title: "Home" }}
+            >
+              {(props) => <HomeScreen {...props} activeDate={activeDate} setActiveDate={setActiveDate} />}
+            </Tab.Screen>
+            <Tab.Screen
+              name="Commemorate"
+              options={{ title: "Commemorations" }}
+            >
+              {(props) => <CommemorateScreen {...props} activeDate={activeDate} />}
+            </Tab.Screen>
+            <Tab.Screen
+              name="Readings"
+              options={{ title: "Readings" }}
+            >
+              {(props) => <ReadingsScreen {...props} activeDate={activeDate} />}
+            </Tab.Screen>
+            <Tab.Screen
+              name="Donation"
+              options={{ title: "Donate" }}
+            >
+              {(props) => <DonationScreen {...props} />}
+            </Tab.Screen>
+          </Tab.Navigator>
+          {Platform.OS !== "web" && showPicker ? (
+            <DateTimePicker
+              mode="date"
+              value={activeDate}
+              display={Platform.OS === "ios" ? "inline" : "default"}
+              onChange={onNativeDateChange}
+            />
+          ) : null}
+        </View>
+      </View>
+    </NavigationContainer>
   );
 }
 
@@ -151,5 +155,15 @@ const styles = StyleSheet.create({
     color: "#111827",
     fontSize: 15,
     fontWeight: "600",
+  },
+  appContainer: {
+    flex: 1,
+    backgroundColor: "#f3f4f6",
+  },
+  appLayout: {
+    flex: 1,
+    width: "100%",
+    maxWidth: 960,
+    alignSelf: "center",
   },
 });
