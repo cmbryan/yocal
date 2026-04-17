@@ -115,6 +115,9 @@ export default function App() {
               {(props) => <DonationScreen {...props} />}
             </Tab.Screen>
           </Tab.Navigator>
+          <View pointerEvents="none" style={styles.copyrightContainer}>
+            <Text style={styles.copyrightText}>Copyright 2026 cmbryan software</Text>
+          </View>
           {Platform.OS !== "web" && showPicker ? (
             <DateTimePicker
               mode="date"
@@ -180,5 +183,16 @@ const styles = StyleSheet.create({
     width: "100%",
     maxWidth: 960,
     alignSelf: "center",
+  },
+  copyrightContainer: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 54,
+    alignItems: "center",
+  },
+  copyrightText: {
+    color: "#6b7280",
+    fontSize: 12,
   },
 });
