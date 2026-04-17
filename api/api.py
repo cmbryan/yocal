@@ -94,6 +94,7 @@ def _get_date(date_obj: datetime.date) -> Dict:
         "fore_after": data["fore_after"],
         "global_saints": data["class_5"],
         "british_saints": data["british"],
+        "a_code": data["a_code"],
     }
 
     a_code = data["a_code"]

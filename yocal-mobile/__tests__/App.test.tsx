@@ -46,42 +46,6 @@ describe("App", () => {
     await waitFor(() => {
       expect(screen.getByText("Monday 2nd June 2025")).toBeTruthy();
       expect(screen.getByText("Fast free")).toBeTruthy();
-    });
-  });
-
-  test("renders fetched liturgical data on Commemorate screen", async () => {
-    mockedFetchDailyData.mockResolvedValue({
-      day_name: "Monday",
-      day_ord: "2nd",
-      month: "June",
-      year: 2025,
-      fast: "Fast free",
-      tone: null,
-      eothinon: null,
-      liturgy: "Liturgy of St John Chrysostom",
-      desig: "Afterfeast",
-      commem: "Some Commemoration",
-      fore_after: "Forefeast",
-      global_saints: "Saint A",
-      british_saints: "Saint B",
-      lections: {
-        basic: ["Romans 1:1"],
-        commem: [],
-        liturgy: ["Romans 1:1"],
-      },
-      texts: {
-        basic: ["<em>Romans 1:1</em><br>Some text"],
-        commem: [],
-      },
-    });
-
-    render(<App />);
-
-    // Navigate to Commemorate tab
-    const commemorateTab = screen.getByText("Commemorations");
-    fireEvent.press(commemorateTab);
-
-    await waitFor(() => {
       expect(screen.getByText("Saint A")).toBeTruthy();
       expect(screen.getByText("British Isles and Ireland:\nSaint B")).toBeTruthy();
     });
@@ -120,8 +84,16 @@ describe("App", () => {
     fireEvent.press(readingsTab);
 
     await waitFor(() => {
+      expect(screen.getByText("Liturgy")).toBeTruthy();
+    });
+
+    // Switch to Liturgy tab
+    const liturgyTab = screen.getByText("Liturgy");
+    fireEvent.press(liturgyTab);
+
+    await waitFor(() => {
       expect(screen.getByText("Romans 1:1")).toBeTruthy();
-      expect(screen.getByText("Readings for the Liturgy: Romans 1:1")).toBeTruthy();
+      expect(screen.getByText("At Church")).toBeTruthy();
     });
   });
 

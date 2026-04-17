@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react-native";
+import { render, screen, fireEvent } from "@testing-library/react-native";
 import ReadingsScreen from "../src/screens/ReadingsScreen";
 import { useDailyData } from "../src/lib/hooks";
 
@@ -9,14 +9,49 @@ jest.mock("../src/lib/hooks", () => ({
 
 const mockedUseDailyData = useDailyData as jest.MockedFunction<typeof useDailyData>;
 
+const combo0 = {
+  lections: {
+    basic: ["2 Timothy 4:9-22", "Matthew 23:29-39"],
+    commem: ["Colossians 2:8-12", "Luke 2:20-21, 40-52"],
+    liturgy: ["Colossians 2:8-12", "Luke 2:20-21, 40-52"]
+  },
+  texts: {
+    basic: [
+      "<em>2 Timothy 4:9-22</em><br>Timothy, my son, make an effort to come to me soon...",
+      "<em>Matthew 23:29-39</em><br>The Lord said to the Jews who came to him..."
+    ],
+    commem: [
+      "<em>Colossians 2:8-12</em><br>Brothers and sisters, see that no one carries you away...",
+      "<em>Luke 2:20-21, 40-52</em><br>At that time the shepherds returned..."
+    ]
+  }
+};
+
+const combo1 = {
+  lections: {
+    basic: ["Titus 1:5-14", "Matthew 24:13-28"],
+    commem: [],
+    liturgy: ["Titus 1:5-14", "Matthew 24:13-28"]
+  },
+  texts: {
+    basic: [
+      "<em>Titus 1:5-14</em><br>Titus, my son, appoint presbyters in each city...",
+      "<em>Matthew 24:13-28</em><br>The Lord said to his disciples..."
+    ],
+    commem: []
+  }
+};
+
 describe("ReadingsScreen", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  test("renders readings data", () => {
+  test("renders readings with basic and commem, liturgy shows commem", () => {
+    const combo = combo0;
     mockedUseDailyData.mockReturnValue({
       data: {
+        ...combo,
         day_name: "Monday",
         day_ord: "2nd",
         month: "June",
@@ -30,15 +65,6 @@ describe("ReadingsScreen", () => {
         fore_after: "Forefeast",
         global_saints: "Saint A",
         british_saints: "Saint B",
-        lections: {
-          basic: ["Romans 1:1", "Romans 1:2"],
-          commem: ["Psalm 1"],
-          liturgy: ["Romans 1:1"],
-        },
-        texts: {
-          basic: ["<em>Romans 1:1</em><br>Some text", "<em>Romans 1:2</em><br>More text"],
-          commem: ["<b>Psalm 1</b><br>Text"],
-        },
       },
       loading: false,
       refreshing: false,
@@ -48,13 +74,134 @@ describe("ReadingsScreen", () => {
 
     render(<ReadingsScreen activeDate={new Date(2025, 5, 2)} />);
 
-    expect(screen.getByText("Romans 1:1")).toBeTruthy();
-    expect(screen.getByText("Romans 1:2")).toBeTruthy();
+    // Default to home tab: basic minus commem
+    expect(screen.getByText("2 Timothy 4:9-22")).toBeTruthy();
+    expect(screen.getByText("Matthew 23:29-39")).toBeTruthy();
+    expect(screen.queryByText("For the Commemoration:")).toBeNull();
+    expect(screen.queryByText("Colossians 2:8-12")).toBeNull();
+    expect(screen.queryByText("Luke 2:20-21, 40-52")).toBeNull();
+    // Texts: only basic
+    expect(screen.getByText("2 Timothy 4:9-22\nTimothy, my son, make an effort to come to me soon...")).toBeTruthy();
+    expect(screen.getByText("Matthew 23:29-39\nThe Lord said to the Jews who came to him...")).toBeTruthy();
+  });
+
+  test("renders readings with basic only, liturgy shows basic", () => {
+    const combo = combo1;
+    mockedUseDailyData.mockReturnValue({
+      data: {
+        ...combo,
+        day_name: "Sunday",
+        day_ord: "28th",
+        month: "December",
+        year: 2025,
+        fast: null,
+        tone: "Tone 4",
+        eothinon: "Eothinon 7",
+        liturgy: "Liturgy of St John Chrysostom",
+        desig: "Sunday After the Nativity",
+        commem: null,
+        fore_after: "Afterfeast",
+        global_saints: "Saint B",
+        british_saints: "",
+      },
+      loading: false,
+      refreshing: false,
+      error: null,
+      reload: jest.fn(),
+    });
+
+    render(<ReadingsScreen activeDate={new Date(2025, 11, 28)} />);
+
+    // Home tab: basic
+    expect(screen.getByText("Titus 1:5-14")).toBeTruthy();
+    expect(screen.getByText("Matthew 24:13-28")).toBeTruthy();
+    expect(screen.queryByText("For the Commemoration:")).toBeNull();
+
+    // Switch to liturgy tab: same as basic
+    fireEvent.press(screen.getByText("Liturgy"));
+    expect(screen.getByText("At Church")).toBeTruthy();
+    expect(screen.getByText("Titus 1:5-14")).toBeTruthy();
+    expect(screen.getByText("Matthew 24:13-28")).toBeTruthy();
+    expect(screen.queryByText("For the Commemoration:")).toBeNull();
+  });
+
+  test("renders readings with basic and commem, liturgy shows commem", () => {
+    const combo = combo0;
+    mockedUseDailyData.mockReturnValue({
+      data: {
+        ...combo,
+        day_name: "Monday",
+        day_ord: "2nd",
+        month: "June",
+        year: 2025,
+        fast: "Fast free",
+        tone: null,
+        eothinon: null,
+        liturgy: "Liturgy of St John Chrysostom",
+        desig: "Afterfeast",
+        commem: "Some Commemoration",
+        fore_after: "Forefeast",
+        global_saints: "Saint A",
+        british_saints: "Saint B",
+      },
+      loading: false,
+      refreshing: false,
+      error: null,
+      reload: jest.fn(),
+    });
+
+    render(<ReadingsScreen activeDate={new Date(2025, 0, 1)} />);
+
+    // Switch to liturgy tab: shows commem
+    fireEvent.press(screen.getByText("Liturgy"));
+    expect(screen.getByText("At Church")).toBeTruthy();
     expect(screen.getByText("For the Commemoration:")).toBeTruthy();
-    expect(screen.getByText("Psalm 1")).toBeTruthy();
-    expect(screen.getByText("Readings for the Liturgy: Romans 1:1")).toBeTruthy();
-    expect(screen.getByText("Romans 1:1\nSome text")).toBeTruthy();
-    expect(screen.getByText("Romans 1:2\nMore text")).toBeTruthy();
-    expect(screen.getByText("Psalm 1\nText")).toBeTruthy();
+    expect(screen.getByText("Colossians 2:8-12")).toBeTruthy();
+    expect(screen.getByText("Luke 2:20-21, 40-52")).toBeTruthy();
+  });
+
+  test("shows no liturgy message on days without liturgy", () => {
+    mockedUseDailyData.mockReturnValue({
+      data: {
+        lections: {
+          basic: ["Isaiah 1:1-20", "Genesis 1:1-13"],
+          commem: [],
+          liturgy: [],
+        },
+        texts: {
+          basic: [
+            "<em>Isaiah 1:1-20</em><br>The vision of Isaiah...",
+            "<em>Genesis 1:1-13</em><br>In the beginning..."
+          ],
+          commem: [],
+        },
+        day_name: "Monday",
+        day_ord: "2nd",
+        month: "March",
+        year: 2025,
+        fast: "Great Lent",
+        tone: null,
+        eothinon: null,
+        liturgy: "",
+        desig: "Great Lent",
+        commem: null,
+        fore_after: null,
+        global_saints: "Saint A",
+        british_saints: "Saint B",
+      },
+      loading: false,
+      refreshing: false,
+      error: null,
+      reload: jest.fn(),
+    });
+
+    render(<ReadingsScreen activeDate={new Date(2025, 2, 3)} />);
+
+    // Switch to liturgy tab
+    fireEvent.press(screen.getByText("Liturgy"));
+    expect(screen.getByText("At Church")).toBeTruthy();
+    expect(screen.getByText("There is no liturgy on this day.")).toBeTruthy();
+    // Texts section should not be present
+    expect(screen.queryByText("Texts")).toBeNull();
   });
 });
