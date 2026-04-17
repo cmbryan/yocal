@@ -5,8 +5,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DateTimePicker, { type DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import HomeScreen from "./src/screens/HomeScreen";
-import CommemorateScreen from "./src/screens/CommemorateScreen";
 import ReadingsScreen from "./src/screens/ReadingsScreen";
+import PrayersScreen from "./src/screens/PrayersScreen";
 import DonationScreen from "./src/screens/DonationScreen";
 import { formatDateKey, parseDateFromKey } from "./src/lib/date";
 
@@ -50,6 +50,7 @@ export default function App() {
               headerTintColor: "#111827",
               headerTitleStyle: {
                 fontWeight: "bold",
+                fontSize: 24,
               },
               headerLeftContainerStyle: {
                 paddingLeft: 0,
@@ -96,16 +97,16 @@ export default function App() {
               {(props) => <HomeScreen {...props} activeDate={activeDate} setActiveDate={setActiveDate} />}
             </Tab.Screen>
             <Tab.Screen
-              name="Commemorate"
-              options={{ title: "Commemorations" }}
-            >
-              {(props) => <CommemorateScreen {...props} activeDate={activeDate} />}
-            </Tab.Screen>
-            <Tab.Screen
               name="Readings"
               options={{ title: "Readings" }}
             >
               {(props) => <ReadingsScreen {...props} activeDate={activeDate} />}
+            </Tab.Screen>
+            <Tab.Screen
+              name="Prayers"
+              options={{ title: "Prayers" }}
+            >
+              {(props) => <PrayersScreen {...props} activeDate={activeDate} />}
             </Tab.Screen>
             <Tab.Screen
               name="Donation"

@@ -1,4 +1,4 @@
-import { type ReactNode, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Pressable,
@@ -42,12 +42,29 @@ function subtractLiturgyRefs(readings: string[], liturgy: string[]): string[] {
 
 interface ReadingsScreenProps {
   activeDate: Date;
+  route?: {
+    params?: {
+      selectedTab?: ReadingTab;
+    };
+  };
+  navigation?: {
+    setParams?: (params: { selectedTab?: ReadingTab }) => void;
+  };
 }
 
 type ReadingTab = "home" | "liturgy";
 
-export default function ReadingsScreen({ activeDate }: ReadingsScreenProps) {
+export default function ReadingsScreen({ activeDate, route, navigation }: ReadingsScreenProps) {
   const [selectedTab, setSelectedTab] = useState<ReadingTab>("home");
+  const requestedTab = route?.params?.selectedTab;
+
+  useEffect(() => {
+    if (requestedTab === "home" || requestedTab === "liturgy") {
+      setSelectedTab(requestedTab);
+      navigation?.setParams?.({ selectedTab: undefined });
+    }
+  }, [requestedTab, navigation]);
+
   const activeDateKey = formatDateKey(activeDate);
   const { data, loading, refreshing, error, reload } = useDailyData(activeDateKey);
 

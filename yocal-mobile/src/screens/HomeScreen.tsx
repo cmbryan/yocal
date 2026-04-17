@@ -50,6 +50,15 @@ export default function HomeScreen({ activeDate, setActiveDate }: HomeScreenProp
     ? joinList([data.desig, data.commem, data.fore_after])
     : [];
 
+  const saints = data
+    ? joinList([
+        data.global_saints,
+        data.british_saints ? `British Isles and Ireland:\n${data.british_saints}` : "",
+      ])
+    : [];
+
+  const allCommemorations = joinList([...commemoration, ...saints]);
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView
@@ -77,7 +86,7 @@ export default function HomeScreen({ activeDate, setActiveDate }: HomeScreenProp
 
         {!loading && !error && (
           <SectionCard title="Designations and Commemorations">
-            {commemoration.map((line) => (
+            {allCommemorations.map((line) => (
               <Text key={line} style={styles.lineItem}>
                 {line}
               </Text>

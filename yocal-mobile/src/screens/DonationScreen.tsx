@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     color: "#374151",
     fontStyle: "italic",
+    textAlign: "center",
   },
   link: {
     color: "#1d4ed8",
