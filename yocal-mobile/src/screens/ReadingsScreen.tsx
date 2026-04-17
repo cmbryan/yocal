@@ -1,6 +1,7 @@
-import { type ReactNode, useCallback, useEffect, useState } from "react";
+import { type ReactNode, useState } from "react";
 import {
   ActivityIndicator,
+  Pressable,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -8,7 +9,7 @@ import {
   Text,
   View,
 } from "react-native";
-import { fetchDailyData, type DatePayload } from "../lib/api";
+import { type DatePayload } from "../lib/api";
 import { formatDateKey, htmlToText } from "../lib/date";
 
 import { useDailyData } from "../lib/hooks";
@@ -28,26 +29,63 @@ function SectionCard({
   );
 }
 
+function subtractLiturgyRefs(readings: string[], liturgy: string[]): string[] {
+  const remaining = [...readings];
+  for (const lit of liturgy) {
+    const index = remaining.indexOf(lit);
+    if (index !== -1) {
+      remaining.splice(index, 1);
+    }
+  }
+  return remaining;
+}
+
 interface ReadingsScreenProps {
   activeDate: Date;
 }
 
+type ReadingTab = "home" | "liturgy";
+
 export default function ReadingsScreen({ activeDate }: ReadingsScreenProps) {
+  const [selectedTab, setSelectedTab] = useState<ReadingTab>("home");
   const activeDateKey = formatDateKey(activeDate);
   const { data, loading, refreshing, error, reload } = useDailyData(activeDateKey);
 
-  const readingRefs = data
-    ? [
-        ...data.lections.basic,
-        ...(data.lections.commem.length > 0
-          ? ["For the Commemoration:", ...data.lections.commem]
-          : []),
-      ]
-    : [];
+  const basicLections = data ? data.lections.basic : [];
+  const commemLections = data ? data.lections.commem : [];
+  const liturgyLections = data ? data.lections.liturgy : [];
 
-  const readingTexts = data
-    ? [...data.texts.basic, ...data.texts.commem].map((item) => htmlToText(item))
-    : [];
+  const homeBasicRefs = subtractLiturgyRefs(basicLections, liturgyLections);
+  const homeCommemRefs = subtractLiturgyRefs(commemLections, liturgyLections);
+
+  const liturgyBasicRefs = subtractLiturgyRefs(liturgyLections, commemLections);
+  const liturgyCommemRefs = subtractLiturgyRefs(liturgyLections, liturgyBasicRefs);
+
+  const homeReadingRefs = [
+    ...homeBasicRefs,
+    ...(homeCommemRefs.length > 0 ? ["For the Commemoration:", ...homeCommemRefs] : []),
+  ];
+
+  const liturgyReadingRefs = [
+    ...liturgyBasicRefs,
+    ...(liturgyCommemRefs.length > 0 ? ["For the Commemoration:", ...liturgyCommemRefs] : []),
+  ];
+
+  const readingRefs = selectedTab === "liturgy" ? liturgyReadingRefs : homeReadingRefs;
+
+  const homeTexts = data ? [
+    ...data.texts.basic.filter((_, i) => homeBasicRefs.includes(data.lections.basic[i])),
+    ...data.texts.commem.filter((_, i) => homeCommemRefs.includes(data.lections.commem[i])),
+  ].map((item) => htmlToText(item)) : [];
+
+  const liturgyTexts = data ? [
+    ...data.texts.basic.filter((_, i) => liturgyBasicRefs.includes(data.lections.basic[i])),
+    ...data.texts.commem.filter((_, i) => liturgyCommemRefs.includes(data.lections.commem[i])),
+  ].map((item) => htmlToText(item)) : [];
+
+  const readingTexts = selectedTab === "liturgy" ? liturgyTexts : homeTexts;
+
+  const readingsTitle = selectedTab === "liturgy" ? "At Church" : "At Home";
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -60,20 +98,50 @@ export default function ReadingsScreen({ activeDate }: ReadingsScreenProps) {
       >
         {!loading && !error && (
           <>
-            <SectionCard title="Today's Readings">
+            <View style={styles.tabRow}>
+              <Pressable
+                style={[
+                  styles.tab,
+                  selectedTab === "home" && styles.tabActive,
+                ]}
+                onPress={() => setSelectedTab("home")}
+              >
+                <Text
+                  style={[
+                    styles.tabText,
+                    selectedTab === "home" && styles.tabTextActive,
+                  ]}
+                >
+                  At Home
+                </Text>
+              </Pressable>
+              <Pressable
+                style={[
+                  styles.tab,
+                  selectedTab === "liturgy" && styles.tabActive,
+                ]}
+                onPress={() => setSelectedTab("liturgy")}
+              >
+                <Text
+                  style={[
+                    styles.tabText,
+                    selectedTab === "liturgy" && styles.tabTextActive,
+                  ]}
+                >
+                  Liturgy
+                </Text>
+              </Pressable>
+            </View>
+
+            <SectionCard title={readingsTitle}>
               {readingRefs.map((reading) => (
                 <Text key={reading} style={styles.lineItem}>
                   {reading}
                 </Text>
               ))}
-              {data && data.lections.liturgy.length > 0 ? (
-                <Text style={styles.noteText}>
-                  Readings for the Liturgy: {data.lections.liturgy.join("; ")}
-                </Text>
-              ) : null}
             </SectionCard>
 
-            <SectionCard title="Reading Texts">
+            <SectionCard title="Texts">
               {readingTexts.map((text, idx) => (
                 <Text key={`${idx}-${text.slice(0, 32)}`} style={styles.readingText}>
                   {text}
@@ -136,6 +204,33 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 24,
     marginBottom: 10,
+  },
+  tabRow: {
+    flexDirection: "row",
+    gap: 8,
+    marginBottom: 6,
+  },
+  tab: {
+    flex: 1,
+    paddingVertical: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: "#d1d5db",
+    backgroundColor: "#f9fafb",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  tabActive: {
+    backgroundColor: "#1d4ed8",
+    borderColor: "#1d4ed8",
+  },
+  tabText: {
+    color: "#374151",
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  tabTextActive: {
+    color: "#ffffff",
   },
   errorText: {
     color: "#b91c1c",
