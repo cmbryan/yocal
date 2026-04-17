@@ -155,7 +155,7 @@ jobs:
     needs:
       - changes
       - mobile
-    if: needs.changes.outputs.mobile_changed == 'true'
+    # if: needs.changes.outputs.mobile_changed == 'true'
     permissions:
       contents: read
       pages: write
