@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Platform, Pressable, StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DateTimePicker, { type DateTimePickerEvent } from "@react-native-community/datetimepicker";
@@ -51,6 +51,15 @@ export default function App() {
               headerTitleStyle: {
                 fontWeight: "bold",
               },
+              headerLeftContainerStyle: {
+                paddingLeft: 0,
+              },
+              headerLeft: () => (
+                <Image
+                  source={require("./assets/jerusalem_cross.gif")}
+                  style={styles.headerLeftImage}
+                />
+              ),
               headerRight: () => (
                 <View style={styles.headerDatePickerRow}>
                   {Platform.OS === "web" ? (
@@ -120,6 +129,11 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  headerLeftImage: {
+    width: 32,
+    height: 32,
+    marginLeft: 8,
+  },
   headerDatePickerRow: {
     flexDirection: "row",
     alignItems: "center",
