@@ -1,6 +1,7 @@
 import { type ReactNode } from "react";
 import {
   ActivityIndicator,
+  Image,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -83,6 +84,12 @@ export default function HomeScreen({ activeDate, setActiveDate }: HomeScreenProp
             ))}
           </SectionCard>
         )}
+        <View style={styles.imageContainer}>
+          <Image
+            source={require("../../assets/antioch_uk.avif")}
+            style={styles.bottomImage}
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -128,5 +135,14 @@ const styles = StyleSheet.create({
     color: "#b91c1c",
     fontSize: 15,
     lineHeight: 22,
+  },
+  imageContainer: {
+    alignItems: "center",
+    paddingVertical: 24,
+  },
+  bottomImage: {
+    width: 140,
+    height: 140,
+    resizeMode: "contain",
   },
 });
