@@ -55,8 +55,8 @@ export default function ReadingsScreen({ activeDate }: ReadingsScreenProps) {
   const commemLections = data ? data.lections.commem : [];
   const liturgyLections = data ? data.lections.liturgy : [];
 
-  const homeBasicRefs = subtractLiturgyRefs(basicLections, liturgyLections);
-  const homeCommemRefs = subtractLiturgyRefs(commemLections, liturgyLections);
+  const homeBasicRefs = subtractLiturgyRefs(basicLections, commemLections);
+  const homeCommemRefs = subtractLiturgyRefs(basicLections, homeBasicRefs);
 
   const liturgyBasicRefs = subtractLiturgyRefs(liturgyLections, commemLections);
   const liturgyCommemRefs = subtractLiturgyRefs(liturgyLections, liturgyBasicRefs);
