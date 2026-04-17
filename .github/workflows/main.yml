@@ -183,7 +183,8 @@ jobs:
           cd yocal-mobile
           npm ci
           REPO_NAME="${GITHUB_REPOSITORY#*/}"
-          npx expo export --platform web --output-dir dist --base-url "/${REPO_NAME}"
+          npx expo export --platform web --output-dir dist
+          sed -i "s|href=\"/|href=\"/${REPO_NAME}/|g; s|src=\"/|src=\"/${REPO_NAME}/|g" dist/index.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
