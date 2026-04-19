@@ -37,7 +37,7 @@ type PrayerSection = {
 };
 
 export default function PrayersScreen({ activeDate, navigation }: PrayersScreenProps) {
-  const [showMorning, setShowMorning] = useState(true);
+  const [showMorning, setShowMorning] = useState(false);
   const [showEvening, setShowEvening] = useState(false);
   const isSunday = activeDate.getDay() === 0;
 
