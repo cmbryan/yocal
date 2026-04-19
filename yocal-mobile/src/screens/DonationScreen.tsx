@@ -30,7 +30,7 @@ export default function DonationScreen(_props: any) {
             <LinkText url="https://en.wikipedia.org/wiki/St_Martin-cum-Gregory%27s_Church,_Micklegate,_York">St Martin-cum-Gregory's</LinkText>, to expand our ministry to York and the surrounding area.
           </Text>
           <Image
-            source={require("../../assets/antioch_uk.avif")}
+            source={require("../../assets/antioch_uk.png")}
             style={styles.firstParagraphImage}
           />
         </View>

@@ -9,7 +9,6 @@ import {
   Text,
   View,
 } from "react-native";
-import { type DatePayload } from "../lib/api";
 import { formatDateKey, htmlToText } from "../lib/date";
 
 import { useDailyData } from "../lib/hooks";
@@ -29,15 +28,12 @@ function SectionCard({
   );
 }
 
-function subtractLiturgyRefs(readings: string[], liturgy: string[]): string[] {
-  const remaining = [...readings];
-  for (const lit of liturgy) {
-    const index = remaining.indexOf(lit);
-    if (index !== -1) {
-      remaining.splice(index, 1);
-    }
-  }
-  return remaining;
+function subtractRefs(readings: string[], toRemove: string[]): string[] {
+  return readings.filter((reading) => !toRemove.includes(reading));
+}
+
+function intersectRefs(readings: string[], source: string[]): string[] {
+  return readings.filter((reading) => source.includes(reading));
 }
 
 interface ReadingsScreenProps {
@@ -72,11 +68,13 @@ export default function ReadingsScreen({ activeDate, route, navigation }: Readin
   const commemLections = data ? data.lections.commem : [];
   const liturgyLections = data ? data.lections.liturgy : [];
 
-  const homeBasicRefs = subtractLiturgyRefs(basicLections, commemLections);
-  const homeCommemRefs = subtractLiturgyRefs(basicLections, homeBasicRefs);
+  const homeBasicRefs = commemLections.length === 0
+    ? basicLections
+    : subtractRefs(basicLections, liturgyLections);
+  const homeCommemRefs = subtractRefs(commemLections, liturgyLections);
 
-  const liturgyBasicRefs = subtractLiturgyRefs(liturgyLections, commemLections);
-  const liturgyCommemRefs = subtractLiturgyRefs(liturgyLections, liturgyBasicRefs);
+  const liturgyBasicRefs = intersectRefs(liturgyLections, basicLections);
+  const liturgyCommemRefs = intersectRefs(liturgyLections, commemLections);
 
   const homeReadingRefs = [
     ...homeBasicRefs,
@@ -104,10 +102,10 @@ export default function ReadingsScreen({ activeDate, route, navigation }: Readin
 
   const readingsTitle = selectedTab === "liturgy" ? "At Church" : "At Home";
 
-  const noLiturgy = selectedTab === "liturgy" && data && data.liturgy == "";
+  const noLiturgy = selectedTab === "liturgy" && data && !data.liturgy;
 
   return (
-    <View style={styles.safeArea}>
+    <SafeAreaView style={styles.safeArea}>
       <ScrollView
         style={styles.scroll}
         contentContainerStyle={styles.content}
@@ -147,7 +145,7 @@ export default function ReadingsScreen({ activeDate, route, navigation }: Readin
                     selectedTab === "liturgy" && styles.tabTextActive,
                   ]}
                 >
-                  Liturgy
+                  At Church
                 </Text>
               </Pressable>
             </View>
@@ -178,7 +176,7 @@ export default function ReadingsScreen({ activeDate, route, navigation }: Readin
         {loading && <ActivityIndicator />}
         {error && <Text style={styles.errorText}>{error}</Text>}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 

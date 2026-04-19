@@ -94,7 +94,7 @@ export default function App() {
               name="Home"
               options={{ title: "Home" }}
             >
-              {(props) => <HomeScreen {...props} activeDate={activeDate} setActiveDate={setActiveDate} />}
+              {(props) => <HomeScreen {...props} activeDate={activeDate} />}
             </Tab.Screen>
             <Tab.Screen
               name="Readings"

@@ -24,7 +24,7 @@ describe("HomeScreen", () => {
       reload: jest.fn(),
     });
 
-    render(<HomeScreen activeDate={new Date(2025, 5, 2)} setActiveDate={() => {}} />);
+    render(<HomeScreen activeDate={new Date(2025, 5, 2)} />);
 
     expect(screen.getAllByText("2025-06-02")[0]).toBeTruthy();
   });
@@ -61,7 +61,7 @@ describe("HomeScreen", () => {
       reload: jest.fn(),
     });
 
-    render(<HomeScreen activeDate={new Date(2025, 5, 2)} setActiveDate={() => {}} />);
+    render(<HomeScreen activeDate={new Date(2025, 5, 2)} />);
 
     expect(screen.getByText("Monday 2nd June 2025")).toBeTruthy();
     expect(screen.getByText("Fast free")).toBeTruthy();
@@ -80,7 +80,7 @@ describe("HomeScreen", () => {
       reload: jest.fn(),
     });
 
-    render(<HomeScreen activeDate={new Date(2025, 5, 2)} setActiveDate={() => {}} />);
+    render(<HomeScreen activeDate={new Date(2025, 5, 2)} />);
 
     expect(screen.getByText("Network error")).toBeTruthy();
   });

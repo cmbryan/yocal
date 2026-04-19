@@ -9,8 +9,7 @@ import {
   Text,
   View,
 } from "react-native";
-import { fetchDailyData, type DatePayload } from "../lib/api";
-import { formatDateKey, htmlToText, joinList, parseDateFromKey } from "../lib/date";
+import { formatDateKey, joinList } from "../lib/date";
 
 import { useDailyData } from "../lib/hooks";
 
@@ -31,10 +30,9 @@ function SectionCard({
 
 interface HomeScreenProps {
   activeDate: Date;
-  setActiveDate: (date: Date) => void;
 }
 
-export default function HomeScreen({ activeDate, setActiveDate }: HomeScreenProps) {
+export default function HomeScreen({ activeDate }: HomeScreenProps) {
   const activeDateKey = formatDateKey(activeDate);
   const { data, loading, refreshing, error, reload } = useDailyData(activeDateKey);
 
@@ -95,7 +93,7 @@ export default function HomeScreen({ activeDate, setActiveDate }: HomeScreenProp
         )}
         <View style={styles.imageContainer}>
           <Image
-            source={require("../../assets/antioch_uk.avif")}
+            source={require("../../assets/antioch_uk.png")}
             style={styles.bottomImage}
           />
         </View>
