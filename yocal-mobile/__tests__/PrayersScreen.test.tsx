@@ -28,6 +28,8 @@ describe("PrayersScreen", () => {
       />,
     );
 
+    // Expand Typika section (starts collapsed)
+    fireEvent.press(screen.getByText("Typika"));
     fireEvent.press(screen.getByText("Readings"));
 
     expect(navigate).toHaveBeenCalledWith("Readings", { selectedTab: "liturgy" });

@@ -84,16 +84,16 @@ describe("App", () => {
     fireEvent.press(readingsTab);
 
     await waitFor(() => {
-      expect(screen.getByText("Liturgy")).toBeTruthy();
+      expect(screen.getAllByText("At Home").length).toBeGreaterThan(0);
     });
 
-    // Switch to Liturgy tab
-    const liturgyTab = screen.getByText("Liturgy");
+    // Switch to At Church tab
+    const liturgyTab = screen.getByText("At Church");
     fireEvent.press(liturgyTab);
 
     await waitFor(() => {
       expect(screen.getByText("Romans 1:1")).toBeTruthy();
-      expect(screen.getByText("At Church")).toBeTruthy();
+      expect(screen.getAllByText("At Church").length).toBeGreaterThan(0);
     });
   });
 
