@@ -1,0 +1,67 @@
+name: Mobile Tests and Pages Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - yocal-mobile/**
+
+jobs:
+  mobile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: yocal-mobile/package-lock.json
+
+      - name: Mobile app tests
+        run: |
+          cd yocal-mobile
+          npm ci
+          npm run typecheck
+          npm run test:ci
+
+  mobile_pages:
+    runs-on: ubuntu-latest
+    needs: mobile
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: yocal-mobile/package-lock.json
+
+      - name: Build Expo web output
+        run: |
+          cd yocal-mobile
+          npm ci
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          npx expo export --platform web --output-dir dist
+          sed -i "s|href=\"/|href=\"/${REPO_NAME}/|g; s|src=\"/|src=\"/${REPO_NAME}/|g" dist/index.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: yocal-mobile/dist
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

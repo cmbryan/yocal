@@ -1,0 +1,30 @@
+name: API Tests and Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - api-php/**
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: PHP tests
+        run: make php-test
+
+      - name: Deploy API files to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./api-php/
+          server-dir: /httpdocs/api-php/
+          exclude: |
+            **/.htaccess
+            **/*.sh
