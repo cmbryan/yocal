@@ -20,6 +20,7 @@ import {
 
 interface PrayersScreenProps {
   activeDate: Date;
+  fontFamily?: string;
   navigation?: {
     navigate?: (screen: string, params?: { selectedTab?: "home" | "liturgy" }) => void;
   };
@@ -36,10 +37,11 @@ type PrayerSection = {
   afterReadings?: string;
 };
 
-export default function PrayersScreen({ activeDate, navigation }: PrayersScreenProps) {
+export default function PrayersScreen({ activeDate, fontFamily, navigation }: PrayersScreenProps) {
   const [showMorning, setShowMorning] = useState(false);
   const [showEvening, setShowEvening] = useState(false);
   const isSunday = activeDate.getDay() === 0;
+  const textFontStyle = fontFamily ? { fontFamily } : null;
 
   const morningPrayerText = useMemo(() => getMorningPrayerTextForDate(activeDate), [activeDate]);
   const typikaSections = useMemo(() => getTypikaSections(), []);
@@ -78,23 +80,23 @@ export default function PrayersScreen({ activeDate, navigation }: PrayersScreenP
         {sections.map((section) => (
           <View key={section.key} style={styles.sectionCard}>
             <Pressable onPress={section.onToggle} style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>{section.title}</Text>
-              <Text style={styles.chevron}>{section.open ? "Hide" : "Show"}</Text>
+              <Text style={[styles.sectionTitle, textFontStyle]}>{section.title}</Text>
+              <Text style={[styles.chevron, textFontStyle]}>{section.open ? "Hide" : "Show"}</Text>
             </Pressable>
 
             {section.open && section.key === "typika" ? (
               <>
-                <Text style={styles.sectionBody}>{section.beforeReadings}</Text>
+                <Text style={[styles.sectionBody, textFontStyle]}>{section.beforeReadings}</Text>
                 <Pressable onPress={openLiturgyReadings}>
-                  <Text style={styles.linkText}>Readings</Text>
+                  <Text style={[styles.linkText, textFontStyle]}>Readings</Text>
                 </Pressable>
-                <Text style={styles.sectionBody}>{section.afterReadings}</Text>
-                <Text style={styles.sourceText}>Source: {section.sourceUrl}</Text>
+                <Text style={[styles.sectionBody, textFontStyle]}>{section.afterReadings}</Text>
+                <Text style={[styles.sourceText, textFontStyle]}>Source: {section.sourceUrl}</Text>
               </>
             ) : section.open && section.text.length > 0 ? (
               <>
-                <Text style={styles.sectionBody}>{section.text}</Text>
-                <Text style={styles.sourceText}>Source: {section.sourceUrl}</Text>
+                <Text style={[styles.sectionBody, textFontStyle]}>{section.text}</Text>
+                <Text style={[styles.sourceText, textFontStyle]}>Source: {section.sourceUrl}</Text>
               </>
             ) : null}
           </View>

@@ -4,30 +4,36 @@ import * as WebBrowser from "expo-web-browser";
 
 const DONATION_URL = "https://pay.sumup.com/b2c/QLQWLULC";
 
-function LinkText({ children, url }: { children: string; url: string }) {
+function LinkText({ children, url, fontFamily }: { children: string; url: string; fontFamily?: string }) {
+  const textFontStyle = fontFamily ? { fontFamily } : null;
   return (
-    <Text style={styles.link} onPress={() => void WebBrowser.openBrowserAsync(url)}>
+    <Text style={[styles.link, textFontStyle]} onPress={() => void WebBrowser.openBrowserAsync(url)}>
       {children}
     </Text>
   );
 }
 
-export default function DonationScreen(_props: any) {
+interface DonationScreenProps {
+  fontFamily?: string;
+}
+
+export default function DonationScreen({ fontFamily }: DonationScreenProps) {
+  const textFontStyle = fontFamily ? { fontFamily } : null;
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.scroll} contentContainerStyle={styles.content}>
 
         <View style={styles.firstParagraphRow}>
-          <Text style={styles.firstParagraphText}>
+          <Text style={[styles.firstParagraphText, textFontStyle]}>
             The Antiochian Orthodox Parish of St Constantine the Great, based in the city of York, has been serving the North of England since ____ through worship, fellowship, and evangelism. We are part of the
             {" "}
-            <LinkText url="https://www.antiochian-orthodox.com/">Antiochian Orthodox Church in the UK</LinkText>, and you can find more about our parish at our
+            <LinkText url="https://www.antiochian-orthodox.com/" fontFamily={fontFamily}>Antiochian Orthodox Church in the UK</LinkText>, and you can find more about our parish at our
             {" "}
-            <LinkText url="https://yorkorthodox.org">website</LinkText>.
+            <LinkText url="https://yorkorthodox.org" fontFamily={fontFamily}>website</LinkText>.
             {"\n\n"}
             Thanks to God, and with your support, we hope to purchase our first building,
             {" "}
-            <LinkText url="https://en.wikipedia.org/wiki/St_Martin-cum-Gregory%27s_Church,_Micklegate,_York">St Martin-cum-Gregory's</LinkText>, to expand our ministry to York and the surrounding area.
+            <LinkText url="https://en.wikipedia.org/wiki/St_Martin-cum-Gregory%27s_Church,_Micklegate,_York" fontFamily={fontFamily}>St Martin-cum-Gregory's</LinkText>, to expand our ministry to York and the surrounding area.
           </Text>
           <Image
             source={require("../../assets/antioch_uk.png")}
@@ -35,17 +41,17 @@ export default function DonationScreen(_props: any) {
           />
         </View>
 
-        <Text style={styles.paragraph}>
+        <Text style={[styles.paragraph, textFontStyle]}>
           If you enjoy using this app, please consider making a donation to help us achieve this milestone!
         </Text>
 
         <View style={styles.buttonWrapper}>
           <Pressable style={styles.buttonPrimary} onPress={() => void WebBrowser.openBrowserAsync(DONATION_URL)}>
-            <Text style={styles.buttonPrimaryText}>Donate</Text>
+            <Text style={[styles.buttonPrimaryText, textFontStyle]}>Donate</Text>
           </Pressable>
         </View>
 
-        <Text style={styles.note}>
+        <Text style={[styles.note, textFontStyle]}>
           <Text style={{ fontWeight: "600" }}>Troparion to St Constantine</Text>
           {"\n"}
           Constantine, who is Your apostle among kings, O Lord,{"\n"}

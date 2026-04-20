@@ -16,13 +16,15 @@ import { useDailyData } from "../lib/hooks";
 function SectionCard({
   title,
   children,
+  textStyle,
 }: {
   title: string;
   children: ReactNode;
+  textStyle?: { fontFamily?: string } | null;
 }) {
   return (
     <View style={styles.card}>
-      <Text style={styles.cardTitle}>{title}</Text>
+      <Text style={[styles.cardTitle, textStyle]}>{title}</Text>
       {children}
     </View>
   );
@@ -38,6 +40,8 @@ function intersectRefs(readings: string[], source: string[]): string[] {
 
 interface ReadingsScreenProps {
   activeDate: Date;
+  offlineMode?: boolean;
+  fontFamily?: string;
   route?: {
     params?: {
       selectedTab?: ReadingTab;
@@ -50,7 +54,7 @@ interface ReadingsScreenProps {
 
 type ReadingTab = "home" | "liturgy";
 
-export default function ReadingsScreen({ activeDate, route, navigation }: ReadingsScreenProps) {
+export default function ReadingsScreen({ activeDate, offlineMode = false, fontFamily, route, navigation }: ReadingsScreenProps) {
   const [selectedTab, setSelectedTab] = useState<ReadingTab>("home");
   const requestedTab = route?.params?.selectedTab;
 
@@ -62,7 +66,8 @@ export default function ReadingsScreen({ activeDate, route, navigation }: Readin
   }, [requestedTab, navigation]);
 
   const activeDateKey = formatDateKey(activeDate);
-  const { data, loading, refreshing, error, reload } = useDailyData(activeDateKey);
+  const { data, loading, refreshing, error, reload } = useDailyData(activeDateKey, offlineMode);
+  const textFontStyle = fontFamily ? { fontFamily } : null;
 
   const basicLections = data ? data.lections.basic : [];
   const commemLections = data ? data.lections.commem : [];
@@ -126,6 +131,7 @@ export default function ReadingsScreen({ activeDate, route, navigation }: Readin
                 <Text
                   style={[
                     styles.tabText,
+                    textFontStyle,
                     selectedTab === "home" && styles.tabTextActive,
                   ]}
                 >
@@ -142,6 +148,7 @@ export default function ReadingsScreen({ activeDate, route, navigation }: Readin
                 <Text
                   style={[
                     styles.tabText,
+                    textFontStyle,
                     selectedTab === "liturgy" && styles.tabTextActive,
                   ]}
                 >
@@ -150,12 +157,12 @@ export default function ReadingsScreen({ activeDate, route, navigation }: Readin
               </Pressable>
             </View>
 
-            <SectionCard title={readingsTitle}>
+            <SectionCard title={readingsTitle} textStyle={textFontStyle}>
               {noLiturgy ? (
-                <Text style={styles.italicText} accessible={true}>There is no liturgy on this day.</Text>
+                <Text style={[styles.italicText, textFontStyle]} accessible={true}>There is no liturgy on this day.</Text>
               ) : (
                 readingRefs.map((reading) => (
-                  <Text key={reading} style={styles.lineItem} accessible={true}>
+                  <Text key={reading} style={[styles.lineItem, textFontStyle]} accessible={true}>
                     {reading}
                   </Text>
                 ))
@@ -163,9 +170,9 @@ export default function ReadingsScreen({ activeDate, route, navigation }: Readin
             </SectionCard>
 
             {!noLiturgy && (
-              <SectionCard title="Texts">
+              <SectionCard title="Texts" textStyle={textFontStyle}>
                 {readingTexts.map((text, idx) => (
-                  <Text key={`${idx}-${text.slice(0, 32)}`} style={styles.readingText} accessible={true}>
+                  <Text key={`${idx}-${text.slice(0, 32)}`} style={[styles.readingText, textFontStyle]} accessible={true}>
                     {text}
                   </Text>
                 ))}
@@ -174,7 +181,7 @@ export default function ReadingsScreen({ activeDate, route, navigation }: Readin
           </>
         )}
         {loading && <ActivityIndicator />}
-        {error && <Text style={styles.errorText}>{error}</Text>}
+        {error && <Text style={[styles.errorText, textFontStyle]}>{error}</Text>}
       </ScrollView>
     </SafeAreaView>
   );

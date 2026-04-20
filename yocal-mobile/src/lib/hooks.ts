@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import { fetchDailyData, type DatePayload } from "./api";
+import { type DatePayload } from "./api";
+import { fetchDailyDataWithOfflineCache } from "./offlineCache";
 
-export function useDailyData(dateKey: string) {
+export function useDailyData(dateKey: string, offlineMode = false) {
   const [data, setData] = useState<DatePayload | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -16,7 +17,7 @@ export function useDailyData(dateKey: string) {
       }
       setError(null);
       try {
-        const payload = await fetchDailyData(dateKey);
+        const payload = await fetchDailyDataWithOfflineCache(dateKey, offlineMode);
         setData(payload);
       } catch (err) {
         const rawMessage =
@@ -32,7 +33,7 @@ export function useDailyData(dateKey: string) {
         setRefreshing(false);
       }
     },
-    [dateKey]
+    [dateKey, offlineMode]
   );
 
   useEffect(() => {

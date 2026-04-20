@@ -16,13 +16,15 @@ import { useDailyData } from "../lib/hooks";
 function SectionCard({
   title,
   children,
+  textStyle,
 }: {
   title: string;
   children: ReactNode;
+  textStyle?: { fontFamily?: string } | null;
 }) {
   return (
     <View style={styles.card}>
-      <Text style={styles.cardTitle}>{title}</Text>
+      <Text style={[styles.cardTitle, textStyle]}>{title}</Text>
       {children}
     </View>
   );
@@ -30,11 +32,14 @@ function SectionCard({
 
 interface HomeScreenProps {
   activeDate: Date;
+  offlineMode?: boolean;
+  fontFamily?: string;
 }
 
-export default function HomeScreen({ activeDate }: HomeScreenProps) {
+export default function HomeScreen({ activeDate, offlineMode = false, fontFamily }: HomeScreenProps) {
   const activeDateKey = formatDateKey(activeDate);
-  const { data, loading, refreshing, error, reload } = useDailyData(activeDateKey);
+  const { data, loading, refreshing, error, reload } = useDailyData(activeDateKey, offlineMode);
+  const textFontStyle = fontFamily ? { fontFamily } : null;
 
   const dayTitle = data
     ? `${data.day_name} ${data.day_ord} ${data.month} ${data.year}`
@@ -66,15 +71,15 @@ export default function HomeScreen({ activeDate }: HomeScreenProps) {
           <RefreshControl refreshing={refreshing} onRefresh={() => void reload(true)} />
         }
       >
-        <SectionCard title={dayTitle}>
+        <SectionCard title={dayTitle} textStyle={textFontStyle}>
           {loading ? (
             <ActivityIndicator />
           ) : error ? (
-            <Text style={styles.errorText}>{error}</Text>
+            <Text style={[styles.errorText, textFontStyle]}>{error}</Text>
           ) : (
             <>
               {details.map((line) => (
-                <Text key={line} style={styles.lineItem}>
+                <Text key={line} style={[styles.lineItem, textFontStyle]}>
                   {line}
                 </Text>
               ))}
@@ -83,9 +88,9 @@ export default function HomeScreen({ activeDate }: HomeScreenProps) {
         </SectionCard>
 
         {!loading && !error && (
-          <SectionCard title="Designations and Commemorations">
+          <SectionCard title="Designations and Commemorations" textStyle={textFontStyle}>
             {allCommemorations.map((line) => (
-              <Text key={line} style={styles.lineItem}>
+              <Text key={line} style={[styles.lineItem, textFontStyle]}>
                 {line}
               </Text>
             ))}
