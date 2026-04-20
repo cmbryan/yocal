@@ -56,6 +56,7 @@ jobs:
           REPO_NAME="${GITHUB_REPOSITORY#*/}"
           npx expo export --platform web --output-dir dist
           sed -i "s|href=\"/|href=\"/${REPO_NAME}/|g; s|src=\"/|src=\"/${REPO_NAME}/|g" dist/index.html
+          find dist/_expo/static/js/web -name '*.js' -exec sed -i "s|uri:\"/assets/|uri:\"/${REPO_NAME}/assets/|g" {} +
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
