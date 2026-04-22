@@ -19,9 +19,10 @@ import HomeScreen from "./src/screens/HomeScreen";
 import ReadingsScreen from "./src/screens/ReadingsScreen";
 import PrayersScreen from "./src/screens/PrayersScreen";
 import DonationScreen from "./src/screens/DonationScreen";
+import { fetchDailyData } from "./src/lib/api";
 import { formatDateKey, parseDateFromKey } from "./src/lib/date";
 import { APP_FONT_OPTIONS, type AppFontId, getAppFontFamily } from "./src/lib/font";
-import { prefetchOfflineDateRange } from "./src/lib/offlineCache";
+import { clearOfflineCache, prefetchOfflineDateRange } from "./src/lib/offlineCache";
 import { loadSettings, saveFont } from "./src/lib/settings";
 
 const Tab = createBottomTabNavigator();
@@ -51,6 +52,17 @@ export default function App() {
     loadSettings().then((s) => setSelectedFont(s.font));
   }, []);
 
+  useEffect(() => {
+    if (Platform.OS === "web") {
+      return;
+    }
+
+    // Best-effort startup warmup: keep the next 30 days cached when online.
+    void prefetchOfflineDateRange(new Date(), 30).catch(() => {
+      // No-op: if network is unavailable, startup should continue silently.
+    });
+  }, []);
+
   const onSelectFont = (fontId: AppFontId) => {
     setSelectedFont(fontId);
     saveFont(fontId);
@@ -75,11 +87,32 @@ export default function App() {
 
   const onToggleOfflineMode = () => {
     const nextMode = !offlineMode;
-    setOfflineMode(nextMode);
-
-    if (!nextMode || Platform.OS === "web") {
+    if (Platform.OS === "web") {
+      setOfflineMode(nextMode);
       return;
     }
+
+    if (!nextMode) {
+      setCacheInProgress(true);
+      void clearOfflineCache()
+        .then(() => fetchDailyData(activeDateKey))
+        .then(() => {
+          setOfflineMode(false);
+        })
+        .catch((error) => {
+          const message = error instanceof Error ? error.message : "Unexpected error.";
+          Alert.alert(
+            "Could not disable Offline mode",
+            `Failed to refresh ${activeDateKey}. Offline mode remains enabled.\n\n${message}`,
+          );
+        })
+        .finally(() => {
+          setCacheInProgress(false);
+        });
+      return;
+    }
+
+    setOfflineMode(true);
 
     setCacheInProgress(true);
     void prefetchOfflineDateRange(activeDate, 30)

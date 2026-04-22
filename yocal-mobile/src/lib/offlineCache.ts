@@ -101,3 +101,7 @@ export async function prefetchOfflineDateRange(
 
   return { cachedCount, failedDates };
 }
+
+export async function clearOfflineCache(): Promise<void> {
+  await AsyncStorage.removeItem(OFFLINE_CACHE_KEY);
+}
