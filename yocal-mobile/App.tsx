@@ -14,6 +14,7 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import DateTimePicker, { type DateTimePickerEvent } from "@react-native-community/datetimepicker";
+import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import HomeScreen from "./src/screens/HomeScreen";
 import ReadingsScreen from "./src/screens/ReadingsScreen";
 import PrayersScreen from "./src/screens/PrayersScreen";
@@ -40,6 +41,7 @@ const webDatePickerInputStyle: Record<string, string | number> = {
 
 export default function App() {
   const [activeDate, setActiveDate] = useState(() => new Date());
+  const [activeTabName, setActiveTabName] = useState("Home");
   const [showPicker, setShowPicker] = useState(false);
   const [showSettingsMenu, setShowSettingsMenu] = useState(false);
   const [selectedFont, setSelectedFont] = useState<AppFontId>("system-sans");
@@ -110,9 +112,27 @@ export default function App() {
       <View style={styles.appContainer}>
         <View style={styles.appLayout}>
           <Tab.Navigator
-            screenOptions={{
+            screenListeners={({ route }) => ({
+              focus: () => setActiveTabName(route.name),
+            })}
+            screenOptions={({ route }) => ({
               tabBarActiveTintColor: "#1d4ed8",
               tabBarInactiveTintColor: "#6b7280",
+              tabBarIcon: ({ color, size }) => {
+                if (route.name === "Prayers") {
+                  return <FontAwesome5 name="praying-hands" color={color} size={size - 1} />;
+                }
+
+                if (route.name === "Home") {
+                  return <Ionicons name="home-outline" color={color} size={size} />;
+                }
+
+                if (route.name === "Readings") {
+                  return <Ionicons name="book-outline" color={color} size={size} />;
+                }
+
+                return <Ionicons name="card-outline" color={color} size={size} />;
+              },
               tabBarStyle: {
                 backgroundColor: "#ffffff",
                 borderTopColor: "#e5e7eb",
@@ -174,7 +194,7 @@ export default function App() {
                   </Pressable>
                 </View>
               ),
-            }}
+            })}
           >
             <Tab.Screen
               name="Home"
@@ -215,9 +235,11 @@ export default function App() {
               {(props) => <DonationScreen {...props} fontFamily={textFontStyle.fontFamily} />}
             </Tab.Screen>
           </Tab.Navigator>
-          <View pointerEvents="none" style={styles.copyrightContainer}>
-            <Text style={styles.copyrightText}>Copyright 2026 cmbryan software</Text>
-          </View>
+          {activeTabName === "Home" ? (
+            <View pointerEvents="none" style={styles.copyrightContainer}>
+              <Text style={styles.copyrightText}>© 2026 cmbryan software{'\n'}All rights reserved</Text>
+            </View>
+          ) : null}
           {Platform.OS !== "web" && showPicker ? (
             <DateTimePicker
               mode="date"
@@ -356,13 +378,14 @@ const styles = StyleSheet.create({
   copyrightContainer: {
     position: "absolute",
     left: 0,
-    right: 0,
+    right: 5,
     bottom: 54,
-    alignItems: "center",
+    alignItems: "flex-end",
   },
   copyrightText: {
     color: "#6b7280",
-    fontSize: 12,
+    fontSize: 8,
+    textAlign: "right",
   },
   settingsBackdrop: {
     flex: 1,
