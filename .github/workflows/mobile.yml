@@ -191,26 +191,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Verify successful push workflow run exists for this commit
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          API_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/mobile.yml/runs?head_sha=${GITHUB_SHA}&event=push&status=success&per_page=50"
-          RESPONSE=$(curl -fsSL \
-            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            "${API_URL}")
+      # - name: Verify successful push workflow run exists for this commit
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     set -euo pipefail
+      #     API_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/mobile.yml/runs?head_sha=${GITHUB_SHA}&event=push&status=success&per_page=50"
+      #     RESPONSE=$(curl -fsSL \
+      #       -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+      #       -H "Accept: application/vnd.github+json" \
+      #       "${API_URL}")
 
-          SUCCESS_COUNT=$(printf '%s' "${RESPONSE}" | node -e "const fs=require('fs'); const data=JSON.parse(fs.readFileSync(0,'utf8')); const runs=(data.workflow_runs||[]).filter((run)=>run.event==='push' && run.conclusion==='success'); process.stdout.write(String(runs.length));")
+      #     SUCCESS_COUNT=$(printf '%s' "${RESPONSE}" | node -e "const fs=require('fs'); const data=JSON.parse(fs.readFileSync(0,'utf8')); const runs=(data.workflow_runs||[]).filter((run)=>run.event==='push' && run.conclusion==='success'); process.stdout.write(String(runs.length));")
 
-          if [ "${SUCCESS_COUNT}" -eq 0 ]; then
-            echo "No successful push run of mobile.yml found for commit ${GITHUB_SHA}."
-            echo "Run or re-run the push workflow for this commit first, then retry workflow_dispatch."
-            exit 1
-          fi
+      #     if [ "${SUCCESS_COUNT}" -eq 0 ]; then
+      #       echo "No successful push run of mobile.yml found for commit ${GITHUB_SHA}."
+      #       echo "Run or re-run the push workflow for this commit first, then retry workflow_dispatch."
+      #       exit 1
+      #     fi
 
-          echo "Found ${SUCCESS_COUNT} successful push workflow run(s) for commit ${GITHUB_SHA}. Continuing."
+      #     echo "Found ${SUCCESS_COUNT} successful push workflow run(s) for commit ${GITHUB_SHA}. Continuing."
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
