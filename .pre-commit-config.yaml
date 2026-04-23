@@ -1,0 +1,33 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        files: ^(yocal-mobile/|\.github/)
+      - id: end-of-file-fixer
+        files: ^(yocal-mobile/|\.github/)
+      - id: mixed-line-ending
+        args: [--fix=lf]
+        files: ^(yocal-mobile/|\.github/)
+      - id: check-merge-conflict
+        files: ^(yocal-mobile/|\.github/)
+      - id: check-yaml
+        files: ^\.github/.*\.(yaml|yml)$
+      - id: check-json
+        files: ^yocal-mobile/.*\.json$
+
+  - repo: local
+    hooks:
+      - id: yocal-mobile-typecheck
+        name: yocal-mobile typecheck
+        language: system
+        entry: bash -lc 'cd yocal-mobile && npm run typecheck'
+        pass_filenames: false
+        files: ^yocal-mobile/
+
+      - id: yocal-mobile-test
+        name: yocal-mobile test
+        language: system
+        entry: bash -lc 'cd yocal-mobile && npm test -- --watch=false'
+        pass_filenames: false
+        files: ^yocal-mobile/
