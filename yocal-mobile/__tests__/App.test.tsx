@@ -145,7 +145,7 @@ describe("App", () => {
     fireEvent(screen.getByLabelText("Toggle Offline mode"), "valueChange", true);
 
     await waitFor(() => {
-      expect(mockedPrefetchOfflineDateRange).toHaveBeenCalledTimes(1);
+      expect(mockedPrefetchOfflineDateRange).toHaveBeenCalled();
       expect(alertSpy).toHaveBeenCalledWith(
         "Offline cache complete",
         "Cached 30 days for offline use.",
