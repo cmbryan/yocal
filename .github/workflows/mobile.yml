@@ -6,9 +6,29 @@ on:
       - main
     paths:
       - yocal-mobile/**
+  workflow_dispatch:
+    inputs:
+      run_target:
+        description: "Select what to run"
+        required: true
+        type: choice
+        options:
+          - mobile_web
+          - android_play
+        default: android_play
+      testing_release:
+        description: "Android only: Select testing release type"
+        required: false
+        type: choice
+        options:
+          - internal
+          - closed
+          - open
+        default: internal
 
 jobs:
   mobile:
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_target == 'mobile_web')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -29,6 +49,7 @@ jobs:
           npm run test:ci
 
   mobile_pages:
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.run_target == 'mobile_web')
     runs-on: ubuntu-latest
     needs: mobile
     permissions:
@@ -66,3 +87,90 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  mobile_android_play:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.run_target == 'android_play'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify successful push workflow run exists for this commit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          API_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/mobile.yml/runs?head_sha=${GITHUB_SHA}&event=push&status=success&per_page=50"
+          RESPONSE=$(curl -fsSL \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "${API_URL}")
+
+          SUCCESS_COUNT=$(printf '%s' "${RESPONSE}" | node -e "const fs=require('fs'); const data=JSON.parse(fs.readFileSync(0,'utf8')); const runs=(data.workflow_runs||[]).filter((run)=>run.event==='push' && run.conclusion==='success'); process.stdout.write(String(runs.length));")
+
+          if [ "${SUCCESS_COUNT}" -eq 0 ]; then
+            echo "No successful push run of mobile.yml found for commit ${GITHUB_SHA}."
+            echo "Run or re-run the push workflow for this commit first, then retry workflow_dispatch."
+            exit 1
+          fi
+
+          echo "Found ${SUCCESS_COUNT} successful push workflow run(s) for commit ${GITHUB_SHA}. Continuing."
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: yocal-mobile/package-lock.json
+
+      - name: Set up Expo and EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install mobile dependencies
+        run: |
+          cd yocal-mobile
+          npm ci
+
+      - name: Build Android AAB with EAS
+        id: eas_build
+        run: |
+          cd yocal-mobile
+          eas build --platform android --profile production --non-interactive --wait --json > eas-build.json
+          BUILD_ID=$(node -e "const fs=require('fs'); const data=JSON.parse(fs.readFileSync('eas-build.json','utf8')); const build=Array.isArray(data)?data[0]:data; if(!build?.id){process.exit(1)}; process.stdout.write(build.id);")
+          echo "build_id=${BUILD_ID}" >> "$GITHUB_OUTPUT"
+
+      - name: Write Google Play service account key
+        run: |
+          cd yocal-mobile
+          printf '%s' "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON}" > play-service-account.json
+        env:
+          GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+
+      - name: Submit Android build to selected Google Play testing track
+        run: |
+          cd yocal-mobile
+          case "${{ github.event.inputs.testing_release }}" in
+            internal)
+              PLAY_TRACK="internal"
+              ;;
+            closed)
+              PLAY_TRACK="alpha"
+              ;;
+            open)
+              PLAY_TRACK="beta"
+              ;;
+            *)
+              echo "Unsupported testing release option: ${{ github.event.inputs.testing_release }}"
+              exit 1
+              ;;
+          esac
+          echo "Submitting to Google Play track: ${PLAY_TRACK}"
+          eas submit --platform android --profile production --non-interactive --id "${{ steps.eas_build.outputs.build_id }}" --track "${PLAY_TRACK}"
