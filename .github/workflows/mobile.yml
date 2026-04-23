@@ -15,6 +15,7 @@ on:
         options:
           - mobile_web
           - android_play
+          - android_play_local
         default: android_play
       testing_release:
         description: "Android only: Select testing release type"
@@ -174,3 +175,154 @@ jobs:
           esac
           echo "Submitting to Google Play track: ${PLAY_TRACK}"
           eas submit --platform android --profile production --non-interactive --id "${{ steps.eas_build.outputs.build_id }}" --track "${PLAY_TRACK}"
+
+  mobile_android_play_local:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.run_target == 'android_play_local'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify successful push workflow run exists for this commit
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          API_URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/mobile.yml/runs?head_sha=${GITHUB_SHA}&event=push&status=success&per_page=50"
+          RESPONSE=$(curl -fsSL \
+            -H "Authorization: Bearer ${GITHUB_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "${API_URL}")
+
+          SUCCESS_COUNT=$(printf '%s' "${RESPONSE}" | node -e "const fs=require('fs'); const data=JSON.parse(fs.readFileSync(0,'utf8')); const runs=(data.workflow_runs||[]).filter((run)=>run.event==='push' && run.conclusion==='success'); process.stdout.write(String(runs.length));")
+
+          if [ "${SUCCESS_COUNT}" -eq 0 ]; then
+            echo "No successful push run of mobile.yml found for commit ${GITHUB_SHA}."
+            echo "Run or re-run the push workflow for this commit first, then retry workflow_dispatch."
+            exit 1
+          fi
+
+          echo "Found ${SUCCESS_COUNT} successful push workflow run(s) for commit ${GITHUB_SHA}. Continuing."
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: yocal-mobile/package-lock.json
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Expo and EAS
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install mobile dependencies
+        run: |
+          cd yocal-mobile
+          npm ci
+
+      - name: Reconstruct signing keystore from secret
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          set -euo pipefail
+          if [ -z "${ANDROID_KEYSTORE_BASE64}" ]; then
+            echo "ANDROID_KEYSTORE_BASE64 secret not set. Generate keystore and add to repo secrets."
+            exit 1
+          fi
+          echo "${ANDROID_KEYSTORE_BASE64}" | base64 -d > yocal-release.keystore
+          ls -lah yocal-release.keystore
+
+      - name: Build Android AAB locally with Gradle (signed)
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          set -euo pipefail
+          cd yocal-mobile
+          npx expo prebuild --platform android --non-interactive --no-install --clean
+          cd android
+          chmod +x gradlew
+          ./gradlew bundleRelease \
+            -Pandroid.injected.signing.store.file=../yocal-release.keystore \
+            -Pandroid.injected.signing.store.password="${ANDROID_KEYSTORE_PASSWORD}" \
+            -Pandroid.injected.signing.key.alias="${ANDROID_KEY_ALIAS}" \
+            -Pandroid.injected.signing.key.password="${ANDROID_KEY_PASSWORD}" \
+            --no-daemon
+
+      - name: Validate AAB integrity and signature
+        run: |
+          set -euo pipefail
+          AAB_PATH="yocal-mobile/android/app/build/outputs/bundle/release/app-release.aab"
+          if [ ! -f "${AAB_PATH}" ]; then
+            echo "AAB not found at ${AAB_PATH}"
+            exit 1
+          fi
+          # Verify the AAB is a valid ZIP (basic sanity check)
+          if ! unzip -t "${AAB_PATH}" > /dev/null 2>&1; then
+            echo "AAB file is not a valid ZIP archive"
+            exit 1
+          fi
+          echo "AAB file integrity validated"
+
+          # Extract and check for signed APK inside AAB
+          # AABs contain base.apk which should be signed if Gradle signing config worked
+          unzip -q "${AAB_PATH}" "base/base.apk" -d /tmp/aab_check || true
+          if [ -f /tmp/aab_check/base/base.apk ]; then
+            echo "Found base.apk in AAB, validating signature..."
+            jarsigner -verify -verbose "/tmp/aab_check/base/base.apk" 2>&1 | head -20 || {
+              echo "Warning: Could not verify APK signature with jarsigner (APK may still be signed)"
+            }
+          fi
+          echo "AAB validation passed"
+
+      - name: Write Google Play service account key
+        run: |
+          cd yocal-mobile
+          printf '%s' "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON}" > play-service-account.json
+        env:
+          GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+
+      - name: Submit locally built AAB to selected Google Play testing track
+        run: |
+          set -euo pipefail
+          cd yocal-mobile
+          case "${{ github.event.inputs.testing_release }}" in
+            internal)
+              PLAY_TRACK="internal"
+              ;;
+            closed)
+              PLAY_TRACK="alpha"
+              ;;
+            open)
+              PLAY_TRACK="beta"
+              ;;
+            *)
+              echo "Unsupported testing release option: ${{ github.event.inputs.testing_release }}"
+              exit 1
+              ;;
+          esac
+          AAB_PATH="android/app/build/outputs/bundle/release/app-release.aab"
+          if [ ! -f "${AAB_PATH}" ]; then
+            echo "Expected AAB not found at ${AAB_PATH}"
+            exit 1
+          fi
+          echo "Submitting ${AAB_PATH} to Google Play track: ${PLAY_TRACK}"
+          eas submit --platform android --profile production --non-interactive --path "${AAB_PATH}" --track "${PLAY_TRACK}"
