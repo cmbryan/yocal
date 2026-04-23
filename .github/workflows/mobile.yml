@@ -157,6 +157,7 @@ jobs:
 
       - name: Submit Android build to selected Google Play testing track
         run: |
+          set -euo pipefail
           cd yocal-mobile
           case "${{ github.event.inputs.testing_release }}" in
             internal)
@@ -174,7 +175,9 @@ jobs:
               ;;
           esac
           echo "Submitting to Google Play track: ${PLAY_TRACK}"
-          eas submit --platform android --profile production --non-interactive --id "${{ steps.eas_build.outputs.build_id }}" --track "${PLAY_TRACK}"
+          # Update eas.json with selected track before submit
+          node -e "const fs=require('fs'); const eas=JSON.parse(fs.readFileSync('eas.json','utf8')); eas.submit.production.android.track='${PLAY_TRACK}'; fs.writeFileSync('eas.json',JSON.stringify(eas,null,2));"
+          eas submit --platform android --profile production --non-interactive --id "${{ steps.eas_build.outputs.build_id }}"
 
   mobile_android_play_local:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.run_target == 'android_play_local'
@@ -325,4 +328,6 @@ jobs:
             exit 1
           fi
           echo "Submitting ${AAB_PATH} to Google Play track: ${PLAY_TRACK}"
-          eas submit --platform android --profile production --non-interactive --path "${AAB_PATH}" --track "${PLAY_TRACK}"
+          # Update eas.json with selected track before submit
+          node -e "const fs=require('fs'); const eas=JSON.parse(fs.readFileSync('eas.json','utf8')); eas.submit.production.android.track='${PLAY_TRACK}'; fs.writeFileSync('eas.json',JSON.stringify(eas,null,2));"
+          eas submit --platform android --profile production --non-interactive --path "${AAB_PATH}"
