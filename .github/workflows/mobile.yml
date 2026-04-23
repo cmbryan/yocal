@@ -258,12 +258,17 @@ jobs:
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
           set -euo pipefail
+          KEYSTORE_PATH="${GITHUB_WORKSPACE}/yocal-release.keystore"
+          if [ ! -f "${KEYSTORE_PATH}" ]; then
+            echo "Keystore not found at ${KEYSTORE_PATH}"
+            exit 1
+          fi
           cd yocal-mobile
           npx expo prebuild --platform android --non-interactive --no-install --clean
           cd android
           chmod +x gradlew
           ./gradlew bundleRelease \
-            -Pandroid.injected.signing.store.file=../yocal-release.keystore \
+            -Pandroid.injected.signing.store.file="${KEYSTORE_PATH}" \
             -Pandroid.injected.signing.store.password="${ANDROID_KEYSTORE_PASSWORD}" \
             -Pandroid.injected.signing.key.alias="${ANDROID_KEY_ALIAS}" \
             -Pandroid.injected.signing.key.password="${ANDROID_KEY_PASSWORD}" \
