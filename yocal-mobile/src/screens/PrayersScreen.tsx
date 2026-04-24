@@ -12,6 +12,9 @@ import {
   EVENING_PRAYER_TEXT,
   getMorningPrayerTextForDate,
   MORNING_PRAYER_SOURCE_URL,
+  SIXTH_HOUR_PRAYER_TEXT,
+  THIRD_HOUR_PRAYER_TEXT,
+  THIRD_SIXTH_SOURCE_URL,
 } from "../lib/prayers";
 import {
   getTypikaSections,
@@ -27,7 +30,7 @@ interface PrayersScreenProps {
 }
 
 type PrayerSection = {
-  key: "morning" | "evening" | "typika";
+  key: "morning" | "third_hour" | "sixth_hour" | "evening" | "typika";
   title: string;
   open: boolean;
   text: string;
@@ -109,12 +112,16 @@ function renderPrayerBlocks(
 
 export default function PrayersScreen({ activeDate, fontFamily, navigation }: PrayersScreenProps) {
   const [showMorning, setShowMorning] = useState(false);
+  const [showThird, setShowThird] = useState(false);
+  const [showSixth, setShowSixth] = useState(false);
   const [showEvening, setShowEvening] = useState(false);
   const isSunday = activeDate.getDay() === 0;
   const textFontStyle = fontFamily ? { fontFamily } : null;
 
   const morningPrayerText = useMemo(() => getMorningPrayerTextForDate(activeDate), [activeDate]);
   const morningPrayerBlocks = useMemo(() => parsePrayerBlocks(morningPrayerText), [morningPrayerText]);
+  const thirdHourPrayerBlocks = useMemo(() => parsePrayerBlocks(THIRD_HOUR_PRAYER_TEXT), [THIRD_HOUR_PRAYER_TEXT]);
+  const sixthHourPrayerBlocks = useMemo(() => parsePrayerBlocks(SIXTH_HOUR_PRAYER_TEXT), [SIXTH_HOUR_PRAYER_TEXT]);
   const eveningPrayerBlocks = useMemo(() => parsePrayerBlocks(EVENING_PRAYER_TEXT), []);
   const typikaSections = useMemo(() => getTypikaSections(), []);
 
@@ -135,6 +142,22 @@ export default function PrayersScreen({ activeDate, fontFamily, navigation }: Pr
         sourceUrl: isSunday ? TYPIKA_SOURCE_URL : MORNING_PRAYER_SOURCE_URL,
       },
       {
+        key: "third_hour",
+        title: "Third Hour",
+        open: showThird,
+        text: THIRD_HOUR_PRAYER_TEXT,
+        onToggle: () => setShowThird((prev) => !prev),
+        sourceUrl: THIRD_SIXTH_SOURCE_URL,
+      },
+      {
+        key: "sixth_hour",
+        title: "Sixth Hour",
+        open: showSixth,
+        text: SIXTH_HOUR_PRAYER_TEXT,
+        onToggle: () => setShowSixth((prev) => !prev),
+        sourceUrl: THIRD_SIXTH_SOURCE_URL,
+      },
+      {
         key: "evening",
         title: "Evening Prayer",
         open: showEvening,
@@ -143,7 +166,7 @@ export default function PrayersScreen({ activeDate, fontFamily, navigation }: Pr
         sourceUrl: EVENING_PRAYER_SOURCE_URL,
       },
     ],
-    [isSunday, morningPrayerText, showMorning, showEvening, typikaSections],
+    [isSunday, morningPrayerText, showMorning, showThird, showSixth, showEvening, typikaSections],
   );
 
   return (
@@ -168,6 +191,16 @@ export default function PrayersScreen({ activeDate, fontFamily, navigation }: Pr
             ) : section.open && section.key === "morning" ? (
               <>
                 {renderPrayerBlocks(morningPrayerBlocks, textFontStyle)}
+                <Text style={[styles.sourceText, textFontStyle]}>Source: {section.sourceUrl}</Text>
+              </>
+            ) : section.open && section.key === "third_hour" ? (
+              <>
+                {renderPrayerBlocks(thirdHourPrayerBlocks, textFontStyle)}
+                <Text style={[styles.sourceText, textFontStyle]}>Source: {section.sourceUrl}</Text>
+              </>
+            ) : section.open && section.key === "sixth_hour" ? (
+              <>
+                {renderPrayerBlocks(sixthHourPrayerBlocks, textFontStyle)}
                 <Text style={[styles.sourceText, textFontStyle]}>Source: {section.sourceUrl}</Text>
               </>
             ) : section.open && section.key === "evening" ? (
