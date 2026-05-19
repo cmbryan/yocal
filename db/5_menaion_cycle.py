@@ -377,9 +377,12 @@ while yr <= yr_final:
         cur.execute('''UPDATE %s SET is_comm_apos = 0
                 WHERE id = %s''' % (tn, athan_id))
 
-     # If a feast falls on the Ascension both Apostle and Gospel readings are suppressed
-    cur.execute('''UPDATE %s SET is_comm_apos = 0, is_comm_gosp = 0
+     # If a feast falls on the Ascension (both Apostle and) Gospel readings are suppressed
+    #cur.execute('''UPDATE %s SET is_comm_apos = 0, is_comm_gosp = 0
+    #            WHERE id = %s''' % (tn, pascha_id+39))
+    cur.execute('''UPDATE %s SET is_comm_gosp = 0
                 WHERE id = %s''' % (tn, pascha_id+39))
+
   
  # If a feast - e.g. Metrophanes - falls on Pentecost the festal Apostle reading is supressed
     cur.execute('''UPDATE %s SET is_comm_apos = 0
