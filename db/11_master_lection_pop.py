@@ -44,12 +44,12 @@ if records < 2:
       cur.execute('''UPDATE master.yocal_lections SET lect_2 = ? WHERE code = ?''' , (b,a))
 
    # Now create new codes and entries where there are extra lections
-   extra = ['L18Sat','G7Wed']
+   extra = ['M2Sun','L18Sat','G7Wed']
    for ext in extra:
       x = 'x' + ext
       cur.execute('''SELECT extra FROM G_Lections WHERE code = ?''',(ext,))
       lect = cur.fetchone()[0]
-      if ext == 'G7Wed':
+      if ext in ['G7Wed','M2Sun']:
          cur.execute('''INSERT INTO master.yocal_lections (code, lect_1) VALUES (?,?)''', (x,lect))
       else:
          two_lect = lect.split('; ')
