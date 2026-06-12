@@ -438,7 +438,7 @@ while yr <= yr_final:
 
     if maj == None:
        cur.execute('''UPDATE %s SET
-            c_code = 'xM2Sun', x_code = None, is_comm_apos = 1, is_comm_gosp = 0
+            c_code = 'xM2Sun', x_code = NULL, is_comm_apos = 1, is_comm_gosp = 0
             WHERE g_code = 'M2Sun' ''' % tn)
 
     # St. Raphael (Hawaweeny) is commemorated on the first Saturday of November.
