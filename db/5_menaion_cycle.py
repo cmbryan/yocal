@@ -377,12 +377,9 @@ while yr <= yr_final:
         cur.execute('''UPDATE %s SET is_comm_apos = 0
                 WHERE id = %s''' % (tn, athan_id))
 
-     # If a feast falls on the Ascension (both Apostle and) Gospel readings are suppressed
-    #cur.execute('''UPDATE %s SET is_comm_apos = 0, is_comm_gosp = 0
-    #            WHERE id = %s''' % (tn, pascha_id+39))
-    cur.execute('''UPDATE %s SET is_comm_gosp = 0
+     # If a feast falls on the Ascension both Apostle and Gospel readings are suppressed
+    cur.execute('''UPDATE %s SET is_comm_apos = 0, is_comm_gosp = 0
                 WHERE id = %s''' % (tn, pascha_id+39))
-
   
  # If a feast - e.g. Metrophanes - falls on Pentecost the festal Apostle reading is supressed
     cur.execute('''UPDATE %s SET is_comm_apos = 0
@@ -432,6 +429,17 @@ while yr <= yr_final:
           cur.execute('''UPDATE %s SET
             british = (british || " Oswald of Worcester and York (t/f from Feb 29th).")
             WHERE date_key = "02-28" ''' % tn)
+
+   # The Second Sunday of Matthew has the Apostle Reading for All Saints of Antioch if there is no major comm
+
+    cur.execute('''SELECT major_commem FROM %s 
+            WHERE g_code = 'M2Sun' ''' % tn)
+    maj = cur.fetchone()[0]
+
+    if maj == None:
+       cur.execute('''UPDATE %s SET
+            c_code = 'xM2Sun', is_comm_apos = 1, is_comm_gosp = 0
+            WHERE g_code = 'M2Sun' ''' % tn)
 
     # St. Raphael (Hawaweeny) is commemorated on the first Saturday of November.
     # We need to add his name to the class_5 list for the appropriate day.
