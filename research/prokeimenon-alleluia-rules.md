@@ -48,7 +48,7 @@ Not read (paywalled / Greek scan): Violakis Greek 1888, Denver bilingual, Bogdan
 | Case | Rule | Status | Evidence |
 |---|---|---|---|
 | Plain Sunday | Prokeimenon of tone of week (Resurrectional, Octoechos, "Arise O Lord" family, twice + stichos) | **E** | Typ Ch I §5 p.25; Wichita Chart II p.32 ("Octoechos"). ANCA ORTHROS "Resurrectional Prokeimenon in Tone N": all 15 sampled Sundays. |
-| Saint of any sampled rank on Sunday (3rd class "Vigil/Polyeleos" or lower) | Still Resurrection/tone of week. Saint gets only the Matins Gospel replaced? No: eothinon stays | **E** | Wichita Chart II p.32 (Octoechos for classes 5-3). ANCA Nov 1 (Cosmas/Damian), Nov 8 (Archangels), Oct 18 (Luke), Jan 25 (Gregory): resurrectional. DCS `psMA.sunday.m5` (Nov 1), `m6` (Nov 8). |
+| Saint of any sampled rank on Sunday (3rd class "Vigil/Polyeleos" or lower) | Still Resurrection/tone of week. | **E** | Wichita Chart II p.32 (Octoechos for classes 5-3). ANCA Nov 1 (Cosmas/Damian), Nov 8 (Archangels), Oct 18 (Luke), Jan 25 (Gregory): resurrectional. DCS `psMA.sunday.m5` (Nov 1), `m6` (Nov 8). |
 | Festal season / afterfeast / leavetaking on Sunday | Prokeimenon "of the tone" | **E** | Wichita Chart III p.38. ANCA Nov 22 (Entrance afterfeast), Sep 20 (Cross afterfeast), Sep 13 forefeast: resurrectional. |
 | Theotokos feast on Sunday (2nd class) | Prokeimenon of the feast (+ feast Matins Gospel) | **E**, no sample | Typ Ch I §5 p.25; Wichita Chart II p.32. Feast text for the prokeimenon: Menaion (e.g. Nativity of Theotokos "I shall call on thy name" cited in Typ Menaion Sep 8, p.65). |
 | Master feast on Sunday (1st class) | Prokeimenon of the feast | **E**, no sample | Wichita Chart II p.32. |
