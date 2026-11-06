@@ -1,0 +1,903 @@
+- id: ves.lihc.ch5.09-01
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 09-01
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Sep 1, p.59
+  status: explicit
+- id: ves.lihc.ch5.09-06
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 09-06
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Sep 6, p.62
+  status: explicit
+- id: ves.lihc.ch5.09-07
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 09-07
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Sep 7, p.63
+  status: explicit
+- id: ves.lihc.ch5.09-08
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 09-08
+  fill:
+    res: 4
+    other:
+    - 6
+  source: typikon
+  locator: Ch V Sep 8, p.64
+  status: explicit
+- id: ves.lihc.ch5.09-12
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 09-12
+  fill:
+    res: 4
+    other:
+    - 6
+  source: typikon
+  locator: Ch V Sep 12, p.71
+  status: explicit
+- id: ves.lihc.ch5.09-13
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 09-13
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Sep 13, p.73
+  status: explicit
+- id: ves.lihc.ch5.09-16
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 09-16
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Sep 16, p.81
+  status: explicit
+- id: ves.lihc.ch5.09-20
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 09-20
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Sep 20, p.82
+  status: explicit
+- id: ves.lihc.ch5.09-21
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 09-21
+  fill:
+    res: 4
+    other:
+    - 6
+  source: typikon
+  locator: Ch V Sep 21, p.83
+  status: explicit
+- id: ves.lihc.ch5.09-23
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 09-23
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Sep 23, p.85
+  status: explicit
+- id: ves.lihc.ch5.09-24
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 09-24
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Sep 24, p.86
+  status: explicit
+- id: ves.lihc.ch5.09-26
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 09-26
+  fill:
+    res: 4
+    other:
+    - 6
+  source: typikon
+  locator: Ch V Sep 26, p.90
+  status: explicit
+- id: ves.lihc.ch5.10-18
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 10-18
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Oct 18, p.94
+  status: explicit
+- id: ves.lihc.ch5.10-23
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 10-23
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Oct 23, p.96
+  status: explicit
+- id: ves.lihc.ch5.11-01
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 11-01
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Nov 1, p.100
+  status: explicit
+- id: ves.lihc.ch5.11-08
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 11-08
+  fill:
+    res: 4
+    other:
+    - 6
+  source: typikon
+  locator: Ch V Nov 8, p.101
+  status: explicit
+- id: ves.lihc.ch5.11-11
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 11-11
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Nov 11, p.103
+  status: explicit
+- id: ves.lihc.ch5.11-12
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 11-12
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Nov 12, p.104
+  status: explicit
+- id: ves.lihc.ch5.11-13
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 11-13
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Nov 13, p.105
+  status: explicit
+- id: ves.lihc.ch5.11-14
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 11-14
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Nov 14, p.107
+  status: explicit
+- id: ves.lihc.ch5.11-16
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 11-16
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Nov 16, p.108
+  status: explicit
+- id: ves.lihc.ch5.11-20
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 11-20
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Nov 20, p.110
+  status: explicit
+- id: ves.lihc.ch5.11-25
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 11-25
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Nov 25, p.116
+  status: explicit
+- id: ves.lihc.ch5.11-30
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 11-30
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Nov 30, p.117
+  status: explicit
+- id: ves.lihc.ch5.12-04
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 12-04
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Dec 4, p.120
+  status: explicit
+- id: ves.lihc.ch5.12-05
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 12-05
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Dec 5, p.121
+  status: explicit
+- id: ves.lihc.ch5.12-06
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 12-06
+  fill:
+    res: 4
+    other:
+    - 6
+  source: typikon
+  locator: Ch V Dec 6, p.123
+  status: explicit
+- id: ves.lihc.ch5.12-09
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 12-09
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Dec 9, p.125
+  status: explicit
+- id: ves.lihc.ch5.12-12
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 12-12
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Dec 12, p.128
+  status: explicit
+- id: ves.lihc.ch5.12-15
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 12-15
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Dec 15, p.130
+  status: explicit
+- id: ves.lihc.ch5.12-26
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 12-26
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Dec 26, p.148
+  status: explicit
+- id: ves.lihc.ch5.12-27
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 12-27
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Dec 27, p.159
+  status: explicit
+- id: ves.lihc.ch5.12-31
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 12-31
+  fill:
+    res: 3
+    other:
+    - 4
+    - 3
+  source: typikon
+  locator: Ch V Dec 31, p.161
+  status: explicit
+- id: ves.lihc.ch5.01-01
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 01-01
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Jan 1, p.164
+  status: explicit
+- id: ves.lihc.ch5.01-11
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 01-11
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Jan 11, p.186
+  status: explicit
+- id: ves.lihc.ch5.01-14
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 01-14
+  fill:
+    res: 4
+    other:
+    - 6
+  source: typikon
+  locator: Ch V Jan 14, p.190
+  status: explicit
+- id: ves.lihc.ch5.02-01
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 02-01
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Feb 1, p.216
+  status: explicit
+- id: ves.lihc.ch5.02-10
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 02-10
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Feb 10, p.229
+  status: explicit
+- id: ves.lihc.ch5.06-24
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 06-24
+  fill:
+    res: 4
+    other:
+    - 6
+    - 4
+  source: typikon
+  locator: Ch V Jun 24, p.417
+  status: explicit
+- id: ves.lihc.ch5.06-29
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 06-29
+  fill:
+    res: 4
+    other:
+    - 6
+  source: typikon
+  locator: Ch V Jun 29, p.419
+  status: explicit
+- id: ves.lihc.ch5.06-30
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 06-30
+  fill:
+    res: 7
+    other:
+    - 3
+  source: typikon
+  locator: Ch V Jun 30, p.421
+  status: explicit
+- id: ves.lihc.ch5.07-01
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 07-01
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Jul 1, p.423
+  status: explicit
+- id: ves.lihc.ch5.07-02
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 07-02
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Jul 2, p.424
+  status: explicit
+- id: ves.lihc.ch5.07-05
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 07-05
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Jul 5, p.426
+  status: explicit
+- id: ves.lihc.ch5.07-07
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 07-07
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Jul 7, p.428
+  status: explicit
+- id: ves.lihc.ch5.07-11
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 07-11
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Jul 11, p.429
+  status: explicit
+- id: ves.lihc.ch5.07-17
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 07-17
+  fill:
+    res: 4
+    other:
+    - 3
+    - 3
+  source: typikon
+  locator: Ch V Jul 17, p.434
+  status: explicit
+- id: ves.lihc.ch5.07-20
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 07-20
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Jul 20, p.435
+  status: explicit
+- id: ves.lihc.ch5.07-25
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 07-25
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Jul 25, p.437
+  status: explicit
+- id: ves.lihc.ch5.07-26
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 07-26
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Jul 26, p.439
+  status: explicit
+- id: ves.lihc.ch5.07-27
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 07-27
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Jul 27, p.440
+  status: explicit
+- id: ves.lihc.ch5.08-01
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 08-01
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Aug 1, p.443
+  status: explicit
+- id: ves.lihc.ch5.08-02
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 08-02
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Aug 2, p.444
+  status: explicit
+- id: ves.lihc.ch5.08-05
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 08-05
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Aug 5, p.448
+  status: explicit
+- id: ves.lihc.ch5.08-13
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 08-13
+  fill:
+    res: 4
+    other:
+    - 6
+  source: typikon
+  locator: Ch V Aug 13, p.452
+  status: explicit
+- id: ves.lihc.ch5.08-14
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 08-14
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Aug 14, p.453
+  status: explicit
+- id: ves.lihc.ch5.08-15
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 08-15
+  fill:
+    res: 4
+    other:
+    - 3
+  source: typikon
+  locator: Ch V Aug 15, p.455
+  status: explicit
+- id: ves.lihc.ch5.08-23
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 08-23
+  fill:
+    res: 4
+    other:
+    - 6
+  source: typikon
+  locator: Ch V Aug 23, p.463
+  status: explicit
+- id: ves.lihc.ch5.08-31
+  slot: vespers.lihc.stichera
+  tier: 1
+  when:
+  - pred: sunday_eve
+  - pred: menaion_date_is
+    args:
+    - 08-31
+  fill:
+    res: 6
+    other:
+    - 4
+  source: typikon
+  locator: Ch V Aug 31, p.467
+  status: explicit
