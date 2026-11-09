@@ -1,0 +1,94 @@
+412 Sundays with READ key
+liturgy.epistle.ref          {'match': 283, 'saint_epistle_skipped': 65, 'diff': 6}
+liturgy.gospel.ref           {'match': 367, 'diff': 22}
+liturgy.kontakion            {'movable_unmodelled': 188, 'diff': 16, 'match': 208}
+liturgy.rite                 {'match': 411, 'diff': 1}
+matins.ainoi.tone            {'match': 400, 'diff': 11, 'not_in_key': 1}
+matins.eothinon_gospel       {'match': 402, 'not_in_key': 10}
+matins.prokeimenon.tone      {'match': 342, 'diff': 18, 'not_in_key': 52}
+
+== liturgy.epistle.ref diffs (6)
+   2022-07-03 db Romans 5:1-10 key 5:1-11
+   2022-07-10 db Romans 6:18-23 key 2:1-10
+   2022-11-20 db Ephesians 2:4-10 key 9:1-7
+   2024-01-28 db 1 Timothy 4:9-15 key 1:15-17
+   2024-02-04 db 2 Corinthians 4:6-15 key 4:9-15
+   2025-11-09 db Galatians 6:11-18 key 5:8-19
+
+== liturgy.gospel.ref diffs (22)
+   2018-06-03 db Matthew 10:32-33, 37-38,19:27-30 key 10:32-33, 37-38; 19:27-30
+   2018-12-16 db Luke 14:16-24; Matthew 22:14 key 14:16-24
+   2019-02-03 db Matthew 25:14-30; Luke 8:8 key 25:14-30
+   2019-06-23 db Matthew 10:32-33, 37-38,19:27-30 key 10:32-33, 37-38; 19:27-30
+   2019-12-15 db Luke 14:16-24; Matthew 22:14 key 14:16-24
+   2020-06-14 db Matthew 10:32-33, 37-38,19:27-30 key 10:32-33, 37-38; 19:27-30
+   2020-12-13 db Luke 14:16-24; Matthew 22:14 key 14:16-24
+   2021-02-07 db Matthew 25:14-30; Luke 8:8 key 25:14-30, + Luke 8:8
+   2021-06-27 db Matthew 10:32-33, 37-38,19:27-30 key 10:32-33, 37-38; 19:27-30
+   2022-06-19 db Matthew 10:32-33, 37-38,19:27-30 key 10:32-33, 37-38; 19:27-30
+   2022-11-20 db Luke 12:16-21,8:8 key 10:38-42; 11:27-28
+   2022-12-11 db Luke 14:16-24; Matthew 22:14 key 14:16-24
+   2023-03-26 db Mark 9:17-31 key 9:16-30
+   2023-06-11 db Matthew 10:32-33, 37-38,19:27-30 key 10:32-33, 37-38; 19:27-30
+   2023-12-17 db Luke 14:16-24; Matthew 22:14 key 14:16-24
+   2024-01-28 db Luke 19:1-10 key 18:35-43
+   2024-02-04 db Matthew 22:35-46 key 19:1-10
+   2024-02-11 db Matthew 25:14-30; Luke 8:8 key 25:14-30, + Luke 8:8
+   2024-12-15 db Luke 14:16-24; Matthew 22:14 key 14:16-24
+   2025-06-15 db Matthew 10:32-33, 37-38,19:27-30 key 10:32-33, 37-38; 19:27-30
+   2025-12-14 db Luke 14:16-24; Matthew 22:14 key 14:16-24
+   2026-06-07 db Matthew 10:32-33, 37-38,19:27-30 key 10:32-33, 37-38; 19:27-30
+
+== liturgy.kontakion diffs (16)
+   2018-06-03 pred undisputed key other:KONTAKION OF ALL SAINTS IN TONE EIGHT (KONTAKION OF ALL SAINTS IN TONE EIGHT) [1st after Pentecost]
+   2018-12-09 pred preparation key other:KONTAKION OF CONCEPTION OF THE THEOTOKOS (KONTAKION OF CONCEPTION OF THE THEOTOKOS BY ST. AN) [28th after Pentecost]
+   2019-06-23 pred undisputed key other:KONTAKION OF ALL SAINTS IN TONE EIGHT (KONTAKION OF ALL SAINTS IN TONE EIGHT) [1st after Pentecost]
+   2020-06-14 pred undisputed key other:KONTAKION OF ALL SAINTS IN TONE EIGHT (KONTAKION OF ALL SAINTS IN TONE EIGHT) [1st after Pentecost]
+   2020-09-13 pred dedication key other:KONTAKION OF HOLY RESURRECTION CHURCH IN (KONTAKION OF HOLY RESURRECTION CHURCH IN TONE FOUR) [Sunday before the Elevation of the Cross]
+   2021-06-27 pred undisputed key other:KONTAKION OF ALL SAINTS IN TONE EIGHT (KONTAKION OF ALL SAINTS IN TONE EIGHT) [1st after Pentecost]
+   2021-07-25 pred undisputed key dormition (KONTAKION OF THE DORMITION OF ST. ANNA IN TONE TWO) [5th after Pentecost]
+   2022-06-19 pred undisputed key other:KONTAKION OF ALL SAINTS IN TONE EIGHT (KONTAKION OF ALL SAINTS IN TONE EIGHT) [1st after Pentecost]
+   2023-06-11 pred undisputed key other:KONTAKION OF ALL SAINTS IN TONE EIGHT (KONTAKION OF ALL SAINTS IN TONE EIGHT) [1st after Pentecost]
+   2023-07-02 pred undisputed key other:KONTAKION FOR PLACING OF THE THEOTOKOS’  (KONTAKION FOR PLACING OF THE THEOTOKOS’ ROBE IN TO) [4th after Pentecost]
+   2024-06-30 pred undisputed key other:KONTAKION OF ALL SAINTS IN TONE EIGHT (KONTAKION OF ALL SAINTS IN TONE EIGHT) [1st after Pentecost]
+   2025-06-15 pred undisputed key other:KONTAKION OF ALL SAINTS IN TONE EIGHT (KONTAKION OF ALL SAINTS IN TONE EIGHT) [1st after Pentecost]
+   2025-08-31 pred nativity_theotokos key other:KONTAKION FOR PLACING OF THE VIRGIN’S SA (KONTAKION FOR PLACING OF THE VIRGIN’S SASH IN TONE) [12th after Pentecost]
+   2025-09-07 pred nativity_theotokos key nativity (KONTAKION OF THE FOREFEAST OF THEOTOKOS’ NATIVITY ) [Sunday before the Elevation of the Cross]
+   2026-06-07 pred undisputed key other:KONTAKION OF ALL SAINTS IN TONE EIGHT (KONTAKION OF ALL SAINTS IN TONE EIGHT) [1st after Pentecost]
+   2026-09-13 pred dedication key other:KONTAKION OF HOLY RESURRECTION CHURCH IN (KONTAKION OF HOLY RESURRECTION CHURCH IN TONE FOUR) [Sunday before the Elevation of the Cross]
+
+== liturgy.rite diffs (1)
+   2018-03-25 pred basil=True key chrys [5th of Great Lent, Sunday of St Mary of Egypt]
+
+== matins.ainoi.tone diffs (11)
+   2018-04-15 key 1 db None [2nd of Pascha, Sunday of Thomas]
+   2019-05-05 key 1 db None [2nd of Pascha, Sunday of Thomas]
+   2020-04-26 key 1 db None [2nd of Pascha, Sunday of Thomas]
+   2021-05-09 key 1 db None [2nd of Pascha, Sunday of Thomas]
+   2022-05-01 key 1 db None [2nd of Pascha, Sunday of Thomas]
+   2023-04-23 key 1 db None [2nd of Pascha, Sunday of Thomas]
+   2024-05-12 key 1 db None [2nd of Pascha, Sunday of Thomas]
+   2025-04-27 key 1 db None [2nd of Pascha, Sunday of Thomas]
+   2026-04-05 key 4 db None [Palm Sunday]
+   2026-04-19 key 1 db None [2nd of Pascha, Sunday of Thomas]
+   2026-05-31 key 4 db None [Sunday of Pentecost]
+
+== matins.prokeimenon.tone diffs (18)
+   2018-03-25 key 4 db 1 [5th of Great Lent, Sunday of St Mary of Egypt]
+   2018-04-15 key 4 db None [2nd of Pascha, Sunday of Thomas]
+   2019-05-05 key 4 db None [2nd of Pascha, Sunday of Thomas]
+   2019-09-08 key 4 db 3 [Sunday before the Elevation of the Cross]
+   2020-02-02 key 4 db 8 [17th after Pentecost]
+   2020-04-26 key 4 db None [2nd of Pascha, Sunday of Thomas]
+   2021-05-09 key 4 db None [2nd of Pascha, Sunday of Thomas]
+   2021-08-15 key 4 db 7 [8th after Pentecost]
+   2022-05-01 key 4 db None [2nd of Pascha, Sunday of Thomas]
+   2022-11-20 key 4 db 6 [23rd after Pentecost]
+   2023-04-23 key 4 db None [2nd of Pascha, Sunday of Thomas]
+   2024-05-12 key 4 db None [2nd of Pascha, Sunday of Thomas]
+   2024-09-08 key 4 db 2 [Sunday before the Elevation of the Cross]
+   2025-02-02 key 4 db 7 [17th after Pentecost]
+   2025-04-27 key 4 db None [2nd of Pascha, Sunday of Thomas]
+   2026-04-05 key 4 db None [Palm Sunday]
+   2026-04-19 key 4 db None [2nd of Pascha, Sunday of Thomas]
+   2026-05-31 key 4 db None [Sunday of Pentecost]
