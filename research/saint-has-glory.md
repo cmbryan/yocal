@@ -24,7 +24,7 @@ All EXPLICIT. "Doxastikon" = proper "Glory..." hymn of the saint at a given slot
 | Vespers/Matins/Liturgy troparion | saint with no LIHC Glory: its troparion is NOT sung on Sunday; only Resurrection troparion + theotokion. With Glory on Sunday after Lord feast: saint troparion at Glory | Typikon p.16 |
 | Dismissal | saint named only "if it has a Doxastikon" | Typikon p.17 |
 | Daily (non-Sunday) Vespers | 6 stichera w/o Glory: 3 Octoechos + 3 saint; saint's Saturday-eve troparia change if no Glory | Typikon p.42-43; Violakis p.41-42 |
-| Matins praises | separate fact: "if saint has stichera for the praises" (not the same as Vespers Glory) | Typikon p.49 (Sunday Matins order); p.30-31 feast cases |
+| Matins praises | separate fact: "if saint has stichera for the praises" (not the same as Vespers Glory) | Typikon p.51 (Sunday Matins order); p.30-31 feast cases |
 
 Conclusion: one boolean is not enough. At least three per-commemoration facts: `vespers_glory` (LIHC SticGlory), `aposticha_glory`, `has_lauds` (praises stichera; ALWB `meMA.Lauds1..4`, `LaudsGlory`). #26 only needs `vespers_glory`; the other two come free from the same ALWB read and will gate Matins praises (38 missing cells in the spike) and Vespers aposticha.
 
@@ -48,7 +48,7 @@ Conclusion: one boolean is not enough. At least three per-commemoration facts: `
 ## 4. Candidate source: ALWB Menaion day files (INFERRED, validated)
 
 - AGES ALWB `Books-Collections/Menaion/mMM/me.mMM.dDD_*.ares`; slot `meVE.SticGlory.text`. Alternate commemorations on same date appear as `alt1.`, `alt2.` blocks. Day record also has `meHO.rank` (empty everywhere checked, #13) so rank is unavailable; glory presence is.
-- GR `cog` library: SticGlory filled on 216 of 371 day files (#13). English `dedes`/`goadedes` too sparse (goadedes 97 of 269 filled; dedes agrees only ~50%): use Greek for the flag, keys only (licence decision #16: no text stored).
+- GR `cog` library: SticGlory filled on 216 of 371 day files (#13). English `dedes`/`goadedes` too sparse (goadedes 97 of 269 filled; dedes agrees ~64%): use Greek for the flag, keys only (licence decision #16: no text stored).
 - Validation vs ANCA key (6R+4 -> glory expected; 7R+3 -> none; 89 Sundays; main commemoration only):
 
 | ALWB cog `SticGlory` | 6R+4 | 7R+3 |
