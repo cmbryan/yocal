@@ -16,7 +16,7 @@ Question: why do yocal and ANCA differ on 2024-01-28 / 2024-02-04, 2022-11-20, 2
 
 **Sources (explicit).** Typikon pp. 191-192 ("Epistle and Gospel readings for the Sundays which follow Epiphany"): table by number of Sundays between Epiphany and Triodion, **1-4 cases only**. Violakis Menaion, 14 Jan "Notes on Apostle and Gospel" A-D + note, printed pp. 162-163 (scan 002-100/101): same four cases, same as Typikon.
 - 1 Sunday: E32 + L15 (Zacchaeus). 2: E29/L12 (Ten Lepers), E32/L15. 3: E29/L12, E32/L15, E17/M17 (Canaanite). 4: E29/L12, E31 + **13th Luke** (Rich Young Ruler), E32/L15, E17/M17.
-- Note (both): late Pascha, weekdays run out of Gospels -> after Luke complete, count the remaining Matthew weeks before Exaltation Sunday; same for Epistles. Violakis ends with E (feast-of-Hypapante katavasia start); nothing about >4 Sundays or about re-reading Luke 14.
+- Note (both): late Pascha, weekdays run out of Gospels -> after Luke complete, count the remaining Matthew weeks before Exaltation Sunday; same for Epistles. Violakis adds nothing on >4 Sundays or on re-reading Luke 14 (its note E concerns Hypapante katavasias).
 - Violakis 4-case prints Epistle of **32nd** for both 2nd and 3rd Sundays (p. 163); Typikon says 31st for the 2nd. Transcribed as printed; likely misprint [?]. Both give "13th" Luke, not 14th.
 - Typikon p. 192 count excludes the "Sunday after Theophany"; 2024: Jan 7 = Forerunner Synaxis (saint's Epistle/Gospel, Typikon p. 37), SunAT = Jan 14 (fn 130, p. 191), then Jan 21, 28, Feb 4, 11, 18 = **5 Sundays** to Publican (Feb 25). Neither source covers 5 or 6 Sundays: **missing**.
 
@@ -27,7 +27,7 @@ Cross-check of all years 2019-2026: L14 omitted in 2019 (4 Sundays, L14 Dec 2 20
 
 **Conclusion.** yocal is not provably wrong: Typikon/Violakis do not address 5 Sundays; yocal's "skip L14 if read in Dec" matches ANCA 2019 but not ANCA 2024. ANCA 2024 either has a different rule for >=5 Sundays (always E31/L14, i.e. "5a" unconditionally) or an ad hoc choice. Evidence is one data point. **Missing rule**, not DB bug.
 
-**Recommended.** (a) Log as Divergence "pre-Triodion 5-Sunday case (2024)": yocal 5b vs ANCA 5a; check future >=5-Sunday years with L14 used (2029/2030-era per DB lists: none with 5 Sundays until recalculated) before choosing. (b) For Rule encoding: keep Typikon 1-3 explicit, 4 explicit but with L14/Matthew substitution (inferred, ANCA 2019/2022), 5-6 inferred from yocal lists. (c) Optional DB change: switch 5b to 5a to match ANCA (one-line list change at db/4_paschalion_cycle.py:84), only if the user prefers ANCA over the "no repeat" principle. Ask OLG/Fr John Morris to settle.
+**Recommended.** (a) Log as Divergence "pre-Triodion 5-Sunday case (2024)": yocal 5b vs ANCA 5a; DB 2019-2031 shows 2024 as the only >=5-Sunday year with L14 already read in Dec, so no further ANCA sample exists yet. (b) For Rule encoding: keep Typikon 1-3 explicit, 4 explicit but with L14/Matthew substitution (inferred, ANCA 2019/2022), 5-6 inferred from yocal lists. (c) Optional DB change: switch 5b to 5a to match ANCA (one-line list change at db/4_paschalion_cycle.py:84), only if the user prefers ANCA over the "no repeat" principle. Ask OLG/Fr John Morris to settle.
 
 ## 2. 2022-11-20 (forefeast of Entrance on a Sunday)
 
