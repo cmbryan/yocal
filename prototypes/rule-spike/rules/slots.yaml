@@ -1,0 +1,12 @@
+# slot catalogue = audit denominator (spike subset). attrs = what a Rule emits / key exposes.
+vespers.lihc.stichera:   {attrs: [res, other]}
+vespers.prokeimenon:     {attrs: [kind, tone]}
+matins.kathismata:       {attrs: [tone]}
+matins.prokeimenon:      {attrs: [kind, tone]}
+matins.eothinon_gospel:  {attrs: [number]}
+matins.praises:          {attrs: [total, res]}
+liturgy.kontakion:       {attrs: [kind, tone]}
+liturgy.epistle:         {attrs: [owner, ref]}
+liturgy.gospel:          {attrs: [ref]}
+liturgy.prokeimenon:     {attrs: [owner]}
+liturgy.alleluia:        {attrs: [tone]}

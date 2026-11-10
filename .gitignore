@@ -174,3 +174,14 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Prototype sources/outputs not committed (see prototypes/REFETCH.md)
+prototypes/**/.venv/
+prototypes/anca-index/raw/
+prototypes/anca-compare/pdfs/
+prototypes/anca-compare/pdfs_sun/
+prototypes/anca-compare/txt/
+prototypes/anca-compare/sun_keys.csv
+prototypes/anca-compare/pages_snapshot*.json
+prototypes/alwb-menaion/data/
+*.pdf
