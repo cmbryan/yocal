@@ -236,10 +236,10 @@ def test_theotokos_feast_sunday_evlogetaria_conflict_accepted(date):
 
 
 @needs_db
-def test_sunday_feast_vespers_litia_conflict_open_like_weekday():
+def test_sunday_feast_vespers_litia_conflict_accepted_like_weekday():
     _, v = slots("vespers", "2024-09-07")
     c = v["vespers.litia"].rule["conflict"]
-    assert c["status"] == "open" and "mf.ves.litia" in c["with"]
+    assert c["status"] == "accepted" and "mf.ves.litia" in c["with"]
 
 
 @needs_db
@@ -314,7 +314,7 @@ def test_annunciation_lent5_matins_liturgy_parts_and_conflicts():
     _, m = slots("matins", "2018-03-25")
     assert (m["matins.praises"].fill["total"], m["matins.praises"].fill["res"], m["matins.praises"].fill["other"]) == (8, 4, [4])
     assert m["matins.evlogetaria"].rule["conflict"]["status"] == "accepted"                      # #39 class: ANCA sings them
-    assert m["matins.prokeimenon"].rule["conflict"]["status"] == "open" and m["matins.eothinon_gospel"].fill["ref"] == "Luke 1:39-49,56"
+    assert m["matins.prokeimenon"].rule["conflict"]["status"] == "accepted" and m["matins.eothinon_gospel"].fill["ref"] == "Luke 1:39-49,56"
     assert m["matins.kontakion"].fill["kind"] == "feast" and m["matins.kathismata"].fill["tone"] == 1
     _, l = slots("liturgy", "2018-03-25")
     assert (l["liturgy.kontakion"].fill["kind"], l["liturgy.kontakion"].fill["tone"]) == ("annunciation", 8)
@@ -396,7 +396,7 @@ def test_jan1_sunday_vespers_order_typikon_p165():
     assert [p.split(" — ")[0] for p in v["vespers.apolytikia"].fill["parts"]] == [
         "Apolytikion of the Resurrection", "Apolytikion of St Basil the Great", "Apolytikion of the Circumcision"]
     c = v["vespers.litia"].rule["conflict"]
-    assert c["status"] == "open" and "mf.ves.litia" in c["with"]
+    assert c["status"] == "accepted" and "mf.ves.litia" in c["with"]
     # the Nativity-leavetaking Sunday orders (pp.157, 161; 3R+4+3) are for Dec 31 on a Sunday: not this day
     assert st.fill["res"] != 3 and not any("Nativity" in p for p in st.fill["parts"])
 
@@ -422,11 +422,12 @@ def test_jan1_sunday_liturgy_parts_and_open_conflicts():
     assert l["liturgy.communion"].fill["kind"] == "praise_the_lord" and l["liturgy.gospel"].fill["ref"] == "Luke 2:20-21, 40-52"
     assert l["liturgy.epistle"].fill["ref"] == "Colossians 2:8-12"
     assert (l["liturgy.dismissal_phrase"].fill["phrase"], l["liturgy.dismissal_phrase"].fill["clause"]) == ("feast_and_resurrection", "none")
-    for slot, frag in (("liturgy.apolytikia", "patron"), ("liturgy.megalynarion", "Let us extol"), ("liturgy.epistle", "Epistle for St. Basil"),
-                       ("liturgy.dismissal", None)):
+    for slot, frag in (("liturgy.apolytikia", "patron"), ("liturgy.megalynarion", "Let us extol"), ("liturgy.dismissal", None)):
         r = l[slot].rule
         assert r["id"].startswith("mf.jan1.sun.lit.") and r["source"] == "anca" and r["status"] == "inferred", slot
         assert r["conflict"]["status"] == "open" and (frag is None or frag in " ".join(r["conflict"]["with"]) + r["conflict"]["note"]), slot
+    ep = l["liturgy.epistle"].rule                                                                                # accepted (not open): DB single Jan 1 Epistle, ANCA 2023/2026
+    assert ep["id"] == "mf.jan1.sun.lit.epistle" and ep["conflict"]["status"] == "accepted" and "Epistle for St. Basil" in " ".join(ep["conflict"]["with"])
     assert l["liturgy.apolytikia"].fill["patron"] is True
     assert l["liturgy.megalynarion"].fill["kind"] == "in_thee_rejoiceth"
 
@@ -467,3 +468,21 @@ def test_no_anca_sunday_text_for_transfiguration_elevation():
     assert not [k for k in ("2023-08-05", "2023-08-06", "2025-09-14") if k in anca._feast_index()]
     enabled = calfacts._slices()["supported_fixed_major"]
     assert "08-06:sunday" not in enabled and "09-14:sunday" not in enabled
+
+
+# ---- audited Source conflict statuses (user-approved; the status lives on the Rule, no DB needed) ----
+def test_audited_conflict_statuses():
+    from yocal_rules.rules import load_catalogue
+    rules = {r["id"]: r for r in load_catalogue()[0]}
+    want = {"pascha.ves.lihc": "misreading", "mf.ves.litia": "accepted", "mf.sun.ves.litia": "accepted", "mf.lent5.ves.litia": "accepted",
+            "mf.jan1.sun.ves.litia": "accepted", "mf.nat.mon.ves.litia": "accepted", "mf.thy.mon.ves.litia": "accepted",
+            "mf.lent5.mat.prokeimenon": "accepted", "mf.lent5.mat.praises": "misreading", "mf.jan1.sun.lit.epistle": "accepted",
+            # unchanged
+            "mf.lent5.ves.lihc": "accepted", "mf.sun.ves.lihc.presentation": "accepted", "mf.sun.mat.evlogetaria": "accepted",
+            "mf.lent5.mat.evlogetaria": "accepted", "agape.lihc.george": "open", "mf.jan1.sun.mat.kathismata": "open",
+            "mf.jan1.sun.lit.apolytikia": "open", "mf.jan1.sun.lit.megalynarion": "open", "mf.jan1.sun.lit.dismissal": "open",
+            "mf.nat.mon.ves.readings": "open"}
+    for rid, st in want.items():
+        assert rules[rid]["conflict"]["status"] == st, rid
+    note = rules["pascha.ves.lihc"]["conflict"]["note"]
+    assert "Residual" in note and "Glory" in note

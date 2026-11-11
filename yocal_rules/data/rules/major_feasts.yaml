@@ -107,8 +107,8 @@
    fill: {litia: true, parts: ["Litia and Artoklasia of the feast after the litany of supplication (if the parish serves it) — Menaion {mmdd}"]},
    source: anca, locator: "inferred: ANCA places the Litia at Great Vespers ('If your parish will offer the Service of the Litia and Artoklasia, it is done here')",
    status: inferred, evidence: "ANCA festal Vespers 2025-26, all 8 feasts, and LITART files for each eve",
-   conflict: {with: ["Typikon Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Jan 1 p.164 (Litia at the Midnight Service)"], status: open,
-              note: "Typikon (Constantinopolitan order) places the Litia of the feast in the Midnight Service; Ch I p.14 describes the Artoklasia after the prayer at the bowing of heads at Vespers. ANCA prints it at Great Vespers as a parish option. Project default: follow ANCA. Vigil list Ch IV p.54 includes all these feasts except Jan 1."}}
+   conflict: {with: ["Typikon Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Jan 1 p.164 (Litia at the Midnight Service)"], status: accepted,
+              note: "Accepted, class-scoped (same class as #39's evlogetaria): explained, non-blocking. Typikon (Constantinopolitan order) places the Litia of the feast in the Midnight Service; Ch I p.14 describes the Artoklasia after the prayer at the bowing of heads at Vespers. ANCA prints it at Great Vespers as a parish option. Project default: follow ANCA. Vigil list Ch IV p.54 includes all these feasts except Jan 1."}}
 - {id: mf.ves.aposticha.feast, slot: vespers.aposticha, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition]}],
    fill: {owner: feast, parts: ["Aposticha of the feast with their verses; Glory, Now: of the feast — Menaion {mmdd}"]},

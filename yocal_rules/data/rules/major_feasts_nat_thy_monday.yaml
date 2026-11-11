@@ -22,7 +22,7 @@
 - {id: mf.nat.mon.ves.litia, slot: vespers.litia, tier: -10, when: [{pred: feast_on_monday_order}, {pred: major_feast_is, args: [nativity]}],
    fill: {litia: false, parts: ["No Litia at this Vespers (the Litia is sung at the Midnight Service of the feast)"]},
    source: typikon, locator: "p.144 (Midnight Service: 'The litia'; the Vespers order lists the Ektenia of Fervent Supplication, then the aposticha)", status: explicit,
-   conflict: {with: [mf.nat.ves.litia, mf.ves.litia], status: open, note: "As the Tuesday-Saturday Rule: ANCA moves the Litia to Great Vespers on the other feasts; no ANCA Nativity text. Typikon kept."}}
+   conflict: {with: [mf.nat.ves.litia, mf.ves.litia], status: accepted, note: "Accepted, class-scoped (same class as #39's evlogetaria): explained, non-blocking. As the Tuesday-Saturday Rule: ANCA moves the Litia to Great Vespers on the other feasts; no ANCA Nativity text. Typikon kept."}}
 - {id: mf.nat.mon.ves.aposticha, slot: vespers.aposticha, tier: -10, when: [{pred: feast_on_monday_order}, {pred: major_feast_is, args: [nativity]}],
    fill: {owner: feast, parts: ["Aposticha of the Nativity (“Today hath come a great and wonderful thing”), then “Lord, now lettest Thou Thy servant”"]},
    source: typikon, locator: "p.144 (unlike the Tue-Sat eve, p.140, which has no aposticha: Vespers passes into the Vesperal Liturgy)", status: explicit}
@@ -41,7 +41,7 @@
    fill: {litia: true, parts: ["Litia and Artoklasia of Theophany (if the parish serves it) — Menaion 01-06"]},
    source: anca, locator: "inferred: Typikon p.176 (Sunday-evening Great Vespers) lists no Litia and no Midnight Office; p.171 (Tue-Sat) puts it at the Midnight Office", status: inferred,
    evidence: "ANCA undated Theophany Great Vespers + LITART text (not weekday-specific): Litia printed at the eve Vespers",
-   conflict: {with: [mf.thy.ves.litia, mf.ves.litia], status: open, note: "Same ANCA-vs-Typikon class as the Tuesday-Saturday Rule; on this Monday the Typikon is silent on the Litia rather than moving it to Midnight. Project default: follow ANCA."}}
+   conflict: {with: [mf.thy.ves.litia, mf.ves.litia], status: accepted, note: "Accepted, class-scoped (same class as #39's evlogetaria): explained, non-blocking. Same ANCA-vs-Typikon class as the Tuesday-Saturday Rule; on this Monday the Typikon is silent on the Litia rather than moving it to Midnight. Project default: follow ANCA."}}
 - {id: mf.thy.mon.ves.aposticha, slot: vespers.aposticha, tier: -10, when: [{pred: feast_on_monday_order}, {pred: major_feast_is, args: [theophany]}],
    fill: {owner: feast, parts: ["Aposticha idiomela “O Christ God, when John saw Thee advancing to him in the Jordan” (the Typikon's forefeast idiomela)"]},
    source: typikon, locator: "p.176 (also p.174 for the Saturday-evening case); ANCA's Theophany aposticha opens with the same words, so no conflict with the Tuesday-Saturday Rule", status: explicit}

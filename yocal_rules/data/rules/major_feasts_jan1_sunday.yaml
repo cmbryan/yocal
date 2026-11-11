@@ -23,8 +23,8 @@
    fill: {litia: true, parts: ["Litia and Artoklasia after the litany of supplication (if the parish serves it) — Menaion 01-01"]},
    source: anca, locator: "inferred: ANCA places the Litia at Great Vespers ('If your parish will offer the Service of the Litia and Artoklasia, it is performed here')",
    status: inferred, evidence: "ANCA Great Vespers 2022-12-31 (single sample)",
-   conflict: {with: [mf.ves.litia, "Typikon Jan 1 on Sunday p.165 (Litia at the Midnight Service)"], status: open,
-              note: "Same class as the weekday conflict mf.ves.litia: the Typikon puts the Litia in the Midnight Service; ANCA prints it at Great Vespers as a parish option. Project default: follow ANCA. Single ANCA sample."}}
+   conflict: {with: [mf.ves.litia, "Typikon Jan 1 on Sunday p.165 (Litia at the Midnight Service)"], status: accepted,
+              note: "Accepted, class-scoped (same class as #39's evlogetaria): explained, non-blocking. Same class as the weekday conflict mf.ves.litia: the Typikon puts the Litia in the Midnight Service; ANCA prints it at Great Vespers as a parish option. Project default: follow ANCA. Single ANCA sample."}}
 - {id: mf.jan1.sun.ves.aposticha, slot: vespers.aposticha, tier: -10,
    when: [{pred: sunday_feast_order, args: [circumcision]}],
    fill: {owner: resurrection, parts: ["Aposticha: stichera of the Resurrection — Octoechos Tone {tone}", "Glory: of St Basil; Now: of the Circumcision (“The supremely good God was not ashamed …”) — Menaion 01-01"]},
@@ -97,8 +97,8 @@
    fill: {owner: saint, ref: "$epistle_ref", parts: ["{epistle_ref}"]},
    source: anca, locator: "inferred: reference from the calendar lectionary (DB lection 01-01, saint flag), as read by ANCA", status: inferred,
    evidence: "ANCA Liturgy Variables 2023-01-01: Epistle Colossians 2:8-12 (the calendar's single Jan 1 Epistle)",
-   conflict: {with: ["Typikon Jan 1 on Sunday p.166 ('The Epistle for St. Basil', 'The Gospel for the Circumcision': two separate readings)"], status: open,
-              note: "The Typikon assigns the Epistle to St Basil and the Gospel to the Circumcision; the calendar and ANCA 2023 give one Jan 1 Epistle (Colossians 2:8-12, which speaks of the circumcision of Christ) and the Circumcision Gospel. The reference follows the calendar/ANCA; whether the Typikon intends another Epistle for St Basil is not resolved. Single ANCA sample."}}
+   conflict: {with: ["Typikon Jan 1 on Sunday p.166 ('The Epistle for St. Basil', 'The Gospel for the Circumcision': two separate readings)"], status: accepted,
+              note: "Accepted (explained, non-blocking). DB yocal_lections 01-01 = Colossians 2:8-12 + Luke 2:20-21,40-52 (one Epistle, one Gospel); ANCA 2023-01-01 (Sunday) and 2026-01-01 (weekday) read Colossians 2:8-12 only; the Typikon p.166 'Epistle for St. Basil' is a Liturgy-of-Basil label naming no reference. Re-open only if a lectionary printing a different Epistle for Basil on Jan 1 is found."}}
 - {id: mf.jan1.sun.lit.gospel, slot: liturgy.gospel, tier: -10,
    when: [{pred: sunday_feast_order, args: [circumcision]}],
    fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the Circumcision"]},
