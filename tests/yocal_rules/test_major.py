@@ -84,7 +84,7 @@ def test_feast_parsers():
 
 @needs_db
 @pytest.mark.parametrize("date,service,must", [
-    ("2025-12-25", "liturgy", ["As many as have been baptized", "Galatians 4:4-7", "Matthew 2:1-12", "Divine Liturgy of St John Chrysostom"]),
+    ("2025-12-25", "liturgy", ["As many as have been baptized", "Galatians 4:4-7", "Matthew 2:1-12", "Liturgy of St. John Chrysostom"]),
     ("2026-01-05", "vespers", ["13 Old Testament readings", "Apolytikion of Theophany"]),
     ("2026-08-06", "matins", ["Luke 9:28-36", "Katavasia of the Holy Cross", "4 stichera of the feast"]),
     ("2026-08-15", "liturgy", ["Philippians 2:5-11", "wondrous in the saints", "I will take the cup of salvation"]),
