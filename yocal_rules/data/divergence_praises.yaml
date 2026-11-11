@@ -1,0 +1,18 @@
+# Matins Praises counts: residual ANCA variance after data/rules/praises.yaml (2022-2026 cached Sundays, in slice).
+- slot: matins.praises
+  source: anca
+  theirs: {res: 2, other: [3, 3]}
+  class: anca_praises_two_saints
+  reason: "Two commemorations each with Praises stichera (saint plus second saint/Fathers): ANCA prints 2 Resurrection + 3 + 3 (Typikon Ch V Dec 12 / Dec 15 and Ch I s5 p.31 'great saint after a feast' use the same 2R+3+3 shape). Our Rules cannot see the second commemoration's stichera (Dec 4 Barbara+John of Damascus 2022, Sep 24 Thekla+Silouan 2023, Oct 13 7th Council+martyrs 2024, Jun 14 2026). Ch V Dec 4 itself says 4R+4."
+- slot: matins.praises
+  source: anca
+  ours: {res: 8}
+  theirs: {res: 4, other: [4]}
+  class: anca_saint_praises_not_in_alwb
+  reason: "Simple-rank date with no ALWB (partial Greek) Lauds record and no Ch V entry, yet ANCA prints 4R + 4 saint (HTM Menaion has praises stichera). Not predictable from the facts we hold (Jul 10, Jan 28, Jun 22, Nov 9, Jul 12); Typikon Ch III p.50-51 permits it ('if the saint has praises stichera')."
+- slot: matins.praises
+  source: anca
+  ours: {res: 4}
+  theirs: {res: 8}
+  class: anca_omits_saint_praises
+  reason: "ALWB records Lauds stichera for the date (Simple rank, Nov 26 St Alypios, Nov 2 martyrs) but ANCA prints 8 Resurrection stichera only. Two samples; no Rule."

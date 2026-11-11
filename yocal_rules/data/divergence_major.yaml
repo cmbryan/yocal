@@ -1,0 +1,5 @@
+# Work package I (Major feasts, data/rules/major_feasts.yaml): residual ANCA variance on enabled feasts.
+# Sweep over the ANCA festal texts 2018-2026 (weekday/Saturday feasts, eves, Ascension): 0 diffs to absorb; entries are added here
+# only when a keyed diff is explained (class-scoped, as data/divergence.yaml). Typikon-vs-ANCA verdicts are Source conflicts on
+# the Rules (`conflict`), not entries here.
+[]

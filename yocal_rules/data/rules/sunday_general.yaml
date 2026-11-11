@@ -1,0 +1,174 @@
+# Hand-written Rules for ordinary Sundays (Sat Great Vespers, Sunday Matins, Sunday Liturgy).
+# Typikon = Antiochian Typikon (Khoury/Morris 2011); printed page cited.
+
+# ---- Vespers
+- {id: ves.prokeimenon.sat, slot: vespers.prokeimenon, tier: 4, when: [{pred: sunday_eve}],
+   fill: {kind: lord_is_king, tone: 6}, source: typikon, locator: "Ch I s3 p.13", status: explicit}
+- {id: ves.lihc.two_sets, slot: vespers.lihc.stichera, tier: 3,
+   when: [{pred: sunday_eve}, {pred: in_slice}, {pred: two_sets_of_3}], fill: {res: 4, other: [6]},
+   source: bpbasil, locator: "Ranking of Feasts: Menaion has two distinct sets of 3 stichera (flag in bpbasil_flags.csv)",
+   status: inferred, evidence: "#32: ANCA 4R+6 on 20/36 flagged Sundays vs 2/100 unflagged, 23/26 repeated date keys stable; no Antiochian source states it"}
+- {id: ves.lihc.glory, slot: vespers.lihc.stichera, tier: 4,
+   when: [{pred: sunday_eve}, {pred: in_slice}, {pred: saint_has_glory}], fill: {res: 6, other: [4]},
+   source: typikon, locator: "Ch III p.48 (6R+4 when the saint has a Glory)", status: explicit}
+- {id: ves.lihc.no_glory, slot: vespers.lihc.stichera, tier: 4,
+   when: [{pred: sunday_eve}, {pred: in_slice}, {pred: saint_no_glory}], fill: {res: 7, other: [3]},
+   source: typikon, locator: "Ch III p.48 (7R+3 when the saint has no Glory)", status: explicit}
+- {id: ves.lihc.glory_unknown, slot: vespers.lihc.stichera, tier: 4,
+   when: [{pred: sunday_eve}, {pred: glory_unknown}], fill: {},
+   source: typikon, locator: "Ch III p.48 (input fact saint_has_glory not derivable for this date)",
+   status: missing, ticket: "calendar: saint_has_glory (#28/#31)"}
+- {id: ves.apolytikia.glory, slot: vespers.apolytikia, tier: 4,
+   when: [{pred: sunday_eve}, {pred: in_slice}, {pred: saint_has_glory}], fill: {res_tone: "$tone", saint: true},
+   source: typikon, locator: "Ch I s3 p.16 (saint with a Glory at Lord I have cried: Res, Glory saint, Now Theotokion)", status: explicit}
+- {id: ves.apolytikia.no_glory, slot: vespers.apolytikia, tier: 4,
+   when: [{pred: sunday_eve}, {pred: in_slice}, {pred: saint_no_glory}], fill: {res_tone: "$tone", saint: false},
+   source: typikon, locator: "Ch I s3 p.16 (saint without a Glory: Res and Theotokion only)", status: explicit}
+
+# ---- Matins
+- {id: mat.apolytikia.glory, slot: matins.apolytikia, tier: 4,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: saint_has_glory}], fill: {res_tone: "$tone", saint: true},
+   source: typikon, locator: "Ch I s3 p.16", status: explicit}
+- {id: mat.apolytikia.no_glory, slot: matins.apolytikia, tier: 4,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: saint_no_glory}], fill: {res_tone: "$tone", saint: false},
+   source: typikon, locator: "Ch I s3 p.16", status: explicit}
+- {id: mat.kathismata.res, slot: matins.kathismata, tier: 4, when: [{pred: sunday}],
+   fill: {tone: "$tone"}, source: typikon, locator: "Ch I s5 p.21-22; Ch III p.50", status: explicit}
+- {id: mat.prokeimenon.res, slot: matins.prokeimenon, tier: 4, when: [{pred: sunday}],
+   fill: {kind: resurrectional, tone: "$tone"}, source: typikon, locator: "Ch I s5 p.25", status: explicit}
+- {id: mat.eothinon.calendar, slot: matins.eothinon_gospel, tier: 4, when: [{pred: sunday}],
+   fill: {number: "$eothinon"}, source: typikon, locator: "Ch I s5 p.29 fn21 (rotation deferred to calendar)", status: explicit}
+- {id: mat.kontakion.undecided, slot: matins.kontakion, tier: 4, when: [{pred: sunday}], fill: {},
+   source: typikon, locator: "Matins kontakion Rules are in kontakion.yaml; fallback for days they do not cover (Palm Sunday, Pascha)", status: missing, ticket: "#27"}
+- {id: mat.praises.plain, slot: matins.praises, tier: 4,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: no_saint_in_calendar}], fill: {total: 8, res: 8},
+   source: typikon, locator: "Ch III p.50-51", status: explicit}
+- {id: mat.praises.saint, slot: matins.praises, tier: 4,
+   when: [{pred: sunday}, {pred: saint_in_calendar}], fill: {},
+   source: typikon, locator: "Ch I s5 p.31 'counts unstated'", status: missing, ticket: "tbd (praises with a saint)"}
+
+# ---- Liturgy
+- {id: lit.apolytikia.glory, slot: liturgy.apolytikia, tier: 4,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: saint_has_glory}], fill: {res_tone: "$tone", saint: true},
+   source: typikon, locator: "Ch I s3 p.16", status: explicit}
+- {id: lit.apolytikia.no_glory, slot: liturgy.apolytikia, tier: 4,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: saint_no_glory}], fill: {res_tone: "$tone", saint: false},
+   source: typikon, locator: "Ch I s3 p.16", status: explicit}
+- {id: lit.kontakion.other, slot: liturgy.kontakion, tier: 4,
+   when: [{pred: sunday}], fill: {},
+   source: typikon, locator: "Liturgy kontakion windows are in kontakion.yaml; fallback for days they do not cover (Palm Sunday, Pascha, ...)", status: missing,
+   ticket: "#25 (kontakion windows)"}
+- {id: lit.epistle.owner, slot: liturgy.epistle, tier: 4, when: [{pred: sunday}],
+   fill: {owner: "$epistle_owner", ref: "$epistle_ref"}, source: typikon,
+   locator: "Ch I s6 p.37-38 (great saint on Sunday: saint's Epistle)", status: explicit}
+- {id: lit.epistle.anca_sunday, slot: liturgy.epistle, tier: 3,
+   when: [{pred: sunday}, {pred: anca_sunday_epistle}],
+   fill: {owner: sunday, ref: "$sunday_epistle_ref"},
+   source: anca, locator: "inferred: ANCA reads the Sunday's own Epistle on All Saints / Triodion Sundays and leavetakings",
+   status: inferred, evidence: "ANCA READ 2022-2026: 7 Sundays where the calendar flag said saint (All Saints of Antioch x4, Apostles synaxis 2024-06-30, Theophany leavetaking 2024-01-14, Tryphon on Triodion 2026-02-01); ANCA's reading equals the DB a_code lection each time",
+   conflict: {with: [lit.epistle.owner], status: open,
+              note: "Calendar flag (is_comm_apos) and Typikon p.37-38 give the saint's Epistle on a great saint's Sunday. ANCA reads the Sunday's own Epistle on All Saints Sundays (incl. All Saints of Antioch), Triodion Sundays and leavetakings: calendar flag right on 173/182 Sundays, this rule 180/182. The Leavetaking and Triodion clauses each rest on one date with a counterexample (2026-01-11, 2025-03-09): low confidence. Project default: follow ANCA."}}
+- {id: lit.prokeimenon.anca_sunday, slot: liturgy.prokeimenon, tier: 3,
+   when: [{pred: sunday}, {pred: anca_sunday_epistle}],
+   fill: {owner: sunday},
+   source: anca, locator: "inferred: the prokeimenon follows the Epistle owner",
+   status: inferred, evidence: "as lit.epistle.anca_sunday; ANCA shows the owner only via the Epistle subtitle (circular check)",
+   conflict: {with: [lit.prokeimenon.follows_epistle], status: open, note: "see lit.epistle.anca_sunday"}}
+- {id: lit.gospel.calendar, slot: liturgy.gospel, tier: 4, when: [{pred: sunday}],
+   fill: {ref: "$gospel_ref"}, source: typikon, locator: "Ch I s6 p.37 (lectionary deferred to calendar)", status: explicit}
+- {id: lit.prokeimenon.follows_epistle, slot: liturgy.prokeimenon, tier: 4, when: [{pred: sunday}],
+   fill: {owner: "$epistle_owner"}, source: anca, locator: "inferred, issue 'Prokeimenon and alleluia verse rules'",
+   status: inferred, evidence: "ANCA READ 16 dates, DCS 5; Violakis p.58 says 'the Prokeimena' only"}
+- {id: lit.alleluia.t2, slot: liturgy.alleluia, tier: 4, when: [{pred: sunday}], fill: {tone: 2},
+   source: typikon, locator: "Ch I s6 p.38", status: explicit}
+- {id: lit.dismissal.not_named.01-05, slot: liturgy.dismissal, tier: 1,
+   when: [{pred: sunday}, {pred: menaion_date_is, args: ["01-05"]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (Lord's/Theotokos feast period)"},
+   source: anca, locator: "inferred: ANCA names no saint on Theophany eve", status: inferred,
+   evidence: "ANCA READ 2025-01-05"}
+- {id: lit.dismissal.not_named.01-14, slot: liturgy.dismissal, tier: 1,
+   when: [{pred: sunday}, {pred: menaion_date_is, args: ["01-14"]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (Lord's/Theotokos feast period)"},
+   source: anca, locator: "inferred: ANCA names no saint at the Theophany leavetaking", status: inferred,
+   evidence: "ANCA READ 2024-01-14"}
+- {id: lit.dismissal.not_named.06-29, slot: liturgy.dismissal, tier: 1,
+   when: [{pred: sunday}, {pred: menaion_date_is, args: ["06-29"]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (Peter and Paul)"},
+   source: anca, locator: "inferred: ANCA names no saint on Peter and Paul", status: inferred,
+   evidence: "ANCA READ 2025-06-29"}
+- {id: lit.dismissal.not_named.08-31, slot: liturgy.dismissal, tier: 1,
+   when: [{pred: sunday}, {pred: menaion_date_is, args: ["08-31"]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (Placing of the Sash)"},
+   source: anca, locator: "inferred: ANCA names no saint at the Placing of the Sash", status: inferred,
+   evidence: "ANCA READ 2025-08-31"}
+- {id: lit.dismissal.anca_default, slot: liturgy.dismissal, tier: 3,
+   when: [{pred: sunday}, {pred: in_slice}],
+   fill: {author: "$liturgy_author", saint_named: true, named_as: "the saint of the day (principal, else first other commemoration)"},
+   source: anca, locator: "inferred: ANCA names the day's saint in the dismissal on almost every Sunday",
+   status: inferred, evidence: "ANCA READ 2022-2026: named on 103/116 in-scope Sundays (102 by the original parse); the rule gets 109/116 with the exceptions above; the seven misses are generic Fathers/All Saints Sundays (Divergence log)",
+   conflict: {with: [lit.dismissal.glory, lit.dismissal.no_glory], status: open,
+              note: "Typikon p.17 (Great Dismissal): saint of the day named only 'if it has a Doxastikon'; the Little Dismissal names it unconditionally. Meaning of 'Doxastikon' (Vespers Glory only, or any Glory hymn: Aposticha, Praises) is unresolved. ANCA names a saint on 102/116 in-scope Sundays 2022-26 (our Typikon reading 61% right, wider Doxastikon reading 67%). Project default: follow ANCA; Typikon reading kept as the shadowed alternative."}}
+- {id: lit.dismissal.glory, slot: liturgy.dismissal, tier: 4,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: saint_has_glory}], fill: {author: "$liturgy_author", saint_named: true},
+   source: typikon, locator: "Ch I s4 p.17 (saint of the day named if it has a Doxastikon; Liturgy author named)", status: explicit}
+- {id: lit.dismissal.sunday_named, slot: liturgy.dismissal, tier: 2,
+   when: [{pred: sunday}, {pred: desig_contains, args: ["Forefathers", "All Saints of Antioch"]}],
+   fill: {author: "$liturgy_author", saint_named: true, named_as: "the Sunday's own commemoration"},
+   source: anca, locator: "inferred: dismissal names the Sunday's own feast (Holy Forefathers, All Saints of Antioch)",
+   status: inferred, evidence: "ANCA READ: Forefathers Sunday 2022-2025 (4/4), All Saints of Antioch 2025-06-22 and 2026-06-14; Typikon p.17 only covers a saint with a Doxastikon"}
+- {id: lit.dismissal.archangel, slot: liturgy.dismissal, tier: 2,
+   when: [{pred: sunday}, {pred: archangel_feast}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "the Archangel feast, in the bodiless-powers clause"},
+   source: anca, locator: "inferred: an Archangel feast is named in the bodiless-powers clause; the saint slot is left empty",
+   status: inferred, evidence: "ANCA READ 2026-09-06 (Archangel Michael at Colossae) and 2026-11-08 (Synaxis of the Archangels); Typikon p.17 template has the bodiless-powers clause"}
+- {id: lit.dismissal.no_glory, slot: liturgy.dismissal, tier: 4,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: saint_no_glory}], fill: {author: "$liturgy_author", saint_named: false},
+   source: typikon, locator: "Ch I s4 p.17", status: explicit}
+
+# ---- Sundays with their own Typikon section (verified in the local Typikon text; printed page cited)
+- {id: ves.lihc.named.fathers_4th, slot: vespers.lihc.stichera, tier: 0, when: [{pred: sunday_eve}, {pred: in_slice}, {pred: named_sunday_is, args: [fathers_4th_council]}],
+   fill: {res: 6, other: [4]}, source: typikon, locator: "Jul 13-19 Sunday of the Fathers of the 4th Council, p.432 (6R+4, Glory for the Fathers)", status: explicit,
+   conflict: {with: ["Typikon p.12 (4R+6 list)"], status: open, note: "Typikon p.12 lists 4R+6 for the Fathers of the 4th and 7th Councils; p.432 gives 6R+4. ANCA follows p.432 (6R+4 on 4 of 5 Sundays 2022-26; the fifth is a 4R+3+3 merge)."}}
+- {id: ves.lihc.named.fathers_7th, slot: vespers.lihc.stichera, tier: 0, when: [{pred: sunday_eve}, {pred: in_slice}, {pred: named_sunday_is, args: [fathers_7th_council]}],
+   fill: {res: 4, other: [6]}, source: typikon, locator: "p.12 (4R+6 for the Fathers of the 4th and 7th Councils)", status: explicit,
+   conflict: {with: ["Typikon p.93 (6R+4)"], status: open, note: "Typikon p.93 (Sunday of the Fathers of the 7th Council) gives 6R+4; p.12 gives 4R+6. ANCA does 4R+6 on 4 of 5 Sundays 2022-26 (the fifth is a 4R+3+3 merge). Project default: follow p.12/ANCA. The window Oct 11-17 is narrower than the p.93 heading 'Oct 1-17' (ANCA evidence)."}}
+- {id: ves.lihc.named.forefathers, slot: vespers.lihc.stichera, tier: 0, when: [{pred: sunday_eve}, {pred: in_slice}, {pred: named_sunday_is, args: [forefathers]}],
+   fill: {res: 6, other: [4]}, source: typikon, locator: "Dec 11-17 Sunday of the Holy Forefathers, p.126 (6R+4, Glory for the Forefathers)", status: explicit}
+- {id: ves.lihc.named.before_nativity_18_19, slot: vespers.lihc.stichera, tier: 0, when: [{pred: sunday_eve}, {pred: in_slice}, {pred: named_sunday_is, args: [before_nativity_18_19]}],
+   fill: {res: 6, other: [4]}, source: typikon, locator: "Sunday before the Nativity falling on Dec 18-19, p.133 (6R+4, Glory for the Sunday)", status: explicit}
+- {id: ves.lihc.named.before_nativity_24, slot: vespers.lihc.stichera, tier: 0, when: [{pred: sunday_eve}, {pred: named_sunday_is, args: [before_nativity_24]}],
+   fill: {res: 0, other: [4, 4]}, source: typikon, locator: "Sunday before the Nativity falling on Dec 24, p.136 (8 stichera: 3 Forefathers repeated to 4 + 4 forefeast; nothing for the Resurrection)", status: explicit}
+- {id: ves.lihc.named.all_saints, slot: vespers.lihc.stichera, tier: 0, when: [{pred: sunday_eve}, {pred: in_slice}, {pred: named_sunday_is, args: [all_saints]}],
+   fill: {res: 6, other: [4]}, source: typikon, locator: "All Saints Sunday (1st after Pentecost), p.540 (6R+4, Glory 'Ye are the pillars of the Church')", status: explicit}
+- {id: ves.lihc.three_hierarchs, slot: vespers.lihc.stichera, tier: 0, when: [{pred: sunday_eve}, {pred: in_slice}, {pred: menaion_date_is, args: ["01-30"]}],
+   fill: {res: 4, other: [6]}, source: typikon, locator: "p.12 (4R+6 for the Three Hierarchs, except on a Triodion Sunday)", status: explicit}
+- {id: ves.apolytikia.named_sunday, slot: vespers.apolytikia, tier: 2,
+   when: [{pred: sunday_eve}, {pred: in_slice}, {pred: named_sunday_is, args: [fathers_4th_council, fathers_7th_council, forefathers, before_nativity_18_19, all_saints]}],
+   fill: {res_tone: "$tone", saint: true}, source: typikon,
+   locator: "named-Sunday sections p.93 / p.126 / p.133 / p.432 / p.540 (troparion of the Sunday's commemoration after the Resurrection)", status: explicit}
+- {id: mat.apolytikia.named_sunday, slot: matins.apolytikia, tier: 2,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: named_sunday_is, args: [fathers_4th_council, fathers_7th_council, forefathers, before_nativity_18_19, all_saints]}],
+   fill: {res_tone: "$tone", saint: true}, source: typikon,
+   locator: "named-Sunday sections p.93 / p.126 / p.133 / p.432 / p.540 (troparion of the Sunday's commemoration after the Resurrection)", status: explicit}
+- {id: lit.apolytikia.named_sunday, slot: liturgy.apolytikia, tier: 2,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: named_sunday_is, args: [fathers_4th_council, fathers_7th_council, forefathers, before_nativity_18_19, all_saints]}],
+   fill: {res_tone: "$tone", saint: true}, source: typikon,
+   locator: "named-Sunday sections p.93 / p.126 / p.133 / p.432 / p.540 (troparion of the Sunday's commemoration after the Resurrection)", status: explicit}
+- {id: ves.apolytikia.before_nativity_24, slot: vespers.apolytikia, tier: 2,
+   when: [{pred: sunday_eve}, {pred: named_sunday_is, args: [before_nativity_24]}],
+   fill: {res_tone: null, saint: true}, source: typikon,
+   locator: "p.136 (Sunday before the Nativity on Dec 24: the Resurrection troparion is chanted at Matins only; Vespers troparia are the Fathers and the forefeast)", status: explicit}
+- {id: mat.apolytikia.before_nativity_24, slot: matins.apolytikia, tier: 2,
+   when: [{pred: sunday}, {pred: named_sunday_is, args: [before_nativity_24]}],
+   fill: {res_tone: "$tone", saint: true}, source: typikon, locator: "p.137 (Matins: Resurrection, Forefathers, forefeast)", status: explicit}
+- {id: lit.apolytikia.before_nativity_24, slot: liturgy.apolytikia, tier: 2,
+   when: [{pred: sunday}, {pred: named_sunday_is, args: [before_nativity_24]}],
+   fill: {res_tone: "$tone", saint: true}, source: typikon, locator: "p.137 (Liturgy: Resurrection, Fathers, forefeast, patron)", status: explicit}
+
+# ---- Sundays that are also on the explicit 4R+6 list (Typikon p.12; Ch V Aug 29 p.464); Ch V per-date table (tier 1) wins where present
+- {id: ves.lihc.four_six.06-24, slot: vespers.lihc.stichera, tier: 2, when: [{pred: sunday_eve}, {pred: menaion_date_is, args: ["06-24"]}], fill: {res: 4, other: [6]}, source: typikon, locator: "p.12 (Nativity of the Baptist)", status: explicit}
+- {id: ves.lihc.four_six.06-29, slot: vespers.lihc.stichera, tier: 2, when: [{pred: sunday_eve}, {pred: menaion_date_is, args: ["06-29"]}], fill: {res: 4, other: [6]}, source: typikon, locator: "p.12 (Peter and Paul)", status: explicit}
+- {id: ves.lihc.four_six.08-29, slot: vespers.lihc.stichera, tier: 2, when: [{pred: sunday_eve}, {pred: menaion_date_is, args: ["08-29"]}], fill: {res: 4, other: [6]}, source: typikon, locator: "Ch V Aug 29 p.464 (Beheading of the Baptist on Sunday)", status: explicit}
+- {id: ves.lihc.four_six.09-26, slot: vespers.lihc.stichera, tier: 2, when: [{pred: sunday_eve}, {pred: menaion_date_is, args: ["09-26"]}], fill: {res: 4, other: [6]}, source: typikon, locator: "p.12 (John the Evangelist)", status: explicit}
+- {id: ves.lihc.four_six.10-26, slot: vespers.lihc.stichera, tier: 2, when: [{pred: sunday_eve}, {pred: menaion_date_is, args: ["10-26"]}], fill: {res: 4, other: [6]}, source: typikon, locator: "p.12 (Demetrius)", status: explicit}
+- {id: ves.lihc.four_six.12-06, slot: vespers.lihc.stichera, tier: 2, when: [{pred: sunday_eve}, {pred: menaion_date_is, args: ["12-06"]}], fill: {res: 4, other: [6]}, source: typikon, locator: "p.12 (Nicholas)", status: explicit}

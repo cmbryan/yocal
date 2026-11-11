@@ -1,0 +1,404 @@
+# Work package F: Triodion and Great Lent Sundays (Publican .. Cheesefare, Lent 1-5, Palm Sunday): Saturday Great Vespers,
+# Sunday Matins and Liturgy. Gated on pascha_days (liturgical Sunday - Pascha): -70 Publican, -63 Prodigal, -56 Meatfare,
+# -49 Cheesefare, -42 Lent 1 (Orthodoxy), -35 Lent 2 (Palamas), -28 Lent 3 (Cross), -21 Lent 4 (Climacus), -14 Lent 5 (Mary of
+# Egypt), -7 Palm Sunday. Typikon = Antiochian Typikon (Khoury/Morris 2011), printed page (footer number).
+# Tiers (negative: these beat every generic/date-window Rule on these Sundays):
+#   -1 the Sunday's own order; -2 catch-all `missing` when a Menaion commemoration / fore-afterfeast shares the Sunday
+#   (Typikon Ch V has per-date 'Sunday of the Triodion' orders not encoded here); -3 coincidences encoded from Ch V.
+# Reused, not duplicated: kontakion.yaml (Triodion/Lent kontakia, Liturgy author incl. Annunciation exception), the
+# calendar-driven Epistle/Gospel Rules in sunday_general.yaml, matins kathismata/prokeimenon/eothinon generic Rules.
+
+# ================= Vespers: "Lord, I have cried" =================
+- {id: tri.ves.lihc.publican_prodigal, slot: vespers.lihc.stichera, tier: -1,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-70, -63]}], fill: {parts: ["7 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the Sunday ({sunday}) — Triodion", "Glory: doxastikon of the Sunday — Triodion; Now: Theotokion — Octoechos Tone {tone}"], res: 7, other: [3]},
+   source: typikon, locator: "Ch VI Publican p.470 (7 Res + 3 Triodion, Glory Triodion); Prodigal p.471 (order as the Publican)", status: explicit}
+- {id: tri.ves.lihc.meatfare_lent4, slot: vespers.lihc.stichera, tier: -1,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-56, -21]}], fill: {parts: ["6 resurrectional stichera — Octoechos Tone {tone}", "4 stichera of the Sunday ({sunday}) — Triodion", "Glory: doxastikon of the Sunday — Triodion; Now: Theotokion — Octoechos Tone {tone}"], res: 6, other: [4]},
+   source: typikon, locator: "Ch VI Meatfare p.474, Cheesefare p.475, Lent 1 p.486, Lent 2 p.489, Lent 3 p.491, Lent 4 p.494 (6 Res + 4); Annunciation forefeast on Lent 3 omitted p.283", status: explicit}
+- {id: tri.ves.lihc.lent5, slot: vespers.lihc.stichera, tier: -1,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-14, -14]}], fill: {parts: ["6 resurrectional stichera — Octoechos Tone {tone}", "4 stichera of the Sunday ({sunday}) — Triodion", "Glory: doxastikon of the Sunday — Triodion; Now: Theotokion — Octoechos Tone {tone}"], res: 6, other: [4]},
+   source: anca, locator: "inferred: Typikon p.502 defers Lent 5 Vespers to the Triodion", status: inferred,
+   evidence: "ANCA Lent 5 eve 2022-2026 5/5 6R+4 (Mary of Egypt); free Triodion texts (Fordham lent5sat, st-sergius 57) 6R+4 (research/triodion-rubrics)"}
+- {id: tri.ves.lihc.palm, slot: vespers.lihc.stichera, tier: -1,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-7, -7]}], fill: {parts: ["No resurrectional stichera (Resurrection service omitted)", "5 stichera of Palm Sunday, each sung twice (10) — Triodion, Tone 6", "Glory, Now: the first sticheron again — Triodion"], res: 0, other: [10]},
+   source: typikon, locator: "Ch VI Palm Sunday p.504 (5 stichera tone 6, each twice); Ch I p.12 (no Resurrection stichera on Palm Sunday)", status: explicit}
+- {id: tri.ves.lihc.coincidence, slot: vespers.lihc.stichera, tier: -2,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-70, -7]}, {pred: menaion_coincidence}, {pred: not_date_between, args: ["03-24", "03-24"]}],
+   fill: {}, source: typikon, locator: "Ch V per-date orders for a feast on a Sunday of the Triodion/Lent (e.g. Jan 30 p.213, Feb 10 p.231, Feb 24 p.244-256, Mar 25 p.280-310) not encoded",
+   status: missing, ticket: "WP-F: Menaion feast/fore-afterfeast on a Triodion/Lent Sunday not yet encoded (Typikon Ch V)"}
+- {id: tri.ves.lihc.feb01, slot: vespers.lihc.stichera, tier: -3,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-01"]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the Sunday ({sunday}) — Triodion", "3 stichera of the forefeast of the Presentation — Menaion 02-01", "Glory: doxastikon of the Sunday — Triodion; Now: Theotokion — Octoechos Tone {tone}"], res: 4, other: [3, 3]},
+   source: typikon, locator: "Ch V Feb 1 on a Sunday of the Triodion p.217 (4 Res + 3 Triodion + 3 forefeast)", status: explicit}
+- {id: tri.ves.lihc.feb02, slot: vespers.lihc.stichera, tier: -3,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-02"]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "2 stichera of the Sunday ({sunday}) — Triodion", "4 stichera of the Presentation — Menaion 02-02", "Glory: doxastikon of the Sunday — Triodion; Now: doxastikon of the Presentation — Menaion 02-02"], res: 4, other: [2, 4]},
+   source: typikon, locator: "Ch V Presentation on a Sunday of the Triodion p.220-221 (4 Res + 2 Triodion + 4 feast)", status: explicit}
+- {id: tri.ves.lihc.feb03_09, slot: vespers.lihc.stichera, tier: -3,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_between, args: ["02-03", "02-09"]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the Sunday ({sunday}) — Triodion", "3 stichera of the afterfeast of the Presentation — Menaion {mmdd}", "Glory: doxastikon of the Sunday — Triodion; Now: Theotokion (Sunday after the feast, p.225) or the feast's (leavetaking, p.226)"], res: 4, other: [3, 3]},
+   source: typikon, locator: "Ch V Sunday after the Presentation on a Triodion Sunday p.225; leavetaking (Feb 9) p.226 (4 Res + 3 Triodion + 3 feast)", status: explicit}
+- {id: tri.ves.lihc.mar09, slot: vespers.lihc.stichera, tier: -3,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-42, -14]}, {pred: date_in, args: ["03-09"]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the Sunday ({sunday}) — Triodion", "3 stichera of the Forty Martyrs — Menaion 03-09", "Glory: doxastikon of the Sunday — Triodion; Now: Theotokion — Octoechos Tone {tone}"], res: 4, other: [3, 3]},
+   source: typikon, locator: "Ch V Mar 9 (Forty Martyrs) on Lent 1-5 p.265 (4 Res + 3 Triodion + 3 Martyrs)", status: explicit}
+- {id: tri.ves.lihc.mar24_lent2, slot: vespers.lihc.stichera, tier: -3,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-35, -35]}, {pred: date_in, args: ["03-24"]}], fill: {},
+   source: typikon, locator: "Annunciation forefeast on Lent 2: no Ch V order (Lent 3 p.283 omits it; Lent 4/5 p.292 combine it)",
+   status: missing, ticket: "WP-F: Annunciation forefeast on Lent 2"}
+- {id: tri.ves.lihc.mar24_lent4_5, slot: vespers.lihc.stichera, tier: -3,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-21, -14]}, {pred: date_in, args: ["03-24"]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the forefeast of the Annunciation — Menaion 03-24", "3 stichera of the Sunday ({sunday}) — Triodion", "Glory: forefeast (Matins aposticha) — Menaion 03-24; Now: Theotokion — Octoechos Tone {tone}"], res: 4, other: [3, 3]},
+   source: typikon, locator: "Ch V Annunciation on Monday of the 5th/6th week p.292 (4 Res + 3 forefeast + 3 Triodion)", status: explicit}
+- {id: tri.ves.lihc.mar26_lent4, slot: vespers.lihc.stichera, tier: -3,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-21, -21]}, {pred: date_in, args: ["03-26"]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the Annunciation — Menaion 03-25", "3 stichera of the Archangel Gabriel — Menaion 03-26", "Glory: of the Archangel — Menaion 03-26; Now: Theotokion — Octoechos Tone {tone}"], res: 4, other: [3, 3]},
+   source: typikon, locator: "Ch V Annunciation on Saturday of the 4th week, leavetaking p.289 (4 Res + 3 feast + 3 Gabriel; printed '9 stichera' is a misprint for 10)", status: explicit}
+
+# ================= Vespers: prokeimenon =================
+- {id: tri.ves.prokeimenon, slot: vespers.prokeimenon, tier: -1,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-70, -7]}], fill: {kind: lord_is_king, tone: 6},
+   source: typikon, locator: "Ch I p.13 (Saturday evening always 'The Lord is king'); Ch VI Saturday-evening orders pp.470-504 give no other", status: explicit,
+   conflict: {with: ["Typikon p.13 (Great Prokeimenon for the eves of the Triodion Sundays from Cheesefare)"], status: open,
+              note: "Read as the Sunday-evening Lenten Vespers (Great Prokeimenon given at Cheesefare Sunday evening p.475, Lent 1 Sunday evening p.488), not Saturday Great Vespers (research/lent-eve-prokeimenon). ANCA 2022-26: 'The Lord is King' tone 6 on every eve incl. Palm Sunday."}}
+
+# ================= Apolytikia (Vespers, Matins 'God is the Lord', Liturgy after the entrance) =================
+- {id: tri.ves.apolytikia.publican_prodigal, slot: vespers.apolytikia, tier: -1,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-70, -63]}], fill: {res_tone: "$tone", saint: false},
+   source: typikon, locator: "Ch VI Publican p.470 (Resurrection apolytikion + theotokion); Prodigal p.471", status: explicit}
+- {id: tri.ves.apolytikia.meatfare_cheesefare, slot: vespers.apolytikia, tier: -1,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-56, -49]}], fill: {res_tone: "$tone", saint: false},
+   source: anca, locator: "inferred: Typikon p.474-475 defers to the Triodion; Publican pattern", status: inferred,
+   evidence: "ANCA 2022-2026 Meatfare and Cheesefare eves 10/10: Resurrection apolytikion only (no Triodion troparion)"}
+- {id: tri.ves.apolytikia.lent1_4, slot: vespers.apolytikia, tier: -1,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-42, -21]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Sunday ({sunday}) — Triodion", "Theotokion (in the tone of the apolytikion it follows)"], res_tone: "$tone", saint: true},
+   source: typikon, locator: "Ch VI troparia: Lent 1 p.486 (Orthodoxy), Lent 2 p.489 (Palamas), Lent 3 p.491 (Cross), Lent 4 p.494 (Climacus)", status: explicit}
+- {id: tri.ves.apolytikia.lent5, slot: vespers.apolytikia, tier: -1,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-14, -14]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Sunday ({sunday}) — Triodion", "Theotokion (in the tone of the apolytikion it follows)"], res_tone: "$tone", saint: true},
+   source: anca, locator: "inferred: Typikon p.502 defers to the Triodion", status: inferred,
+   evidence: "ANCA 2022-2026 5/5: Resurrection + Mary of Egypt apolytikion"}
+- {id: tri.ves.apolytikia.palm, slot: vespers.apolytikia, tier: -1,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-7, -7]}], fill: {parts: ["Apolytikion of Lazarus Saturday — Triodion, Tone 1 (twice)", "Apolytikion of Palm Sunday — Triodion, Tone 4"], res_tone: null, saint: true},
+   source: typikon, locator: "Ch VI Palm Sunday p.504 (Lazarus troparion 2x, 'buried with thee' 1x; no Resurrection troparion)", status: explicit}
+- {id: tri.ves.apolytikia.coincidence, slot: vespers.apolytikia, tier: -2,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-70, -7]}, {pred: menaion_coincidence}, {pred: not_date_between, args: ["03-24", "03-24"]}],
+   fill: {}, source: typikon, locator: "Ch V per-date Triodion-Sunday orders not encoded", status: missing,
+   ticket: "WP-F: Menaion feast/fore-afterfeast on a Triodion/Lent Sunday not yet encoded (Typikon Ch V)"}
+- {id: tri.ves.apolytikia.feb01_09, slot: vespers.apolytikia, tier: -3,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_between, args: ["02-01", "02-09"]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Presentation (fore-/after-feast; on Feb 1 St Tryphon first) — Menaion {mmdd}", "Theotokion (in the tone of the apolytikion it follows)"], res_tone: "$tone", saint: true},
+   source: typikon, locator: "Ch V Feb 1 p.217 (Res, Tryphon, forefeast); Feb 2 p.221, Sunday after p.225, leavetaking p.226 (Res, Presentation)", status: explicit}
+- {id: tri.ves.apolytikia.mar09, slot: vespers.apolytikia, tier: -3,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-42, -14]}, {pred: date_in, args: ["03-09"]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Forty Martyrs — Menaion 03-09", "Apolytikion of the Sunday ({sunday}) — Triodion", "Theotokion (in the tone of the apolytikion it follows)"], res_tone: "$tone", saint: true},
+   source: typikon, locator: "Ch V Mar 9 on Lent 1-5 p.265 (Res, Forty Martyrs, Triodion troparion)", status: explicit}
+- {id: tri.ves.apolytikia.mar26_lent4, slot: vespers.apolytikia, tier: -3,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-21, -21]}, {pred: date_in, args: ["03-26"]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Annunciation (twice) — Menaion 03-25"], res_tone: "$tone", saint: true},
+   source: typikon, locator: "Ch V Annunciation leavetaking on Lent 4 eve p.289 (Res 1x, Annunciation 2x)", status: explicit}
+
+- {id: tri.mat.apolytikia.publican_prodigal, slot: matins.apolytikia, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}], fill: {res_tone: "$tone", saint: false},
+   source: typikon, locator: "Ch VI Publican p.470 (Res 2x + theotokion); Prodigal p.471", status: explicit}
+- {id: tri.mat.apolytikia.meatfare_cheesefare, slot: matins.apolytikia, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-56, -49]}], fill: {res_tone: "$tone", saint: false},
+   source: anca, locator: "inferred: Typikon p.474-475 defers to the Triodion; Publican pattern", status: inferred,
+   evidence: "ANCA 2022-2026 Meatfare and Cheesefare 10/10: Resurrection apolytikion only"}
+- {id: tri.mat.apolytikia.lent1_4, slot: matins.apolytikia, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -21]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Sunday ({sunday}) — Triodion", "Theotokion (in the tone of the apolytikion it follows)"], res_tone: "$tone", saint: true},
+   source: typikon, locator: "Ch VI 'troparia as at Vespers': Lent 1 p.486, Lent 2 p.489-490, Lent 3 p.491, Lent 4 p.494", status: explicit}
+- {id: tri.mat.apolytikia.lent5, slot: matins.apolytikia, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-14, -14]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Sunday ({sunday}) — Triodion", "Theotokion (in the tone of the apolytikion it follows)"], res_tone: "$tone", saint: true},
+   source: anca, locator: "inferred: Typikon p.502 defers to the Triodion", status: inferred, evidence: "ANCA 2022-2026 5/5: Resurrection + Mary of Egypt"}
+- {id: tri.mat.apolytikia.palm, slot: matins.apolytikia, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-7, -7]}], fill: {parts: ["Apolytikion of Lazarus Saturday — Triodion, Tone 1 (twice)", "Apolytikion of Palm Sunday — Triodion, Tone 4"], res_tone: null, saint: true},
+   source: typikon, locator: "Ch VI Palm Sunday p.504 (troparia as at Vespers)", status: explicit}
+- {id: tri.mat.apolytikia.coincidence, slot: matins.apolytikia, tier: -2,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -7]}, {pred: menaion_coincidence}, {pred: not_date_between, args: ["03-24", "03-24"]}],
+   fill: {}, source: typikon, locator: "Ch V per-date Triodion-Sunday orders not encoded", status: missing,
+   ticket: "WP-F: Menaion feast/fore-afterfeast on a Triodion/Lent Sunday not yet encoded (Typikon Ch V)"}
+- {id: tri.mat.apolytikia.feb01_09, slot: matins.apolytikia, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_between, args: ["02-01", "02-09"]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Presentation (fore-/after-feast; on Feb 1 St Tryphon first) — Menaion {mmdd}", "Theotokion (in the tone of the apolytikion it follows)"], res_tone: "$tone", saint: true},
+   source: typikon, locator: "Ch V Feb 2 p.221, Sunday after the Presentation p.225, leavetaking p.227 (Res + Presentation); Feb 1 p.217 (troparia as Vespers implied)", status: explicit}
+- {id: tri.mat.apolytikia.mar09, slot: matins.apolytikia, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -14]}, {pred: date_in, args: ["03-09"]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Forty Martyrs — Menaion 03-09", "Apolytikion of the Sunday ({sunday}) — Triodion", "Theotokion (in the tone of the apolytikion it follows)"], res_tone: "$tone", saint: true},
+   source: typikon, locator: "Ch V Mar 9 on Lent 1-5 p.266 (troparia as at Vespers)", status: explicit}
+- {id: tri.mat.apolytikia.mar26_lent4, slot: matins.apolytikia, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-21, -21]}, {pred: date_in, args: ["03-26"]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Annunciation (twice) — Menaion 03-25"], res_tone: "$tone", saint: true},
+   source: typikon, locator: "Ch V Annunciation leavetaking on Lent 4 p.290 (Res 1x, Annunciation 2x)", status: explicit}
+
+- {id: tri.lit.apolytikia.publican_prodigal, slot: liturgy.apolytikia, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}], fill: {res_tone: "$tone", saint: false},
+   source: typikon, locator: "Ch VI Publican p.471 (Res, patron, Triodion kontakion); Prodigal p.471", status: explicit}
+- {id: tri.lit.apolytikia.meatfare_cheesefare, slot: liturgy.apolytikia, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-56, -49]}], fill: {res_tone: "$tone", saint: false},
+   source: anca, locator: "inferred: Typikon p.474-475 defers to the Triodion; Publican pattern", status: inferred,
+   evidence: "ANCA READ 2022-2026 Meatfare and Cheesefare 10/10: Resurrection apolytikion only"}
+- {id: tri.lit.apolytikia.lent1_4, slot: liturgy.apolytikia, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -21]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Sunday ({sunday}) — Triodion", "Apolytikion of the patron saint or feast of the temple"], res_tone: "$tone", saint: true},
+   source: typikon, locator: "Ch VI Lent 1 p.488 (Res, Orthodoxy, patron), Lent 3 p.493 (Res, Cross, patron); Lent 2/4: Ch I p.16/p.35 (saint with a Vespers Glory, p.489, p.494)", status: explicit}
+- {id: tri.lit.apolytikia.lent5, slot: liturgy.apolytikia, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-14, -14]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Sunday ({sunday}) — Triodion", "Apolytikion of the patron saint or feast of the temple"], res_tone: "$tone", saint: true},
+   source: anca, locator: "inferred: Typikon p.502 gives only the kontakion", status: inferred, evidence: "ANCA READ 2022-2026 5/5: Resurrection + Mary of Egypt"}
+- {id: tri.lit.apolytikia.palm, slot: liturgy.apolytikia, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-7, -7]}], fill: {parts: ["Apolytikion of Lazarus Saturday — Triodion, Tone 1", "Apolytikion of Palm Sunday — Triodion, Tone 4"], res_tone: null, saint: true},
+   source: typikon, locator: "Ch VI Palm Sunday p.505 (Lazarus troparion, 'buried with thee', Palm kontakion)", status: explicit}
+- {id: tri.lit.apolytikia.coincidence, slot: liturgy.apolytikia, tier: -2,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -7]}, {pred: menaion_coincidence}, {pred: not_date_between, args: ["03-24", "03-24"]}],
+   fill: {}, source: typikon, locator: "Ch V per-date Triodion-Sunday orders not encoded", status: missing,
+   ticket: "WP-F: Menaion feast/fore-afterfeast on a Triodion/Lent Sunday not yet encoded (Typikon Ch V)"}
+- {id: tri.lit.apolytikia.feb01_09, slot: liturgy.apolytikia, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_between, args: ["02-01", "02-09"]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Presentation (fore-/after-feast; on Feb 1 St Tryphon first) — Menaion {mmdd}", "Apolytikion of the patron saint or feast of the temple"], res_tone: "$tone", saint: true},
+   source: typikon, locator: "Ch V Feb 2 p.222, Sunday after the Presentation p.226, leavetaking p.227-228 (Res + Presentation); Feb 1 (Ch I p.35: saint with a Glory)", status: explicit}
+- {id: tri.lit.apolytikia.mar09, slot: liturgy.apolytikia, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -14]}, {pred: date_in, args: ["03-09"]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Forty Martyrs — Menaion 03-09", "Apolytikion of the Sunday ({sunday}) — Triodion", "Apolytikion of the patron saint or feast of the temple"], res_tone: "$tone", saint: true},
+   source: anca, locator: "inferred: Typikon Mar 9 p.267 lists no Liturgy troparia", status: inferred, evidence: "ANCA READ 2025-03-09: Res, Orthodoxy, Forty Martyrs"}
+- {id: tri.lit.apolytikia.mar26_lent4, slot: liturgy.apolytikia, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-21, -21]}, {pred: date_in, args: ["03-26"]}], fill: {parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Annunciation — Menaion 03-25", "Apolytikion of the patron saint or feast of the temple"], res_tone: "$tone", saint: true},
+   source: anca, locator: "inferred: Typikon p.290 lists no Liturgy troparia", status: inferred, evidence: "ANCA READ 2023-03-26: Res + Archangel Gabriel"}
+
+# ================= Matins: kathismata, prokeimenon, eothinon, kontakion (Palm Sunday; Presentation on a Triodion Sunday) =================
+- {id: tri.mat.kathismata.palm, slot: matins.kathismata, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-7, -7]}], fill: {parts: ["Kathismata hymns of Palm Sunday — Triodion (no evlogetaria)"], tone: null, owner: "Triodion (Palm Sunday)"},
+   source: typikon, locator: "Ch VI Palm Sunday p.504 (poetic kathisma of the feast; no evlogetaria); Ch I p.11 (Resurrection service omitted)", status: explicit}
+- {id: tri.mat.prokeimenon.palm, slot: matins.prokeimenon, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-7, -7]}], fill: {parts: ["Prokeimenon of Palm Sunday (“Out of the mouths of infants”) — Triodion, Tone 4"], kind: other, tone: 4, text: "Out of the mouths of infants"},
+   source: anca, locator: "inferred: Typikon p.505 gives the text, not the tone", status: inferred,
+   evidence: "ANCA Abbr/ORTHROS 2026-04-05: Palm Sunday prokeimenon in tone 4 after the festal anabathmoi"}
+- {id: tri.mat.eothinon.palm, slot: matins.eothinon_gospel, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-7, -7]}], fill: {parts: ["Matins Gospel of Palm Sunday (Matthew 21:1-11, 15-17); no eothinon"], number: null, gospel: "Matins Gospel of Palm Sunday (Matthew 21:1-11, 15-17)"},
+   source: typikon, locator: "Ch VI Palm Sunday p.505 (Matins Gospel for Palm Sunday; no 'In that we have beheld')", status: explicit}
+- {id: tri.mat.kontakion.palm, slot: matins.kontakion, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-7, -7]}], fill: {parts: ["Kontakion and oikos of Palm Sunday — Triodion"], kind: feast, owner: "Palm Sunday"},
+   source: typikon, locator: "Ch VI Palm Sunday p.505 (kontakion and oikos after ode 6)", status: explicit}
+- {id: tri.mat.prokeimenon.feb02, slot: matins.prokeimenon, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-02"]}], fill: {parts: ["Prokeimenon of the Presentation — Menaion 02-02"], kind: other, owner: "the Presentation"},
+   source: typikon, locator: "Ch V Presentation on a Triodion Sunday p.221 (prokeimenon of the feast)", status: explicit}
+- {id: tri.mat.eothinon.feb02, slot: matins.eothinon_gospel, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-02"]}], fill: {parts: ["Liturgy Gospel of the Presentation in place of the eothinon — Menaion 02-02"], number: null, gospel: "Liturgy Gospel of the Presentation"},
+   source: typikon, locator: "Ch V Presentation on a Triodion Sunday p.221; Ch I p.37", status: explicit}
+
+# ================= Matins: praises =================
+- {id: tri.mat.praises.publican, slot: matins.praises, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -70]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "4 stichera of the Sunday ({sunday}) — Triodion", "Glory: doxastikon of the Sunday — Triodion; Now: “Most blessed art thou”"], total: 8, res: 4, other: [4]},
+   source: anca, locator: "inferred: ANCA prints 4 Res + 4 Triodion", status: inferred,
+   evidence: "ANCA Abbr 2022-02-13, 2023-02-05, 2024-02-25: 4 Res + 4 'For the Pharisee and Publican'",
+   conflict: {with: [tri.mat.praises.publican.typikon], status: open, note: "Typikon p.471: 8 = 5 Res + 3 Triodion. ANCA 3/3 Publican Sundays without a feast print 4 + 4. Project default: follow ANCA."}}
+- {id: tri.mat.praises.publican.typikon, slot: matins.praises, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -70]}], fill: {parts: ["5 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the Sunday ({sunday}) — Triodion", "Glory: doxastikon of the Sunday — Triodion; Now: “Most blessed art thou”"], total: 8, res: 5, other: [3]},
+   source: typikon, locator: "Ch VI Publican p.471 (8 = 5 Res + 3 Triodion; Glory Triodion; Now 'Most blessed')", status: explicit}
+- {id: tri.mat.praises.prodigal, slot: matins.praises, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-63, -63]}], fill: {parts: ["5 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the Sunday ({sunday}) — Triodion", "Glory: doxastikon of the Sunday — Triodion; Now: “Most blessed art thou”"], total: 8, res: 5, other: [3]},
+   source: typikon, locator: "Ch VI Prodigal p.471 (order as the Publican, p.471: 5 Res + 3 Triodion)", status: explicit}
+- {id: tri.mat.praises.meatfare_cheesefare, slot: matins.praises, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-56, -49]}], fill: {parts: ["5 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the Sunday ({sunday}) — Triodion", "Glory: doxastikon of the Sunday — Triodion; Now: “Most blessed art thou”"], total: 8, res: 5, other: [3]},
+   source: anca, locator: "inferred: Typikon p.474-475 defers to the Triodion", status: inferred,
+   evidence: "ANCA Abbr 2022-2026 10/10: 5 Res + 3 Triodion; Meatfare also Fordham/st-sergius Triodion (research/triodion-rubrics; st-sergius has 4 Triodion stichera on Cheesefare)"}
+- {id: tri.mat.praises.lent1, slot: matins.praises, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -42]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "4 stichera of the Sunday ({sunday}) — Triodion", "Glory: doxastikon of the Sunday — Triodion; Now: “Most blessed art thou”"], total: 8, res: 4, other: [4]},
+   source: typikon, locator: "Ch VI Lent 1 p.487 (8 = 4 Res + 4 Triodion)", status: explicit}
+- {id: tri.mat.praises.lent2, slot: matins.praises, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-35, -35]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "4 stichera of St Gregory Palamas (3, one repeated) — Triodion", "Glory: doxastikon of the Sunday — Triodion; Now: “Most blessed art thou”"], total: 8, res: 4, other: [4]},
+   source: anca, locator: "inferred: ANCA prints 4 Res + 4 Palamas (3 stichera, one repeated)", status: inferred,
+   evidence: "ANCA Abbr Lent 2 2022-2026 5/5: eight stichera, 4 Res + 4 for St Gregory Palamas",
+   conflict: {with: [tri.mat.praises.lent2.typikon], status: open, note: "Typikon p.490: 9 = 5 Res + 3 Palamas + 1 Lent. ANCA 5/5 years print 8 (4 + 4). Project default: follow ANCA."}}
+- {id: tri.mat.praises.lent2.typikon, slot: matins.praises, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-35, -35]}], fill: {parts: ["5 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of St Gregory Palamas + 1 of Great Lent — Triodion", "Glory: “In this season of abstinence” — Triodion; Now: “Most blessed art thou”"], total: 9, res: 5, other: [3, 1]},
+   source: typikon, locator: "Ch VI Lent 2 p.490 (9 = 5 Res + 3 Palamas + 1 Lent)", status: explicit}
+- {id: tri.mat.praises.lent3_5, slot: matins.praises, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-28, -14]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "4 stichera of the Sunday ({sunday}) — Triodion", "Glory: doxastikon of the Sunday — Triodion; Now: “Most blessed art thou”"], total: 8, res: 4, other: [4]},
+   source: typikon, locator: "Ch VI Lent 3 p.492, Lent 4 p.494-495, Lent 5 p.502 (8 = 4 Res + 4)", status: explicit}
+- {id: tri.mat.praises.palm, slot: matins.praises, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-7, -7]}], fill: {parts: ["4 stichera of Palm Sunday — Triodion, Tone 4", "Glory, Now: doxastikon of Palm Sunday — Triodion, Tone 6"], total: 4, res: 0, other: [4]},
+   source: anca, locator: "inferred: Typikon p.505 'the praises with the idiomelon for Palm Sunday' (count unstated)", status: inferred,
+   evidence: "ANCA Abbr 2026-04-05: four stichera for Palm Sunday (HTM Holy Week), no Resurrection stichera (Ch I p.11)"}
+- {id: tri.mat.praises.coincidence, slot: matins.praises, tier: -2,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -7]}, {pred: menaion_coincidence}, {pred: not_date_between, args: ["03-24", "03-24"]}],
+   fill: {}, source: typikon, locator: "Ch V per-date Triodion-Sunday orders not encoded; Ch I p.31 (9 stichera for a great saint on the first two Triodion Sundays)", status: missing,
+   ticket: "WP-F: Menaion feast/fore-afterfeast on a Triodion/Lent Sunday not yet encoded (Typikon Ch V)"}
+- {id: tri.mat.praises.feb01, slot: matins.praises, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-01"]}], fill: {parts: ["3 resurrectional stichera — Octoechos Tone {tone}", "2 stichera of the Sunday ({sunday}) — Triodion", "3 stichera of the forefeast of the Presentation — Menaion 02-01", "Glory: doxastikon of the Sunday — Triodion; Now: “Most blessed art thou”"], total: 8, res: 3, other: [2, 3]},
+   source: typikon, locator: "Ch V Feb 1 on a Triodion Sunday p.217-218 (3 Res + 2 Triodion + 3 forefeast)", status: explicit}
+- {id: tri.mat.praises.feb02, slot: matins.praises, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-02"]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "4 stichera of the Presentation — Menaion 02-02", "Glory: doxastikon of the Sunday — Triodion; Now: of the Presentation — Menaion 02-02"], total: 8, res: 4, other: [4]},
+   source: typikon, locator: "Ch V Presentation on a Triodion Sunday p.222 (4 Res + 4 feast)", status: explicit}
+- {id: tri.mat.praises.feb03_08, slot: matins.praises, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_between, args: ["02-03", "02-08"]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "4 stichera of the Sunday ({sunday}) — Triodion", "Glory: doxastikon of the Sunday — Triodion; Now: “Most blessed art thou”"], total: 8, res: 4, other: [4]},
+   source: typikon, locator: "Ch V Sunday after the Presentation on a Triodion Sunday p.225-226 (4 Res + 4 Triodion)", status: explicit}
+- {id: tri.mat.praises.feb09, slot: matins.praises, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-09"]}],
+   fill: {parts: ["3 resurrectional stichera — Octoechos Tone {tone}", "2 stichera of the Sunday ({sunday}) — Triodion", "3 stichera of the Presentation — Menaion 02-09", "Glory: doxastikon of the Sunday — Triodion; Now: doxastikon of the Presentation — Menaion 02-09"], total: 8, res: 3, other: [2, 3]},
+   source: anca, locator: "inferred: ANCA uses the Feb 1 layout (Typikon p.217) at the leavetaking", status: inferred,
+   evidence: "ANCA Abbr 2020-02-09 and 2025-02-09 (Publican Sunday = leavetaking of the Presentation): 3 Res + 2 Triodion + 3 Presentation, Glory Triodion, Now Presentation",
+   conflict: {with: [tri.mat.praises.feb09.typikon], status: open, note: "Typikon p.227: 10 = 4 Res + 3 Triodion + 3 feast. ANCA 2/2 print 8 (3 + 2 + 3). Project default: follow ANCA."}}
+- {id: tri.mat.praises.feb09.typikon, slot: matins.praises, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-09"]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the Sunday ({sunday}) — Triodion", "3 stichera of the Presentation — Menaion 02-09"], total: 10, res: 4, other: [3, 3]},
+   source: typikon, locator: "Ch V leavetaking of the Presentation on a Triodion Sunday p.227 (10 = 4 Res + 3 Triodion + 3 feast)", status: explicit}
+- {id: tri.mat.praises.mar09_lent1_3, slot: matins.praises, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -28]}, {pred: date_in, args: ["03-09"]}], fill: {parts: ["2 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the Sunday ({sunday}) — Triodion", "3 stichera of the Forty Martyrs — Menaion 03-09", "Glory: doxastikon of the Sunday — Triodion; Now: “Most blessed art thou”"], total: 8, res: 2, other: [3, 3]},
+   source: typikon, locator: "Ch V Mar 9 on Lent 1-3 p.267 (2 Res + 3 Triodion/Palamas + 3 Martyrs)", status: explicit}
+- {id: tri.mat.praises.mar09_lent4_5, slot: matins.praises, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-21, -14]}, {pred: date_in, args: ["03-09"]}], fill: {parts: ["5 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the Forty Martyrs — Menaion 03-09", "Glory: doxastikon of the Sunday — Triodion; Now: “Most blessed art thou”"], total: 8, res: 5, other: [3]},
+   source: typikon, locator: "Ch V Mar 9 on Lent 4/5 p.267 (5 Res + 3 Martyrs)", status: explicit}
+- {id: tri.mat.praises.mar24_lent2, slot: matins.praises, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-35, -35]}, {pred: date_in, args: ["03-24"]}], fill: {},
+   source: typikon, locator: "Annunciation forefeast on Lent 2: no Ch V order", status: missing, ticket: "WP-F: Annunciation forefeast on Lent 2"}
+- {id: tri.mat.praises.mar26_lent4, slot: matins.praises, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-21, -21]}, {pred: date_in, args: ["03-26"]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "4 stichera of the Archangel Gabriel — Menaion 03-26", "Glory: doxastikon of the Sunday — Triodion; Now: “Most blessed art thou”"], total: 8, res: 4, other: [4]},
+   source: typikon, locator: "Ch V Annunciation leavetaking on Lent 4 p.290 (4 Res + 4 Archangel Gabriel)", status: explicit}
+
+# ================= Liturgy: kontakion (Palm Sunday only; all other Triodion/Lent kontakia are in kontakion.yaml) =================
+- {id: tri.lit.kontakion.palm, slot: liturgy.kontakion, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-7, -7]}], fill: {parts: ["Kontakion of Palm Sunday (“Upborne upon the heavenly throne”) — Triodion, Tone 6"], kind: palm_sunday, tone: 6},
+   source: anca, locator: "inferred: Typikon p.505 gives 'Upborne upon the heavenly throne' without its tone", status: inferred,
+   evidence: "ANCA READ 2026-04-05: kontakion of Palm Sunday in tone 6"}
+
+# ================= Liturgy: readings (calendar-driven Rules in sunday_general.yaml; documented exceptions) =================
+- {id: tri.lit.epistle.mar09_lent, slot: liturgy.epistle, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -14]}, {pred: date_in, args: ["03-09"]}],
+   fill: {owner: "$epistle_owner", ref: "$epistle_ref"}, source: anca,
+   locator: "inferred: the calendar flag (Forty Martyrs' Epistle) as ANCA reads it", status: inferred,
+   evidence: "ANCA READ 2025-03-09 (Lent 1): 'For the Forty Martyrs of Sebastia', Heb 12:1-10; DB is_comm_apos=1",
+   conflict: {with: ["Typikon Ch V Mar 9 p.267 (Epistle and Gospel for the Sunday)"], status: open, note: "Typikon p.267 reads the Sunday's Epistle when the Forty Martyrs fall on a Lent Sunday; ANCA (1 sample) and the yocal calendar read the Martyrs' Epistle. Project default: follow ANCA + calendar."}}
+- {id: tri.lit.prokeimenon.mar09_lent, slot: liturgy.prokeimenon, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -14]}, {pred: date_in, args: ["03-09"]}],
+   fill: {owner: "$epistle_owner"}, source: anca, locator: "inferred: the prokeimenon follows the Epistle owner", status: inferred,
+   evidence: "as tri.lit.epistle.mar09_lent (ANCA READ 2025-03-09)",
+   conflict: {with: ["Typikon Ch V Mar 9 p.267"], status: open, note: "see tri.lit.epistle.mar09_lent"}}
+- {id: tri.lit.epistle.feb02, slot: liturgy.epistle, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-02"]}], fill: {},
+   source: typikon, locator: "Ch I p.37, Ch V p.222 (Epistle of the Presentation, Gospel of the Sunday)", status: missing,
+   ticket: "WP-F: Presentation on a Triodion Sunday: calendar gives the feast's Gospel, Typikon the Sunday's; no ANCA sample"}
+- {id: tri.lit.gospel.feb02, slot: liturgy.gospel, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-02"]}], fill: {},
+   source: typikon, locator: "Ch I p.37, Ch V p.222 (Gospel of the Sunday)", status: missing,
+   ticket: "WP-F: Presentation on a Triodion Sunday: calendar gives the feast's Gospel, Typikon the Sunday's; no ANCA sample"}
+- {id: tri.lit.prokeimenon.feb02, slot: liturgy.prokeimenon, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-02"]}], fill: {owner: saint},
+   source: typikon, locator: "Ch V p.222 (Epistle, hence prokeimenon, of the Presentation)", status: explicit}
+
+# ================= Annunciation (Mar 25) on a Lent Sunday or Palm Sunday: not encoded (Typikon Ch V p.280-283, 290-293, 303-306, 310) =================
+- {id: tri.annunciation.mat.prokeimenon, slot: matins.prokeimenon, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -7]}, {pred: date_in, args: ["03-25"]}], fill: {},
+   source: typikon, locator: "Ch V Mar 25 on Lent 3 p.280, Lent 4 p.290, Lent 5 p.303, Palm Sunday p.310", status: missing,
+   ticket: "WP-F / major feasts: Annunciation on a Lent Sunday or Palm Sunday"}
+- {id: tri.annunciation.mat.eothinon, slot: matins.eothinon_gospel, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -7]}, {pred: date_in, args: ["03-25"]}], fill: {},
+   source: typikon, locator: "Ch V Mar 25 on Lent 3 p.280, Lent 4 p.290, Lent 5 p.303, Palm Sunday p.310; Ch I p.37", status: missing,
+   ticket: "WP-F / major feasts: Annunciation on a Lent Sunday or Palm Sunday"}
+- {id: tri.annunciation.lit.epistle, slot: liturgy.epistle, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -7]}, {pred: date_in, args: ["03-25"]}], fill: {},
+   source: typikon, locator: "Ch I p.37-38 (Lent 3: Sunday Epistle + feast Gospel; Lent 4/5: feast's; Palm: feast Epistle + Sunday Gospel)", status: missing,
+   ticket: "WP-F / major feasts: Annunciation on a Lent Sunday or Palm Sunday"}
+- {id: tri.annunciation.lit.gospel, slot: liturgy.gospel, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -7]}, {pred: date_in, args: ["03-25"]}], fill: {},
+   source: typikon, locator: "Ch I p.37-38", status: missing, ticket: "WP-F / major feasts: Annunciation on a Lent Sunday or Palm Sunday"}
+- {id: tri.annunciation.lit.prokeimenon, slot: liturgy.prokeimenon, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -7]}, {pred: date_in, args: ["03-25"]}], fill: {},
+   source: typikon, locator: "Ch I p.37-38", status: missing, ticket: "WP-F / major feasts: Annunciation on a Lent Sunday or Palm Sunday"}
+
+# ================= Liturgy: dismissal (author from the Liturgy-author Rules) =================
+- {id: tri.lit.dismissal.triodion_glory, slot: liturgy.dismissal, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -49]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (the Vespers Glory is the Triodion's)"},
+   source: typikon, locator: "Ch I s4 p.17 (saint of the day named only if it has a Doxastikon); Ch VI p.470-475 (Glory from the Triodion)", status: explicit}
+- {id: tri.lit.dismissal.lent1, slot: liturgy.dismissal, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -42]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (the Vespers Glory is the Triodion's)"},
+   source: typikon, locator: "Ch I s4 p.17; Ch VI Lent 1 p.486 (Glory from the Triodion)", status: explicit}
+- {id: tri.lit.dismissal.lent3, slot: liturgy.dismissal, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-28, -28]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (the Vespers Glory is for the Cross)"},
+   source: typikon, locator: "Ch I s4 p.17; Ch VI Lent 3 p.491 (Glory for the Holy Cross)", status: explicit}
+- {id: tri.lit.dismissal.lent2, slot: liturgy.dismissal, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-35, -35]}],
+   fill: {parts: ["St Gregory Palamas"], author: "$liturgy_author", saint_named: true, named_as: "St Gregory Palamas"},
+   source: typikon, locator: "Ch I s4 p.17; Ch VI Lent 2 p.489 (Glory for St Gregory Palamas)", status: explicit}
+- {id: tri.lit.dismissal.lent4, slot: liturgy.dismissal, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-21, -21]}],
+   fill: {parts: ["St John Climacus"], author: "$liturgy_author", saint_named: true, named_as: "St John Climacus"},
+   source: typikon, locator: "Ch I s4 p.17; Ch VI Lent 4 p.494 (Glory for St John of the Ladder)", status: explicit}
+- {id: tri.lit.dismissal.lent5, slot: liturgy.dismissal, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-14, -14]}],
+   fill: {parts: ["St Mary of Egypt"], author: "$liturgy_author", saint_named: true, named_as: "St Mary of Egypt"},
+   source: anca, locator: "inferred: Typikon p.502 defers to the Triodion (Glory for St Mary, research/triodion-rubrics)", status: inferred,
+   evidence: "ANCA READ Lent 5 2022-2026 5/5 name St Mary of Egypt"}
+- {id: tri.lit.dismissal.palm, slot: liturgy.dismissal, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-7, -7]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (Palm Sunday dismissal)"},
+   source: anca, locator: "inferred: Typikon p.505 gives no dismissal wording", status: inferred, evidence: "ANCA READ 2026-04-05: no saint named"}
+- {id: tri.lit.dismissal.coincidence, slot: liturgy.dismissal, tier: -2,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -7]}, {pred: menaion_coincidence}, {pred: not_date_between, args: ["03-24", "03-24"]}],
+   fill: {}, source: typikon, locator: "Ch I s4 p.17 (depends on whether the Menaion saint keeps a Doxastikon: Ch V per-date orders)", status: missing,
+   ticket: "WP-F: Menaion feast/fore-afterfeast on a Triodion/Lent Sunday not yet encoded (Typikon Ch V)"}
+- {id: tri.lit.dismissal.feb01, slot: liturgy.dismissal, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-01"]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (Vespers Glory is the Triodion's)"},
+   source: anca, locator: "inferred: p.17 'Doxastikon' read as the Vespers (Lord I have cried) Glory, which is the Triodion's (p.217)", status: inferred,
+   evidence: "ANCA READ 2026-02-01: Tryphon not named",
+   conflict: {with: ["Typikon p.217 (aposticha Glory for St Tryphon)"], status: open, note: "On the wider reading of p.17 (any Doxastikon) Tryphon, who has the aposticha Glory, would be named. One ANCA sample; the same question is open for the generic dismissal Rules (lit.dismissal.anca_default)."}}
+- {id: tri.lit.dismissal.feb02_09, slot: liturgy.dismissal, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_between, args: ["02-02", "02-09"]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (dismissal with the feast's phrase: Presentation)"},
+   source: typikon, locator: "Ch V p.222, p.226 (dismissal with the characteristic phrases of the feast and the Resurrection); Ch I s4 p.17 (Glory from the Triodion)", status: explicit}
+- {id: tri.lit.dismissal.mar09, slot: liturgy.dismissal, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -14]}, {pred: date_in, args: ["03-09"]}],
+   fill: {parts: ["the Forty Martyrs of Sebaste"], author: "$liturgy_author", saint_named: true, named_as: "the Forty Martyrs of Sebaste"},
+   source: anca, locator: "inferred: Forty Martyrs keep the aposticha Glory (Typikon p.265)", status: inferred, evidence: "ANCA READ 2025-03-09 (Lent 1) names the Forty Martyrs"}
+- {id: tri.lit.dismissal.mar26_lent4, slot: liturgy.dismissal, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-21, -21]}, {pred: date_in, args: ["03-26"]}],
+   fill: {parts: ["the Archangel Gabriel"], author: "$liturgy_author", saint_named: true, named_as: "the Archangel Gabriel"},
+   source: typikon, locator: "Ch V p.289 (Vespers Glory for the Archangel); Ch I s4 p.17", status: explicit}
+
+# ================= Liturgy: dismissal characteristic phrase (slot from work package H) =================
+- {id: tri.lit.dismissal_phrase.sunday, slot: liturgy.dismissal_phrase, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -35]}], fill: {phrase: resurrection, clause: none},
+   source: typikon, locator: "Ch I s4 p.17 (Great Dismissal on Sunday: 'May he who rose again from the dead')", status: explicit}
+- {id: tri.lit.dismissal_phrase.lent4_5, slot: liturgy.dismissal_phrase, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-21, -14]}], fill: {phrase: resurrection, clause: none},
+   source: typikon, locator: "Ch I s4 p.17", status: explicit}
+- {id: tri.lit.dismissal_phrase.lent3, slot: liturgy.dismissal_phrase, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-28, -28]}], fill: {parts: ["Opening: “May He who rose from the dead …”; the Cross named in the Cross clause (Veneration of the Cross)"], phrase: resurrection, clause: cross},
+   source: anca, locator: "inferred: Ch I s4 p.17-18 (Sunday phrase; the Cross keeps 'who rose again' p.18); ANCA adds the Cross to the Cross clause", status: inferred,
+   evidence: "ANCA READ Lent 3 2022-2026 5/5: Cross named in the dismissal"}
+- {id: tri.lit.dismissal_phrase.palm, slot: liturgy.dismissal_phrase, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-7, -7]}], fill: {parts: ["Opening: the characteristic phrase of Palm Sunday (no “rose from the dead”)"], phrase: feast, clause: none},
+   source: anca, locator: "inferred: Typikon p.505 gives no wording; Palm Sunday has its own phrase (no 'rose again')", status: inferred,
+   evidence: "ANCA READ 2026-04-05: feast phrase only"}
+- {id: tri.lit.dismissal_phrase.coincidence, slot: liturgy.dismissal_phrase, tier: -2,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -7]}, {pred: menaion_coincidence},
+          {pred: not_date_between, args: ["03-24", "03-24"]}, {pred: not_date_between, args: ["03-09", "03-09"]}],
+   fill: {}, source: typikon, locator: "Ch I s4 p.18 (feast phrase on a Sunday following a feast of the Lord / Annunciation); Ch V per-date orders",
+   status: missing, ticket: "WP-F: Menaion feast/fore-afterfeast on a Triodion/Lent Sunday not yet encoded (Typikon Ch V)"}
+- {id: tri.lit.dismissal_phrase.feb01, slot: liturgy.dismissal_phrase, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-01"]}], fill: {phrase: resurrection, clause: none},
+   source: typikon, locator: "Ch I s4 p.17-18 (no feast phrase before the feast)", status: explicit}
+- {id: tri.lit.dismissal_phrase.feb02_09, slot: liturgy.dismissal_phrase, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_between, args: ["02-02", "02-09"]}], fill: {parts: ["Opening: the characteristic phrase of the Presentation, then “and rose from the dead …”"], phrase: feast_and_resurrection, clause: none},
+   source: typikon, locator: "Ch I s4 p.18; Ch V p.222, p.226 (characteristic phrases of the feast and the Resurrection)", status: explicit}
+- {id: tri.lit.dismissal_phrase.mar26_lent4, slot: liturgy.dismissal_phrase, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-21, -21]}, {pred: date_in, args: ["03-26"]}], fill: {phrase: resurrection, clause: none},
+   source: anca, locator: "inferred: the Annunciation leavetaking is kept at Saturday Vespers (Typikon p.289), so Sunday has no feast phrase", status: inferred,
+   evidence: "ANCA READ 2023-03-26"}
+
+# ================= Liturgy: prokeimenon of Lent 1 and Lent 3 (proper; other Triodion/Lent Sundays: the Octoechos tone of the week) =================
+- {id: tri.lit.prokeimenon.lent1, slot: liturgy.prokeimenon, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -42]}],
+   fill: {owner: sunday, parts: ["Prokeimenon of the Sunday of Orthodoxy (“Blessed art thou, O Lord, the God of our fathers”) — Triodion"]},
+   source: anca, locator: "inferred: Typikon p.488 'Epistle and Gospel for the Sunday of Orthodoxy' (prokeimenon not named)", status: inferred,
+   evidence: "ANCA READ Lent 1 2022, 2023, 2024, 2026: 'Blessed art Thou, O Lord, the God of our fathers' whatever the tone of the week (2025: Forty Martyrs' prokeimenon with their Epistle)"}
+- {id: tri.lit.prokeimenon.lent3, slot: liturgy.prokeimenon, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-28, -28]}],
+   fill: {owner: sunday, parts: ["Prokeimenon of the Cross (“O Lord, save thy people”) — Triodion"]},
+   source: anca, locator: "inferred: Typikon p.493 (Liturgy of the Cross Sunday; prokeimenon not named)", status: inferred,
+   evidence: "ANCA READ Lent 3 2022-2026 5/5: 'O Lord, save Thy people and bless Thine inheritance' (For the Third Sunday of Great Lent) whatever the tone of the week"}
+
+# ================= Coincidences with their own readings / kontakion =================
+- {id: tri.lit.epistle.feb24, slot: liturgy.epistle, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -42]}, {pred: date_in, args: ["02-24"]}],
+   fill: {owner: "$epistle_owner", ref: "$epistle_ref"}, source: anca,
+   locator: "inferred: Finding of the Forerunner's Head on a Triodion Sunday: the calendar flag (feast's Epistle)", status: inferred,
+   evidence: "ANCA READ 2019-02-24 (Prodigal): Epistle 2 Cor 4:6-15 for the Forerunner; DB is_comm_apos=1. Overrides lit.epistle.anca_sunday (Triodion clause)."}
+- {id: tri.lit.prokeimenon.feb24, slot: liturgy.prokeimenon, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -42]}, {pred: date_in, args: ["02-24"]}],
+   fill: {owner: "$epistle_owner"}, source: anca, locator: "inferred: the prokeimenon follows the Epistle owner", status: inferred,
+   evidence: "as tri.lit.epistle.feb24 (ANCA READ 2019-02-24)"}
+- {id: tri.lit.kontakion.mar24_lent2, slot: liturgy.kontakion, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-35, -35]}, {pred: date_in, args: ["03-24"]}],
+   fill: {kind: forefeast_annunciation, tone: 4, parts: ["Kontakion of the forefeast of the Annunciation — Menaion 03-24"]}, source: anca,
+   locator: "inferred: no Ch V order for the forefeast on Lent 2", status: inferred, evidence: "ANCA READ 2019-03-24 (Lent 2): kontakion of the forefeast, tone 4"}
+- {id: tri.lit.kontakion.mar24_lent4_5, slot: liturgy.kontakion, tier: -3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-21, -14]}, {pred: date_in, args: ["03-24"]}],
+   fill: {kind: forefeast_annunciation, tone: 4, parts: ["Kontakion of the forefeast of the Annunciation — Menaion 03-24"]}, source: typikon,
+   locator: "Ch V Annunciation on Monday of the 5th/6th week p.293 (Liturgy: the kontakion for the forefeast); tone as ANCA 2019-03-24", status: explicit}

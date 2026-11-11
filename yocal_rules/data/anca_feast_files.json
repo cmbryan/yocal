@@ -1,0 +1,97 @@
+{
+ "_comment": "Work package I: ANCA texts for weekday Major feasts and their eves, which are not on the weekend index (anca_pages.json). ANCA publishes them under undated names ('Aug 06 READ.pdf'), replaced each year: each is mapped only to the latest weekday occurrence it was published for (2025-26 church year, files last modified 2026). Theophany (2026: '2-Theophany VESP', '3-Theophany ORTHROS', '7-Theophany-Abbr'; no Liturgy text found) and Ascension ('Ascension-VESP/ORTHROS/READ', 2026) have feast-named files. No Nativity file was found (name probe of ~2400 candidates).",
+ "2025-11-20": {
+  "links": [
+   "/servicetexts/Nov%2020%20VESP.pdf"
+  ]
+ },
+ "2025-11-21": {
+  "links": [
+   "/servicetexts/Nov%2021%20ORTHROS.pdf",
+   "/servicetexts/Nov%2021%20READ.pdf"
+  ]
+ },
+ "2025-12-31": {
+  "links": [
+   "/servicetexts/Dec%2031%20VESP.pdf"
+  ]
+ },
+ "2026-01-01": {
+  "links": [
+   "/servicetexts/Jan%2001%20ORTHROS.pdf",
+   "/servicetexts/Jan%2001%20READ.pdf"
+  ]
+ },
+ "2026-01-05": {
+  "links": [
+   "/servicetexts/2-Theophany%20VESP.pdf"
+  ]
+ },
+ "2026-01-06": {
+  "links": [
+   "/servicetexts/3-Theophany%20ORTHROS.pdf",
+   "/servicetexts/7-Theophany-Abbr.pdf"
+  ]
+ },
+ "2026-02-02": {
+  "links": [
+   "/servicetexts/Feb%2002%20ORTHROS.pdf",
+   "/servicetexts/Feb%2002%20READ.pdf"
+  ]
+ },
+ "2026-03-24": {
+  "links": [
+   "/servicetexts/Mar%2024%20VESP.pdf"
+  ]
+ },
+ "2026-03-25": {
+  "links": [
+   "/servicetexts/Mar%2025%20ORTHROS.pdf",
+   "/servicetexts/Mar%2025%20READ.pdf"
+  ]
+ },
+ "2026-05-20": {
+  "links": [
+   "/servicetexts/Ascension-VESP.pdf"
+  ]
+ },
+ "2026-05-21": {
+  "links": [
+   "/servicetexts/Ascension-ORTHROS.pdf",
+   "/servicetexts/Ascension-READ.pdf"
+  ]
+ },
+ "2026-08-05": {
+  "links": [
+   "/servicetexts/Aug%2005%20VESP.pdf"
+  ]
+ },
+ "2026-08-06": {
+  "links": [
+   "/servicetexts/Aug%2006%20ORTHROS.pdf",
+   "/servicetexts/Aug%2006%20READ.pdf"
+  ]
+ },
+ "2026-08-14": {
+  "links": [
+   "/servicetexts/Aug%2014%20VESP.pdf"
+  ]
+ },
+ "2026-09-07": {
+  "links": [
+   "/servicetexts/Sept%2007%20VESP.pdf"
+  ]
+ },
+ "2026-09-08": {
+  "links": [
+   "/servicetexts/Sept%2008%20ORTHROS.pdf",
+   "/servicetexts/Sept%2008%20READ.pdf"
+  ]
+ },
+ "2026-09-14": {
+  "links": [
+   "/servicetexts/Sept%2014%20ORTHROS.pdf",
+   "/servicetexts/Sept%2014%20READ.pdf"
+  ]
+ }
+}

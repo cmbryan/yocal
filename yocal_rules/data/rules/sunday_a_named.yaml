@@ -1,0 +1,24 @@
+# Work package A: Sunday before Theophany (named Sunday) apolytikia, and a Kyriaki (Jul 7) Sunday Epistle exception.
+- {id: ves.apolytikia.before_theophany, slot: vespers.apolytikia, tier: 2,
+   when: [{pred: sunday_eve}, {pred: named_sunday_is, args: [before_theophany]}],
+   fill: {res_tone: "$tone", saint: true}, source: typikon,
+   locator: "Sunday before Theophany pp.167-169 (Vespers troparia: Resurrection, then the Sunday before Epiphany / forefeast)", status: explicit}
+- {id: mat.apolytikia.before_theophany, slot: matins.apolytikia, tier: 2,
+   when: [{pred: sunday}, {pred: named_sunday_is, args: [before_theophany]}],
+   fill: {res_tone: "$tone", saint: true}, source: typikon,
+   locator: "Sunday before Theophany pp.167-169 (Matins 'God is the Lord': Resurrection 2x, forefeast 1x)", status: explicit}
+- {id: lit.apolytikia.before_theophany, slot: liturgy.apolytikia, tier: 2,
+   when: [{pred: sunday}, {pred: named_sunday_is, args: [before_theophany]}],
+   fill: {res_tone: "$tone", saint: true}, source: typikon,
+   locator: "Sunday before Theophany pp.167-169 (Liturgy: Resurrection, then forefeast / Sunday before Epiphany)", status: explicit}
+- {id: lit.epistle.saint_on_antioch_sunday.07-07, slot: liturgy.epistle, tier: 2,
+   when: [{pred: sunday}, {pred: menaion_date_is, args: ["07-07"]}],
+   fill: {owner: saint, ref: "$epistle_ref"}, source: anca,
+   locator: "inferred: when the Sunday of All Saints of Antioch falls on Jul 7, ANCA reads St Kyriaki's Epistle (the calendar flag agrees)",
+   status: inferred, evidence: "ANCA READ 2024-07-07 ('For St. Kyriaki', Gal 3:23-4:5); one sample, calendar flag is_comm_apos=1",
+   conflict: {with: [lit.epistle.anca_sunday], status: open, note: "anca_sunday_epistle (All Saints of Antioch Sunday) would read the Sunday's own Epistle; ANCA 2025-06-22 and 2026-06-14 did so when no saint is on the date. Single-sample exception."}}
+- {id: lit.prokeimenon.saint_on_antioch_sunday.07-07, slot: liturgy.prokeimenon, tier: 2,
+   when: [{pred: sunday}, {pred: menaion_date_is, args: ["07-07"]}],
+   fill: {owner: saint}, source: anca, locator: "inferred: the prokeimenon follows the Epistle owner",
+   status: inferred, evidence: "as lit.epistle.saint_on_antioch_sunday.07-07 (ANCA READ 2024-07-07)",
+   conflict: {with: [lit.prokeimenon.anca_sunday], status: open, note: "see lit.epistle.saint_on_antioch_sunday.07-07"}}

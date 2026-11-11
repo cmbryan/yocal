@@ -1,0 +1,35 @@
+# Work package H (fore/after-feast Sundays): residual ANCA variance against data/rules/fore_after.yaml. Date-scoped; DB assumed correct.
+- slot: liturgy.dismissal
+  source: anca
+  scope: {date: ["2022-01-02", "2022-01-09", "2022-02-06", "2022-08-07", "2022-08-14", "2022-08-21", "2022-09-11", "2022-09-18",
+                 "2023-01-08", "2023-08-13", "2023-08-20", "2023-09-10", "2023-09-17", "2023-12-31"]}
+  ours: {saint_named: false}
+  theirs: {saint_named: true}
+  class: anca_2022_23_names_minor_saint_in_feast_period
+  reason: "ANCA 2022-23 names the day's minor saints in Lord/Theotokos feast periods; from 2024 it never does (15/15 Sundays 2024-26), which agrees with Typikon p.17 (saint named only with a Doxastikon; the period's Glory is the feast's)"
+- slot: [vespers.lihc.stichera, matins.praises]
+  source: anca
+  scope: {date: ["2022-02-06"]}
+  class: calendar_data_gap
+  reason: "ANCA adds St Julian of Homs (Antiochian local commemoration, not in the DB) to the Presentation afterfeast: 4R+3+3 Vespers, 2R+3+3 Praises; Typikon p.223 gives 6R+4 / 4R+4 without a saint"
+- slot: vespers.lihc.stichera
+  source: anca
+  scope: {date: ["2023-06-25"]}
+  ours: {res: 6}
+  theirs: {res: 4, other: [3, 3]}
+  class: anca_forerunner_leavetaking_merge
+  reason: "Jun 24 on Saturday: Typikon p.417 gives 6R+4 for the leavetaking (Forerunner from Jun 25); ANCA 2023 adds St Febronia (4R+3+3). One sample"
+- slot: matins.prokeimenon
+  source: anca
+  scope: {date: ["2022-11-20"]}
+  ours: {kind: resurrectional}
+  theirs: {kind: other}
+  class: anca_forefeast_variant
+  reason: "Forefeast of the Entrance on Sunday: Typikon p.110 gives the Resurrection prokeimenon; ANCA 2022 prints the Entrance prokeimenon (tone 4). One sample, same date as the other 2022-11-20 ANCA forefeast variants"
+- slot: matins.kathismata
+  source: anca
+  scope: {date: ["2025-09-21"]}
+  ours: {tone: 6}
+  theirs: {tone: 4}
+  class: anca_internal_inconsistency
+  reason: "ANCA Abbr rubric says Octoechos Tone 4, but the printed heading is 'SIXTH TONE RESURRECTIONAL KATHISMATA' and the week's tone is 6. ANCA typo"

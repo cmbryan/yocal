@@ -1,0 +1,30 @@
+# slot catalogue: ordered per service = audit denominator. attrs = what a Rule emits / a key exposes.
+vespers.lihc.stichera:   {service: vespers, label: "Lord, I have cried: stichera", attrs: [res, other]}
+vespers.prokeimenon:     {service: vespers, label: "Prokeimenon", attrs: [kind, tone]}
+vespers.apolytikia:      {service: vespers, label: "Apolytikia", attrs: [res_tone, saint]}
+matins.apolytikia:       {service: matins, label: "Apolytikia (God is the Lord)", attrs: [res_tone, saint]}
+matins.kathismata:       {service: matins, label: "Kathismata hymns", attrs: [tone]}
+matins.prokeimenon:      {service: matins, label: "Prokeimenon", attrs: [kind, tone]}
+matins.eothinon_gospel:  {service: matins, label: "Eothinon Gospel", attrs: [number]}
+matins.kontakion:        {service: matins, label: "Kontakion and oikos", attrs: [kind, tone, owner]}
+matins.praises:          {service: matins, label: "The Praises", attrs: [total, res, other, glory]}
+liturgy.apolytikia:      {service: liturgy, label: "Apolytikia (after the little entrance)", attrs: [res_tone, saint]}
+liturgy.kontakion:       {service: liturgy, label: "Kontakion", attrs: [kind, tone]}
+liturgy.prokeimenon:     {service: liturgy, label: "Prokeimenon", attrs: [owner]}
+liturgy.epistle:         {service: liturgy, label: "Epistle", attrs: [owner, ref]}
+liturgy.alleluia:        {service: liturgy, label: "Alleluia", attrs: [tone]}
+liturgy.gospel:          {service: liturgy, label: "Gospel", attrs: [ref]}
+liturgy.dismissal:       {service: liturgy, label: "Dismissal", attrs: [author, saint_named]}
+liturgy.author:          {service: liturgy, label: "Liturgy", attrs: [author]}
+liturgy.dismissal_phrase: {service: liturgy, label: "Dismissal: characteristic phrase", attrs: [phrase, clause]}
+# Major feasts (work package I): feast-only slots, built only when the fact named by `only` is true; `after` places the slot in the document
+vespers.readings:      {service: vespers, label: "Old Testament readings", attrs: [count], only: major_feast_slots, after: vespers.prokeimenon}
+vespers.litia:         {service: vespers, label: "Litia and Artoklasia", attrs: [litia], only: major_feast_slots, after: vespers.readings}
+vespers.aposticha:     {service: vespers, label: "Aposticha", attrs: [owner], only: major_feast_slots, after: vespers.litia}
+matins.katavasia:      {service: matins, label: "Katavasia", attrs: [of], only: major_feast_slots, after: matins.kontakion}
+liturgy.antiphons:     {service: liturgy, label: "Antiphons", attrs: [refrain2], only: major_feast_slots, after: "^"}
+liturgy.eisodikon:     {service: liturgy, label: "Entrance hymn (eisodikon)", attrs: [kind], only: major_feast_slots, after: liturgy.antiphons}
+liturgy.trisagion:     {service: liturgy, label: "Trisagion hymn", attrs: [kind], only: major_feast_slots, after: liturgy.kontakion}
+liturgy.megalynarion:  {service: liturgy, label: "Megalynarion (in place of “It is truly meet”)", attrs: [kind], only: major_feast_slots, after: liturgy.gospel}
+liturgy.communion:     {service: liturgy, label: "Communion hymn", attrs: [kind], only: major_feast_slots, after: liturgy.megalynarion}
+liturgy.final_hymn:    {service: liturgy, label: "After Communion (in place of “We have seen the true light”)", attrs: [kind], only: major_feast_slots, after: liturgy.communion}

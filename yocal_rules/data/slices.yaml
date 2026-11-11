@@ -1,0 +1,38 @@
+# Which Sundays the Rules cover. A date outside every list is 'Incomplete' (date-dependent Rules are withheld, slots missing).
+# Work packages enable a category here once their Rules (and tests) exist; one item per line so edits do not collide.
+supported_seasons:
+  - ordinary
+  - pentecostarion                                   # G: pentecostarion.yaml (Thomas .. Pentecost)
+  - triodion                                         # F: triodion.yaml (Publican .. Cheesefare)
+  - lent                                             # F: triodion.yaml (Lent 1-5, Palm Sunday)
+supported_fore_after:       # substrings of the DB fore_after text, e.g. "Forefeast of The Nativity"
+  - Forefeast of the Theophany                       # H: fore_after.yaml (ordinary season only, see calfacts.in_slice)
+  - Afterfeast of The Theophany                      # H
+  - Forefeast of the Presentation of the Lord        # H
+  - Afterfeast of the Presentation of the Lord       # H
+  - Afterfeast of the Entrance of the Lord to the Temple  # H (DB name for the Presentation afterfeast, Feb 3)
+  - Transfiguration                                  # H: fore/after/leavetaking
+  - Dormition of the Mother of God                   # H: fore/after/leavetaking
+  - Nativity of the Mother of God                    # H: fore/after/leavetaking
+  - Elevation of the Cross                           # H: fore/after
+  - Leavetaking of the Elevation of the Precious     # H
+  - Entrance of the Mother of God into the Temple    # H: fore/after/leavetaking
+  - The Nativity of Christ                           # H: fore/after/leavetaking
+  - Leavetaking of The Nativity of the Forerunner    # H
+  - Leavetaking of The Beheading of the Forerunner   # H
+  - Forefeast of the Procession of the Precious      # H: generic Sunday Rules (Typikon p.442: forefeast suppressed on Sunday)
+  - Forefeast of the Conception of the Mother of God # H: generic Sunday Rules (not a Major feast; ANCA 2024-12-08)
+  - Afterfeast of the Ascension                      # G: Sunday of the Holy Fathers (pentecostarion.yaml)
+  - Forefeast of The Annunciation                   # F: Mar 24 on a Lent Sunday (triodion.yaml; Lent 2 partly missing)
+  - Afterfeast of The Annunciation                   # F: Mar 26 on Lent 4 (triodion.yaml; other Lent Sundays missing)
+supported_fixed_major:      # mm-dd of fixed Major feasts whose weekday/Saturday order has Rules; 'mm-dd:sunday' = the Sunday order
+  - "08-06"                  # I: major_feasts.yaml (Transfiguration)
+  - "09-14"                  # I: Elevation
+  - "02-02"                  # I: Presentation
+  - "09-08"                  # I: Nativity of the Theotokos
+  - "11-21"                  # I: Entrance of the Theotokos
+  - "08-15"                  # I: Dormition
+  - "01-01"                  # I: Circumcision / St Basil
+  # "12-25" / "01-06" (Nativity, Theophany; Tue-Sat Rules in major_feasts.yaml) stay disabled: no ANCA Nativity text, no ANCA Theophany Liturgy text (unverified)
+supported_movable_major:    # ids of movable Major feasts not on a Sunday (calfacts.MAJOR_MOVABLE)
+  - ascension                # I: major_feasts.yaml

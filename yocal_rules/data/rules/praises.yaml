@@ -1,0 +1,59 @@
+# Matins "The Praises" (Lauds) on Sundays: counts of resurrectional (res) / other blocks (other, one entry per block) / Glory kind.
+# Tiers: 0-1 named Sundays (Typikon), 2 Ch V per-date Sunday entries (Typikon), 3 ANCA-following inference
+# (rank / ALWB Lauds / default). All sit below mat.praises.saint (tier 4, 'counts unstated'), which stays as the fallback.
+# Typikon Ch III p.50-51 gives only the shape (8 Resurrection stichera; if the saint has praises stichera, Resurrection + saint).
+# Glory for the saint-bearing sets is left unstated unless a Typikon section states it (Glory overrides need an independent cite).
+
+# ---- Tier 1: named Sundays (own Typikon section)
+- {id: mat.praises.fathers, slot: matins.praises, tier: 1,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: named_sunday_is, args: [fathers_4th_council, fathers_7th_council]}],
+   fill: {total: 8, res: 4, other: [4], glory: other},
+   source: typikon, locator: "Sunday of the Holy Fathers: Ch V Jul 13-19 p.432 and Oct 11-17 p.93 (4 Res + 4 Fathers, Glory for the Fathers)", status: explicit}
+- {id: mat.praises.forefathers, slot: matins.praises, tier: 1,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: named_sunday_is, args: [forefathers]}],
+   fill: {total: 8, res: 4, other: [4], glory: other},
+   source: typikon, locator: "Sunday of the Forefathers (Dec 11-17), Ch V p.126 (Glory for the Forefathers); 4 Res + 4 Forefathers",
+   status: inferred, evidence: "Typikon states the saint-bearing variants only (2R+3+3, Dec 12 / Dec 15 below); ANCA 4R+4 on 3/3 plain Forefathers Sundays 2022, 2023, 2025"}
+- {id: mat.praises.forefathers.saint3, slot: matins.praises, tier: 0,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: named_sunday_is, args: [forefathers]}, {pred: date_in, args: ["12-12", "12-15"]}],
+   fill: {total: 8, res: 2, other: [3, 3], glory: other},
+   source: typikon, locator: "Ch V Dec 12 (St Spyridon) and Dec 15 (St Eleutherius), Forefathers Sunday variant: 2 Res + 3 Forefathers + 3 saint", status: explicit}
+- {id: mat.praises.before_nativity, slot: matins.praises, tier: 1,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: named_sunday_is, args: [before_nativity_18_19, before_nativity_24]}],
+   fill: {total: 8, res: 4, other: [4], glory: other},
+   source: typikon, locator: "Sunday before the Nativity: Ch V Dec 18-24 p.133-136 (4 Res + 4 Sunday before the Nativity, Glory for that Sunday)", status: explicit}
+- {id: mat.praises.before_theophany, slot: matins.praises, tier: 1,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: named_sunday_is, args: [before_theophany]}],
+   fill: {total: 8, res: 4, other: [4], glory: other},
+   source: typikon, locator: "Ch V Jan 1-6 pp.167-175 (4 Res + 4 for the Sunday before Epiphany; Glory for that Sunday)", status: explicit}
+- {id: mat.praises.all_saints, slot: matins.praises, tier: 1,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: named_sunday_is, args: [all_saints]}],
+   fill: {total: 8, res: 4, other: [4], glory: eothinon},
+   source: typikon, locator: "Ch VI All Saints p.540 (4 Res tone 8 + 4 Saints tone 4; Glory eothinon)", status: explicit}
+# (Leavetaking / fore- / afterfeast Sundays: fore_after.yaml, tier 0.)
+
+# ---- Tier 2: Ch V per-date Sunday entries (4 Resurrection + 4 saint)
+- {id: mat.praises.ch5.saint, slot: matins.praises, tier: 2,
+   when: [{pred: sunday}, {pred: in_slice},
+          {pred: date_in, args: ["06-24", "06-29", "06-30", "07-01", "07-05", "07-07", "07-20", "07-26", "08-02", "08-29", "09-16", "09-23", "09-26",
+                                 "10-18", "10-23", "10-26", "11-01", "11-08", "11-11", "11-12", "11-13", "11-14", "11-16", "11-25", "11-30",
+                                 "12-04", "12-05", "12-06", "01-17", "01-18", "01-20", "01-25", "01-30", "02-10"]}],
+   fill: {total: 8, res: 4, other: [4]},
+   source: typikon, locator: "Ch V per-date Sunday entries ('At the praises we chant 8 stichera: 4 for the Resurrection, 4 for the saint'), the listed dates", status: explicit}
+
+# ---- Tier 3: ANCA-following inference for the remaining ordinary Sundays
+- {id: mat.praises.rank_saint, slot: matins.praises, tier: 3,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: bb_rank_in, args: [POLYELEOS, DOXOLOGY, VIGIL]}],
+   fill: {total: 8, res: 4, other: [4]},
+   source: bpbasil, locator: "Ranking of Feasts: Polyeleos/Doxology/Vigil saints have their own praises stichera; Typikon Ch III p.50-51 (saint with praises stichera: Resurrection + saint)",
+   status: inferred, evidence: "ANCA 4R+4 on 33/34 in-slice Sundays 2022-26 whose date is ranked Polyeleos/Doxology/Vigil (counts: see report); counts unstated in Typikon Ch III"}
+- {id: mat.praises.alwb_lauds, slot: matins.praises, tier: 3,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: bb_rank_not_in, args: [POLYELEOS, DOXOLOGY, VIGIL]}, {pred: saint_lauds}],
+   fill: {total: 8, res: 4, other: [4]},
+   source: anca, locator: "ANCA-following; fact = ALWB Greek Menaion meMA.Lauds* keys present for the date's main commemoration (data/alwb_lauds.csv)",
+   status: inferred, evidence: "ANCA 4R+4 on 7/9 in-slice Sundays 2022-26 with Lauds stichera recorded and a Simple-rank date; Greek ALWB Lauds data is partial"}
+- {id: mat.praises.res_only, slot: matins.praises, tier: 3,
+   when: [{pred: sunday}, {pred: in_slice}, {pred: bb_rank_not_in, args: [POLYELEOS, DOXOLOGY, VIGIL]}, {pred: no_saint_lauds}],
+   fill: {total: 8, res: 8, other: [], glory: eothinon},
+   source: typikon, locator: "Ch III p.50-51 (8 Resurrection stichera) + Ch I s5 p.31 (Glory eothinon, Now Theotokion); no saint praises stichera for Simple-rank dates",
+   status: inferred, evidence: "ANCA 8R on 46/53 in-slice Simple-rank Sundays with no ALWB Lauds data (Glory eothinon 100%); residual 4R+4 logged in divergence_praises.yaml"}

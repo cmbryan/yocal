@@ -1,0 +1,34 @@
+# Work package G (Pentecostarion Sundays): residual ANCA variance against the Typikon-based Rules in pentecostarion.yaml.
+# Scope facts: pascha_days (days since Pascha), year, date.
+
+- slot: matins.praises
+  source: anca
+  scope: {pascha_days: [7, 49], year: [2021, 2022, 2024, 2025, 2026]}
+  ours: {total: 6}
+  theirs: {total: 4}
+  class: anca_counts_without_repetition
+  reason: "Thomas Sunday (Typikon p.526: 4 stichera, 1st and 3rd repeated = 6) and Pentecost (p.539: 3 stichera each repeated = 6): ANCA heads the praises 'with four stichera' from 2021 (Thomas 2019-20: 'six'); shadowed alternative pent.mat.praises.thomas.anca4 carries the open conflict"
+
+- slot: liturgy.dismissal
+  source: anca
+  scope: {pascha_days: [21, 35, 42], year: [2019, 2020, 2021, 2022, 2023]}
+  ours: {saint_named: false}
+  theirs: {saint_named: true}
+  class: anca_names_menaion_saint_until_2023
+  reason: "Paralytic / Blind Man / Holy Fathers Sundays: ANCA READ names the Menaion saints of the day up to 2023 and none from 2024 (3/3 years); Rule follows Typikon p.17 (no Menaion Doxastikon on these Sundays) and ANCA 2024-26"
+
+- slot: liturgy.dismissal_phrase
+  source: anca
+  scope: {date: ["2019-06-02"]}
+  ours: {phrase: resurrection}
+  theirs: {phrase: feast}
+  class: anca_wording_variant
+  reason: "ANCA 2019 READ opens 'May He Who is risen from the dead' (the parser labels any opening without 'rose' as a feast phrase); same resurrection opening"
+
+- slot: liturgy.dismissal_phrase
+  source: anca
+  scope: {date: ["2023-05-07"]}
+  ours: {clause: none}
+  theirs: {clause: cross}
+  class: anca_local_commemoration_clause
+  reason: "May 7 (Apparition of the Cross over Jerusalem) on the Sunday of the Paralytic: ANCA names it in the Cross clause; not a Typikon commemoration on a Pentecostarion Sunday (one sample)"

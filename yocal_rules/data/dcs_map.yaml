@@ -1,0 +1,3 @@
+# keys-only map: DCS/ALWB hymn key -> our hymn identity (hymn-kinds). Reference only, no text. Grows as unmapped keys are met.
+kontakion:
+  hoTY.Key0408: {kind: ordinary_theotokos, tone: 2}   # "Protection of Christians" = ANCA "O protection of Christians"

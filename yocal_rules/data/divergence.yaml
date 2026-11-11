@@ -1,0 +1,83 @@
+# Divergence log: accepted differences between our output and an Answer key (class-scoped; one-off scope = date + service).
+# Each entry: slot, source (anca|dcs), scope (context facts), ours, theirs (value or list of alternatives), class, reason.
+# A diff matching no entry is unexplained (blocking for ANCA). UK divergences are never logged.
+- slot: vespers.lihc.stichera
+  source: anca
+  scope: {two_sets_of_3: true}
+  ours: {res: 4, other: [6]}
+  theirs:
+    - {res: 6, other: [4]}
+    - {res: 7, other: [3]}
+  class: anca_year_variant
+  reason: "#32: ANCA compilers pick 4R+6 on most two-sets Sundays but 6R+4/7R+3 in some years (~12% variance); inferred Rule, non-blocking"
+
+# Dec 7 (Ambrose): ANCA gives a Glory; ALWB and Bp Basil show none, no Typikon named-Sunday section applies, and Violakis has no entry.
+# Not otherwise investigated; ANCA alone cannot justify a glory override (#28). (Oct 11, Jun 7 and Jul 19 were earlier logged here
+# in error: they are Typikon named Sundays and are now Rules.)
+- slot: vespers.lihc.stichera
+  source: anca
+  scope: {mmdd: ["12-07"]}
+  ours: {res: 7, other: [3]}
+  theirs: {res: 6, other: [4]}
+  class: anca_adds_glory
+  reason: "ANCA prints a saint's Doxasticon (6R+4) where ALWB/Bp Basil have none (#34 'ALWB data gap' class); no independent evidence found"
+- slot: [vespers.apolytikia, matins.apolytikia, liturgy.apolytikia]
+  source: anca
+  scope: {mmdd: ["12-07"]}
+  ours: {saint: false}
+  theirs: {saint: true}
+  class: anca_adds_glory
+  reason: "follows the ANCA Doxasticon above: saint's apolytikion sung"
+
+# Generic Fathers / All Saints Sundays: ANCA names no saint although the default (ANCA-following) rule does. Same Sundays are named in other years; no separating feature found.
+- slot: liturgy.dismissal
+  source: anca
+  scope: {mmdd: ["07-14", "07-13", "07-19", "10-11", "10-12", "06-15", "06-07"]}
+  ours: {saint_named: true}
+  theirs: {saint_named: false}
+  class: anca_generic_sunday_not_named
+  reason: "ANCA names the saint on most Sundays but not on some Fathers/All Saints Sundays (7 of 116, 2022-26); no rule found"
+
+# ---- readings (one-off, date-scoped; DB assumed correct so these are divergences, not fixes)
+- slot: [liturgy.epistle, liturgy.prokeimenon]
+  source: anca
+  scope: {date: ["2025-11-09", "2022-07-10"]}
+  class: calendar_data_gap
+  reason: "ANCA reads the saint's Epistle (Nektarios 2025-11-09: DB has the reading but flag 0; Joseph of Damascus 2022-07-10: DB has no saint reading)"
+- slot: [liturgy.epistle, liturgy.gospel, liturgy.prokeimenon]
+  source: anca
+  scope: {date: ["2024-01-28", "2024-02-04", "2022-11-20", "2022-01-30", "2024-01-14"]}
+  class: anca_lectionary_shift
+  reason: "ANCA reads a different Sunday lection than the DB: Pentecost-week mapping one week off (2024-01-28/02-04), Theotokos readings (2022-11-20), Sunday's Gospel not the saint's (2022-01-30), Theophany leavetaking Gospel (2024-01-14)"
+- slot: liturgy.epistle
+  source: anca
+  scope: {date: ["2022-07-03"]}
+  class: verse_split_difference
+  reason: "Romans 5:1-10 (DB) vs 5:1-11 (ANCA): real verse-range difference"
+- slot: liturgy.gospel
+  source: anca
+  scope: {date: ["2023-03-26"]}
+  class: verse_split_difference
+  reason: "Mark 9:17-31 (DB) vs 9:16-30 (ANCA): real verse-range difference"
+
+# ---- merges, local commemorations, data gaps (date-scoped; DB assumed correct)
+- slot: [vespers.lihc.stichera, vespers.apolytikia, matins.apolytikia, liturgy.apolytikia]
+  source: anca
+  scope: {date: ["2022-07-17", "2023-09-24", "2023-10-22", "2024-01-14", "2024-06-30", "2024-10-13", "2024-12-15", "2025-06-22", "2026-01-11", "2026-06-14"]}
+  class: anca_two_commemoration_merge
+  reason: "ANCA merges two commemorations (4R+3+3: e.g. Marina on the Fathers, Thekla+Silouan, Averkios+Youths, Afterfeast of Theophany, Theophany leavetaking, Apostles synaxis on All Saints, Eleutherius on the Forefathers, All Saints of Antioch / North America) where we emit one"
+- slot: [vespers.lihc.stichera, vespers.apolytikia, matins.apolytikia, liturgy.apolytikia, liturgy.dismissal]
+  source: anca
+  scope: {date: ["2022-07-10", "2026-07-12"]}
+  class: calendar_data_gap
+  reason: "ANCA's saint (Joseph of Damascus 2022-07-10; Paisios the New of Athos 2026-07-12, a local commemoration) is not the DB's principal commemoration"
+- slot: [vespers.lihc.stichera, vespers.apolytikia, matins.apolytikia, liturgy.apolytikia]
+  source: anca
+  scope: {date: ["2024-01-21", "2022-08-28"]}
+  class: alwb_data_gap
+  reason: "ANCA gives the saint a Glory (Maximus the Confessor 2024-01-21: the Greek ALWB file has an Aposticha Glory but the Vespers flag is 0; Moses the Ethiopian 2022-08-28: no flags and no principal in the DB)"
+- slot: [vespers.lihc.stichera, vespers.apolytikia, matins.apolytikia, liturgy.apolytikia]
+  source: anca
+  scope: {date: ["2022-11-20"]}
+  class: anca_forefeast_variant
+  reason: "Forefeast of the Entrance: ANCA's 4R+3+3 / apolytikion pattern differs from ours; no Typikon rule modelled yet for the forefeast Sunday"

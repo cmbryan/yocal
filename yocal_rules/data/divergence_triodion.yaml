@@ -1,0 +1,36 @@
+# Divergence log, work package F (Triodion / Lent Sundays): accepted ANCA differences from the triodion.yaml Rules.
+- slot: liturgy.dismissal
+  source: anca
+  scope: {year: [2019, 2020, 2021, 2022, 2023], pascha_days: [-70, -63, -56, -49, -42, -28]}
+  ours: {saint_named: false}
+  theirs: {saint_named: true}
+  class: anca_pre2024_names_menaion_saint
+  reason: "ANCA 2019-2023 name the Menaion saints of the day on Triodion Sundays and Lent 1/3 (2022-23: 12/12; 2019-21 likewise); from 2024-02-25 on they name none (13/13), as Typikon Ch I p.17 does (saint named only with a Doxastikon; the Glory is the Triodion's). ANCA practice change; Rule follows the Typikon and current ANCA."
+- slot: matins.kathismata
+  source: anca
+  scope: {date: ["2024-04-21"]}
+  ours: {tone: 5}
+  theirs: {tone: 4}
+  class: anca_typo
+  reason: "ANCA Abbr 2024-04-21 rubric says 'Octoechos for Tone 4' but prints the FIFTH TONE resurrectional kathismata (tone of the week 5)."
+- slot: matins.praises
+  source: anca
+  scope: {date: ["2026-02-08"]}
+  ours: {total: 8, res: 4}
+  theirs: {total: 8, res: 5}
+  class: anca_feast_on_triodion_sunday
+  reason: "Sunday after the Presentation on the Prodigal Sunday: Typikon p.225 gives 4 Res + 4 Triodion; ANCA 2026 prints the plain Prodigal praises (5 Res + 3). The yocal calendar ends the afterfeast on Feb 7 2026 (Typikon p.228 would keep it to the Friday before Meatfare Saturday); ANCA's Vespers/apolytikia/kontakion keep the afterfeast on Feb 8. One sample."
+- slot: vespers.lihc.stichera
+  source: anca
+  scope: {date: ["2020-03-01"]}
+  ours: {res: 6}
+  theirs: {res: 5}
+  class: anca_print_artefact
+  reason: "Cheesefare eve 2020: the Abbr prints 'ten troparia' and verses 10-6 Resurrection, 4-1 Triodion; verse 5 is lost in the printed/extracted text (6R+4 intended)."
+- slot: liturgy.dismissal
+  source: anca
+  scope: {date: ["2020-03-29"]}
+  ours: {saint_named: true}
+  theirs: {saint_named: false}
+  class: anca_print_artefact
+  reason: "ANCA READ 2020-03-29 names St John Climacus, but a running page header splits the name ('... of Sinai, author of The Ladder') so the parser misses 'whose memory'."

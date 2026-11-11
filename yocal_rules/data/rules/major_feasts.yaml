@@ -1,0 +1,475 @@
+# Work package I: Major feasts (GLOSSARY 'Major feast') and their eve Great Vespers.
+# Gated on the major_feast fact (calfacts.major_feast: normalised id), independent of in_slice. This file covers a feast falling
+# on a weekday or Saturday (feast_on_weekday; Vespers = the eve, Sunday-Friday evening). Sunday coincidence is NOT covered here:
+# slices.yaml lists 'mm-dd:sunday' only when a Sunday order exists. Palm Sunday, Pentecost: triodion.yaml / pentecostarion.yaml.
+# Typikon = Antiochian Typikon (Khoury/Morris 2011), printed page; Ch I s6 = Liturgy general rules pp.33-40.
+# ANCA = the festal service texts ('Great Vespers of <date>', 'Festal Orthros', 'Liturgy Variables') of the 2025-26 church year.
+# Weekday-feast Vespers/Matins for most feasts: the Typikon says 'follow the Menaion' (p.111, 164, 218, 449); the Menaion is not
+# available to this project, so Menaion-dependent counts/tones are inferred from the ANCA texts and flagged as such.
+
+# ================= Great Vespers (eve) =================
+# Annunciation eve (always a Lenten weekday or Sunday): not covered. The Typikon's Lenten grid (p.277-324: Triodion + forefeast
+# counts, Presanctified on some eves) and ANCA 2026 (Tuesday eve: 6 feast stichera, Litia) disagree and one sample cannot settle it.
+- {id: mf.ves.lihc.6, slot: vespers.lihc.stichera, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity_theotokos, dormition]}],
+   fill: {res: 0, other: [6], parts: ["6 stichera of the feast (no resurrectional stichera) — Menaion {mmdd}", "Glory, Now: doxastikon of the feast"]},
+   source: typikon, locator: "Sep 8 weekday p.64-65 (6 stichera, Glory/Now feast); Aug 15 weekday p.455 (prosomia each twice = 6)", status: explicit}
+- {id: mf.ves.lihc.6.menaion, slot: vespers.lihc.stichera, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance]}],
+   fill: {res: 0, other: [6], parts: ["6 stichera of the feast (no resurrectional stichera) — Menaion {mmdd}", "Glory, Now: doxastikon of the feast"]},
+   source: anca, locator: "inferred: Typikon defers weekday Vespers to the Menaion (p.111 Nov 21, p.218 Feb 2, p.449 Aug 6; Sep 14 order p.75 gives 3 stichera each twice = 6)",
+   status: inferred, evidence: "ANCA festal Vespers 2025-26 (Aug 5, Sep 13, Feb 1, Nov 20, Mar 24): 6 hymn-bearing verses, all for the feast"}
+- {id: mf.ves.lihc.circumcision, slot: vespers.lihc.stichera, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [circumcision]}],
+   fill: {res: 0, other: [3, 3], parts: ["3 stichera of the Circumcision — Menaion 01-01", "3 stichera of St Basil the Great — Menaion 01-01", "Glory: doxastikon of St Basil; Now: of the Circumcision"]},
+   source: anca, locator: "inferred: Typikon p.164 defers to the Menaion on a weekday (Sunday order p.165: 2+1 repeated for the feast, 3 for St Basil)",
+   status: inferred, evidence: "ANCA Great Vespers of Jan 01 (eve 2025-12-31): 3 Circumcision + 3 St Basil, Glory St Basil"}
+- {id: mf.ves.prokeimenon.daily.sun, slot: vespers.prokeimenon, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: eve_weekday_in, args: [Sunday]}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition, circumcision, ascension, nativity]}],
+   fill: {kind: daily, tone: 8, parts: ["Prokeimenon of the day (Sunday evening, “Behold now, bless the Lord”) — Tone 8"]},
+   source: typikon, locator: "Sep 8 p.65, Aug 15 p.455 ('the daily prokeimenon' on the eve); Ch I p.13 (Great Prokeimenon only on the evening of a Lord's feast)", status: explicit}
+- {id: mf.ves.prokeimenon.daily.mon, slot: vespers.prokeimenon, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: eve_weekday_in, args: [Monday]}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition, circumcision, ascension, nativity]}],
+   fill: {kind: daily, tone: 4, parts: ["Prokeimenon of the day (Monday evening, “The Lord will hearken unto me”) — Tone 4"]},
+   source: typikon, locator: "Sep 8 p.65, Aug 15 p.455, Nativity eve p.140 ('the daily prokeimenon' on the eve)", status: explicit}
+- {id: mf.ves.prokeimenon.daily.tue, slot: vespers.prokeimenon, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: eve_weekday_in, args: [Tuesday]}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition, circumcision, ascension, nativity]}],
+   fill: {kind: daily, tone: 1, parts: ["Prokeimenon of the day (Tuesday evening, “Thy mercy, O Lord, shall pursue me”) — Tone 1"]},
+   source: typikon, locator: "Sep 8 p.65, Aug 15 p.455, Nativity eve p.140 ('the daily prokeimenon' on the eve)", status: explicit}
+- {id: mf.ves.prokeimenon.daily.wed, slot: vespers.prokeimenon, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: eve_weekday_in, args: [Wednesday]}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition, circumcision, ascension, nativity]}],
+   fill: {kind: daily, tone: 5, parts: ["Prokeimenon of the day (Wednesday evening, “O God, in Thy name save me”) — Tone 5"]},
+   source: typikon, locator: "Sep 8 p.65, Aug 15 p.455, Nativity eve p.140 ('the daily prokeimenon' on the eve)", status: explicit}
+- {id: mf.ves.prokeimenon.daily.thu, slot: vespers.prokeimenon, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: eve_weekday_in, args: [Thursday]}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition, circumcision, ascension, nativity]}],
+   fill: {kind: daily, tone: 6, parts: ["Prokeimenon of the day (Thursday evening, “My help cometh from the Lord”) — Tone 6"]},
+   source: typikon, locator: "Sep 8 p.65, Aug 15 p.455, Nativity eve p.140 ('the daily prokeimenon' on the eve)", status: explicit}
+- {id: mf.ves.prokeimenon.daily.fri, slot: vespers.prokeimenon, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: eve_weekday_in, args: [Friday]}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition, circumcision, ascension, nativity]}],
+   fill: {kind: daily, tone: 7, parts: ["Prokeimenon of the day (Friday evening, “O God, my helper art Thou”) — Tone 7"]},
+   source: typikon, locator: "Sep 8 p.65, Aug 15 p.455, Nativity eve p.140 ('the daily prokeimenon' on the eve)", status: explicit}
+- {id: mf.ves.readings.3, slot: vespers.readings, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition, circumcision]}],
+   fill: {count: 3, parts: ["3 Old Testament readings of the feast — Menaion {mmdd}"]},
+   source: typikon, locator: "readings of the feast at the eve: Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Circumcision p.165; count from the Menaion",
+   status: inferred, evidence: "count: ANCA festal Vespers 2025-26 print 3 readings for all 8 feasts (Aug 5, Aug 14, Sep 7, Sep 13, Nov 20, Dec 31, Feb 1, Mar 24)"}
+- {id: mf.ves.litia, slot: vespers.litia, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition, circumcision]}],
+   fill: {litia: true, parts: ["Litia and Artoklasia of the feast after the litany of supplication (if the parish serves it) — Menaion {mmdd}"]},
+   source: anca, locator: "inferred: ANCA places the Litia at Great Vespers ('If your parish will offer the Service of the Litia and Artoklasia, it is done here')",
+   status: inferred, evidence: "ANCA festal Vespers 2025-26, all 8 feasts, and LITART files for each eve",
+   conflict: {with: ["Typikon Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Jan 1 p.164 (Litia at the Midnight Service)"], status: open,
+              note: "Typikon (Constantinopolitan order) places the Litia of the feast in the Midnight Service; Ch I p.14 describes the Artoklasia after the prayer at the bowing of heads at Vespers. ANCA prints it at Great Vespers as a parish option. Project default: follow ANCA. Vigil list Ch IV p.54 includes all these feasts except Jan 1."}}
+- {id: mf.ves.aposticha.feast, slot: vespers.aposticha, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition]}],
+   fill: {owner: feast, parts: ["Aposticha of the feast with their verses; Glory, Now: of the feast — Menaion {mmdd}"]},
+   source: typikon, locator: "Sep 8 p.65 (3 idiomela, Glory/Now feast); Sep 14 p.75; Aug 15 p.455", status: explicit}
+- {id: mf.ves.aposticha.circumcision, slot: vespers.aposticha, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [circumcision]}],
+   fill: {owner: saint, parts: ["Aposticha of St Basil; Glory: St Basil; Now: of the Circumcision — Menaion 01-01"]},
+   source: anca, locator: "inferred: Typikon p.164 defers to the Menaion on a weekday; Sunday order p.165 gives Glory St Basil, Now Circumcision",
+   status: inferred, evidence: "ANCA Great Vespers of Jan 01 (2025-12-31): aposticha of St Basil, doxastika St Basil then Circumcision"}
+- {id: mf.ves.apolytikia.feast, slot: vespers.apolytikia, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition]}],
+   fill: {res_tone: null, saint: true, parts: ["Apolytikion of the feast (thrice) — Menaion {mmdd}"]},
+   source: typikon, locator: "Sep 8 p.65, Sep 14 p.75, Aug 6 p.449, Aug 15 p.455 (troparion of the feast thrice)", status: explicit}
+- {id: mf.ves.apolytikia.circumcision, slot: vespers.apolytikia, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [circumcision]}],
+   fill: {res_tone: null, saint: true, parts: ["Apolytikion of St Basil the Great — Menaion 01-01", "Apolytikion of the Circumcision — Menaion 01-01"]},
+   source: typikon, locator: "Jan 1 p.164-165 (troparia of St Basil and of the Circumcision)", status: explicit}
+
+# ================= Matins (the feast day) =================
+- {id: mf.mat.apolytikia.feast, slot: matins.apolytikia, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition]}],
+   fill: {res_tone: null, saint: true, parts: ["Apolytikion of the feast (thrice) — Menaion {mmdd}"]},
+   source: typikon, locator: "God is the Lord: troparion of the feast thrice, Sep 8 p.65, Sep 14 p.75, Aug 15 p.455", status: explicit}
+- {id: mf.mat.apolytikia.circumcision, slot: matins.apolytikia, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [circumcision]}],
+   fill: {res_tone: null, saint: true, parts: ["Apolytikion of St Basil the Great (twice) — Menaion 01-01", "Apolytikion of the Circumcision — Menaion 01-01"]},
+   source: typikon, locator: "Jan 1 weekday p.164 (St Basil 2x, Circumcision 1x)", status: explicit}
+- {id: mf.mat.kathismata.feast, slot: matins.kathismata, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
+   fill: {tone: null, parts: ["Kathismata hymns of the feast — Menaion {mmdd}; Psalter, then the Polyeleos"]},
+   source: typikon, locator: "poetic kathisma of the feast and polyeleos: Sep 8 p.65, Sep 14 p.75, Nov 21 p.111, Feb 2 p.218, Aug 6 p.449, Aug 15 p.455", status: explicit}
+- {id: mf.mat.prokeimenon.feast, slot: matins.prokeimenon, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition]}],
+   fill: {kind: other, tone: 4, parts: ["First antiphon of the anabathmoi of Tone 4 (“From my youth”), then the prokeimenon of the feast — Menaion {mmdd}, Tone 4"]},
+   source: typikon, locator: "Sep 8 p.65, Sep 14 p.75, Aug 15 p.455 (1st anabathmoi of Tone 4, then the prokeimenon); its tone from the Menaion",
+   status: inferred, evidence: "tone: ANCA Festal Orthros 2025-26 for all 7 feasts print the prokeimenon of the feast in Tone 4"}
+- {id: mf.mat.prokeimenon.circumcision, slot: matins.prokeimenon, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [circumcision]}],
+   fill: {kind: other, tone: 4, parts: ["Anabathmoi of Tone 4, then the prokeimenon of St Basil — Menaion 01-01, Tone 4"]},
+   source: anca, locator: "inferred: Typikon p.164 defers to the Menaion", status: inferred,
+   evidence: "ANCA Festal Orthros Jan 01 (2026): festal anabathmoi Tone 4, prokeimenon for St Basil Tone 4"}
+- {id: mf.mat.gospel.feast, slot: matins.eothinon_gospel, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition]}],
+   fill: {number: null, ref: "$feast_matins_gospel_ref", parts: ["No eothinon: the Matins Gospel of the feast ({feast_matins_gospel_ref})"]},
+   source: typikon, locator: "Matins Gospel of the feast: Sep 8 p.65, Sep 14 p.75, Aug 15 p.455 (reference from the calendar lectionary, code m-<mm-dd>)", status: explicit}
+- {id: mf.mat.gospel.circumcision, slot: matins.eothinon_gospel, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [circumcision]}],
+   fill: {number: null, ref: "John 10:1-9", parts: ["No eothinon: the Matins Gospel of St Basil (John 10:1-9) — Menaion 01-01"]},
+   source: anca, locator: "inferred: Typikon p.164 defers to the Menaion; the calendar lectionary has no Matins Gospel for Jan 1",
+   status: inferred, evidence: "ANCA Festal Orthros Jan 01 (2026): John 10:1-9 (the hierarch's Gospel, calendar lection #3-Hier)"}
+- {id: mf.mat.kontakion.feast, slot: matins.kontakion, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition]}],
+   fill: {kind: feast, parts: ["Kontakion and oikos of the feast after the 6th ode — Menaion {mmdd}"]},
+   source: typikon, locator: "Sep 8 p.65 (after the 6th ode, kontakion and oikos)", status: explicit}
+- {id: mf.mat.kontakion.circumcision, slot: matins.kontakion, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [circumcision]}],
+   fill: {kind: feast, parts: ["Kontakion and oikos of St Basil after the 6th ode — Menaion 01-01"]},
+   source: anca, locator: "inferred: Typikon p.164 defers to the Menaion; Sunday order p.165 reads the kontakion of St Basil after the 6th ode", status: inferred,
+   evidence: "ANCA Festal Orthros Jan 01 (2026): kontakion and oikos for St Basil"}
+- {id: mf.mat.katavasia.cross, slot: matins.katavasia, tier: -10,
+   when: [{pred: major_feast_is, args: [nativity_theotokos, elevation, transfiguration]}],
+   fill: {of: cross, parts: ["Katavasia of the Holy Cross (“Moses, inscribing the invincible weapon”); 9th ode: the canons of the feast"]},
+   source: typikon, locator: "Gloss. katavasia schedule p.576-577 (Sep 1-21 and Aug 6-13: the Holy Cross); Sep 8 p.65", status: explicit}
+- {id: mf.mat.katavasia.nativity, slot: matins.katavasia, tier: -10,
+   when: [{pred: major_feast_is, args: [entrance]}],
+   fill: {of: nativity, parts: ["First katavasia of the Nativity of Christ (“Christ is born, glorify Him”); 9th ode: both canons of the feast"]},
+   source: typikon, locator: "Nov 21 p.111; Gloss. schedule p.577 (Nov 21 - Dec 24)", status: explicit}
+- {id: mf.mat.katavasia.theophany, slot: matins.katavasia, tier: -10,
+   when: [{pred: major_feast_is, args: [circumcision]}],
+   fill: {of: theophany, parts: ["Both katavasiae of Theophany; 9th ode: both canons with their megalynaria"]},
+   source: typikon, locator: "Jan 1 p.164; Gloss. schedule p.577", status: explicit}
+- {id: mf.mat.katavasia.feast, slot: matins.katavasia, tier: -10,
+   when: [{pred: major_feast_is, args: [presentation, dormition]}],
+   fill: {of: feast, parts: ["Katavasia of the feast's own canon; 9th ode with the magnifications of the feast"]},
+   source: typikon, locator: "Gloss. schedule p.577 (Jan 15 - Presentation leavetaking: Presentation; Aug 15-23: Dormition); Feb 2 p.218", status: explicit}
+- {id: mf.mat.katavasia.annunciation, slot: matins.katavasia, tier: -10,
+   when: [{pred: major_feast_is, args: [annunciation]}],
+   fill: {of: feast, parts: ["Katavasia of the Annunciation canon; 9th ode with the magnifications of the feast"]},
+   source: anca, locator: "inferred: the Gloss. schedule p.577 has no entry for a weekday of Lent", status: inferred,
+   evidence: "ANCA Festal Orthros Mar 25 (2026): katavasia of the ninth ode of the Annunciation canon"}
+- {id: mf.mat.praises.4, slot: matins.praises, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity_theotokos]}],
+   fill: {total: 4, res: 0, other: [4], parts: ["4 stichera of the feast; Glory, Now: of the feast — Menaion {mmdd}"]},
+   source: typikon, locator: "Sep 8 weekday p.65 (4 stichera, Glory/Now feast)", status: explicit}
+- {id: mf.mat.praises.4.menaion, slot: matins.praises, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, dormition, circumcision]}],
+   fill: {total: 4, res: 0, other: [4], parts: ["4 stichera of the feast; Glory, Now: doxastikon of the feast — Menaion {mmdd}"]},
+   source: anca, locator: "inferred: Typikon defers weekday Matins to the Menaion (counts unstated)", status: inferred,
+   evidence: "ANCA Festal Orthros 2025-26 (Aug 6, Aug 15, Sep 14, Nov 21, Jan 1, Feb 2, Mar 25): 4 verses with stichera"}
+
+# ================= Divine Liturgy (the feast day) =================
+- {id: mf.lit.antiphons.lord, slot: liturgy.antiphons, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, annunciation, circumcision]}],
+   fill: {refrain2: feast, parts: ["Antiphons of the feast; 2nd antiphon refrain “Save us, O Son of God, Who …” with the phrase of the feast"]},
+   source: typikon, locator: "Ch I s6 II p.34 (antiphons of a feast of the Lord on any day; Presentation and Annunciation refrains named); Jan 1 p.166", status: explicit}
+- {id: mf.lit.antiphons.theotokos, slot: liturgy.antiphons, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity_theotokos, entrance, dormition]}],
+   fill: {refrain2: saints, parts: ["Antiphons of the feast; 2nd antiphon refrain “Save us, O Son of God, Who art wondrous in the saints”"]},
+   source: typikon, locator: "Ch I s6 II p.34 (feast of the Theotokos on a weekday: 2nd refrain 'who art wondrous in the Saints'); Sep 8 p.65", status: explicit}
+- {id: mf.lit.eisodikon.feast, slot: liturgy.eisodikon, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, annunciation, circumcision]}],
+   fill: {kind: feast, parts: ["Entrance hymn of the feast"]},
+   source: typikon, locator: "Ch I s6 III p.34 (Presentation, Annunciation special entrance hymn); Aug 6 p.450", status: explicit}
+- {id: mf.lit.eisodikon.weekday, slot: liturgy.eisodikon, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity_theotokos, entrance, dormition]}],
+   fill: {kind: weekday, parts: ["Entrance hymn of weekdays (“… Who art wondrous in the saints”)"]},
+   source: typikon, locator: "Ch I s6 III p.34-35 (weekday entrance hymn 'who art wondrous in the saints'; the 2nd antiphon refrain of a weekday Theotokos feast, p.34)",
+   status: inferred, evidence: "Typikon names the weekday entrance hymn for saints and weekdays; ANCA Liturgy Variables Aug 15 and Nov 21 (2025-26): 'Eisodikon of ordinary weekdays'"}
+- {id: mf.lit.apolytikia.feast, slot: liturgy.apolytikia, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition]}],
+   fill: {res_tone: null, saint: true, patron: false, parts: ["Apolytikion of the feast — Menaion {mmdd} (not the apolytikion of the patron of the temple)"]},
+   source: anca, locator: "inferred: Typikon Ch I s6 IV p.35 gives feast + patron only for the days between a feast and its leavetaking", status: inferred,
+   evidence: "ANCA Liturgy Variables 2025-26, all 7 feasts: 'Do NOT sing the apolytikion of the patron saint or feast of the temple'"}
+- {id: mf.lit.apolytikia.circumcision, slot: liturgy.apolytikia, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [circumcision]}],
+   fill: {res_tone: null, saint: true, patron: true, parts: ["Apolytikion of the Circumcision — Menaion 01-01", "Apolytikion of St Basil the Great — Menaion 01-01", "Apolytikion of the patron saint or feast of the temple"]},
+   source: typikon, locator: "Jan 1 p.166 (troparia of the Circumcision and St Basil)", status: explicit}
+- {id: mf.lit.kontakion.feast, slot: liturgy.kontakion, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
+   fill: {kind: "$major_feast", parts: ["Kontakion of the feast — Menaion {mmdd}"]},
+   source: typikon, locator: "Ch I s6 V p.35-37 (kontakion schedule: the feast's own kontakion from the feast to its leavetaking; Jan 1 Circumcision)", status: explicit}
+- {id: mf.lit.kontakion.elevation, slot: liturgy.kontakion, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [elevation]}],
+   fill: {kind: holy_cross, parts: ["Kontakion of the Holy Cross (“Do Thou, Who of Thine own good will”) — Menaion 09-14"]},
+   source: typikon, locator: "Ch I s6 V p.35 (Sep 14 to the leavetaking: kontakion of the Holy Cross)", status: explicit}
+- {id: mf.lit.trisagion.trisagion, slot: liturgy.trisagion, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
+   fill: {kind: trisagion, parts: ["“Holy God” (the Trisagion)"]},
+   source: typikon, locator: "Ch I s6 VI p.37 (Trisagion at every Liturgy except the listed feasts)", status: explicit}
+- {id: mf.lit.trisagion.cross, slot: liturgy.trisagion, tier: -10,
+   when: [{pred: major_feast_is, args: [elevation]}],
+   fill: {kind: cross, parts: ["“Before Thy Cross” in place of the Trisagion"]},
+   source: typikon, locator: "Ch I s6 VI p.37", status: explicit}
+- {id: mf.lit.prokeimenon.feast, slot: liturgy.prokeimenon, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
+   fill: {owner: feast, parts: ["Prokeimenon of the feast — Menaion {mmdd}"]},
+   source: typikon, locator: "Ch I s6 VII p.37-38 (Epistle of the feast; its prokeimenon goes with it)", status: explicit}
+- {id: mf.lit.epistle.feast, slot: liturgy.epistle, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
+   fill: {owner: feast, ref: "$epistle_ref", parts: ["{epistle_ref} — for the feast"]},
+   source: typikon, locator: "Ch I s6 VII p.37-38 (Epistle and Gospel of the feast on a weekday; references from the calendar lectionary)", status: explicit}
+- {id: mf.lit.alleluia, slot: liturgy.alleluia, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
+   fill: {tone: 2, parts: ["Alleluia — Tone 2, with the verses of the feast (Menaion {mmdd})"]},
+   source: typikon, locator: "Ch I s6 VIII p.38 (Alleluia thrice in Tone 2 at every Liturgy)", status: explicit}
+- {id: mf.lit.gospel.feast, slot: liturgy.gospel, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
+   fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the feast"]},
+   source: typikon, locator: "Ch I s6 VII p.37-38 (references from the calendar lectionary)", status: explicit}
+- {id: mf.lit.megalynarion.feast, slot: liturgy.megalynarion, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [elevation, presentation, entrance, annunciation, nativity_theotokos, dormition]}],
+   fill: {kind: feast, parts: ["Megalynarion: the 9th ode (heirmos) of the feast with its magnification, in place of “It is truly meet”"]},
+   source: typikon, locator: "Ch I s6 X p.38 (feast of the Lord or the Theotokos: 9th ode of the canon of the feast)", status: explicit}
+- {id: mf.lit.megalynarion.transfiguration, slot: liturgy.megalynarion, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration]}],
+   fill: {kind: feast, parts: ["Megalynarion: “Now hath been heard that which had never been heard before” (7th ode of the feast's canon)"]},
+   source: typikon, locator: "Aug 6 p.450; Ch I s6 X p.38 (custom)", status: explicit}
+- {id: mf.lit.megalynarion.circumcision, slot: liturgy.megalynarion, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [circumcision]}],
+   fill: {kind: in_thee_rejoiceth, parts: ["Megalynarion of the Liturgy of St Basil: “All creation rejoiceth in thee”"]},
+   source: anca, locator: "inferred: Liturgy of St Basil megalynarion (Ch I s6 X p.38)", status: inferred,
+   evidence: "ANCA Liturgy Variables Jan 01 (2026) and Jan 01 2023: 'St. Basil Liturgy megalynarion' (In thee rejoiceth)",
+   conflict: {with: ["Typikon Jan 1 p.164 and p.166"], status: open,
+              note: "Typikon Jan 1 (weekday p.164, Sunday p.166): after 'The mercies of our great God' the megalynarion of St Basil 'Let us all extol the great Basil'. ANCA prints the ordinary Basil-Liturgy megalynarion 'In thee rejoiceth'. Project default: follow ANCA."}}
+- {id: mf.lit.communion.feast, slot: liturgy.communion, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation]}],
+   fill: {kind: feast, parts: ["Communion hymn of the feast — Menaion {mmdd}"]},
+   source: typikon, locator: "Ch I s6 XI p.39 (communion hymn of the feast on feasts of the Lord); Aug 6 p.450", status: explicit}
+- {id: mf.lit.communion.cup, slot: liturgy.communion, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [presentation, entrance, nativity_theotokos, dormition]}],
+   fill: {kind: cup_of_salvation, parts: ["Communion hymn: “I will take the cup of salvation” (Psalm 115:4)"]},
+   source: anca, locator: "inferred: Ch I s6 XI p.39 gives 'I will take the cup' for Theotokos feasts on Sunday; weekday not stated", status: inferred,
+   evidence: "ANCA Liturgy Variables 2025-26 (Sep 8, Nov 21, Aug 15, Feb 2): 'I will take the cup of salvation'"}
+- {id: mf.lit.communion.annunciation, slot: liturgy.communion, tier: -10,
+   when: [{pred: major_feast_is, args: [annunciation]}],
+   fill: {kind: chosen_zion, parts: ["Communion hymn: “The Lord hath chosen Zion” (Psalm 131:13)"]},
+   source: typikon, locator: "Ch I s6 XI p.39-40", status: explicit}
+- {id: mf.lit.communion.circumcision, slot: liturgy.communion, tier: -10,
+   when: [{pred: major_feast_is, args: [circumcision]}],
+   fill: {kind: praise_the_lord, parts: ["Communion hymn: “Praise ye the Lord from the heavens” (Psalm 148:1)"]},
+   source: typikon, locator: "Ch I s6 XI p.39 (Circumcision on any day); Jan 1 p.166", status: explicit}
+- {id: mf.lit.final.feast, slot: liturgy.final_hymn, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, circumcision]}],
+   fill: {kind: feast_troparion, parts: ["Apolytikion of the feast in place of “We have seen the true light”"]},
+   source: typikon, locator: "Ch I s6 XII p.40 (feast of the Lord); Aug 6 p.450; Jan 1 p.166", status: explicit}
+- {id: mf.lit.final.true_light, slot: liturgy.final_hymn, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [presentation, entrance, nativity_theotokos, dormition, annunciation]}],
+   fill: {kind: true_light, parts: ["“We have seen the true light”"]},
+   source: typikon, locator: "Feb 2 weekday p.218 ('We sing We have seen the true light'); Ch I s6 XII p.40 (troparion only on feasts of the Lord)", status: explicit}
+- {id: mf.lit.dismissal.feast, slot: liturgy.dismissal, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (the feast's own day)", parts: ["the patron of the temple; no saint of the day named"]},
+   source: anca, locator: "inferred: no saint of the day is named on the feast day itself", status: inferred,
+   evidence: "ANCA Liturgy Variables 2025-26, all 8 feasts: dismissal without a saint of the day (Jan 1: St Basil named as the Liturgy's author)"}
+- {id: mf.lit.dismissal_phrase.lord, slot: liturgy.dismissal_phrase, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, presentation, annunciation, circumcision]}],
+   fill: {phrase: feast, clause: none, parts: ["Opening: “May He Who …” with the characteristic phrase of the feast (no “rose from the dead”)"]},
+   source: typikon, locator: "Ch I s4 p.17-18 (characteristic phrase of a feast of the Lord; Annunciation and Presentation have one); Jan 1 p.164; Feb 2 p.218; Aug 6 p.449", status: explicit}
+- {id: mf.lit.dismissal_phrase.cross, slot: liturgy.dismissal_phrase, tier: -10,
+   when: [{pred: major_feast_is, args: [elevation]}],
+   fill: {phrase: resurrection, clause: cross, parts: ["Opening: “May He Who rose from the dead …” even on a weekday; the Cross named in the Cross clause"]},
+   source: typikon, locator: "Ch I s4 p.18 (Holy Cross: 'May he who rose again from the dead' on whatever day)", status: explicit}
+- {id: mf.lit.dismissal_phrase.theotokos, slot: liturgy.dismissal_phrase, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity_theotokos, entrance, dormition]}],
+   fill: {phrase: plain, clause: none, parts: ["Opening: “May Christ our true God …” (no characteristic phrase)"]},
+   source: typikon, locator: "Ch I s4 p.17-18 (weekday Great Dismissal; only the Annunciation and the Presentation among Theotokos feasts have a phrase)", status: explicit}
+- {id: mf.lit.author, slot: liturgy.author, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
+   fill: {author: "$liturgy_author", parts: ["Divine Liturgy of St {liturgy_author}"]},
+   source: typikon, locator: "Ch I s4 p.17 (Liturgy author); Jan 1 p.164 (Liturgy of St Basil); DB calendar Basil flag", status: explicit}
+
+# ================= Ascension (Thursday, Pascha+39): Typikon p.535-536 gives the full order =================
+- {id: mf.asc.ves.lihc, slot: vespers.lihc.stichera, tier: -10,
+   when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {res: 0, other: [10], parts: ["5 stichera of the Ascension, each twice (10) — Pentecostarion, Tone 6", "Glory, Now: of the Ascension — Tone 6"]},
+   source: typikon, locator: "Ascension, Wednesday Great Vespers p.535", status: explicit}
+- {id: mf.asc.ves.readings, slot: vespers.readings, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {count: 3, parts: ["Old Testament readings of the Ascension (Isaiah 2:2-3; Isaiah 62:10-63:3, 7-9; Zechariah 14:1, 4, 8-11) — Pentecostarion"]},
+   source: typikon, locator: "p.535 ('the readings from the Old Testament as in the Pentecostarion'); count and references from the Pentecostarion",
+   status: inferred, evidence: "ANCA Great Vespers of the Fortieth Day after Pascha (2026-05-20): 3 readings"}
+- {id: mf.asc.ves.litia, slot: vespers.litia, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {litia: true, parts: ["Litia and Artoklasia of the Ascension (if the parish serves it) — Pentecostarion"]},
+   source: anca, locator: "inferred: Typikon Ch IV p.54 vigil list includes the Ascension; ANCA prints the Litia at Great Vespers", status: inferred,
+   evidence: "ANCA Ascension-VESP and Ascension-LITART (2026)"}
+- {id: mf.asc.ves.aposticha, slot: vespers.aposticha, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {owner: feast, parts: ["Aposticha: idiomela of the Ascension, Tone 2; Glory, Now: of the Ascension, Tone 6"]},
+   source: typikon, locator: "p.535-536", status: explicit}
+- {id: mf.asc.ves.apolytikia, slot: vespers.apolytikia, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {res_tone: null, saint: true, parts: ["Apolytikion of the Ascension (“Thou didst ascend in glory”), Tone 4 (thrice)"]},
+   source: typikon, locator: "p.536", status: explicit}
+- {id: mf.asc.mat.apolytikia, slot: matins.apolytikia, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {res_tone: null, saint: true, parts: ["Apolytikion of the Ascension, Tone 4 (thrice)"]},
+   source: typikon, locator: "p.536", status: explicit}
+- {id: mf.asc.mat.kathismata, slot: matins.kathismata, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {tone: null, parts: ["Kathismata hymns of the Ascension (Tones 1, 3, 5) — Pentecostarion"]},
+   source: typikon, locator: "p.536", status: explicit}
+- {id: mf.asc.mat.prokeimenon, slot: matins.prokeimenon, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {kind: other, tone: 4, parts: ["Anabathmoi of Tone 4 (“From my youth”), then the prokeimenon of the Ascension, Tone 4"]},
+   source: typikon, locator: "p.536", status: explicit}
+- {id: mf.asc.mat.gospel, slot: matins.eothinon_gospel, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {number: null, ref: "$feast_matins_gospel_ref", parts: ["Matins Gospel of the Ascension = the 3rd eothinon ({feast_matins_gospel_ref}); then “In that we have beheld”"]},
+   source: typikon, locator: "p.536 (the Matins Gospel of the 3rd eothinon)", status: explicit}
+- {id: mf.asc.mat.kontakion, slot: matins.kontakion, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {kind: feast, parts: ["Kontakion and oikos of the Ascension — Pentecostarion"]},
+   source: typikon, locator: "p.536 (kontakion of the Ascension; Liturgy kontakion Tone 8)", status: explicit}
+- {id: mf.asc.mat.katavasia, slot: matins.katavasia, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {of: feast, parts: ["Katavasia of the Ascension, Tone 4 (“The heavy of tongue”); 9th ode: magnification of the Ascension"]},
+   source: typikon, locator: "p.536; Gloss. schedule p.577 (Ascension to Pentecost)", status: explicit}
+- {id: mf.asc.mat.praises, slot: matins.praises, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {total: 4, res: 0, other: [4], parts: ["4 stichera of the Ascension, Tone 1; Glory, Now: of the Ascension, Tone 2"]},
+   source: typikon, locator: "p.536", status: explicit}
+- {id: mf.asc.lit.antiphons, slot: liturgy.antiphons, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {refrain2: feast, parts: ["Antiphons of the Ascension; 2nd antiphon refrain “… Who didst ascend in glory”"]},
+   source: typikon, locator: "p.536; Ch I s6 II p.34", status: explicit}
+- {id: mf.asc.lit.eisodikon, slot: liturgy.eisodikon, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {kind: feast, parts: ["Entrance hymn of the Ascension"]}, source: typikon, locator: "p.536", status: explicit}
+- {id: mf.asc.lit.apolytikia, slot: liturgy.apolytikia, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {res_tone: null, saint: true, patron: false, parts: ["Apolytikion of the Ascension, Tone 4 (not the apolytikion of the patron of the temple)"]},
+   source: typikon, locator: "p.536 (after the Little Entrance: the troparion of the Ascension)", status: explicit}
+- {id: mf.asc.lit.kontakion, slot: liturgy.kontakion, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {kind: ascension, tone: 6, parts: ["Kontakion of the Ascension (“When Thou hadst fulfilled the dispensation”), Tone 6"]}, source: anca,
+   locator: "inferred: Typikon p.536 (kontakion of the Ascension) prints 'tone 8'", status: inferred, evidence: "ANCA Ascension-READ (2026): Tone 6 (plagal of the 2nd)",
+   conflict: {with: ["Typikon p.536 (kontakion 'in tone 8')"], status: open, note: "Typikon gives Tone 8; ANCA Tone 6 (the hymn's usual plagal-2nd melody). Project default: follow ANCA (one sample)."}}
+- {id: mf.asc.lit.trisagion, slot: liturgy.trisagion, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {kind: trisagion, parts: ["“Holy God” (the Trisagion)"]}, source: typikon, locator: "Ch I s6 VI p.37", status: explicit}
+- {id: mf.asc.lit.prokeimenon, slot: liturgy.prokeimenon, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {owner: feast, parts: ["Prokeimenon of the Ascension — Pentecostarion"]}, source: typikon, locator: "p.536 (Epistle of the Ascension)", status: explicit}
+- {id: mf.asc.lit.epistle, slot: liturgy.epistle, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {owner: feast, ref: "$epistle_ref", parts: ["{epistle_ref} — for the Ascension"]}, source: typikon, locator: "p.536 (Acts 1:1-12)", status: explicit}
+- {id: mf.asc.lit.alleluia, slot: liturgy.alleluia, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {tone: 2, parts: ["Alleluia — Tone 2, with the verses of the Ascension"]}, source: typikon, locator: "Ch I s6 VIII p.38", status: explicit}
+- {id: mf.asc.lit.gospel, slot: liturgy.gospel, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the Ascension"]}, source: typikon, locator: "p.536 (Luke 24:36-53)", status: explicit}
+- {id: mf.asc.lit.megalynarion, slot: liturgy.megalynarion, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {kind: feast, parts: ["Megalynarion of the Ascension (“In unison do we magnify thee”)"]}, source: typikon, locator: "p.536", status: explicit}
+- {id: mf.asc.lit.communion, slot: liturgy.communion, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {kind: feast, parts: ["Communion hymn of the Ascension (“God is gone up with a shout”)"]}, source: typikon, locator: "p.536", status: explicit}
+- {id: mf.asc.lit.final, slot: liturgy.final_hymn, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {kind: feast_troparion, parts: ["Apolytikion of the Ascension in place of “We have seen the true light”"]}, source: typikon, locator: "p.536; Ch I s6 XII p.40", status: explicit}
+- {id: mf.asc.lit.dismissal, slot: liturgy.dismissal, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (the feast's own day)", parts: ["the patron of the temple; no saint of the day named"]},
+   source: anca, locator: "inferred: no saint of the day is named on the feast day itself", status: inferred,
+   evidence: "ANCA Ascension-READ (2026-05-21, Constantine and Helen in the calendar): no saint of the day named"}
+- {id: mf.asc.lit.dismissal_phrase, slot: liturgy.dismissal_phrase, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {phrase: feast, clause: none, parts: ["Opening: “May He Who in glory ascended from us into heaven and sat at the right hand of God the Father …”"]},
+   source: typikon, locator: "p.536; Ch I s4 p.17", status: explicit}
+- {id: mf.asc.lit.author, slot: liturgy.author, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
+   fill: {author: "$liturgy_author", parts: ["Divine Liturgy of St {liturgy_author}"]}, source: typikon, locator: "Ch I s4 p.17", status: explicit}
+
+# ================= Nativity of Christ (Tuesday-Saturday): Typikon p.138-143 =================
+# Eve (Dec 24): Royal Hours, then Great Vespers with the Liturgy of St Basil (p.140). Monday / Sunday orders (p.143-148): not covered.
+- {id: mf.nat.ves.lihc, slot: vespers.lihc.stichera, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {res: 0, other: [6], parts: ["4 idiomela of the Nativity, the 1st and 2nd repeated (6) — Menaion 12-25", "Glory, Now: “When Augustus reigned alone upon earth”", "Entrance with the Gospel book"]},
+   source: typikon, locator: "Nativity eve p.140", status: explicit}
+- {id: mf.nat.ves.readings, slot: vespers.readings, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {count: 2, parts: ["Readings: Genesis 1:1-13 with the troparion “Thou wast born secretly in the cave”; Isaiah 9:6-7 with “Thou hast shone forth from a Virgin”", "Then the Trisagion, Epistle (Hebrews 1:1-12), Alleluia, Gospel (Luke 2:1-20) and the Liturgy of St Basil"]},
+   source: typikon, locator: "p.140 (two readings with their troparia; Epistle and Gospel of the Vesperal Liturgy)", status: explicit,
+   conflict: {with: ["Menaion (8 readings, Typikon editor's note p.140)"], status: open,
+              note: "The Typikon prescribes 2 readings; the Menaion has 8. ANCA follows the Menaion on the Theophany eve (13 readings, 2026) but has no Nativity text; Typikon kept until an ANCA Nativity sample exists."}}
+- {id: mf.nat.ves.litia, slot: vespers.litia, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {litia: false, parts: ["No Litia at this Vespers (the Litia and the aposticha are sung at the Midnight Service of the feast)"]},
+   source: typikon, locator: "p.141 (Midnight Service: the litia, the aposticha)", status: explicit,
+   conflict: {with: [mf.ves.litia], status: open, note: "ANCA moves the Litia to Great Vespers on the other feasts (and on the Theophany eve, 2026); no ANCA Nativity text to confirm."}}
+- {id: mf.nat.ves.aposticha, slot: vespers.aposticha, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {owner: none, parts: ["No aposticha: Vespers passes into the Liturgy of St Basil after the readings"]},
+   source: typikon, locator: "p.140-141", status: explicit}
+- {id: mf.nat.ves.apolytikia, slot: vespers.apolytikia, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {res_tone: null, saint: false, parts: ["No dismissal troparion at Vespers (the Liturgy of St Basil follows; “We have seen the true light” at its end)"]},
+   source: typikon, locator: "p.140", status: explicit}
+- {id: mf.nat.mat.apolytikia, slot: matins.apolytikia, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {res_tone: null, saint: true, parts: ["Apolytikion of the Nativity (“Thy Nativity, O Christ our God”), thrice"]}, source: typikon, locator: "p.141", status: explicit}
+- {id: mf.nat.mat.kathismata, slot: matins.kathismata, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {tone: null, parts: ["The three kathismata hymns of the Nativity — Menaion 12-25; Psalter, then the Polyeleos"]}, source: typikon, locator: "p.141", status: explicit}
+- {id: mf.nat.mat.prokeimenon, slot: matins.prokeimenon, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {kind: other, tone: null, parts: ["Anabathmoi of Tone 4, then the prokeimenon “From the womb before the morning star have I begotten Thee” — Menaion 12-25"]},
+   source: typikon, locator: "p.141 (tone not printed)", status: explicit}
+- {id: mf.nat.mat.gospel, slot: matins.eothinon_gospel, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {number: null, ref: "$feast_matins_gospel_ref", parts: ["No eothinon: the Matins Gospel of the Nativity ({feast_matins_gospel_ref})"]}, source: typikon, locator: "p.141", status: explicit}
+- {id: mf.nat.mat.kontakion, slot: matins.kontakion, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {kind: feast, parts: ["Kontakion and oikos of the Nativity after the 6th ode"]}, source: typikon, locator: "p.141", status: explicit}
+- {id: mf.nat.mat.katavasia, slot: matins.katavasia, tier: -10, when: [{pred: major_feast_is, args: [nativity]}],
+   fill: {of: nativity, parts: ["Both katavasiae of the Nativity; 9th ode of both canons with their megalynaria"]}, source: typikon, locator: "p.141; Gloss. schedule p.577", status: explicit}
+- {id: mf.nat.mat.praises, slot: matins.praises, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {total: 4, res: 0, other: [4], parts: ["4 stichera of the Nativity; Glory, Now: of the Nativity — Menaion 12-25"]}, source: typikon, locator: "p.142", status: explicit}
+- {id: mf.nat.lit.antiphons, slot: liturgy.antiphons, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {refrain2: feast, parts: ["Antiphons of the Nativity; 2nd antiphon refrain “O Son of God, born of a Virgin”"]}, source: typikon, locator: "p.142", status: explicit}
+- {id: mf.nat.lit.eisodikon, slot: liturgy.eisodikon, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {kind: feast, parts: ["Entrance hymn of the Nativity (“From the womb before the morning star”)"]}, source: typikon, locator: "p.143", status: explicit}
+- {id: mf.nat.lit.apolytikia, slot: liturgy.apolytikia, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {res_tone: null, saint: true, patron: false, parts: ["Apolytikion of the Nativity (“Thy Nativity, O Christ our God”)"]}, source: typikon, locator: "p.143", status: explicit}
+- {id: mf.nat.lit.kontakion, slot: liturgy.kontakion, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {kind: nativity, parts: ["Kontakion of the Nativity (“Today the Virgin giveth birth”)"]}, source: typikon, locator: "p.143; Ch I s6 V p.36", status: explicit}
+- {id: mf.lit.trisagion.baptized, slot: liturgy.trisagion, tier: -10, when: [{pred: major_feast_is, args: [nativity, theophany]}],
+   fill: {kind: baptized, parts: ["“As many as have been baptized into Christ” in place of the Trisagion"]}, source: typikon, locator: "Ch I s6 VI p.37; p.143, p.173", status: explicit}
+- {id: mf.nat.lit.prokeimenon, slot: liturgy.prokeimenon, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity, theophany]}],
+   fill: {owner: feast, parts: ["Prokeimenon of the feast — Menaion {mmdd}"]}, source: typikon, locator: "p.143, p.173 (Epistle of the feast)", status: explicit}
+- {id: mf.nat.lit.epistle, slot: liturgy.epistle, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity, theophany]}],
+   fill: {owner: feast, ref: "$epistle_ref", parts: ["{epistle_ref} — for the feast"]}, source: typikon, locator: "p.143, p.173 (references from the calendar lectionary)", status: explicit}
+- {id: mf.nat.lit.alleluia, slot: liturgy.alleluia, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity, theophany]}],
+   fill: {tone: 2, parts: ["Alleluia — Tone 2, with the verses of the feast"]}, source: typikon, locator: "Ch I s6 VIII p.38", status: explicit}
+- {id: mf.nat.lit.gospel, slot: liturgy.gospel, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity, theophany]}],
+   fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the feast"]}, source: typikon, locator: "p.143, p.173 (references from the calendar lectionary)", status: explicit}
+- {id: mf.nat.lit.megalynarion, slot: liturgy.megalynarion, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity, theophany]}],
+   fill: {kind: feast, parts: ["Megalynarion and heirmos of the 9th ode of the 1st canon of the feast"]}, source: typikon, locator: "p.143, p.173", status: explicit}
+- {id: mf.nat.lit.communion, slot: liturgy.communion, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
+   fill: {kind: feast, parts: ["Communion hymn: “The Lord hath sent redemption unto His people”"]}, source: typikon, locator: "p.143", status: explicit}
+- {id: mf.nat.lit.final, slot: liturgy.final_hymn, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity, theophany]}],
+   fill: {kind: feast_troparion, parts: ["Apolytikion of the feast in place of “We have seen the true light”"]}, source: typikon, locator: "p.143, p.173; Ch I s6 XII p.40", status: explicit}
+- {id: mf.nat.lit.dismissal, slot: liturgy.dismissal, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity, theophany]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (the feast's own day)", parts: ["the patron of the temple; no saint of the day named"]},
+   source: anca, locator: "inferred: no saint of the day is named on a feast of the Lord (ANCA pattern on the other Lord's feasts)", status: inferred,
+   evidence: "ANCA Liturgy Variables 2025-26 for 6 feasts of the Lord (Aug 6, Sep 14, Feb 2, Mar 25, Jan 1, Ascension): no saint of the day named"}
+- {id: mf.nat.lit.dismissal_phrase, slot: liturgy.dismissal_phrase, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity, theophany]}],
+   fill: {phrase: feast, clause: none, parts: ["Opening: “May He Who …” with the characteristic phrase of the feast (no “rose from the dead”)"]},
+   source: typikon, locator: "Ch I s4 p.18 (Nativity: 'born in a cave'); p.141, p.171", status: explicit}
+- {id: mf.nat.lit.author, slot: liturgy.author, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity, theophany]}],
+   fill: {author: "John Chrysostom", parts: ["Divine Liturgy of St John Chrysostom"]}, source: typikon, locator: "p.142 (Liturgy of St John Chrysostom on the feast; St Basil on the eve)", status: explicit}
+
+# ================= Theophany (Tuesday-Saturday): Typikon p.170-173 =================
+- {id: mf.thy.ves.lihc, slot: vespers.lihc.stichera, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {res: 0, other: [6], parts: ["6 stichera of Theophany — Menaion 01-06", "Glory, Now: of Theophany", "Entrance with the Gospel book"]},
+   source: anca, locator: "inferred: Typikon p.170 'the Vespers Service from the Menaion'", status: inferred,
+   evidence: "ANCA Great Vespers of January 06 and Abbreviated Rubrics (2026-01-05): 6 stichera, Tone 2"}
+- {id: mf.thy.ves.prokeimenon, slot: vespers.prokeimenon, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {kind: none, tone: null, parts: ["No prokeimenon: the readings begin after “O Gladsome Light”"]},
+   source: anca, locator: "inferred: Typikon p.170 lists the readings directly after the Vespers hymns (Ch I p.13: Nativity and Epiphany are the exceptions to the Saturday prokeimenon)", status: inferred,
+   evidence: "ANCA Great Vespers of January 06 (2026): 'No daily prokeimenon is sung, and the readings are immediately begun'"}
+- {id: mf.thy.ves.readings, slot: vespers.readings, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {count: 13, parts: ["13 Old Testament readings of Theophany, the troparia “Thou didst appear in the world” after the 3rd and “Thou didst appear, O Saviour” after the 6th — Menaion 01-06", "Then the Epistle (1 Corinthians 9:19-27) and Gospel (Luke 3:1-18) of the eve; where the Vesperal Liturgy of St Basil is served it continues from the Trisagion"]},
+   source: anca, locator: "inferred: Menaion (13 readings, Typikon editor's note p.170)", status: inferred,
+   evidence: "ANCA Great Vespers of January 06 (2026): 13 readings then Epistle and Gospel",
+   conflict: {with: ["Typikon p.170 (3 readings: Genesis 1:1-13, Exodus 14:15-29, 2 Kings 5:9-14)"], status: open,
+              note: "Typikon prescribes 3 readings with the two troparia; its editor notes the Menaion's 13. ANCA prints all 13. Project default: follow ANCA (one sample)."}}
+- {id: mf.thy.ves.litia, slot: vespers.litia, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {litia: true, parts: ["Litia and Artoklasia of Theophany (if the parish serves it) — Menaion 01-06"]},
+   source: anca, locator: "inferred: ANCA prints the Litia at the Theophany eve Vespers", status: inferred, evidence: "ANCA Great Vespers of January 06 and 2A-Theophany LITART (2026)",
+   conflict: {with: ["Typikon p.171 (Litia and aposticha at the Midnight Office of the feast)"], status: open, note: "As mf.ves.litia; ANCA's Theophany eve is an evening Great Vespers with Epistle and Gospel. Project default: follow ANCA."}}
+- {id: mf.thy.ves.aposticha, slot: vespers.aposticha, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {owner: feast, parts: ["Aposticha of Theophany; Glory, Now: of Theophany — Menaion 01-06"]},
+   source: anca, locator: "inferred", status: inferred, evidence: "ANCA Great Vespers of January 06 (2026): aposticha for Theophany",
+   conflict: {with: ["Typikon p.171 (aposticha sung at the Midnight Office 'because it was omitted yesterday')"], status: open, note: "Project default: follow ANCA (one sample)."}}
+- {id: mf.thy.ves.apolytikia, slot: vespers.apolytikia, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {res_tone: null, saint: true, parts: ["Apolytikion of Theophany (“When Thou, O Lord, wast baptized in the Jordan”)"]},
+   source: anca, locator: "inferred: the evening Great Vespers ends with the troparion of the feast", status: inferred,
+   evidence: "ANCA Great Vespers of January 06 (2026)"}
+- {id: mf.thy.mat.apolytikia, slot: matins.apolytikia, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {res_tone: null, saint: true, parts: ["Apolytikion of Theophany, thrice"]}, source: typikon, locator: "p.171", status: explicit}
+- {id: mf.thy.mat.kathismata, slot: matins.kathismata, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {tone: null, parts: ["Kathismata hymns of Theophany — Menaion 01-06; Psalter, then the Polyeleos"]}, source: typikon, locator: "p.171", status: explicit}
+- {id: mf.thy.mat.prokeimenon, slot: matins.prokeimenon, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {kind: other, tone: 4, parts: ["Festal anabathmoi and the prokeimenon of Theophany — Menaion 01-06, Tone 4"]},
+   source: anca, locator: "inferred: Typikon p.171 does not list the prokeimenon", status: inferred, evidence: "ANCA Festal Orthros January 06 (2026): Tone 4"}
+- {id: mf.thy.mat.gospel, slot: matins.eothinon_gospel, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {number: null, ref: "$feast_matins_gospel_ref", parts: ["No eothinon: the Matins Gospel of Theophany ({feast_matins_gospel_ref})"]},
+   source: anca, locator: "inferred: Typikon p.171 does not list the Matins Gospel; reference from the calendar lectionary (m-01-06)", status: inferred,
+   evidence: "ANCA Abbreviated Rubrics and Festal Orthros January 06 (2026): Mark 1:9-11"}
+- {id: mf.thy.mat.kontakion, slot: matins.kontakion, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {kind: feast, parts: ["Kontakion and oikos of Theophany after the 6th ode"]}, source: typikon, locator: "p.171", status: explicit}
+- {id: mf.thy.mat.katavasia, slot: matins.katavasia, tier: -10, when: [{pred: major_feast_is, args: [theophany]}],
+   fill: {of: theophany, parts: ["Both katavasiae of Theophany; 9th ode: the megalynaria of both canons"]}, source: typikon, locator: "p.171; Gloss. schedule p.577", status: explicit}
+- {id: mf.thy.mat.praises, slot: matins.praises, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {total: 6, res: 0, other: [6], parts: ["6 stichera of Theophany; Glory, Now: of Theophany — Menaion 01-06"]}, source: typikon, locator: "p.171", status: explicit}
+- {id: mf.thy.lit.antiphons, slot: liturgy.antiphons, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {refrain2: feast, parts: ["Antiphons of Theophany; 2nd antiphon refrain “O Son of God, baptized in the Jordan”"]}, source: typikon, locator: "p.172", status: explicit}
+- {id: mf.thy.lit.eisodikon, slot: liturgy.eisodikon, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {kind: feast, parts: ["Entrance hymn of Theophany (“Blessed is He that cometh in the name of the Lord”)"]}, source: typikon, locator: "p.173", status: explicit}
+- {id: mf.thy.lit.apolytikia, slot: liturgy.apolytikia, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {res_tone: null, saint: true, patron: false, parts: ["Apolytikion of Theophany"]}, source: typikon, locator: "p.173", status: explicit}
+- {id: mf.thy.lit.kontakion, slot: liturgy.kontakion, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {kind: theophany, parts: ["Kontakion of Theophany (“Today Thou hast appeared to the world”)"]}, source: typikon, locator: "p.173; Ch I s6 V p.36", status: explicit}
+- {id: mf.thy.lit.communion, slot: liturgy.communion, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
+   fill: {kind: feast, parts: ["Communion hymn: “The grace of God that bringeth salvation hath appeared to all men”"]}, source: typikon, locator: "p.173", status: explicit,
+   conflict: {with: ["Typikon Ch I s6 XI p.39 ('Praise ye the Lord' on Epiphany)"], status: open, note: "Ch I lists Epiphany under 'Praise ye the Lord'; the Jan 6 order p.173 gives the feast's own hymn. The per-feast order is followed (no ANCA Theophany Liturgy text found)."}}

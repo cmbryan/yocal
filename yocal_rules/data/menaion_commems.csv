@@ -1,0 +1,425 @@
+date_key,role,name,has_vespers_glory,glory_en,name_lang
+01-01,main,our Father among the saints Basil the Great,1,0,en
+01-02,main,Forefeast of Epiphany,1,0,en
+01-03,main,Forefeast of Epiphany,1,0,en
+01-04,main,Forefeast of Epiphany,0,0,en
+01-05,main,Forefeast of Epiphany.,0,0,en
+01-06,main,Holy Epiphany,1,1,en
+01-07,main,Synaxis in honor of the holy Forerunner,1,0,en
+01-08,main,our St. George the Chozebite,0,0,en
+01-09,main,Holy Martyr Polyefktos,1,1,en
+01-10,main,St. Gregory Bishop of Nyssa,1,0,en
+01-10,alt1,,0,0,
+01-11,main,St. Theodosius the Cenobiarch,1,1,en
+01-12,main,Holy Martyr Tatiana,1,0,en
+01-13,main,Holy Martyrs Hermylos and Stratonikos,1,1,en
+01-14,main,Leave-taking of the Feast of Epiphany,0,0,en
+01-15,main,St. Paul of Thebes,1,1,en
+01-16,main,Veneration of the Precious Chains of the Apostle Peter,1,0,en
+01-17,main,St. Anthony the Great,1,1,en
+01-18,main,"Saints Athanasius and Cyril, Patriarchs of Alexandria",1,0,en
+01-19,main,St. Makarios the Egyptian,1,1,en
+01-20,main,St. Euthymius the Great,1,0,en
+01-21,main,St. Maximus the Confessor,0,0,en
+01-22,main,"Holy Apostle Timothy, and the Holy Devout Martyr Anastasios the Persian",1,1,en
+01-23,main,St. Clement of Ancyra,1,0,en
+01-24,main,our Devout Mother Xenia,0,0,en
+01-25,main,St. Gregory the Theologian,1,1,en
+01-26,main,St. Xenophon,0,0,en
+01-27,main,Transfer of the Relic of St. John Chrysostom,1,1,en
+01-28,main,St. Ephrem the Syrian,1,0,en
+01-29,main,Transfer of the Relics of St. Ignatius the God-bearer,1,1,en
+01-30,main,Holy Three Hierarchs,0,0,en
+01-30,alt1,"Μνήμη τοῦ Ἁγίου Ἱερομάρτυρος Ἱππολύτου, Πάπα Ῥώμης.",0,0,gr
+01-31,main,Holy Unmercenaries Cyrus and John,1,0,en
+02-01,main,Forefeast of the Meeting,1,1,en
+02-02,main,The Meeting of our Lord,1,0,en
+02-03,main,"St. Symeon who Received God, and the Prophetess Anna",0,0,en
+02-04,main,our St. Isidore Pelusiotes,1,0,en
+02-05,main,Holy Martyr Agatha,1,1,en
+02-06,main,"St. Bukolos, Bishop of Smyrna",0,0,en
+02-06,alt1,St. Photios the Great,1,1,en
+02-06,alt2,Sts. Barsanouphios and John,0,0,en
+02-07,main,"St. Parthenios, Bishop of Lampsacus",0,0,en
+02-07,alt1,,1,0,
+02-08,main,Holy Great Martyr Theodore the General,1,1,en
+02-09,main,Holy Martyr Nikephoros,1,0,en
+02-10,main,Holy Hieromartyr Haralambos,1,1,en
+02-11,main,Holy Hieromartyr Blaise,1,0,en
+02-12,main,St. Meletios of Great Antioch,0,0,en
+02-13,main,our Devout Father Martinian,1,0,en
+02-14,main,our Devout Father Auxentius,1,1,en
+02-15,main,Holy Apostle Onesimus,0,0,en
+02-16,main,Holy Martyr Pamphilos and those with him,0,0,en
+02-17,main,Holy Great-martyr Theodore the Tyro,1,1,en
+02-18,main,our Devout Father Leo Pope of Rome,0,0,en
+02-19,main,Holy Apostle Archippus,0,0,en
+02-19,alt1,St. Philothea the Athenian,1,1,en
+02-20,main,Saint Leo of Catania,0,0,en
+02-21,main,our Devout Father Timothy of Symbola,0,0,en
+02-22,main,Holy Martyrs in the Quarter of Evgenios,0,0,en
+02-23,main,"St. Polycarp, Bishop of Smyrna",0,0,en
+02-24,main,Finding of Forerunner’s Head,1,1,en
+02-25,main,St. Tarasius of Constantinople,0,0,en
+02-26,main,"Saint Porphyrios, Bishop of Gaza",0,0,en
+02-26,alt1,Holy Great-martyr Photini the Samaritan Woman,1,0,en
+02-27,main,our St. Procopius of Decapolis,0,0,en
+02-28,main,our Devout Father Basil the Confessor,0,0,en
+02-29,main,St. Cassian the Confessor,0,0,en
+03-01,main,Holy Devout Martyr Eudocia,1,1,en
+03-02,main,Holy Martyr Hesychius,0,0,en
+03-02,alt1,St. Nicholas Planas,1,1,en
+03-03,main,"Holy Martyrs Eutropios, Kleonikos, and Basiliskos",0,0,en
+03-04,main,St. Gerasimos of Jordan,0,0,en
+03-05,main,Holy Monastic Martyr Conon,0,0,en
+03-06,main,42 Martyrs of Amorion,1,0,en
+03-07,main,holy Hieromartyrs in Cherson,0,0,en
+03-08,main,St. Theophylact of Nicomedia,0,0,en
+03-09,main,Holy Forty Martyrs of Sebastia,0,0,en
+03-09,alt1,,0,0,
+03-10,main,Holy Martyr Quadratus of Corinth,0,0,en
+03-11,main,St. Sophronius of Jerusalem,0,0,en
+03-12,main,our St. Theophanis of Sigriani,0,0,en
+03-13,main,Translation of the Relic St. Nikephoros of Constantinople,0,0,en
+03-14,main,our Devout Father Benedict,0,0,en
+03-15,main,Holy Martyrs Agapius and those with him,0,0,en
+03-16,main,Holy Martyr Sabinos the Egyptian,0,0,en
+03-17,main,St. Alexios the Man of God,0,0,en
+03-18,main,St. Cyril of Jerusalem,0,0,en
+03-19,main,Holy Martyrs Chysanthos and Dareia,0,0,en
+03-20,main,our Devout Fathers who were killed in the Monastery of St. Savas,0,0,en
+03-21,main,our St. James the Bishop and Confessor,0,0,en
+03-22,main,Holy Hieromartyr Basil,0,0,en
+03-23,main,Memory St. Nikon and his 199 Disciples,0,0,en
+03-24,main,Forefeast of the Annunciation,1,1,en
+03-25,main,Annunciation of the Most Holy Theotokos,1,1,en
+03-26,main,Synaxis in Honor of the Chief Commander Gabriel,0,0,en
+03-27,main,Holy Martyr Matrona of Thessaloniki,0,0,en
+03-28,main,St. Hilary the New,0,0,en
+03-29,main,"Holy Martyrs Mark, Bishop of Arethusa, Cyril the Deacon",0,0,en
+03-30,main,St. John of The Ladder,0,0,en
+03-31,main,Holy Hieromartyr Hypatios,0,0,en
+04-01,main,our Devout Mother Mary of Egypt,1,1,en
+04-02,main,our Devout Father Titus,0,0,en
+04-03,main,our Devout Father Nikitas the Confessor,0,0,en
+04-04,main,St. George in Maleo,0,0,en
+04-05,main,"Holy Martyrs Claudius, Diodore, Victor and the rest",0,0,en
+04-06,main,our Father among the Saints Eutychios of Constantinople,0,0,en
+04-07,main,Holy Martyr Kalliopios,0,0,en
+04-07,alt1,"Μνήμη τοῦ Ὁσίου Πατρὸς ἡμῶν Γεωργίου, Μητροπολίτου Μυτιλήνης.",0,0,gr
+04-08,main,holy Apostles of the Seventy,0,0,en
+04-09,main,Holy Martyr Eupsychios,0,0,en
+04-10,main,"Holy Martyrs Terence, Pompey, Maximus, Makarios, Africanus, and those with them",0,0,en
+04-11,main,"Μνήμη τοῦ Ἁγίου Ἱερομάρτυρος Ἀντίπα, Ἐπισκόπου Περγάμου.",0,0,gr
+04-12,main,"St. Basil, Bishop of Parium",0,0,en
+04-13,main,"St. Martin, Pope of Rome",0,0,en
+04-14,main,"Holy Apostles Aristarchus, Pudens, and Trophimus",0,0,en
+04-15,main,Holy Martyr Crescent,0,0,en
+04-16,main,"Holy Women Marytrs: Charity, Peace, and Snow",0,0,en
+04-17,main,Holy Hieromartyr Symeon of Persia and those with him,0,0,en
+04-18,main,"St. John, disciple of St. Gregory of Decapolis",0,0,en
+04-19,main,Holy Hieromartyr Pafnoutios,0,0,en
+04-20,main,St. Theodore the Trichinas,0,0,en
+04-21,main,holy Hieromartyr Januarius and those with him,0,0,en
+04-22,main,St. Theodore of Sykeon,0,0,en
+04-23,main,Holy Great-martyr George,1,1,en
+04-24,main,St. Elizabeth,0,0,en
+04-25,main,St. Mark the Evangelist,1,1,en
+04-26,main,Basileus,0,0,en
+04-27,main,"St. Symeon, the Kinsman of the Lord",0,0,en
+04-28,main,holy Nine Martyrs in Kyzikos,0,0,en
+04-29,main,Holy Apostles Jason and Sosipater,0,0,en
+04-30,main,"Holy Apostle Iakovos (James), the Brother of John the Theologian",1,1,en
+05-01,main,Holy Prophet Jeremiah,0,0,en
+05-02,main,St. Athanasius the Great,1,1,en
+05-03,main,Holy Martyrs Timothy and Maura,0,0,en
+05-04,main,Holy Martyr Pelagia,0,0,en
+05-05,main,Holy and Glorious Great-martyr Irene,0,0,en
+05-06,main,Righteous Job,1,1,en
+05-07,main,Commemoration of the Appearance of the Holy Cross in the Sky,1,1,en
+05-08,main,St. John the Theologian,1,1,en
+05-09,main,Holy Martyr Christopher,1,1,en
+05-10,main,Holy Apostle Simon the Zealot,1,0,en
+05-11,main,Commemoration of the Birthday of Constantinople; and Memory of the St. Mokios,0,0,en
+05-12,main,Sts. Epiphanios of Cyprus and Germanus of Constantinople,1,1,en
+05-13,main,Holy Martyr Glykeria,0,0,en
+05-14,main,Holy Martyr Isidore of Chios,0,0,en
+05-15,main,our Devout Father Pachomius the Great,1,1,en
+05-16,main,St. Theodore the Sancitfied,0,0,en
+05-17,main,Holy Apostles Andronicus and June,0,0,en
+05-18,main,"Holy Martyrs Peter, Dionysius, Andrew, Paul, and Christina; and Heraclius, Paulinus and Benedimus",0,0,en
+05-19,main,"Holy Hieromartyr Patrick, Bishop of Prusa, and those with him",0,0,en
+05-20,main,St. Thalleleus,0,0,en
+05-21,main,Sts. Constantine and Helen,1,1,en
+05-21,alt1,,0,0,
+05-22,main,Memory or the Holy Martyr Basiliscus,0,0,en
+05-23,main,"St. Michael, Bishop of Synnada",0,0,en
+05-24,main,St. Symeon of Wonder Mountain,1,0,en
+05-25,main,Third Finding of the Forerunner’s Head,0,0,en
+05-26,main,Holy Apostle Carpus,0,0,en
+05-27,main,Holy Hieromartyr Helladius,0,0,en
+05-28,main,Holy Martyr Eutychius of Melitene,0,0,en
+05-29,main,Holy Martyr Theodosia,0,0,en
+05-30,main,our Devout Father Isaakios,0,0,en
+05-31,main,Holy Martyr Hermias,0,0,en
+06-01,main,"St. Justin Martyr the Philosopher, and another St. Justin and those with him",0,0,en
+06-02,main,St. Nikephoros Archbishop of Constantinople,0,0,en
+06-03,main,Holy Martyr Lucillian,0,0,en
+06-04,main,St. Metrophanes Archbishop of Constantinople,1,1,en
+06-05,main,"Holy Hieromartyr Dorotheus, Bishop of Tyre",0,0,en
+06-06,main,our Devout Father Hilarion the New,0,0,en
+06-07,main,Holy Hieromartyr Theodotus of Ancyra,0,0,en
+06-08,main,Transfer of the Relic of the Holy Great-martyr Theodore the General,0,0,en
+06-09,main,St. Cyril of Alexandria,0,0,en
+06-10,main,Sts. Alexander and Antonina,0,0,en
+06-11,main,Holy Apostles Bartholomew and Barnabas,1,1,en
+06-11,alt1,St. Bartholomew,1,0,en
+06-12,main,our Devout Father Onoufrios,0,0,en
+06-12,alt1,Μνήμη τοῦ Ἁγίου Γερασίμου,1,0,gr
+06-13,main,Holy Martyr Aquilina,0,0,en
+06-14,main,Holy Prophet Elisha,1,0,en
+06-15,main,Holy Prophet Amos,0,0,en
+06-16,main,"St. Tychon, Bishop of Amathous",0,0,en
+06-17,main,"Holy Martyrs Isaurus, Basil, Innocent, Felix, Hermias, and Peregrinos",1,1,en
+06-18,main,Holy Martyr Leontios,0,0,en
+06-19,main,Holy Apostle Jude,1,1,en
+06-20,main,Holy Hieromartyr Methodius of Patara,0,0,en
+06-21,main,Holy Martyr Julian of Tarsus,0,0,en
+06-22,main,Hieromartyr Eusebius of Samosata,0,0,en
+06-23,main,Holy Martyr Agrippina,0,0,en
+06-24,main,The Birth of the Holy Forerunner,1,1,en
+06-25,main,Leave-taking of the Feast of the Forerunner,0,0,en
+06-26,main,Memory Devout St. David of Thessaloniki,0,0,en
+06-27,main,St. Samson the Innkeeper,0,0,en
+06-28,main,Transfer of the Relics of the Holy Unmercenaries Cyrus and John,0,0,en
+06-29,main,Preeminent Apostles Peter and Paul,1,1,en
+06-30,main,The Synaxis in Honor of the Twelve Apostles,0,0,en
+07-01,main,Holy Unmercenaries Cosmas and Damian of Rome,1,1,en
+07-02,main,Commemoration of the Placement in Blachernai of the Precious Garment of the Most Holy Theotokos,1,0,en
+07-03,main,holy Martyr Hyacinth,0,0,en
+07-04,main,St. Andrew of Crete,0,0,en
+07-05,main,our Devout and God-bearing Father Athanasius of Athos,1,1,en
+07-06,main,our Devout Father Sisoi,0,0,en
+07-07,main,Holy Martyr Kyriake,1,1,en
+07-08,main,Holy and Glorious Great-martyr Procopius,1,1,en
+07-09,main,holy Hieromartyr Pancratius,0,0,en
+07-10,main,45 Holy Martyrs in Nikopolis,0,0,en
+07-11,main,Holy Great-martyr Euphemia,0,0,en
+07-12,main,Holy Martyrs Proclus and Hilary,0,0,en
+07-12,alt1,our Devout Father Paisios of the Holy Mountain Athos,1,1,en
+07-12,alt2,our Devout and God-bearing Father Paisios of the Holy Mountain Athos,1,1,en
+07-13,main,The Synaxis in Honor of Archangel Gabriel,1,1,en
+07-13,alt1,St. Golinduc,0,0,en
+07-14,main,Holy Apostle Aquila,0,0,en
+07-15,main,Holy Martyrs Cyricus and Julitta,1,1,en
+07-16,main,Holy Hieromartyr Athenogenes,0,0,en
+07-17,main,Holy Great-martyr Marina,1,0,en
+07-18,main,Holy Martyr Emilian,0,0,en
+07-19,main,Sts. Macrina and Dius.,0,0,en
+07-20,main,Holy Prophet Elias,1,1,en
+07-20,alt1,,0,0,
+07-21,main,Sts. John and Symeon the Fool for Christ,0,0,en
+07-22,main,Saint Mary Magdalene,1,0,en
+07-22,alt1,St. Markella of Chios,1,1,en
+07-23,main,Holy Hieromartyr Phocas,1,1,en
+07-24,main,Holy Great-martyr Christina,1,0,en
+07-25,main,Repose of Saint Anna,1,1,en
+07-25,alt1,,0,0,
+07-26,main,"Holy Hieromartyrs Hermolaus, Hermippus, and Hermocrates; and the Devout Martyr St. Paraskeve.",1,1,en
+07-27,main,Holy Great-martyr Panteleimon,1,1,en
+07-28,main,"Holy Apostles and Deacons Prochorus, Nicanor, Timon, and Parmenas",0,0,en
+07-28,alt1,Μνήμη της Ἁγίας Εἰρήνης Χρυσοβαλάντου,0,0,gr
+07-29,main,holy Martyr Callinicus,0,0,en
+07-30,main,"Holy Apostles of the Seventy: Silas, Silvan, Crescens, Epenetus, and Andronicus",0,0,en
+07-31,main,Holy and Righteous Evdokimos,1,1,en
+07-HF,main,Sunday of the Holy Fathers,1,1,en
+08-01,main,The Procession of the Holy Cross.,1,0,en
+08-02,main,Transfer of the Relic of Saint Stephen the Protomartyr,1,1,en
+08-03,main,"our Devout Fathers Isakius, Dalmatus and Faustus",0,0,en
+08-04,main,Holy Seven Youths of Ephesus,0,0,en
+08-05,main,The Forefeast of the Holy Transfiguration of our Lord,1,1,en
+08-06,main,Commemoration of the Transfiguration of our Savior,1,1,en
+08-07,main,Holy Monastic Martyr Dometius,0,0,en
+08-07,alt1,Devout Theodosius the New,0,0,en
+08-08,main,"St. Emelian, Bishop of Cyzicus",0,0,en
+08-08,alt1,holy Neomartyr Triantaphyllos,0,0,en
+08-09,main,Holy Apostle Matthias,0,0,en
+08-10,main,Holy Martyr and Archdeacon Lawrence,0,0,en
+08-11,main,Holy Martyr Euplus,0,0,en
+08-11,alt1,Miracle of St. Spyridon on Kerkyra,0,0,en
+08-11,alt2,St. Niphon Patriarch of Constantinople,0,0,en
+08-12,main,Holy Martyrs Photius and Anicetus,0,0,en
+08-13,main,Leave-taking of the Feast of the Transfiguration,0,0,en
+08-14,main,Forefeast of the Dormition of the Theotokos,0,0,en
+08-15,main,Dormition of our Most Holy Lady Theotokos,0,0,en
+08-16,main,Commemoration of the Transfer of the Holy Napkin,1,1,en
+08-16,alt1,our devout father Gerasimos of Kephallenia,0,0,en
+08-17,main,Holy Martyr Myron,0,0,en
+08-18,main,Holy Martyrs Florus and Laurus,0,0,en
+08-19,main,Holy Martyrs Andrew the General and those with him,0,0,en
+08-20,main,Holy Prophet Samuel,0,0,en
+08-21,main,Holy Apostle Thaddeus and the Holy Martyr Bassa,0,0,en
+08-22,main,Holy Martyr Agathonicus,1,1,en
+08-22,alt1,Synaxis of our Most Holy Lady Theotokos in Prousa,0,0,en
+08-23,main,Leave-taking of the Feast of the Dormition of the Theotokos,0,0,en
+08-24,main,Holy Hieromartyr Eutyches,0,0,en
+08-24,alt1,St. Kosmas Aetolos,1,0,en
+08-24,alt2,"Ἀνάμνησις τῆς μετακομιδῆς τοῦ Λειψάνου τοῦ Ἁγίου Διονυσίου, Ἀρχιεπισκόπου Αἰγίνης",0,0,gr
+08-25,main,holy Apostles Bartholomew and Titus,1,1,en
+08-26,main,Holy Martyrs Adrian and Natalie,1,0,en
+08-27,main,our Devout Father Pimen,0,0,en
+08-27,alt1,Μνήμη τοῦ Ἁγ. Φανουρίου,1,0,gr
+08-28,main,St. Moses the Ethiopian,0,0,en
+08-29,main,Commemoration of the Beheading of the Holy Forerunner,0,0,en
+08-30,main,Post-feast of the Beheading of the Forerunner,0,0,en
+08-31,main,Commemoration of the Placement of the Holy Belt of the Most Holy Theotokos,1,1,en
+09-01,main,Indiction,1,0,en
+09-02,main,Holy Martyr Mamas,1,0,en
+09-03,main,"Holy Hieromartyr Anthimos, Bishop of Nicomedia.",1,1,en
+09-03,alt1,Disinterment of the Relics of St. Nektarios of Pentapolis,1,1,en
+09-04,main,"Holy Hieromartyr Babylas, Bishop of Antioch",1,1,en
+09-05,main,"Holy Prophet Zacharias, Father of the Forerunner",1,0,en
+09-06,main,Miracle of Archangel Michael in Colossae (Chonae),0,0,en
+09-07,main,Forefeast of the Nativity of the Most Holy Theotokos,1,1,en
+09-07,alt1,Μνήμη τῆς Ὁσίας Κασσιανῆς τῆς Ὑμνογράφου,1,0,gr
+09-08,main,The Nativity of our Most Holy Lady Theotokos,0,0,en
+09-09,main,"Holy and Righteous Ancestors of God, Joachim and Anna",0,0,en
+09-10,main,"Holy Martyrs Menodora, Metrodora, and Nymphodora",0,0,en
+09-11,main,St. Theodora of Alexandria,0,0,en
+09-12,main,Leave-taking of the Feast of the Nativity of the Theotokos,0,0,en
+09-13,main,Consecration of the Church of the Holy Resurrection,1,1,en
+09-14,main,The Elevation of the Holy Cross,1,1,en
+09-15,main,Holy Great-martyr Nikitas,1,1,en
+09-16,main,Holy Great-martyr Euphemia,0,0,en
+09-17,main,Holy Martyr Sophia and her daughters,0,0,en
+09-17,alt1,,1,0,
+09-18,main,St. Eumenius of Gortynia,0,0,en
+09-19,main,"Holy Martyrs Trophimus, Sabbatius, and Dorymedon",0,0,en
+09-20,main,Holy Great-martyr Eustathius and Companions,1,1,en
+09-21,main,Leave-taking of the Feast.,0,0,en
+09-22,main,Holy Apostle Quadratus,1,0,en
+09-23,main,The Conception of the Honorable Forerunner,1,1,en
+09-24,main,"Holy Great-martyr Thecla, the Equal to the Apostles.",1,0,en
+09-24,alt1,"The Synaxis in Honor of the Most Holy Theotokos, our Lady of the Myrtles",0,0,en
+09-24,alt2,Ἀνάμνησις τοῦ ἐν Κυθήροις θαύματος τῆς Θεοτόκου τῆς «Μυρτιδιωτίσσης»,1,0,gr
+09-24,alt3,Μνήμη τοῦ Ὁσίου Σιλουανοῦ τοῦ Ἀθωνίτου,0,0,gr
+09-25,main,our Devout Mother Euphrosyne,1,1,en
+09-26,main,The Translation of St. John the Theologian,0,0,en
+09-27,main,Holy Martyr Callistratus and those with him,1,0,en
+09-28,main,St. Chariton the Confessor,1,0,en
+09-29,main,our Devout Father Kyriakos,1,1,en
+09-30,main,St. Gregory of Greater Armenia,1,0,en
+10-01,main,"holy Apostle Ananias, one of the Seventy, and our Devout Father Romanos the Melodist",1,1,en
+10-01,alt1,Ἀκολουθία Παναγίας Γοργοϋπηκόου,1,0,gr
+10-02,main,Sts. Cyprian and Justina,1,0,en
+10-03,main,St. Dionysius the Areopagite,1,0,en
+10-04,main,our Father among the Saints Hierotheos,0,0,en
+10-05,main,Holy Martyr Charitina,0,0,en
+10-06,main,holy Apostle Thomas,1,0,en
+10-07,main,Holy Martyrs Sergius and Bacchus,1,0,en
+10-08,main,our Devout Mother Pelagia,1,1,en
+10-09,main,Holy Apostle James (Iakovos) the Son of Alphaeus,1,0,en
+10-10,main,Holy Martyrs Eulampius and Eulampia,1,0,en
+10-11,main,"Holy Apostle Philip the Deacon, and St. Theophanes the Inscribed",0,0,en
+10-12,main,"Holy Martyrs Probus, Tarachus, and Andronicus",1,0,en
+10-13,main,Holy Martyrs Carpus and Papylus,1,1,en
+10-14,main,"Holy Martyrs Nazarius, Gervasios, Protasius, and Celsus; and St. Cosmas the Hymnographer",1,1,en
+10-15,main,Holy Hieromartyr Lucian,0,0,en
+10-16,main,Holy Martyr Longinus the Centurian,1,0,en
+10-17,main,Holy Prophet Hosea; and the Holy Monastic Martyr Andrew of Crete,0,0,en
+10-18,main,Holy Apostle and Evangelist Luke,1,1,en
+10-18,alt1,,0,0,
+10-19,main,Holy Prophet Joel,0,0,en
+10-20,main,Holy Great-martyr Artemius,1,1,en
+10-20,alt1,our devout father Gerasimos of Kephallenia,0,0,en
+10-20,alt2,St. Matrona,0,0,en
+10-21,main,our Devout Father Hilarion the Great,1,0,en
+10-22,main,St. Abercius of Hierapolis; and the Holy Seven Youths of Ephesus,1,1,en
+10-23,main,"Holy Apostle James (Iakovos), the Brother of God",1,0,en
+10-23,alt1,,0,0,
+10-24,main,Holy Great-martyr Arethas and his Companions,1,0,en
+10-25,main,Holy Martyrs Marcian and Martyrius,1,0,en
+10-26,main,"Holy Great-martyr Demetrios, the Myrrh-streamer",1,1,en
+10-27,main,Holy Martyr Nestor,1,1,en
+10-28,main,Holy Martyrs Terence and Neonilla and their Children,0,0,en
+10-28,alt1,Holy Protection of our Most Holy Lady Theotokos,1,0,en
+10-29,main,holy Monastic Martyr Anastasia the Roman.,0,0,en
+10-30,main,Sts. Zenobius and Zenobia,1,0,en
+10-31,main,"Holy Apostles Stachys, Apelles, Amplias, Urban, Aristobulus, and Narcissus",0,0,en
+10-HF,main,The Holy Fathers of the 7th Council,1,1,en
+11-01,main,Holy Unmercenaries Cosmas and Damian,0,0,en
+11-02,main,"Holy Martyrs Acindynos, Pegasios, Aphthonios, Elpidophoros, and Anempodistos",1,0,en
+11-03,main,Holy Great-martyr George,0,0,en
+11-04,main,our Devout Father Joannicius the Great,1,1,en
+11-05,main,Holy Martyrs Galaktion and Episteme,0,0,en
+11-06,main,St. Paul the Confessor,1,0,en
+11-07,main,our Devout Father Lazarus the Wonder-worker,1,0,en
+11-07,alt1,,0,0,
+11-08,main,The Synaxis in Honor of the Chief Commanders Michael and Gabriel,1,1,en
+11-09,main,Holy Martyrs Onesiphorus and Porphyrios; our Devout Mother Matrona,0,0,en
+11-09,alt1,St. Nektarios of Pentapolis,1,1,en
+11-10,main,"Holy Apostles Olympus, Rhodion, Sosipater, Tertius, Erastus, and Quartus",0,0,en
+11-11,main,"Holy Martyrs Menas, Victor and Vincent; and the Holy Martyr Stephanie",1,1,en
+11-12,main,St. John the Merciful,1,0,en
+11-13,main,St. John Chrysostom,1,1,en
+11-14,main,Holy Apostle Philip,1,0,en
+11-14,alt1,St. Gregory Palamas,1,1,en
+11-15,main,"Holy Martyrs Guria, Shamuna and Habib",1,1,en
+11-16,main,Holy Evangelist Matthew,1,0,en
+11-16,alt1,,0,0,
+11-17,main,St. Gregory Bishop of Neocaesarea,1,0,en
+11-18,main,Holy Martyr Plato,1,0,en
+11-19,main,Holy Prophet Obadiah,0,0,en
+11-20,main,The Forefeast of the Entry of the Most Holy Theotokos into the Temple,0,0,en
+11-21,main,The Entry of the Most Holy Theotokos,1,1,en
+11-22,main,Holy Apostle Philemon,1,1,en
+11-22,alt1,"St. Iakovos, Abbot of the Monastery of “Hosios Davíd”",1,1,en
+11-23,main,"our Fathers among the Saints Amphilochios, Bishop of Iconium, and Gregory of Agrigentum",0,0,en
+11-24,main,our Devout Fathers and Hieromartyrs Clement of Rome and Peter of Alexandria.,1,1,en
+11-25,main,"Leave-taking of the Feast of the Entry, and Memory of the Holy Great-martyr Catherine",1,1,en
+11-26,main,St. Alypios the Stylite,0,0,en
+11-26,alt1,Μνήμη τοῦ Ἁγίου Στυλιανοῦ,1,0,gr
+11-27,main,Holy Great-martyr James (Iakovos) the Persian,1,0,en
+11-28,main,Devout St Stephen the New,1,0,en
+11-29,main,Holy Martyrs Paramonus and Philumenus,0,0,en
+11-30,main,Holy Apostle Andrew,1,1,en
+12-01,main,Holy Prophet Nahum,0,0,en
+12-02,main,Holy Prophet Habakkuk,0,0,en
+12-02,alt1,Devout St. Porphyrios of Kafsokalyvia,1,1,en
+12-03,main,Holy Prophet Zephaniah,0,0,en
+12-04,main,Holy Great-martyr Barbara,1,1,en
+12-04,alt1,Μνήμη τοῦ Ἁγίων Ἰωάννου τοῦ Δαμασκηνοῦ,1,0,gr
+12-05,main,St. Savas the Sanctified,1,1,en
+12-06,main,"Saint Nicholas, Archbishop of Myra",1,1,en
+12-07,main,"St. Ambrose, Bishop of Milan",0,0,en
+12-08,main,Forefeast of the Conception of St. Anna,0,0,en
+12-09,main,St. Anna’s Conception of the Theotokos,0,0,en
+12-10,main,"Holy Martyrs Menas Kallikelados, Hermogenes, and Evgraphos",1,1,en
+12-11,main,St. Daniel the Stylite,1,1,en
+12-12,main,St. Spyridon the Wonder-worker,1,1,en
+12-12,alt1,,1,0,
+12-13,main,"Holy Martyrs Eustratius, Auxentius, Eugene, Mardarius, and Orestes, and St. Lucia",1,1,en
+12-14,main,"Holy Martyrs Thyrsos, Leucius, Kallinikos, Philemon, Apollonios, Arrianos, and those with them",0,0,en
+12-15,main,St. Eleftherios,1,1,en
+12-16,main,Holy Prophet Haggai,0,0,en
+12-16,alt1,"our Father among the Saints Modestos the Wonder-worker, Archbishop of Jerusalem.",1,0,en
+12-17,main,Holy Prophet Daniel and the Holy Three Servants,1,0,en
+12-17,alt1,St. Dionysios Archbishop of Aegina,1,1,en
+12-18,main,Holy Martyr Sebastian and those with him,0,0,en
+12-19,main,Holy Martyr Boniface,0,0,en
+12-20,main,Forefeast of the Birth of our Savior,1,0,en
+12-21,main,Holy Martyr Julianna,1,0,en
+12-22,main,St. Anastasia Pharmakolytria,1,1,en
+12-23,main,Holy Ten Martyrs in Crete,1,1,en
+12-24,main,Holy Martyr Eugenia,0,0,en
+12-25,main,The Nativity of our Lord Jesus Christ,1,1,en
+12-26,main,The Synaxis in Honor of the Theotokos,0,0,en
+12-26,alt1,Holy Hieromartyr Efthymios,1,0,en
+12-27,main,Holy Protomartyr Stephen.,1,1,en
+12-28,main,Twenty-thousand Saints burned in Nikomedia,0,0,en
+12-29,main,"14,000 Holy Innocents",1,1,en
+12-30,main,"Holy Martyr Anysia, and our Devout Mother Melania",1,0,en
+12-31,main,Leave-taking of Christmas,0,0,en
+12-AC,main,"righteous Joseph the Betrothed, David the King, and James (Iakovos) the Brother of the Lord.",1,0,en
+12-BC,main,Sunday Before Christmas,0,0,en
+12-FF,main,Sunday of the Holy Forefathers,1,1,en

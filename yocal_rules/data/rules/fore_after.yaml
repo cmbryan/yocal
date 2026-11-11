@@ -1,0 +1,214 @@
+# Work package H: Sundays (and their Saturday Great Vespers) in a fore-feast / after-feast / leavetaking period.
+# Gated on the normalised feast_period fact (calfacts.feast_period: 'kind:feast' from the DB fore_after text) and season 'ordinary'
+# (Triodion/Lent overlaps belong to the Triodion Rules, Pentecostarion ones to the Pentecostarion Rules). Independent of in_slice.
+# Typikon = Antiochian Typikon (Khoury/Morris 2011), printed page. Ch V per-date stichera counts (vespers_lihc_ch5.yaml, tier 1)
+# win over the period Rules below (tier 2); named-Sunday apolytikia (tier 2) win over the period apolytikia (tier 3, same answer).
+# Feast periods of the Lord / Theotokos covered: theophany, presentation, transfiguration, dormition, nativity_theotokos, elevation,
+# entrance_theotokos, nativity. Saints' leavetakings covered: nativity_forerunner (Jun 25), beheading (Aug 30).
+
+# ================= Vespers: "Lord, I have cried" =================
+- {id: fa.ves.lihc.afterfeast, slot: vespers.lihc.stichera, tier: 2,
+   when: [{pred: sunday_eve}, {pred: season_is, args: [ordinary]}, {pred: no_feast_period_saint},
+          {pred: feast_period_in, args: ["afterfeast:theophany", "afterfeast:presentation", "afterfeast:transfiguration", "afterfeast:dormition",
+                                         "afterfeast:nativity_theotokos", "afterfeast:elevation", "afterfeast:entrance_theotokos"]}],
+   fill: {res: 6, other: [4], of: [feast]}, source: typikon,
+   locator: "Ch III p.12 (Sunday between a Theotokos feast and its leavetaking: 6R+4); Ch V Sunday-after sections: Theophany p.180, Presentation p.223, Nativity of the Theotokos p.70, Elevation p.79, Entry p.114, Transfiguration p.450, Dormition p.461",
+   status: explicit}
+- {id: fa.ves.lihc.afterfeast_saint, slot: vespers.lihc.stichera, tier: 2,
+   when: [{pred: sunday_eve}, {pred: season_is, args: [ordinary]}, {pred: feast_period_saint},
+          {pred: feast_period_in, args: ["afterfeast:theophany", "afterfeast:presentation", "afterfeast:transfiguration", "afterfeast:dormition",
+                                         "afterfeast:nativity_theotokos", "afterfeast:elevation", "afterfeast:entrance_theotokos"]}],
+   fill: {res: 4, other: [3, 3], of: [feast, saint]}, source: typikon,
+   locator: "Ch III p.12 (great saint on a Sunday following a feast of the Lord: 4R+3 feast+3 saint); Jan 7 p.179, Holy Napkin Aug 16 p.460",
+   status: explicit}
+- {id: fa.ves.lihc.forefeast_6_4, slot: vespers.lihc.stichera, tier: 2,
+   when: [{pred: sunday_eve}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["forefeast:transfiguration"]}],
+   fill: {res: 6, other: [4], of: [forefeast]}, source: typikon, locator: "Ch V Aug 5 on Sunday p.448", status: explicit}
+- {id: fa.ves.lihc.forefeast_theophany, slot: vespers.lihc.stichera, tier: 2,
+   when: [{pred: sunday_eve}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["forefeast:theophany"]},
+          {pred: date_between, args: ["01-02", "01-04"]}],
+   fill: {res: 6, other: [4], of: [forefeast]}, source: typikon, locator: "Sunday before Theophany on Jan 2-4, p.167 (3 stichera repeated to 4)", status: explicit}
+- {id: fa.ves.lihc.nativity, slot: vespers.lihc.stichera, tier: 2,
+   when: [{pred: sunday_eve}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["forefeast:nativity", "afterfeast:nativity"]}],
+   fill: {res: 4, other: [3, 3], of: [feast, sunday]}, source: typikon,
+   locator: "Sunday before the Nativity on Dec 20-23 p.134 (4R+3 forefeast+3 Forefathers); Sunday after the Nativity Dec 26 p.152, Dec 27 p.154 (4R+3+3); Dec 28-30 p.156 ('follow the Menaion')",
+   status: explicit}
+- {id: fa.ves.lihc.leavetaking_unlisted, slot: vespers.lihc.stichera, tier: 2,
+   when: [{pred: sunday_eve}, {pred: season_is, args: [ordinary]},
+          {pred: feast_period_in, args: ["leavetaking:theophany", "leavetaking:presentation", "leavetaking:transfiguration", "leavetaking:dormition",
+                                         "leavetaking:nativity_theotokos", "leavetaking:elevation", "leavetaking:entrance_theotokos", "leavetaking:nativity", "forefeast:presentation",
+                                         "forefeast:dormition", "forefeast:nativity_theotokos", "forefeast:elevation", "forefeast:entrance_theotokos"]}],
+   fill: {}, source: typikon,
+   locator: "Ch V per-date sections (vespers_lihc_ch5.yaml, tier 1) give these counts; this guard keeps the generic Sunday counts off a date the Ch V table lacks",
+   status: missing, ticket: "fore/after-feast: Ch V count not tabulated for this date"}
+- {id: fa.ves.lihc.holy_napkin, slot: vespers.lihc.stichera, tier: 1,
+   when: [{pred: sunday_eve}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["afterfeast:dormition"]}, {pred: menaion_date_is, args: ["08-16"]}],
+   fill: {res: 4, other: [3, 3], of: [saint, feast]}, source: typikon,
+   locator: "Ch V Aug 16 on Sunday p.460 (4R+3 Holy Napkin+3 Dormition)", status: explicit}
+# Saturday that is itself the feast of a saint, eve of its Sunday leavetaking
+- {id: fa.ves.lihc.forerunner_leavetaking, slot: vespers.lihc.stichera, tier: 2,
+   when: [{pred: sunday_eve}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["leavetaking:nativity_forerunner"]}],
+   fill: {res: 6, other: [4], of: [feast]}, source: typikon,
+   locator: "Ch V Jun 24 on Saturday p.417 (Saturday Great Vespers: leavetaking, 6R+4 Forerunner from Jun 25, Glory Forerunner)", status: explicit}
+- {id: fa.ves.lihc.beheading_leavetaking, slot: vespers.lihc.stichera, tier: 2,
+   when: [{pred: sunday_eve}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["leavetaking:beheading"]}],
+   fill: {res: 4, other: [3, 3], of: [feast, saint]}, source: typikon,
+   locator: "Ch V Aug 29 on Saturday p.466 (4R+3 Beheading from Aug 30+3 St Alexander)", status: explicit}
+
+# ================= Vespers prokeimenon: the Saturday is itself a great feast of the Lord =================
+- {id: fa.ves.prokeimenon.great, slot: vespers.prokeimenon, tier: 3,
+   when: [{pred: sunday_eve}, {pred: date_in, args: ["12-26", "01-07", "08-07", "09-15"]}],
+   fill: {kind: great, tone: 7}, source: typikon,
+   locator: "Ch III p.13 ('If a feast of the Lord falls on a Saturday, on Saturday evening we chant the special prokeimenon of the feast'); Dec 26 p.152, Jan 7 p.179, Transfiguration p.449 ('At the evening of the feast, on any day ... the Great Prokeimenon'); tone 7 for the great prokeimena",
+   status: explicit,
+   conflict: {with: [ves.prokeimenon.sat], status: open,
+              note: "Typikon p.13 first bullet: Saturday evening is always 'The Lord is King' except Nativity and Epiphany; its third bullet (and p.449) gives the feast's great prokeimenon when a feast of the Lord falls on Saturday. ANCA follows the third bullet 3/3 (VESP 2022-08-06 Transfiguration, 2024-01-06 Theophany, 2024-09-14 Elevation). Presentation (Feb 2) on a Saturday is unsampled and not listed."}}
+
+# ================= Apolytikia: Resurrection + troparion of the (fore/after)feast (+ great saint) =================
+- {id: fa.ves.apolytikia.period, slot: vespers.apolytikia, tier: 3,
+   when: [{pred: sunday_eve}, {pred: season_is, args: [ordinary]},
+          {pred: feast_period_in, args: ["*:theophany", "*:presentation", "*:transfiguration", "*:dormition", "*:nativity_theotokos", "*:elevation",
+                                         "*:entrance_theotokos", "*:nativity", "leavetaking:nativity_forerunner", "leavetaking:beheading"]}],
+   fill: {res_tone: "$tone", saint: true, feast: true}, source: typikon,
+   locator: "Ch I s3 p.15-16 (forefeast, Sunday after a feast, leavetaking: Resurrection then the feast's troparion; great saint with a Glory: Resurrection, saint, feast); Ch V Jun 24 p.417, Aug 29 p.466",
+   status: explicit}
+- {id: fa.mat.apolytikia.period, slot: matins.apolytikia, tier: 3,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]},
+          {pred: feast_period_in, args: ["*:theophany", "*:presentation", "*:transfiguration", "*:dormition", "*:nativity_theotokos", "*:elevation",
+                                         "*:entrance_theotokos", "*:nativity"]}],
+   fill: {res_tone: "$tone", saint: true, feast: true}, source: typikon,
+   locator: "Ch I s3 p.15-16 (Matins: Resurrection 2x, feast 1x); Ch V Sunday-after sections (e.g. p.180, p.461)", status: explicit}
+- {id: fa.lit.apolytikia.period, slot: liturgy.apolytikia, tier: 3,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]},
+          {pred: feast_period_in, args: ["*:theophany", "*:presentation", "*:transfiguration", "*:dormition", "*:nativity_theotokos", "*:elevation",
+                                         "*:entrance_theotokos", "*:nativity"]}],
+   fill: {res_tone: "$tone", saint: true, feast: true}, source: typikon,
+   locator: "Ch V Sunday-after sections (Resurrection, feast, patron; e.g. p.80, p.115, p.451, p.461)", status: explicit}
+# Jun 25 / Aug 30: Typikon p.417 / p.466 'On Sunday morning (at Matins) everything is for the Resurrection' (no feast troparion listed);
+# ANCA 2023-06-25 and 2026-08-30 sing the Forerunner's troparion after the Resurrection
+- {id: fa.mat.apolytikia.saint_leavetaking, slot: matins.apolytikia, tier: 3,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["leavetaking:nativity_forerunner", "leavetaking:beheading"]}],
+   fill: {res_tone: "$tone", saint: true, feast: true}, source: anca,
+   locator: "inferred: ANCA ORTHROS sings the Forerunner's (Nativity / Beheading) troparion after the Resurrection", status: inferred,
+   evidence: "ANCA ORTHROS 2023-06-25 and 2026-08-30 (one sample each)",
+   conflict: {with: ["Typikon p.417 / p.466 (Sunday Matins everything for the Resurrection)"], status: open,
+              note: "Typikon p.417 (Jun 24 on Saturday) and p.466 (Aug 29 on Saturday): Sunday morning is all Resurrection, Forerunner troparion not listed; ANCA sings it at Matins and Liturgy. Two single samples; following ANCA per project default."}}
+- {id: fa.lit.apolytikia.saint_leavetaking, slot: liturgy.apolytikia, tier: 3,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["leavetaking:nativity_forerunner", "leavetaking:beheading"]}],
+   fill: {res_tone: "$tone", saint: true, feast: true}, source: anca,
+   locator: "inferred: ANCA READ sings the Forerunner's troparion after the Resurrection", status: inferred,
+   evidence: "ANCA READ 2023-06-25 and 2026-08-30 (one sample each)",
+   conflict: {with: ["Typikon p.417 / p.466 (Sunday morning everything for the Resurrection)"], status: open, note: "see fa.mat.apolytikia.saint_leavetaking"}}
+
+# ================= Matins: the Praises (tier 0: the period wins over the date/rank Rules of praises.yaml) =================
+- {id: fa.mat.praises.afterfeast, slot: matins.praises, tier: 0,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: no_feast_period_saint},
+          {pred: feast_period_in, args: ["afterfeast:theophany", "afterfeast:presentation", "afterfeast:transfiguration", "afterfeast:dormition",
+                                         "afterfeast:nativity_theotokos", "afterfeast:elevation", "afterfeast:entrance_theotokos"]}],
+   fill: {total: 8, res: 4, other: [4], glory: eothinon}, source: typikon,
+   locator: "Ch V Sunday-after sections: 4 Resurrection + 4 feast, Glory eothinon (Theophany p.181, Presentation p.224, Nativity of the Theotokos p.70, Elevation p.80, Entry p.115, Transfiguration p.451, Holy Napkin p.460, Dormition p.461)",
+   status: explicit}
+- {id: fa.mat.praises.afterfeast_saint, slot: matins.praises, tier: 0,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: feast_period_saint},
+          {pred: feast_period_in, args: ["afterfeast:theophany", "afterfeast:presentation", "afterfeast:transfiguration", "afterfeast:dormition",
+                                         "afterfeast:nativity_theotokos", "afterfeast:elevation", "afterfeast:entrance_theotokos"]}],
+   fill: {total: 8, res: 4, other: [4]}, source: typikon,
+   locator: "Ch V Jan 7 p.180 (4R+4 feast, Glory Forerunner) and Jan 11 p.182 (4R+4 feast, Glory eothinon): Glory varies, left unstated", status: explicit}
+- {id: fa.mat.praises.forefeast, slot: matins.praises, tier: 0,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]},
+          {pred: feast_period_in, args: ["forefeast:theophany", "forefeast:presentation", "forefeast:transfiguration", "forefeast:dormition",
+                                         "forefeast:nativity_theotokos", "forefeast:elevation", "forefeast:entrance_theotokos"]}],
+   fill: {total: 8, res: 4, other: [4]}, source: typikon,
+   locator: "Ch V forefeast-on-Sunday sections: 4 Resurrection + 4 forefeast (Jan 2-4 p.168, Aug 5 p.448, Nov 20 p.110)", status: explicit}
+- {id: fa.mat.praises.leavetaking, slot: matins.praises, tier: 0,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]},
+          {pred: feast_period_in, args: ["leavetaking:theophany", "leavetaking:presentation", "leavetaking:transfiguration", "leavetaking:dormition",
+                                         "leavetaking:nativity_theotokos", "leavetaking:elevation", "leavetaking:entrance_theotokos", "leavetaking:nativity"]}],
+   fill: {total: 8, res: 4, other: [4], glory: other}, source: typikon,
+   locator: "Ch I s5 p.30-31 (leavetaking on a Sunday: 4 Resurrection + 4 feast, Glory for the feast); Transfiguration p.452, Dormition p.463", status: explicit}
+- {id: fa.mat.praises.nativity, slot: matins.praises, tier: 0,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["forefeast:nativity", "afterfeast:nativity"]}],
+   fill: {total: 8, res: 4, other: [4], glory: other}, source: typikon,
+   locator: "Sunday before the Nativity Dec 20-23 p.135 (4R+4 Forefathers, Glory Forefathers); Sunday after the Nativity p.152-156 (Glory for the Sunday)",
+   status: explicit}
+- {id: fa.mat.praises.saint_leavetaking, slot: matins.praises, tier: 0,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["leavetaking:nativity_forerunner", "leavetaking:beheading"]}],
+   fill: {total: 8, res: 8, other: [], glory: eothinon}, source: typikon,
+   locator: "Ch V Jun 24 on Saturday p.417 ('On Sunday morning, everything is for the Resurrection'); Aug 29 on Saturday p.466 ('At Matins everything is for the Resurrection'); Glory eothinon Ch I s5 p.31",
+   status: explicit}
+
+# ================= Liturgy: Dismissal (saint named?) =================
+# Typikon p.17: the saint of the day is named only if it has a Doxastikon; inside a Lord/Theotokos period the Vespers Glory belongs to the feast.
+- {id: fa.lit.dismissal.period, slot: liturgy.dismissal, tier: 2,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: no_feast_period_saint},
+          {pred: feast_period_in, args: ["*:theophany", "*:presentation", "*:transfiguration", "*:dormition", "*:nativity_theotokos", "*:elevation",
+                                         "*:entrance_theotokos", "*:nativity"]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (the day's saint has no Doxastikon in a feast period)"}, source: typikon,
+   locator: "Ch I s4 p.17 (saint of the day named only if it has a Doxastikon); Ch III p.12-13 (the Glory is the feast's)", status: explicit,
+   conflict: {with: [lit.dismissal.anca_default], status: open,
+              note: "ANCA 2022-23 names the day's minor saints in feast periods (13 Sundays); ANCA 2024-26 never does (15/15 Sundays), agreeing with p.17. The 2022-23 practice is logged as a Divergence (divergence_fore_after.yaml)."}}
+- {id: fa.lit.dismissal.period_saint, slot: liturgy.dismissal, tier: 2,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: feast_period_saint},
+          {pred: feast_period_in, args: ["*:theophany", "*:presentation", "*:transfiguration", "*:dormition", "*:nativity_theotokos", "*:elevation",
+                                         "*:entrance_theotokos", "*:nativity"]}],
+   fill: {author: "$liturgy_author", saint_named: true, named_as: "the great saint of the day (has a Doxastikon)"}, source: typikon,
+   locator: "Ch I s4 p.17 (saint with a Doxastikon named); Ch III p.12 (great saint in a Lord's feast period has the Glory)", status: explicit}
+- {id: fa.lit.dismissal.nativity_sunday, slot: liturgy.dismissal, tier: 1,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["forefeast:nativity", "afterfeast:nativity"]}],
+   fill: {author: "$liturgy_author", saint_named: true, named_as: "the Sunday's own commemoration (Holy Fathers / Joseph, David and James)"}, source: typikon,
+   locator: "Ch I s4 p.17 with the Sunday's own Doxastikon: Sunday before the Nativity p.134, Sunday after the Nativity p.152-156", status: explicit}
+- {id: fa.lit.dismissal.forerunner_synaxis, slot: liturgy.dismissal, tier: 1,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["afterfeast:theophany"]}, {pred: menaion_date_is, args: ["01-07"]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "the Forerunner, in the Forerunner clause ('whose Synaxis we celebrate')"}, source: anca,
+   locator: "inferred: ANCA names the Synaxis inside the Forerunner clause, not in the saint-of-the-day slot", status: inferred,
+   evidence: "ANCA READ 2024-01-07 (one sample); same pattern as Archangel feasts (lit.dismissal.archangel)"}
+- {id: fa.lit.dismissal.dedication, slot: liturgy.dismissal, tier: 1,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["forefeast:elevation"]}, {pred: menaion_date_is, args: ["09-13"]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (Dedication of the Church of the Resurrection is not a saint)"}, source: anca,
+   locator: "inferred: ANCA names no saint on the Dedication (Sep 13) forefeast Sunday", status: inferred,
+   evidence: "ANCA READ 2026-09-13 (one sample)"}
+
+# ================= Liturgy: Dismissal characteristic phrase (Typikon p.17-18) =================
+- {id: fa.lit.dismissal_phrase.lord_after, slot: liturgy.dismissal_phrase, tier: 2,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]},
+          {pred: feast_period_in, args: ["afterfeast:theophany", "afterfeast:presentation", "afterfeast:transfiguration", "afterfeast:nativity",
+                                         "leavetaking:theophany", "leavetaking:presentation", "leavetaking:transfiguration", "leavetaking:nativity"]}],
+   fill: {phrase: feast_and_resurrection, clause: none}, source: typikon,
+   locator: "Ch I s4 p.17-18 (Sunday following a feast of the Lord or its leavetaking: the feast's characteristic phrase, then 'and rose from the dead'); Presentation p.223, Transfiguration p.450-451",
+   status: explicit}
+- {id: fa.lit.dismissal_phrase.cross, slot: liturgy.dismissal_phrase, tier: 2,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["afterfeast:elevation", "leavetaking:elevation"]}],
+   fill: {phrase: resurrection, clause: cross}, source: typikon,
+   locator: "Ch I s4 p.18 (Holy Cross: 'May he who rose again from the dead' even in the feast period); Cross clause: ANCA", status: explicit}
+- {id: fa.lit.dismissal_phrase.theotokos, slot: liturgy.dismissal_phrase, tier: 2,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]},
+          {pred: feast_period_in, args: ["afterfeast:dormition", "leavetaking:dormition", "afterfeast:entrance_theotokos", "leavetaking:entrance_theotokos",
+                                         "afterfeast:nativity_theotokos", "leavetaking:nativity_theotokos"]}],
+   fill: {phrase: resurrection, clause: theotokos}, source: anca,
+   locator: "Ch I s4 p.17 (characteristic phrase only for feasts of the Lord); inferred: ANCA names the Theotokos feast inside the Theotokos clause ('whose Dormition ... we now celebrate')",
+   status: inferred, evidence: "ANCA READ 2022-26 Dormition / Entry after-feast and leavetaking Sundays (see the sweep counts in the H report)"}
+- {id: fa.lit.dismissal_phrase.forefeast, slot: liturgy.dismissal_phrase, tier: 2,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]},
+          {pred: feast_period_in, args: ["forefeast:theophany", "forefeast:presentation", "forefeast:transfiguration", "forefeast:elevation", "forefeast:nativity",
+                                         "forefeast:procession_cross", "forefeast:conception"]}],
+   fill: {phrase: resurrection, clause: none}, source: typikon,
+   locator: "Ch I s4 p.17-18 (the feast's phrase is added only after the feast: Sunday following it or its leavetaking)", status: explicit}
+- {id: fa.lit.dismissal_phrase.forefeast_theotokos, slot: liturgy.dismissal_phrase, tier: 2,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["forefeast:dormition", "forefeast:nativity_theotokos", "forefeast:entrance_theotokos"]}],
+   fill: {phrase: resurrection}, source: typikon,
+   locator: "Ch I s4 p.17-18 (no characteristic phrase before the feast); the Theotokos-clause mention is left unstated: ANCA has it on 2022-08-14 and 2022-11-20, not on 2025-09-07",
+   status: explicit}
+- {id: fa.lit.dismissal_phrase.forerunner, slot: liturgy.dismissal_phrase, tier: 2,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["leavetaking:beheading", "leavetaking:nativity_forerunner"]}],
+   fill: {phrase: resurrection, clause: forerunner}, source: anca,
+   locator: "Ch I s4 p.17 (no characteristic phrase for a saint); inferred: ANCA names the Forerunner's feast in the Forerunner clause", status: inferred,
+   evidence: "ANCA READ 2023-06-25 and 2026-08-30 (one sample each)"}
+- {id: fa.lit.dismissal_phrase.forerunner_synaxis, slot: liturgy.dismissal_phrase, tier: 1,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: feast_period_in, args: ["afterfeast:theophany"]}, {pred: menaion_date_is, args: ["01-07"]}],
+   fill: {phrase: feast_and_resurrection, clause: forerunner}, source: anca,
+   locator: "Ch I s4 p.17-18 (Theophany phrase + 'and rose'); inferred: ANCA names the Synaxis in the Forerunner clause", status: inferred,
+   evidence: "ANCA READ 2024-01-07 (one sample)"}
+- {id: lit.dismissal_phrase.sunday, slot: liturgy.dismissal_phrase, tier: 4,
+   when: [{pred: sunday}, {pred: in_slice}],
+   fill: {phrase: resurrection}, source: typikon,
+   locator: "Ch I s4 p.17 (Great Dismissal on Sunday: 'May he who rose again from the dead, Christ our true God'); the clause mention is left unstated (ANCA names a Theotokos feast such as the Robe, 2023-07-02, in the Theotokos clause)", status: explicit}

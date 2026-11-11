@@ -1,0 +1,171 @@
+# Sunday kontakion Rules (#27 Matins 6th-ode kontakion; #25 Liturgy kontakion windows; #19 Liturgy author).
+# Typikon = Antiochian Typikon (Khoury/Morris 2011) printed page; Violakis = 1888 Typikon (local translation) section.
+# Tiers (Matins rules sit one tier lower than the Liturgy ones; default resurrectional = 3): 0-1 movable (Pascha-relative) overrides, 2 single-date exceptions, 3 fixed date windows/lists; placeholders in
+# sunday_general.yaml (tier 4, status missing) remain only for days these Rules do not cover (Palm Sunday, Pascha, Lord's-feast Sundays).
+
+# ================= Matins kontakion (resurrectional by default; feast's replaces it) =================
+- {id: mat.kontakion.default, slot: matins.kontakion, tier: 3, when: [{pred: sunday}],
+   fill: {kind: resurrectional, tone: "$tone"}, source: typikon, locator: "Ch I s10 p.28 (Octoechos kontakion; Violakis §26 p.21)", status: explicit}
+- {id: mat.kontakion.triodion, slot: matins.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -49]}],
+   fill: {kind: feast, owner: "the Triodion Sunday's own"}, source: typikon, locator: "Ch I s10 p.28 (Triodion Sundays except Lent 2, 4, 5); Violakis §26", status: explicit}
+- {id: mat.kontakion.lent_1_3, slot: matins.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -42]}],
+   fill: {kind: feast, owner: "Sunday of Orthodoxy (Lent 1)"}, source: typikon, locator: "Ch I s10 p.28 (Triodion Sundays except Lent 2, 4, 5)", status: explicit}
+- {id: mat.kontakion.lent_3, slot: matins.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-28, -28]}],
+   fill: {kind: feast, owner: "Lent 3 (Veneration of the Cross)"}, source: typikon, locator: "Ch I s10 p.28 (Triodion Sundays except Lent 2, 4, 5)", status: explicit,
+   conflict: {with: [mat.kontakion.default], status: open, note: "ANCA Abbr 2025-03-23 prints the resurrectional kontakion on Lent 3 but the full ORTHROS file prints the Lent 3 kontakion (same as every other year 2022-26). The full ORTHROS file is used as key."}}
+- {id: mat.kontakion.pentecostarion, slot: matins.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [7, 49]}],
+   fill: {kind: feast, owner: "the Pentecostarion Sunday's own"}, source: typikon, locator: "Ch I s10 p.28 (Thomas ... All Saints); Ch.V overrides George/John/Constantine (#27 C2)", status: explicit}
+- {id: mat.kontakion.all_saints, slot: matins.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [56, 56]}],
+   fill: {kind: feast, owner: "All Saints"}, source: typikon, locator: "Ch I s10 p.28 (All Saints)", status: explicit}
+- {id: mat.kontakion.all_saints_antioch, slot: matins.kontakion, tier: 0,
+   when: [{pred: sunday}, {pred: desig_contains, args: ["All Saints of Antioch"]}, {pred: year_at_least, args: [2025]}],
+   fill: {kind: feast, owner: "All Saints of Antioch"}, source: anca, locator: "inferred: ANCA-local commemoration, not in the Typikon",
+   status: inferred, evidence: "ANCA ORTHROS 2025-06-22 and 2026-06-14 print its own kontakion and oikos (#27 divergence 4); 2022-24 print the resurrectional only (commemoration not yet kept), hence the year clause"}
+- {id: mat.kontakion.forefathers_to_nativity, slot: matins.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_between, args: ["12-11", "12-31"]}],
+   fill: {kind: feast, owner: "Forefathers / Fathers / forefeast of the Nativity (Dec 20-23) / Nativity / Sunday after Nativity"},
+   source: typikon, locator: "Ch I s10 p.28 (Forefathers, Genealogy, Sunday after Nativity); Ch V Dec 18-19 p.134, Dec 20-23 p.135, Dec 24 p.136-137, Dec 25 p.144", status: explicit}
+- {id: mat.kontakion.jan_forefeast, slot: matins.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["01-01", "01-05", "01-06", "01-07"]}],
+   fill: {kind: feast, owner: "Basil (Jan 1) / forefeast of Theophany (Jan 5) / Theophany / Synaxis of the Forerunner"},
+   source: typikon, locator: "Ch V Jan 1 p.165, Jan 5 p.169, Jan 6 p.173-174, Jan 7 p.178-181", status: explicit}
+- {id: mat.kontakion.three_hierarchs, slot: matins.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["01-30"]}, {pred: pascha_days_between, args: [-9999, -71]}],
+   fill: {kind: feast, owner: "the Three Hierarchs"}, source: typikon, locator: "Ch I s10 p.28 (Three Hierarchs, only before the Triodion)", status: explicit}
+- {id: mat.kontakion.theotokos_feast, slot: matins.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["02-02", "08-15", "08-23", "09-08", "11-21"]}],
+   fill: {kind: feast, owner: "Theotokos / Presentation feast (resurrectional kontakion goes after ode 3)"},
+   source: typikon, locator: "Ch I s10 p.28 and s9 p.27; Presentation p.219; Dormition leavetaking Aug 23 p.463-464", status: explicit}
+- {id: mat.kontakion.lord_feast, slot: matins.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["08-06", "09-14"]}],
+   fill: {kind: feast, owner: "the Lord's feast (Resurrection service omitted)"},
+   source: typikon, locator: "Ch I s5 p.11 (Resurrection omitted); Aug 6 p.449, Sep 14 p.75-76", status: explicit}
+- {id: mat.kontakion.listed_saints, slot: matins.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["06-24", "06-29", "09-01", "09-26", "10-26", "11-08", "11-13", "11-30", "12-06", "01-25", "01-27", "08-29"]}],
+   fill: {kind: feast, owner: "the saint (resurrectional kontakion goes after ode 3)"},
+   source: typikon, locator: "Ch I s10 p.28 (Forerunner, Peter & Paul, John, Andrew, Archangels, Demetrius, Nicholas) + Ch V extras (Sep 1 p.61, Chrysostom p.106-107, Gregory p.203-207, Beheading p.466)", status: explicit}
+- {id: mat.kontakion.fathers_councils, slot: matins.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: named_sunday_is, args: [fathers_4th_council, fathers_7th_council]}],
+   fill: {kind: feast, owner: "the Holy Fathers of the Council"}, source: typikon,
+   locator: "Ch I s10 p.28 (3 Sundays of the Fathers); Ch V Oct 11-17 p.94", status: explicit}
+
+# ================= Liturgy kontakion (fixed date windows; Typikon Ch I s6 p.35-37, Violakis §40 p.32-33) =================
+- {id: lit.kontakion.lent5_annunciation_early, slot: liturgy.kontakion, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-14, -14]}, {pred: date_between, args: ["03-27", "04-30"]}],
+   fill: {kind: ordinary_theotokos, tone: 2}, source: typikon, locator: "Ch I s6 p.36; Violakis §40 p.33 (Lent 5 when the Annunciation fell before Akathist Saturday)", status: explicit}
+- {id: lit.kontakion.lent_sundays, slot: liturgy.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -14]}],
+   fill: {kind: lent_sunday, tone: 8}, source: typikon, locator: "Ch I s6 p.36 ('To thee the Champion Leader')", status: explicit}
+- {id: lit.kontakion.triodion.pharisee_publican, slot: liturgy.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -70]}, {pred: date_between, args: ["02-10", "03-31"]}],
+   fill: {kind: pharisee_publican, tone: 4}, source: typikon, locator: "Ch I s6 p.36 + fn 27 (Publican; Triodion kontakion once the Presentation leavetaking, Feb 9, is past)", status: explicit}
+- {id: lit.kontakion.triodion.prodigal_son, slot: liturgy.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-63, -63]}, {pred: date_between, args: ["02-10", "03-31"]}],
+   fill: {kind: prodigal_son, tone: 3}, source: typikon, locator: "Ch I s6 p.36 + fn 27 (Prodigal; Triodion kontakion once the Presentation leavetaking, Feb 9, is past)", status: explicit}
+- {id: lit.kontakion.triodion.last_judgment, slot: liturgy.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-56, -56]}, {pred: date_between, args: ["02-10", "03-31"]}],
+   fill: {kind: last_judgment, tone: 1}, source: typikon, locator: "Ch I s6 p.36 + fn 27 (Last Judgment; Triodion kontakion once the Presentation leavetaking, Feb 9, is past)", status: explicit}
+- {id: lit.kontakion.triodion.forgiveness, slot: liturgy.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-49, -49]}, {pred: date_between, args: ["02-10", "03-31"]}],
+   fill: {kind: forgiveness, tone: 6}, source: typikon, locator: "Ch I s6 p.36 + fn 27 (Forgiveness; Triodion kontakion once the Presentation leavetaking, Feb 9, is past)", status: explicit}
+- {id: lit.kontakion.pascha_cycle, slot: liturgy.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 38]}],
+   fill: {kind: pascha, tone: 8}, source: typikon, locator: "Ch I s6 p.36; Violakis §40 p.32-33", status: explicit}
+- {id: lit.kontakion.ascension, slot: liturgy.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [39, 48]}],
+   fill: {kind: ascension, tone: 6}, source: violakis, locator: "§40 p.32-33 (Typikon p.36 bullet garbled, #25)", status: explicit}
+- {id: lit.kontakion.pentecost, slot: liturgy.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [49, 49]}],
+   fill: {kind: pentecost, tone: 8}, source: typikon, locator: "Ch I s6 p.36", status: explicit}
+- {id: lit.kontakion.all_saints, slot: liturgy.kontakion, tier: 1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [56, 56]}],
+   fill: {kind: all_saints, tone: 8}, source: typikon, locator: "Ch I s6 p.36", status: explicit}
+- {id: lit.kontakion.undisputed_pre_triodion, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [-9999, -71]}, {pred: date_between, args: ["02-10", "02-28"]}],
+   fill: {kind: ordinary_theotokos, tone: 2}, source: typikon, locator: "Ch I s6 p.35-36 (silent between Feb 10 and the Publican)", status: inferred,
+   evidence: "#25: ANCA READ 2019-02-10, 2021-02-14, 2024-02-11/18 all 'O undisputed Intercessor'"}
+- {id: lit.kontakion.undisputed_summer, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [57, 9999]}, {pred: date_between, args: ["06-01", "07-26"]}],
+   fill: {kind: ordinary_theotokos, tone: 2}, source: typikon, locator: "Ch I s6 p.36 (after All Saints / from the Apostles' Fast to Jul 27); Violakis §40", status: explicit}
+- {id: lit.kontakion.undisputed_autumn, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: date_between, args: ["09-22", "11-07"]}],
+   fill: {kind: ordinary_theotokos, tone: 2}, source: typikon, locator: "Ch I s6 p.35 (ends Nov 7 incl.: the Entrance kontakion starts Nov 8, Violakis §40 p.32-33)", status: explicit}
+- {id: lit.kontakion.entrance, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: date_between, args: ["11-08", "11-25"]}],
+   fill: {kind: entrance, tone: 4}, source: typikon, locator: "Ch I s6 p.35 (Nov 8 to the leavetaking); Violakis §40", status: explicit,
+   conflict: {with: ["Typikon p.35 (separate forefeast kontakion on Nov 20)"], status: open, note: "ANCA READ 2022-11-20 prints the Entrance heading and tone 4 on the forefeast Sunday: followed (same kind). Nov 25 (leavetaking) on a Sunday is not sampled."}}
+- {id: lit.kontakion.preparation, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: date_between, args: ["11-26", "12-24"]}],
+   fill: {kind: nativity_preparation, tone: 3}, source: typikon, locator: "Ch I s6 p.36 (until the forefeast); Violakis §40 (until the eve)", status: explicit,
+   conflict: {with: ["Typikon p.36 (until the forefeast)"], status: open, note: "Typikon says until the forefeast, Violakis until the eve. Dec 20-24 is inferred from ANCA (5 Sundays 2019-25 all Preparation); followed as such."}}
+- {id: lit.kontakion.conception_anna, slot: liturgy.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["12-09"]}],
+   fill: {kind: conception_of_anna, tone: 2}, source: typikon, locator: "Ch I s6 p.36 (no Sunday sampled)", status: explicit}
+- {id: lit.kontakion.nativity, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: date_between, args: ["12-25", "12-31"]}],
+   fill: {kind: nativity, tone: 3}, source: typikon, locator: "Ch I s6 p.36", status: explicit}
+- {id: lit.kontakion.circumcision, slot: liturgy.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["01-01"]}],
+   fill: {kind: circumcision, tone: 3}, source: typikon, locator: "Ch I s6 p.36", status: explicit}
+- {id: lit.kontakion.forefeast_theophany, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: date_between, args: ["01-02", "01-05"]}],
+   fill: {kind: forefeast_theophany, tone: 4}, source: typikon, locator: "Ch I s6 p.36", status: explicit}
+- {id: lit.kontakion.theophany, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: date_between, args: ["01-06", "01-14"]}],
+   fill: {kind: theophany, tone: 4}, source: typikon, locator: "Ch I s6 p.36", status: explicit}
+- {id: lit.kontakion.presentation, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: date_between, args: ["01-15", "02-09"]}],
+   fill: {kind: presentation, tone: 1}, source: typikon, locator: "Ch I s6 p.36 + fn 27 (to the leavetaking, Feb 9, also on a pre-Triodion Sunday)", status: inferred,
+   evidence: "#25: Feb 9 boundary implied by fn 27; ANCA READ 2020-02-09, 2025-02-09, 2026-02-01/02-08 (Triodion Sundays) print the Presentation kontakion"}
+- {id: lit.kontakion.forefeast_presentation, slot: liturgy.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["02-01"]}],
+   fill: {kind: forefeast_presentation, tone: 4}, source: typikon, locator: "Ch I s6 p.36", status: explicit}
+- {id: lit.kontakion.robe, slot: liturgy.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["07-02"]}],
+   fill: {kind: placing_of_robe, tone: 4}, source: typikon, locator: "Ch I s6 p.36 (Jul 2)", status: explicit}
+- {id: lit.kontakion.anna_july, slot: liturgy.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["07-25"]}],
+   fill: {kind: dormition_of_anna, tone: 2}, source: typikon, locator: "Ch I s6 p.36 (Jul 25; no Sunday sampled 2022-26)", status: explicit}
+- {id: lit.kontakion.transfiguration, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: date_between, args: ["07-27", "08-13"]}],
+   fill: {kind: transfiguration, tone: 7}, source: typikon, locator: "Ch I s6 p.36; Violakis §40 (also Aug 1 on a Sunday)", status: explicit}
+- {id: lit.kontakion.forefeast_dormition, slot: liturgy.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["08-14"]}],
+   fill: {kind: forefeast_dormition, tone: 4}, source: typikon, locator: "Ch I s6 p.36-37", status: explicit}
+- {id: lit.kontakion.dormition, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: date_between, args: ["08-15", "08-23"]}],
+   fill: {kind: dormition, tone: 2}, source: typikon, locator: "Ch I s6 p.36-37", status: explicit}
+- {id: lit.kontakion.nativity_theotokos, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: date_between, args: ["08-24", "09-12"]}],
+   fill: {kind: nativity_theotokos, tone: 4}, source: typikon, locator: "Ch I s6 p.37; Violakis §40", status: explicit}
+- {id: lit.kontakion.sash, slot: liturgy.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["08-31"]}],
+   fill: {kind: placing_of_sash, tone: 2}, source: typikon, locator: "Ch I s6 p.37", status: explicit}
+- {id: lit.kontakion.indiction, slot: liturgy.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["09-01"]}],
+   fill: {kind: indiction, tone: 4}, source: typikon, locator: "Ch I s6 p.35", status: explicit}
+- {id: lit.kontakion.forefeast_nativity_theotokos, slot: liturgy.kontakion, tier: 2,
+   when: [{pred: sunday}, {pred: date_in, args: ["09-07"]}],
+   fill: {kind: forefeast_nativity_theotokos, tone: 3}, source: typikon, locator: "Ch I s6 p.37", status: explicit}
+- {id: lit.kontakion.dedication, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: date_in, args: ["09-13"]}],
+   fill: {kind: dedication_resurrection_church, tone: 4}, source: typikon, locator: "Ch I s6 p.35", status: explicit}
+- {id: lit.kontakion.holy_cross, slot: liturgy.kontakion, tier: 3,
+   when: [{pred: sunday}, {pred: date_between, args: ["09-14", "09-21"]}],
+   fill: {kind: holy_cross, tone: 4}, source: typikon, locator: "Ch I s6 p.35", status: explicit}
+
+# ================= Liturgy author (#19): Basil per the DB flag; Annunciation on a Lent Sunday is Chrysostom =================
+- {id: lit.author.annunciation_lent_sunday, slot: liturgy.author, tier: 1,
+   when: [{pred: sunday}, {pred: date_in, args: ["03-25"]}],
+   fill: {author: "John Chrysostom"}, source: typikon, locator: "Ch V Mar 25 on Lent 3 p.283 (Chrysostom); ANCA READ 2018-03-25 (Lent 5) agrees; #19",
+   status: explicit,
+   conflict: {with: [lit.author.basil], status: open, note: "The yocal DB basil flag marks Annunciation on a Lent Sunday as Basil (15 dates 2000-2099, #19); Typikon p.283 and ANCA say Chrysostom. Not in the 2022-26 range, so untested against ANCA here."}}
+- {id: lit.author.basil, slot: liturgy.author, tier: 3, when: [{pred: sunday}, {pred: basil}],
+   fill: {author: "Basil the Great"}, source: typikon, locator: "Mar 9 section p.267 (Lent 1-5), Jan 1, eves of Nativity/Theophany; #19 (Lent 2 and 5 settled by ANCA READ 2018-26)", status: explicit}
+- {id: lit.author.chrysostom, slot: liturgy.author, tier: 4, when: [{pred: sunday}, {pred: not_basil}],
+   fill: {author: "John Chrysostom"}, source: typikon, locator: "Ch I s6 (default Liturgy); Palm Sunday and Lazarus Saturday are Chrysostom (#19)", status: explicit}

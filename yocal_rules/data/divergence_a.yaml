@@ -1,0 +1,15 @@
+# Work package A divergences (date-scoped; DB assumed correct).
+- slot: [vespers.apolytikia, matins.apolytikia, liturgy.apolytikia]
+  source: anca
+  scope: {date: ["2023-07-22", "2023-07-23", "2024-10-26", "2024-10-27"]}
+  ours: {saint: true}
+  theirs: {saint: false}
+  class: anca_omits_menaion_doxastikon
+  reason: "#34: ANCA omits the Menaion Vespers Glory / saint's troparion (Mary Magdalene 07-22 and Nestor 10-27 have an ALWB Vespers Glory; Typikon pp.97-98 gives Demetrius a Glory and troparion on Sat Oct 26) and shows 7R+3; ANCA variance on 4 dates, no independent evidence to drop it"
+- slot: matins.kathismata
+  source: anca
+  scope: {date: ["2025-01-05"]}
+  ours: {tone: 3}
+  theirs: {tone: 4}
+  class: anca_internal_inconsistency
+  reason: "ANCA Abbreviated rubric says Octoechos Tone 4, but the printed Orthros heading is 'THIRD TONE RESURRECTIONAL KATHISMATA' and the week's tone is 3 (Typikon p.167: Resurrection kathisma in the tone of the week). Not a parse issue; ANCA typo"
