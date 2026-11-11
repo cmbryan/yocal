@@ -43,6 +43,7 @@ supported_fixed_major:      # mm-dd of fixed Major feasts whose weekday/Saturday
   - "03-25:sunday@-14"       # I: Annunciation on the 5th Sunday of Great Lent (ANCA 2018); 'mm-dd:sunday@N' = that Sunday only (N days from Pascha), eve Vespers included
   # "08-06:sunday" / "09-14:sunday" (Transfiguration, Elevation) stay disabled: no ANCA text exists for a Sunday: the liturgicday pages for 2023-08-05/06 and 2025-09-13/14 list no service texts (re-checked), so the cached files are 0 bytes (= 404); the undated 'Aug 06'/'Sept 14' files are 2026 weekday texts. Re-check ANCA before enabling
   # "12-25" / "01-06" (Nativity, Theophany; Tue-Sat Rules in major_feasts.yaml) stay disabled: no ANCA Nativity text, no ANCA Theophany Liturgy text (unverified)
+  # "12-25:Monday" / "01-06:Monday": Typikon-only Rules exist (major_feasts_nat_thy_monday.yaml, p.145-148 / p.174-176) but no ANCA text to verify them: stay disabled
 supported_movable_major:    # ids of movable Major feasts not on a Sunday (calfacts.MAJOR_MOVABLE)
   - ascension                # I: major_feasts.yaml
 supported_major_eve_vespers:  # 'mm-dd:Weekday' = eve Great Vespers only (weekday of the eve) of a fixed Major feast; Matins/Liturgy of that feast stay disabled

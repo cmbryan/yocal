@@ -286,8 +286,8 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         reasons.append("not a Sunday")
     if mf_mov and ld.weekday() != 6 and mf not in sl["supported_movable_major"]:
         reasons.append(f"Major feast ({mf})")
-    if mf in ("nativity", "theophany") and ld.weekday() == 0:  # Monday order (Typikon p.145, p.174): no Rules yet
-        reasons.append(f"Major feast ({mf}) on a Monday")
+    if mf in ("nativity", "theophany") and ld.weekday() == 0:  # Monday order (Typikon p.145-148, p.174-176): Rules are Typikon-sourced, no ANCA text to verify them
+        reasons.append(f"Major feast ({mf}) on a Monday (Typikon-only Rules, not checked against ANCA)")
     if ssn not in sl["supported_seasons"]:
         reasons.append(f"{ssn} season")
     eve_only = service == "vespers" and f"{mmdd}:{(ld - dt.timedelta(days=1)).strftime('%A')}" in sl["supported_major_eve_vespers"]  # eve Vespers only, per eve weekday
