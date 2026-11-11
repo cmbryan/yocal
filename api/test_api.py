@@ -134,3 +134,10 @@ def test_get_date_commem_then_extra_order():
         "For the Departed: 1 Thessalonians 4:13-17", "John 5:24-30"]
     assert result["lections"]["basic"] == [
         "1 Corinthians 10:23-28", "Luke 21:8-9, 25-27, 33-36"]
+
+
+def test_get_date_applies_lection_exceptions():
+    # lection_exceptions.csv overrides g_code in the master DB only
+    result = _get_date(date(2026, 1, 19))
+    assert "Matthew 22:35-46" in result["lections"]["basic"]
+    assert "Mark 5:24-34" not in result["lections"]["basic"]

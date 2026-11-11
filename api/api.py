@@ -13,8 +13,6 @@ from . import create_app
 
 app = create_app()
 
-yocal_path = 'db/yocal/YOCal.db'
-assert os.path.exists(yocal_path), f"{yocal_path} not found"
 yocal_master_path = 'db/yocal/YOCal_Master.db'
 assert os.path.exists(yocal_master_path), f"{yocal_master_path} not found"
 
@@ -96,6 +94,7 @@ def _get_date(date_obj: datetime.date) -> Dict:
         "global_saints": data["class_5"],
         "british_saints": data["british"],
         "a_code": data["a_code"],
+        "explanatory_notes": data["explanatory_notes"],
     }
 
     a_code = data["a_code"]
@@ -205,11 +204,12 @@ def _get_lections(code: str) -> Dict:
 
 
 def _get_data(date_obj: datetime.date) -> Dict:
-    with sqlite3.connect(yocal_path) as conn:
+    # Read from the master DB (as the WP template does) so that
+    # lection exceptions are applied.
+    with sqlite3.connect(yocal_master_path) as conn:
         cursor = conn.cursor()
-        cursor.execute(f"SELECT * FROM Year_{date_obj.year}"
-                        " WHERE date = ?",
-                        (date_obj.strftime("%Y-%m-%d"),))
+        cursor.execute("SELECT * FROM yocal_main WHERE date = ?",
+                       (date_obj.strftime("%Y-%m-%d"),))
         result = cursor.fetchone()
         column_names = [description[0] for description in cursor.description]
 
