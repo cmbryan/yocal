@@ -108,3 +108,36 @@ def test_test_display_template(test_date, expected_file):
             assert response.strip() == expected_output.strip(), \
                 f"Template output does not match expected output for {test_date}." \
                 f" diff {expected_file} {actual_file} for more details"
+
+
+def test_get_date_f7ec_sunday_gospel_from_sunday():
+    # Sunday of the Fathers of the 7th Council: Apostle from F7EC, Gospel from L4Sun
+    result = _get_date(date(2026, 10, 11))
+    assert result["lections"]["basic"] == ["Titus 3:8-15", "Luke 8:5-8a,9-15,8b"]
+    assert result["lections"]["liturgy"] == ["Titus 3:8-15", "Luke 8:5-8a,9-15,8b"]
+    assert len(result["texts"]["basic"]) == 2
+
+
+@pytest.mark.parametrize("day", [date(2024, 3, 13), date(2024, 3, 15)])
+def test_get_date_cheesefare_wed_fri_no_liturgy_bold(day):
+    # E36Wed / E36Fri: no Liturgy, so no readings are appointed for it
+    result = _get_date(day)
+    assert result["lections"]["liturgy"] == []
+    assert result["liturgy"] == ""
+
+
+def test_get_date_commem_then_extra_order():
+    # Commemoration (both readings) precedes the extra readings, as in the WP template
+    result = _get_date(date(2024, 3, 9))
+    assert result["lections"]["commem"] == [
+        "Hebrews 12:1-10", "Matthew 20:1-16",
+        "For the Departed: 1 Thessalonians 4:13-17", "John 5:24-30"]
+    assert result["lections"]["basic"] == [
+        "1 Corinthians 10:23-28", "Luke 21:8-9, 25-27, 33-36"]
+
+
+def test_get_date_applies_lection_exceptions():
+    # lection_exceptions.csv overrides g_code in the master DB only
+    result = _get_date(date(2026, 1, 19))
+    assert "Matthew 22:35-46" in result["lections"]["basic"]
+    assert "Mark 5:24-34" not in result["lections"]["basic"]

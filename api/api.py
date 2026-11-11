@@ -13,8 +13,6 @@ from . import create_app
 
 app = create_app()
 
-yocal_path = 'db/yocal/YOCal.db'
-assert os.path.exists(yocal_path), f"{yocal_path} not found"
 yocal_master_path = 'db/yocal/YOCal_Master.db'
 assert os.path.exists(yocal_master_path), f"{yocal_master_path} not found"
 
@@ -64,7 +62,8 @@ def get_test_display():
 
 
 def liturgy_allowed(a_code: str) -> bool:
-    return a_code[0] == "G" and (a_code[2] != "S" or a_code in ["G7Sat", "E36Wed", "E36Fri"])
+    return (a_code[0] == "G" and (a_code[2] != "S" or a_code == "G7Sat")) \
+        or a_code in ["E36Wed", "E36Fri"]
 
 def _get_date(date_obj: datetime.date) -> Dict:
     data = _get_data(date_obj)
@@ -95,6 +94,7 @@ def _get_date(date_obj: datetime.date) -> Dict:
         "global_saints": data["class_5"],
         "british_saints": data["british"],
         "a_code": data["a_code"],
+        "explanatory_notes": data["explanatory_notes"],
     }
 
     a_code = data["a_code"]
@@ -114,6 +114,11 @@ def _get_date(date_obj: datetime.date) -> Dict:
     if a_code:
         a_data = _get_lections(a_code)
         a_data["primary"] = []
+        # Fathers of the 7th Council: only the Apostle reading is used;
+        # the Gospel comes from the Sunday (g_code)
+        if a_code == "F7EC":
+            a_data["lect_2"] = None
+            a_data["text_2"] = None
 
     if g_code:
         g_data = _get_lections(g_code)
@@ -164,23 +169,24 @@ def _get_date(date_obj: datetime.date) -> Dict:
     result["texts"]["basic"] = []
     result["texts"]["commem"] = []
 
-    for idx in range(1, 3):
-        lect_idx = f"lect_{idx}"
-        text_idx = f"text_{idx}"
+    # Order matches the WP template: Apostle, Gospel (Apostle code's, else
+    # the Sunday's), commemoration, then extra. Only lect_2 is taken from g_data.
+    basic_sources = [(a_data, "lect_1"), (a_data, "lect_2"), (g_data, "lect_2")]
+    commem_sources = [(c_data, "lect_1"), (c_data, "lect_2"),
+                      (x_data, "lect_1"), (x_data, "lect_2")]
 
-        for data in [a_data, g_data]:
-            if data[lect_idx]:
-                result["lections"]["basic"].append(data[lect_idx])
-                result["texts"]["basic"].append(data[text_idx])
-                if lect_idx in data["primary"]:
-                    result["lections"]["liturgy"].append(data[lect_idx])
+    for section, sources in [("basic", basic_sources),
+                             ("commem", commem_sources)]:
+        for src, lect_idx in sources:
+            if src[lect_idx]:
+                result["lections"][section].append(src[lect_idx])
+                result["texts"][section].append(src[lect_idx.replace("lect", "text")])
 
-        for data in [c_data, x_data]:
-            if data[lect_idx]:
-                result["lections"]["commem"].append(data[lect_idx])
-                result["texts"]["commem"].append(data[text_idx])
-                if lect_idx in data["primary"]:
-                    result["lections"]["liturgy"].append(data[lect_idx])
+    # Liturgy readings: Apostle first, then Gospel
+    for lect_idx in ("lect_1", "lect_2"):
+        for src in [a_data, g_data, c_data, x_data]:
+            if src[lect_idx] and lect_idx in src["primary"]:
+                result["lections"]["liturgy"].append(src[lect_idx])
 
     return result
 
@@ -198,11 +204,12 @@ def _get_lections(code: str) -> Dict:
 
 
 def _get_data(date_obj: datetime.date) -> Dict:
-    with sqlite3.connect(yocal_path) as conn:
+    # Read from the master DB (as the WP template does) so that
+    # lection exceptions are applied.
+    with sqlite3.connect(yocal_master_path) as conn:
         cursor = conn.cursor()
-        cursor.execute(f"SELECT * FROM Year_{date_obj.year}"
-                        " WHERE date = ?",
-                        (date_obj.strftime("%Y-%m-%d"),))
+        cursor.execute("SELECT * FROM yocal_main WHERE date = ?",
+                       (date_obj.strftime("%Y-%m-%d"),))
         result = cursor.fetchone()
         column_names = [description[0] for description in cursor.description]
 
