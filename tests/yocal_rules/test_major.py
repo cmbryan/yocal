@@ -254,7 +254,6 @@ def test_sunday_feast_orders_not_enabled_stay_incomplete():
     f = lambda d, s: calfacts.load_facts(dt.date.fromisoformat(d), s)
     assert f("2023-08-06", "liturgy")["slice_reasons"] == ["fixed Major feast on a Sunday"]                      # Transfiguration: no ANCA text
     assert f("2025-09-14", "matins")["slice_reasons"] == ["fixed Major feast on a Sunday"]                       # Elevation: no ANCA text
-    assert f("2023-01-01", "liturgy")["slice_reasons"] == ["fixed Major feast on a Sunday"]                      # Circumcision / St Basil: not started
     r = f("2031-02-02", "matins")                                                                                 # Presentation on a Triodion Sunday (Typikon p.220 alt. order)
     assert not r["in_slice"] and "fixed Major feast on a Sunday of the triodion season" in r["slice_reasons"]
     _, m = slots("matins", "2031-02-02")
@@ -368,3 +367,92 @@ def test_annunciation_cases_no_unexplained_anca_diff(tmp_path, date, svc, kind):
     if not _cached(date, kind):
         pytest.skip("ANCA text not cached")
     assert cli.main([date, svc, "--offline", "--cache", CACHE, "--fail-on-diff", "--out", str(tmp_path)]) == 0
+
+
+# ---- Circumcision / St Basil (Jan 1) on a Sunday (data/rules/major_feasts_jan1_sunday.yaml; ANCA 2022-12-31 Vespers, 2023-01-01 Matins/Liturgy) ----
+JAN1_SUNDAY = [("vespers", "2022-12-31"), ("matins", "2023-01-01"), ("liturgy", "2023-01-01")]
+
+
+@needs_db
+def test_jan1_sunday_in_slice_and_only_prokeimenon_missing():
+    for svc, d in JAN1_SUNDAY:
+        r, s = slots(svc, d)
+        assert r.facts["in_slice"] and r.facts["major_feast"] == "circumcision" and r.facts["weekday"] == "Sunday"
+        missing = [k for k, x in s.items() if x.status == "missing"]
+        assert missing == (["liturgy.prokeimenon"] if svc == "liturgy" else []), (svc, missing)
+    assert "ticket" in slots("liturgy", "2023-01-01")[1]["liturgy.prokeimenon"].rule
+    assert calfacts.load_facts(dt.date(2034, 1, 1), "matins")["in_slice"]                                        # same order, any year (rules are year-independent; only 2023 ANCA-verified)
+    assert calfacts.load_facts(dt.date(2026, 1, 1), "matins")["in_slice"]                                        # weekday order unchanged
+
+
+@needs_db
+def test_jan1_sunday_vespers_order_typikon_p165():
+    _, v = slots("vespers", "2022-12-31")
+    st = v["vespers.lihc.stichera"]
+    assert (st.fill["res"], st.fill["other"]) == (4, [3, 3]) and st.rule["id"] == "mf.jan1.sun.ves.lihc"
+    assert st.rule["source"] == "typikon" and st.rule["status"] == "explicit" and "p.165" in st.rule["locator"]
+    assert "Now: theotokion of the Resurrection" in st.fill["parts"][-1]                                          # not the Circumcision doxastikon (p.165)
+    assert v["vespers.aposticha"].fill["owner"] == "resurrection" and v["vespers.readings"].fill["count"] == 3
+    assert [p.split(" — ")[0] for p in v["vespers.apolytikia"].fill["parts"]] == [
+        "Apolytikion of the Resurrection", "Apolytikion of St Basil the Great", "Apolytikion of the Circumcision"]
+    c = v["vespers.litia"].rule["conflict"]
+    assert c["status"] == "open" and "mf.ves.litia" in c["with"]
+    # the Nativity-leavetaking Sunday orders (pp.157, 161; 3R+4+3) are for Dec 31 on a Sunday: not this day
+    assert st.fill["res"] != 3 and not any("Nativity" in p for p in st.fill["parts"])
+
+
+@needs_db
+def test_jan1_sunday_matins_evlogetaria_not_a_theotokos_class_conflict():
+    _, m = slots("matins", "2023-01-01")
+    e = m["matins.evlogetaria"]
+    assert e.rule["id"] == "mf.jan1.sun.mat.evlogetaria" and e.rule["source"] == "typikon" and e.rule["status"] == "explicit"
+    assert "conflict" not in e.rule                                                                               # #39 'not sung' conflict is Theotokos-class only
+    assert m["matins.praises"].fill["res"] == 4 and m["matins.praises"].fill["other"] == [4]
+    assert m["matins.prokeimenon"].fill["kind"] == "resurrectional" and m["matins.eothinon_gospel"].fill["number"] == 7
+    k = m["matins.kathismata"].rule
+    assert k["source"] == "anca" and k["conflict"]["status"] == "open" and "p.165" in k["conflict"]["with"][0]
+
+
+@needs_db
+def test_jan1_sunday_liturgy_parts_and_open_conflicts():
+    _, l = slots("liturgy", "2023-01-01")
+    assert l["liturgy.author"].fill["author"] == "Basil the Great"
+    assert l["liturgy.antiphons"].fill["refrain2"] == "feast" and l["liturgy.eisodikon"].fill["kind"] == "sunday"
+    assert l["liturgy.kontakion"].fill["kind"] == "circumcision" and l["liturgy.final_hymn"].fill["kind"] == "feast_troparion"
+    assert l["liturgy.communion"].fill["kind"] == "praise_the_lord" and l["liturgy.gospel"].fill["ref"] == "Luke 2:20-21, 40-52"
+    assert l["liturgy.epistle"].fill["ref"] == "Colossians 2:8-12"
+    assert (l["liturgy.dismissal_phrase"].fill["phrase"], l["liturgy.dismissal_phrase"].fill["clause"]) == ("feast_and_resurrection", "none")
+    for slot, frag in (("liturgy.apolytikia", "patron"), ("liturgy.megalynarion", "Let us extol"), ("liturgy.epistle", "Epistle for St. Basil"),
+                       ("liturgy.dismissal", None)):
+        r = l[slot].rule
+        assert r["id"].startswith("mf.jan1.sun.lit.") and r["source"] == "anca" and r["status"] == "inferred", slot
+        assert r["conflict"]["status"] == "open" and (frag is None or frag in " ".join(r["conflict"]["with"]) + r["conflict"]["note"]), slot
+    assert l["liturgy.apolytikia"].fill["patron"] is True
+    assert l["liturgy.megalynarion"].fill["kind"] == "in_thee_rejoiceth"
+
+
+@needs_db
+def test_jan1_sunday_documents(tmp_path):
+    for svc, d in JAN1_SUNDAY:
+        assert cli.main([d, svc, "--no-compare", "--out", str(tmp_path)]) == 0
+        doc = (tmp_path / f"{d}-{svc}.md").read_text()
+        assert "Incomplete" not in doc and "Typikon" not in doc and "{'" not in doc and "{tone}" not in doc and "{mmdd}" not in doc
+        assert doc.count("- [to be determined]") == (1 if svc == "liturgy" else 0)
+    assert "3 stichera of St Basil" in (tmp_path / "2022-12-31-vespers.md").read_text()
+    assert "Resurrectional evlogetaria" in (tmp_path / "2023-01-01-matins.md").read_text()
+    assert "Colossians 2:8-12" in (tmp_path / "2023-01-01-liturgy.md").read_text()
+
+
+@needs_db
+@pytest.mark.parametrize("date,svc,kind", [("2022-12-31", "vespers", "VESP"), ("2023-01-01", "matins", "ORTHROS"), ("2023-01-01", "liturgy", "READ")])
+def test_jan1_sunday_no_unexplained_anca_diff(tmp_path, date, svc, kind):
+    if not _cached(date, kind):
+        pytest.skip("ANCA text not cached")
+    assert cli.main([date, svc, "--offline", "--cache", CACHE, "--fail-on-diff", "--out", str(tmp_path)]) == 0
+
+
+def test_jan1_sunday_anca_parsers():
+    k = anca.parse_feast_liturgy("Eisodikon (Entrance Hymn) is “O come, let us worship… save us, O Son of God, Who art risen from the dead…” as on ordinary Sundays.")
+    assert k["liturgy.eisodikon"]["kind"] == "sunday"
+    k = anca.parse_feast_liturgy("After Communion, instead of singing “We have seen the true light”, sing the Apolytikion of the Circumcision in Tone One.")
+    assert k["liturgy.final_hymn"]["kind"] == "feast_troparion"
