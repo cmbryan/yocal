@@ -63,6 +63,8 @@ PREDS = {
     "feast_on_weekday": lambda f, a: bool(f.get("major_feast")) and f["weekday"] != "Sunday"
                                      and not (f["major_feast"] in ("nativity", "theophany") and f["weekday"] == "Monday"),
     "feast_on_sunday": lambda f, a: bool(f.get("major_feast")) and f["weekday"] == "Sunday",
+    # Sunday order of a fixed Major feast (data/rules/major_feasts_sunday.yaml): feast id in args, ordinary season (Presentation on a Triodion Sunday has its own order, p.220)
+    "sunday_feast_order": lambda f, a: f["weekday"] == "Sunday" and f.get("major_feast", "") in a and f["season"] == "ordinary",
     "weekday_in": lambda f, a: f["weekday"] in a,  # weekday of the liturgical day (Vespers: the day after the eve)
     "eve_weekday_in": lambda f, a: _WEEK[(_WEEK.index(f["weekday"]) - 1) % 7] in a,  # weekday of the eve (the day before)
     "eve_basil": lambda f, a: f.get("eve_basil", False),  # the eve's DB row has the Liturgy of St Basil (Vesperal Liturgy)

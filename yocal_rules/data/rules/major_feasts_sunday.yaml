@@ -1,0 +1,164 @@
+# Work package I (cont.): Sunday occurrence of a fixed Major feast of the Theotokos class (Nativity of the Theotokos Sep 8, Presentation Feb 2,
+# Entrance Nov 21, Dormition Aug 15), ordinary season only (predicate sunday_feast_order). Sat Great Vespers = the eve; Matins; Liturgy.
+# Enabled in slices.yaml ('mm-dd:sunday') only where a cached ANCA text verifies it: Sep 8 (2019, 2024), Feb 2 (2020, 2025), Nov 21 (2021), Aug 15 (2021).
+# Not covered: Transfiguration (Aug 6) and Elevation (Sep 14) on Sunday (no ANCA text), Annunciation, Nativity, Theophany, Presentation on a Triodion Sunday (Typikon p.220 alt. order).
+# Typikon = Antiochian Typikon (Khoury/Morris 2011), printed page. Sunday orders: Sep 8 pp.66-68, Feb 2 pp.218-220, Nov 21 pp.113-114, Aug 15 pp.457-458.
+# General Sunday-feast rules: Ch I s5 V p.25 (kathismata), VI p.25-26 (evlogetaria), XV p.30 (praises); Ch I s6 I-III pp.34-35 (Beatitudes, antiphons, entrance hymn).
+# Issue decisions (#39, #42, #43): Presentation Vespers 4R+6 follows ANCA (conflict accepted); Matins evlogetaria follow ANCA (conflict accepted).
+# Other slots of these days (Vespers prokeimenon, Matins kontakion/katavasia) are resolved by the general Sunday and kontakion/major_feasts Rules.
+
+# ================= Great Vespers (Saturday evening) =================
+- {id: mf.sun.ves.lihc.theotokos, slot: vespers.lihc.stichera, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, entrance, dormition]}],
+   fill: {res: 4, other: [6], parts: ["4 stichera of the Resurrection — Octoechos Tone {tone}", "6 stichera of the feast — Menaion {mmdd} (3 idiomela each twice for the Dormition)", "Glory, Now: doxastikon of the feast"]},
+   source: typikon, locator: "Sep 8 p.66, Nov 21 p.113, Aug 15 p.457 (10 stichera: 4 Resurrection + 6 feast, Glory/Now feast)", status: explicit}
+- {id: mf.sun.ves.lihc.presentation, slot: vespers.lihc.stichera, tier: -10,
+   when: [{pred: sunday_feast_order, args: [presentation]}],
+   fill: {res: 4, other: [6], parts: ["4 stichera of the Resurrection — Octoechos Tone {tone}", "6 stichera of the Presentation — Menaion {mmdd}", "Glory, Now: doxastikon of the feast"]},
+   source: anca, locator: "inferred: 4R+6 as the Typikon's own Theotokos-feast Sunday pattern (Sep 8 p.66, Nov 21 p.113, Aug 15 p.457) and the Presentation's Matins praises (p.219)", status: inferred,
+   evidence: "ANCA Great Vespers 2020-02-01 and 2025-02-01: 4 Resurrection + 6 feast verses; Violakis §7 groups the Meeting with the Theotokos feasts (4R+6); #42 research",
+   conflict: {with: ["Typikon Feb 2 p.218 (Sunday order: 6 Resurrection + 4 Presentation + Glory)"], status: accepted,
+              note: "p.218 is an outlier against the Typikon's own Theotokos-feast Sunday pattern (pp.66, 113, 457) and its Presentation Matins 4R+4 (p.219); ANCA 2020 and 2025 and Violakis §7 give 4R+6. Project default: follow ANCA (#42)."}}
+- {id: mf.sun.ves.apolytikia, slot: vespers.apolytikia, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone} (once)", "Apolytikion of the feast (twice) — Menaion {mmdd}"]},
+   source: typikon, locator: "Sep 8 p.67, Feb 2 p.218, Nov 21 p.113, Aug 15 p.457 (Resurrection 1x, feast 2x)", status: explicit}
+- {id: mf.sun.ves.readings, slot: vespers.readings, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {count: 3, parts: ["3 Old Testament readings of the feast — Menaion {mmdd}"]},
+   source: typikon, locator: "readings of the feast after the Entrance: Sep 8 p.66, Feb 2 p.218, Nov 21 p.113, Aug 15 p.457; count from the Menaion",
+   status: inferred, evidence: "count: ANCA Great Vespers 2019-09-07, 2024-09-07, 2020-02-01, 2025-02-01, 2021-11-20, 2021-08-14 print 3 readings"}
+- {id: mf.sun.ves.litia, slot: vespers.litia, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {litia: true, parts: ["Litia and Artoklasia of the feast after the litany of supplication (if the parish serves it) — Menaion {mmdd}"]},
+   source: anca, locator: "inferred: ANCA places the Litia at Great Vespers ('If your parish will offer the Service of the Litia and Artoklasia ...')",
+   status: inferred, evidence: "ANCA Great Vespers 2019-09-07, 2024-09-07, 2020-02-01, 2025-02-01, 2021-11-20, 2021-08-14",
+   conflict: {with: [mf.ves.litia, "Typikon Sep 8 p.67, Feb 2 p.219, Nov 21 p.113, Aug 15 p.457 (Litia at the Midnight Service)"], status: open,
+              note: "Same class as the weekday conflict mf.ves.litia: the Typikon puts the Litia of the feast in the Midnight Service; ANCA prints it at Great Vespers as a parish option. Project default: follow ANCA."}}
+- {id: mf.sun.ves.aposticha, slot: vespers.aposticha, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {owner: resurrection, parts: ["Aposticha: stichera of the Resurrection — Octoechos Tone {tone}", "Glory, Now: of the feast — Menaion {mmdd}"]},
+   source: typikon, locator: "Sep 8 p.66-67, Feb 2 p.218, Nov 21 p.113, Aug 15 p.457 (Resurrection stichera; Glory, Now for the feast)", status: explicit}
+
+# ================= Matins =================
+- {id: mf.sun.mat.apolytikia, slot: matins.apolytikia, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone} (once)", "Apolytikion of the feast (twice) — Menaion {mmdd}"]},
+   source: typikon, locator: "God is the Lord: Sep 8 p.67, Feb 2 p.219, Nov 21 p.113, Aug 15 p.457", status: explicit}
+- {id: mf.sun.mat.kathismata, slot: matins.kathismata, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {tone: "$tone", parts: ["Polyeleos; 1st and 2nd kathisma: Resurrection — Octoechos Tone {tone}, Glory: Resurrection, Now: from the kathisma of the feast", "3rd kathisma of the feast (twice) — Menaion {mmdd}"]},
+   source: typikon, locator: "Ch I s5 V p.25 (feast of the Theotokos on Sunday); Sep 8 p.67, Feb 2 p.219, Nov 21 p.113, Aug 15 p.457", status: explicit}
+- {id: mf.sun.mat.evlogetaria, slot: matins.evlogetaria, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {kind: resurrectional, parts: ["Resurrectional evlogetaria (“The company of the Angels”) after the 3rd kathisma, then the Little Litany"]},
+   source: anca, locator: "inferred: ANCA Orthros prints the resurrectional Evlogetaria on these Sundays",
+   status: inferred, evidence: "ANCA Orthros 2019-09-08, 2024-09-08 (Nativity), 2020-02-02, 2025-02-02 (Presentation), 2021-11-21 (Entrance), 2021-08-15 (Dormition): 'Evlogetaria (Benedictions)' printed after the 3rd kathisma",
+   conflict: {with: ["Typikon Ch I s5 VI p.25-26 (feast of the Theotokos on Sunday: evlogetaria not chanted)", "Sep 8 p.67", "Feb 2 p.219", "Nov 21 p.113", "Aug 15 p.458"], status: accepted,
+              note: "Class-scoped (all Theotokos-class feasts on a Sunday): the Typikon says the evlogetaria are not sung; ANCA parish practice sings the resurrectional evlogetaria. Accepted as ANCA parish practice (#39); project default: follow ANCA."}}
+- {id: mf.sun.mat.prokeimenon, slot: matins.prokeimenon, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {kind: other, tone: 4, parts: ["Hypakoe and anabathmoi of the Resurrection — Octoechos Tone {tone}", "Prokeimenon of the feast — Menaion {mmdd}, Tone 4"]},
+   source: typikon, locator: "Ch I s5 VI p.26; Sep 8 p.67, Feb 2 p.219, Nov 21 p.113, Aug 15 p.458 (hypakoe and anabathmoi of the Resurrection, prokeimenon of the feast; tone from the Menaion)",
+   status: inferred, evidence: "tone: ANCA Orthros 2019-09-08, 2024-09-08, 2020-02-02, 2025-02-02, 2021-11-21, 2021-08-15 print the feast's prokeimenon in Tone 4"}
+- {id: mf.sun.mat.gospel, slot: matins.eothinon_gospel, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {number: null, ref: "$feast_matins_gospel_ref", parts: ["No eothinon Gospel: the Matins Gospel of the feast ({feast_matins_gospel_ref}), then “In that we have beheld the Resurrection”"]},
+   source: typikon, locator: "Ch I s5 VI p.26; Sep 8 p.67, Feb 2 p.219, Nov 21 p.113, Aug 15 p.458 (Matins Gospel of the feast, then 'In that we have beheld'; reference from the calendar lectionary, code m-<mm-dd>)", status: explicit}
+- {id: mf.sun.mat.kontakion, slot: matins.kontakion, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {kind: feast, parts: ["After the 3rd ode: kontakion and oikos of the Resurrection — Octoechos Tone {tone}; kathisma of the feast", "After the 6th ode: kontakion and oikos of the feast — Menaion {mmdd}"]},
+   source: typikon, locator: "Ch I s9 p.27, s10 p.28; Sep 8 p.67, Feb 2 p.219, Nov 21 p.114, Aug 15 p.458", status: explicit}
+- {id: mf.sun.mat.praises, slot: matins.praises, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {total: 8, res: 4, other: [4], parts: ["8 stichera: 4 of the Resurrection — Octoechos Tone {tone}; 4 of the feast; Glory, Now: of the feast — Menaion {mmdd}"]},
+   source: typikon, locator: "Ch I s5 XV p.30 (feast of the Mother of God on Sunday: 4 Resurrection + 4 feast); Sep 8 p.67-68, Feb 2 p.219, Nov 21 p.114, Aug 15 p.458", status: explicit}
+
+# ================= Divine Liturgy =================
+- {id: mf.sun.lit.antiphons.theotokos, slot: liturgy.antiphons, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, entrance, dormition]}],
+   fill: {refrain2: resurrection, parts: ["Antiphons of the feast; 2nd antiphon refrain “Save us, O Son of God, Who art risen from the dead”"]},
+   source: typikon, locator: "Ch I s6 II p.34 (feast of the Theotokos on Sunday: 2nd refrain 'who rose from the dead'); Sep 8 p.68, Aug 15 p.458", status: explicit}
+- {id: mf.sun.lit.antiphons.presentation, slot: liturgy.antiphons, tier: -10,
+   when: [{pred: sunday_feast_order, args: [presentation]}],
+   fill: {refrain2: feast, parts: ["Antiphons of the feast; 2nd antiphon refrain “Save us, O Son of God, Who wast carried in the arms of Simeon”"]},
+   source: typikon, locator: "Ch I s6 II p.34; Feb 2 p.219-220", status: explicit}
+- {id: mf.sun.lit.eisodikon.sunday, slot: liturgy.eisodikon, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, entrance, dormition]}],
+   fill: {kind: sunday, parts: ["Entrance hymn of Sundays (“Come, let us worship … Save us, O Son of God, Who art risen from the dead”)"]},
+   source: typikon, locator: "Ch I s6 III p.34 (Theotokos feast on Sunday: 'Save us, O Son of God who art risen from the dead'); Aug 15 p.458", status: explicit}
+- {id: mf.sun.lit.eisodikon.presentation, slot: liturgy.eisodikon, tier: -10,
+   when: [{pred: sunday_feast_order, args: [presentation]}],
+   fill: {kind: feast, parts: ["Entrance hymn of the feast (“The Lord hath made known His salvation …”) ending “Save us, O Son of God, Who art risen from the dead”"]},
+   source: typikon, locator: "Ch I s6 III p.34; Feb 2 p.220", status: explicit}
+- {id: mf.sun.lit.apolytikia, slot: liturgy.apolytikia, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {res_tone: "$tone", saint: true, patron: false, parts: ["Apolytikion of the feast (during the Little Entrance, after the 3rd antiphon) — Menaion {mmdd}", "Apolytikion of the Resurrection — Octoechos Tone {tone} (after the Entrance, first)", "Not the apolytikion of the patron saint or feast of the temple"]},
+   source: anca, locator: "inferred: Typikon Sep 8 p.68, Feb 2 p.220, Nov 21 p.114, Aug 15 p.458 name Resurrection and feast troparia (patron only at Nov 21 weekday p.112); Ch I s6 IV p.35", status: inferred,
+   evidence: "ANCA Liturgy Variables 2019-09-08, 2024-09-08, 2020-02-02, 2025-02-02, 2021-11-21, 2021-08-15: Resurrection and feast apolytikia, 'Do NOT sing the apolytikion of the patron saint or feast of the temple'"}
+- {id: mf.sun.lit.kontakion, slot: liturgy.kontakion, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {kind: "$major_feast", parts: ["Kontakion of the feast — Menaion {mmdd}"]},
+   source: typikon, locator: "Sep 8 p.68, Feb 2 p.220, Nov 21 p.114, Aug 15 p.458 (kontakion of the feast); Ch I s6 V p.35", status: explicit}
+- {id: mf.sun.lit.trisagion, slot: liturgy.trisagion, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {kind: trisagion, parts: ["“Holy God” (the Trisagion)"]},
+   source: typikon, locator: "Ch I s6 VI p.37 (Trisagion at every Liturgy except the listed feasts)", status: explicit}
+- {id: mf.sun.lit.prokeimenon.sunday, slot: liturgy.prokeimenon, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos]}],
+   fill: {owner: sunday, parts: ["Prokeimenon of the Sunday before the Elevation of the Cross (with the Epistle)"]},
+   source: typikon, locator: "Sep 8 p.68; Ch I s6 VII p.38 (Epistle and Gospel of the Sunday before the Elevation)", status: explicit}
+- {id: mf.sun.lit.prokeimenon.feast, slot: liturgy.prokeimenon, tier: -10,
+   when: [{pred: sunday_feast_order, args: [presentation, entrance, dormition]}],
+   fill: {owner: feast, parts: ["Prokeimenon of the feast — Menaion {mmdd}"]},
+   source: typikon, locator: "Feb 2 p.220, Nov 21 p.114, Aug 15 p.458 (Epistle and Gospel of the feast; the prokeimenon goes with the Epistle)", status: explicit}
+- {id: mf.sun.lit.epistle.sunday, slot: liturgy.epistle, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos]}],
+   fill: {owner: sunday, ref: "$epistle_ref", parts: ["{epistle_ref} — for the Sunday before the Elevation of the Cross"]},
+   source: typikon, locator: "Sep 8 p.68; Ch I s6 VII p.38 (reference from the calendar lectionary)", status: explicit}
+- {id: mf.sun.lit.epistle.feast, slot: liturgy.epistle, tier: -10,
+   when: [{pred: sunday_feast_order, args: [presentation, entrance, dormition]}],
+   fill: {owner: feast, ref: "$epistle_ref", parts: ["{epistle_ref} — for the feast"]},
+   source: typikon, locator: "Feb 2 p.220, Nov 21 p.114, Aug 15 p.458 (reference from the calendar lectionary)", status: explicit}
+- {id: mf.sun.lit.gospel.sunday, slot: liturgy.gospel, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos]}],
+   fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the Sunday before the Elevation of the Cross"]},
+   source: typikon, locator: "Sep 8 p.68; Ch I s6 VII p.38 (reference from the calendar lectionary)", status: explicit}
+- {id: mf.sun.lit.gospel.feast, slot: liturgy.gospel, tier: -10,
+   when: [{pred: sunday_feast_order, args: [presentation, entrance, dormition]}],
+   fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the feast"]},
+   source: typikon, locator: "Feb 2 p.220, Nov 21 p.114, Aug 15 p.458 (reference from the calendar lectionary)", status: explicit}
+- {id: mf.sun.lit.alleluia, slot: liturgy.alleluia, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {tone: 2, parts: ["Alleluia — Tone 2, with the verses of the Epistle's day (Menaion {mmdd})"]},
+   source: typikon, locator: "Ch I s6 VIII p.38 (Alleluia thrice in Tone 2 at every Liturgy)", status: explicit}
+- {id: mf.sun.lit.megalynarion, slot: liturgy.megalynarion, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {kind: feast, parts: ["Megalynarion: the 9th ode (heirmos) of the feast with its magnification, in place of “It is truly meet”"]},
+   source: typikon, locator: "Ch I s6 X p.38; Sep 8 p.68, Feb 2 p.220, Nov 21 p.114, Aug 15 p.458", status: explicit}
+- {id: mf.sun.lit.communion, slot: liturgy.communion, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {kind: cup_of_salvation, parts: ["Communion hymn: “I will take the cup of salvation” (Psalm 115:4)"]},
+   source: typikon, locator: "Ch I s6 XI p.39; Sep 8 p.68, Feb 2 p.220, Nov 21 p.114, Aug 15 p.458", status: explicit}
+- {id: mf.sun.lit.final, slot: liturgy.final_hymn, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {kind: true_light, parts: ["“We have seen the true light”"]},
+   source: typikon, locator: "Sep 8 p.68, Feb 2 p.220, Nov 21 p.114, Aug 15 p.458; Ch I s6 XII p.40 (troparion only on feasts of the Lord on a weekday)", status: explicit}
+- {id: mf.sun.lit.author, slot: liturgy.author, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {author: "$liturgy_author", parts: ["Divine Liturgy of St {liturgy_author}"]},
+   source: typikon, locator: "Ch I s4 p.17 (Liturgy author); DB calendar Basil flag", status: explicit}
+- {id: mf.sun.lit.dismissal, slot: liturgy.dismissal, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
+   fill: {author: "$liturgy_author", saint_named: false, named_as: "none (the feast's own day)", parts: ["the patron of the temple; Joachim and Anna; no saint of the day named"]},
+   source: anca, locator: "inferred: no saint of the day is named on the feast day itself", status: inferred,
+   evidence: "ANCA Liturgy Variables 2019-09-08, 2024-09-08, 2020-02-02, 2025-02-02, 2021-11-21, 2021-08-15: dismissal without a saint of the day"}
+- {id: mf.sun.lit.dismissal_phrase.theotokos, slot: liturgy.dismissal_phrase, tier: -10,
+   when: [{pred: sunday_feast_order, args: [nativity_theotokos, entrance, dormition]}],
+   fill: {phrase: resurrection, clause: theotokos, parts: ["Opening: “May He Who rose from the dead …”; the feast named in the Theotokos clause (“whose Nativity / Entrance / Dormition we now celebrate”)"]},
+   source: anca, locator: "inferred: Ch I s4 p.17-18 (Sunday: 'who rose again from the dead'; no characteristic phrase for these Theotokos feasts); the Theotokos clause is ANCA's", status: inferred,
+   evidence: "ANCA Liturgy Variables 2019-09-08, 2024-09-08 (Nativity), 2021-11-21 (Entrance), 2021-08-15 (Dormition): 'May He Who rose from the dead ... whose [feast] we now celebrate'"}
+- {id: mf.sun.lit.dismissal_phrase.presentation, slot: liturgy.dismissal_phrase, tier: -10,
+   when: [{pred: sunday_feast_order, args: [presentation]}],
+   fill: {phrase: feast_and_resurrection, clause: none, parts: ["Opening: the characteristic phrase of the Presentation, then “and rose from the dead …”"]},
+   source: typikon, locator: "Ch I s4 p.18 (Presentation has a characteristic phrase; on Sunday the Resurrection phrase follows); Feb 2 p.218-220", status: explicit}

@@ -28,3 +28,5 @@ liturgy.trisagion:     {service: liturgy, label: "Trisagion hymn", attrs: [kind]
 liturgy.megalynarion:  {service: liturgy, label: "Megalynarion (in place of “It is truly meet”)", attrs: [kind], only: major_feast_slots, after: liturgy.gospel}
 liturgy.communion:     {service: liturgy, label: "Communion hymn", attrs: [kind], only: major_feast_slots, after: liturgy.megalynarion}
 liturgy.final_hymn:    {service: liturgy, label: "After Communion (in place of “We have seen the true light”)", attrs: [kind], only: major_feast_slots, after: liturgy.communion}
+# Sunday occurrence of a fixed Major feast (major_feasts_sunday.yaml): the evlogetaria slot exists only then (Typikon Ch I s5 VI p.25-26 omits them; ANCA sings them)
+matins.evlogetaria:    {service: matins, label: "Evlogetaria", attrs: [kind], only: major_feast_sunday, after: matins.kathismata}

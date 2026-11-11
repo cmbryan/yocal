@@ -293,6 +293,8 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
     eve_only = service == "vespers" and f"{mmdd}:{(ld - dt.timedelta(days=1)).strftime('%A')}" in sl["supported_major_eve_vespers"]  # eve Vespers only, per eve weekday
     if mmdd in FIXED_MAJOR and not eve_only and (mmdd + (":sunday" if ld.weekday() == 6 else "")) not in sl["supported_fixed_major"]:
         reasons.append("fixed Major feast" + (" on a Sunday" if ld.weekday() == 6 else ""))  # 'mm-dd' = weekday order, 'mm-dd:sunday' = Sunday order
+    elif mmdd in FIXED_MAJOR and ld.weekday() == 6 and ssn != "ordinary":  # Sunday order Rules are written for the ordinary season only (Presentation on a Triodion Sunday: p.220)
+        reasons.append(f"fixed Major feast on a Sunday of the {ssn} season")
     fa = (r["fore_after"] or "").strip()
     if fa and not any(x in fa for x in sl["supported_fore_after"]):
         reasons.append(f"fore/after-feast ({fa})")
@@ -325,7 +327,7 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         fore_after=fa,  # DB fore_after text (forefeast/afterfeast/leavetaking), '' if none
         season=ssn, in_slice=not reasons, slice_reasons=reasons,
         # Major feast (work package I): id ('' if none), class lord|theotokos, movable flag; feast_slots gates the feast-only slots
-        major_feast=mf, major_feast_class=mf_cls, major_feast_movable=mf_mov, major_feast_slots=mf in FEAST_SLOT_FEASTS,
+        major_feast=mf, major_feast_class=mf_cls, major_feast_movable=mf_mov, major_feast_slots=mf in FEAST_SLOT_FEASTS, major_feast_sunday=mf in FEAST_SLOT_FEASTS and ld.weekday() == 6,
         # the feast's Matins Gospel (DB lection code m-<mm-dd>, m-<g_code> for movable feasts), '' if the DB has none
         feast_matins_gospel_ref=(lect(f"m-{mmdd}")[1] or lect(f"m-{r['g_code']}")[1] or "").strip() if mf else "",
         # the eve's own calendar row (Vespers is served on the eve): DB Liturgy-of-St-Basil flag (Vesperal Liturgy)
