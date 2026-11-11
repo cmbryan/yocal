@@ -62,6 +62,10 @@ PREDS = {
     # Mon-Sat (Vespers: the eve of it) under the weekday order; Nativity/Theophany on a Monday have their own order (Typikon p.145, p.174)
     "feast_on_weekday": lambda f, a: bool(f.get("major_feast")) and f["weekday"] != "Sunday"
                                      and not (f["major_feast"] in ("nativity", "theophany") and f["weekday"] == "Monday"),
+    # Mon-Sat including Nativity/Theophany on a Monday: for Rules whose order the Typikon repeats on that Monday (locator names the Monday page)
+    "feast_not_sunday": lambda f, a: bool(f.get("major_feast")) and f["weekday"] != "Sunday",
+    # Nativity/Theophany on a Monday (Typikon p.145-148, p.174-176): the Sunday-evening eve Great Vespers (no Vesperal Liturgy) and the Liturgy of St Basil
+    "feast_on_monday_order": lambda f, a: f.get("major_feast", "") in ("nativity", "theophany") and f["weekday"] == "Monday",
     "feast_on_sunday": lambda f, a: bool(f.get("major_feast")) and f["weekday"] == "Sunday",
     # Sunday order of a fixed Major feast (data/rules/major_feasts_sunday.yaml): feast id in args, ordinary season (Presentation on a Triodion Sunday has its own order, p.220)
     "sunday_feast_order": lambda f, a: f["weekday"] == "Sunday" and f.get("major_feast", "") in a and f["season"] == "ordinary",
