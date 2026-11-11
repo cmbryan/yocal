@@ -98,3 +98,44 @@ def test_documents(tmp_path, date, service, must):
     assert "- [to be determined]" not in doc and "Typikon" not in doc and "{'" not in doc
     for m in must:
         assert m in doc, m
+
+
+@needs_db
+@pytest.mark.parametrize("date,tone,prok_rule", [("2019-03-24", 8, "mf.ves.ann.prokeimenon.sun"), ("2026-03-24", 1, "mf.ves.ann.prokeimenon.tue")])
+def test_annunciation_eve_vespers_follow_anca(date, tone, prok_rule):
+    r, v = slots("vespers", date)                                                              # Sunday eve (Mon feast, 2019) / Tuesday eve (Wed feast, 2026)
+    assert calfacts.load_facts(dt.date.fromisoformat(date), "vespers")["in_slice"]
+    assert v["vespers.lihc.stichera"].fill["res"] == 0 and v["vespers.lihc.stichera"].fill["other"] == [6]
+    assert (v["vespers.prokeimenon"].fill["kind"], v["vespers.prokeimenon"].fill["tone"]) == ("daily", tone)
+    assert v["vespers.prokeimenon"].rule["id"] == prok_rule
+    assert v["vespers.readings"].fill["count"] == 3 and v["vespers.litia"].fill["litia"] is True
+    assert v["vespers.aposticha"].fill["owner"] == "feast" and v["vespers.apolytikia"].fill["saint"] is True
+    assert not any(x.rule["status"] == "missing" for x in v.values())
+
+
+@needs_db
+def test_annunciation_eve_typikon_reading_logged_as_conflict():
+    _, v = slots("vespers", "2026-03-24")
+    for slot in ("vespers.lihc.stichera", "vespers.prokeimenon"):
+        c = v[slot].rule["conflict"]
+        assert c["status"] == "open" and "p.283" in c["with"][0] and "p.286" in c["with"][0] and "Menaion" in c["note"]
+    assert v["vespers.litia"].rule["conflict"]["with"] == ["mf.ves.litia"]
+    assert all(v[s].rule["source"] == "anca" and v[s].rule["status"] == "inferred" for s in v)
+
+
+@needs_db
+def test_annunciation_eve_other_cases_stay_incomplete():
+    f = lambda d, s: calfacts.load_facts(dt.date.fromisoformat(d), s)
+    assert not f("2025-03-24", "vespers")["in_slice"]                                          # Monday eve (Tue feast): no ANCA text
+    assert not f("2022-03-24", "vespers")["in_slice"]                                          # Wednesday eve
+    assert not f("2018-03-24", "vespers")["in_slice"]                                          # Saturday eve of a Sunday feast
+    assert not f("2026-03-25", "matins")["in_slice"] and not f("2026-03-25", "liturgy")["in_slice"]  # feast day itself stays disabled
+
+
+@needs_db
+def test_annunciation_eve_document(tmp_path):
+    assert cli.main(["2026-03-24", "vespers", "--no-compare", "--out", str(tmp_path)]) == 0
+    doc = (tmp_path / "2026-03-24-vespers.md").read_text()
+    assert "Incomplete" not in doc and "All Variable parts determined" in doc and "Annunciation" in doc
+    assert cli.main(["2025-03-24", "vespers", "--no-compare", "--out", str(tmp_path)]) == 0
+    assert "Incomplete" in (tmp_path / "2025-03-24-vespers.md").read_text()

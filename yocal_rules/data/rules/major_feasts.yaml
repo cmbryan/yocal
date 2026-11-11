@@ -8,8 +8,54 @@
 # available to this project, so Menaion-dependent counts/tones are inferred from the ANCA texts and flagged as such.
 
 # ================= Great Vespers (eve) =================
-# Annunciation eve (always a Lenten weekday or Sunday): not covered. The Typikon's Lenten grid (p.277-324: Triodion + forefeast
-# counts, Presanctified on some eves) and ANCA 2026 (Tuesday eve: 6 feast stichera, Litia) disagree and one sample cannot settle it.
+# Annunciation eve (a Lenten weekday, never Holy Week/Bright Week in the Gregorian-Pascha range): Rules mf.ves.ann.* below, enabled
+# only for an eve on Sunday (Monday feast) or Tuesday (Wednesday feast) via slices.yaml supported_major_eve_vespers: ANCA 2019 and 2026
+# agree (6 feast stichera, 3 readings, Litia, feast aposticha and apolytikion). Other eve weekdays have no ANCA text: Incomplete.
+# Typikon Ch V Mar 25 Lenten table (p.276-295) defers the eve to 'the order found in the Menaion' (no counts) and gives its Lenten-frame
+# Vespers (Triodion stichera, Great Prokeimenon, Lenten ending) for the forefeast eve; ANCA is followed, Typikon reading logged as conflict.
+- {id: mf.ves.ann.lihc, slot: vespers.lihc.stichera, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [annunciation]}],
+   fill: {res: 0, other: [6], parts: ["6 stichera of the Annunciation (no resurrectional stichera) — Menaion 03-25", "Glory, Now: doxastikon of the Annunciation"]},
+   source: anca, locator: "inferred: Typikon Ch V Mar 25 p.283-286, p.294-295 defers the eve to the Menaion",
+   status: inferred, evidence: "ANCA Great Vespers of March 24 (2019, Sunday eve) and of March 25 (2026, Tuesday eve): 6 hymn-bearing verses, all for the feast, doxastikon of the feast",
+   conflict: {with: ["Typikon Ch V Mar 25 Lenten table p.283 (Mon wk4: 'Sunday evening ... the service in the Menaion'), p.284 (feast headed 'Tuesday', Vespers Monday evening: 10 stichera = 7 Triodion + 3 forefeast, Great Prokeimenon, Triodion aposticha, Lenten ending), p.286 (Wed/Thu wk4/6: eve per the Menaion), p.294-295 (Mon wk5/6, Wed wk5: eve per the Menaion)"], status: open,
+              note: "Typikon gives no eve counts ('the order found in the Menaion') and shows a Lenten-frame Vespers (Triodion stichera, Great Prokeimenon, Presanctified when the forefeast is Wed/Fri, p.277) for the evening before the forefeast; its 'Tuesday' heading (p.283-284) is inconsistent with its own text (forefeast on Tuesday, feast Wednesday). ANCA 2019 (Sunday eve) and 2026 (Tuesday eve) print a plain festal Vespers: 6 feast stichera, daily prokeimenon, 3 readings, Litia, feast aposticha and apolytikion, no Lenten ending. Project default: follow ANCA."}}
+- {id: mf.ves.ann.prokeimenon.sun, slot: vespers.prokeimenon, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: eve_weekday_in, args: [Sunday]}, {pred: major_feast_is, args: [annunciation]}],
+   fill: {kind: daily, tone: 8, parts: ["Prokeimenon of the day (Sunday evening, “Behold now, bless the Lord”) — Tone 8"]},
+   source: anca, locator: "inferred: Typikon Ch V Mar 25 p.283-286, p.294-295 defers the eve to the Menaion; Typikon shows the Great Prokeimenon only at the forefeast eve (p.284-285)",
+   status: inferred, evidence: "ANCA Great Vespers of March 24 (2019): SUNDAY PROKEIMENON IN TONE EIGHT, not the Great Prokeimenon",
+   conflict: {with: ["Typikon Ch V Mar 25 Lenten table p.283 (Mon wk4: 'Sunday evening ... the service in the Menaion'), p.284 (feast headed 'Tuesday', Vespers Monday evening: 10 stichera = 7 Triodion + 3 forefeast, Great Prokeimenon, Triodion aposticha, Lenten ending), p.286 (Wed/Thu wk4/6: eve per the Menaion), p.294-295 (Mon wk5/6, Wed wk5: eve per the Menaion)"], status: open,
+              note: "Typikon gives no eve counts ('the order found in the Menaion') and shows a Lenten-frame Vespers (Triodion stichera, Great Prokeimenon, Presanctified when the forefeast is Wed/Fri, p.277) for the evening before the forefeast; its 'Tuesday' heading (p.283-284) is inconsistent with its own text (forefeast on Tuesday, feast Wednesday). ANCA 2019 (Sunday eve) and 2026 (Tuesday eve) print a plain festal Vespers: 6 feast stichera, daily prokeimenon, 3 readings, Litia, feast aposticha and apolytikion, no Lenten ending. Project default: follow ANCA."}}
+- {id: mf.ves.ann.prokeimenon.tue, slot: vespers.prokeimenon, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: eve_weekday_in, args: [Tuesday]}, {pred: major_feast_is, args: [annunciation]}],
+   fill: {kind: daily, tone: 1, parts: ["Prokeimenon of the day (Tuesday evening, “The Lord is my shepherd”) — Tone 1"]},
+   source: anca, locator: "inferred: Typikon Ch V Mar 25 p.283-286, p.294-295 defers the eve to the Menaion; Typikon shows the Great Prokeimenon only at the forefeast eve (p.284-285)",
+   status: inferred, evidence: "ANCA Great Vespers of March 25 (2026): TUESDAY PROKEIMENON IN TONE ONE, not the Great Prokeimenon",
+   conflict: {with: ["Typikon Ch V Mar 25 Lenten table p.283 (Mon wk4: 'Sunday evening ... the service in the Menaion'), p.284 (feast headed 'Tuesday', Vespers Monday evening: 10 stichera = 7 Triodion + 3 forefeast, Great Prokeimenon, Triodion aposticha, Lenten ending), p.286 (Wed/Thu wk4/6: eve per the Menaion), p.294-295 (Mon wk5/6, Wed wk5: eve per the Menaion)"], status: open,
+              note: "Typikon gives no eve counts ('the order found in the Menaion') and shows a Lenten-frame Vespers (Triodion stichera, Great Prokeimenon, Presanctified when the forefeast is Wed/Fri, p.277) for the evening before the forefeast; its 'Tuesday' heading (p.283-284) is inconsistent with its own text (forefeast on Tuesday, feast Wednesday). ANCA 2019 (Sunday eve) and 2026 (Tuesday eve) print a plain festal Vespers: 6 feast stichera, daily prokeimenon, 3 readings, Litia, feast aposticha and apolytikion, no Lenten ending. Project default: follow ANCA."}}
+- {id: mf.ves.ann.readings, slot: vespers.readings, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [annunciation]}],
+   fill: {count: 3, parts: ["3 Old Testament readings of the Annunciation (Genesis 28:10-17; Ezekiel 43:27-44:4; Proverbs 9:1-11) — Menaion 03-25"]},
+   source: anca, locator: "inferred: Typikon Ch V Mar 25 p.283-286, p.294-295 defers the eve to the Menaion",
+   status: inferred, evidence: "ANCA Great Vespers of March 24 (2019) and March 25 (2026): 3 readings"}
+- {id: mf.ves.ann.litia, slot: vespers.litia, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [annunciation]}],
+   fill: {litia: true, parts: ["Litia and Artoklasia of the Annunciation after the litany of supplication (if the parish serves it) — Menaion 03-25"]},
+   source: anca, locator: "inferred: as mf.ves.litia (ANCA prints the Litia at Great Vespers as a parish option)",
+   status: inferred, evidence: "ANCA Great Vespers of March 24 (2019) and March 25 (2026): 'If your parish will offer the Service of the Litia and Artoklasia, it is done here'",
+   conflict: {with: [mf.ves.litia], status: open, note: "see mf.ves.litia (Typikon places the Litia in the Midnight Service). Project default: follow ANCA."}}
+- {id: mf.ves.ann.aposticha, slot: vespers.aposticha, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [annunciation]}],
+   fill: {owner: feast, parts: ["Aposticha of the Annunciation with their verses; Glory, Now: of the Annunciation — Menaion 03-25"]},
+   source: anca, locator: "inferred: Typikon Ch V Mar 25 p.283-286, p.294-295 defers the eve to the Menaion (Triodion aposticha only at the forefeast eve, p.284-285)",
+   status: inferred, evidence: "ANCA Great Vespers of March 24 (2019) and March 25 (2026): 'Aposticha for the Annunciation in Tone Four', Glory/Now doxastikon of the Annunciation"}
+- {id: mf.ves.ann.apolytikia, slot: vespers.apolytikia, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [annunciation]}],
+   fill: {res_tone: null, saint: true, parts: ["Apolytikion of the Annunciation — Tone 4, Menaion 03-25"]},
+   source: anca, locator: "inferred: Typikon Ch V Mar 25 p.283-286, p.294-295 defers the eve to the Menaion",
+   status: inferred, evidence: "ANCA Great Vespers of March 24 (2019) and March 25 (2026): Apolytikion of the Annunciation in Tone Four after the Trisagion prayers"}
+
 - {id: mf.ves.lihc.6, slot: vespers.lihc.stichera, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity_theotokos, dormition]}],
    fill: {res: 0, other: [6], parts: ["6 stichera of the feast (no resurrectional stichera) — Menaion {mmdd}", "Glory, Now: doxastikon of the feast"]},
