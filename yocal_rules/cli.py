@@ -37,7 +37,7 @@ def _run(a, service, date):
 
 
 def weekend(argv) -> int:
-    """python -m yocal_rules weekend DATE: Saturday Great Vespers + Sunday Matins + Sunday Liturgy."""
+    """python -m yocal_rules weekend DATE: Saturday Great Vespers + Sunday Matins + Sunday Liturgy (+ Agape Vespers when the Sunday is Pascha)."""
     ap = argparse.ArgumentParser(prog="yocal_rules weekend", description="Build the whole weekend (Sat Great Vespers, Sun Matins, Sun Liturgy) and a combined Markdown file.")
     ap.add_argument("date", type=dt.date.fromisoformat, help="the Saturday, or any date in that weekend (Mon-Fri resolve to the coming Saturday)")
     _common(ap)
@@ -45,6 +45,8 @@ def weekend(argv) -> int:
     sat = a.date + dt.timedelta(days=(5 - a.date.weekday()) % 7) if a.date.weekday() != 6 else a.date - dt.timedelta(days=1)
     sun = sat + dt.timedelta(days=1)
     plan = [("vespers", sat), ("matins", sun), ("liturgy", sun)]
+    if sun == calfacts.pascha(sun.year):  # Pascha weekend: Holy Saturday Vesperal Liturgy, Paschal Matins, Liturgy, and Agape Vespers that evening
+        plan.append(("agape", sun))
     parts, paths, blocked = [], [], False
     try:
         for service, d in plan:

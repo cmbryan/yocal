@@ -71,6 +71,7 @@ PREDS = {
     "sunday_feast_order": lambda f, a: f["weekday"] == "Sunday" and f.get("major_feast", "") in a and f["season"] == "ordinary",
     "weekday_in": lambda f, a: f["weekday"] in a,  # weekday of the liturgical day (Vespers: the day after the eve)
     "eve_weekday_in": lambda f, a: _WEEK[(_WEEK.index(f["weekday"]) - 1) % 7] in a,  # weekday of the eve (the day before)
+    "bright_monday_george": lambda f, a: f.get("bright_monday_george", False),  # Agape Vespers: St George (Apr 23) transferred to Bright Monday (Typikon p.325)
     "eve_basil": lambda f, a: f.get("eve_basil", False),  # the eve's DB row has the Liturgy of St Basil (Vesperal Liturgy)
 }
 

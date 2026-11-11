@@ -49,3 +49,8 @@ supported_movable_major:    # ids of movable Major feasts not on a Sunday (calfa
 supported_major_eve_vespers:  # 'mm-dd:Weekday' = eve Great Vespers only (weekday of the eve) of a fixed Major feast; Matins/Liturgy of that feast stay disabled
   - "03-25:Sunday"            # I: Annunciation eve before a Monday feast (ANCA 2019); Mon/Wed/Thu/Fri eves have no ANCA Great Vespers text (2025/2021/2022/2023)
   - "03-25:Tuesday"           # I: Annunciation eve before a Wednesday feast (ANCA 2026; 2020 Readers Vespers)
+supported_pascha:           # services enabled on Pascha day (calfacts.season 'pascha'); 'vespers' = Holy Saturday Vesperal Liturgy (eve of Pascha), 'agape' = Agape Vespers (Sunday evening)
+  - vespers                  # P: pascha.yaml (ANCA 2026-04-11 Holy Saturday Vesperal Liturgy text; single sample, Typikon p.516-517)
+  - matins                   # P: pascha.yaml (ANCA 2026 Paschal Vigil outline; single sample, Typikon p.518-520)
+  - liturgy                  # P: pascha.yaml (ANCA 2026-04-12 READ; single sample, Typikon p.520-522)
+  - agape                    # P: pascha.yaml (ANCA 2020 readers' text, 2024 with St George, 2026; Typikon p.522-523, p.325)

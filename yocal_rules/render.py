@@ -130,7 +130,7 @@ def describe(slot: str, res, f: dict):
     return [f"- {fl}"]
 
 
-TITLES = {"vespers": "Great Vespers", "matins": "Matins", "liturgy": "Divine Liturgy"}
+TITLES = {"vespers": "Great Vespers", "matins": "Matins", "liturgy": "Divine Liturgy", "agape": "Agape Vespers"}
 
 
 def service_document(r) -> str:
@@ -139,6 +139,8 @@ def service_document(r) -> str:
     head = f"# {TITLES[r.service]} — {sd:%A %-d %B %Y}"
     if r.service == "vespers":
         head += f" (eve of {ld:%A %-d %B})"
+        if f["pascha_days"] == 0:
+            head = f"# Vesperal Liturgy of Holy Saturday — {sd:%A %-d %B %Y} (eve of Pascha)"
     L = [head, ""]
     tbd = []
     day = " · ".join(x for x in [f"{f['desig']}" if f["desig"] else "", f"Tone {f['tone']}" if f["tone"] else "",

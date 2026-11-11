@@ -1,0 +1,164 @@
+# Work package P: Pascha (pascha_days 0). See yocal_rules/PASCHA_PLAN.md.
+# Typikon = Antiochian Typikon (Khoury/Morris 2011): Holy Saturday Vesperal Liturgy Ch VI pp.516-517; Ch VII Pascha pp.518-523 (Matins 518-520,
+# Liturgy 520-522, Agape Vespers 522-523); St George transferred to Bright Monday Ch V Apr 23 p.325. Printed page = the 'Back to Table of Contents N' footer closing the page.
+# The engine has Vespers / Matins / Liturgy slots only: the Midnight Office, the Rush procession, the Paschal Hours/Office and Compline are NOT modelled.
+# Four services share this file (slots.yaml):
+#   vespers (Saturday, the eve = Holy Saturday Vesperal Liturgy, Vespers part only; its Liturgy part is not modelled),
+#   matins (Paschal Orthros; the Vigil outline's Midnight Office and Resurrection Service are not slots), liturgy, agape (Sunday evening, own service).
+# Verification (ANCA, one sample each unless stated): Holy Saturday 2026 'Holy-Sat-Vesperal-Lit-NEW'; Orthros 2026 '8-Paschal VIGIL' (outline of rubrics);
+# Liturgy 2026 '9-Paschal-READ'; Agape 2020 (readers' text), 2024 (with St George), 2026. No ANCA text exists for Pascha 2018, 2019, 2021-2023, 2025 (index lists no
+# Vigil/READ/Agape file; 2025 has only the readers' 'Paschal TYPIKA'), so every Rule is Typikon-explicit or single-sample inferred.
+
+# ======================= Holy Saturday Vesperal Liturgy of St Basil (service vespers; the eve of Pascha) =======================
+- {id: pascha.ves.lihc, slot: vespers.lihc.stichera, tier: 0,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {res: 4, other: [4], parts: ["4 stichera of the Resurrection — Octoechos Tone 1", "4 idiomela of Great and Holy Saturday (“Today Hades groans”, Tone 8; ANCA prints 3 and repeats the first) — Triodion", "Glory: doxastikon of Holy Saturday (“Great Moses mystically prefigured this day”, Tone 6) — Triodion; Now: theotokion of the Resurrection, Tone 1 — Octoechos (ANCA)"]},
+   source: typikon, locator: "Ch VI p.516 (Lord I have cried: 8 stichera, 4 Resurrection in tone 1 + 4 Ideomela of Holy Saturday; Glory/Now 'The great Moses')", status: explicit,
+   conflict: {with: ["Typikon Ch VI p.516 ('Glory…' 'Now and ever… The great Moses…')"], status: open,
+              note: "Count 4R+4: ANCA 2026 prints verses 10 and 9 without hymns and 4 Holy Saturday slots (3 distinct idiomela, the 1st repeated), so 8 hymns; a reading of ~10 is a misreading (#42 item 4). Residual: the Typikon prints 'Glory… Now and ever… The great Moses' (one doxastikon for both?) while ANCA 2026 sings the Moses doxastikon at Glory and a Tone-1 Resurrection theotokion at Now. The slot compares counts only; the parts text follows ANCA. Single ANCA sample."}}
+- {id: pascha.ves.prokeimenon, slot: vespers.prokeimenon, tier: 0,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {kind: arise_o_god, tone: 7, parts: ["No daily prokeimenon; instead of the Alleluia after the Epistle, “Arise, O God, judge the earth” with its verses (Psalm 81) — Tone 7"]},
+   source: typikon, locator: "Ch I s2 p.13 and s6 VIII p.38 (Holy Saturday: 'Arise, O God' after the Epistle in place of Alleluia); Ch VI p.517", status: explicit}
+- {id: pascha.ves.apolytikia, slot: vespers.apolytikia, tier: 0,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {res_tone: null, saint: false, parts: ["No apolytikion in the Vesperal Liturgy (the baptismal troparion “Grant to me a luminous robe”, Tone 8, is sung only when candidates are baptized — ANCA)"]},
+   source: typikon, locator: "Ch VI pp.516-517 (the order lists no apolytikion)", status: inferred,
+   evidence: "Typikon Ch VI p.516-517 order lists none; ANCA 2026 Holy Saturday Vesperal Liturgy prints only the baptismal troparion (Tone 8) after the Gladsome Light readings begin"}
+- {id: pascha.ves.readings, slot: vespers.readings, tier: 0,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {count: 15, parts: ["15 Old Testament readings of Holy Saturday (Genesis 1:1-13 … Daniel 3 with the Song of the Three Children); ANCA: at least the first six and the fifteenth when there are baptisms"]},
+   source: typikon, locator: "Ch VI p.517 (Editor's Note listing the 15 readings)", status: explicit}
+- {id: pascha.ves.litia, slot: vespers.litia, tier: 0,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {litia: false, parts: ["No Litia and Artoklasia (Vesperal Liturgy)"]},
+   source: typikon, locator: "Ch VI pp.516-517 (the order lists none)", status: inferred,
+   evidence: "Typikon Ch VI p.516-517 order lists no Litia; ANCA 2026 Holy Saturday Vesperal Liturgy prints none"}
+- {id: pascha.ves.aposticha, slot: vespers.aposticha, tier: 0,
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {owner: none, parts: ["No aposticha: after the readings the Vesperal Liturgy continues with the Trisagion substitute and the Epistle"]},
+   source: typikon, locator: "Ch VI pp.516-517 (the order lists none)", status: inferred,
+   evidence: "Typikon Ch VI p.516-517 order lists no aposticha; ANCA 2026 Holy Saturday Vesperal Liturgy prints none"}
+
+# ======================= Paschal Matins (Orthros) =======================
+- {id: pent.pascha.mat.apolytikia, slot: matins.apolytikia, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {res_tone: null, saint: true, parts: ["Troparion of Pascha with the Paschal verses — Pentecostarion, Tone 5"]},
+   source: typikon, locator: "Ch VII Pascha Matins p.518 (Paschal troparion with the verses; no 'God is the Lord')", status: explicit}
+- {id: pent.pascha.mat.kathismata, slot: matins.kathismata, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {tone: null, parts: ["None: the Paschal Matins goes from the Great Litany to the Paschal canon"]},
+   source: typikon, locator: "Ch VII Pascha Matins pp.518-520 (no kathismata in the order)", status: explicit}
+- {id: pent.pascha.mat.prokeimenon, slot: matins.prokeimenon, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {kind: null, tone: null, parts: ["None at the Paschal Matins"]},
+   source: typikon, locator: "Ch VII Pascha Matins pp.518-520 (no prokeimenon in the order)", status: explicit}
+- {id: pent.pascha.mat.gospel, slot: matins.eothinon_gospel, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {number: 2, parts: ["Eothinon Gospel no. 2 (Mark 16:1-8), read outside at the procession before Matins"]},
+   source: typikon, locator: "Ch VII p.518 (Rush procession: the Gospel of the 2nd eothinon, Mark 16:1-8)", status: explicit}
+- {id: pent.pascha.mat.kontakion, slot: matins.kontakion, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {kind: feast, owner: "Pascha", parts: ["Kontakion “Though Thou didst descend into the grave” (Tone 8), oikos and synaxarion of Pascha, read after the 6th ode — Pentecostarion"]},
+   source: typikon, locator: "Ch VII p.519 (after the 6th ode the kontakion, oikos and synaxarion of Pascha)", status: explicit}
+- {id: pascha.mat.katavasia, slot: matins.katavasia, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {of: feast, parts: ["Katavasia: the irmos of each ode of the Paschal canon repeated (8th ode: “We praise, we bless, and we worship the Lord” first), each followed by “Christ is risen” (thrice) and “Verily, Jesus is risen”; 9th ode with its magnifications — Pentecostarion, Tone 1"]},
+   source: anca, locator: "ANCA Paschal Vigil outline, Paschal Orthros 6 (Note: the irmos at the start of each ode is repeated as the katavasia)", status: explicit}
+- {id: pent.pascha.mat.praises, slot: matins.praises, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {total: 8, res: 4, other: [4], glory: other, parts: ["4 stichera of the Resurrection — Tone 1", "The 4 Paschal stichera with their verses — Pentecostarion, Tone 5", "Glory, Now: 'Today is the day of Resurrection' — Pentecostarion, Tone 5"]},
+   source: typikon, locator: "Ch VII p.520 (praises: 4 Res tone 1 + the Paschal verses; Glory/Now 'Today is the Day'); count of Paschal stichera: ANCA Vigil outline Paschal Orthros 8", status: explicit}
+
+# ======================= Paschal Divine Liturgy of St John Chrysostom =======================
+- {id: pent.pascha.lit.apolytikia, slot: liturgy.apolytikia, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {res_tone: null, saint: true, parts: ["Troparion of Pascha — Pentecostarion, Tone 5", "Hypakoe of Pascha — Pentecostarion, Tone 4", "Not the apolytikion of the patron saint or feast of the temple"]},
+   source: typikon, locator: "Ch VII p.521 (after the entrance: troparion and hypakoe of Pascha, then the kontakion)", status: explicit}
+- {id: pascha.lit.prokeimenon, slot: liturgy.prokeimenon, tier: -1,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {owner: sunday, parts: ["Prokeimenon of Pascha: “This is the day which the Lord hath made; let us rejoice and be glad therein” with its verse (Psalm 117) — before the Acts reading"]},
+   source: anca, locator: "inferred: ANCA READ prints it above the Acts reading; Typikon Ch VII p.521 lists no prokeimenon; Ch I s2 p.13 (Bright Week: prokeimenon from the Pentecostarion)",
+   status: inferred, evidence: "ANCA READ 2026-04-12 (single sample): 'This is the day which the Lord hath made …' with the verse 'O give thanks unto the Lord' before The Reading from the Acts of the Apostles (1:1-8)"}
+- {id: pascha.lit.antiphons, slot: liturgy.antiphons, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {refrain2: resurrection, parts: ["1st antiphon “Shout with joy to God, all the earth” (refrain: Through the intercessions of the Theotokos, O Savior, save us)", "2nd antiphon “May God have mercy upon us” (refrain: Save us, O Son of God, Who art risen from the dead, who sing to Thee. Alleluia)", "3rd antiphon “Let God arise” with the refrain “Christ is risen”, sung during the Little Entrance — Pentecostarion"]},
+   source: typikon, locator: "Ch VII p.521 (antiphons of Pascha; the 1st Antiphon … 3rd Antiphon with the Little Entrance)", status: explicit}
+- {id: pascha.lit.eisodikon, slot: liturgy.eisodikon, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {kind: feast, parts: ["Entrance hymn of Pascha: “In the gathering places bless ye God … Save us, O Son of God, Who art risen from the dead, who sing to Thee. Alleluia”"]},
+   source: typikon, locator: "Ch VII p.521 and note 319 (sung every day until the leavetaking of Pascha)", status: explicit}
+- {id: pascha.lit.trisagion, slot: liturgy.trisagion, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {kind: baptized, parts: ["“As many of you as have been baptized into Christ” in place of the Trisagion"]},
+   source: typikon, locator: "Ch VII p.521 and note 320 (Bright Week until the Saturday before Thomas Sunday and the leavetaking)", status: explicit}
+- {id: pascha.lit.megalynarion, slot: liturgy.megalynarion, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {kind: feast, parts: ["Megalynarion of Pascha “The Angel cried unto her that is full of grace … Shine, shine, O new Jerusalem” (Tone 1) in place of “It is truly meet”"]},
+   source: typikon, locator: "Ch VII p.522 (megalynarion of Pascha)", status: explicit}
+- {id: pascha.lit.communion, slot: liturgy.communion, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {kind: feast, parts: ["Communion hymn of Pascha: “Receive ye the Body of Christ; taste ye the Fountain of immortality” (Tone 8)"]},
+   source: typikon, locator: "Ch VII p.522 (the communion hymn, 'Receive ye the Body of Christ')", status: explicit}
+- {id: pascha.lit.final, slot: liturgy.final_hymn, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {kind: christ_is_risen, parts: ["“Christ is risen” once in place of “We have seen the true light”; “Christ is risen” thrice in place of “Blessed be the Name of the Lord”"]},
+   source: typikon, locator: "Ch VII p.522 (Christ is risen 1x and 3x)", status: explicit}
+- {id: pent.pascha.lit.dismissal, slot: liturgy.dismissal, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {author: "$liturgy_author", saint_named: false},
+   source: anca, locator: "inferred: Paschal dismissal, no saint of the day",
+   status: inferred, evidence: "ANCA READ 2026-04-12 (9-Paschal-READ) names no saint; Typikon Ch VII pp.520-522 gives no dismissal wording; no Menaion material at Pascha"}
+- {id: pent.lit.dismissal_phrase.pascha, slot: liturgy.dismissal_phrase, tier: 0,
+   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {phrase: feast, clause: none}, source: anca,
+   locator: "inferred: the Paschal opening 'May He Who is risen from the dead, trampling down death by death' (labelled 'feast' by the parser: no 'rose')",
+   status: inferred, evidence: "ANCA READ 2026-04-12 (one sample); Typikon Ch VII pp.520-522 prints no dismissal wording for Pascha (Ch VII p.522: 'the Dismissal with the characteristic phrase \"May he who rose from the dead, trampling down death\"')"}
+
+# ======================= Agape Vespers (service agape: Sunday evening of Pascha) =======================
+# Order: Typikon Ch VII pp.522-523. Plain day: ANCA 2020 (readers') and 2026. With St George (Apr 23 transferred to Bright Monday, DB Bright Monday row;
+# Typikon Ch V p.325): ANCA 2024. Tier -1 = the George order.
+- {id: agape.lihc, slot: agape.lihc.stichera, tier: 0,
+   when: [{pred: pascha_days_between, args: [0, 0]}],
+   fill: {res: 6, other: [], parts: ["6 stichera of the Resurrection — Octoechos Tone 2", "Glory: doxastikon of the Resurrection — Tone 2 (“Come, let us all sing with our mouths”)", "Now (during the Entrance): theotokion of the Resurrection — Tone 2 (“O Virgin, verily, the shadow of the law”)"]},
+   source: typikon, locator: "Ch VII p.523 (Lord I have cried: 6 stichera for the Resurrection in tone 2; Glory 'Come let us sing with our mouths'; Now 'O Virgin, verily…')", status: explicit}
+- {id: agape.lihc.george, slot: agape.lihc.stichera, tier: -1,
+   when: [{pred: pascha_days_between, args: [0, 0]}, {pred: bright_monday_george}],
+   fill: {res: 4, other: [4], parts: ["4 stichera of the Resurrection — Octoechos Tone 2", "4 stichera of St George — Menaion 04-23 (Tone 4)", "Glory: doxastikon of St George (“Thou hast walked according to thy name”) — Menaion 04-23; Now (during the Entrance): theotokion of the Resurrection — Tone 2"]},
+   source: typikon, locator: "Ch V Apr 23 p.325 (George on Holy Saturday/Pascha moved to Bright Monday; Vespers on Sunday: 8 stichera, 4 Resurrection + 4 George, Glory George, Now 'O Virgin, verily…')", status: explicit,
+   conflict: {with: ["Typikon Ch V p.325 ('4 for the Resurrection in tone 4')"], status: open,
+              note: "The Typikon prints the Resurrection stichera of the George Agape Vespers in tone 4; ANCA 2024 prints them in tone 2, the tone of every Agape Vespers (Typikon Ch VII p.523; ANCA 2020, 2024, 2026) and of the theotokion named in the same p.325 order. The slot compares counts, not the tone; the parts text follows ANCA (tone 2). Single ANCA sample with St George (2024)."}}
+- {id: agape.prokeimenon, slot: agape.prokeimenon, tier: 0,
+   when: [{pred: pascha_days_between, args: [0, 0]}],
+   fill: {kind: great, tone: 7, parts: ["Great prokeimenon “Who is so great a god as our God” with its verses — Tone 7"]},
+   source: typikon, locator: "Ch VII p.523 (The Great Prokeimenon 'Who is so great a God as our God' in tone 7); Ch V p.325", status: explicit}
+- {id: agape.gospel, slot: agape.gospel, tier: 0,
+   when: [{pred: pascha_days_between, args: [0, 0]}],
+   fill: {ref: "John 20:19-25", parts: ["John 20:19-25, read in several languages"]},
+   source: typikon, locator: "Ch VII p.523 (the Holy Gospel, St John 20:19-25, in several languages); Ch V p.325", status: explicit}
+- {id: agape.aposticha, slot: agape.aposticha, tier: 0,
+   when: [{pred: pascha_days_between, args: [0, 0]}],
+   fill: {kind: paschal, glory: pascha, parts: ["1 sticheron of the Resurrection “Thy Resurrection, O Christ Savior” — Tone 2", "The Paschal stichera with their verses — Pentecostarion, Tone 5", "Glory, Now: “Today is the day of Resurrection” — Pentecostarion, Tone 5; then “Christ is risen” (thrice)"]},
+   source: typikon, locator: "Ch VII p.523 (aposticha: one sticheron tone 2, the Paschals tone 5, Glory/Now 'Today is the Day of the Resurrection')", status: explicit}
+- {id: agape.aposticha.george, slot: agape.aposticha, tier: -1,
+   when: [{pred: pascha_days_between, args: [0, 0]}, {pred: bright_monday_george}],
+   fill: {kind: paschal, glory: saint, parts: ["1 sticheron of the Resurrection “Thy Resurrection, O Christ Savior” — Tone 2", "The Paschal stichera with their verses — Pentecostarion, Tone 5", "Glory: doxastikon of St George (“Let us, O brethren, extol spiritually”) — Menaion 04-23, Tone 4; Now: “Today is the day of Resurrection” — Pentecostarion, Tone 5; then “Christ is risen”"]},
+   source: typikon, locator: "Ch V Apr 23 p.325 (aposticha: sticheron tone 2, Paschals, Glory for St George, Now 'Today is the Day of the Resurrection')", status: explicit}
+- {id: agape.apolytikia, slot: agape.apolytikia, tier: 0,
+   when: [{pred: pascha_days_between, args: [0, 0]}],
+   fill: {saint: false, parts: ["No saint's apolytikion; the Paschal troparion “Christ is risen” closes the service before the Dismissal"]},
+   source: typikon, locator: "Ch VII p.523 (the order lists no troparion)", status: explicit}
+- {id: agape.apolytikia.george, slot: agape.apolytikia, tier: -1,
+   when: [{pred: pascha_days_between, args: [0, 0]}, {pred: bright_monday_george}],
+   fill: {saint: true, parts: ["Apolytikion of St George — Menaion 04-23 (Tone 4), between two singings of “Christ is risen”"]},
+   source: typikon, locator: "Ch V Apr 23 p.325 (the troparion of St George, then 'Christ is risen')", status: explicit}
+- {id: agape.dismissal, slot: agape.dismissal, tier: 0,
+   when: [{pred: pascha_days_between, args: [0, 0]}],
+   fill: {saint_named: false, parts: ["Dismissal as at the Divine Liturgy for Pascha (“May He Who is risen from the dead”), no saint named, with the Paschal dialogue"]},
+   source: anca, locator: "inferred: Typikon Ch VII p.523 ('the Dismissal as at the Divine Liturgy for Pascha'); the Pascha Liturgy names no saint of the day",
+   status: inferred, evidence: "ANCA Agape Vespers 2020 (readers') and 2026: the Dismissal names no saint of the day (the patron 'Saint N.' placeholder only)"}
+- {id: agape.dismissal.george, slot: agape.dismissal, tier: -1,
+   when: [{pred: pascha_days_between, args: [0, 0]}, {pred: bright_monday_george}],
+   fill: {saint_named: true, parts: ["Dismissal as at the Divine Liturgy for Pascha, naming the Great Martyr George, whose memory is celebrated"]},
+   source: anca, locator: "inferred: Typikon Ch V p.325 prints only 'The Dismissal'; Ch I s4 p.17 (a commemoration with a Doxastikon is named)",
+   status: inferred, evidence: "ANCA Agape Vespers with St George 2024-05-05: the Dismissal names 'the holy, glorious and right-victorious Great-martyr George the trophy-bearer, whose memory we celebrate today'"}

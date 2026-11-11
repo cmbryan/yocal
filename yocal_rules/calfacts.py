@@ -172,7 +172,7 @@ def _slices():
     if _SLICES is None:
         import yaml
         d = yaml.safe_load(open(os.path.join(DATA, "slices.yaml"), encoding="utf-8")) or {}
-        _SLICES = {k: [str(x) for x in (d.get(k) or [])] for k in ("supported_seasons", "supported_fore_after", "supported_fixed_major", "supported_movable_major", "supported_major_eve_vespers")}
+        _SLICES = {k: [str(x) for x in (d.get(k) or [])] for k in ("supported_seasons", "supported_fore_after", "supported_fixed_major", "supported_movable_major", "supported_major_eve_vespers", "supported_pascha")}
     return _SLICES
 
 
@@ -233,9 +233,9 @@ MAJOR_FIXED = {"12-25": ("nativity", "lord"), "01-01": ("circumcision", "lord"),
                "08-15": ("dormition", "theotokos"), "09-08": ("nativity_theotokos", "theotokos"), "09-14": ("elevation", "lord"),
                "11-21": ("entrance", "theotokos")}
 MAJOR_MOVABLE = {-7: ("palm_sunday", "lord"), 0: ("pascha", "lord"), 39: ("ascension", "lord"), 49: ("pentecost", "lord")}
-# feasts whose services carry the feast-only slots (slots.yaml `only: major_feast_slots`); Palm Sunday, Pascha and Pentecost
-# are Sunday-cycle days of the Triodion / Pentecostarion packages and keep the Sunday slot set
-FEAST_SLOT_FEASTS = {v[0] for v in MAJOR_FIXED.values()} | {"ascension"}
+# feasts whose services carry the feast-only slots (slots.yaml `only: major_feast_slots`); Palm Sunday and Pentecost
+# are Sunday-cycle days of the Triodion / Pentecostarion packages and keep the Sunday slot set. Pascha has its own set (pascha.yaml).
+FEAST_SLOT_FEASTS = {v[0] for v in MAJOR_FIXED.values()} | {"ascension", "pascha"}  # Pascha: Holy Saturday Vesperal Liturgy readings, the Paschal katavasia and Liturgy hymns (pascha.yaml)
 
 
 def major_feast(ld: dt.date):
@@ -288,7 +288,10 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         reasons.append(f"Major feast ({mf})")
     if mf in ("nativity", "theophany") and ld.weekday() == 0:  # Monday order (Typikon p.145-148, p.174-176): Rules are Typikon-sourced, no ANCA text to verify them
         reasons.append(f"Major feast ({mf}) on a Monday (Typikon-only Rules, not checked against ANCA)")
-    if ssn not in sl["supported_seasons"]:
+    if ssn == "pascha":  # Pascha day: enabled per service (slices.yaml supported_pascha; 'vespers' = the Holy Saturday Vesperal Liturgy, 'agape' = Sunday evening)
+        if service not in sl.get("supported_pascha", []):
+            reasons.append(f"Pascha: {service} not enabled")
+    elif ssn not in sl["supported_seasons"]:
         reasons.append(f"{ssn} season")
     eve_only = service == "vespers" and f"{mmdd}:{(ld - dt.timedelta(days=1)).strftime('%A')}" in sl["supported_major_eve_vespers"]  # eve Vespers only, per eve weekday
     # 'mm-dd:Weekday' (feast-day weekday, not Sunday) enables the feast day's Matins/Liturgy only for that weekday; never the eve Vespers
@@ -331,10 +334,12 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         fore_after=fa,  # DB fore_after text (forefeast/afterfeast/leavetaking), '' if none
         season=ssn, in_slice=not reasons, slice_reasons=reasons,
         # Major feast (work package I): id ('' if none), class lord|theotokos, movable flag; feast_slots gates the feast-only slots
-        major_feast=mf, major_feast_class=mf_cls, major_feast_movable=mf_mov, major_feast_slots=mf in FEAST_SLOT_FEASTS, major_feast_sunday=mf in FEAST_SLOT_FEASTS and ld.weekday() == 6,
+        major_feast=mf, major_feast_class=mf_cls, major_feast_movable=mf_mov, major_feast_slots=mf in FEAST_SLOT_FEASTS, major_feast_sunday=mf in FEAST_SLOT_FEASTS and mf != "pascha" and ld.weekday() == 6,
         # the feast's Matins Gospel (DB lection code m-<mm-dd>, m-<g_code> for movable feasts), '' if the DB has none
         feast_matins_gospel_ref=(lect(f"m-{mmdd}")[1] or lect(f"m-{r['g_code']}")[1] or "").strip() if mf else "",
         # the eve's own calendar row (Vespers is served on the eve): DB Liturgy-of-St-Basil flag (Vesperal Liturgy)
+        # Agape Vespers (Pascha evening): St George transferred to Bright Monday is commemorated at it (Typikon Apr 23 p.325)
+        bright_monday_george=bool(service == "agape" and re.search(r"Great Martyr, Trophybearer and Wonderworker George \(Transferred from April 23", (con.execute("select major_commem from yocal_main where date=?", ((ld + dt.timedelta(days=1)).isoformat(),)).fetchone() or [""])[0] or "")),
         eve_basil=bool(service == "vespers" and (con.execute("select basil from yocal_main where date=?", (date.isoformat(),)).fetchone() or [""])[0]),
     )
 

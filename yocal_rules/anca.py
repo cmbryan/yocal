@@ -44,6 +44,9 @@ def candidate_urls(date: dt.date, kind: str):
     """kind: VESP | Abbr | ORTHROS | READ. Index first (covers non-date filenames), then constructed names."""
     ent = _index().get(date.isoformat())
     urls = []
+    named = _feast_index().get(date.isoformat(), {}).get("named", {}).get(kind)  # undated/odd names mapped to a pseudo-kind (VIGIL, VDL)
+    if named:
+        return [BASE + named]
     for link in (ent or {}).get("links", []) + _feast_index().get(date.isoformat(), {}).get("links", []):
         name = urllib.parse.unquote(link)
         if name.endswith((f" {kind}.pdf", f"-{kind}.pdf")) and "Bilingual" not in name:  # '-': e.g. '7-Palm-Sunday-READ.pdf'
@@ -438,6 +441,8 @@ def parse_feast_liturgy(txt):
                                       else "chosen_zion" if re.search(r"(?:chosen|elected) (?:Zion|Sion)", t) else "feast")
     if re.search(r"[Ii]nstead of singing “?We have seen the true light,?”?,? sing the [Aa]polytikion", f):
         k["liturgy.final_hymn"] = dict(kind="feast_troparion")
+    elif re.search(r"Instead of “We have seen the true light,?” sing “Christ is [Rr]isen”", f):  # Pascha
+        k["liturgy.final_hymn"] = dict(kind="christ_is_risen")
     elif re.search(r"Post-Communion Hymn: “?We have seen the true light", f):
         k["liturgy.final_hymn"] = dict(kind="true_light")
     if re.search(r"THE DISMISSAL\s*(?:Priest:\s*)?May Christ our true God", f):  # weekday Great Dismissal without a phrase
@@ -445,6 +450,65 @@ def parse_feast_liturgy(txt):
     m = re.search(r"(Do NOT|Now) sing the apolytikion of the patron", f)
     if m:
         k["liturgy.patron"] = dict(patron=m.group(1) == "Now")
+    return k
+
+
+# ------------------------------------------------------------------ Pascha (data/rules/pascha.yaml)
+def parse_holy_saturday(txt):
+    """ANCA 'Vesperal Divine Liturgy of St Basil' on Holy Saturday (Vespers part only): Lord-I-have-cried blocks, the
+    anti-alleluarion that replaces the daily prokeimenon, the count of Old Testament readings."""
+    k = {}
+    sp = _span(txt, r"“O LORD I HAVE CRIED” IN TONE", r"DOXASTICON FOR")
+    res, oth = _lihc_blocks(sp)
+    if res or oth:
+        k["vespers.lihc.stichera"] = dict(res=res, other=oth, total=res + sum(oth))
+    m = re.search(r"ANTI-ALLELUARION IN TONE (\w+)", txt)
+    if m and re.search(r"Daily Prokeimenon is not sung", txt):
+        k["vespers.prokeimenon"] = dict(kind="arise_o_god", tone=_word(m.group(1)))
+    n = len(re.findall(r"Reader:\s+The reading from (?!the Epistle)", txt, re.I))
+    if n:
+        k["vespers.readings"] = dict(count=n)
+    return k
+
+
+def parse_agape(txt):
+    """ANCA 'Paschal Agape Great Vespers' (Sunday evening of Pascha), with or without a Great Martyr George section."""
+    k = {}
+    f = _flat(re.sub(r"Agape Vespers\s+Great Vespers \d+\s+(?:with St\. George|Agape Vespers)", " ", txt))  # running page headers split sentences
+    res, oth = _lihc_blocks(_span(txt, r"“O LORD I HAVE CRIED” IN TONE", r"DOXASTICON FOR"))
+    if res or oth:
+        k["agape.lihc.stichera"] = dict(res=res, other=oth, total=res + sum(oth))
+    m = re.search(r"GREAT PROKEIMENON IN TONE (\w+)", txt)
+    if m:
+        k["agape.prokeimenon"] = dict(kind="great", tone=_word(m.group(1)))
+    m = re.search(r"Holy Gospel according to Saint John \((\d+:\d+[-–\d:]*)\)", f)
+    if m:
+        k["agape.gospel"] = dict(ref=m.group(1))
+    if "PASCHAL STICHERA IN TONE" in txt:
+        tail = txt[txt.index("APOSTICHON"):] if "APOSTICHON" in txt else txt
+        k["agape.aposticha"] = dict(kind="paschal", glory="saint" if re.search(r"DOXASTICON FOR ST\.", tail) else "pascha")
+    k["agape.apolytikia"] = dict(saint=bool(re.search(r"APOLYTIKION OF ST\.", txt)))
+    if "THE DISMISSAL" in txt:
+        k["agape.dismissal"] = dict(saint_named=_dismissal_names_saint(f))
+    return k
+
+
+def parse_paschal_vigil(txt):
+    """ANCA 'Outline of Rubrics for Great and All-Holy Pascha' (Midnight Office, Resurrection Service, Paschal Orthros): Orthros slots only."""
+    k = {}
+    m = re.search(r"\((\d+)(?:st|nd|rd|th) Eothinon Gospel\)", txt)
+    if m:
+        k["matins.eothinon_gospel"] = dict(number=int(m.group(1)))
+    if re.search(r"To be read:\s+Kontakion: “Though Thou, O deathless one", txt):
+        k["matins.kontakion"] = dict(kind="feast")  # the kontakion, oikos and synaxarion of Pascha replace the resurrectional kontakion
+    if re.search(r"Katavasia \(repeat the Irmos\)", txt):
+        k["matins.katavasia"] = dict(of="feast")
+    sp = _span(txt, r"\n\s*8\.\s+Praises", r"\n\s*9\.\s")
+    r = re.search(r"(\d+) stichera for the Resurrection", sp)
+    o = re.search(r"(\d+) Pascha Stichera", sp)
+    if r and o:
+        k["matins.praises"] = dict(total=int(r.group(1)) + int(o.group(1)), res=int(r.group(1)), other=[int(o.group(1))],
+                                   glory="other" if "Doxasticon" in sp else None)
     return k
 
 
@@ -461,6 +525,15 @@ def _FEAST_SLOT_FEASTS():
 def key_for(service: str, date: dt.date, cache: str, offline: bool = False):
     """-> (key dict slot->attrs, [source labels], [notes]). Empty key => `no key`."""
     notes, used = [], []
+    from .calfacts import pascha as _pascha  # lazy (calendar side)
+    ld = date + dt.timedelta(days=1) if service == "vespers" else date
+    if ld == _pascha(ld.year) and service != "liturgy":  # Pascha day: Holy Saturday Vesperal Liturgy (eve), Paschal Vigil outline, Agape Vespers
+        kind = {"vespers": "VDL", "matins": "VIGIL", "agape": "VESP"}[service]
+        t = fetch(date, kind, cache, offline)
+        if not t:
+            return {}, used, [f"no ANCA {kind} file for this date"]
+        used.append(f"{kind} {date:%b %d %Y}")
+        return {"vespers": parse_holy_saturday, "matins": parse_paschal_vigil, "agape": parse_agape}[service](t), used, notes
     if service == "liturgy":
         t = fetch(date, "READ", cache, offline)
         if not t:

@@ -1,4 +1,4 @@
-# Work package G: Pentecostarion Sundays (Thomas .. Pentecost, pascha_days 7..49) and Pascha (pascha_days 0).
+# Work package G: Pentecostarion Sundays (Thomas .. Pentecost, pascha_days 7..49). Pascha itself (pascha_days 0, with Holy Saturday and Agape Vespers) is in pascha.yaml.
 # Typikon = Antiochian Typikon (Khoury/Morris 2011), Ch VII; printed page = the 'Back to Table of Contents N' footer that closes the page.
 # Hymns are referenced by placeholder only (no Pentecostarion text, HANDOFF known gap); `parts` is what the service document prints.
 # Tiers: -1 Ch V coincidence orders with a great saint (date-specific); 0 the Sunday's own order (gated off the coincidence dates
@@ -367,52 +367,6 @@
    when: [{pred: sunday}, {pred: pascha_days_between, args: [7, 49]}, {pred: date_in, args: *COINC}], fill: {},
    source: typikon, locator: "Ch I p.17 + Ch V coincidence orders", status: missing, ticket: "pentecostarion coincidence order not encoded (G)"}
 
-# ======================= Pascha (pascha_days 0): Matins and Liturgy where the Typikon order is explicit; Holy Saturday eve withheld =======================
-- {id: pent.pascha.ves.lihc, slot: vespers.lihc.stichera, tier: 0,
-   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [0, 0]}], fill: {},
-   source: typikon, locator: "Holy Saturday: Vesperal Liturgy of St Basil (Ch VI pp.516-517), not a Saturday Great Vespers", status: missing,
-   ticket: "Holy Saturday Vesperal Liturgy out of scope (G)"}
-- {id: pent.pascha.ves.prokeimenon, slot: vespers.prokeimenon, tier: 0,
-   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [0, 0]}], fill: {},
-   source: typikon, locator: "Ch I p.13 (Holy Saturday: special prokeimenon 'Arise, O God' after the Epistle, not 'The Lord is king')", status: missing,
-   ticket: "Holy Saturday Vesperal Liturgy out of scope (G)"}
-- {id: pent.pascha.ves.apolytikia, slot: vespers.apolytikia, tier: 0,
-   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [0, 0]}], fill: {},
-   source: typikon, locator: "Holy Saturday Vesperal Liturgy (Ch VI pp.516-517)", status: missing, ticket: "Holy Saturday Vesperal Liturgy out of scope (G)"}
-- {id: pent.pascha.mat.apolytikia, slot: matins.apolytikia, tier: 0,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {res_tone: null, saint: true, parts: ["Troparion of Pascha with the Paschal verses — Pentecostarion, Tone 5"]},
-   source: typikon, locator: "Ch VII Pascha Matins p.518 (Paschal troparion with the verses; no 'God is the Lord')", status: explicit}
-- {id: pent.pascha.mat.kathismata, slot: matins.kathismata, tier: 0,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {tone: null, parts: ["None: the Paschal Matins goes from the Great Litany to the Paschal canon"]},
-   source: typikon, locator: "Ch VII Pascha Matins pp.518-520 (no kathismata in the order)", status: explicit}
-- {id: pent.pascha.mat.prokeimenon, slot: matins.prokeimenon, tier: 0,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {kind: null, tone: null, parts: ["None at the Paschal Matins"]},
-   source: typikon, locator: "Ch VII Pascha Matins pp.518-520 (no prokeimenon in the order)", status: explicit}
-- {id: pent.pascha.mat.gospel, slot: matins.eothinon_gospel, tier: 0,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {number: 2, parts: ["Eothinon Gospel no. 2 (Mark 16:1-8), read outside at the procession before Matins"]},
-   source: typikon, locator: "Ch VII p.518 (Rush procession: the Gospel of the 2nd eothinon, Mark 16:1-8)", status: explicit}
-- {id: pent.pascha.mat.kontakion, slot: matins.kontakion, tier: 0,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {kind: feast, owner: "Pascha"},
-   source: typikon, locator: "Ch VII p.519 (after the 6th ode the kontakion, oikos and synaxarion of Pascha)", status: explicit}
-- {id: pent.pascha.mat.praises, slot: matins.praises, tier: 0,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {total: 8, res: 4, other: [4], glory: other, parts: ["4 stichera of the Resurrection — Tone 1", "The Paschal stichera with their verses — Pentecostarion, Tone 5", "Glory, Now: 'Today is the day of Resurrection' — Pentecostarion"]},
-   source: typikon, locator: "Ch VII p.520 (praises: 4 Res tone 1 + the Paschal verses; Glory/Now 'Today is the Day')", status: explicit}
-- {id: pent.pascha.lit.apolytikia, slot: liturgy.apolytikia, tier: 0,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {res_tone: null, saint: true, parts: ["Troparion of Pascha — Pentecostarion, Tone 5", "Hypakoe of Pascha — Pentecostarion, Tone 4"]},
-   source: typikon, locator: "Ch VII p.521 (after the entrance: troparion and hypakoe of Pascha, then the kontakion)", status: explicit}
-- {id: pent.pascha.lit.dismissal, slot: liturgy.dismissal, tier: 0,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {author: "$liturgy_author", saint_named: false},
-   source: anca, locator: "inferred: Paschal dismissal, no saint of the day",
-   status: inferred, evidence: "ANCA READ 2026-04-12 (9-Paschal-READ) names no saint; Typikon Ch VII pp.520-522 gives no dismissal wording; no Menaion material at Pascha"}
-
 # ======================= Dismissal characteristic phrase (slot liturgy.dismissal_phrase; Typikon Ch I s4 p.17-18) =======================
 - {id: pent.lit.dismissal_phrase.resurrection, slot: liturgy.dismissal_phrase, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [7, 35]}, {pred: not_date_in, args: ["05-25"]}],
@@ -430,8 +384,3 @@
    when: [{pred: sunday}, {pred: pascha_days_between, args: [49, 49]}],
    fill: {phrase: feast, clause: none}, source: typikon,
    locator: "Ch VII p.539 (characteristic phrase 'He that sent down from Heaven the All-Holy Spirit'; no 'rose')", status: explicit}
-- {id: pent.lit.dismissal_phrase.pascha, slot: liturgy.dismissal_phrase, tier: 0,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {phrase: feast, clause: none}, source: anca,
-   locator: "inferred: the Paschal opening 'May He Who is risen from the dead, trampling down death by death' (labelled 'feast' by the parser: no 'rose')",
-   status: inferred, evidence: "ANCA READ 2026-04-12 (one sample); Typikon Ch VII pp.520-522 prints no dismissal wording for Pascha"}

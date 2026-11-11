@@ -39,7 +39,7 @@
 - {id: mat.eothinon.calendar, slot: matins.eothinon_gospel, tier: 4, when: [{pred: sunday}],
    fill: {number: "$eothinon"}, source: typikon, locator: "Ch I s5 p.29 fn21 (rotation deferred to calendar)", status: explicit}
 - {id: mat.kontakion.undecided, slot: matins.kontakion, tier: 4, when: [{pred: sunday}], fill: {},
-   source: typikon, locator: "Matins kontakion Rules are in kontakion.yaml; fallback for days they do not cover (Palm Sunday, Pascha)", status: missing, ticket: "#27"}
+   source: typikon, locator: "Matins kontakion Rules are in kontakion.yaml; fallback for days they do not cover (Palm Sunday; Pascha has pent.pascha.mat.kontakion)", status: missing, ticket: "#27"}
 - {id: mat.praises.plain, slot: matins.praises, tier: 4,
    when: [{pred: sunday}, {pred: in_slice}, {pred: no_saint_in_calendar}], fill: {total: 8, res: 8},
    source: typikon, locator: "Ch III p.50-51", status: explicit}
@@ -56,7 +56,7 @@
    source: typikon, locator: "Ch I s3 p.16", status: explicit}
 - {id: lit.kontakion.other, slot: liturgy.kontakion, tier: 4,
    when: [{pred: sunday}], fill: {},
-   source: typikon, locator: "Liturgy kontakion windows are in kontakion.yaml; fallback for days they do not cover (Palm Sunday, Pascha, ...)", status: missing,
+   source: typikon, locator: "Liturgy kontakion windows are in kontakion.yaml; fallback for days they do not cover (Palm Sunday, ...; Pascha is lit.kontakion.pascha_cycle)", status: missing,
    ticket: "#25 (kontakion windows)"}
 - {id: lit.epistle.owner, slot: liturgy.epistle, tier: 4, when: [{pred: sunday}],
    fill: {owner: "$epistle_owner", ref: "$epistle_ref"}, source: typikon,
