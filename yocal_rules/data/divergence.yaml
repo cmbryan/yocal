@@ -38,6 +38,16 @@
   class: anca_generic_sunday_not_named
   reason: "ANCA names the saint on most Sundays but not on some Fathers/All Saints Sundays (7 of 116, 2022-26); no rule found"
 
+# 2024-02-11: ANCA's dismissal opens "May He Who and rose from the dead" (the feast phrase is dropped, a template slip);
+# no other cached ANCA Liturgy file has it, and no feast of the Lord is kept that day (Presentation leavetaking was Feb 9).
+- slot: liturgy.dismissal_phrase
+  source: anca
+  scope: {date: ["2024-02-11"]}
+  ours: {phrase: resurrection}
+  theirs: {phrase: feast_and_resurrection}
+  class: anca_typo
+  reason: "ANCA READ 2024-02-11 prints 'May He Who and rose from the dead' (feast phrase missing, parsed as feast_and_resurrection); one-off typo, the plain 'May He Who rose' is right for an ordinary Sunday (Typikon p.17)"
+
 # ---- readings (one-off, date-scoped; DB assumed correct so these are divergences, not fixes)
 - slot: [liturgy.epistle, liturgy.prokeimenon]
   source: anca
