@@ -456,3 +456,14 @@ def test_jan1_sunday_anca_parsers():
     assert k["liturgy.eisodikon"]["kind"] == "sunday"
     k = anca.parse_feast_liturgy("After Communion, instead of singing “We have seen the true light”, sing the Apolytikion of the Circumcision in Tone One.")
     assert k["liturgy.final_hymn"]["kind"] == "feast_troparion"
+
+
+def test_no_anca_sunday_text_for_transfiguration_elevation():
+    """ANCA published no service texts for Aug 6 2023 / Sep 14 2025 (liturgicday pages 3540/3541/4310/4311 list none;
+    dated and undated names 404; the undated 'Aug 06'/'Sept 14' files are the 2026 weekday texts). Re-check before enabling
+    '08-06:sunday' / '09-14:sunday': if this fails, ANCA texts now exist and the Sunday Rules can be verified."""
+    for d in ("2023-08-05", "2023-08-06", "2025-09-14"):
+        assert not [l for l in anca._index()[d]["links"] if "VESP" in l or "ORTHROS" in l or "READ" in l or "Abbr" in l], d
+    assert not [k for k in ("2023-08-05", "2023-08-06", "2025-09-14") if k in anca._feast_index()]
+    enabled = calfacts._slices()["supported_fixed_major"]
+    assert "08-06:sunday" not in enabled and "09-14:sunday" not in enabled
