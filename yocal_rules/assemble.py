@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from . import anca, calfacts, compare as cmp, dcs
 from .rules import evaluate, load_catalogue
 
-SERVICES = ("vespers", "matins", "liturgy")
+SERVICES = ("vespers", "matins", "liturgy", "agape")  # agape = Agape Vespers, Sunday evening of Pascha only
 
 
 class OutOfScope(Exception):
@@ -29,6 +29,10 @@ def check_scope(service: str, date: dt.date):
     if service not in SERVICES:
         raise OutOfScope(f"unknown service {service!r}; choose from {', '.join(SERVICES)}")
     ld = calfacts.liturgical_date(service, date)
+    if service == "agape":
+        if date != calfacts.pascha(date.year):
+            raise OutOfScope(f"{date} agape: Agape Vespers is served on Pascha Sunday only ({calfacts.pascha(date.year)} in {date.year})")
+        return
     eve_of_feast = ld.strftime("%m-%d") in calfacts.FIXED_MAJOR or bool(calfacts.major_feast(ld)[0])  # feast day itself (Vespers: the feast the eve precedes)
     if service == "vespers":
         ok = date.weekday() == 5 or eve_of_feast
@@ -59,7 +63,7 @@ def compare_keys(r: Result, cache: str, offline: bool = False, dcs_on: bool = Tr
     srcs = []
     if anca_on:
         srcs.append(("anca", anca.key_for))
-    if dcs_on:
+    if dcs_on and r.service != "agape":  # DCS has no Agape Vespers page
         srcs.append(("dcs", dcs.key_for))
     for name, fn in srcs:
         try:

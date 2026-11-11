@@ -15,10 +15,10 @@ def slots(service, date):
 
 
 @needs_db
-def test_pentecostarion_sundays_are_in_slice_pascha_is_not():
+def test_pentecostarion_sundays_are_in_slice_and_pascha_is_enabled_per_service():
     assert calfacts.load_facts(dt.date(2026, 4, 19), "matins")["in_slice"]          # Thomas
     assert calfacts.load_facts(dt.date(2026, 5, 24), "matins")["in_slice"]          # Holy Fathers (afterfeast of the Ascension)
-    assert not calfacts.load_facts(dt.date(2026, 4, 12), "matins")["in_slice"]      # Pascha stays out of the slice
+    assert calfacts.load_facts(dt.date(2026, 4, 12), "matins")["in_slice"]          # Pascha: enabled by slices.yaml supported_pascha (test_pascha.py)
 
 
 @needs_db
@@ -55,12 +55,10 @@ def test_coincidence_orders_and_withheld_dates():
 
 
 @needs_db
-def test_pascha_matins_and_holy_saturday_vespers():
+def test_pascha_matins():
     _, m = slots("matins", dt.date(2026, 4, 12))
     assert m["matins.eothinon_gospel"].fill["number"] == 2
     assert m["matins.kontakion"].fill["kind"] == "feast"
-    _, v = slots("vespers", dt.date(2026, 4, 11))
-    assert all(x.status == "missing" for x in v.values())
 
 
 def test_thomas_unheaded_stichera_parse_as_proper():

@@ -30,3 +30,10 @@ liturgy.communion:     {service: liturgy, label: "Communion hymn", attrs: [kind]
 liturgy.final_hymn:    {service: liturgy, label: "After Communion (in place of “We have seen the true light”)", attrs: [kind], only: major_feast_slots, after: liturgy.communion}
 # Sunday occurrence of a fixed Major feast (major_feasts_sunday.yaml): the evlogetaria slot exists only then (Typikon Ch I s5 VI p.25-26 omits them; ANCA sings them)
 matins.evlogetaria:    {service: matins, label: "Evlogetaria", attrs: [kind], only: major_feast_sunday, after: matins.kathismata}
+# Agape Vespers (Sunday evening of Pascha; data/rules/pascha.yaml): its own service, built only on Pascha day
+agape.lihc.stichera:   {service: agape, label: "Lord, I have cried: stichera", attrs: [res, other]}
+agape.prokeimenon:     {service: agape, label: "Great prokeimenon", attrs: [kind, tone]}
+agape.gospel:          {service: agape, label: "Paschal Agape Gospel", attrs: [ref]}
+agape.aposticha:       {service: agape, label: "Aposticha and Paschal stichera", attrs: [kind, glory]}
+agape.apolytikia:      {service: agape, label: "Apolytikia", attrs: [saint]}
+agape.dismissal:       {service: agape, label: "Dismissal", attrs: [saint_named]}

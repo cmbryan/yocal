@@ -1,5 +1,5 @@
 {
- "_comment": "Work package I: ANCA texts for weekday Major feasts and their eves, which are not on the weekend index (anca_pages.json). ANCA publishes them under undated names ('Aug 06 READ.pdf'), replaced each year: each is mapped only to the latest weekday occurrence it was published for (2025-26 church year, files last modified 2026). Theophany (2026: '2-Theophany VESP', '3-Theophany ORTHROS', '7-Theophany-Abbr'; no Liturgy text found) and Ascension ('Ascension-VESP/ORTHROS/READ', 2026) have feast-named files. No Nativity file was found (name probe of ~2400 candidates).",
+ "_comment": "Work package I: ANCA texts for weekday Major feasts and their eves, which are not on the weekend index (anca_pages.json). ANCA publishes them under undated names ('Aug 06 READ.pdf'), replaced each year: each is mapped only to the latest weekday occurrence it was published for (2025-26 church year, files last modified 2026). Theophany (2026: '2-Theophany VESP', '3-Theophany ORTHROS', '7-Theophany-Abbr'; no Liturgy text found) and Ascension ('Ascension-VESP/ORTHROS/READ', 2026) have feast-named files. No Nativity file was found (name probe of ~2400 candidates). Pascha (work package P): 'named' maps a pseudo-kind to an undated/odd file name: VDL = Holy Saturday Vesperal Liturgy (page 2026-04-11), VIGIL = Outline of Rubrics for Pascha (Midnight Office, Resurrection Service, Orthros; listed on page 2026-04-11, mapped to the Pascha date). Agape Vespers texts are the pages' own '*-Agape-VESP.pdf' links (2020 readers', 2024 with St George, 2026).",
  "2020-03-24": {
   "links": [
    "/servicetexts/Mar%2024%20Readers%20VESP.pdf"
@@ -54,6 +54,18 @@
    "/servicetexts/Mar%2025%20ORTHROS.pdf",
    "/servicetexts/Mar%2025%20READ.pdf"
   ]
+ },
+ "2026-04-11": {
+  "links": [],
+  "named": {
+   "VDL": "/servicetexts/Holy-Sat-Vesperal-Lit-NEW.pdf"
+  }
+ },
+ "2026-04-12": {
+  "links": [],
+  "named": {
+   "VIGIL": "/servicetexts/8-Paschal%20VIGIL.pdf"
+  }
  },
  "2026-05-20": {
   "links": [
