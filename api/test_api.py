@@ -108,3 +108,11 @@ def test_test_display_template(test_date, expected_file):
             assert response.strip() == expected_output.strip(), \
                 f"Template output does not match expected output for {test_date}." \
                 f" diff {expected_file} {actual_file} for more details"
+
+
+def test_get_date_f7ec_sunday_gospel_from_sunday():
+    # Sunday of the Fathers of the 7th Council: Apostle from F7EC, Gospel from L4Sun
+    result = _get_date(date(2026, 10, 11))
+    assert result["lections"]["basic"] == ["Titus 3:8-15", "Luke 8:5-8a,9-15,8b"]
+    assert result["lections"]["liturgy"] == ["Titus 3:8-15", "Luke 8:5-8a,9-15,8b"]
+    assert len(result["texts"]["basic"]) == 2

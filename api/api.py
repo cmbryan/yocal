@@ -114,6 +114,11 @@ def _get_date(date_obj: datetime.date) -> Dict:
     if a_code:
         a_data = _get_lections(a_code)
         a_data["primary"] = []
+        # Fathers of the 7th Council: only the Apostle reading is used;
+        # the Gospel comes from the Sunday (g_code)
+        if a_code == "F7EC":
+            a_data["lect_2"] = None
+            a_data["text_2"] = None
 
     if g_code:
         g_data = _get_lections(g_code)
