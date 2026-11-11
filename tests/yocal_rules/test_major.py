@@ -490,3 +490,73 @@ def test_audited_conflict_statuses():
         assert rules[rid]["conflict"]["status"] == st, rid
     note = rules["pascha.ves.lihc"]["conflict"]["note"]
     assert "Residual" in note and "Glory" in note
+
+
+# ---- slices.yaml verified_years: pattern claims made explicit (fact + banner) ----
+def test_slices_loader_keeps_plain_keys_and_verified_years():
+    sl = calfacts._slices()
+    assert "09-08:sunday" in sl["supported_fixed_major"] and "ascension" in sl["supported_movable_major"] and "agape" in sl["supported_pascha"]
+    assert sl["verified_years"]["supported_fixed_major"]["09-08:sunday"] == [2019, 2024]
+    assert sl["verified_years"]["supported_fixed_major"]["02-02:sunday"] == [2020, 2025]
+    assert sl["verified_years"]["supported_fixed_major"]["01-01:sunday"] == [2023]
+    assert sl["verified_years"]["supported_fixed_major"]["03-25:Monday"] == [2019] and sl["verified_years"]["supported_fixed_major"]["03-25:Wednesday"] == [2026]
+    assert sl["verified_years"]["supported_fixed_major"]["03-25:sunday@-14"] == [2018]
+    assert sl["verified_years"]["supported_major_eve_vespers"] == {"03-25:Sunday": [2019], "03-25:Tuesday": [2020, 2026]}
+    assert sl["verified_years"]["supported_pascha"] == {"vespers": [2026], "matins": [2026], "liturgy": [2026], "agape": [2020, 2024, 2026]}
+    assert sl["verified_years"]["supported_movable_major"] == {"ascension": [2026]}
+    assert "supported_seasons" in sl and sl["verified_years"]["supported_seasons"] == {}                  # ordinary Sunday/season slices carry none
+
+
+@needs_db
+@pytest.mark.parametrize("date,svc,years,verified", [
+    ("2024-09-08", "matins", [2019, 2024], True),                  # Sunday order, verified year
+    ("2030-09-08", "matins", [2019, 2024], False),                 # same pattern, no ANCA text for this year
+    ("2023-01-01", "liturgy", [2023], True),
+    ("2022-12-31", "vespers", [2023], True),                       # eve Vespers: liturgical date's year
+    ("2026-03-25", "liturgy", [2026], True),                       # day-only key 03-25:Wednesday
+    ("2018-03-25", "matins", [2018], True),                        # sunday@-14
+    ("2019-03-24", "vespers", [2019], True),                       # eve key 03-25:Sunday
+    ("2020-03-24", "vespers", [2020, 2026], True),                 # eve key 03-25:Tuesday
+    ("2026-05-21", "liturgy", [2026], True),                       # movable: ascension
+    ("2026-04-12", "agape", [2020, 2024, 2026], True),
+    ("2026-04-11", "vespers", [2026], True),
+    ("2026-08-06", "matins", [2026], True),                        # plain mm-dd key
+    ("2031-08-06", "matins", [2026], False),
+])
+def test_slice_verified_years_fact(date, svc, years, verified):
+    f = calfacts.load_facts(dt.date.fromisoformat(date), svc)
+    assert f["in_slice"] and f["slice_verified_years"] == years and f["verified"] is verified
+
+
+@needs_db
+@pytest.mark.parametrize("date,svc", [("2026-11-01", "matins"), ("2026-04-19", "matins"), ("2025-03-25", "matins"), ("2026-02-15", "liturgy")])
+def test_slice_verified_years_empty_without_list_or_out_of_slice(date, svc):
+    f = calfacts.load_facts(dt.date.fromisoformat(date), svc)                                            # ordinary Sunday, Thomas, Tuesday feast (out), Meatfare
+    assert f["slice_verified_years"] == [] and f["verified"] is False
+
+
+@needs_db
+def test_verified_and_pattern_enabled_banners(tmp_path):
+    for date, line in (("2024-09-08", "> **Verified** against ANCA 2019, 2024 (Rules pattern)."),
+                       ("2030-09-08", "> **Pattern-enabled:** no ANCA text for this year; verified in 2019, 2024.")):
+        assert cli.main([date, "matins", "--no-compare", "--out", str(tmp_path)]) == 0
+        doc = (tmp_path / f"{date}-matins.md").read_text()
+        assert doc.count(line + "\n") == 1 and "Incomplete" not in doc
+        other = "Pattern-enabled" if "Verified" in line else "Verified"
+        assert other not in doc
+    assert cli.main(["2026-11-01", "matins", "--no-compare", "--out", str(tmp_path)]) == 0                  # ordinary Sunday: nothing new
+    doc = (tmp_path / "2026-11-01-matins.md").read_text()
+    assert "Verified" not in doc and "Pattern-enabled" not in doc and "Incomplete" not in doc
+    assert cli.main(["2025-03-25", "matins", "--no-compare", "--out", str(tmp_path)]) == 0                  # out of slice: Incomplete only
+    doc = (tmp_path / "2025-03-25-matins.md").read_text()
+    assert "Incomplete" in doc and "Verified" not in doc and "Pattern-enabled" not in doc
+
+
+@needs_db
+def test_banner_does_not_change_slot_content(tmp_path):
+    cli.main(["2030-09-08", "matins", "--no-compare", "--out", str(tmp_path)])
+    banner = (tmp_path / "2030-09-08-matins.md").read_text()
+    r = assemble.build("matins", dt.date(2030, 9, 8))
+    assert all(x.status != "missing" for _, _, x in r.slots)
+    body = banner.split("Pattern-enabled")[1].split("\n", 2)[2]
+    assert body.startswith("## ") and "[to be determined]" not in body

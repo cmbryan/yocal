@@ -164,6 +164,10 @@ def service_document(r) -> str:
     if not f["in_slice"]:
         L += [f"> **Incomplete:** this date is outside the implemented Rules ({'; '.join(f['slice_reasons'])}). "
               f"Parts marked {TBD} need Rules not yet written.", ""]
+    elif f.get("slice_verified_years"):  # in slice via a pattern key with verified_years (slices.yaml): say how far the Rules were checked
+        yrs = ", ".join(str(y) for y in f["slice_verified_years"])
+        L += [f"> **Verified** against ANCA {yrs} (Rules pattern).", ""] if f["verified"] else \
+             [f"> **Pattern-enabled:** no ANCA text for this year; verified in {yrs}.", ""]
     for slot, meta, res in r.slots:
         if slot == "liturgy.author":
             continue
