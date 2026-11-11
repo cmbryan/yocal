@@ -479,7 +479,7 @@ def test_audited_conflict_statuses():
     from yocal_rules.rules import load_catalogue
     rules = {r["id"]: r for r in load_catalogue()[0]}
     want = {"pascha.ves.lihc": "misreading", "mf.ves.litia": "accepted", "mf.sun.ves.litia": "accepted", "mf.lent5.ves.litia": "accepted",
-            "mf.jan1.sun.ves.litia": "accepted", "mf.nat.mon.ves.litia": "accepted", "mf.thy.mon.ves.litia": "accepted",
+            "mf.jan1.sun.ves.litia": "accepted", "mf.nat.mon.ves.litia": "accepted", "mf.thy.mon.ves.litia": "accepted", "mf.nat.ves.litia": "accepted", "mf.thy.ves.litia": "accepted",
             "mf.lent5.mat.prokeimenon": "accepted", "mf.lent5.mat.praises": "misreading", "mf.jan1.sun.lit.epistle": "accepted",
             # unchanged
             "mf.lent5.ves.lihc": "accepted", "mf.sun.ves.lihc.presentation": "accepted", "mf.sun.mat.evlogetaria": "accepted",
