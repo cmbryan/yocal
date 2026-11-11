@@ -248,7 +248,7 @@ def test_luke_8_8_acclamation_is_optional():
 @needs_db
 def test_anca_sunday_epistle_overrides_flag_with_open_conflict():
     got = lambda d: {s: x for s, _, x in assemble.build("liturgy", d).slots}
-    g = got(dt.date(2026, 6, 14))  # All Saints of Antioch: flag says saint, ANCA reads the Sunday's
+    g = got(dt.date(2023, 6, 18))  # All Saints of Antioch 2022-23: flag says saint, ANCA reads the Sunday's
     assert g["liturgy.epistle"].rule_id == "lit.epistle.anca_sunday" and g["liturgy.epistle"].fill["owner"] == "sunday"
     assert g["liturgy.prokeimenon"].fill["owner"] == "sunday"
     assert g["liturgy.epistle"].rule["conflict"]["status"] == "open" and "lit.epistle.owner" in g["liturgy.epistle"].shadowed
