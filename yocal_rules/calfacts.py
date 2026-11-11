@@ -172,7 +172,7 @@ def _slices():
     if _SLICES is None:
         import yaml
         d = yaml.safe_load(open(os.path.join(DATA, "slices.yaml"), encoding="utf-8")) or {}
-        _SLICES = {k: [str(x) for x in (d.get(k) or [])] for k in ("supported_seasons", "supported_fore_after", "supported_fixed_major", "supported_movable_major")}
+        _SLICES = {k: [str(x) for x in (d.get(k) or [])] for k in ("supported_seasons", "supported_fore_after", "supported_fixed_major", "supported_movable_major", "supported_major_eve_vespers")}
     return _SLICES
 
 
@@ -290,7 +290,8 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         reasons.append(f"Major feast ({mf}) on a Monday")
     if ssn not in sl["supported_seasons"]:
         reasons.append(f"{ssn} season")
-    if mmdd in FIXED_MAJOR and (mmdd + (":sunday" if ld.weekday() == 6 else "")) not in sl["supported_fixed_major"]:
+    eve_only = service == "vespers" and f"{mmdd}:{(ld - dt.timedelta(days=1)).strftime('%A')}" in sl["supported_major_eve_vespers"]  # eve Vespers only, per eve weekday
+    if mmdd in FIXED_MAJOR and not eve_only and (mmdd + (":sunday" if ld.weekday() == 6 else "")) not in sl["supported_fixed_major"]:
         reasons.append("fixed Major feast" + (" on a Sunday" if ld.weekday() == 6 else ""))  # 'mm-dd' = weekday order, 'mm-dd:sunday' = Sunday order
     fa = (r["fore_after"] or "").strip()
     if fa and not any(x in fa for x in sl["supported_fore_after"]):

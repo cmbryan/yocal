@@ -36,6 +36,7 @@ ANCA file names come from the committed `data/anca_pages.json`; PDFs are downloa
 ## Slice and out-of-scope behaviour
 - Out of scope (exit 1, error message): other days or services, unless the date is a fixed Major feast.
 - **In slice** = ordinary-season Sunday with no fixed Major feast and no fore/after-feast. Outside the slice (Triodion/Pentecostarion seasons, Major feasts, fore/after-feasts) the document is still produced, headed **Incomplete** with the reasons, and slots whose Rules are not yet written show `[to be determined]` (status `missing` in the supplement). Tone, readings and names from the calendar are still shown.
+- `slices.yaml` `supported_major_eve_vespers` (`mm-dd:Weekday` of the eve) enables only the eve Great Vespers of a fixed Major feast, leaving that feast's Matins/Liturgy Incomplete (Annunciation: Sunday and Tuesday eves, ANCA 2019/2026).
 
 ## Divergence log
 `data/divergence.yaml` (all `data/divergence*.yaml` are read): accepted, class-scoped differences between our output and an answer key. A diff matching no entry is *unexplained*, and for ANCA on an explicit/inferred Rule it blocks the gate. Entry:

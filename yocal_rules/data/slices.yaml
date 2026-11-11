@@ -36,3 +36,6 @@ supported_fixed_major:      # mm-dd of fixed Major feasts whose weekday/Saturday
   # "12-25" / "01-06" (Nativity, Theophany; Tue-Sat Rules in major_feasts.yaml) stay disabled: no ANCA Nativity text, no ANCA Theophany Liturgy text (unverified)
 supported_movable_major:    # ids of movable Major feasts not on a Sunday (calfacts.MAJOR_MOVABLE)
   - ascension                # I: major_feasts.yaml
+supported_major_eve_vespers:  # 'mm-dd:Weekday' = eve Great Vespers only (weekday of the eve) of a fixed Major feast; Matins/Liturgy of that feast stay disabled
+  - "03-25:Sunday"            # I: Annunciation eve before a Monday feast (ANCA 2019); other Lenten eve weekdays have no ANCA text
+  - "03-25:Tuesday"           # I: Annunciation eve before a Wednesday feast (ANCA 2026)
