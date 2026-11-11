@@ -64,7 +64,8 @@ def get_test_display():
 
 
 def liturgy_allowed(a_code: str) -> bool:
-    return a_code[0] == "G" and (a_code[2] != "S" or a_code in ["G7Sat", "E36Wed", "E36Fri"])
+    return (a_code[0] == "G" and (a_code[2] != "S" or a_code == "G7Sat")) \
+        or a_code in ["E36Wed", "E36Fri"]
 
 def _get_date(date_obj: datetime.date) -> Dict:
     data = _get_data(date_obj)
@@ -169,23 +170,24 @@ def _get_date(date_obj: datetime.date) -> Dict:
     result["texts"]["basic"] = []
     result["texts"]["commem"] = []
 
-    for idx in range(1, 3):
-        lect_idx = f"lect_{idx}"
-        text_idx = f"text_{idx}"
+    # Order matches the WP template: Apostle, Gospel (Apostle code's, else
+    # the Sunday's), commemoration, then extra. Only lect_2 is taken from g_data.
+    basic_sources = [(a_data, "lect_1"), (a_data, "lect_2"), (g_data, "lect_2")]
+    commem_sources = [(c_data, "lect_1"), (c_data, "lect_2"),
+                      (x_data, "lect_1"), (x_data, "lect_2")]
 
-        for data in [a_data, g_data]:
-            if data[lect_idx]:
-                result["lections"]["basic"].append(data[lect_idx])
-                result["texts"]["basic"].append(data[text_idx])
-                if lect_idx in data["primary"]:
-                    result["lections"]["liturgy"].append(data[lect_idx])
+    for section, sources in [("basic", basic_sources),
+                             ("commem", commem_sources)]:
+        for src, lect_idx in sources:
+            if src[lect_idx]:
+                result["lections"][section].append(src[lect_idx])
+                result["texts"][section].append(src[lect_idx.replace("lect", "text")])
 
-        for data in [c_data, x_data]:
-            if data[lect_idx]:
-                result["lections"]["commem"].append(data[lect_idx])
-                result["texts"]["commem"].append(data[text_idx])
-                if lect_idx in data["primary"]:
-                    result["lections"]["liturgy"].append(data[lect_idx])
+    # Liturgy readings: Apostle first, then Gospel
+    for lect_idx in ("lect_1", "lect_2"):
+        for src in [a_data, g_data, c_data, x_data]:
+            if src[lect_idx] and lect_idx in src["primary"]:
+                result["lections"]["liturgy"].append(src[lect_idx])
 
     return result
 
