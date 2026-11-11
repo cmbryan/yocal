@@ -82,7 +82,7 @@ def supplement(r) -> str:
         if res.status == "inferred":
             notes.append("inferred Rule (not stated in a Source)")
         if res.rule and res.rule.get("conflict"):
-            notes.append(f"open Source conflict with {', '.join('`'+x+'`' for x in res.rule['conflict']['with'])}")
+            notes.append(f"{res.rule['conflict']['status']} Source conflict with {', '.join('`'+x+'`' for x in res.rule['conflict']['with'])}")
         for x in notes:
             L.append(f"- `{slot}`: {x}")
             n += 1

@@ -33,6 +33,11 @@ supported_fixed_major:      # mm-dd of fixed Major feasts whose weekday/Saturday
   - "11-21"                  # I: Entrance of the Theotokos
   - "08-15"                  # I: Dormition
   - "01-01"                  # I: Circumcision / St Basil
+  - "09-08:sunday"           # I: major_feasts_sunday.yaml (Nativity of the Theotokos on Sunday; ANCA 2019, 2024)
+  - "02-02:sunday"           # I: Presentation on an ordinary-season Sunday (ANCA 2020, 2025); a Triodion Sunday stays disabled (Typikon p.220 alt. order)
+  - "11-21:sunday"           # I: Entrance of the Theotokos on Sunday (ANCA 2021)
+  - "08-15:sunday"           # I: Dormition on Sunday (ANCA 2021)
+  # "08-06:sunday" / "09-14:sunday" (Transfiguration, Elevation) stay disabled: no ANCA text for a Sunday (2023-08-06, 2025-09-14 files are empty); "01-01:sunday" (Circumcision + St Basil, ANCA 2023 only) not started
   # "12-25" / "01-06" (Nativity, Theophany; Tue-Sat Rules in major_feasts.yaml) stay disabled: no ANCA Nativity text, no ANCA Theophany Liturgy text (unverified)
 supported_movable_major:    # ids of movable Major feasts not on a Sunday (calfacts.MAJOR_MOVABLE)
   - ascension                # I: major_feasts.yaml

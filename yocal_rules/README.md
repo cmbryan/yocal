@@ -36,6 +36,7 @@ ANCA file names come from the committed `data/anca_pages.json`; PDFs are downloa
 ## Slice and out-of-scope behaviour
 - Out of scope (exit 1, error message): other days or services, unless the date is a fixed Major feast.
 - **In slice** = ordinary-season Sunday with no fixed Major feast and no fore/after-feast. Outside the slice (Triodion/Pentecostarion seasons, Major feasts, fore/after-feasts) the document is still produced, headed **Incomplete** with the reasons, and slots whose Rules are not yet written show `[to be determined]` (status `missing` in the supplement). Tone, readings and names from the calendar are still shown.
+- `slices.yaml` `supported_fixed_major`: `mm-dd` enables a fixed Major feast on a weekday/Saturday; `mm-dd:sunday` enables its Sunday order (`data/rules/major_feasts_sunday.yaml`, ordinary season only): 09-08, 02-02, 11-21, 08-15, each verified against cached ANCA texts. Transfiguration, Elevation (no ANCA Sunday text), Circumcision/St Basil, Annunciation, Nativity, Theophany and Presentation on a Triodion Sunday stay Incomplete on a Sunday. A Sunday feast adds the `matins.evlogetaria` slot.
 - `slices.yaml` `supported_major_eve_vespers` (`mm-dd:Weekday` of the eve) enables only the eve Great Vespers of a fixed Major feast, leaving that feast's Matins/Liturgy Incomplete (Annunciation: Sunday and Tuesday eves, ANCA 2019/2026).
 
 ## Divergence log
@@ -61,7 +62,7 @@ Add to a new or existing `data/rules/*.yaml` (all files globbed except `slots.ya
 - `tier`: specificity; lowest wins; a tie among matching Rules is a build error. Losing Rules are listed as *shadowed*.
 - `source`: key in `sources.yaml` (typikon, anca, dcs, violakis, bpbasil). Authority: Typikon > ANCA > DCS > other. `locator`: printed page/section only, no long quotes.
 - `status`: `explicit` (a Source states it; no `evidence`), `inferred` (needs `evidence`), `missing` (needs `ticket`; renders `[to be determined]`).
-- `conflict` (optional): `{with: [rule ids], status: open, note: "..."}`. Used where ANCA shows a well-evidenced pattern the default Rule follows and the Typikon reading is kept as a shadowed Rule; shown in the supplement as a Source conflict (user decision pending).
+- `conflict` (optional): `{with: [rule ids or Typikon locators], status: open|accepted|misreading, note: "..."}`. Used where ANCA shows a well-evidenced pattern the default Rule follows and the Typikon reading is kept as a shadowed Rule; shown in the supplement as a Source conflict (user decision pending).
 - New predicates/facts: add to `rules.py` / `calfacts.py`.
 
 ## Data files (`data/`)

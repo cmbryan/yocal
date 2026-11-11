@@ -347,7 +347,7 @@ def _lihc_blocks(span):
 
 
 def _owner(h):
-    return "saint" if re.search(r"\bST\.|\bSAINT\b", h) else "feast"
+    return "saint" if re.search(r"\bST\.|\bSAINT\b", h) else "resurrection" if "RESURRECTION" in h else "feast"  # Sunday feast: Resurrection stichera, Glory/Now of the feast
 
 
 def parse_feast_vespers(txt):
@@ -399,6 +399,8 @@ def parse_feast_matins(txt):
     m = re.search(r"ORTHROS GOSPEL.{0,600}?Gospel according to (?:Saint|St\.?) \w+\.?\s*\((\d+:[-–\d:,; ]+)\)", txt, re.S | re.I)
     if m:
         k["matins.eothinon_gospel"] = dict(ref=m.group(1).strip())  # the feast's Matins Gospel (no eothinon)
+    if re.search(r"EVLOGETARIA", txt):  # Sunday feast of the Theotokos class: resurrectional evlogetaria printed (the Typikon omits them)
+        k["matins.evlogetaria"] = dict(kind="resurrectional")
     m = re.search(r"\n\s*(?:THE )?KATAVASIA[E]?:? (?:OF )?(?:THE )?([A-Z’' ]+?)(?: IN TONE| \(|\n)", txt)
     if m:
         k["matins.katavasia"] = dict(of=_katavasia(m.group(1)), label=m.group(1).strip())
@@ -419,7 +421,7 @@ def parse_feast_liturgy(txt):
         k["liturgy.antiphons"] = dict(refrain2="resurrection" if re.search(r"rose|risen", r2) else "saints" if "wondrous in" in r2 else "feast")
     m = re.search(r"EISODIKON \(ENTRANCE HYMN\) (?:OF|FOR) ([A-Z ’']+)", txt)
     if m:
-        k["liturgy.eisodikon"] = dict(kind="weekday" if "ORDINARY" in m.group(1) else "sunday" if "SUNDAY" in m.group(1) else "feast")
+        k["liturgy.eisodikon"] = dict(kind="sunday" if "SUNDAY" in m.group(1) else "weekday" if "ORDINARY" in m.group(1) else "feast")
     tri = re.search(r"ANTI-?TRISAGION.{0,200}", f)
     k["liturgy.trisagion"] = dict(kind="cross" if tri and "Cross" in tri.group(0) else "baptized" if tri else "trisagion")
     if re.search(r"BASIL LITURGY MEGALYNARION|In thee rejoiceth|All creation rejoiceth", f):
