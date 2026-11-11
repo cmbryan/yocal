@@ -422,6 +422,8 @@ def parse_feast_liturgy(txt):
     m = re.search(r"EISODIKON \(ENTRANCE HYMN\) (?:OF|FOR) ([A-Z ’']+)", txt)
     if m:
         k["liturgy.eisodikon"] = dict(kind="sunday" if "SUNDAY" in m.group(1) else "weekday" if "ORDINARY" in m.group(1) else "feast")
+    if "liturgy.eisodikon" not in k and re.search(r"Eisodikon \(Entrance Hymn\) is “O come, let us worship[^”]{0,40}[Rr]isen from the dead", f):
+        k["liturgy.eisodikon"] = dict(kind="sunday")  # 'as on ordinary Sundays' (Jan 1 on a Sunday)
     tri = re.search(r"ANTI-?TRISAGION.{0,200}", f)
     k["liturgy.trisagion"] = dict(kind="cross" if tri and "Cross" in tri.group(0) else "baptized" if tri else "trisagion")
     if re.search(r"BASIL LITURGY MEGALYNARION|In thee rejoiceth|All creation rejoiceth", f):
@@ -434,7 +436,7 @@ def parse_feast_liturgy(txt):
         k["liturgy.communion"] = dict(kind="praise_the_lord" if re.search(r"Praise (?:ye )?the Lord from the heavens", t)
                                       else "cup_of_salvation" if "cup of salvation" in t
                                       else "chosen_zion" if re.search(r"(?:chosen|elected) (?:Zion|Sion)", t) else "feast")
-    if re.search(r"[Ii]nstead of singing “?We have seen the true light,?”? sing the [Aa]polytikion", f):
+    if re.search(r"[Ii]nstead of singing “?We have seen the true light,?”?,? sing the [Aa]polytikion", f):
         k["liturgy.final_hymn"] = dict(kind="feast_troparion")
     elif re.search(r"Post-Communion Hymn: “?We have seen the true light", f):
         k["liturgy.final_hymn"] = dict(kind="true_light")

@@ -1,0 +1,128 @@
+# Work package I (cont.): Circumcision of the Lord / St Basil (Jan 1) falling on a Sunday (predicate sunday_feast_order, ordinary season).
+# Sat Dec 31 Great Vespers = the eve (Nativity leavetaking day; the Typikon's Jan 1 Sunday order p.165 prints no leavetaking material and ANCA 2022-12-31 has none); Matins; Liturgy of St Basil.
+# Enabled in slices.yaml as "01-01:sunday". Verified against the ONLY available ANCA texts: 2022-12-31 (Great Vespers), 2023-01-01 (Orthros, Liturgy Variables).
+# ANCA coverage starts 2018-02 (anca_pages.json); Jan 1 Sundays 2017 (before coverage; probed, 404), 2028, 2034, 2045 have no ANCA text, so every rule here is single-sample.
+# Typikon order: Ch V Jan 1 'If the feast falls on Sunday' pp.165-166 (printed pages). A Sunday Jan 1 is NOT 'the Sunday after the Nativity' (p.160: that Sunday moves to Dec 26).
+# The Typikon Sunday-after-Nativity/Dec 31 leavetaking orders (pp.157-158, 161-162; 3R+4+3) do not apply (they need Dec 31 on a Sunday); this is a different order (4R+3+3).
+# Class scope: the #39 'Theotokos-feast Sunday evlogetaria not sung' conflict does NOT apply: Jan 1 is a feast of the Lord + a great saint; Ch I s5 VI p.25 omits evlogetaria only for a Theotokos
+# feast, and Jan 1 p.165 lists 'The evlogetaria'. ANCA 2023 sings them: no conflict.
+# Slots not written here fall to the generic Sunday / feast Rules (Saturday prokeimenon, katavasia p.164-165, communion p.166, author, alleluia, dismissal).
+
+# ================= Great Vespers (Saturday evening, Dec 31) =================
+- {id: mf.jan1.sun.ves.lihc, slot: vespers.lihc.stichera, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {res: 4, other: [3, 3], parts: ["4 stichera of the Resurrection — Octoechos Tone {tone}", "3 stichera of the Circumcision (2 stichera, the first repeated) — Menaion 01-01", "3 stichera of St Basil — Menaion 01-01", "Glory: doxastikon of St Basil; Now: theotokion of the Resurrection — Octoechos Tone {tone}"]},
+   source: typikon, locator: "Jan 1 on Sunday p.165 (10 stichera: 4 Resurrection, 2 feast with the first repeated = 3, 3 St Basil; Glory St Basil, Now Resurrection); Ch V Jan 1", status: explicit}
+- {id: mf.jan1.sun.ves.readings, slot: vespers.readings, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {count: 3, parts: ["3 Old Testament readings of the Circumcision — Menaion 01-01"]},
+   source: typikon, locator: "Jan 1 on Sunday p.165 (the readings for the Circumcision); count from the Menaion", status: inferred,
+   evidence: "count: ANCA Great Vespers 2022-12-31 prints 3 readings (Genesis 17:1-14, Proverbs 8:22-30, Wisdom of Solomon)"}
+- {id: mf.jan1.sun.ves.litia, slot: vespers.litia, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {litia: true, parts: ["Litia and Artoklasia after the litany of supplication (if the parish serves it) — Menaion 01-01"]},
+   source: anca, locator: "inferred: ANCA places the Litia at Great Vespers ('If your parish will offer the Service of the Litia and Artoklasia, it is performed here')",
+   status: inferred, evidence: "ANCA Great Vespers 2022-12-31 (single sample)",
+   conflict: {with: [mf.ves.litia, "Typikon Jan 1 on Sunday p.165 (Litia at the Midnight Service)"], status: open,
+              note: "Same class as the weekday conflict mf.ves.litia: the Typikon puts the Litia in the Midnight Service; ANCA prints it at Great Vespers as a parish option. Project default: follow ANCA. Single ANCA sample."}}
+- {id: mf.jan1.sun.ves.aposticha, slot: vespers.aposticha, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {owner: resurrection, parts: ["Aposticha: stichera of the Resurrection — Octoechos Tone {tone}", "Glory: of St Basil; Now: of the Circumcision (“The supremely good God was not ashamed …”) — Menaion 01-01"]},
+   source: typikon, locator: "Jan 1 on Sunday p.165 (Resurrection stichera; Glory St Basil; Now Circumcision)", status: explicit}
+- {id: mf.jan1.sun.ves.apolytikia, slot: vespers.apolytikia, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of St Basil the Great — Menaion 01-01", "Apolytikion of the Circumcision — Menaion 01-01"]},
+   source: typikon, locator: "Jan 1 on Sunday p.165 (troparia: Resurrection, St Basil, Circumcision)", status: explicit}
+
+# ================= Matins =================
+- {id: mf.jan1.sun.mat.apolytikia, slot: matins.apolytikia, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of St Basil the Great — Menaion 01-01", "Apolytikion of the Circumcision — Menaion 01-01"]},
+   source: typikon, locator: "God is the Lord: Jan 1 on Sunday p.165 (as at Vespers)", status: explicit}
+- {id: mf.jan1.sun.mat.kathismata, slot: matins.kathismata, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {tone: "$tone", parts: ["1st and 2nd kathisma: Resurrection — Octoechos Tone {tone}; Glory: of St Basil; Now: of the Circumcision — Menaion 01-01", "3rd kathisma of St Basil — Menaion 01-01"]},
+   source: anca, locator: "inferred: Ch I s5 V p.25 (great saint on Sunday: 1st and 2nd kathisma Resurrection, 3rd for the saint); Jan 1 on Sunday p.165", status: inferred,
+   evidence: "ANCA Orthros 2023-01-01 'Resurrectional & Festal Kathismata': Resurrection hymn, Glory St Basil, Now Circumcision (1st and 2nd); 3rd kathisma for the feast (St Basil)",
+   conflict: {with: ["Typikon Jan 1 on Sunday p.165 ('the poetic kathisma from the Menaion'; the kathisma of St Basil after the 3rd ode)"], status: open,
+              note: "The Typikon's Jan 1 entry names one Menaion kathisma and places St Basil's after the 3rd ode; ANCA (and Ch I s5 V p.25 for a great saint) sings the Resurrection kathismata with the saint's Glory and the feast's Now, then the saint's 3rd kathisma. Project default: follow ANCA. Single ANCA sample."}}
+- {id: mf.jan1.sun.mat.evlogetaria, slot: matins.evlogetaria, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {kind: resurrectional, parts: ["Resurrectional evlogetaria (“The company of the Angels”) after the kathismata, then the Little Litany"]},
+   source: typikon, locator: "Jan 1 on Sunday p.165 ('The evlogetaria'); Ch I s5 VI p.25 (omitted only for a feast of the Theotokos on Sunday)", status: explicit}
+- {id: mf.jan1.sun.mat.prokeimenon, slot: matins.prokeimenon, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {kind: resurrectional, tone: "$tone", parts: ["Hypakoe, anabathmoi and prokeimenon of the Resurrection — Octoechos Tone {tone}"]},
+   source: typikon, locator: "Jan 1 on Sunday p.165 (hypakoe, anabathmoi and prokeimenon for the Resurrection in the tone of the week)", status: explicit}
+- {id: mf.jan1.sun.mat.kontakion, slot: matins.kontakion, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {kind: feast, parts: ["After the 3rd ode: kontakion and oikos of the Resurrection — Octoechos Tone {tone}; kathisma of St Basil", "After the 6th ode: kontakion and oikos of St Basil, then the monologion — Menaion 01-01"]},
+   source: typikon, locator: "Jan 1 on Sunday p.165", status: explicit}
+- {id: mf.jan1.sun.mat.praises, slot: matins.praises, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {total: 8, res: 4, other: [4], parts: ["8 stichera: 4 of the Resurrection — Octoechos Tone {tone}; 4 of the Circumcision — Menaion 01-01", "Glory: of St Basil; Now: of the Circumcision"]},
+   source: typikon, locator: "Jan 1 on Sunday p.166 (8 stichera: 4 Resurrection, 4 Circumcision; Glory St Basil, Now Circumcision)", status: explicit}
+
+# ================= Divine Liturgy of St Basil =================
+- {id: mf.jan1.sun.lit.antiphons, slot: liturgy.antiphons, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {refrain2: feast, parts: ["Antiphons of the Circumcision; 2nd antiphon refrain “Save us, O Son of God, Who wast circumcised in the flesh”"]},
+   source: typikon, locator: "Jan 1 on Sunday p.166 (2nd antiphon refrain 'O Son of God, circumcised in the flesh, save us')", status: explicit}
+- {id: mf.jan1.sun.lit.eisodikon, slot: liturgy.eisodikon, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {kind: sunday, parts: ["Entrance hymn of Sundays (“Come, let us worship … Save us, O Son of God, Who art risen from the dead”)"]},
+   source: typikon, locator: "Jan 1 on Sunday p.166 (entrance hymn 'Come let us worship … who wast risen')", status: explicit}
+- {id: mf.jan1.sun.lit.apolytikia, slot: liturgy.apolytikia, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {res_tone: "$tone", saint: true, patron: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Circumcision — Menaion 01-01", "Apolytikion of St Basil the Great — Menaion 01-01", "Apolytikion of the patron saint or feast of the temple"]},
+   source: anca, locator: "inferred: Jan 1 on Sunday p.166 (troparia: Resurrection, Circumcision, St Basil)", status: inferred,
+   evidence: "ANCA Liturgy Variables 2023-01-01: Resurrection, Circumcision, St Basil, then 'Now sing the apolytikion of the patron saint or feast of the temple'",
+   conflict: {with: ["Typikon Jan 1 on Sunday p.166 (lists Resurrection, Circumcision, St Basil only; no patron saint)"], status: open,
+              note: "The Typikon's list omits the patron saint's apolytikion (its other Sunday coincidence orders, e.g. pp.158, 168, list it); ANCA prints it. ANCA also cues the Circumcision apolytikion at the Little Entrance (not in the Typikon): possible template residue, not encoded. Project default: follow ANCA. Single ANCA sample."}}
+- {id: mf.jan1.sun.lit.kontakion, slot: liturgy.kontakion, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {kind: "$major_feast", parts: ["Kontakion of the Circumcision (“The Master of all endureth humiliation …”) — Menaion 01-01"]},
+   source: typikon, locator: "Jan 1 on Sunday p.166; Ch I s6 V p.35-37", status: explicit}
+- {id: mf.jan1.sun.lit.trisagion, slot: liturgy.trisagion, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {kind: trisagion, parts: ["“Holy God” (the Trisagion)"]},
+   source: typikon, locator: "Ch I s6 VI p.37 (Trisagion at every Liturgy except the listed feasts; Jan 1 not listed)", status: explicit}
+- {id: mf.jan1.sun.lit.prokeimenon, slot: liturgy.prokeimenon, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {},
+   source: typikon, locator: "Jan 1 on Sunday p.166 ('The Epistle for St. Basil'; the prokeimenon goes with the Epistle)", status: missing,
+   ticket: "owner unresolved: Typikon p.166 assigns the Epistle (and so the prokeimenon) to St Basil, but ANCA 2023-01-01 reads Colossians 2:8-12 with the prokeimenon 'My mouth shall speak of wisdom' and the key parser does not read the prokeimenon owner; not guessed"}
+- {id: mf.jan1.sun.lit.epistle, slot: liturgy.epistle, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {owner: saint, ref: "$epistle_ref", parts: ["{epistle_ref}"]},
+   source: anca, locator: "inferred: reference from the calendar lectionary (DB lection 01-01, saint flag), as read by ANCA", status: inferred,
+   evidence: "ANCA Liturgy Variables 2023-01-01: Epistle Colossians 2:8-12 (the calendar's single Jan 1 Epistle)",
+   conflict: {with: ["Typikon Jan 1 on Sunday p.166 ('The Epistle for St. Basil', 'The Gospel for the Circumcision': two separate readings)"], status: open,
+              note: "The Typikon assigns the Epistle to St Basil and the Gospel to the Circumcision; the calendar and ANCA 2023 give one Jan 1 Epistle (Colossians 2:8-12, which speaks of the circumcision of Christ) and the Circumcision Gospel. The reference follows the calendar/ANCA; whether the Typikon intends another Epistle for St Basil is not resolved. Single ANCA sample."}}
+- {id: mf.jan1.sun.lit.gospel, slot: liturgy.gospel, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the Circumcision"]},
+   source: typikon, locator: "Jan 1 on Sunday p.166 ('The Gospel for the Circumcision'; reference from the calendar lectionary)", status: explicit}
+- {id: mf.jan1.sun.lit.megalynarion, slot: liturgy.megalynarion, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {kind: in_thee_rejoiceth, parts: ["Megalynarion of the Liturgy of St Basil: “All creation rejoiceth in thee”"]},
+   source: anca, locator: "inferred: Liturgy of St Basil megalynarion (Ch I s6 X p.38)", status: inferred,
+   evidence: "ANCA Liturgy Variables 2023-01-01 (and the weekday 2026-01-01): 'St. Basil Liturgy megalynarion' (In thee rejoiceth)",
+   conflict: {with: [mf.lit.megalynarion.circumcision, "Typikon Jan 1 on Sunday p.166 (megalynarion of St Basil 'Let us extol the great Basil')"], status: open,
+              note: "Same conflict as the weekday Rule: the Typikon gives the Jan 1 megalynarion of St Basil in the 2nd tone; ANCA prints the ordinary Basil-Liturgy megalynarion 'In thee rejoiceth'. Project default: follow ANCA."}}
+- {id: mf.jan1.sun.lit.final, slot: liturgy.final_hymn, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {kind: feast_troparion, parts: ["Apolytikion of the Circumcision in place of “We have seen the true light”"]},
+   source: typikon, locator: "Jan 1 on Sunday p.166 (troparion of the feast in place of 'We have seen the true light'); Ch I s6 XII p.40", status: explicit}
+- {id: mf.jan1.sun.lit.dismissal_phrase, slot: liturgy.dismissal_phrase, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {phrase: feast_and_resurrection, clause: none, parts: ["Opening: “May He Who on the eighth day deigned to be circumcised in the flesh for our salvation, and rose from the dead …”"]},
+   source: anca, locator: "inferred: Jan 1 on Sunday p.166 ('The Dismissal for the Circumcision'); Ch I s4 p.18 (feast phrase, then the Resurrection on a Sunday as for the Presentation)", status: inferred,
+   evidence: "ANCA Liturgy Variables 2023-01-01: 'May He Who on the eighth day deigned to be circumcised … and rose from the dead'"}
+- {id: mf.jan1.sun.lit.dismissal, slot: liturgy.dismissal, tier: -10,
+   when: [{pred: sunday_feast_order, args: [circumcision]}],
+   fill: {author: "$liturgy_author", saint_named: true, named_as: "the day's first other commemoration (St Basil is named as the Liturgy's author)", parts: ["the Circumcision in the opening phrase", "the day's first other commemoration after Joachim and Anna (ANCA 2023: the new-martyr Peter of the Peloponnesos)"]},
+   source: anca, locator: "inferred: Ch I s4 p.17-18 (Great Dismissal); Jan 1 on Sunday p.166 ('The Dismissal for the Circumcision')", status: inferred,
+   evidence: "ANCA Liturgy Variables 2023-01-01: St Basil named as author, then 'the new-martyr Peter of the Peloponnesos, whose memory we celebrate today'",
+   conflict: {with: [lit.dismissal.glory, lit.dismissal.no_glory], status: open,
+              note: "Same open conflict as lit.dismissal.anca_default (Typikon p.17: saint of the day named only if it has a Doxastikon; ANCA names it). Single ANCA sample for Jan 1 on a Sunday."}}
