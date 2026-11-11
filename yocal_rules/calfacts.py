@@ -291,9 +291,13 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
     if ssn not in sl["supported_seasons"]:
         reasons.append(f"{ssn} season")
     eve_only = service == "vespers" and f"{mmdd}:{(ld - dt.timedelta(days=1)).strftime('%A')}" in sl["supported_major_eve_vespers"]  # eve Vespers only, per eve weekday
-    if mmdd in FIXED_MAJOR and not eve_only and (mmdd + (":sunday" if ld.weekday() == 6 else "")) not in sl["supported_fixed_major"]:
+    # 'mm-dd:Weekday' (feast-day weekday, not Sunday) enables the feast day's Matins/Liturgy only for that weekday; never the eve Vespers
+    day_only = service != "vespers" and ld.weekday() != 6 and f"{mmdd}:{ld.strftime('%A')}" in sl["supported_fixed_major"]
+    # 'mm-dd:sunday@N' = the Sunday order on the Sunday N days from Pascha (e.g. Annunciation on Lent 5 = -14), Vespers (the eve) included
+    sunday_at = ld.weekday() == 6 and f"{mmdd}:sunday@{(ld - pascha(ld.year)).days}" in sl["supported_fixed_major"]
+    if mmdd in FIXED_MAJOR and not eve_only and not day_only and not sunday_at and (mmdd + (":sunday" if ld.weekday() == 6 else "")) not in sl["supported_fixed_major"]:
         reasons.append("fixed Major feast" + (" on a Sunday" if ld.weekday() == 6 else ""))  # 'mm-dd' = weekday order, 'mm-dd:sunday' = Sunday order
-    elif mmdd in FIXED_MAJOR and ld.weekday() == 6 and ssn != "ordinary":  # Sunday order Rules are written for the ordinary season only (Presentation on a Triodion Sunday: p.220)
+    elif mmdd in FIXED_MAJOR and ld.weekday() == 6 and ssn != "ordinary" and not sunday_at:  # Sunday order Rules are written for the ordinary season only (Presentation on a Triodion Sunday: p.220)
         reasons.append(f"fixed Major feast on a Sunday of the {ssn} season")
     fa = (r["fore_after"] or "").strip()
     if fa and not any(x in fa for x in sl["supported_fore_after"]):
