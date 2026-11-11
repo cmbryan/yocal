@@ -89,9 +89,11 @@
    source: typikon, locator: "Ch I s6 VI p.37 (Trisagion at every Liturgy except the listed feasts; Jan 1 not listed)", status: explicit}
 - {id: mf.jan1.sun.lit.prokeimenon, slot: liturgy.prokeimenon, tier: -10,
    when: [{pred: sunday_feast_order, args: [circumcision]}],
-   fill: {},
-   source: typikon, locator: "Jan 1 on Sunday p.166 ('The Epistle for St. Basil'; the prokeimenon goes with the Epistle)", status: missing,
-   ticket: "owner unresolved: Typikon p.166 assigns the Epistle (and so the prokeimenon) to St Basil, but ANCA 2023-01-01 reads Colossians 2:8-12 with the prokeimenon 'My mouth shall speak of wisdom' and the key parser does not read the prokeimenon owner; not guessed"}
+   fill: {owner: saint, parts: ["Prokeimenon “My mouth shall speak of wisdom” (Psalm 48:3, 1; verse “Hear this, all ye people”) — with the Epistle of St Basil, Menaion 01-01"]},
+   source: anca, locator: "inferred: ANCA prints the prokeimenon immediately before the Epistle (Jan 1 on Sunday p.166 gives 'The Epistle for St. Basil'; Ch I s6 VII pp.37-38 ties the prokeimenon to the Epistle)", status: inferred,
+   evidence: "ANCA READ 2023-01-01 (Sunday) and READ 2026-01-01 (weekday): 'My mouth shall speak of wisdom; Hear this, all ye people' (Ps 48:3, 1) immediately before Colossians 2:8-12",
+   conflict: {with: ["Typikon Jan 1 on Sunday p.166 ('The Epistle for St. Basil'); Ch I s6 VII pp.37-38 (prokeimenon goes with the Epistle)"], status: accepted,
+              note: "Accepted (explained, non-blocking), same class as mf.jan1.sun.lit.epistle: the Typikon names no wording for the prokeimenon, only ties it to the Epistle, which it labels 'for St. Basil' and names no reference. The prokeimenon text follows ANCA 2023-01-01 and 2026-01-01 (both read Psalm 48 before Colossians 2:8-12). Re-open only if a lectionary printing a different Epistle/prokeimenon for Basil on Jan 1 is found."}}
 - {id: mf.jan1.sun.lit.epistle, slot: liturgy.epistle, tier: -10,
    when: [{pred: sunday_feast_order, args: [circumcision]}],
    fill: {owner: saint, ref: "$epistle_ref", parts: ["{epistle_ref}"]},

@@ -374,13 +374,16 @@ JAN1_SUNDAY = [("vespers", "2022-12-31"), ("matins", "2023-01-01"), ("liturgy", 
 
 
 @needs_db
-def test_jan1_sunday_in_slice_and_only_prokeimenon_missing():
+def test_jan1_sunday_in_slice_and_nothing_missing():
     for svc, d in JAN1_SUNDAY:
         r, s = slots(svc, d)
         assert r.facts["in_slice"] and r.facts["major_feast"] == "circumcision" and r.facts["weekday"] == "Sunday"
         missing = [k for k, x in s.items() if x.status == "missing"]
-        assert missing == (["liturgy.prokeimenon"] if svc == "liturgy" else []), (svc, missing)
-    assert "ticket" in slots("liturgy", "2023-01-01")[1]["liturgy.prokeimenon"].rule
+        assert missing == [], (svc, missing)
+    pk = slots("liturgy", "2023-01-01")[1]["liturgy.prokeimenon"]
+    assert pk.status == "inferred" and pk.rule["source"] == "anca" and "ticket" not in pk.rule and pk.fill["owner"] == "saint"
+    assert "2023-01-01" in pk.rule["evidence"] and "2026-01-01" in pk.rule["evidence"] and "Psalm 48" in pk.fill["parts"][0]
+    assert pk.rule["conflict"]["status"] == "accepted" and "p.166" in pk.rule["conflict"]["with"][0]
     assert calfacts.load_facts(dt.date(2034, 1, 1), "matins")["in_slice"]                                        # same order, any year (rules are year-independent; only 2023 ANCA-verified)
     assert calfacts.load_facts(dt.date(2026, 1, 1), "matins")["in_slice"]                                        # weekday order unchanged
 
@@ -438,7 +441,8 @@ def test_jan1_sunday_documents(tmp_path):
         assert cli.main([d, svc, "--no-compare", "--out", str(tmp_path)]) == 0
         doc = (tmp_path / f"{d}-{svc}.md").read_text()
         assert "Incomplete" not in doc and "Typikon" not in doc and "{'" not in doc and "{tone}" not in doc and "{mmdd}" not in doc
-        assert doc.count("- [to be determined]") == (1 if svc == "liturgy" else 0)
+        assert "[to be determined]" not in doc
+    assert "My mouth shall speak of wisdom" in (tmp_path / "2023-01-01-liturgy.md").read_text()
     assert "3 stichera of St Basil" in (tmp_path / "2022-12-31-vespers.md").read_text()
     assert "Resurrectional evlogetaria" in (tmp_path / "2023-01-01-matins.md").read_text()
     assert "Colossians 2:8-12" in (tmp_path / "2023-01-01-liturgy.md").read_text()
