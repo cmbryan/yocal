@@ -54,7 +54,8 @@ def test_holy_saturday_vespers_rules():
     r, v = slots("vespers", "2026-04-11")
     assert [s for s, _, _ in r.slots] == ["vespers.lihc.stichera", "vespers.prokeimenon", "vespers.readings", "vespers.litia", "vespers.aposticha", "vespers.apolytikia"]
     assert (v["vespers.lihc.stichera"].fill["res"], v["vespers.lihc.stichera"].fill["other"]) == (4, [4])  # 4R + 4 (#42 item 4)
-    assert v["vespers.lihc.stichera"].rule["conflict"]["status"] == "open"
+    assert v["vespers.lihc.stichera"].rule["conflict"]["status"] == "misreading"  # count part (#42 item 4); Glory/Now wording residual in the note
+    assert "Residual" in v["vespers.lihc.stichera"].rule["conflict"]["note"]
     assert v["vespers.prokeimenon"].fill["kind"] == "arise_o_god"
     assert v["vespers.readings"].fill["count"] == 15 and v["vespers.litia"].fill["litia"] is False
 

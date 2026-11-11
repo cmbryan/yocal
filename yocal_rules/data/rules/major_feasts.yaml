@@ -107,8 +107,8 @@
    fill: {litia: true, parts: ["Litia and Artoklasia of the feast after the litany of supplication (if the parish serves it) — Menaion {mmdd}"]},
    source: anca, locator: "inferred: ANCA places the Litia at Great Vespers ('If your parish will offer the Service of the Litia and Artoklasia, it is done here')",
    status: inferred, evidence: "ANCA festal Vespers 2025-26, all 8 feasts, and LITART files for each eve",
-   conflict: {with: ["Typikon Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Jan 1 p.164 (Litia at the Midnight Service)"], status: open,
-              note: "Typikon (Constantinopolitan order) places the Litia of the feast in the Midnight Service; Ch I p.14 describes the Artoklasia after the prayer at the bowing of heads at Vespers. ANCA prints it at Great Vespers as a parish option. Project default: follow ANCA. Vigil list Ch IV p.54 includes all these feasts except Jan 1."}}
+   conflict: {with: ["Typikon Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Jan 1 p.164 (Litia at the Midnight Service)"], status: accepted,
+              note: "Accepted, class-scoped (same class as #39's evlogetaria): explained, non-blocking. Typikon (Constantinopolitan order) places the Litia of the feast in the Midnight Service; Ch I p.14 describes the Artoklasia after the prayer at the bowing of heads at Vespers. ANCA prints it at Great Vespers as a parish option. Project default: follow ANCA. Vigil list Ch IV p.54 includes all these feasts except Jan 1."}}
 - {id: mf.ves.aposticha.feast, slot: vespers.aposticha, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition]}],
    fill: {owner: feast, parts: ["Aposticha of the feast with their verses; Glory, Now: of the feast — Menaion {mmdd}"]},
@@ -413,7 +413,7 @@
 - {id: mf.nat.ves.litia, slot: vespers.litia, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
    fill: {litia: false, parts: ["No Litia at this Vespers (the Litia and the aposticha are sung at the Midnight Service of the feast)"]},
    source: typikon, locator: "p.141 (Midnight Service: the litia, the aposticha)", status: explicit,
-   conflict: {with: [mf.ves.litia], status: open, note: "ANCA moves the Litia to Great Vespers on the other feasts (and on the Theophany eve, 2026); no ANCA Nativity text to confirm."}}
+   conflict: {with: [mf.ves.litia], status: accepted, note: "Accepted, class-scoped (same class as #39's evlogetaria): explained, non-blocking. ANCA moves the Litia to Great Vespers on the other feasts (and on the Theophany eve, 2026); no ANCA Nativity text to confirm. Typikon kept."}}
 - {id: mf.nat.ves.aposticha, slot: vespers.aposticha, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity]}],
    fill: {owner: none, parts: ["No aposticha: Vespers passes into the Liturgy of St Basil after the readings"]},
    source: typikon, locator: "p.140-141", status: explicit}
@@ -487,7 +487,7 @@
 - {id: mf.thy.ves.litia, slot: vespers.litia, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
    fill: {litia: true, parts: ["Litia and Artoklasia of Theophany (if the parish serves it) — Menaion 01-06"]},
    source: anca, locator: "inferred: ANCA prints the Litia at the Theophany eve Vespers", status: inferred, evidence: "ANCA Great Vespers of January 06 and 2A-Theophany LITART (2026)",
-   conflict: {with: ["Typikon p.171 (Litia and aposticha at the Midnight Office of the feast)"], status: open, note: "As mf.ves.litia; ANCA's Theophany eve is an evening Great Vespers with Epistle and Gospel. Project default: follow ANCA."}}
+   conflict: {with: ["Typikon p.171 (Litia and aposticha at the Midnight Office of the feast)"], status: accepted, note: "Accepted, class-scoped (same class as #39's evlogetaria): explained, non-blocking. As mf.ves.litia; ANCA's Theophany eve is an evening Great Vespers with Epistle and Gospel. Project default: follow ANCA."}}
 - {id: mf.thy.ves.aposticha, slot: vespers.aposticha, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [theophany]}],
    fill: {owner: feast, parts: ["Aposticha of Theophany; Glory, Now: of Theophany — Menaion 01-06"]},
    source: anca, locator: "inferred", status: inferred, evidence: "ANCA Great Vespers of January 06 (2026): aposticha for Theophany",

@@ -22,7 +22,7 @@
    fill: {litia: true, parts: ["Litia and Artoklasia of the Annunciation after the litany of supplication (if the parish serves it) — Menaion 03-25"]},
    source: anca, locator: "inferred: as mf.ves.ann.litia (ANCA prints the Litia at Great Vespers as a parish option)", status: inferred,
    evidence: "ANCA Great Vespers 2018-03-24: 'If your parish will offer the Service of the Litia and Artoklasia, it is performed here'",
-   conflict: {with: [mf.ves.litia], status: open, note: "see mf.ves.litia (Typikon places the Litia in the Midnight Service). Project default: follow ANCA."}}
+   conflict: {with: [mf.ves.litia], status: accepted, note: "Accepted, class-scoped (same class as #39's evlogetaria): explained, non-blocking. see mf.ves.litia (Typikon places the Litia in the Midnight Service; ANCA 2018-03-24 prints it at Great Vespers as a parish option). Project default: follow ANCA."}}
 - {id: mf.lent5.ves.aposticha, slot: vespers.aposticha, tier: -10,
    when: [{pred: major_feast_is, args: [annunciation]}, {pred: weekday_in, args: [Sunday]}, {pred: pascha_days_between, args: [-14, -14]}],
    fill: {owner: resurrection, parts: ["Aposticha: stichera of the Resurrection — Octoechos Tone {tone}", "Glory, Now: of the Annunciation — Menaion 03-25"]},
@@ -53,8 +53,8 @@
    fill: {kind: other, tone: 4, parts: ["Hypakoe and anabathmoi of the Resurrection — Octoechos Tone {tone}", "Prokeimenon of the Annunciation — Menaion 03-25, Tone 4"]},
    source: typikon, locator: "Ch I s5 VI p.26 (hypakoe and anabathmoi of the Resurrection, prokeimenon of the feast; as mf.sun.mat.prokeimenon)", status: inferred,
    evidence: "ANCA Orthros 2018-03-25: Resurrectional hypakoe and anabathmoi (Tone 1), then 'Prokeimenon for the Annunciation in Tone Four'",
-   conflict: {with: ["Typikon Ch V Mar 25 p.292, p.305 (hypakoe and anabathmoi for the Annunciation)"], status: open,
-              note: "The Lent 4/5 order names hypakoe, anabathmoi (and prokeimenon) of the Annunciation; Ch I s5 VI p.26 and ANCA 2018 (and the Sunday orders of the other Theotokos feasts, ANCA 2019-2025) give the Resurrection's hypakoe and anabathmoi. Project default: follow ANCA."}}
+   conflict: {with: ["Typikon Ch V Mar 25 p.292, p.305 (hypakoe and anabathmoi for the Annunciation)"], status: accepted,
+              note: "Accepted (explained, non-blocking): the Typikon's Annunciation hypakoe/anabathmoi contradict its own Ch I s5 VI p.26 and ANCA 2018-2025 for the other Theotokos feasts on Sunday. The Lent 4/5 order names hypakoe, anabathmoi (and prokeimenon) of the Annunciation; Ch I s5 VI p.26 and ANCA 2018 (and the Sunday orders of the other Theotokos feasts, ANCA 2019-2025) give the Resurrection's hypakoe and anabathmoi. Project default: follow ANCA."}}
 - {id: mf.lent5.mat.gospel, slot: matins.eothinon_gospel, tier: -10,
    when: [{pred: major_feast_is, args: [annunciation]}, {pred: weekday_in, args: [Sunday]}, {pred: pascha_days_between, args: [-14, -14]}],
    fill: {number: null, ref: "$feast_matins_gospel_ref", parts: ["No eothinon Gospel: the Matins Gospel of the Annunciation ({feast_matins_gospel_ref}), then “In that we have beheld the Resurrection”"]},
@@ -67,8 +67,8 @@
    when: [{pred: major_feast_is, args: [annunciation]}, {pred: weekday_in, args: [Sunday]}, {pred: pascha_days_between, args: [-14, -14]}],
    fill: {total: 8, res: 4, other: [4], parts: ["8 stichera: 4 of the Resurrection — Octoechos Tone {tone}; 4 of the Annunciation; Glory, Now: of the Annunciation — Menaion 03-25"]},
    source: typikon, locator: "Ch I s5 XV p.30 (feast of the Mother of God on Sunday: 4 Resurrection + 4 feast)", status: explicit,
-   conflict: {with: ["Typikon Ch V Mar 25 p.292, p.306 ('the stichera from Small Vespers for the forefeast; Glory, Now from Small Vespers for the forefeast')"], status: open,
-              note: "The Lent 4/5 order's praises name the forefeast's Small Vespers stichera and no Resurrection stichera (apparently carried over from the forefeast Saturday, p.291); the general Sunday rule (Ch I s5 XV p.30) and ANCA 2018 (4 Resurrection + 4 Annunciation, Glory the Annunciation) agree. Project default: general rule / ANCA."}}
+   conflict: {with: ["Typikon Ch V Mar 25 p.292, p.306 ('the stichera from Small Vespers for the forefeast; Glory, Now from Small Vespers for the forefeast')"], status: misreading,
+              note: "Misreading: the Typikon's praises list is a carry-over from the forefeast Saturday order (p.291 Saturday Matins praises: identical wording, forefeast's Small Vespers stichera and Glory/Now, no Resurrection stichera; the same Sunday order's aposticha then gives 4 Resurrection + 4 Annunciation, p.292), not a rule for this Sunday's Matins; the Sunday rule (Ch I s5 XV p.30) and ANCA 2018 (4 Resurrection + 4 Annunciation, Glory the Annunciation) agree. Project default: general rule / ANCA."}}
 
 # ================= Divine Liturgy =================
 - {id: mf.lent5.lit.antiphons, slot: liturgy.antiphons, tier: -10,

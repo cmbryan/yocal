@@ -33,8 +33,8 @@
    fill: {litia: true, parts: ["Litia and Artoklasia of the feast after the litany of supplication (if the parish serves it) — Menaion {mmdd}"]},
    source: anca, locator: "inferred: ANCA places the Litia at Great Vespers ('If your parish will offer the Service of the Litia and Artoklasia ...')",
    status: inferred, evidence: "ANCA Great Vespers 2019-09-07, 2024-09-07, 2020-02-01, 2025-02-01, 2021-11-20, 2021-08-14",
-   conflict: {with: [mf.ves.litia, "Typikon Sep 8 p.67, Feb 2 p.219, Nov 21 p.113, Aug 15 p.457 (Litia at the Midnight Service)"], status: open,
-              note: "Same class as the weekday conflict mf.ves.litia: the Typikon puts the Litia of the feast in the Midnight Service; ANCA prints it at Great Vespers as a parish option. Project default: follow ANCA."}}
+   conflict: {with: [mf.ves.litia, "Typikon Sep 8 p.67, Feb 2 p.219, Nov 21 p.113, Aug 15 p.457 (Litia at the Midnight Service)"], status: accepted,
+              note: "Accepted, class-scoped (same class as #39's evlogetaria): explained, non-blocking. Same class as the weekday conflict mf.ves.litia: the Typikon puts the Litia of the feast in the Midnight Service; ANCA prints it at Great Vespers as a parish option. Project default: follow ANCA."}}
 - {id: mf.sun.ves.aposticha, slot: vespers.aposticha, tier: -10,
    when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
    fill: {owner: resurrection, parts: ["Aposticha: stichera of the Resurrection — Octoechos Tone {tone}", "Glory, Now: of the feast — Menaion {mmdd}"]},

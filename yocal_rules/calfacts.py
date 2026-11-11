@@ -172,7 +172,11 @@ def _slices():
     if _SLICES is None:
         import yaml
         d = yaml.safe_load(open(os.path.join(DATA, "slices.yaml"), encoding="utf-8")) or {}
-        _SLICES = {k: [str(x) for x in (d.get(k) or [])] for k in ("supported_seasons", "supported_fore_after", "supported_fixed_major", "supported_movable_major", "supported_major_eve_vespers", "supported_pascha")}
+        names = ("supported_seasons", "supported_fore_after", "supported_fixed_major", "supported_movable_major", "supported_major_eve_vespers", "supported_pascha")
+        # an item is a plain key or {key: ..., verified_years: [...]} (the ANCA years the key was verified on; optional)
+        _SLICES = {k: [str(x["key"] if isinstance(x, dict) else x) for x in (d.get(k) or [])] for k in names}
+        _SLICES["verified_years"] = {k: {str(x["key"]): [int(y) for y in (x.get("verified_years") or [])]
+                                         for x in (d.get(k) or []) if isinstance(x, dict) and x.get("verified_years")} for k in names}
     return _SLICES
 
 
@@ -302,6 +306,24 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         reasons.append("fixed Major feast" + (" on a Sunday" if ld.weekday() == 6 else ""))  # 'mm-dd' = weekday order, 'mm-dd:sunday' = Sunday order
     elif mmdd in FIXED_MAJOR and ld.weekday() == 6 and ssn != "ordinary" and not sunday_at:  # Sunday order Rules are written for the ordinary season only (Presentation on a Triodion Sunday: p.220)
         reasons.append(f"fixed Major feast on a Sunday of the {ssn} season")
+    # the slices.yaml key that enabled this date (a pattern claim) and the ANCA years it was verified on; ordinary Sundays/seasons have none
+    vy = []
+    if not reasons:
+        if ssn == "pascha":
+            lst, k = "supported_pascha", service
+        elif sunday_at:
+            lst, k = "supported_fixed_major", f"{mmdd}:sunday@{(ld - pascha(ld.year)).days}"
+        elif eve_only:
+            lst, k = "supported_major_eve_vespers", f"{mmdd}:{(ld - dt.timedelta(days=1)).strftime('%A')}"
+        elif day_only:
+            lst, k = "supported_fixed_major", f"{mmdd}:{ld.strftime('%A')}"
+        elif mmdd in FIXED_MAJOR:
+            lst, k = "supported_fixed_major", mmdd + (":sunday" if ld.weekday() == 6 else "")
+        elif mf_mov and ld.weekday() != 6:
+            lst, k = "supported_movable_major", mf
+        else:
+            lst, k = "", ""
+        vy = sl["verified_years"].get(lst, {}).get(k, [])
     fa = (r["fore_after"] or "").strip()
     if fa and not any(x in fa for x in sl["supported_fore_after"]):
         reasons.append(f"fore/after-feast ({fa})")
@@ -333,6 +355,7 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         pascha_days=(ld - pascha(ld.year)).days,
         fore_after=fa,  # DB fore_after text (forefeast/afterfeast/leavetaking), '' if none
         season=ssn, in_slice=not reasons, slice_reasons=reasons,
+        slice_verified_years=vy, verified=bool(vy) and ld.year in vy,  # verified: this date's year is one the enabling key was checked against ANCA on
         # Major feast (work package I): id ('' if none), class lord|theotokos, movable flag; feast_slots gates the feast-only slots
         major_feast=mf, major_feast_class=mf_cls, major_feast_movable=mf_mov, major_feast_slots=mf in FEAST_SLOT_FEASTS, major_feast_sunday=mf in FEAST_SLOT_FEASTS and mf != "pascha" and ld.weekday() == 6,
         # the feast's Matins Gospel (DB lection code m-<mm-dd>, m-<g_code> for movable feasts), '' if the DB has none

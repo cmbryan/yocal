@@ -236,10 +236,10 @@ def test_theotokos_feast_sunday_evlogetaria_conflict_accepted(date):
 
 
 @needs_db
-def test_sunday_feast_vespers_litia_conflict_open_like_weekday():
+def test_sunday_feast_vespers_litia_conflict_accepted_like_weekday():
     _, v = slots("vespers", "2024-09-07")
     c = v["vespers.litia"].rule["conflict"]
-    assert c["status"] == "open" and "mf.ves.litia" in c["with"]
+    assert c["status"] == "accepted" and "mf.ves.litia" in c["with"]
 
 
 @needs_db
@@ -314,7 +314,7 @@ def test_annunciation_lent5_matins_liturgy_parts_and_conflicts():
     _, m = slots("matins", "2018-03-25")
     assert (m["matins.praises"].fill["total"], m["matins.praises"].fill["res"], m["matins.praises"].fill["other"]) == (8, 4, [4])
     assert m["matins.evlogetaria"].rule["conflict"]["status"] == "accepted"                      # #39 class: ANCA sings them
-    assert m["matins.prokeimenon"].rule["conflict"]["status"] == "open" and m["matins.eothinon_gospel"].fill["ref"] == "Luke 1:39-49,56"
+    assert m["matins.prokeimenon"].rule["conflict"]["status"] == "accepted" and m["matins.eothinon_gospel"].fill["ref"] == "Luke 1:39-49,56"
     assert m["matins.kontakion"].fill["kind"] == "feast" and m["matins.kathismata"].fill["tone"] == 1
     _, l = slots("liturgy", "2018-03-25")
     assert (l["liturgy.kontakion"].fill["kind"], l["liturgy.kontakion"].fill["tone"]) == ("annunciation", 8)
@@ -374,13 +374,16 @@ JAN1_SUNDAY = [("vespers", "2022-12-31"), ("matins", "2023-01-01"), ("liturgy", 
 
 
 @needs_db
-def test_jan1_sunday_in_slice_and_only_prokeimenon_missing():
+def test_jan1_sunday_in_slice_and_nothing_missing():
     for svc, d in JAN1_SUNDAY:
         r, s = slots(svc, d)
         assert r.facts["in_slice"] and r.facts["major_feast"] == "circumcision" and r.facts["weekday"] == "Sunday"
         missing = [k for k, x in s.items() if x.status == "missing"]
-        assert missing == (["liturgy.prokeimenon"] if svc == "liturgy" else []), (svc, missing)
-    assert "ticket" in slots("liturgy", "2023-01-01")[1]["liturgy.prokeimenon"].rule
+        assert missing == [], (svc, missing)
+    pk = slots("liturgy", "2023-01-01")[1]["liturgy.prokeimenon"]
+    assert pk.status == "inferred" and pk.rule["source"] == "anca" and "ticket" not in pk.rule and pk.fill["owner"] == "saint"
+    assert "2023-01-01" in pk.rule["evidence"] and "2026-01-01" in pk.rule["evidence"] and "Psalm 48" in pk.fill["parts"][0]
+    assert pk.rule["conflict"]["status"] == "accepted" and "p.166" in pk.rule["conflict"]["with"][0]
     assert calfacts.load_facts(dt.date(2034, 1, 1), "matins")["in_slice"]                                        # same order, any year (rules are year-independent; only 2023 ANCA-verified)
     assert calfacts.load_facts(dt.date(2026, 1, 1), "matins")["in_slice"]                                        # weekday order unchanged
 
@@ -396,7 +399,7 @@ def test_jan1_sunday_vespers_order_typikon_p165():
     assert [p.split(" — ")[0] for p in v["vespers.apolytikia"].fill["parts"]] == [
         "Apolytikion of the Resurrection", "Apolytikion of St Basil the Great", "Apolytikion of the Circumcision"]
     c = v["vespers.litia"].rule["conflict"]
-    assert c["status"] == "open" and "mf.ves.litia" in c["with"]
+    assert c["status"] == "accepted" and "mf.ves.litia" in c["with"]
     # the Nativity-leavetaking Sunday orders (pp.157, 161; 3R+4+3) are for Dec 31 on a Sunday: not this day
     assert st.fill["res"] != 3 and not any("Nativity" in p for p in st.fill["parts"])
 
@@ -422,11 +425,12 @@ def test_jan1_sunday_liturgy_parts_and_open_conflicts():
     assert l["liturgy.communion"].fill["kind"] == "praise_the_lord" and l["liturgy.gospel"].fill["ref"] == "Luke 2:20-21, 40-52"
     assert l["liturgy.epistle"].fill["ref"] == "Colossians 2:8-12"
     assert (l["liturgy.dismissal_phrase"].fill["phrase"], l["liturgy.dismissal_phrase"].fill["clause"]) == ("feast_and_resurrection", "none")
-    for slot, frag in (("liturgy.apolytikia", "patron"), ("liturgy.megalynarion", "Let us extol"), ("liturgy.epistle", "Epistle for St. Basil"),
-                       ("liturgy.dismissal", None)):
+    for slot, frag in (("liturgy.apolytikia", "patron"), ("liturgy.megalynarion", "Let us extol"), ("liturgy.dismissal", None)):
         r = l[slot].rule
         assert r["id"].startswith("mf.jan1.sun.lit.") and r["source"] == "anca" and r["status"] == "inferred", slot
         assert r["conflict"]["status"] == "open" and (frag is None or frag in " ".join(r["conflict"]["with"]) + r["conflict"]["note"]), slot
+    ep = l["liturgy.epistle"].rule                                                                                # accepted (not open): DB single Jan 1 Epistle, ANCA 2023/2026
+    assert ep["id"] == "mf.jan1.sun.lit.epistle" and ep["conflict"]["status"] == "accepted" and "Epistle for St. Basil" in " ".join(ep["conflict"]["with"])
     assert l["liturgy.apolytikia"].fill["patron"] is True
     assert l["liturgy.megalynarion"].fill["kind"] == "in_thee_rejoiceth"
 
@@ -437,7 +441,8 @@ def test_jan1_sunday_documents(tmp_path):
         assert cli.main([d, svc, "--no-compare", "--out", str(tmp_path)]) == 0
         doc = (tmp_path / f"{d}-{svc}.md").read_text()
         assert "Incomplete" not in doc and "Typikon" not in doc and "{'" not in doc and "{tone}" not in doc and "{mmdd}" not in doc
-        assert doc.count("- [to be determined]") == (1 if svc == "liturgy" else 0)
+        assert "[to be determined]" not in doc
+    assert "My mouth shall speak of wisdom" in (tmp_path / "2023-01-01-liturgy.md").read_text()
     assert "3 stichera of St Basil" in (tmp_path / "2022-12-31-vespers.md").read_text()
     assert "Resurrectional evlogetaria" in (tmp_path / "2023-01-01-matins.md").read_text()
     assert "Colossians 2:8-12" in (tmp_path / "2023-01-01-liturgy.md").read_text()
@@ -467,3 +472,91 @@ def test_no_anca_sunday_text_for_transfiguration_elevation():
     assert not [k for k in ("2023-08-05", "2023-08-06", "2025-09-14") if k in anca._feast_index()]
     enabled = calfacts._slices()["supported_fixed_major"]
     assert "08-06:sunday" not in enabled and "09-14:sunday" not in enabled
+
+
+# ---- audited Source conflict statuses (user-approved; the status lives on the Rule, no DB needed) ----
+def test_audited_conflict_statuses():
+    from yocal_rules.rules import load_catalogue
+    rules = {r["id"]: r for r in load_catalogue()[0]}
+    want = {"pascha.ves.lihc": "misreading", "mf.ves.litia": "accepted", "mf.sun.ves.litia": "accepted", "mf.lent5.ves.litia": "accepted",
+            "mf.jan1.sun.ves.litia": "accepted", "mf.nat.mon.ves.litia": "accepted", "mf.thy.mon.ves.litia": "accepted", "mf.nat.ves.litia": "accepted", "mf.thy.ves.litia": "accepted",
+            "mf.lent5.mat.prokeimenon": "accepted", "mf.lent5.mat.praises": "misreading", "mf.jan1.sun.lit.epistle": "accepted",
+            # unchanged
+            "mf.lent5.ves.lihc": "accepted", "mf.sun.ves.lihc.presentation": "accepted", "mf.sun.mat.evlogetaria": "accepted",
+            "mf.lent5.mat.evlogetaria": "accepted", "agape.lihc.george": "open", "mf.jan1.sun.mat.kathismata": "open",
+            "mf.jan1.sun.lit.apolytikia": "open", "mf.jan1.sun.lit.megalynarion": "open", "mf.jan1.sun.lit.dismissal": "open",
+            "mf.nat.mon.ves.readings": "open"}
+    for rid, st in want.items():
+        assert rules[rid]["conflict"]["status"] == st, rid
+    note = rules["pascha.ves.lihc"]["conflict"]["note"]
+    assert "Residual" in note and "Glory" in note
+
+
+# ---- slices.yaml verified_years: pattern claims made explicit (fact + banner) ----
+def test_slices_loader_keeps_plain_keys_and_verified_years():
+    sl = calfacts._slices()
+    assert "09-08:sunday" in sl["supported_fixed_major"] and "ascension" in sl["supported_movable_major"] and "agape" in sl["supported_pascha"]
+    assert sl["verified_years"]["supported_fixed_major"]["09-08:sunday"] == [2019, 2024]
+    assert sl["verified_years"]["supported_fixed_major"]["02-02:sunday"] == [2020, 2025]
+    assert sl["verified_years"]["supported_fixed_major"]["01-01:sunday"] == [2023]
+    assert sl["verified_years"]["supported_fixed_major"]["03-25:Monday"] == [2019] and sl["verified_years"]["supported_fixed_major"]["03-25:Wednesday"] == [2026]
+    assert sl["verified_years"]["supported_fixed_major"]["03-25:sunday@-14"] == [2018]
+    assert sl["verified_years"]["supported_major_eve_vespers"] == {"03-25:Sunday": [2019], "03-25:Tuesday": [2020, 2026]}
+    assert sl["verified_years"]["supported_pascha"] == {"vespers": [2026], "matins": [2026], "liturgy": [2026], "agape": [2020, 2024, 2026]}
+    assert sl["verified_years"]["supported_movable_major"] == {"ascension": [2026]}
+    assert "supported_seasons" in sl and sl["verified_years"]["supported_seasons"] == {}                  # ordinary Sunday/season slices carry none
+
+
+@needs_db
+@pytest.mark.parametrize("date,svc,years,verified", [
+    ("2024-09-08", "matins", [2019, 2024], True),                  # Sunday order, verified year
+    ("2030-09-08", "matins", [2019, 2024], False),                 # same pattern, no ANCA text for this year
+    ("2023-01-01", "liturgy", [2023], True),
+    ("2022-12-31", "vespers", [2023], True),                       # eve Vespers: liturgical date's year
+    ("2026-03-25", "liturgy", [2026], True),                       # day-only key 03-25:Wednesday
+    ("2018-03-25", "matins", [2018], True),                        # sunday@-14
+    ("2019-03-24", "vespers", [2019], True),                       # eve key 03-25:Sunday
+    ("2020-03-24", "vespers", [2020, 2026], True),                 # eve key 03-25:Tuesday
+    ("2026-05-21", "liturgy", [2026], True),                       # movable: ascension
+    ("2026-04-12", "agape", [2020, 2024, 2026], True),
+    ("2026-04-11", "vespers", [2026], True),
+    ("2026-08-06", "matins", [2026], True),                        # plain mm-dd key
+    ("2031-08-06", "matins", [2026], False),
+])
+def test_slice_verified_years_fact(date, svc, years, verified):
+    f = calfacts.load_facts(dt.date.fromisoformat(date), svc)
+    assert f["in_slice"] and f["slice_verified_years"] == years and f["verified"] is verified
+
+
+@needs_db
+@pytest.mark.parametrize("date,svc", [("2026-11-01", "matins"), ("2026-04-19", "matins"), ("2025-03-25", "matins"), ("2026-02-15", "liturgy")])
+def test_slice_verified_years_empty_without_list_or_out_of_slice(date, svc):
+    f = calfacts.load_facts(dt.date.fromisoformat(date), svc)                                            # ordinary Sunday, Thomas, Tuesday feast (out), Meatfare
+    assert f["slice_verified_years"] == [] and f["verified"] is False
+
+
+@needs_db
+def test_verified_and_pattern_enabled_banners(tmp_path):
+    for date, line in (("2024-09-08", "> **Verified** against ANCA 2019, 2024 (Rules pattern)."),
+                       ("2030-09-08", "> **Pattern-enabled:** no ANCA text for this year; verified in 2019, 2024.")):
+        assert cli.main([date, "matins", "--no-compare", "--out", str(tmp_path)]) == 0
+        doc = (tmp_path / f"{date}-matins.md").read_text()
+        assert doc.count(line + "\n") == 1 and "Incomplete" not in doc
+        other = "Pattern-enabled" if "Verified" in line else "Verified"
+        assert other not in doc
+    assert cli.main(["2026-11-01", "matins", "--no-compare", "--out", str(tmp_path)]) == 0                  # ordinary Sunday: nothing new
+    doc = (tmp_path / "2026-11-01-matins.md").read_text()
+    assert "Verified" not in doc and "Pattern-enabled" not in doc and "Incomplete" not in doc
+    assert cli.main(["2025-03-25", "matins", "--no-compare", "--out", str(tmp_path)]) == 0                  # out of slice: Incomplete only
+    doc = (tmp_path / "2025-03-25-matins.md").read_text()
+    assert "Incomplete" in doc and "Verified" not in doc and "Pattern-enabled" not in doc
+
+
+@needs_db
+def test_banner_does_not_change_slot_content(tmp_path):
+    cli.main(["2030-09-08", "matins", "--no-compare", "--out", str(tmp_path)])
+    banner = (tmp_path / "2030-09-08-matins.md").read_text()
+    r = assemble.build("matins", dt.date(2030, 9, 8))
+    assert all(x.status != "missing" for _, _, x in r.slots)
+    body = banner.split("Pattern-enabled")[1].split("\n", 2)[2]
+    assert body.startswith("## ") and "[to be determined]" not in body
