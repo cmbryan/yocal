@@ -46,8 +46,10 @@
    when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-21, -14]}, {pred: date_in, args: ["03-24"]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the forefeast of the Annunciation — Menaion 03-24", "3 stichera of the Sunday ({sunday}) — Triodion", "Glory: forefeast (Matins aposticha) — Menaion 03-24; Now: Theotokion — Octoechos Tone {tone}"], res: 4, other: [3, 3]},
    source: typikon, locator: "Ch V Annunciation on Monday of the 5th/6th week p.292 (4 Res + 3 forefeast + 3 Triodion)", status: explicit}
 - {id: tri.ves.lihc.mar26_lent4, slot: vespers.lihc.stichera, tier: -3,
-   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-21, -21]}, {pred: date_in, args: ["03-26"]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the Annunciation — Menaion 03-25", "3 stichera of the Archangel Gabriel — Menaion 03-26", "Glory: of the Archangel — Menaion 03-26; Now: Theotokion — Octoechos Tone {tone}"], res: 4, other: [3, 3]},
-   source: typikon, locator: "Ch V Annunciation on Saturday of the 4th week, leavetaking p.289 (4 Res + 3 feast + 3 Gabriel; printed '9 stichera' is a misprint for 10)", status: explicit}
+   when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [-21, -21]}, {pred: date_in, args: ["03-26"]}], fill: {parts: ["4 resurrectional stichera — Octoechos Tone {tone}", "3 stichera of the Annunciation — Menaion 03-25", "3 stichera of the Archangel Gabriel — Menaion 03-26", "Glory: doxastikon of the Annunciation (the Typikon's 'for the Archangel'); Now: Theotokion — Octoechos Tone {tone}"], res: 4, other: [3, 3]},
+   source: typikon, locator: "Ch V Annunciation on Saturday of the 4th week, leavetaking p.289 (4 Res + 3 feast + 3 Gabriel; printed '9 stichera' is a misprint for 10)", status: explicit,
+   conflict: {with: ["Typikon Ch V Mar 25 on Lent 4 leavetaking p.289 ('Glory ... for the Archangel'; '9 stichera')"], status: misreading,
+              note: "#42 verdict: a misreading, not a conflict. The Menaion for Mar 26 has no own Doxastikon; ALWB points to Mar 25; the Typikon's 'Glory for the Archangel' is the text ANCA 2023-03-25 labels 'Doxasticon for the Annunciation'. '9 stichera' is a misprint for 10 (4+3+3). Encoded as the Annunciation doxastikon."}}
 
 # ================= Vespers: prokeimenon =================
 - {id: tri.ves.prokeimenon, slot: vespers.prokeimenon, tier: -1,

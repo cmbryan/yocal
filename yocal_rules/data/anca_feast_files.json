@@ -1,5 +1,10 @@
 {
  "_comment": "Work package I: ANCA texts for weekday Major feasts and their eves, which are not on the weekend index (anca_pages.json). ANCA publishes them under undated names ('Aug 06 READ.pdf'), replaced each year: each is mapped only to the latest weekday occurrence it was published for (2025-26 church year, files last modified 2026). Theophany (2026: '2-Theophany VESP', '3-Theophany ORTHROS', '7-Theophany-Abbr'; no Liturgy text found) and Ascension ('Ascension-VESP/ORTHROS/READ', 2026) have feast-named files. No Nativity file was found (name probe of ~2400 candidates).",
+ "2020-03-24": {
+  "links": [
+   "/servicetexts/Mar%2024%20Readers%20VESP.pdf"
+  ]
+ },
  "2025-11-20": {
   "links": [
    "/servicetexts/Nov%2020%20VESP.pdf"

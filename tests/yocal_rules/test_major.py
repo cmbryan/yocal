@@ -28,7 +28,8 @@ def test_slice_weekday_vs_sunday_and_monday_orders():
     assert calfacts.load_facts(dt.date(2024, 9, 8), "matins")["in_slice"]                     # Sunday order enabled (major_feasts_sunday.yaml)
     assert calfacts.load_facts(dt.date(2023, 8, 6), "matins")["slice_reasons"] == ["fixed Major feast on a Sunday"]  # Transfiguration on Sunday: no ANCA text
     assert not calfacts.load_facts(dt.date(2025, 1, 6), "matins")["in_slice"]                 # Theophany on a Monday
-    assert not calfacts.load_facts(dt.date(2026, 3, 25), "matins")["in_slice"]                # Annunciation: not enabled
+    assert calfacts.load_facts(dt.date(2026, 3, 25), "matins")["in_slice"]                    # Annunciation on a Wednesday: enabled (ANCA 2026)
+    assert not calfacts.load_facts(dt.date(2025, 3, 25), "matins")["in_slice"]                # ... on a Tuesday: no ANCA text
 
 
 @needs_db
@@ -128,9 +129,33 @@ def test_annunciation_eve_typikon_reading_logged_as_conflict():
 def test_annunciation_eve_other_cases_stay_incomplete():
     f = lambda d, s: calfacts.load_facts(dt.date.fromisoformat(d), s)
     assert not f("2025-03-24", "vespers")["in_slice"]                                          # Monday eve (Tue feast): no ANCA text
-    assert not f("2022-03-24", "vespers")["in_slice"]                                          # Wednesday eve
-    assert not f("2018-03-24", "vespers")["in_slice"]                                          # Saturday eve of a Sunday feast
-    assert not f("2026-03-25", "matins")["in_slice"] and not f("2026-03-25", "liturgy")["in_slice"]  # feast day itself stays disabled
+    assert not f("2021-03-24", "vespers")["in_slice"]                                          # Wednesday eve (Thu feast)
+    assert not f("2022-03-24", "vespers")["in_slice"]                                          # Thursday eve (Fri feast)
+    assert not f("2023-03-24", "vespers")["in_slice"]                                          # Friday eve (Sat feast): ANCA has only a Presanctified Liturgy
+    assert f("2020-03-24", "vespers")["in_slice"] and f("2026-03-24", "vespers")["in_slice"]  # Tuesday eves
+    # the feast-day weekday key enables Matins/Liturgy only, never the eve Vespers of that weekday
+    assert not f("2019-03-25", "vespers")["in_slice"] and not f("2026-03-25", "vespers")["in_slice"]  # Mon/Wed evening = the eve of Tuesday/Thursday
+
+
+@needs_db
+@pytest.mark.parametrize("date", ["2019-03-25", "2026-03-25"])
+def test_annunciation_feast_day_matins_liturgy_enabled(date):                                    # Monday (ANCA 2019), Wednesday (ANCA 2026)
+    for svc in ("matins", "liturgy"):
+        r, s = slots(svc, date)
+        assert r.facts["in_slice"] and r.facts["major_feast"] == "annunciation"
+        assert not any(x.status == "missing" for x in s.values())
+    _, m = slots("matins", date)
+    assert m["matins.praises"].fill["other"] == [4] and m["matins.katavasia"].rule["id"] == "mf.mat.katavasia.annunciation"
+    _, l = slots("liturgy", date)
+    assert l["liturgy.communion"].fill["kind"] == "chosen_zion" and l["liturgy.kontakion"].fill["kind"] == "annunciation"
+    assert l["liturgy.epistle"].fill["ref"] == "Hebrews 2:11-18" and l["liturgy.gospel"].fill["ref"] == "Luke 1:24-38"
+
+
+@needs_db
+@pytest.mark.parametrize("date", ["2021-03-25", "2022-03-25", "2023-03-25", "2025-03-25"])
+def test_annunciation_feast_day_other_weekdays_stay_incomplete(date):                             # Thu, Fri, Sat, Tue: no ANCA Orthros/Liturgy text
+    for svc in ("matins", "liturgy"):
+        assert not calfacts.load_facts(dt.date.fromisoformat(date), svc)["in_slice"]
 
 
 @needs_db
@@ -261,3 +286,85 @@ def test_sunday_feast_documents(tmp_path, date, service, must, absent):
         assert m in doc, m
     for a in absent:
         assert a not in doc, a
+
+
+# ---- Annunciation on the 5th Sunday of Great Lent (data/rules/major_feasts_annunciation_lent5.yaml; ANCA 2018) ----
+@needs_db
+def test_annunciation_lent5_in_slice_and_complete():
+    for svc, d in (("vespers", "2018-03-24"), ("matins", "2018-03-25"), ("liturgy", "2018-03-25")):
+        r, s = slots(svc, d)
+        assert r.facts["in_slice"] and r.facts["major_feast"] == "annunciation" and r.facts["pascha_days"] == -14
+        assert not any(x.status == "missing" for x in s.values()), (svc, [k for k, x in s.items() if x.status == "missing"])
+    f = lambda d: calfacts.load_facts(dt.date.fromisoformat(d), "matins")
+    assert not f("2035-03-25")["in_slice"] and not f("2040-03-25")["in_slice"]                    # Annunciation on Lent 2-4 Sundays: no ANCA text
+
+
+@needs_db
+def test_annunciation_lent5_vespers_4r6_conflict_accepted():                                      # #42: Typikon p.291 (and ANCA) 4R+6; p.305 prints 6R+4
+    _, v = slots("vespers", "2018-03-24")
+    r = v["vespers.lihc.stichera"]
+    assert (r.fill["res"], r.fill["other"]) == (4, [6]) and r.rule["id"] == "mf.lent5.ves.lihc"
+    assert r.rule["source"] == "typikon" and r.rule["status"] == "explicit"
+    assert r.rule["conflict"]["status"] == "accepted" and "p.305" in r.rule["conflict"]["with"][0] and "6 Resurrection + 4" in r.rule["conflict"]["with"][0]
+    assert v["vespers.apolytikia"].fill["res_tone"] == 1 and v["vespers.aposticha"].fill["owner"] == "resurrection"
+    assert (v["vespers.prokeimenon"].fill["kind"], v["vespers.prokeimenon"].fill["tone"]) == ("lord_is_king", 6)
+
+
+@needs_db
+def test_annunciation_lent5_matins_liturgy_parts_and_conflicts():
+    _, m = slots("matins", "2018-03-25")
+    assert (m["matins.praises"].fill["total"], m["matins.praises"].fill["res"], m["matins.praises"].fill["other"]) == (8, 4, [4])
+    assert m["matins.evlogetaria"].rule["conflict"]["status"] == "accepted"                      # #39 class: ANCA sings them
+    assert m["matins.prokeimenon"].rule["conflict"]["status"] == "open" and m["matins.eothinon_gospel"].fill["ref"] == "Luke 1:39-49,56"
+    assert m["matins.kontakion"].fill["kind"] == "feast" and m["matins.kathismata"].fill["tone"] == 1
+    _, l = slots("liturgy", "2018-03-25")
+    assert (l["liturgy.kontakion"].fill["kind"], l["liturgy.kontakion"].fill["tone"]) == ("annunciation", 8)
+    assert l["liturgy.antiphons"].fill["refrain2"] == "feast" and l["liturgy.eisodikon"].fill["kind"] == "feast"
+    assert l["liturgy.dismissal_phrase"].fill["phrase"] == "feast_and_resurrection" and l["liturgy.author"].fill["author"] == "John Chrysostom"
+    assert l["liturgy.apolytikia"].fill["patron"] is False and l["liturgy.dismissal"].fill["saint_named"] is False
+
+
+@needs_db
+def test_annunciation_lent5_documents(tmp_path):
+    for svc, d in (("vespers", "2018-03-24"), ("matins", "2018-03-25"), ("liturgy", "2018-03-25")):
+        assert cli.main([d, svc, "--no-compare", "--out", str(tmp_path)]) == 0
+        doc = (tmp_path / f"{d}-{svc}.md").read_text()
+        assert "Incomplete" not in doc and "- [to be determined]" not in doc and "Typikon" not in doc and "{'" not in doc
+    assert "4 stichera of the Resurrection" in (tmp_path / "2018-03-24-vespers.md").read_text()
+    assert "Hebrews 2:11-18" in (tmp_path / "2018-03-25-liturgy.md").read_text()
+
+
+@needs_db
+def test_annunciation_eve_apolytikion_thrice_no_conflict():
+    _, v = slots("vespers", "2026-03-24")
+    assert "thrice" in v["vespers.apolytikia"].fill["parts"][0] and "conflict" not in v["vespers.apolytikia"].rule
+
+
+# ---- Saturday of Lent week 4: Annunciation leavetaking Vespers Glory (#42 'misreading') ----
+@needs_db
+def test_lent4_leavetaking_vespers_glory_is_annunciation_misreading():
+    _, v = slots("vespers", "2023-03-25")
+    r = v["vespers.lihc.stichera"]
+    assert (r.fill["res"], r.fill["other"]) == (4, [3, 3]) and r.rule["id"] == "tri.ves.lihc.mar26_lent4"
+    assert "Glory: doxastikon of the Annunciation" in r.fill["parts"][-1]
+    assert r.rule["conflict"]["status"] == "misreading" and "9 stichera" in r.rule["conflict"]["with"][0]
+
+
+# ---- ANCA key check against cached texts (skipped without the cache) ----
+CACHE = os.path.join(os.environ.get("CLAUDE_JOB_DIR", ""), "tmp", "cache")
+
+
+def _cached(date, kind):
+    p = os.path.join(CACHE, f"anca-{date}-{kind}.txt")
+    return os.path.exists(p) and os.path.getsize(p) > 0
+
+
+@needs_db
+@pytest.mark.parametrize("date,svc,kind", [
+    ("2018-03-24", "vespers", "VESP"), ("2018-03-25", "matins", "ORTHROS"), ("2018-03-25", "liturgy", "READ"),
+    ("2019-03-25", "matins", "ORTHROS"), ("2019-03-25", "liturgy", "READ"), ("2026-03-25", "matins", "ORTHROS"), ("2026-03-25", "liturgy", "READ"),
+    ("2019-03-24", "vespers", "VESP"), ("2026-03-24", "vespers", "VESP"), ("2020-03-24", "vespers", "VESP"), ("2023-03-25", "vespers", "VESP")])
+def test_annunciation_cases_no_unexplained_anca_diff(tmp_path, date, svc, kind):
+    if not _cached(date, kind):
+        pytest.skip("ANCA text not cached")
+    assert cli.main([date, svc, "--offline", "--cache", CACHE, "--fail-on-diff", "--out", str(tmp_path)]) == 0
