@@ -29,6 +29,16 @@ def test_matins_kontakion():
     assert _slot("matins", "2025-06-22", "matins.kontakion").fill["kind"] == "feast"
 
 
+def test_entrance_afterfeast_sunday_2026_both_is_logged_divergence():
+    from yocal_rules import compare
+    d = dt.date(2026, 11, 22)
+    r = assemble.build("matins", d)
+    ours = next(x for s, _, x in r.slots if s == "matins.kontakion")
+    assert ours.fill["kind"] == "resurrectional"  # Typikon; ANCA 2024-11-24 / 2025-11-23 agree
+    c = compare.compare(ours, {"matins.kontakion": {"kind": "both"}}, "anca", r.facts, "matins", compare.load_divergence())
+    assert c.state == "diff" and not c.blocking and c.cls == "divergence:anca_2026_resurrectional_plus_feast"
+
+
 def test_liturgy_author():
     assert _slot("liturgy", "2022-03-13", "liturgy.author").fill["author"] == "Basil the Great"
     assert _slot("liturgy", "2022-07-03", "liturgy.author").fill["author"] == "John Chrysostom"

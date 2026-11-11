@@ -2,10 +2,10 @@
 - slot: matins.kontakion
   source: anca
   scope:
-    date: ["2026-06-07", "2026-07-05", "2026-07-12", "2026-07-19", "2026-08-23", "2026-09-20", "2026-10-11", "2026-10-18", "2026-11-08"]
+    date: ["2026-06-07", "2026-07-05", "2026-07-12", "2026-07-19", "2026-08-23", "2026-09-20", "2026-10-11", "2026-10-18", "2026-11-08", "2026-11-22"]
   theirs: {kind: both}
   class: anca_2026_resurrectional_plus_feast
-  reason: "From 2026-06-07 ANCA ORTHROS prints the resurrectional kontakion/oikos AND the feast's (or afterfeast's) on every Sunday that has one, except All Saints of Antioch 2026-06-14. Before that only the feast's (2019-2026-05). Includes Luke/Athanasius/Paisios (not in Typikon p.28 list) and Cross afterfeast (Typikon Ch V p.80: resurrectional only). Typikon p.27 would give resurrectional after ode 3 and the feast's at ode 6, so 'both' is consistent with it for listed saints/Theotokos feasts; not followed as a Rule because the pattern is one year old (#27)."
+  reason: "From 2026-06-07 ANCA ORTHROS prints the resurrectional kontakion/oikos AND the feast's (or afterfeast's) on every Sunday that has one, except All Saints of Antioch 2026-06-14. Before that only the feast's (2019-2026-05). Includes Luke/Athanasius/Paisios (not in Typikon p.28 list) and Cross afterfeast (Typikon Ch V p.80: resurrectional only) and Entrance afterfeast 2026-11-22 (2024-11-24 and 2025-11-23, same afterfeast, print resurrectional only, so 2026 is the year pattern, not an afterfeast rule). Typikon p.27 would give resurrectional after ode 3 and the feast's at ode 6, so 'both' is consistent with it for listed saints/Theotokos feasts; not followed as a Rule because the pattern is one year old (#27)."
 - slot: matins.kontakion
   source: anca
   scope: {date: ["2022-11-20"]}
