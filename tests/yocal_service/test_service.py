@@ -99,18 +99,40 @@ def test_translation_key_and_resolve():
     assert not pending and [p["text"] for p in ps] == ["Our own.", "Second."] and ps[0]["source"] == "parish"
 
 
-def test_seasonal_hymn_replaces_booklet_blocks():
-    from yocal_service import compose as c, anca_read
-    class D:
-        def ablocks(self, rx): return anca_read.find([{"heading": "THE ANTI-TRISAGION HYMN", "sub": [], "body": ["As many as are baptised."]}], rx)
-    cfg = [{"anca": "^THE ANTI-TRISAGION", "section": "trisagion", "lead": {"role": "Choir", "text": "Amen."},
+def test_festal_hymn_from_rules_replaces_booklet_blocks(tmp_path):
+    from yocal_service import compose as c, texts
+    from yocal_rules import hymns
+    tx = _store(tmp_path)
+    texts.put(tx, "dcs", "liturgical.verses|psLI.trisagionbaptized.text", "As many as were baptized.", "x", "2026-12-25")
+    cfg = [{"slot": "liturgy.trisagion", "section": "trisagion", "lead": {"role": "Choir", "text": "Amen."},
             "drop": [{"text": "^Amen\\. Holy God"}, {"role": "^Choir$", "text": "^$"}]}]
     blocks = [{"t": "line", "role": "Priest", "text": "For you"}, {"t": "line", "role": "Choir", "text": "Amen. Holy God, Holy Mighty"},
               {"t": "line", "role": "Choir", "text": ""}, {"t": "line", "role": "Deacon", "text": "Let us attend!"}]
-    pend = []
-    out = c.seasonal_hymns(D(), "trisagion", blocks, cfg, {}, pend)
-    assert [b.get("text") or b["t"] for b in out] == ["For you", "Amen.", "variable", "Let us attend!"] and len(pend) == 1
-    assert c.seasonal_hymns(D(), "other", blocks, cfg, {}, pend) == blocks
+    ctx = {"con": tx, "parish": {}, "pending": [], "hymns": {"liturgy.trisagion": [hymns.Hymn("lit/trisagion/baptized", "As many", None, "trisagion")]}}
+    out = c.festal_hymns(ctx, "trisagion", blocks, cfg, {})
+    assert [b.get("text") or b["t"] for b in out] == ["For you", "Amen.", "variable", "Let us attend!"]
+    assert out[2]["paragraphs"][0]["text"] == "As many as were baptized." and ctx["pending"][0]["key"] == "lit/trisagion/baptized"
+    ctx["hymns"]["liturgy.trisagion"] = []  # the Rules say: ordinary Trisagion -> booklet untouched
+    assert c.festal_hymns(ctx, "trisagion", blocks, cfg, {}) == blocks
+
+
+def test_festal_antiphon_refrains(tmp_path):
+    from yocal_service import compose as c, texts
+    from yocal_rules import hymns
+    tx = _store(tmp_path)
+    for i, v in enumerate(["Verse one.", "Verse two."], 1):
+        texts.put(tx, "dcs", f"menaion.verses|psLI.m02.d02.antiphon2.v{i}.text", v, "x", "2027-02-02")
+    texts.put(tx, "dcs", "prayers|pr.antiphon2.meeting.text", "who were held in the arms of righteous Symeon.", "x", "2027-02-02")
+    texts.put(tx, "dcs", "prayers|pr.antiphon2.pentecost.text", "Save us, O good Comforter.", "x", "2027-06-20")
+    ctx = {"con": tx, "parish": {}, "pending": []}
+    booklet = "Save us, O Son of God, risen from the dead. We sing to you, Alleluia."
+    h = hymns.Hymn("men/02-02/antiphon2", "Second", None, "antiphon", {"n": 2, "refrain": "lit/refrain2/presentation"})
+    ps = c.antiphon_paras(ctx, h, booklet)
+    assert [p["role"] for p in ps] == ["Verse", "Refrain", "Verse", "Refrain"]
+    assert ps[1]["text"] == "Save us, O Son of God, who were held in the arms of righteous Symeon. We sing to you, Alleluia."
+    assert c._swap_phrase(booklet, "Save us, O good Comforter.") == "Save us, O good Comforter. We sing to you, Alleluia."
+    h3 = hymns.Hymn("men/02-02/antiphon3", "Third", None, "antiphon", {"n": 3, "refrain": "men/02-02/apolytikion"})
+    assert c.antiphon_paras(ctx, h3, "")[0]["source"] == "gap"  # verses not saved: a gap, never the date's page
 
 
 def test_anca_read_wrapped_heading():
@@ -232,14 +254,17 @@ def test_dismissal_from_rules_and_calendar():
 
 
 @pytest.mark.skipif(not os.path.exists(template.TEMPLATE) or not os.path.exists("db/yocal/YOCal_Master.db"), reason="needs local template + calendar DB")
-@pytest.mark.parametrize("date", ["2026-11-15", "2027-03-28", "2027-05-16", "2027-05-02",
-                                  pytest.param("2026-11-22", marks=pytest.mark.xfail(strict=True, reason="festal antiphons still taken from the ANCA/DCS page (seasonal_hymns): needs Rules"))])
+@pytest.mark.parametrize("date", ["2026-11-15", "2027-03-28", "2027-05-16", "2027-05-02", "2026-11-22",
+                                  "2026-04-26",   # Pentecostarion Sunday (Myrrhbearers)
+                                  "2026-03-15",   # Lent 3 (antiphons, Before your Cross, Basil megalynarion)
+                                  "2026-08-23",   # leavetaking of the Dormition (Theotokos afterfeast Sunday)
+                                  "2026-04-12"])  # Pascha
 def test_rule_slots_do_not_depend_on_anca_or_dcs(tmp_path, monkeypatch, date):
-    """Guard: the converted slots come from Rules + store only; with no ANCA/DCS page at all they are identical."""
+    """Guard: the converted slots (incl. the festal hymns) come from Rules + store only; with no ANCA/DCS page they are identical."""
     from yocal_service import compose as c
     monkeypatch.setenv("YOCAL_SOURCES", _store(tmp_path).root)
     run = lambda: {b["slot"]: b["paragraphs"] for s in c.compose(dt.date.fromisoformat(date), offline=True, fetch_music=False)["sections"]
-                   for b in s["blocks"] if b["t"] == "variable" and b["slot"] in c.RESOLVERS}
+                   for b in s["blocks"] if b["t"] == "variable" and (b["slot"] in c.RESOLVERS or b["slot"].endswith("_festal"))}
     with_pages = run()
 
     def blank(self, date, offline):

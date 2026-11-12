@@ -195,7 +195,67 @@ def communion(fill: dict, f: dict) -> list | None:
     return [Hymn(hid, label, None, "communion")]
 
 
+# ---- festal Liturgy hymns: antiphons, entrance hymn, trisagion, megalynarion. [] = the parish booklet's ordinary text stands.
+def day_feast_name(f: dict) -> str | None:
+    """'pentecost', 'entrance_theotokos', ... : the Major feast of the day, else the feast of its fore/after-feast period."""
+    if f.get("major_feast"):
+        return f["major_feast"]
+    fp = (f.get("feast_period") or "").split(":")
+    return fp[1] if len(fp) == 2 else None
+
+
+def _refrain2(fill: dict, f: dict) -> str | None:
+    """Hymn id of the 2nd-antiphon / entrance-hymn refrain phrase; None = the booklet's ('risen from the dead')."""
+    r = fill.get("refrain2") or "resurrection"
+    if r == "resurrection":
+        return None
+    if r == "feast":
+        r = day_feast_name(f)
+    return f"lit/refrain2/{r}" if r else None
+
+
+def antiphons(fill: dict, f: dict) -> list | None:
+    """Festal antiphons 1-3 (verses of the feast; refrain 1 the booklet's, refrain 2 `refrain2`, refrain 3 `refrain3` or the feast's troparion)."""
+    if fill.get("kind") == "ordinary":
+        return []
+    of = fill.get("of") or day_feast(f)
+    if not of:
+        return None
+    r3 = fill.get("refrain3") or f"{of}/apolytikion"
+    refr = {1: None, 2: _refrain2(fill, f), 3: r3}
+    return [Hymn(f"{of}/antiphon{n}", f"The {['First', 'Second', 'Third'][n - 1]} Antiphon ({label(of + '/x', f).split('— ')[-1]})", None,
+                 "antiphon", {"n": n, "refrain": refr[n]}) for n in (1, 2, 3)]
+
+
+def eisodikon(fill: dict, f: dict) -> list | None:
+    if fill.get("kind") in ("sunday", "weekday", None):
+        return []  # "Come, let us worship" (booklet)
+    of = fill.get("of") or day_feast(f)
+    if not of:
+        return None
+    return [Hymn(f"{of}/eisodikon", "The Entrance Hymn of the feast", None, "eisodikon", {"refrain": _refrain2({"refrain2": fill.get("ending", "resurrection")}, f)})]
+
+
+def trisagion(fill: dict, f: dict) -> list | None:
+    k = fill.get("kind")
+    if k in ("trisagion", None):
+        return []
+    return [Hymn(f"lit/trisagion/{k}", {"baptized": "“As many as have been baptized into Christ”", "cross": "“Before your Cross”"}.get(k, k)
+                 + " (in place of the Trisagion)", None, "trisagion")]
+
+
+def megalynarion(fill: dict, f: dict) -> list | None:
+    k = fill.get("kind")
+    if k in ("axion", None):
+        return []  # "It is truly meet" (booklet)
+    if k == "in_thee_rejoiceth":
+        return [Hymn("lit/megalynarion/basil", "Megalynarion of the Liturgy of St Basil (“In you rejoices”)", None, "megalynarion")]
+    of = fill.get("of") or day_feast(f)
+    return [Hymn(f"{of}/megalynarion", "Megalynarion of the feast (in place of “It is truly meet”)", None, "megalynarion")] if of else None
+
+
 SLOTS = {"liturgy.apolytikia": apolytikia, "liturgy.kontakion": kontakion, "liturgy.prokeimenon": prokeimenon,
+         "liturgy.antiphons": antiphons, "liturgy.eisodikon": eisodikon, "liturgy.trisagion": trisagion, "liturgy.megalynarion": megalynarion,
          "liturgy.alleluia": alleluia, "liturgy.communion": communion}
 
 
@@ -246,6 +306,10 @@ def dcs_keys(hid: str) -> list:
             alts.append([f"menaion.verses|psLI.m{mm}.d{dd}.{k}.v{i}.text" for i in (1, 2, 3)])
         elif k == "communion":
             alts.append([f"menaion.verses|psLI.m{mm}.d{dd}.communion.v1.text"])
+        elif k == "antiphon":  # festal antiphon n: its verses (refrains are rendered from the booklet + refrain2)
+            alts.append([f"menaion.verses|psLI.m{mm}.d{dd}.antiphon{n}.v{i}.text" for i in range(1, 9)])
+        elif k == "eisodikon":
+            alts.append([f"menaion.verses|psLI.m{mm}.d{dd}.entrance.v{i}.text" for i in (1, 2)])
     m = re.fullmatch(r"mov/(-?\d+)/([a-z]+)(\d*)", hid)
     if m:
         p, k, num = int(m.group(1)), m.group(2), m.group(3)
@@ -258,10 +322,24 @@ def dcs_keys(hid: str) -> list:
             alts += [[f"movable.verses|psLI.{b}.d{n:03d}.communion.v1.text"], [f"{b}.d{n:03d}|{b}LI.CommunionHymn.text"]]
         elif k in ("prokeimenon", "alleluia"):
             alts.append([f"movable.verses|psLI.{b}.d{n:03d}.{k}.v{i}.text" for i in (1, 2, 3)])
+        elif k == "antiphon":
+            alts.append([f"movable.verses|psLI.{b}.d{n:03d}.antiphon{num}.v{i}.text" for i in range(1, 9)])
+        elif k == "eisodikon":
+            alts.append([f"movable.verses|psLI.{b}.d{n:03d}.entrance.v{i}.text" for i in (1, 2)])
     m = re.fullmatch(r"lit/sun/t(\d)/(prokeimenon|alleluia)", hid)
     if m:
         alts.append([f"liturgical.verses|psLI.sunday.m{m.group(1)}.{m.group(2)}.v{i}.text" for i in (1, 2, 3)])
+    m = re.fullmatch(r"lit/refrain2/(\w+)", hid)
+    if m:  # the phrase of the 2nd-antiphon / entrance-hymn refrain ("who sat on a donkey's colt.")
+        alts.append([f"prayers|pr.antiphon2.{REFRAIN2_DCS.get(m.group(1), m.group(1))}.text"])
+    m = re.fullmatch(r"lit/trisagion/(\w+)", hid)
+    if m:
+        alts.append([f"liturgical.verses|psLI.trisagion{m.group(1)}.text"])
     return alts
+
+
+# our feast ids -> DCS refrain names (prayers|pr.antiphon2.<name>.text)
+REFRAIN2_DCS = {"nativity": "christmas", "theophany": "epiphany", "presentation": "meeting", "palm_sunday": "palm"}
 
 
 # ------------------------------------------------------------------ DCS key -> hymn id (answer key: which hymns a DCS page prints)
@@ -285,6 +363,13 @@ def id_from_dcs(topic: str, field_: str) -> str | None:
         if re.fullmatch(re.escape(k).replace(r"\*", ".*"), key):
             return hid
     num = lambda n: "" if n in ("", "1") else n
+    m = re.fullmatch(r"(menaion|movable)\.verses\|psLI\.(?:m(\d\d)\.d(\d\d)|(tr|pe)\.d(\d{3}))\.(antiphon\d|entrance)\.v1\.text", key)
+    if m:
+        base = f"men/{m.group(2)}-{m.group(3)}" if m.group(1) == "menaion" else f"mov/{int(m.group(5)) - MOVABLE_BASE}"
+        return f"{base}/{'eisodikon' if m.group(6) == 'entrance' else m.group(6)}"
+    m = re.fullmatch(r"liturgical\.verses\|psLI\.trisagion(\w+?)\.text", key)
+    if m:
+        return f"lit/trisagion/{m.group(1)}"
     m = re.fullmatch(r"oc\.m(\d)\.d1\|oc\w+\.(Apolytikion|Kontakion)\.text", key)
     if m:
         return f"oct/t{m.group(1)}/sun/{m.group(2).lower()}"

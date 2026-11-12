@@ -22,10 +22,10 @@ vespers.readings:      {service: vespers, label: "Old Testament readings", attrs
 vespers.litia:         {service: vespers, label: "Litia and Artoklasia", attrs: [litia], only: major_feast_slots, after: vespers.readings}
 vespers.aposticha:     {service: vespers, label: "Aposticha", attrs: [owner], only: major_feast_slots, after: vespers.litia}
 matins.katavasia:      {service: matins, label: "Katavasia", attrs: [of], only: major_feast_slots, after: matins.kontakion}
-liturgy.antiphons:     {service: liturgy, label: "Antiphons", attrs: [refrain2], only: major_feast_slots, after: "^"}
-liturgy.eisodikon:     {service: liturgy, label: "Entrance hymn (eisodikon)", attrs: [kind], only: major_feast_slots, after: liturgy.antiphons}
-liturgy.trisagion:     {service: liturgy, label: "Trisagion hymn", attrs: [kind], only: major_feast_slots, after: liturgy.kontakion}
-liturgy.megalynarion:  {service: liturgy, label: "Megalynarion (in place of “It is truly meet”)", attrs: [kind], only: major_feast_slots, after: liturgy.gospel}
+liturgy.antiphons:     {service: liturgy, label: "Antiphons", attrs: [kind, of, refrain2, refrain3], after: "^"}
+liturgy.eisodikon:     {service: liturgy, label: "Entrance hymn (eisodikon)", attrs: [kind, of, ending], after: liturgy.antiphons}
+liturgy.trisagion:     {service: liturgy, label: "Trisagion hymn", attrs: [kind], after: liturgy.kontakion}
+liturgy.megalynarion:  {service: liturgy, label: "Megalynarion (in place of “It is truly meet”)", attrs: [kind, of], after: liturgy.gospel}
 liturgy.communion:     {service: liturgy, label: "Communion hymn", attrs: [kind], after: liturgy.megalynarion, after_or: liturgy.gospel}
 liturgy.final_hymn:    {service: liturgy, label: "After Communion (in place of “We have seen the true light”)", attrs: [kind], only: major_feast_slots, after: liturgy.communion}
 # Sunday occurrence of a fixed Major feast (major_feasts_sunday.yaml): the evlogetaria slot exists only then (Typikon Ch I s5 VI p.25-26 omits them; ANCA sings them)

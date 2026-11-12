@@ -105,7 +105,7 @@ def main(argv=None):
     from . import template
     a = [int(x) for x in (argv if argv is not None else sys.argv[1:])]
     y0, y1 = (a + [a[0]])[:2] if a else (dt.date.today().year,) * 2
-    need = scan(template.config()["seasonal_hymns"], y0, y1)
+    need = scan(template.config().get("seasonal_hymns", []), y0, y1)  # obsolete: festal hymns are Rule-driven, texts keyed by hymn id (data/parish_texts.yaml)
     store = load_one()
     for k, v in need.items():
         e = store.setdefault(k, {"heading": v["heading"], "text": None})

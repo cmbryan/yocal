@@ -1,14 +1,15 @@
 """Compose one service for a date: parish PDF template + Rules -> hymn ids -> saved texts (texts.py) + music.
 
 The Rules alone decide which hymn goes where (yocal_rules.hymns). ANCA/DCS pages are only text/music sources (saved once,
-by hymn id) and answer keys. Not yet converted (still read from the date's ANCA/DCS page): seasonal_hymns, dcs_text, music.
+by hymn id) and answer keys. Festal antiphons / entrance hymn / trisagion / megalynarion: Rules too (festal_hymns).
+Not yet converted (still read from the date's ANCA/DCS page): dcs_text, music.
 """
 from __future__ import annotations
 
 import datetime as dt
 import re
 
-from . import anca_read, db, music, template, texts, translations
+from . import anca_read, db, music, template, texts
 from yocal_rules import anca as rules_anca, assemble, calfacts, hymns, render
 
 SERVICES = {"liturgy": "Divine Liturgy"}
@@ -38,49 +39,6 @@ class Day:
 
 def _P(role, text, source, heading=None):
     return {"role": role, "text": text, "source": source, **({"heading": heading} if heading else {})}
-
-
-def _tone_of(h: str) -> str:
-    m = re.search(r"TONE (\w+)", h, re.I)
-    return m.group(1).title() if m else ""
-
-
-def _nice_heading(h: str) -> str:
-    """'KONTAKION OF ENTRANCE OF THE THEOTOKOS IN TONE FOUR' -> 'Kontakion of Entrance of the Theotokos in Tone Four'."""
-    h = re.sub(r"\s*\([^)]*\)", "", h).strip().title()
-    h = re.sub(r"\b(Of|The|In|For|And)\b", lambda m: m.group(1).lower(), h).replace("Ss.", "SS.").replace("Ss ", "SS. ")
-    return h[:1].upper() + h[1:]
-
-
-
-def dcs_antiphon(day: Day, n: int) -> list:
-    """Festal antiphon n from the DCS page (verses that belong to a Menaion date, `psLI.mMM.dDD.antiphonN`), with their refrains; [] if none."""
-    name = {1: "FIRST", 2: "SECOND", 3: "THIRD"}[n]
-    out, on, refr = [], False, []
-    festal = False
-
-    def flush():
-        if refr:
-            out.append(_P("Choir", "Refrain: " + " ".join(refr), "dcs"))
-            refr.clear()
-    for r in day.dcs:
-        if r["kind"] == "heading":
-            on = r["text"].upper().startswith(f"PRAYER OF {name} ANTIPHON")
-            continue
-        if not on or r["kind"] != "text":
-            continue
-        if re.search(rf"\.m\d+\.d\w+\.antiphon{n}\.v\d+\.text$", r["field"]):
-            flush()
-            festal = True
-            out.append(_P("Choir", "Verse: " + r["text"], "dcs"))
-        elif re.search(rf"hoLI\.Antiphon{n}\d?\.text$|^pr\.antiphon{n}\.", r["field"]):
-            refr.append(r["text"])
-        elif n == 3 and re.search(r"Apolytikion\d*\.text$", r["field"]) and r["topic"].startswith("me."):
-            flush()
-            out.append(_P("Choir", r["text"], "dcs", "Apolytikion"))
-    flush()
-    return out if festal else []
-
 
 
 _NT = {"Acts": "the Acts of the Apostles", "Romans": "the Epistle of St Paul to the Romans", "Galatians": "the Epistle of St Paul to the Galatians",
@@ -263,50 +221,112 @@ def attach_music(con, date, day: Day, sec_cfg: list, service: str, fetch: bool) 
     return items
 
 
-# ------------------------------------------------------------------ seasonal hymns (ANCA headings -> replace booklet blocks)
+# ------------------------------------------------------------------ festal hymns (Rules -> replace booklet blocks)
 def _bmatch(b: dict, m: dict) -> bool:
     return all(re.search(rx, str(b.get(k) if k != "slot" else b.get("slot") or "") or "") for k, rx in m.items())
 
 
-def seasonal_hymns(day: Day, sec_id: str, blocks: list, cfgs: list, store: dict, pending: list) -> list:
+_RISEN = "risen from the dead"
+
+
+def _text(ctx: dict, hid: str, slot: str, label: str):
+    """Saved text of a hymn id (texts.get), recording a pending translation; None if not saved."""
+    t = texts.get(ctx["con"], hid, ctx["parish"])
+    if t and t["pending"] and all(p["key"] != hid for p in ctx["pending"]):
+        ctx["pending"].append({"section": slot, "key": hid, "heading": label, "source": t["source"]})
+    return t
+
+
+def _src(t: dict) -> dict:
+    return {"source": SRC[t["source"]], "credit": t["credit"]}
+
+
+def _swap_phrase(booklet: str, phrase: str) -> str | None:
+    """Booklet refrain/ending with 'risen from the dead' replaced by the feast's phrase ('who sat on a donkey's colt.').
+    A phrase that is a whole refrain ('Save us, O good Comforter.') replaces the booklet's 'Save us, O Son of God, …' head."""
+    if _RISEN not in booklet:
+        return None
+    head, tail = booklet.split(_RISEN, 1)
+    phrase = phrase.strip().rstrip(".")
+    if phrase.lower().startswith("save us"):
+        return phrase + tail
+    return head + phrase + tail
+
+
+def _refrain_para(ctx: dict, booklet: str, rid: str | None, slot: str) -> dict:
+    """Refrain paragraph: the booklet's when rid is None, else the booklet's frame with the phrase saved under rid."""
+    if not rid:
+        return {"role": "Refrain", "text": booklet, "source": "pdf"}
+    t = _text(ctx, rid, slot, "Refrain of the feast")
+    txt = _swap_phrase(booklet, " ".join(t["parts"])) if t else None
+    if not txt:
+        return {"role": "Refrain", "text": f"Refrain of the feast: text not saved yet ({rid})", "source": "gap", "hymn": rid}
+    return {"role": "Refrain", "text": txt, "hymn": rid, **_src(t)}
+
+
+def antiphon_paras(ctx: dict, h: hymns.Hymn, booklet_refrain: str) -> list:
+    """Festal antiphon: each verse of the feast followed by its refrain (1: booklet; 2: booklet frame + feast phrase; 3: a troparion)."""
+    n, rid = h.meta["n"], h.meta.get("refrain")
+    slot = "liturgy.antiphons"
+    t = _text(ctx, h.id, slot, h.label)
+    if not t:
+        return [{"role": "", "text": f"{h.label}: verses not saved yet", "source": "gap", "heading": h.label, "hymn": h.id}]
+    if n == 3:
+        rt = _text(ctx, rid, slot, "Refrain (troparion)") if rid else None
+        refr = ({"role": "Refrain", "text": rt["parts"][0], "hymn": rid, **_src(rt)} if rt else
+                {"role": "Refrain", "text": f"Refrain: troparion not saved yet ({rid})", "source": "gap", "hymn": rid})
+    else:
+        refr = _refrain_para(ctx, booklet_refrain, rid, slot)
+    out = []
+    for i, v in enumerate(t["parts"]):
+        out += [{"role": "Verse", "text": v, "hymn": h.id, **_src(t), **({"heading": h.label} if i == 0 else {})}, dict(refr)]
+    if n == 1:
+        out += [{"role": "Verse", "text": "Glory... Now...", "source": "pdf"}, dict(refr)]
+    return out
+
+
+def eisodikon_paras(ctx: dict, h: hymns.Hymn, booklet: str) -> list:
+    """Festal entrance verse(s) + the booklet's ending ('O Son of God risen from the dead, save us …'), phrase of the feast if any."""
+    slot = "liturgy.eisodikon"
+    t = _text(ctx, h.id, slot, h.label)
+    ending = booklet.split(". ", 1)[1] if ". " in booklet else booklet
+    if h.meta.get("refrain"):
+        p = _refrain_para(ctx, ending, h.meta["refrain"], slot)
+        if p["source"] == "gap":
+            return [{"role": "Choir", "text": f"{h.label}: ending of the feast not saved yet", "source": "gap", "heading": h.label, "hymn": h.id}]
+        ending = p["text"]
+    if not t:
+        return [{"role": "Choir", "text": f"{h.label}: verse not saved yet", "source": "gap", "heading": h.label, "hymn": h.id}]
+    return [{"role": "Choir", "text": " ".join(t["parts"]) + " " + ending, "heading": h.label, "hymn": h.id, **_src(t)}]
+
+
+def festal_hymns(ctx: dict, sec_id: str, blocks: list, cfgs: list, captions: dict) -> list:
+    """Replace booklet blocks by the festal hymns the Rules appoint (liturgy_sections.yaml `festal_hymns` says where).
+    A slot whose hymns are [] (the booklet's ordinary text) or None (no structured hymns) leaves the booklet as it is."""
     for c in cfgs:
-        if c["section"] != sec_id or (c.get("unless_anca") and day.ablocks(c["unless_anca"])):
+        if c["section"] != sec_id:
             continue
-        found = [b for b in day.ablocks(c["anca"]) if b["body"]]
-        if not found and c.get("dcs_antiphon"):  # no ANCA heading (or file): festal antiphon verses on the DCS page
-            paras = dcs_antiphon(day, c["dcs_antiphon"])
-            if paras:
-                new = {"t": "variable", "slot": f"{sec_id}_seasonal", "caption": ["Festal antiphon from the GOA Digital Chant Stand (no ANCA text for this date)"], "paragraphs": paras, "missing": False}
-                out, idx = [], None
-                for b in blocks:
-                    if any(_bmatch(b, m) for m in c.get("drop", [])):
-                        idx = len(out) if idx is None else idx
-                        continue
-                    out.append(b)
-                blocks = out[:len(out) if idx is None else idx] + [new] + out[len(out) if idx is None else idx:]
+        hs = ctx["hymns"].get(c["slot"]) or []
+        if c.get("n"):
+            hs = [h for h in hs if h.meta.get("n") == c["n"]]
+        if not hs:
             continue
-        if not found:
-            continue
-        paras, heads = [], []
-        for h in found:
-            ps, k, pend = translations.resolve(h, store=store)
-            for p in ps:
-                p.setdefault("heading", None)
-            ps[0]["heading"] = _nice_heading(h["heading"])
-            paras += ps
-            heads.append(_nice_heading(h["heading"]))
-            if pend:
-                pending.append({"section": sec_id, "key": k, "heading": heads[-1]})
-        new = {"t": "variable", "slot": f"{sec_id}_seasonal", "caption": ["Seasonal replacement from ANCA's Liturgy Variables for this date"], "paragraphs": paras, "missing": False}
+        dropped = [b for b in blocks if any(_bmatch(b, m) for m in c.get("drop", []))]
+        if c["slot"] == "liturgy.antiphons":
+            refr = next((b["text"] for b in dropped if b.get("role") == "Refrain"), "")
+            paras = antiphon_paras(ctx, hs[0], refr)
+        elif c["slot"] == "liturgy.eisodikon":
+            paras = eisodikon_paras(ctx, hs[0], next((b["text"] for b in dropped if b.get("role") == "Choir"), ""))
+        else:
+            paras = slot_paras(ctx, c["slot"])
+        new = {"t": "variable", "slot": f"{sec_id}_festal", "caption": captions.get(c["slot"], []), "paragraphs": paras,
+               "missing": not paras or all(p["source"] == "gap" for p in paras)}
         out, idx = [], None
         for b in blocks:
-            if any(_bmatch(b, m) for m in c.get("drop", [])):
-                if idx is None:
-                    idx = len(out)
+            if b in dropped:
+                idx = len(out) if idx is None else idx
                 continue
             out.append(b)
-        if idx is None and c.get("after"):
-            idx = next((i + 1 for i, b in enumerate(out) if _bmatch(b, c["after"])), len(out))
         idx = len(out) if idx is None else idx
         ins = ([{"t": "line", **c["lead"]}] if c.get("lead") else []) + [new]
         blocks = out[:idx] + ins + out[idx:]
@@ -354,8 +374,8 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
     hctx = {"con": texts.load(), "parish": texts.parish_texts(), "pending": pending,
             "hymns": {s: hymns.for_slot(s, x, f) for s, x in res.items()},
             "dismissal": hymns.dismissal(res.get("liturgy.dismissal"), res.get("liturgy.dismissal_phrase"), f)}
-    store = translations.load()
-    hymn_cfgs = template.config().get("seasonal_hymns", [])
+    hymn_cfgs = template.config().get("festal_hymns", [])
+    captions = {s: [c.lstrip("- ").strip() for c in e["lines"]] for s, e in engine.items()}
     sections = []
     for sec in tpl["sections"]:
         if sec.get("exclude"):
@@ -375,7 +395,7 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
             paras = fn(day, f, ctx=hctx, engine=engine, template_text=b.get("template", "")) if fn else []
             cap = [c.lstrip("- ").strip() for c in engine.get(ENGINE_SLOT.get(b["slot"], ""), {}).get("lines", [])]
             blocks.append({"t": "variable", "slot": b["slot"], "caption": cap, "paragraphs": paras, "missing": not paras})
-        blocks = seasonal_hymns(day, sec["id"], blocks, hymn_cfgs, store, pending)
+        blocks = festal_hymns(hctx, sec["id"], blocks, hymn_cfgs, captions)
         if sec.get("dcs_text") and sum(b["t"] == "line" for b in blocks) < 3:
             rx = re.compile(sec["dcs_text"], re.I)
             grab, on = [], False

@@ -75,6 +75,15 @@ dcs:
   mov/-70/kontakion: ["tr.d001|trMA.Kontakion0.text"]
   lit/communion/sunday: ["liturgical.verses|psLI.sunday.communion.v1.text"]
   named/before_nativity/apolytikion: ["me.m12.d17|meVE.Apolytikion1.text"]   # "Great are the accomplishments of faith" (DCS 2026-12-20)
+  # Megalynaria: the 9th-ode magnification (if any) then the heirmos, which DCS keys by melody (he.h.mN|heHE.<name>); no pattern.
+  men/02-02/megalynarion: ["me.m02.d02|meMA.Ode9C1MTh.text", "he.h.m3|heHE.EnNomoSkia.text"]              # DCS 2027-02-02
+  men/11-21/megalynarion: ["me.m11.d21|meMA.Ode9C1M01.text", "he.h.m4|heHE.OsEmpsychoTheouKivoto.text"]   # DCS 2026-11-21
+  men/12-25/megalynarion: ["me.m01.d30|meMA.Ode9C2MTh.text", "he.h.m1|heHE.MystirionXenon.text"]          # DCS 2026-12-25
+  mov/0/megalynarion: ["pe.d071|peMA.Ode9C1MKa.text", "he.h.m1|heHE.FotizouFotizou.text"]               # "The Angel cried" + "Shine, shine" (DCS 2027-05-02)
+  mov/7/megalynarion: ["he.h.m1|heHE.SeTinFaeinin.text"]                                                # "O most radiant lamp" (DCS 2027-05-09)
+  mov/-7/megalynarion: ["he.h.m4|heHE.TheosKyriosKaiEpefanenImin.text"]                                 # "God is the Lord" (DCS 2027-04-25)
+  mov/49/megalynarion: ["he.h.m7|heHE.MiTisFthoras.text"]                                               # "O Mother who knew no man" (DCS 2027-06-20)
+  lit/megalynarion/basil: ["oc.m8.d1|ocMA.Kathisma23.text"]                                             # "In you, O Lady full of grace, all creation rejoices" (DCS 2027-03-28)
 
 # DCS keys printed at every Liturgy that are not a variable hymn (ignored when reading a page's hymns)
 dcs_ignore:

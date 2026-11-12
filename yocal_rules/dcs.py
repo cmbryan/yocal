@@ -95,7 +95,12 @@ def hymn_ids(ks) -> dict:
         kind = re.sub(r"\d+$", "", hid.rsplit("/", 1)[-1])
         slot = {"apolytikion": "liturgy.apolytikia", "troparion": "liturgy.apolytikia", "hypakoe": "liturgy.apolytikia",
                 "kontakion": "liturgy.kontakion"}.get(kind) if region else None
-        slot = slot or {"prokeimenon": "liturgy.prokeimenon", "alleluia": "liturgy.alleluia", "communion": "liturgy.communion"}.get(kind)
+        slot = slot or {"prokeimenon": "liturgy.prokeimenon", "alleluia": "liturgy.alleluia", "communion": "liturgy.communion",
+                        "antiphon": "liturgy.antiphons", "eisodikon": "liturgy.eisodikon", "megalynarion": "liturgy.megalynarion"}.get(kind)
+        if hid.startswith("lit/trisagion/"):
+            slot = "liturgy.trisagion"
+        elif hid.startswith("lit/megalynarion/"):
+            slot = "liturgy.megalynarion"
         if slot and hid not in out.setdefault(slot, []):
             out[slot].append(hid)
     return {s: v for s, v in out.items() if v}

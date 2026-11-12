@@ -37,8 +37,9 @@ def test_feast_only_slots_and_order():
     r, s = slots("liturgy", "2026-08-06")
     ids = [x for x, _, _ in r.slots]
     assert ids[0] == "liturgy.antiphons" and ids.index("liturgy.trisagion") == ids.index("liturgy.kontakion") + 1
-    _, sun = slots("liturgy", "2026-11-08")                                                     # ordinary Sunday: no feast-only slots
-    assert "liturgy.antiphons" not in sun
+    _, sun = slots("liturgy", "2026-11-08")                     # ordinary Sunday: festal-hymn slots resolve to the booklet's ordinary texts
+    assert sun["liturgy.antiphons"].fill == {"kind": "ordinary"} and sun["liturgy.megalynarion"].fill == {"kind": "axion"}
+    assert "liturgy.final_hymn" not in sun
 
 
 @needs_db

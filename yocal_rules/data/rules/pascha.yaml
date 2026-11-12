@@ -82,7 +82,7 @@
    status: inferred, evidence: "ANCA READ 2026-04-12 (single sample): 'This is the day which the Lord hath made …' with the verse 'O give thanks unto the Lord' before The Reading from the Acts of the Apostles (1:1-8)"}
 - {id: pascha.lit.antiphons, slot: liturgy.antiphons, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {refrain2: resurrection, parts: ["1st antiphon “Shout with joy to God, all the earth” (refrain: Through the intercessions of the Theotokos, O Savior, save us)", "2nd antiphon “May God have mercy upon us” (refrain: Save us, O Son of God, Who art risen from the dead, who sing to Thee. Alleluia)", "3rd antiphon “Let God arise” with the refrain “Christ is risen”, sung during the Little Entrance — Pentecostarion"]},
+   fill: {refrain2: resurrection, refrain3: mov/0/troparion, parts: ["1st antiphon “Shout with joy to God, all the earth” (refrain: Through the intercessions of the Theotokos, O Savior, save us)", "2nd antiphon “May God have mercy upon us” (refrain: Save us, O Son of God, Who art risen from the dead, who sing to Thee. Alleluia)", "3rd antiphon “Let God arise” with the refrain “Christ is risen”, sung during the Little Entrance — Pentecostarion"]},
    source: typikon, locator: "Ch VII p.521 (antiphons of Pascha; the 1st Antiphon … 3rd Antiphon with the Little Entrance)", status: explicit}
 - {id: pascha.lit.eisodikon, slot: liturgy.eisodikon, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
