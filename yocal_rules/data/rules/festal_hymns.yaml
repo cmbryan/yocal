@@ -40,15 +40,15 @@
    fill: {refrain2: resurrection},
    source: anca, locator: "inferred: ANCA prints the antiphons of the feast (2nd refrain 'Who art risen from the dead') on every Sunday after a feast of the Theotokos and at its leavetaking",
    status: inferred, evidence: "ANCA READ: Entrance afterfeast 2024-11-24, 2025-11-23, 2026-11-22 (Ps 47/45/44 of Nov 21); Dormition 2022-08-21, 2023-08-20, 2024-08-18, 2025-08-17, 2026-08-16, leavetaking 2026-08-23; Nativity of the Theotokos 2022-09-11, 2023-09-10; GOA DCS 2026-11-22 the same",
-   conflict: {with: [lit.antiphons.ordinary, "Typikon Ch I s6 III p.35"], status: open,
-              note: "Typikon p.35: antiphons of the feast between a feast and its leavetaking 'except on Sunday'; p.34: Theotokos leavetaking on Sunday, 2nd antiphon of the Resurrection. ANCA (and the DCS) print the feast's antiphons on those Sundays, 5 years consistent. Project default: follow ANCA. The one-day Annunciation afterfeast (Mar 26, a Lent Sunday) is excluded: ANCA 2023-03-26 prints no antiphons."}}
+   conflict: {with: [lit.antiphons.ordinary, "Typikon Ch I s6 III p.35"], status: accepted,
+              note: "Typikon p.35: antiphons of the feast between a feast and its leavetaking 'except on Sunday'; p.34: Theotokos leavetaking on Sunday, 2nd antiphon of the Resurrection. ANCA (and the DCS) print the feast's antiphons on those Sundays, 5 years consistent. Project default: follow ANCA. The one-day Annunciation afterfeast (Mar 26, a Lent Sunday) is excluded: ANCA 2023-03-26 prints no antiphons. Decided 2026-11-12 (parish): follow ANCA; Typikon reading kept as the shadowed alternative."}}
 - {id: lit.antiphons.period_lord, slot: liturgy.antiphons, tier: 2,
    when: [{pred: sunday}, {pred: feast_period_in, args: ["afterfeast:*", "leavetaking:*"]}, {pred: feast_period_class_is, args: [lord]}],
    fill: {refrain2: feast},
    source: anca, locator: "inferred: ANCA prints the antiphons of the feast (2nd refrain of the feast, e.g. 'Who wast transfigured on Mount Tabor') on every Sunday after a feast of the Lord and at its leavetaking",
    status: inferred, evidence: "ANCA READ: Transfiguration afterfeast 2022-08-07, 2024-08-11, 2025-08-10, 2026-08-09, leavetaking 2023-08-13; Elevation 2022-09-18, 2023-09-17, 2024-09-15, 2026-09-20, leavetaking 2025-09-21; Theophany 2022-01-09, 2023-01-08, 2024-01-07, 2025-01-12, 2026-01-11, leavetaking 2024-01-14; Presentation 2022-02-06, 2023-02-05, 2024-02-04, leavetaking 2025-02-09; Nativity 2024-12-29, 2025-12-28, leavetaking 2023-12-31; Ascension 2018-05-20, 2022-06-05, 2023-05-28, 2024-06-16, 2025-06-01, 2026-05-24",
-   conflict: {with: [lit.antiphons.ordinary, "Typikon Ch I s6 II-III p.34-35"], status: open,
-              note: "Typikon p.35: antiphons of the feast between a feast and its leavetaking 'except on Sunday'; p.34: only the 2nd antiphon of the feast when its leavetaking falls on Sunday. ANCA prints all three antiphons of the feast on every such Sunday. Project default: follow ANCA."}}
+   conflict: {with: [lit.antiphons.ordinary, "Typikon Ch I s6 II-III p.34-35"], status: accepted,
+              note: "Typikon p.35: antiphons of the feast between a feast and its leavetaking 'except on Sunday'; p.34: only the 2nd antiphon of the feast when its leavetaking falls on Sunday. ANCA prints all three antiphons of the feast on every such Sunday. Project default: follow ANCA. Decided 2026-11-12 (parish): follow ANCA; Typikon reading kept as the shadowed alternative."}}
 - {id: lit.eisodikon.lord_leavetaking, slot: liturgy.eisodikon, tier: 2,
    when: [{pred: sunday}, {pred: feast_period_in, args: ["leavetaking:*"]}, {pred: feast_period_class_is, args: [lord]}],
    fill: {kind: feast, ending: resurrection},
