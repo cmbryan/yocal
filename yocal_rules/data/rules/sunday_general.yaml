@@ -86,8 +86,28 @@
 - {id: lit.prokeimenon.follows_epistle, slot: liturgy.prokeimenon, tier: 4, when: [{pred: sunday}],
    fill: {owner: "$epistle_owner"}, source: anca, locator: "inferred, issue 'Prokeimenon and alleluia verse rules'",
    status: inferred, evidence: "ANCA READ 16 dates, DCS 5; Violakis p.58 says 'the Prokeimena' only"}
+- {id: lit.prokeimenon.named_sunday, slot: liturgy.prokeimenon, tier: 1,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: desig_contains, args: ["Forefathers", "before the Nativity", "After the Nativity", "after the Nativity", "before the Theophany", "after the Theophany", "before the Elevation", "after the Elevation", "Fathers of the"]}],
+   fill: {owner: sunday, proper: true}, source: anca,
+   locator: "inferred: a named Sunday (Forefathers, before/after the Nativity, Theophany or Elevation, Holy Fathers, All Saints) has its own prokeimenon, labelled '(For the Sunday before the Nativity)', '(For the Holy Forefathers)' etc.",
+   status: inferred, evidence: "ANCA READ 2022-2026, 242 Sundays: of 54 named Sundays, 47 carry the Sunday's own name on the Epistle block (the proper), 7 the 'Nth Sunday after Pentecost' tone label; Typikon Ch I s6 is silent on the Liturgy prokeimenon",
+   conflict: {with: ["Digital Chant Stand 2026-12-27"], status: open, note: "Sunday after the Nativity falling on Dec 27 (St Stephen): ANCA 2025-12-28 prints the Sunday's own ('God is wondrous in His saints'); the DCS page for 2026-12-27 gives St Stephen's prokeimenon. Project default: follow ANCA when it has a file."}}
+- {id: lit.prokeimenon.all_saints, slot: liturgy.prokeimenon, tier: 1,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: desig_contains, args: ["Sunday of All Saints"]}, {pred: not_desig_contains, args: ["of All Saints of"]}],
+   fill: {owner: sunday, proper: true}, source: anca,
+   locator: "inferred: the Sunday of All Saints has its own prokeimenon ('God is wondrous in His saints'); the regional All Saints Sundays (Antioch, North America, British Isles) take the tone of the week's",
+   status: inferred, evidence: "ANCA READ 2022-06-19, 2023-06-11, 2025-06-15, 2026-06-07 (All Saints: 'God is wondrous in His saints'); 2022-06-26, 2023-06-18, 2025-06-22, 2026-06-14 (regional All Saints: tone of the week)"}
+- {id: lit.prokeimenon.tone_sunday, slot: liturgy.prokeimenon, tier: 2,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: epistle_owner_is, args: [sunday]}, {pred: not_desig_contains, args: ["Forefathers", "before the Nativity", "After the Nativity", "after the Nativity", "before the Theophany", "after the Theophany", "before the Elevation", "after the Elevation", "Fathers of the"]}],
+   fill: {owner: sunday, proper: false}, source: anca,
+   locator: "inferred: an ordinary Sunday whose Epistle is the Sunday's has the tone of the week's prokeimenon (ANCA: '(For the Nth Sunday after Pentecost)')",
+   status: inferred, evidence: "ANCA READ 2022-2026: 63 of 65 plain Sundays and 19 of 20 fore/after-feast-period Sundays are labelled '(For the Nth Sunday after Pentecost)'; Typikon silent; Triodion/Lent/Pascha Sundays are covered by their own Rules"}
 - {id: lit.alleluia.t2, slot: liturgy.alleluia, tier: 4, when: [{pred: sunday}], fill: {tone: 2},
    source: typikon, locator: "Ch I s6 p.38", status: explicit}
+- {id: lit.alleluia.day_tone, slot: liturgy.alleluia, tier: 3, when: [{pred: sunday}, {pred: tone_known}], fill: {tone: "$tone"},
+   source: parish, locator: "parish choir booklets 2025-26: Alleluia and its verses in the tone of the week (Typikon Ch I s6 VIII p.38 says Tone 2)",
+   status: inferred, evidence: "booklets 2025-11-16 (T6), 11-23 (T7), 12-07 (T1), 12-14 (T2), 2026-11-08 (T6): Alleluia chanted in the day's tone; 2025-12-21 (T3 Sunday) used Tone 4; DCS li2 pages give the verses per Sunday tone",
+   conflict: {with: [lit.alleluia.t2], status: decided, note: "DIVERGENCE FROM THE TYPIKON (decided by the parish choir director, 2026-11): Typikon Ch I s6 VIII p.38 has the Alleluia in Tone 2 at every Liturgy; the parish uses the tone of the week, for the chant and for the verses. The Typikon Rule lit.alleluia.t2 is kept as the shadowed alternative."}}
 - {id: lit.dismissal.not_named.01-05, slot: liturgy.dismissal, tier: 1,
    when: [{pred: sunday}, {pred: menaion_date_is, args: ["01-05"]}],
    fill: {author: "$liturgy_author", saint_named: false, named_as: "none (Lord's/Theotokos feast period)"},

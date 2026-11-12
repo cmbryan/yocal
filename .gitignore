@@ -185,3 +185,6 @@ prototypes/anca-compare/sun_keys.csv
 prototypes/anca-compare/pages_snapshot*.json
 prototypes/alwb-menaion/data/
 *.pdf
+
+# Parish choir PDF text extracted locally (copyrighted; never committed)
+yocal_service/local/

@@ -96,6 +96,8 @@ def describe(slot: str, res, f: dict):
     if slot == "liturgy.prokeimenon":
         if fl["owner"] == "saint":
             return [f"- Prokeimenon of {_short(f['principal_name'])} — Menaion {f['mmdd']}"]
+        if fl.get("proper"):  # a named Sunday's own prokeimenon (Rule lit.prokeimenon.named_sunday)
+            return [f"- Prokeimenon of the day ({f.get('desig_g') or f['desig']}) — its own, not the tone of the week"]
         return [f"- Prokeimenon of the Sunday — Octoechos {_tone(f['tone'])}"]
     if slot == "liturgy.epistle":
         who = _short(f["principal_name"]) if fl["owner"] == "saint" else f"the Sunday, {f['desig']}"

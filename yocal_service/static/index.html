@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chant Stand</title>
+<style>
+:root{--bg:#fbf8f1;--fg:#1d1b18;--muted:#6b645a;--card:#fff;--line:#e3dccd;--accent:#8c2f1e;--choir:#1f4e79;--priest:#7a3b00;--deacon:#4a5d23;--reader:#5b3a7a;--warn:#fff3cd;--warnfg:#6b5200;--fs:20px}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#141311;--fg:#ece6da;--muted:#a39b8c;--card:#1d1b18;--line:#34302a;--accent:#e08a74;--choir:#8fc0ec;--priest:#e0a35e;--deacon:#a5c36a;--reader:#c4a2e6;--warn:#3d3410;--warnfg:#f0d98a}}
+:root[data-theme=dark]{--bg:#141311;--fg:#ece6da;--muted:#a39b8c;--card:#1d1b18;--line:#34302a;--accent:#e08a74;--choir:#8fc0ec;--priest:#e0a35e;--deacon:#a5c36a;--reader:#c4a2e6;--warn:#3d3410;--warnfg:#f0d98a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:var(--fs)/1.5 Georgia,"Times New Roman",serif}
+header{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:8px 16px;font:15px system-ui,sans-serif}
+header h1{font-size:17px;margin:0 8px 0 0;color:var(--accent)}
+header select,header input,header button{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+header button{cursor:pointer;min-height:38px}header button:hover{border-color:var(--accent)}
+.sp{flex:1}
+#layout{display:flex;max-width:1500px;margin:0 auto}
+nav{width:240px;flex:none;position:sticky;top:58px;align-self:flex-start;max-height:calc(100vh - 58px);overflow:auto;padding:12px 8px 12px 16px;font:14px system-ui,sans-serif}
+nav a{display:block;padding:5px 8px;color:var(--muted);text-decoration:none;border-left:3px solid transparent;border-radius:0 6px 6px 0}
+nav a.on{color:var(--fg);border-left-color:var(--accent);background:var(--card)}
+nav a .m{color:var(--accent);margin-left:4px}
+main{flex:1;min-width:0;padding:8px 16px 120px}
+.day h2{margin:.6em 0 .1em;font-size:1.5em}.day .sub{color:var(--muted);font:15px system-ui,sans-serif}
+.note{background:var(--warn);color:var(--warnfg);padding:10px 14px;border-radius:10px;font:15px system-ui,sans-serif;margin:12px 0}
+section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 20px 14px;margin:18px 0;scroll-margin-top:70px}
+section h3{font-size:1.15em;color:var(--accent);margin:.7em 0 .3em;border-bottom:1px solid var(--line);padding-bottom:.2em}
+.l{display:grid;grid-template-columns:5.2em 1fr;gap:0 10px;margin:.35em 0}
+.r{font:600 .62em system-ui,sans-serif;text-transform:uppercase;letter-spacing:.06em;padding-top:.55em;text-align:right}
+.r.Choir,.r.All,.r.People{color:var(--choir)}.r.Priest{color:var(--priest)}.r.Deacon{color:var(--deacon)}.r.Reader{color:var(--reader)}
+.t.Choir,.t.All{font-weight:500}
+.src.pend,.pend{color:var(--warnfg)}.sea{border-left:3px solid var(--accent);padding-left:8px}.seatag{color:var(--accent);font:600 .7em system-ui,sans-serif;text-transform:uppercase;margin:.6em 0 0 calc(5.2em + 10px)}.pet{margin:.15em 0}.rub{color:var(--muted);font-style:italic;font-size:.82em;margin:.5em 0 .5em calc(5.2em + 10px)}
+details.silent,details.seasonal{margin:.5em 0 .5em calc(5.2em + 10px);color:var(--muted);font-size:.85em}details summary{cursor:pointer;font:14px system-ui,sans-serif}
+.var{border-left:4px solid var(--accent);padding-left:12px;margin:.8em 0}
+.var .cap{font:13px system-ui,sans-serif;color:var(--muted)}
+.var h4{margin:.3em 0;font-size:.95em;color:var(--accent)}
+.src{font:600 10px system-ui,sans-serif;text-transform:uppercase;border:1px solid var(--line);border-radius:5px;padding:0 5px;color:var(--muted);vertical-align:middle;margin-left:6px}
+.miss{background:var(--warn);color:var(--warnfg);padding:8px 12px;border-radius:8px;font:15px system-ui,sans-serif}
+.music{margin:1em 0 .4em;border-top:2px dashed var(--line);padding-top:.5em}
+.music>summary{font:600 15px system-ui,sans-serif;color:var(--accent)}
+.mi{margin:.6em 0}.mi h5{margin:.2em 0;font:600 15px system-ui,sans-serif}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin:.3em 0;font:13px system-ui,sans-serif}
+.tabs button{border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:999px;padding:4px 10px;cursor:pointer}
+.tabs button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tabs button.cached::after{content:" ✓";opacity:.7}
+.pages img{width:100%;max-width:1000px;display:block;margin:6px 0;background:#fff;border:1px solid var(--line);border-radius:6px}
+.srcl{font:12px system-ui,sans-serif;color:var(--muted)}.srcl a{color:var(--muted)}
+#msg{padding:40px 0;text-align:center;color:var(--muted);font:16px system-ui,sans-serif}
+@media (max-width:820px){nav{display:none}.l{grid-template-columns:4em 1fr}.rub,details.seasonal{margin-left:calc(4em + 10px)}}
+@media print{header,nav{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Chant Stand</h1>
+  <label>Service <select id="service"></select></label>
+  <button id="prev" title="Previous Sunday">◀</button>
+  <input type="date" id="date" aria-label="Date">
+  <button id="next" title="Next Sunday">▶</button>
+  <span class="sp"></span>
+  <button id="fm" title="Smaller text">A−</button><button id="fp" title="Larger text">A+</button>
+  <button id="theme" title="Light / dark">◐</button>
+  <button id="dl" title="Download all music for this date so it works offline">⬇ Music</button>
+</header>
+<div id="layout"><nav id="toc"></nav><main id="main"><div id="msg">Loading…</div></main></div>
+<script>
+const $=s=>document.querySelector(s), el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.textContent=h;return e};
+const store={get(k,d){try{return localStorage.getItem(k)??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+let fs=+store.get('fs',20);const setFs=()=>{document.documentElement.style.setProperty('--fs',fs+'px');store.set('fs',fs)};setFs();
+$('#fm').onclick=()=>{fs=Math.max(14,fs-2);setFs()};$('#fp').onclick=()=>{fs=Math.min(40,fs+2);setFs()};
+const th=store.get('theme','');if(th)document.documentElement.dataset.theme=th;
+$('#theme').onclick=()=>{const d=document.documentElement,cur=d.dataset.theme||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');d.dataset.theme=cur==='dark'?'light':'dark';store.set('theme',d.dataset.theme)};
+const iso=d=>d.toISOString().slice(0,10), addDays=(s,n)=>{const d=new Date(s+'T12:00:00');d.setDate(d.getDate()+n);return iso(d)};
+const nextSunday=s=>{const d=new Date(s+'T12:00:00');return addDays(s,(7-d.getDay())%7)};
+let state={date:new URLSearchParams(location.search).get('date')||nextSunday(iso(new Date())),service:new URLSearchParams(location.search).get('service')||'liturgy'};
+async function api(u,o){const r=await fetch(u,o);const j=await r.json().catch(()=>({}));if(!r.ok)throw Object.assign(new Error(j.error||r.statusText),{data:j});return j}
+async function init(){
+  const sv=await api('/api/services');const sel=$('#service');sv.forEach(s=>sel.append(new Option(s.title,s.id)));sel.value=state.service;
+  sel.onchange=()=>{state.service=sel.value;load()};
+  $('#date').onchange=e=>{state.date=e.target.value;load()};
+  $('#prev').onclick=()=>{state.date=addDays(nextSunday(state.date),-7);load()};
+  $('#next').onclick=()=>{state.date=addDays(nextSunday(addDays(state.date,1)),0);load()};
+  $('#dl').onclick=async e=>{const b=e.target;b.disabled=true;b.textContent='Downloading…';try{const r=await api(`/api/prefetch?service=${state.service}&date=${state.date}`,{method:'POST'});b.textContent=`⬇ ${r.cached}/${r.assets} cached`;load(true)}catch(x){b.textContent='⬇ failed'}b.disabled=false};
+  load();
+}
+async function load(keepScroll){
+  $('#date').value=state.date;history.replaceState(null,'',`?service=${state.service}&date=${state.date}`);
+  const y=scrollY;const main=$('#main');if(!keepScroll)main.replaceChildren(el('div',null,null)),main.firstChild.id='msg',main.firstChild.textContent='Assembling service…';
+  try{render(await api(`/api/service?service=${state.service}&date=${state.date}`));if(keepScroll)scrollTo(0,y)}
+  catch(e){main.replaceChildren(el('div','note',e.message));if(e.data&&e.data.nearest_sunday){const b=el('button',null,'Go to '+e.data.nearest_sunday);b.onclick=()=>{state.date=e.data.nearest_sunday;load()};main.append(b)}$('#toc').replaceChildren()}
+}
+const srcName={dcs:'GOA DCS',anca:'ANCA',pdf:'parish booklet','pdf+anca':'parish booklet + ANCA',inferred:'inferred',engine:'rules',gap:'gap',parish:'parish translation',yocal:'yocal database',dcs_text:'text from GOA Digital Chant Stand (verify)',anca_pending:'ANCA text – parish translation pending'};
+function para(role,text){const d=el('div','l'),t=el('div','t '+role);const parts=text.split(/(?<=let us pray to the Lord\.)\s+/);parts.forEach((x,i)=>{if(i)t.append(el('div','pet',''));t.lastChild&&i?t.lastChild.textContent=x:t.append(document.createTextNode(x))});if(parts.length>1){t.replaceChildren(...parts.map(x=>el('div','pet',x)))}d.append(el('div','r '+role,role),t);return d}
+let lastSea=null;
+function renderBlock(b,sec){
+  const n=renderBlock0(b,sec);if(!b.seasonal){lastSea=null;return n}
+  n.classList.add('sea');if(lastSea===b.seasonal)return n;lastSea=b.seasonal;const f=document.createDocumentFragment();f.append(el('div','seatag','Seasonal: '+b.seasonal),n);return f}
+function renderBlock0(b,sec){
+  if(b.t==='line'){if(/^\[Silently/.test(b.text)){const d=el('details','silent');d.append(el('summary',null,"Priest's silent prayer (tap to expand)"),para(b.role,b.text));return d}return para(b.role,b.text)}
+  if(b.t==='rubric')return el('div','rub',b.text);
+  if(b.t==='seasonal'){const d=el('details','seasonal');d.append(el('summary',null,'Seasonal rubric (tap to expand)'));b.blocks.forEach(x=>d.append(renderBlock(x)));return d}
+  if(b.t==='variable'){
+    const v=el('div','var');if(b.caption&&b.caption.length)v.append(el('div','cap',b.caption.join(' · ')));
+    if(b.missing){v.append(el('div','miss','Text for this part not found for this date – see the rules-engine note above.'));return v}
+    b.paragraphs.forEach(p=>{if(p.heading)v.append(el('h4',null,p.heading));const d=p.role?para(p.role,p.text):el('div','rub',p.text);const s=el('span','src',srcName[p.source]||p.source);if(p.credit)s.title=p.credit;(d.querySelector('.t')||d).append(s);v.append(d)});return v}
+  return el('div')}
+const assetLabel=a=>(a.source==='anca'?'ANCA':'DCS')+' · '+(a.label||a.form).replace(/^c\d+(\.\w+)? - /,'').replace(/\s*\/\s*$/,'')+(a.source==='dcs'&&a.form!=='audio'?' ('+(a.form==='byzantine'?'Byz':'West')+')':'');
+function musicItem(m){
+  const w=el('div','mi');w.append(el('h5',null,m.title));
+  if(!m.assets.length){w.append(el('div','srcl','No score found for this date (will appear when ANCA/DCS publish it).'));return w}
+  const tabs=el('div','tabs'),body=el('div','pages'),src=el('div','srcl');w.append(tabs,body,src);
+  m.assets.forEach((a,i)=>{const b=el('button',a.cached?'cached':'',assetLabel(a));b.title=a.url;b.onclick=()=>show(i);tabs.append(b)});
+  async function show(i,tried=new Set()){tried.add(i);const a=m.assets[i];[...tabs.children].forEach((c,j)=>c.classList.toggle('on',j===i));body.replaceChildren(el('div','srcl','Loading…'));
+    src.replaceChildren(el('span',null,'Source: '),Object.assign(el('a',null,a.url),{href:a.url,target:'_blank',rel:'noopener'}));
+    try{
+      if(a.form==='audio'){const au=el('audio');au.controls=true;au.src=`/api/music/${a.id}/file`;body.replaceChildren(au);return}
+      const r=await api(`/api/music/${a.id}/pages`);tabs.children[i].classList.add('cached');
+      if(!r.pages){tabs.children[i].classList.add('bad');tabs.children[i].style.opacity=.45;const nx=m.assets.findIndex((_,j)=>!tried.has(j));if(nx>=0)return show(nx,tried);body.replaceChildren(el('div','miss',r.error||'Could not load this score.'));return}
+      body.replaceChildren(...Array.from({length:r.pages},(_,k)=>Object.assign(el('img'),{src:`/api/music/${a.id}/page/${k+1}.png`,loading:'lazy',alt:`${m.title} page ${k+1}`})))
+    }catch(e){body.replaceChildren(el('div','miss',e.message))}}
+  m._show=show;show(0);return w}
+function render(d){
+  document.title=`${d.service_title} ${d.date}`;
+  const main=$('#main'),toc=$('#toc');main.replaceChildren();toc.replaceChildren();
+  const day=el('div','day');day.append(el('h2',null,`${d.service_title} – ${d.weekday} ${d.date}`),el('div','sub',d.heading+(d.gospel_designation?' · '+d.gospel_designation:'')));
+  if(d.commemorations.length)day.append(el('div','sub','Also: '+d.commemorations.join('; ')));
+  (d.notes||[]).forEach(n=>day.append(el('div','note',n)));
+  if((d.translations_pending||[]).length)day.append(el('div','note','Parish translation pending for: '+[...new Set(d.translations_pending.map(x=>x.heading))].join('; ')+' (ANCA wording shown meanwhile).'));
+  main.append(day);
+  if(!d.complete)main.append(el('div','note','Rules incomplete for this date ('+d.incomplete_reasons.join('; ')+'). Variable parts marked below may be missing or guessed.'));
+  d.sections.forEach(s=>{
+    const sec=el('section');sec.id='s-'+s.id;sec.append(el('h3',null,s.title));
+    const body=s.optional?Object.assign(el('details'),{}):sec;if(s.optional){body.append(el('summary',null,'Optional – tap to expand'));sec.append(body)}
+    s.blocks.forEach(b=>body.append(renderBlock(b,s)));
+    if(s.music.length){const m=el('details','music');m.open=true;m.append(el('summary',null,'♪ Music'));s.music.forEach(x=>m.append(musicItem(x)));sec.append(m)}
+    main.append(sec);
+    const a=el('a',null,s.title);a.href='#s-'+s.id;if(s.music.length)a.append(el('span','m','♪'));toc.append(a)});
+  const links=[...toc.children],secs=[...main.querySelectorAll('section')];
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('on'));links[secs.indexOf(e.target)]?.classList.add('on')}}),{rootMargin:'-20% 0px -70% 0px'});secs.forEach(s=>io.observe(s));
+}
+if('wakeLock' in navigator){const wl=()=>navigator.wakeLock.request('screen').catch(()=>{});wl();document.addEventListener('visibilitychange',()=>document.visibilityState==='visible'&&wl())}
+init();
+</script>
+</body>
+</html>

@@ -10,7 +10,7 @@ matins.kontakion:        {service: matins, label: "Kontakion and oikos", attrs: 
 matins.praises:          {service: matins, label: "The Praises", attrs: [total, res, other, glory]}
 liturgy.apolytikia:      {service: liturgy, label: "Apolytikia (after the little entrance)", attrs: [res_tone, saint]}
 liturgy.kontakion:       {service: liturgy, label: "Kontakion", attrs: [kind, tone]}
-liturgy.prokeimenon:     {service: liturgy, label: "Prokeimenon", attrs: [owner]}
+liturgy.prokeimenon:     {service: liturgy, label: "Prokeimenon", attrs: [owner, proper]}
 liturgy.epistle:         {service: liturgy, label: "Epistle", attrs: [owner, ref]}
 liturgy.alleluia:        {service: liturgy, label: "Alleluia", attrs: [tone]}
 liturgy.gospel:          {service: liturgy, label: "Gospel", attrs: [ref]}
@@ -26,7 +26,7 @@ liturgy.antiphons:     {service: liturgy, label: "Antiphons", attrs: [refrain2],
 liturgy.eisodikon:     {service: liturgy, label: "Entrance hymn (eisodikon)", attrs: [kind], only: major_feast_slots, after: liturgy.antiphons}
 liturgy.trisagion:     {service: liturgy, label: "Trisagion hymn", attrs: [kind], only: major_feast_slots, after: liturgy.kontakion}
 liturgy.megalynarion:  {service: liturgy, label: "Megalynarion (in place of “It is truly meet”)", attrs: [kind], only: major_feast_slots, after: liturgy.gospel}
-liturgy.communion:     {service: liturgy, label: "Communion hymn", attrs: [kind], only: major_feast_slots, after: liturgy.megalynarion}
+liturgy.communion:     {service: liturgy, label: "Communion hymn", attrs: [kind], after: liturgy.megalynarion, after_or: liturgy.gospel}
 liturgy.final_hymn:    {service: liturgy, label: "After Communion (in place of “We have seen the true light”)", attrs: [kind], only: major_feast_slots, after: liturgy.communion}
 # Sunday occurrence of a fixed Major feast (major_feasts_sunday.yaml): the evlogetaria slot exists only then (Typikon Ch I s5 VI p.25-26 omits them; ANCA sings them)
 matins.evlogetaria:    {service: matins, label: "Evlogetaria", attrs: [kind], only: major_feast_sunday, after: matins.kathismata}

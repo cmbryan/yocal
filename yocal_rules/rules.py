@@ -6,6 +6,7 @@ Rule resolves to `missing` (never dropped).
 from __future__ import annotations
 
 import fnmatch
+import re
 import glob
 import os
 from dataclasses import dataclass, field
@@ -20,6 +21,7 @@ _WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Su
 # closed vocabulary of context-fact predicates
 PREDS = {
     "sunday": lambda f, a: f["weekday"] == "Sunday",
+    "tone_known": lambda f, a: f.get("tone") is not None,
     "sunday_eve": lambda f, a: f["weekday"] == "Sunday",  # liturgical-day unit: the Saturday eve belongs to Sunday
     "in_slice": lambda f, a: f["in_slice"],
     "menaion_date_is": lambda f, a: f["mmdd"] == a[0],
@@ -31,6 +33,7 @@ PREDS = {
     "saint_no_glory": lambda f, a: f["saint_has_glory"] is False,
     "glory_unknown": lambda f, a: f["saint_has_glory"] is None,
     "desig_contains": lambda f, a: any(x in f"{f['desig']} {f['desig_g']}" for x in a),
+    "not_desig_contains": lambda f, a: not any(x in f"{f['desig']} {f['desig_g']}" for x in a),
     "archangel_feast": lambda f, a: f["archangel_feast"],
     # ANCA reads the Sunday's own Epistle/prokeimenon (not the saint's) on these Sundays
     "anca_sunday_epistle": lambda f, a: f["all_saints_sunday"] or f["season"] == "triodion" or f["leavetaking"],
@@ -72,6 +75,9 @@ PREDS = {
     "weekday_in": lambda f, a: f["weekday"] in a,  # weekday of the liturgical day (Vespers: the day after the eve)
     "eve_weekday_in": lambda f, a: _WEEK[(_WEEK.index(f["weekday"]) - 1) % 7] in a,  # weekday of the eve (the day before)
     "bright_monday_george": lambda f, a: f.get("bright_monday_george", False),  # Agape Vespers: St George (Apr 23) transferred to Bright Monday (Typikon p.325)
+    "principal_matches": lambda f, a: bool(re.search(a[0], f.get("principal_name") or "")),  # regex on the Menaion principal commemoration
+    "feast_period_class_is": lambda f, a: f.get("feast_period_class", "") in a,  # lord | theotokos | saint (fore_after.yaml)
+    "all_saints_sunday": lambda f, a: f["all_saints_sunday"],
     "eve_basil": lambda f, a: f.get("eve_basil", False),  # the eve's DB row has the Liturgy of St Basil (Vesperal Liturgy)
 }
 

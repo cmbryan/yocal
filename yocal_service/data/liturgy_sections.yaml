@@ -1,0 +1,156 @@
+# Divine Liturgy section map for the parish choir PDF (Matins & Liturgy booklet).
+# Holds structure and rules only -- never PDF text. The text is extracted locally into
+# yocal_service/local/liturgy_template.json (git-ignored) by `python -m yocal_service.build_template PDF`.
+#
+# anchors are searched in order; a section runs to the next anchor.
+#   start:    regex on the stripped line that opens the section
+#   title:    display title (default: the matched line)
+#   optional: collapsed by default
+#   exclude:  kept as an anchor but not shown (memorial service: not part of the Liturgy)
+#   replace:  whole body replaced by a variable slot
+#   spans:    [{after|start, until, slot}] line ranges replaced by a variable slot
+#   music:    items for the chanting stand; dcs/anca are regexes
+#             dcs  -> filename of a Digital Chant Stand score;  anca -> label/context/filename of an ANCA link
+#   dcs_text: fallback DCS heading regex when the PDF gave only music for the section (e.g. Cherubic Hymn)
+#
+# seasonal: conditions for bracketed rubrics '[ ... ]' in the booklet (matched on the bracket's opening text).
+#   when:  list of alternatives (OR); each alternative is AND of  fact: [lo, hi] | value | bool
+#          facts: pascha_days (days after Pascha), season;  [{}] = always
+#   strip: regex removed from the start of the first paragraph when inlined (a leading condition phrase)
+#   Applies -> inlined in place; does not apply -> omitted; unmatched -> collapsed "Seasonal rubric".
+seasonal:
+  - match: '^\[During Bright Week'
+    label: Bright Week / Leave-taking of Pascha
+    when: [{pascha_days: [0, 6]}, {pascha_days: [38, 38]}]
+  - match: '^\[From Thomas Sunday'
+    label: Thomas Sunday to Leave-taking of Pascha
+    when: [{pascha_days: [7, 37]}]
+  - match: '^\[Omitted if a deacon is not serving'
+    label: Deacon serving
+    when: [{}]   # always: a deacon is assumed to serve
+    strip: '^\[?Omitted if a deacon is not serving:\s*'
+
+# seasonal_hymns: ANCA Liturgy Variables headings that replace booklet blocks (data-driven: applies when ANCA publishes the
+# heading for the date: Pascha, Lent, feasts...). Text -> parish translation (data/parish_translations.yaml) or ANCA pending.
+#   anca:       heading regex     unless_anca: skip when ANCA also has this heading (ordinary Sunday logic stays in force)
+#   section:    section id        drop: [{role, text, slot}] blocks removed; the hymn takes the first one's place
+#   lead:       block inserted before the hymn      after: {slot}  no drop: the hymn is added after that block
+seasonal_hymns:
+  - {anca: '^THE FIRST ANTIPHON', dcs_antiphon: 1, section: first_antiphon, drop: [{role: '^(Verse|Refrain)$'}]}
+  - {anca: '^THE SECOND ANTIPHON', dcs_antiphon: 2, section: second_antiphon, drop: [{role: '^(Verse|Refrain)$'}]}
+  - {anca: '^THE THIRD ANTIPHON', dcs_antiphon: 3, section: third_antiphon, drop: [{role: '^(Verse|Refrain)$'}, {slot: '^res_apolytikion$'}]}
+  - {anca: '^THE EISODIKON', section: eisodikon, drop: [{role: '^Choir$'}]}
+  - {anca: '^(PASCHAL APOLYTIKION|APOLYTIKION|THE HYPAKOE|HYPAKOE|THE KONTAKION|KONTAKION)', unless_anca: '^RESURRECTIONAL APOLYTIKION',
+     section: apolytikia, drop: [{slot: '^(res_apolytikion|apolytikia|kontakion)$'}]}
+  - {anca: '^THE ANTI-TRISAGION', section: trisagion, lead: {role: Choir, text: 'Amen.'},
+     drop: [{text: '^Amen\. Holy God'}, {text: '^With strength'}, {text: '^Holy God, Holy Mighty'}, {role: '^Choir$', text: '^$'}]}
+  - {anca: 'MEGALYNARION', section: megalynarion, drop: [{text: '^It is truly right'}, {text: '^Moth'}]}
+  - {anca: '^KOINONIKON', section: communion_clergy, drop: [{slot: '^communion_hymn$'}]}
+
+sections:
+  - {id: enarxis, start: '^The Enarxis$', title: The Enarxis}
+  - id: litany_peace
+    start: '^Litany of Peace$'
+    title: Litany of Peace
+    music: [{key: kyrie, title: 'Lord, have mercy (Kyrie eleison)', dcs: '^kyrieeleison'}]
+  - id: first_antiphon
+    start: '^The Prayer of the First Antiphon$'
+    title: The First Antiphon
+    music: [{key: antiphon1, title: 'First Antiphon (Sunday)', dcs: '^antiphon1\.'}]
+  - {id: little_litany_1, start: '^The First Little Litany$', title: The First Little Litany}
+  - id: second_antiphon
+    start: '^The Prayer of the Second Antiphon$'
+    title: The Second Antiphon
+    music:
+      - {key: antiphon2, title: 'Second Antiphon (Sunday)', dcs: '^antiphon2sunday'}
+      - {key: only_begotten, title: 'Only-begotten Son', dcs: '^onlybegotten'}
+  - {id: little_litany_2, start: '^The Second Little Litany$', title: The Second Little Litany}
+  - id: third_antiphon
+    start: '^The Prayer of the Third Antiphon$'
+    title: The Third Antiphon
+    spans: [{start: '^Resurrectional Apolytikion \(Tone', until: '^Verse: Let heaven', slot: res_apolytikion}]
+    music:
+      - {key: res_apolytikion, title: 'Resurrectional Apolytikion', dcs: '^apolytikion\.', anca: 'RESURRECTIONAL APOLYTIKION|Resurrection'}
+  - {id: little_entrance, start: '^The Little Entrance$', title: The Little Entrance}
+  - id: eisodikon
+    start: '^The Eisodikon$'
+    title: The Entrance Hymn
+    music: [{key: eisodikon, title: 'Entrance hymn: Come, let us worship (Sunday)', dcs: '^entrancehymnsunday'}]
+  - id: apolytikia
+    start: '^The Apolytikia and Kontakion$'
+    title: Apolytikia and Kontakion
+    spans:
+      - {start: '^Resurrectional Apolytikion \(Tone', until: '^Troparion to the Patron', slot: apolytikia}
+      - {start: '^Kontakion of the', until: '^Deacon: Let us pray to the Lord', slot: kontakion}
+    music:
+      - {key: res_apolytikion, title: 'Resurrectional Apolytikion', dcs: '^apolytikion\.', anca: 'RESURRECTIONAL APOLYTIKION|Resurrection'}
+      - {key: saint_apolytikion, title: 'Apolytikion of the saint', dcs: '^apolytikion1', anca: 'APOLYTIKION FOR'}
+      - {key: kontakion, title: Kontakion, dcs: '^seasonalkontakion', anca: 'kont|Thou Who wast raised|KONTAKION'}
+  - id: trisagion
+    start: '^The Trisagion$'
+    title: The Trisagion
+    music: [{key: trisagion, title: 'Trisagion', dcs: '^trisagion\d'}]
+  - id: prokeimenon
+    start: '^The Prokeimenon \(Tone'
+    title: The Prokeimenon
+    replace: prokeimenon
+    music: [{key: prokeimenon, title: Prokeimenon, anca: 'PROKEIMENON'}]
+  - id: epistle
+    start: '^The Epistle$'
+    title: The Epistle
+    spans:
+      - {after: '^Deacon: Wisdom!$', until: '^The reader turns westward', slot: epistle_intro}
+      - {after: '^Deacon: Let us attend\.$', until: '^When the epistle is concluded', slot: epistle}
+  - id: alleluia
+    start: '^The Alleluia \(Tone'
+    title: The Alleluia
+    replace: alleluia
+    music: [{key: alleluia, title: 'Alleluia', dcs: '^alleluia'}]
+  - id: gospel
+    start: '^The Gospel$'
+    title: The Gospel
+    spans:
+      - {after: '^Choir: And to your spirit', until: '^Choir: Glory to you, Lord', slot: gospel_intro}
+      - {after: '^The deacon/priest chants the appointed reading', until: '^Choir: Glory to you, Lord\. Glory to you\.$', slot: gospel}
+  - id: fervent
+    start: '^Litany of Fervent Supplication$'
+    title: Litany of Fervent Supplication
+    music: [{key: litany_responses, title: 'Litany responses (Lord, have mercy / To you, O Lord)', dcs: '^liturgicmode'}]
+  - id: cherubic
+    start: '^Cherubic Hymn$'
+    title: The Cherubic Hymn
+    dcs_text: 'ENTRANCE OF THE HOLY GIFTS'
+    music: [{key: cherubic, title: 'Cherubic Hymn', dcs: '^cherubicmode'}]
+  - id: anaphora
+    start: '^Anaphora$'
+    title: The Anaphora
+    dcs_text: 'HOLY ANAPHORA'
+  - {id: creed, start: '^The Creed$', title: The Creed}
+  - {id: megalynarion, start: '^The Megalynarion$', title: The Megalynarion}
+  - id: holy_things
+    start: '^Deacon: Let us attend\.$'
+    title: The Holy Things
+    music: [{key: one_is_holy, title: 'One is Holy', dcs: '^oneisholy'}]
+  - id: communion_clergy
+    start: '^The Communion of the Clergy$'
+    title: Communion Hymn (Koinonikon)
+    replace: communion_hymn
+    music: [{key: communion_hymn, title: 'Communion hymn (Sunday)', dcs: '^communionhymnsunday'}]
+  - {id: pre_communion, start: '^The Pre-Communion Prayers$', title: The Pre-Communion Prayers}
+  - {id: communion_faithful, start: '^Communion of The Faithful$', title: Communion of the Faithful}
+  - id: post_communion
+    start: '^The Post-Communion Hymn$'
+    title: The Post-Communion Hymn
+    music: [{key: true_light, title: 'We have seen the true light', dcs: '^wehaveseenthetruelight'}]
+  - {id: thanksgiving_litany, start: '^The Litany of Thanksgiving$', title: The Litany of Thanksgiving}
+  - id: ambo
+    start: '^Prayer behind the Ambon$'
+    title: Prayer behind the Ambon
+    music: [{key: blessed_be, title: 'Blessed be the name of the Lord', dcs: '^blessedbethename'}]
+  - {id: memorial, start: '^Prayers Of Mercy For The Departed$', title: Prayers of Mercy for the Departed, optional: true, exclude: true}
+  - id: dismissal
+    start: '^The Dismissal$'
+    title: The Dismissal
+    spans: [{start: '^Priest: May \[insert', until: '^Then facing the icon of Christ', slot: dismissal, keep: true}]
+    music: [{key: many_years, title: 'During the Dismissal (Many years)', dcs: '^duringdismissal'}]
+  - {id: thanksgiving_prayers, start: '^The Prayers of Thanksgiving$', title: The Prayers of Thanksgiving}
