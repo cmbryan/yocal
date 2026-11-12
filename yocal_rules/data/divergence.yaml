@@ -112,3 +112,10 @@
   theirs: {owner: saint}
   class: calendar_data_gap
   reason: "ANCA labels the Epistle for a saint (2024-12-15, 11th of Luke) while the yocal calendar reads the Sunday's Epistle; same pattern as the logged calendar_data_gap dates"
+- slot: liturgy.communion
+  source: anca
+  scope: {pascha_days: [0]}
+  ours: {kind: feast}
+  theirs: {kind: receive_body}
+  class: communion_kind_naming
+  reason: "Pascha Sunday: Rule pascha.lit.communion names the hymn 'of the feast' (Typikon Ch VII p.522); ANCA's Koinonikon heading 'of Pascha' prints the same text as the 4 Sundays after Thomas ('Receive ye the Body of Christ'), which our ANCA parser reads as receive_body. Same hymn, different kind label"

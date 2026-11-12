@@ -38,7 +38,3 @@
 - {id: lit.comm.all_saints, slot: liturgy.communion, tier: 1, when: [{pred: sunday}, {pred: desig_contains, args: ["Sunday of All Saints"]}, {pred: not_desig_contains, args: ["of All Saints of"]}],
    fill: {kind: righteous, parts: ["Communion hymn: “Rejoice in the Lord, O ye righteous” (Psalm 32:1)"]},
    source: typikon, locator: "Ch I s6 XI p.39 (Sunday of All Saints)", status: explicit}
-- {id: lit.comm.pascha, slot: liturgy.communion, tier: 0, when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {kind: receive_body, parts: ["Communion hymn of Pascha: “Receive ye the Body of Christ”"]},
-   source: anca, locator: "inferred: Typikon p.39 names the 4 Sundays after Thomas Sunday; Pascha Sunday uses the same hymn", status: inferred,
-   evidence: "ANCA Liturgy Variables 2026-04-12: 'Koinonikon of Pascha: Receive ye the body of Christ'"}
