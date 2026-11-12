@@ -187,8 +187,6 @@ def communion(fill: dict, f: dict) -> list | None:
     if kind == "feast":
         fb = day_feast(f)
         hid = f"{fb}/communion" if fb else None
-    elif kind == "saint":
-        hid = f"{saint_base(f)}/communion"
     if not hid:
         return None
     label = "Communion Hymn (Sunday)" if kind == "praise_the_lord" else f"Communion Hymn ({kind.replace('_', ' ')})"
@@ -291,7 +289,10 @@ def dismissal(dis, phrase, f: dict) -> dict:
 def dcs_keys(hid: str) -> list:
     """Hymn id -> candidate DCS key lists: [[part, ...], ...] (alternatives, each the hymn's parts in order; a part may be a list to join)."""
     alts = []
-    over = table().get("dcs", {}).get(hid)
+    dcs_tab = table().get("dcs", {})
+    if hid in dcs_tab and not dcs_tab[hid]:
+        return []  # `id: []`: DCS holds no copy of this hymn (its key there is another hymn)
+    over = dcs_tab.get(hid)
     if over:
         alts.append(over)
     m = re.fullmatch(r"oct/t(\d)/sun/(apolytikion|kontakion)", hid)
@@ -348,6 +349,8 @@ def _overrides() -> dict:
     out = {}
     for hid, parts in (table().get("dcs") or {}).items():
         keys = [k for p in parts for k in (p if isinstance(p, list) else [p])]
+        if not keys:  # `id: []`: no DCS copy
+            continue
         out[keys[0]] = hid
         for k in keys[1:]:
             out.setdefault(k, "")

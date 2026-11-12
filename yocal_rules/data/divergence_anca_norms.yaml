@@ -1,0 +1,23 @@
+# ANCA answer key (yocal_rules/anca.py) reads the Epistle block's subtitle; the Rules in rules/anca_norms.yaml follow the
+# prokeimenon text ANCA actually prints under it (parish decision 2026-11-12: follow ANCA for the prokeimena).
+- slot: liturgy.prokeimenon
+  source: anca
+  scope: {mmdd: ["11-11"]}
+  ours: {owner: sunday}
+  theirs: {owner: saint}
+  class: anca_subtitle_saint_prints_tone
+  reason: "ANCA 2018-11-11 subtitle '(For St. Menas)' but the text is the Tone 7 Sunday prokeimenon ('The Lord will give strength'); Rule lit.prokeimenon.menas_tone follows the text."
+- slot: liturgy.prokeimenon
+  source: anca
+  scope: {mmdd: ["02-09"]}
+  ours: {owner: feast}
+  theirs: {owner: sunday}
+  class: anca_subtitle_sunday_prints_feast
+  reason: "ANCA 2020-02-09 and 2025-02-09 subtitle '(For Sunday of the Pharisee and Publican)' but the text is the Presentation's ('My soul doth magnify the Lord'); Rule lit.prokeimenon.presentation_leavetaking follows the text."
+- slot: liturgy.prokeimenon
+  source: anca
+  scope: {mmdd: ["09-15", "09-16", "09-17", "09-18", "09-19", "09-20", "09-21"]}
+  ours: {proper: false}
+  theirs: {proper: true}
+  class: anca_subtitle_named_prints_tone
+  reason: "ANCA 2024-09-15, 2025-09-21, 2026-09-20 subtitle '(For Sunday after the Elevation of the Holy Cross)' but the text is the tone's; Rule lit.prokeimenon.after_elevation_tone.2024 follows the text (2018-2023 printed the Sunday's own)."

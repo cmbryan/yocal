@@ -60,6 +60,7 @@ communion:
   praise_jerusalem: mov/7/communion
   righteous: mov/56/communion
   chosen_zion: men/03-25/communion             # "The Lord has chosen Zion": the Annunciation's
+  saint: lit/communion/common/remembrance      # a saint's communion hymn is a class common (Rules lit.comm.saint.*); default "In everlasting remembrance"
 
 # ids whose DCS key is not the pattern one (seen on DCS pages; reference only)
 dcs:
@@ -67,7 +68,11 @@ dcs:
   oct/t5/sun/apolytikion: ["he.a.m5|heAU.TonSynanarchonLogon.text"]
   oct/t6/sun/apolytikion: ["he.a.m6|heAU.AngelikaiDynameis.text"]
   hor/kontakion/protection: ["ho.*|hoTY.Key0408.text"]
-  men/02-01/kontakion: ["me.m02.d01|me*.Kontakion2.text"]
+  men/02-01/kontakion: []   # ANCA 2026-02-01 forefeast kontakion "On this day doth Simeon" (Tone 4); DCS Kontakion2 is another hymn
+  lit/communion/common/remembrance: ["liturgical.verses|psLI.weekday.d3.communion.v1.text"]   # Ps 111: "The righteous will be remembered for ever"
+  lit/communion/common/apostles: ["liturgical.verses|psLI.weekday.d5.communion.v1.text"]      # Ps 18: "Their proclamation went forth"
+  lit/communion/common/angels: ["liturgical.verses|psLI.weekday.d2.communion.v1.text"]        # Ps 103: "He makes His angels spirits"
+  lit/communion/cup_of_salvation: ["liturgical.verses|psLI.weekday.d4.communion.v1.text"]     # Ps 115: "I will take up the cup of salvation"
   men/09-01/kontakion: ["me.m09.d01|me*.Kontakion3.text"]
   men/12-09/kontakion: ["me.m12.d09|me*.Kontakion2.text"]
   men/03-25/kontakion: [["tr.d056|trMA.Kontakion11.text", "tr.d056|trMA.Kontakion12.text", "tr.d056|trMA.Kontakion13.text",
