@@ -1,0 +1,44 @@
+# Liturgy communion hymn on Sundays. Typikon Ch I s6 XI "The Communion Hymn", printed p.39. Weekday/feast-day Rules: major_feasts.yaml (tier -10).
+# kind: praise_the_lord (Ps 148:1) | feast (hymn of the feast) | cup_of_salvation (Ps 115:4) | saint (the saint's own) | receive_body | light_of_countenance | righteous | praise_jerusalem
+- {id: lit.comm.sunday, slot: liturgy.communion, tier: 4, when: [{pred: sunday}],
+   fill: {kind: praise_the_lord, parts: ["Communion hymn: “Praise ye the Lord from the heavens” (Psalm 148:1)"]},
+   source: typikon, locator: "Ch I s6 XI p.39 (every Sunday that is not a feast of the Lord or the Theotokos or its leavetaking)", status: explicit}
+- {id: lit.comm.lord_feast, slot: liturgy.communion, tier: 2, when: [{pred: sunday}, {pred: major_feast_class_is, args: [lord]}],
+   fill: {kind: feast, parts: ["Communion hymn of the feast"]},
+   source: typikon, locator: "Ch I s6 XI p.39 (communion hymn of the feast on feasts of the Lord)", status: explicit}
+- {id: lit.comm.theotokos_feast, slot: liturgy.communion, tier: 2, when: [{pred: sunday}, {pred: major_feast_class_is, args: [theotokos]}],
+   fill: {kind: cup_of_salvation, parts: ["Communion hymn: “I will take the cup of salvation” (Psalm 115:4)"]},
+   source: typikon, locator: "Ch I s6 XI p.39 (feasts of the Theotokos on a Sunday)", status: explicit}
+- {id: lit.comm.lord_leavetaking, slot: liturgy.communion, tier: 2, when: [{pred: sunday}, {pred: leavetaking}, {pred: feast_period_class_is, args: [lord]}],
+   fill: {kind: feast, parts: ["Communion hymn of the feast (leavetaking)"]},
+   source: typikon, locator: "Ch I s6 XI p.39 (the default 'Praise ye the Lord' excludes the leavetaking of a feast of the Lord)", status: inferred,
+   evidence: "reading of the p.39 exclusion; no ANCA 2026 Sunday leavetaking of a Lord feast to check"}
+- {id: lit.comm.theotokos_leavetaking, slot: liturgy.communion, tier: 2, when: [{pred: sunday}, {pred: leavetaking}, {pred: feast_period_class_is, args: [theotokos]}],
+   fill: {kind: cup_of_salvation, parts: ["Communion hymn: “I will take the cup of salvation” (Psalm 115:4)"]},
+   source: typikon, locator: "Ch I s6 XI p.39 (Theotokos feast on Sunday; leavetaking excluded from the default)", status: inferred,
+   evidence: "ANCA Liturgy Variables 2026-08-23 (leavetaking of the Dormition): 'Koinonikon of the Feast'; 'I will take the cup' per p.39"}
+- {id: lit.comm.saint, slot: liturgy.communion, tier: 3,
+   when: [{pred: sunday}, {pred: principal_matches, args: ['(?<!the-)\bApostle\b|\bEvangelist\b|Baptist|Forerunner|Peter and Paul|Three Hierarchs|Constantine']}],
+   fill: {kind: saint, parts: ["Communion hymn of the saint (apostle, evangelist, Baptist, Peter and Paul, Three Hierarchs, Constantine and Helen)"]},
+   source: typikon, locator: "Ch I s6 XI p.39 (feast of St John the Baptist, SS Peter and Paul, an Apostle, an Evangelist, St Andrew, the 3 Hierarchs, SS Constantine and Helen: the hymn is the saint's, not the Sunday's)", status: explicit,
+   conflict: {with: [ANCA], status: open, note: "ANCA Liturgy Variables 2026-08-09 (Holy Apostle Matthias, Transfiguration afterfeast) lists no Koinonikon, i.e. the Sunday hymn. ANCA 2026-10-18 (Luke) has the saint's. Project default: follow ANCA where it speaks; the Typikon reading is kept here."}}
+- {id: lit.comm.archangels, slot: liturgy.communion, tier: 3, when: [{pred: sunday}, {pred: menaion_date_is, args: ["11-08"]}],
+   fill: {kind: saint, parts: ["Communion hymn of the Archangels: “He maketh His angels spirits…” (Psalm 103:4)"]},
+   source: typikon, locator: "Ch I s6 XI p.39 (the Archangels, November 8)", status: explicit}
+- {id: lit.comm.lent3, slot: liturgy.communion, tier: 1, when: [{pred: sunday}, {pred: desig_contains, args: ["3rd of Great Lent"]}],
+   fill: {kind: light_of_countenance, parts: ["Communion hymn: “The light of Thy countenance” (Psalm 4:7)"]},
+   source: typikon, locator: "Ch I s6 XI p.39 (3rd Sunday of Great Lent)", status: explicit}
+- {id: lit.comm.after_thomas, slot: liturgy.communion, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [14, 35]}],
+   fill: {kind: receive_body, parts: ["Communion hymn: “Receive ye the Body of Christ”"]},
+   source: typikon, locator: "Ch I s6 XI p.39 (the 4 Sundays after St Thomas Sunday)", status: explicit}
+- {id: lit.comm.thomas, slot: liturgy.communion, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [7, 7]}],
+   fill: {kind: praise_jerusalem, parts: ["Communion hymn of Thomas Sunday (ANCA: “Praise the Lord, O Jerusalem”, Psalm 147:12)"]},
+   source: anca, locator: "inferred: Typikon p.39 names the 4 Sundays after Thomas Sunday, not Thomas Sunday itself", status: inferred,
+   evidence: "ANCA Liturgy Variables 2026-04-19: 'Koinonikon of Thomas Sunday'"}
+- {id: lit.comm.all_saints, slot: liturgy.communion, tier: 1, when: [{pred: sunday}, {pred: desig_contains, args: ["Sunday of All Saints"]}, {pred: not_desig_contains, args: ["of All Saints of"]}],
+   fill: {kind: righteous, parts: ["Communion hymn: “Rejoice in the Lord, O ye righteous” (Psalm 32:1)"]},
+   source: typikon, locator: "Ch I s6 XI p.39 (Sunday of All Saints)", status: explicit}
+- {id: lit.comm.pascha, slot: liturgy.communion, tier: 0, when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
+   fill: {kind: receive_body, parts: ["Communion hymn of Pascha: “Receive ye the Body of Christ”"]},
+   source: anca, locator: "inferred: Typikon p.39 names the 4 Sundays after Thomas Sunday; Pascha Sunday uses the same hymn", status: inferred,
+   evidence: "ANCA Liturgy Variables 2026-04-12: 'Koinonikon of Pascha: Receive ye the body of Christ'"}

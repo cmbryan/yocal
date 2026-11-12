@@ -272,6 +272,12 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         x = con.execute("select lect_1,lect_2 from yocal_lections where code=?", (code,)).fetchone()
         return x or (None, None)
 
+    def text(code, n):  # the reading's text from yocal_lections (HTML; used by the service, not by the Rules)
+        x = con.execute(f"select text_{n} from yocal_lections where code=?", (code,)).fetchone()
+        return (x[0] if x else None) or ""
+
+    ep_text = text(r["c_code"], 1) if r["is_comm_apos"] else text(r["a_code"], 1)
+    gp_text = text(r["c_code"], 2) if r["is_comm_gosp"] else text(r["g_code"], 2)
     ep = lect(r["c_code"])[0] if r["is_comm_apos"] else lect(r["a_code"])[0]
     sunday_ep = lect(r["a_code"])[0]
     gp = lect(r["c_code"])[1] if r["is_comm_gosp"] else lect(r["g_code"])[1]
@@ -336,7 +342,7 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         tone=_num(r["tone"]), eothinon=_num(r["eothinon"]), desig=r["desig_a"], desig_g=r["desig_g"],
         epistle_owner="saint" if r["is_comm_apos"] else "sunday",
         gospel_owner="saint" if r["is_comm_gosp"] else "sunday",
-        epistle_ref=ep, sunday_epistle_ref=sunday_ep, gospel_ref=gp,
+        epistle_ref=ep, sunday_epistle_ref=sunday_ep, gospel_ref=gp, epistle_text=ep_text, gospel_text=gp_text,
         all_saints_sunday="Sunday of All Saints" in f"{r['desig_a']} {r['desig_g']}",
         leavetaking=(_basil().get(mmdd, {}).get("rank") == "LEAVETAKING"),
         saint_in_calendar=bool(major), principal_name=major,

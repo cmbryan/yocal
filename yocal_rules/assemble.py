@@ -52,6 +52,8 @@ def build(service: str, date: dt.date, db_path: str = calfacts.DEFAULT_DB, strip
     for s in [s for s in ids if slots[s].get("after")]:  # `after`: document position ('^' = first)
         ids.remove(s)
         a = slots[s]["after"]
+        if a not in ids and a != "^":
+            a = slots[s].get("after_or", a)  # anchor slot absent (feast-only): fall back
         ids.insert(0 if a == "^" else ids.index(a) + 1 if a in ids else len(ids), s)
     res = evaluate(rules, facts, ids)
     ordered = [(s, slots[s], res[s]) for s in ids]

@@ -91,3 +91,24 @@
   scope: {date: ["2022-11-20"]}
   class: anca_forefeast_variant
   reason: "Forefeast of the Entrance: ANCA's 4R+3+3 / apolytikion pattern differs from ours; no Typikon rule modelled yet for the forefeast Sunday"
+- slot: liturgy.communion
+  source: anca
+  scope: {date: ["2026-08-09"]}
+  ours: {kind: saint}
+  theirs: {kind: praise_the_lord}
+  class: anca_sunday_hymn_on_apostle
+  reason: "Holy Apostle Matthias on a Sunday in the Transfiguration afterfeast: Typikon Ch I s6 XI p.39 gives the apostle's communion hymn; ANCA lists no Koinonikon (the Sunday hymn). Open conflict on Rule lit.comm.saint; ANCA 2026-10-18 (Luke) does give the saint's"
+- slot: liturgy.prokeimenon
+  source: anca
+  scope: {date: ["2026-01-11"]}
+  ours: {owner: sunday, proper: true}
+  theirs: {owner: saint}
+  class: anca_saint_on_named_sunday
+  reason: "Sunday after the Theophany coinciding with St Theodosios (Jan 11): ANCA's Epistle block is labelled for the saint and prints the saint's prokeimenon; our named-Sunday Rule gives the Sunday's own. The yocal DB gives the Sunday's Epistle. Open question for the Rule lit.prokeimenon.named_sunday"
+- slot: liturgy.prokeimenon
+  source: anca
+  scope: {date: ["2024-12-15"]}
+  ours: {owner: sunday}
+  theirs: {owner: saint}
+  class: calendar_data_gap
+  reason: "ANCA labels the Epistle for a saint (2024-12-15, 11th of Luke) while the yocal calendar reads the Sunday's Epistle; same pattern as the logged calendar_data_gap dates"

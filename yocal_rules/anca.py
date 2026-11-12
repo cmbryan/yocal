@@ -312,7 +312,12 @@ def parse_liturgy(txt):
     if m2:
         k["liturgy.gospel"] = dict(ref=m2.group(1).strip())
     if owner:  # circular: the key shows the prokeimenon owner only through the Epistle subtitle
-        k["liturgy.prokeimenon"] = dict(owner=owner)
+        # ANCA labels the Epistle block '(For the Nth Sunday after Pentecost)' when the prokeimenon is the tone of the week's; a named Sunday
+        # (Forefathers, before/after Nativity/Theophany/Elevation, Holy Fathers, All Saints...) carries its own name: `proper`
+        pk = dict(owner=owner)
+        if owner == "sunday":
+            pk["proper"] = not re.search(r"^(?:the )?[A-Za-z\-]+ Sunday after Pentecost$", ep.group(1).strip(), re.I)
+        k["liturgy.prokeimenon"] = pk
     a = re.search(r"of our father among the saints, ([A-Z][A-Za-z ]+?)(?:,| archbishop)", f)
     if "Priest: May he who rose" in f or "THE DISMISSAL" in f:
         k["liturgy.dismissal"] = dict(author="Basil the Great" if a and "Basil" in a.group(1) else "John Chrysostom" if a else None,
@@ -415,6 +420,27 @@ def parse_feast_matins(txt):
     return k
 
 
+def parse_communion(f: str) -> dict:
+    """The Koinonikon heading -> liturgy.communion kind. ANCA lists a heading only when it is not the Sunday hymn ('Praise ye the Lord')."""
+    k = {}
+    f = re.sub(r"\s+", " ", f)
+    m = re.search(r"KOINONIKON \(COMMUNION HYMN\)(.{0,250})", f)
+    if m:
+        t = m.group(1)
+        h = t[:90]
+        k["liturgy.communion"] = dict(kind="praise_the_lord" if re.search(r"Praise (?:ye )?the Lord from the heavens", t)
+                                      else "cup_of_salvation" if "cup of salvation" in t
+                                      else "chosen_zion" if re.search(r"(?:chosen|elected) (?:Zion|Sion)", t)
+                                      else "receive_body" if re.search(r"Receive ye the body", t, re.I)
+                                      else "light_of_countenance" if re.search(r"light of Thy countenance", t, re.I)
+                                      else "righteous" if re.search(r"Rejoice in the Lord, O ye righteous", t)
+                                      else "praise_jerusalem" if re.search(r"Praise the Lord, O Jerusalem", t)
+                                      else "saint" if re.search(r"\b(?:FOR|OF) (?:ST\.|SS\.|THE ARCHANGELS|THE EVANGELIST|THE APOSTLE)", h) else "feast")
+    elif re.search(r"Liturgy Variables", f):
+        k["liturgy.communion"] = dict(kind="praise_the_lord")
+    return k
+
+
 def parse_feast_liturgy(txt):
     k = {}
     f = _flat(txt)
@@ -433,12 +459,7 @@ def parse_feast_liturgy(txt):
         k["liturgy.megalynarion"] = dict(kind="in_thee_rejoiceth")
     elif re.search(r"MEGALYNARION (?:OF|FOR) ", f):
         k["liturgy.megalynarion"] = dict(kind="feast")
-    m = re.search(r"KOINONIKON \(COMMUNION HYMN\)(.{0,250})", f)
-    if m:
-        t = m.group(1)
-        k["liturgy.communion"] = dict(kind="praise_the_lord" if re.search(r"Praise (?:ye )?the Lord from the heavens", t)
-                                      else "cup_of_salvation" if "cup of salvation" in t
-                                      else "chosen_zion" if re.search(r"(?:chosen|elected) (?:Zion|Sion)", t) else "feast")
+    k.update(parse_communion(f))
     if re.search(r"[Ii]nstead of singing “?We have seen the true light,?”?,? sing the [Aa]polytikion", f):
         k["liturgy.final_hymn"] = dict(kind="feast_troparion")
     elif re.search(r"Instead of “We have seen the true light,?” sing “Christ is [Rr]isen”", f):  # Pascha
@@ -540,6 +561,7 @@ def key_for(service: str, date: dt.date, cache: str, offline: bool = False):
             return {}, used, ["no ANCA READ file for this date"]
         used.append(f"READ {date:%b %d %Y}")
         k = parse_liturgy(t)
+        k.update(parse_communion(t))
         if _feast_day(service, date):  # festal Liturgy parts (feast-only slots)
             fk = parse_feast_liturgy(t)
             pat = fk.pop("liturgy.patron", None)
