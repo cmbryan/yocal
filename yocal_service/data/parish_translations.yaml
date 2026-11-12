@@ -1,0 +1,414 @@
+# Parish translations of seasonal hymns (replace ANCA's wording). Fill `text`; blank line = new paragraph.
+# Keys: <ANCA heading slug>:<hash of ANCA text>. `heading`/`dates` are hints only (where ANCA publishes it).
+# `applies_to: [regex]` (optional) lets one entry also cover other headings whose slug matches (same hymn under another saint's name).
+# Regenerate the list of needed keys with: python -m yocal_service.translations
+translations:
+  apolytikion-for-thomas-sunday:c77d06b9:
+    dates:
+    - '2026-04-19'
+    heading: APOLYTIKION FOR THOMAS SUNDAY IN TONE SEVEN
+    text: null
+  apolytikion-of-lazarus-saturday:d0583500:
+    dates:
+    - '2026-04-05'
+    heading: APOLYTIKION OF LAZARUS SATURDAY IN TONE ONE
+    text: null
+  apolytikion-of-palm-sunday:ed032577:
+    dates:
+    - '2026-04-05'
+    heading: APOLYTIKION OF PALM SUNDAY IN TONE FOUR
+    text: null
+  apolytikion-of-pentecost:11e52d2c:
+    dates:
+    - '2026-05-31'
+    heading: APOLYTIKION OF PENTECOST IN TONE EIGHT
+    text: null
+  apolytikion-of-st-john-chrysostom:938fcdfe:
+    dates:
+    - '2026-04-12'
+    heading: APOLYTIKION OF ST. JOHN CHRYSOSTOM IN TONE EIGHT
+    text: null
+  koinonikon-for-palm-sunday:ae229817:
+    dates:
+    - '2026-04-05'
+    heading: KOINONIKON FOR PALM SUNDAY IN TONE EIGHT
+    text: null
+  koinonikon-for-pentecost:2161d1a4:
+    dates:
+    - '2026-05-31'
+    heading: KOINONIKON FOR PENTECOST IN TONE EIGHT
+    text: null
+  koinonikon-for-st-luke:478fcc91:
+    applies_to:
+    - ^koinonikon-(for|of)-(st-|the-)?(evangelist|luke|mark|john|matthew)
+    dates:
+    - '2026-10-18'
+    heading: KOINONIKON FOR ST. LUKE IN TONE EIGHT
+    text: null
+  koinonikon-for-the-archangels:c301cdea:
+    dates:
+    - '2026-11-08'
+    heading: KOINONIKON FOR THE ARCHANGELS IN TONE EIGHT
+    text: null
+  koinonikon-for-third-sunday-of-great-lent:c71ba6fb:
+    dates:
+    - '2026-03-15'
+    heading: KOINONIKON FOR THIRD SUNDAY OF GREAT LENT
+    text: null
+  koinonikon-of-all-saints:2bcce1b7:
+    dates:
+    - '2026-06-07'
+    heading: KOINONIKON OF ALL SAINTS IN TONE EIGHT
+    text: null
+  koinonikon-of-pascha:e5b81cd2:
+    dates:
+    - '2026-04-12'
+    - '2026-04-26'
+    - '2026-05-03'
+    - '2026-05-10'
+    - '2026-05-17'
+    heading: KOINONIKON OF PASCHA IN TONE EIGHT
+    text: null
+  koinonikon-of-the-feast:f272ae7a:
+    dates:
+    - '2026-08-23'
+    heading: KOINONIKON OF THE FEAST IN TONE EIGHT
+    text: null
+  koinonikon-of-thomas-sunday:7713c486:
+    dates:
+    - '2026-04-19'
+    heading: KOINONIKON OF THOMAS SUNDAY
+    text: null
+  kontakion-of-palm-sunday:dd145969:
+    dates:
+    - '2026-04-05'
+    heading: KONTAKION OF PALM SUNDAY IN TONE SIX
+    text: null
+  kontakion-of-pentecost:7e8b0bf5:
+    dates:
+    - '2026-05-31'
+    heading: KONTAKION OF PENTECOST IN TONE EIGHT
+    text: null
+  megalynarion-for-palm-sunday:3da23fe3:
+    dates:
+    - '2026-04-05'
+    heading: MEGALYNARION FOR PALM SUNDAY IN TONE FOUR
+    text: null
+  megalynarion-for-paralytic-sunday:4790056f:
+    dates:
+    - '2026-05-03'
+    heading: MEGALYNARION FOR PARALYTIC SUNDAY IN TONE ONE
+    text: null
+  megalynarion-for-pascha:5bd58d7d:
+    dates:
+    - '2026-04-12'
+    - '2026-04-26'
+    - '2026-05-17'
+    heading: MEGALYNARION FOR PASCHA IN TONE ONE
+    text: null
+  megalynarion-for-sunday-of-the-samaritan-woman:260ad9bd:
+    dates:
+    - '2026-05-10'
+    heading: MEGALYNARION FOR SUNDAY OF THE SAMARITAN WOMAN IN TONE ONE
+    text: null
+  megalynarion-for-the-feast:a46abb15:
+    dates:
+    - '2026-05-31'
+    heading: MEGALYNARION FOR THE FEAST IN TONE SEVEN
+    text: null
+  megalynarion-for-thomas-sunday:6e1d9ae3:
+    dates:
+    - '2026-04-19'
+    heading: MEGALYNARION FOR THOMAS SUNDAY IN TONE ONE
+    text: null
+  megalynarion-of-the-feast:98cd9e05:
+    dates:
+    - '2026-08-23'
+    heading: MEGALYNARION OF THE FEAST IN TONE ONE
+    text: null
+  paschal-apolytikion:0a499897:
+    dates:
+    - '2026-04-12'
+    heading: PASCHAL APOLYTIKION IN TONE FIVE
+    text: null
+  st-basil-liturgy-megalynarion:8ce0ebf3:
+    dates:
+    - '2026-03-01'
+    - '2026-03-08'
+    - '2026-03-15'
+    - '2026-03-22'
+    - '2026-03-29'
+    heading: ST. BASIL LITURGY MEGALYNARION
+    text: null
+  the-anti-trisagion-hymn:8aada5c6:
+    dates:
+    - '2026-03-15'
+    heading: THE ANTI-TRISAGION HYMN
+    text: null
+  the-anti-trisagion-hymn:b1750c64:
+    dates:
+    - '2026-04-12'
+    - '2026-05-31'
+    heading: THE ANTI-TRISAGION HYMN
+    text: null
+  the-eisodikon-of-palm-sunday:23d3a2ae:
+    dates:
+    - '2026-04-05'
+    heading: THE EISODIKON OF PALM SUNDAY
+    text: null
+  the-eisodikon-of-pascha:56fa62e8:
+    dates:
+    - '2026-04-12'
+    - '2026-05-03'
+    - '2026-05-10'
+    - '2026-05-17'
+    heading: THE EISODIKON OF PASCHA
+    text: null
+  the-eisodikon-of-pascha:bbbfef7b:
+    dates:
+    - '2026-04-19'
+    - '2026-04-26'
+    heading: THE EISODIKON OF PASCHA
+    text: null
+  the-eisodikon-of-the-feast:19c71768:
+    dates:
+    - '2026-05-31'
+    heading: THE EISODIKON OF THE FEAST
+    text: null
+  the-first-antiphon:105f021a:
+    dates:
+    - '2026-04-12'
+    - '2026-04-19'
+    - '2026-04-26'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-first-antiphon:14ea20ae:
+    dates:
+    - '2026-03-15'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-first-antiphon:164402eb:
+    dates:
+    - '2026-05-31'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-first-antiphon:462a4a14:
+    dates:
+    - '2026-05-03'
+    - '2026-05-10'
+    - '2026-05-17'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-first-antiphon:57b19d2e:
+    dates:
+    - '2026-11-22'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-first-antiphon:68ea66ae:
+    dates:
+    - '2026-08-16'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-first-antiphon:6e17a493:
+    dates:
+    - '2026-09-20'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-first-antiphon:795552e0:
+    dates:
+    - '2026-08-23'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-first-antiphon:9061b77c:
+    dates:
+    - '2026-08-09'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-first-antiphon:9eab56f3:
+    dates:
+    - '2026-01-11'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-first-antiphon:aee0f796:
+    dates:
+    - '2026-04-05'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-first-antiphon:cefbaee2:
+    dates:
+    - '2026-02-08'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-first-antiphon:fbe0a3ff:
+    dates:
+    - '2026-05-24'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-first-antiphon:fe88ef3a:
+    dates:
+    - '2026-03-01'
+    heading: THE FIRST ANTIPHON
+    text: null
+  the-hypakoe-of-pascha:aa5d5cea:
+    dates:
+    - '2026-04-12'
+    heading: THE HYPAKOE OF PASCHA IN TONE FOUR
+    text: null
+  the-kontakion-of-pascha:321d51c1:
+    dates:
+    - '2026-04-12'
+    - '2026-04-19'
+    heading: THE KONTAKION OF PASCHA IN TONE EIGHT
+    text: null
+  the-second-antiphon:1b8f449c:
+    dates:
+    - '2026-08-23'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:277036dc:
+    dates:
+    - '2026-09-20'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:36dfa0e9:
+    dates:
+    - '2026-04-05'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:41abd965:
+    dates:
+    - '2026-05-31'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:5fb03d68:
+    dates:
+    - '2026-05-24'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:770800b6:
+    dates:
+    - '2026-05-03'
+    - '2026-05-10'
+    - '2026-05-17'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:79b83f96:
+    dates:
+    - '2026-08-16'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:9a96df96:
+    dates:
+    - '2026-03-01'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:b06e18e8:
+    dates:
+    - '2026-04-19'
+    - '2026-04-26'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:ba97191b:
+    dates:
+    - '2026-03-15'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:beed95c2:
+    dates:
+    - '2026-02-08'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:e6fdab03:
+    dates:
+    - '2026-11-22'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:ea53da38:
+    dates:
+    - '2026-08-09'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:f3517065:
+    dates:
+    - '2026-04-12'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-second-antiphon:f4af53c4:
+    dates:
+    - '2026-01-11'
+    heading: THE SECOND ANTIPHON
+    text: null
+  the-third-antiphon:0de0d1cd:
+    dates:
+    - '2026-03-15'
+    heading: THE THIRD ANTIPHON
+    text: null
+  the-third-antiphon:1b9377a6:
+    dates:
+    - '2026-02-08'
+    heading: THE THIRD ANTIPHON
+    text: null
+  the-third-antiphon:34afc2cf:
+    dates:
+    - '2026-04-05'
+    heading: THE THIRD ANTIPHON
+    text: null
+  the-third-antiphon:38847037:
+    dates:
+    - '2026-03-01'
+    heading: THE THIRD ANTIPHON
+    text: null
+  the-third-antiphon:54430e5a:
+    dates:
+    - '2026-04-19'
+    - '2026-04-26'
+    heading: THE THIRD ANTIPHON
+    text: null
+  the-third-antiphon:68238841:
+    dates:
+    - '2026-08-16'
+    - '2026-08-23'
+    heading: THE THIRD ANTIPHON
+    text: null
+  the-third-antiphon:6bcd2870:
+    dates:
+    - '2026-09-20'
+    heading: THE THIRD ANTIPHON
+    text: null
+  the-third-antiphon:70ee8ef8:
+    dates:
+    - '2026-05-03'
+    - '2026-05-10'
+    - '2026-05-17'
+    heading: THE THIRD ANTIPHON
+    text: null
+  the-third-antiphon:8c113bce:
+    dates:
+    - '2026-04-12'
+    heading: THE THIRD ANTIPHON
+    text: null
+  the-third-antiphon:8d734f6f:
+    dates:
+    - '2026-11-22'
+    heading: THE THIRD ANTIPHON
+    text: null
+  the-third-antiphon:9bae175f:
+    dates:
+    - '2026-01-11'
+    heading: THE THIRD ANTIPHON
+    text: null
+  the-third-antiphon:9bc1d18e:
+    dates:
+    - '2026-05-24'
+    heading: THE THIRD ANTIPHON
+    text: null
+  the-third-antiphon:d1cdbcb4:
+    dates:
+    - '2026-05-31'
+    heading: THE THIRD ANTIPHON
+    text: null
+  the-third-antiphon:fb2cf41e:
+    dates:
+    - '2026-08-09'
+    heading: THE THIRD ANTIPHON
+    text: null
