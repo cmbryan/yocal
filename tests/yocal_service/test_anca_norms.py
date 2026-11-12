@@ -60,9 +60,9 @@ def test_common_communion_by_text():
     ("2021-08-29", "liturgy.communion", "lit.comm.saint.forerunner", ["lit/communion/common/remembrance"]),   # Beheading
     ("2026-11-08", "liturgy.communion", "lit.comm.archangels", ["lit/communion/common/angels"]),
     ("2020-12-27", "liturgy.communion", "lit.comm.sunday", ["lit/communion/sunday"]),                         # Stephen: not in the Typikon list
-    ("2018-11-11", "liturgy.prokeimenon", "lit.prokeimenon.menas_tone", ["lit/sun/t7/prokeimenon"]),
+    ("2018-11-11", "liturgy.prokeimenon", "lit.prokeimenon.follows_epistle", ["men/11-11/prokeimenon"]),     # single ANCA sample: known difference
     ("2025-02-09", "liturgy.prokeimenon", "lit.prokeimenon.presentation_leavetaking", ["men/02-02/prokeimenon"]),
-    ("2025-11-09", "liturgy.prokeimenon", "lit.prokeimenon.saint_by_anca", ["men/11-09/prokeimenon"]),
+    ("2025-11-09", "liturgy.prokeimenon", "lit.prokeimenon.tone_sunday", ["lit/sun/t5/prokeimenon"]),        # single ANCA sample: known difference
     ("2025-09-21", "liturgy.prokeimenon", "lit.prokeimenon.after_elevation_tone.2024", ["lit/sun/t6/prokeimenon"]),
     ("2021-09-19", "liturgy.prokeimenon", "lit.prokeimenon.named_sunday", ["named/after_elevation/prokeimenon"]),
 ])

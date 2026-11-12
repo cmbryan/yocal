@@ -1,27 +1,14 @@
 # Prokeimenon cases where ANCA's practice departs from "the prokeimenon follows the calendar's Epistle owner"
 # (lit.prokeimenon.follows_epistle / anca_sunday / tone_sunday). Parish decision 2026-11-12: follow ANCA for the prokeimena.
 # Evidence: ANCA READ 2018-2026, every Sunday whose Epistle block prints a prokeimenon (425 files); see each Rule.
-- {id: lit.prokeimenon.saint_by_anca, slot: liturgy.prokeimenon, tier: 1.5,
-   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_in, args: ["06-30", "07-11", "11-09", "11-25"]}],
-   fill: {owner: saint}, source: anca,
-   locator: "inferred: ANCA prints these commemorations' own prokeimenon on a Sunday although the calendar gives the Sunday's Epistle",
-   status: inferred,
-   evidence: "ANCA READ 2018-11-25 '(For St. Katherine the Great-Martyr)', 2021-07-11 '(For St. Euphemia the All-Praised)', 2025-11-09 '(For St. Nektarios)', 2019-06-30 (Synaxis of the Twelve Apostles: 'Their sound'); one sample each. The other saints' Sundays 2018-26 with the calendar's Sunday Epistle take the tone's.",
-   conflict: {with: [lit.prokeimenon.anca_sunday, lit.prokeimenon.tone_sunday], status: accepted,
-              note: "Per-commemoration ANCA practice, not a class: rank (Bp Basil) and Glory do not separate these from the saints' Sundays that take the tone's. Open: ANCA presumably also reads these saints' Epistle; the Epistle slot still follows the calendar flag."}}
+# Only class-level patterns become Rules (parish decision 2026-11-12). Single-sample per-saint departures are known
+# differences in divergence_anca_norms.yaml, to revisit as more ANCA years arrive.
 - {id: lit.prokeimenon.presentation_leavetaking, slot: liturgy.prokeimenon, tier: 1,
    when: [{pred: sunday}, {pred: menaion_date_is, args: ["02-09"]}],
    fill: {owner: feast}, source: anca,
    locator: "inferred: at the leavetaking of the Presentation (Feb 9) on a Sunday ANCA prints the feast's prokeimenon ('My soul doth magnify the Lord')",
    status: inferred, evidence: "ANCA READ 2020-02-09 and 2025-02-09 (both the Sunday of the Publican and Pharisee): 2/2 the feast's. Other leavetakings on a Sunday 2018-26 (Dormition, Transfiguration, Beheading, Nativity of the Forerunner): 6/6 the tone's.",
    conflict: {with: [lit.prokeimenon.anca_sunday], status: accepted, note: "anca_sunday gives the Sunday's own on leavetakings and Triodion Sundays; ANCA itself prints the feast's on this leavetaking."}}
-- {id: lit.prokeimenon.menas_tone, slot: liturgy.prokeimenon, tier: 1,
-   when: [{pred: sunday}, {pred: menaion_date_is, args: ["11-11"]}],
-   fill: {owner: sunday, proper: false}, source: anca,
-   locator: "inferred: on St Menas (Nov 11) on a Sunday ANCA prints the tone's prokeimenon under the subtitle '(For St. Menas)'",
-   status: inferred, evidence: "ANCA READ 2018-11-11 (Tone 7: 'The Lord will give strength to His people'); single sample (Nov 11 next falls on a Sunday in 2029).",
-   conflict: {with: [lit.prokeimenon.follows_epistle, "Digital Chant Stand men/11-11 prokeimenon"], status: accepted,
-              note: "The calendar gives St Menas's Epistle (the prokeimenon would be his; DCS 'God is wondrous in His saints'). Followed ANCA by parish decision; single sample, re-check when ANCA publishes 2029."}}
 - {id: lit.prokeimenon.after_elevation_tone.2024, slot: liturgy.prokeimenon, tier: 0,
    when: [{pred: sunday}, {pred: desig_contains, args: ["after the Elevation"]}, {pred: year_at_least, args: [2024]}],
    fill: {owner: sunday, proper: false}, source: anca,
