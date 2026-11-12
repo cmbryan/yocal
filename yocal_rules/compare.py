@@ -88,8 +88,9 @@ def compare(res, key: dict | None, source: str, facts, service, log):
         compared += 1
         if not _val_eq(a, v, kv[a]):
             diffs.append(f"{a}: ours {v} / {source.upper()} {kv[a]}")
-    ours_h = [h.id for h in (hymns.for_slot(res.slot, res, facts) or [])]
-    if kv.get("hymns") and ours_h:  # the hymns themselves (DCS keys name them): ids, order ignored
+    ours = hymns.for_slot(res.slot, res, facts)  # None = no structured hymns; [] = the booklet's ordinary text
+    ours_h = [h.id for h in ours or []]
+    if kv.get("hymns") and ours is not None:  # the hymns themselves (DCS keys name them): ids, order ignored
         compared += 1
         if set(ours_h) != set(kv["hymns"]):
             diffs.append(f"hymns: ours {ours_h} / {source.upper()} {kv['hymns']}")

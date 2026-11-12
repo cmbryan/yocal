@@ -1,0 +1,95 @@
+# Festal Liturgy hymns on Sundays: antiphons, entrance hymn, trisagion, megalynarion (Typikon Ch I s6 II-III p.34-35, VI p.37, X p.38-39).
+# Feast days themselves: major_feasts*.yaml, pascha.yaml (tier -10 / 0). kind ordinary | sunday | trisagion | axion = the parish
+# booklet's text stands. Festal: `of` = book location of the hymns (default: the day's feast, yocal_rules/hymns.py day_feast),
+# refrain2 = phrase of the 2nd refrain / entrance-hymn ending (resurrection = the booklet's), refrain3 = 3rd-antiphon refrain hymn id
+# (default: the troparion of `of`).
+
+# ---- defaults (every Sunday)
+- {id: lit.antiphons.ordinary, slot: liturgy.antiphons, tier: 4, when: [{pred: sunday}], fill: {kind: ordinary},
+   source: parish, locator: "parish choir booklets: the Sunday antiphons with refrains (Ps 102, 145; 3rd with the resurrectional apolytikion)",
+   status: inferred, evidence: "parish booklets 2025-26 print the three antiphons on every ordinary Sunday",
+   conflict: {with: ["Typikon Ch I s6 I p.34 (Typika and Beatitudes on Sundays)"], status: accepted,
+              note: "Parish practice: antiphons, never the Typika (no selector)."}}
+- {id: lit.eisodikon.sunday, slot: liturgy.eisodikon, tier: 4, when: [{pred: sunday}], fill: {kind: sunday},
+   source: typikon, locator: "Ch I s6 III p.34 (Sundays and the Sundays following a feast: “O come let us worship … who art risen from the dead”)", status: explicit}
+- {id: lit.trisagion.default, slot: liturgy.trisagion, tier: 4, when: [{pred: sunday}], fill: {kind: trisagion},
+   source: typikon, locator: "Ch I s6 VI p.37 (“Holy God” at every Divine Liturgy)", status: explicit}
+- {id: lit.megalynarion.axion, slot: liturgy.megalynarion, tier: 4, when: [{pred: sunday}], fill: {kind: axion},
+   source: typikon, locator: "Ch I s6 X p.38 (“It is truly meet” at every Liturgy of St John Chrysostom)", status: explicit}
+- {id: lit.megalynarion.basil, slot: liturgy.megalynarion, tier: 3, when: [{pred: sunday}, {pred: basil}], fill: {kind: in_thee_rejoiceth},
+   source: typikon, locator: "Ch I s6 X p.38 (Liturgy of St Basil: “In thee rejoiceth”)", status: explicit}
+
+# ---- Pascha season (Pascha itself: pascha.yaml)
+- {id: lit.antiphons.pascha_season, slot: liturgy.antiphons, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [7, 35]}],
+   fill: {of: mov/0, refrain2: resurrection, refrain3: mov/0/troparion},
+   source: typikon, locator: "Ch I s6 II p.34 (antiphons of Pascha from Pascha to its leavetaking; the St Sabbas alternative noted there is not followed)",
+   status: explicit}
+- {id: lit.eisodikon.pascha_season, slot: liturgy.eisodikon, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [7, 35]}],
+   fill: {kind: feast, of: mov/0, ending: resurrection},
+   source: typikon, locator: "Ch I s6 III p.35 (custom: the Entrance Hymn of Pascha “In the congregations bless ye God …” until its leavetaking); Ch VII p.521 note 319",
+   status: explicit}
+- {id: lit.megalynarion.thomas, slot: liturgy.megalynarion, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [7, 7]}],
+   fill: {kind: feast, of: mov/7}, source: typikon, locator: "Ch I s6 X p.38 (Thomas Sunday: “O most radiant lamp”)", status: explicit}
+- {id: lit.megalynarion.pascha_season, slot: liturgy.megalynarion, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [14, 35]}],
+   fill: {kind: feast, of: mov/0}, source: typikon, locator: "Ch I s6 X p.38-39 (other Sundays of the Paschal season: “The angel spake … Shine, thou O new Jerusalem”)",
+   status: explicit}
+
+# ---- Sundays in a fore/after-feast period of a feast of the Lord or the Theotokos
+- {id: lit.antiphons.period_theotokos, slot: liturgy.antiphons, tier: 2,
+   when: [{pred: sunday}, {pred: feast_period_in, args: ["*:entrance_theotokos", "*:dormition", "*:nativity_theotokos"]}, {pred: feast_period_in, args: ["afterfeast:*", "leavetaking:*"]}],
+   fill: {refrain2: resurrection},
+   source: anca, locator: "inferred: ANCA prints the antiphons of the feast (2nd refrain 'Who art risen from the dead') on every Sunday after a feast of the Theotokos and at its leavetaking",
+   status: inferred, evidence: "ANCA READ: Entrance afterfeast 2024-11-24, 2025-11-23, 2026-11-22 (Ps 47/45/44 of Nov 21); Dormition 2022-08-21, 2023-08-20, 2024-08-18, 2025-08-17, 2026-08-16, leavetaking 2026-08-23; Nativity of the Theotokos 2022-09-11, 2023-09-10; GOA DCS 2026-11-22 the same",
+   conflict: {with: [lit.antiphons.ordinary, "Typikon Ch I s6 III p.35"], status: open,
+              note: "Typikon p.35: antiphons of the feast between a feast and its leavetaking 'except on Sunday'; p.34: Theotokos leavetaking on Sunday, 2nd antiphon of the Resurrection. ANCA (and the DCS) print the feast's antiphons on those Sundays, 5 years consistent. Project default: follow ANCA. The one-day Annunciation afterfeast (Mar 26, a Lent Sunday) is excluded: ANCA 2023-03-26 prints no antiphons."}}
+- {id: lit.antiphons.period_lord, slot: liturgy.antiphons, tier: 2,
+   when: [{pred: sunday}, {pred: feast_period_in, args: ["afterfeast:*", "leavetaking:*"]}, {pred: feast_period_class_is, args: [lord]}],
+   fill: {refrain2: feast},
+   source: anca, locator: "inferred: ANCA prints the antiphons of the feast (2nd refrain of the feast, e.g. 'Who wast transfigured on Mount Tabor') on every Sunday after a feast of the Lord and at its leavetaking",
+   status: inferred, evidence: "ANCA READ: Transfiguration afterfeast 2022-08-07, 2024-08-11, 2025-08-10, 2026-08-09, leavetaking 2023-08-13; Elevation 2022-09-18, 2023-09-17, 2024-09-15, 2026-09-20, leavetaking 2025-09-21; Theophany 2022-01-09, 2023-01-08, 2024-01-07, 2025-01-12, 2026-01-11, leavetaking 2024-01-14; Presentation 2022-02-06, 2023-02-05, 2024-02-04, leavetaking 2025-02-09; Nativity 2024-12-29, 2025-12-28, leavetaking 2023-12-31; Ascension 2018-05-20, 2022-06-05, 2023-05-28, 2024-06-16, 2025-06-01, 2026-05-24",
+   conflict: {with: [lit.antiphons.ordinary, "Typikon Ch I s6 II-III p.34-35"], status: open,
+              note: "Typikon p.35: antiphons of the feast between a feast and its leavetaking 'except on Sunday'; p.34: only the 2nd antiphon of the feast when its leavetaking falls on Sunday. ANCA prints all three antiphons of the feast on every such Sunday. Project default: follow ANCA."}}
+- {id: lit.eisodikon.lord_leavetaking, slot: liturgy.eisodikon, tier: 2,
+   when: [{pred: sunday}, {pred: feast_period_in, args: ["leavetaking:*"]}, {pred: feast_period_class_is, args: [lord]}],
+   fill: {kind: feast, ending: resurrection},
+   source: typikon, locator: "Ch I s6 III p.34 (leavetaking of a feast of the Lord on Sunday: the feast's entrance verse, concluding “… who art risen from the dead”)",
+   status: explicit}
+- {id: lit.megalynarion.leavetaking, slot: liturgy.megalynarion, tier: 2,
+   when: [{pred: sunday}, {pred: feast_period_in, args: ["leavetaking:*"]}, {pred: feast_period_class_is, args: [lord, theotokos]}],
+   fill: {kind: feast}, source: typikon, locator: "Ch I s6 X p.38 (feast of the Lord or the Theotokos and their leavetakings: the 9th ode of the feast)", status: explicit}
+
+# ---- a fixed feast of the Lord on a Sunday (no Sunday order of its own yet; the Theotokos feasts, Presentation, Jan 1 and
+#      Annunciation have theirs in major_feasts_*.yaml)
+- {id: lit.antiphons.lord_feast_sunday, slot: liturgy.antiphons, tier: 1,
+   when: [{pred: sunday}, {pred: major_feast_is, args: [nativity, theophany, transfiguration, elevation]}],
+   fill: {refrain2: feast}, source: typikon, locator: "Ch I s6 II p.34 (feast of the Lord: the antiphons of the feast on whatever day it falls)", status: explicit}
+- {id: lit.megalynarion.lord_feast_sunday, slot: liturgy.megalynarion, tier: 1,
+   when: [{pred: sunday}, {pred: major_feast_is, args: [nativity, theophany, transfiguration, elevation]}],
+   fill: {kind: feast}, source: typikon, locator: "Ch I s6 X p.38 (feast of the Lord: the 9th ode of the feast; Transfiguration custom: 7th ode)", status: explicit}
+
+# ---- Triodion
+- {id: lit.antiphons.lent1, slot: liturgy.antiphons, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -42]}],
+   fill: {of: mov/-42, refrain2: resurrection},
+   source: typikon, locator: "Ch VI p.487-488 (antiphons of the Sunday of Orthodoxy; 3rd refrain its troparion “We reverence Thine Immaculate Icon”)", status: explicit}
+- {id: lit.antiphons.lent3, slot: liturgy.antiphons, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [-28, -28]}],
+   fill: {of: mov/-28, refrain2: resurrection},
+   source: typikon, locator: "Ch VI p.492-493 (antiphons of the 3rd Sunday of Lent; 3rd refrain the troparion of the Holy Cross)", status: explicit}
+- {id: lit.trisagion.lent3, slot: liturgy.trisagion, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [-28, -28]}],
+   fill: {kind: cross}, source: typikon, locator: "Ch I s6 VI p.37; Ch VI p.493 (“Before thy cross”)", status: explicit}
+- {id: lit.antiphons.palm, slot: liturgy.antiphons, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [-7, -7]}],
+   fill: {refrain2: feast}, source: typikon, locator: "Ch VI p.505 (the antiphons for Palm Sunday)", status: explicit}
+- {id: lit.eisodikon.palm, slot: liturgy.eisodikon, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [-7, -7]}],
+   fill: {kind: feast, ending: feast},
+   source: typikon, locator: "Ch VI p.505 (“Blessed is he who cometh … Save us O Son of God who didst sit upon the foal of an ass”)", status: explicit}
+- {id: lit.megalynarion.palm, slot: liturgy.megalynarion, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [-7, -7]}],
+   fill: {kind: feast}, source: typikon, locator: "Ch VI p.505 (heirmos of the 9th ode of the canon for Palm Sunday, “God the Lord hath appeared unto us”)", status: explicit}
+
+# ---- Pentecost
+- {id: lit.antiphons.pentecost, slot: liturgy.antiphons, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [49, 49]}],
+   fill: {refrain2: feast}, source: typikon, locator: "Ch VII p.539 (antiphons for Pentecost)", status: explicit}
+- {id: lit.eisodikon.pentecost, slot: liturgy.eisodikon, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [49, 49]}],
+   fill: {kind: feast, ending: feast}, source: typikon, locator: "Ch VII p.539 (“Be thou exalted, O Lord … Save us O Good Comforter”)", status: explicit}
+- {id: lit.trisagion.pentecost, slot: liturgy.trisagion, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [49, 49]}],
+   fill: {kind: baptized}, source: typikon, locator: "Ch I s6 VI p.37; Ch VII p.539 (“As many of you as have been baptized”)", status: explicit}
+- {id: lit.megalynarion.pentecost, slot: liturgy.megalynarion, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [49, 49]}],
+   fill: {kind: feast}, source: typikon, locator: "Ch VII p.539 (9th ode of the katavasia of Pentecost, “O Mother that hath known no man”)", status: explicit}

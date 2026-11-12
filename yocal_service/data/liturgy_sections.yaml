@@ -30,21 +30,18 @@ seasonal:
     when: [{}]   # always: a deacon is assumed to serve
     strip: '^\[?Omitted if a deacon is not serving:\s*'
 
-# seasonal_hymns: ANCA Liturgy Variables headings that replace booklet blocks (data-driven: applies when ANCA publishes the
-# heading for the date: Pascha, Lent, feasts...). Text -> parish translation (data/parish_translations.yaml) or ANCA pending.
-#   anca:       heading regex     unless_anca: skip when ANCA also has this heading (ordinary Sunday logic stays in force)
-#   section:    section id        drop: [{role, text, slot}] blocks removed; the hymn takes the first one's place
-#   lead:       block inserted before the hymn      after: {slot}  no drop: the hymn is added after that block
-# TRANSITIONAL: still decided by the date's ANCA/DCS page. To be replaced by Rules (liturgy.antiphons, eisodikon, trisagion,
-# megalynarion on every day). Apolytikia/kontakion/communion hymn are no longer here: the Rules name them (yocal_rules/hymns.py).
-seasonal_hymns:
-  - {anca: '^THE FIRST ANTIPHON', dcs_antiphon: 1, section: first_antiphon, drop: [{role: '^(Verse|Refrain)$'}]}
-  - {anca: '^THE SECOND ANTIPHON', dcs_antiphon: 2, section: second_antiphon, drop: [{role: '^(Verse|Refrain)$'}]}
-  - {anca: '^THE THIRD ANTIPHON', dcs_antiphon: 3, section: third_antiphon, drop: [{role: '^(Verse|Refrain)$'}, {slot: '^res_apolytikion$'}]}
-  - {anca: '^THE EISODIKON', section: eisodikon, drop: [{role: '^Choir$'}]}
-  - {anca: '^THE ANTI-TRISAGION', section: trisagion, lead: {role: Choir, text: 'Amen.'},
+# festal_hymns: where the festal hymns the Rules appoint replace booklet blocks (yocal_rules/data/rules/festal_hymns.yaml and the
+# feast files). Only placement lives here: the Rules decide whether and which; a slot whose hymns are [] keeps the booklet's text.
+#   slot:  rules-engine slot     n: antiphon number      section: section id
+#   drop:  [{role, text, slot}] booklet blocks removed; the hymn takes the first one's place     lead: block inserted before it
+festal_hymns:
+  - {slot: liturgy.antiphons, n: 1, section: first_antiphon, drop: [{role: '^(Verse|Refrain)$'}]}
+  - {slot: liturgy.antiphons, n: 2, section: second_antiphon, drop: [{role: '^(Verse|Refrain)$', text: '^(?!Glory)'}]}
+  - {slot: liturgy.antiphons, n: 3, section: third_antiphon, drop: [{role: '^(Verse|Refrain)$'}, {slot: '^res_apolytikion$'}]}
+  - {slot: liturgy.eisodikon, section: eisodikon, drop: [{role: '^Choir$'}]}
+  - {slot: liturgy.trisagion, section: trisagion, lead: {role: Choir, text: 'Amen.'},
      drop: [{text: '^Amen\. Holy God'}, {text: '^With strength'}, {text: '^Holy God, Holy Mighty'}, {role: '^Choir$', text: '^$'}]}
-  - {anca: 'MEGALYNARION', section: megalynarion, drop: [{text: '^It is truly right'}, {text: '^Moth'}]}
+  - {slot: liturgy.megalynarion, section: megalynarion, drop: [{text: '^It is truly right'}, {text: '^Moth'}]}
 
 sections:
   - {id: enarxis, start: '^The Enarxis$', title: The Enarxis}

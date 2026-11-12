@@ -450,7 +450,8 @@ def parse_feast_liturgy(txt):
         k["liturgy.antiphons"] = dict(refrain2="resurrection" if re.search(r"rose|risen", r2) else "saints" if "wondrous in" in r2 else "feast")
     m = re.search(r"EISODIKON \(ENTRANCE HYMN\) (?:OF|FOR) ([A-Z ’']+)", txt)
     if m:
-        k["liturgy.eisodikon"] = dict(kind="sunday" if "SUNDAY" in m.group(1) else "weekday" if "ORDINARY" in m.group(1) else "feast")
+        g = m.group(1)  # 'OF PALM SUNDAY' is the feast's own entrance hymn, not the Sunday one
+        k["liturgy.eisodikon"] = dict(kind="feast" if "PALM" in g else "sunday" if "SUNDAY" in g else "weekday" if "ORDINARY" in g else "feast")
     if "liturgy.eisodikon" not in k and re.search(r"Eisodikon \(Entrance Hymn\) is “O come, let us worship[^”]{0,40}[Rr]isen from the dead", f):
         k["liturgy.eisodikon"] = dict(kind="sunday")  # 'as on ordinary Sundays' (Jan 1 on a Sunday)
     tri = re.search(r"ANTI-?TRISAGION.{0,200}", f)

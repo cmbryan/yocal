@@ -122,6 +122,17 @@ def describe(slot: str, res, f: dict):
             out.append("- Local (UK) commemorations:")
             out += [f"  - {x}" for x in _items(f["uk_commem"])]
         return out
+    if slot in ("liturgy.antiphons", "liturgy.eisodikon", "liturgy.trisagion", "liturgy.megalynarion"):
+        from .hymns import for_slot
+        hs = for_slot(slot, res, f)
+        if hs == []:
+            return [{"liturgy.antiphons": "- The Sunday antiphons", "liturgy.eisodikon": "- “Come, let us worship … who rose from the dead”",
+                     "liturgy.trisagion": "- “Holy God” (the Trisagion)", "liturgy.megalynarion": "- “It is truly meet”"}[slot]]
+        if hs and slot == "liturgy.antiphons":
+            return [f"- Antiphons of {hs[0].id.rsplit('/', 1)[0]}; 2nd refrain: {hs[1].meta.get('refrain') or 'risen from the dead'}; "
+                    f"3rd refrain: {hs[2].meta.get('refrain')}"]
+        if hs:
+            return [f"- {h.label} — {h.id}" for h in hs]
     if slot == "liturgy.dismissal_phrase":
         ph = {"resurrection": "“May He who rose from the dead …”",
               "feast_and_resurrection": f"the characteristic phrase of the feast ({f.get('fore_after') or f['principal_name']}), then “and rose from the dead …”",
