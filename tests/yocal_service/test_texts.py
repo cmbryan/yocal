@@ -103,11 +103,12 @@ def test_verify_statuses(tmp_path):
                        principal=lambda mmdd: {"01-15": "Saint Paul of Thebes"}.get(mmdd, ""))
     r = res["ids"]
     assert r["oct/t6/sun/apolytikion"]["status"] == "agree" and not r["oct/t6/sun/apolytikion"]["notes"]  # plagal second = tone 6
-    assert r["men/01-15/apolytikion"]["status"] == "conflict" and any("mode 1 vs tone 8" in n for n in r["men/01-15/apolytikion"]["notes"])
-    assert any("calendar principal is 'Saint Paul of Thebes'" in n for n in r["men/01-15/apolytikion"]["notes"])
+    # the DCS copy is labelled for St John, not the calendar principal: not used (norm), ANCA's text stands, flagged for review
+    assert r["men/01-15/apolytikion"]["status"] == "label" and r["men/01-15/apolytikion"]["sources"] == ["anca"]
+    assert any("DCS copy not used: labelled for 'John'" in n for n in r["men/01-15/apolytikion"]["notes"])
     assert r["men/02-02/kontakion"]["status"] == "label"  # DCS calls the text an apolytikion
     assert r["men/09-09/kontakion"]["status"] == "none"
-    assert "conflict (1)" in texts.report(res)
+    assert "label (2)" in texts.report(res)
 
 
 def test_mode_of():

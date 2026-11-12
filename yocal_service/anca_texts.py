@@ -172,6 +172,27 @@ def hymn_text(hid: str, body: list) -> str:
     return "\n\n".join(p for p in keep if p)
 
 
+# Saints' communion hymns are class commons (ANCA prints them under 'FOR THE SAINT/APOSTLE/HIERARCHS/...'): keyed by the text itself.
+COMMON_TEXT = [(r"^His (sound|voice) hath gone (forth|out)", "apostle"), (r"^Their (sound|voice|proclamation) (hath )?(gone|went) (forth|out)", "apostles"),
+               (r"everlasting remembrance|remembered for ever", "remembrance"), (r"maketh His angels spirits|makes His angels spirits", "angels")]
+
+
+def is_tone_prokeimenon(tx, tone: int, text: str) -> bool:
+    """The Sunday prokeimenon of the tone (other saved copies: parish booklet, DCS), in another translation or the same."""
+    from .harvest import sim, toks
+    from .texts import get
+    t = get(tx, f"lit/sun/t{tone}/prokeimenon", parish={}, principal=None)
+    return bool(t) and t["source"] != "anca" and sim(toks(text.split("\n\n")[0]), toks(t["parts"][0])) >= TONE_SAME
+
+
+TONE_SAME = 0.6  # refrain overlap; below it, shared words ('Lord', 'people', 'bless') make different psalms look alike
+
+
+def common_communion(text: str):
+    """Communion hymn text -> 'lit/communion/common/<class>' when it is one of the saints' commons, else None."""
+    return next((f"lit/communion/common/{c}" for rx, c in COMMON_TEXT if re.search(rx, text, re.I)), None)
+
+
 def ingest(tx, put, cache: str, facts_for) -> Counter:
     """Every cached READ file -> tx (source 'anca', key = hymn id). facts_for(date) -> calendar facts or None."""
     st = Counter()
@@ -189,6 +210,8 @@ def ingest(tx, put, cache: str, facts_for) -> Counter:
         file_tone = _tone(_norm(res[0]["heading"])) if res else None
         for b in blocks:
             hid, why = heading_id(b["heading"], b["sub"], facts_fn, file_tone)
+            if not hid and "KOINONIKON" in b["heading"].upper() and b["body"]:  # 'FOR THE SAINT', 'FOR ST. XENIA': a common, by its text
+                hid = common_communion(hymn_text("x/communion", b["body"]))
             if not hid:
                 if why != "not a hymn heading":
                     st[f"skip: {why}"] += 1
@@ -197,6 +220,11 @@ def ingest(tx, put, cache: str, facts_for) -> Counter:
             if not text:
                 st["skip: empty body"] += 1
                 continue
+            if (hid.endswith("/communion") or "/communion/common/" in hid) and not hid.startswith("mov/"):
+                hid = common_communion(text) or hid
+            if hid.endswith("/prokeimenon") and not hid.startswith("lit/sun/") and file_tone and is_tone_prokeimenon(tx, file_tone, text):
+                hid = f"lit/sun/t{file_tone}/prokeimenon"  # printed under a saint's subtitle but it is the tone's (e.g. 2018-11-11)
+                st["prokeimenon: tone's under a saint subtitle"] += 1
             put(tx, "anca", hid, text, f"ANCA Liturgy Variables {day}", day, label=re.sub(r"\s+", " ", b["heading"]).strip(),
                 tone=_tone(_norm(b["heading"])))
             st["stored"] += 1

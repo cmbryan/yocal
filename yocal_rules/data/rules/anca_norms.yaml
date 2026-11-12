@@ -1,0 +1,17 @@
+# Prokeimenon cases where ANCA's practice departs from "the prokeimenon follows the calendar's Epistle owner"
+# (lit.prokeimenon.follows_epistle / anca_sunday / tone_sunday). Parish decision 2026-11-12: follow ANCA for the prokeimena.
+# Evidence: ANCA READ 2018-2026, every Sunday whose Epistle block prints a prokeimenon (425 files); see each Rule.
+# Only class-level patterns become Rules (parish decision 2026-11-12). Single-sample per-saint departures are known
+# differences in divergence_anca_norms.yaml, to revisit as more ANCA years arrive.
+- {id: lit.prokeimenon.presentation_leavetaking, slot: liturgy.prokeimenon, tier: 1,
+   when: [{pred: sunday}, {pred: menaion_date_is, args: ["02-09"]}],
+   fill: {owner: feast}, source: anca,
+   locator: "inferred: at the leavetaking of the Presentation (Feb 9) on a Sunday ANCA prints the feast's prokeimenon ('My soul doth magnify the Lord')",
+   status: inferred, evidence: "ANCA READ 2020-02-09 and 2025-02-09 (both the Sunday of the Publican and Pharisee): 2/2 the feast's. Other leavetakings on a Sunday 2018-26 (Dormition, Transfiguration, Beheading, Nativity of the Forerunner): 6/6 the tone's.",
+   conflict: {with: [lit.prokeimenon.anca_sunday], status: accepted, note: "anca_sunday gives the Sunday's own on leavetakings and Triodion Sundays; ANCA itself prints the feast's on this leavetaking."}}
+- {id: lit.prokeimenon.after_elevation_tone.2024, slot: liturgy.prokeimenon, tier: 0,
+   when: [{pred: sunday}, {pred: desig_contains, args: ["after the Elevation"]}, {pred: year_at_least, args: [2024]}],
+   fill: {owner: sunday, proper: false}, source: anca,
+   locator: "inferred: from 2024 ANCA prints the tone's prokeimenon on the Sunday after the Elevation (subtitle '(For Sunday after the Elevation of the Holy Cross)')",
+   status: inferred, evidence: "ANCA READ 2024-09-15 (Tone 3), 2025-09-21 (Tone 6), 2026-09-20 (Tone 7): 3/3 the tone's; 2018-2023: 6/6 the Sunday's own ('O Lord, how manifold are Thy works'), kept as lit.prokeimenon.named_sunday for those years.",
+   conflict: {with: [lit.prokeimenon.named_sunday], status: accepted, note: "ANCA practice changed in 2024; parish decision 2026-11-12: follow ANCA."}}

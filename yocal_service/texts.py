@@ -12,6 +12,7 @@ Files live in the sources store (store.py: the private yocal_sources submodule).
 from __future__ import annotations
 
 import fnmatch
+import functools
 import glob
 import json
 import os
@@ -86,8 +87,24 @@ def _row(tx: Texts, source: str, key: str):
     return tx.find(source, key)
 
 
-def _dcs(con: Texts, hid: str):
-    """-> (parts, origin, [rows used]) via the id's DCS keys (override first, then pattern), or None."""
+_WHO = re.compile(r"\bFor (?:St\.?|Sts\.?|Saint|the Holy|Holy)\s+([^.]+)")  # 'Apolytikion. For St. John. Mode 1.' -> 'John'
+_OWNED = re.compile(r"men/(\d\d-\d\d)/(?:apolytikion|kontakion|troparion)\d*$")
+
+
+def other_owner(hid: str, label: str, principal) -> str | None:
+    """Norm (inferred, ANCA-following): a Menaion hymn id belongs to the calendar's principal commemoration of its date.
+    If the DCS label before the key names someone else ('Apolytikion. For St. John.' on Jan 15, principal Paul of Thebes),
+    -> that name: the DCS copy is another saint's hymn and is not used for this id. None when the label agrees or names nobody."""
+    m, who = _OWNED.match(hid), _WHO.search(label or "")
+    if not (m and who and principal):
+        return None
+    p = principal(m.group(1))
+    return who.group(1) if p and not _same_name(who.group(1), p) else None
+
+
+def _dcs(con: Texts, hid: str, principal=None):
+    """-> (parts, origin, [rows used]) via the id's DCS keys (override first, then pattern), or None.
+    principal(mmdd) -> calendar principal name: DCS copies labelled for another saint are skipped (other_owner)."""
     for alt in hymns.dcs_keys(hid):
         parts, origin, used = [], None, []
         for i, part in enumerate(alt):
@@ -100,24 +117,38 @@ def _dcs(con: Texts, hid: str):
             parts.append(_clean(" ".join(r["text"] for r in rows)))
             origin = origin or rows[0]["origin"]
             used += rows
-        if parts:
+        if parts and not other_owner(hid, used[0].get("label", ""), principal):
             return parts, origin, used
     return None
 
 
-def get(con: Texts, hid: str, parish: dict | None = None) -> dict | None:
+GUESSED = ("men/", "mov/", "named/")  # ids whose DCS key is found by position (hymns.dcs_keys pattern); lit/, hor/, oct/ keys are fixed texts
+
+
+def different_hymn(a: list, b: list) -> bool:
+    """Norm (inferred, ANCA-following, parish decision 2026-11-12): when the DCS and ANCA copies under one hymn id are
+    different hymns, not two translations of one (similarity below CONFLICT, as `verify` scores it), ANCA's is the hymn
+    used (e.g. Jan 15 apolytikion, Dec 9 prokeimenon, Feb 1 forefeast kontakion). Same hymn: DCS wording keeps precedence."""
+    from .harvest import sim, toks
+    whole = sim(toks(" ".join(a)), toks(" ".join(b)))
+    first = sim(toks(a[0]), toks(b[0]))  # refrain vs refrain (a verse shared by two prokeimena must not make them one hymn)
+    return max(whole, first) < CONFLICT
+
+
+def get(con: Texts, hid: str, parish: dict | None = None, principal="calendar") -> dict | None:
     """-> {parts: [str], source, pending, credit} or None (not saved yet: a visible gap, never a per-date fallback)."""
     parish = parish_texts() if parish is None else parish
+    principal = calendar_principal if principal == "calendar" else principal
     if hid in parish:
         e = parish[hid]
         return {"parts": _split(e["text"]), "source": "parish", "pending": False, "credit": e.get("credit", "parish translation")}
     r = _row(con, "parish", hid)
     if r:
         return {"parts": _split(r["text"]), "source": "parish", "pending": False, "credit": r["origin"]}
-    d = _dcs(con, hid)
-    if d:
-        return {"parts": d[0], "source": "dcs", "pending": True, "credit": d[1]}
+    d = _dcs(con, hid, principal)
     r = _row(con, "anca", hid)
+    if d and not (r and hid.startswith(GUESSED) and different_hymn(d[0], _split(r["text"]))):
+        return {"parts": d[0], "source": "dcs", "pending": True, "credit": d[1]}
     if r:
         return {"parts": _split(r["text"]), "source": "anca", "pending": True, "credit": r["origin"]}
     return None
@@ -196,7 +227,15 @@ def ingest(cache: str = CACHE, root: str | None = None) -> dict:
                 put(con, "dcs", f"{r['topic']}|{r['field']}", r["text"], f"GOA DCS {r['date']} li", r["date"])
                 stats["dcs_texts"] += 1
     stats["booklet"] = ingest_booklets(con)
+    old = con.rows["anca"]  # ANCA rows are derived from the cached files: rebuilt, so a corrected heading/text mapping drops stale keys
+    con.rows["anca"] = {}
     stats["anca"] = dict(anca_texts.ingest(con, put, cache, _facts))
+    for k, r in old.items():  # keep rows whose source file this machine does not have
+        day = re.search(r"(\d{4}-\d\d-\d\d)", r.get("origin", ""))
+        if k not in con.rows["anca"] and not (day and os.path.exists(os.path.join(cache, f"anca-{day.group(1)}-READ.txt"))):
+            con.rows["anca"][k] = r
+    if con.rows["anca"] != old:
+        con.dirty.add("anca")
     con.save()
     stats["stored"] = {s: len(r) for s, r in con.rows.items()}
     return stats
@@ -244,6 +283,7 @@ def _same_name(a: str, b: str) -> bool:
     return bool(w(a) & w(b))
 
 
+@functools.lru_cache(maxsize=400)
 def calendar_principal(mmdd: str):
     """Principal commemoration of a Menaion date (calendar DB, a non-leap year), '' if none."""
     import datetime as dt
@@ -264,7 +304,10 @@ def verify(tx: Texts, need: dict, parish: dict | None = None, principal=calendar
             srcs["parish"] = _split(parish[hid]["text"])
         elif hid in tx.rows["parish"]:
             srcs["parish"] = _split(tx.rows["parish"][hid]["text"])
-        d = _dcs(tx, hid)
+        raw = _dcs(tx, hid)
+        d = _dcs(tx, hid, principal)
+        if raw and not d:
+            notes.append(f"DCS copy not used: labelled for {other_owner(hid, raw[2][0].get('label', ''), principal)!r} ({raw[2][0]['key']})")
         if d:
             srcs["dcs"] = d[0]
             by_key.setdefault(d[2][0]["key"], []).append(hid)

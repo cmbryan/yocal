@@ -18,13 +18,30 @@
    source: typikon, locator: "Ch I s6 XI p.39 (Theotokos feast on Sunday; leavetaking excluded from the default)", status: inferred,
    evidence: "ANCA Liturgy Variables 2026-08-23 (leavetaking of the Dormition): 'Koinonikon of the Feast'; 'I will take the cup' per p.39"}
 - {id: lit.comm.saint, slot: liturgy.communion, tier: 3,
-   when: [{pred: sunday}, {pred: principal_matches, args: ['(?<!the-)\bApostle\b|\bEvangelist\b|Baptist|Forerunner|Peter and Paul|Three Hierarchs|Constantine']}],
+   when: [{pred: sunday}, {pred: principal_matches, args: ['(?<!the-)\bApostles?\b|\bEvangelist\b|Baptist|Forerunner|Peter and Paul|Three (Great )?Hierarchs|Constantine']}],
    fill: {kind: saint, parts: ["Communion hymn of the saint (apostle, evangelist, Baptist, Peter and Paul, Three Hierarchs, Constantine and Helen)"]},
    source: typikon, locator: "Ch I s6 XI p.39 (feast of St John the Baptist, SS Peter and Paul, an Apostle, an Evangelist, St Andrew, the 3 Hierarchs, SS Constantine and Helen: the hymn is the saint's, not the Sunday's)", status: explicit,
    conflict: {with: [ANCA], status: open, note: "ANCA Liturgy Variables 2026-08-09 (Holy Apostle Matthias, Transfiguration afterfeast) lists no Koinonikon, i.e. the Sunday hymn. ANCA 2026-10-18 (Luke) has the saint's. Project default: follow ANCA where it speaks; the Typikon reading is kept here."}}
 - {id: lit.comm.archangels, slot: liturgy.communion, tier: 3, when: [{pred: sunday}, {pred: menaion_date_is, args: ["11-08"]}],
-   fill: {kind: saint, parts: ["Communion hymn of the Archangels: “He maketh His angels spirits…” (Psalm 103:4)"]},
+   fill: {kind: saint, hymns: ["lit/communion/common/angels"], parts: ["Communion hymn of the Archangels: “He maketh His angels spirits…” (Psalm 103:4)"]},
    source: typikon, locator: "Ch I s6 XI p.39 (the Archangels, November 8)", status: explicit}
+# Which common a saint's communion hymn is (Typikon p.39 says only "the saint's"): ANCA prints a class common chosen by the kind
+# of saint. Inferred from every ANCA Koinonikon for a saint 2018-2026 (Sundays and Saturdays). Parish decision 2026-11-12: follow ANCA.
+- {id: lit.comm.saint.apostles, slot: liturgy.communion, tier: 2.5,
+   when: [{pred: sunday}, {pred: principal_matches, args: ['(?<!the-)\bApostles\b|Peter and Paul|Three (Great )?Hierarchs|Constantine']}],
+   fill: {kind: saint, hymns: ["lit/communion/common/apostles"], parts: ["Communion hymn: “Their sound hath gone forth into all the earth” (Psalm 18:4)"]},
+   source: anca, locator: "inferred: ANCA 'Koinonikon for the Apostles / Synaxis / Hierarchs / Saints' (several apostles, the Three Hierarchs, Constantine and Helen)", status: inferred,
+   evidence: "ANCA READ 2019-06-30 (Synaxis of the Twelve), 2020-06-28, 2022-01-30 (Three Hierarchs), 2022-05-21 (Constantine and Helen, Sat), 2025-06-29 (Peter and Paul): 5/5 'Their sound hath gone forth'"}
+- {id: lit.comm.saint.apostle, slot: liturgy.communion, tier: 2.5,
+   when: [{pred: sunday}, {pred: principal_matches, args: ['^(?!.*(?:(?<!the-)\bApostles\b|Peter and Paul|Hierarchs|Constantine)).*(?:(?<!the-)\bApostle\b|\bEvangelist\b)']}],
+   fill: {kind: saint, hymns: ["lit/communion/common/apostle"], parts: ["Communion hymn: “His sound hath gone forth into all the earth” (Psalm 18:4)"]},
+   source: anca, locator: "inferred: ANCA 'Koinonikon for the Apostle / for St. John / St. Luke / St. Stephen' (one apostle or evangelist)", status: inferred,
+   evidence: "ANCA READ Sundays 2020-10-18 and 2026-10-18 (Luke), 2021-09-26 (John), 2025-11-16 (Matthew), 2025-11-30 (Andrew); Saturdays 2024-11-16, 2024-11-30, 2025-12-27 (Stephen), 2026-09-26, 2026-11-14 (Philip): 10/10 'His sound hath gone forth/out'"}
+- {id: lit.comm.saint.forerunner, slot: liturgy.communion, tier: 2.5,
+   when: [{pred: sunday}, {pred: principal_matches, args: ['^(?!.*(?:Apostle|Evangelist|Hierarchs|Constantine)).*(?:Baptist|Forerunner)']}],
+   fill: {kind: saint, hymns: ["lit/communion/common/remembrance"], parts: ["Communion hymn: “In everlasting remembrance shall the righteous be” (Psalm 111:6)"]},
+   source: anca, locator: "inferred: ANCA 'Koinonikon for the Saint / of the Synaxis' (the Forerunner; also hierarchs, martyrs, ascetics on weekdays)", status: inferred,
+   evidence: "ANCA READ Sundays 2018-06-24 (Nativity of the Forerunner), 2021-08-29 (Beheading), 2024-01-07 (Synaxis); Saturdays 2019-03-09, 2024-02-24, 2025-01-18, 2025-01-25, 2025-12-06, 2025-12-20, 2026-01-24, 2026-08-29 and 4 more: 15/15 'In everlasting remembrance shall the righteous be'"}
 - {id: lit.comm.lent3, slot: liturgy.communion, tier: 1, when: [{pred: sunday}, {pred: desig_contains, args: ["3rd of Great Lent"]}],
    fill: {kind: light_of_countenance, parts: ["Communion hymn: “The light of Thy countenance” (Psalm 4:7)"]},
    source: typikon, locator: "Ch I s6 XI p.39 (3rd Sunday of Great Lent)", status: explicit}
