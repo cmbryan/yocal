@@ -47,7 +47,7 @@
               note: "Typikon p.526: 6 (four stichera, 1st and 3rd repeated). ANCA printed 'six' in 2019-20 and 'four' from 2021 (5 years). ANCA is not consistent over time, so the Typikon count is followed; ANCA 2021+ logged in divergence_pentecostarion.yaml. User decision."}}
 - {id: pent.lit.apolytikia.thomas, slot: liturgy.apolytikia, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [7, 7]}, {pred: not_date_in, args: *COINC}],
-   fill: {res_tone: null, saint: true, parts: ["Apolytikion of Thomas Sunday — Pentecostarion, Tone 7"]},
+   fill: {hymns: ["mov/7/apolytikion"], res_tone: null, saint: true, parts: ["Apolytikion of Thomas Sunday — Pentecostarion, Tone 7"]},
    source: typikon, locator: "Ch VII p.527 (after the entrance: troparion for Thomas Sunday, then the Pascha kontakion; no patron troparion listed)", status: explicit}
 
 # ======================= Myrrhbearers (14), Paralytic (21), Samaritan (28), Blind Man (35): Octoechos + Pentecostarion =======================
@@ -80,7 +80,7 @@
    source: typikon, locator: "Ch VII p.528 ('God is the Lord': as at Vespers)", status: explicit}
 - {id: pent.lit.apolytikia.myrrhbearers, slot: liturgy.apolytikia, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [14, 14]}, {pred: not_date_in, args: *COINC}],
-   fill: {res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone 2", "The two troparia of Joseph and the Myrrhbearers (from Holy Friday Vespers) — Pentecostarion, Tone 2", "Apolytikion of the patron saint or feast of the temple"]},
+   fill: {hymns: ["oct/t{tone}/sun/apolytikion", "mov/14/apolytikion", "mov/14/apolytikion2"], res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone 2", "The two troparia of Joseph and the Myrrhbearers (from Holy Friday Vespers) — Pentecostarion, Tone 2", "Apolytikion of the patron saint or feast of the temple"]},
    source: typikon, locator: "Ch VII p.528 (Liturgy: Resurrection, the Holy Friday troparia, patron)", status: explicit}
 - {id: pent.ves.apolytikia.paralytic, slot: vespers.apolytikia, tier: 0,
    when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [21, 21]}, {pred: not_date_in, args: *COINC}],
@@ -92,7 +92,7 @@
    source: typikon, locator: "Ch VII p.529 ('God is the Lord': as at Vespers)", status: explicit}
 - {id: pent.lit.apolytikia.paralytic, slot: liturgy.apolytikia, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [21, 21]}, {pred: not_date_in, args: *COINC}],
-   fill: {res_tone: "$tone", saint: false, parts: ["Apolytikion of the Resurrection — Octoechos Tone 3", "Apolytikion of the patron saint or feast of the temple"]},
+   fill: {hymns: ["oct/t{tone}/sun/apolytikion"], res_tone: "$tone", saint: false, parts: ["Apolytikion of the Resurrection — Octoechos Tone 3", "Apolytikion of the patron saint or feast of the temple"]},
    source: typikon, locator: "Ch VII p.530 (Liturgy: Resurrection, patron)", status: explicit}
 - {id: pent.ves.apolytikia.samaritan, slot: vespers.apolytikia, tier: 0,
    when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [28, 28]}, {pred: not_date_in, args: *COINC}],
@@ -104,7 +104,7 @@
    source: typikon, locator: "Ch VII p.532 ('God is the Lord': as at Vespers)", status: explicit}
 - {id: pent.lit.apolytikia.samaritan, slot: liturgy.apolytikia, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [28, 28]}, {pred: not_date_in, args: *COINC}],
-   fill: {res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone 4", "Apolytikion of Mid-Pentecost — Pentecostarion, Tone 8", "Apolytikion of the patron saint or feast of the temple"]},
+   fill: {hymns: ["oct/t{tone}/sun/apolytikion", "mov/24/apolytikion"], res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone 4", "Apolytikion of Mid-Pentecost — Pentecostarion, Tone 8", "Apolytikion of the patron saint or feast of the temple"]},
    source: typikon, locator: "Ch VII p.533 (Liturgy: Resurrection, Mid-Pentecost, patron)", status: explicit}
 - {id: pent.ves.apolytikia.blind_man, slot: vespers.apolytikia, tier: 0,
    when: [{pred: sunday_eve}, {pred: pascha_days_between, args: [35, 35]}, {pred: not_date_in, args: *COINC}],
@@ -116,7 +116,7 @@
    source: typikon, locator: "Ch VII p.533 ('God is the Lord': as at Vespers)", status: explicit}
 - {id: pent.lit.apolytikia.blind_man, slot: liturgy.apolytikia, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [35, 35]}, {pred: not_date_in, args: *COINC}],
-   fill: {res_tone: "$tone", saint: false, parts: ["Apolytikion of the Resurrection — Octoechos Tone 5", "Apolytikion of the patron saint or feast of the temple"]},
+   fill: {hymns: ["oct/t{tone}/sun/apolytikion"], res_tone: "$tone", saint: false, parts: ["Apolytikion of the Resurrection — Octoechos Tone 5", "Apolytikion of the patron saint or feast of the temple"]},
    source: typikon, locator: "Ch VII p.534 (Liturgy: Resurrection, patron)", status: explicit}
 
 # ---- Matins kathismata (Resurrection in the tone of the week; ANCA prints the Pentecostarion's seasonal order)
@@ -167,7 +167,7 @@
 # ---- Liturgy prokeimenon: the Sunday's own from the Pentecostarion (owner from the Epistle, as lit.prokeimenon.follows_epistle)
 - {id: pent.lit.prokeimenon.sunday, slot: liturgy.prokeimenon, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 49]}, {pred: epistle_owner_is, args: [sunday]}],
-   fill: {owner: sunday, parts: ["Prokeimenon of the day (with the Acts reading) — Pentecostarion"]},
+   fill: {hymns: ["mov/{pascha_days}/prokeimenon"], owner: sunday, parts: ["Prokeimenon of the day (with the Acts reading) — Pentecostarion"]},
    source: anca, locator: "inferred: the prokeimenon follows the Epistle owner (lit.prokeimenon.follows_epistle); Pascha-season readings are Acts from the Pentecostarion",
    status: inferred, evidence: "ANCA READ 2021-2026 print the Pentecostarion prokeimenon above the Acts reading on every Pascha-cycle Sunday whose Epistle is the Sunday's (e.g. 2026-04-26 'The Lord is my strength'); saint-Epistle Sundays fall to the generic rule"}
 
@@ -186,7 +186,7 @@
    source: typikon, locator: "Ch VII p.537 ('God is the Lord': Resurrection, Fathers, Ascension)", status: explicit}
 - {id: pent.lit.apolytikia.fathers, slot: liturgy.apolytikia, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [42, 42]}, {pred: not_date_in, args: *COINC}],
-   fill: {res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone 6", "Apolytikion of the Ascension — Pentecostarion, Tone 4", "Apolytikion of the Holy Fathers — Pentecostarion, Tone 8", "Apolytikion of the patron saint or feast of the temple"]},
+   fill: {hymns: ["oct/t{tone}/sun/apolytikion", "mov/39/apolytikion", "mov/42/apolytikion"], res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone 6", "Apolytikion of the Ascension — Pentecostarion, Tone 4", "Apolytikion of the Holy Fathers — Pentecostarion, Tone 8", "Apolytikion of the patron saint or feast of the temple"]},
    source: typikon, locator: "Ch VII pp.537-538 (Liturgy: Resurrection, Ascension, Fathers, patron)", status: explicit}
 - {id: pent.mat.praises.fathers, slot: matins.praises, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [42, 42]}, {pred: not_date_in, args: *COINC}],
@@ -230,7 +230,7 @@
    source: typikon, locator: "Ch VII p.539 (praises: 3 stichera for Pentecost repeating each, tone 4; Glory/Now tone 6)", status: explicit}
 - {id: pent.lit.apolytikia.pentecost, slot: liturgy.apolytikia, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [49, 49]}, {pred: not_date_in, args: *COINC}],
-   fill: {res_tone: null, saint: true, parts: ["Apolytikion of Pentecost — Pentecostarion, Tone 8"]},
+   fill: {hymns: ["mov/49/apolytikion"], res_tone: null, saint: true, parts: ["Apolytikion of Pentecost — Pentecostarion, Tone 8"]},
    source: typikon, locator: "Ch VII p.539 (after the entrance: troparion and kontakion of Pentecost)", status: explicit}
 - {id: pent.lit.dismissal.pentecost, slot: liturgy.dismissal, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [49, 49]}, {pred: not_date_in, args: *COINC}],
@@ -258,7 +258,7 @@
    source: typikon, locator: "Ch V p.329 (praises 6: 3 Thomas + 3 George; Ch I p.31 agrees)", status: explicit}
 - {id: pent.lit.apolytikia.george_thomas, slot: liturgy.apolytikia, tier: -1,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [7, 7]}, {pred: date_in, args: ["04-23"]}],
-   fill: {res_tone: null, saint: true, parts: ["Apolytikion of Thomas Sunday — Pentecostarion, Tone 7", "Apolytikion of St George — Menaion 04-23"]},
+   fill: {hymns: ["mov/7/apolytikion", "men/04-23/apolytikion"], res_tone: null, saint: true, parts: ["Apolytikion of Thomas Sunday — Pentecostarion, Tone 7", "Apolytikion of St George — Menaion 04-23"]},
    source: typikon, locator: "Ch V p.329 (Liturgy: troparia of Thomas Sunday and St George, then the Pascha kontakion)", status: explicit}
 - {id: pent.lit.dismissal.george_thomas, slot: liturgy.dismissal, tier: -1,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [7, 7]}, {pred: date_in, args: ["04-23"]}],
@@ -284,7 +284,7 @@
    source: typikon, locator: "Ch V p.365 (praises: 3 Res + 3 John + Paschals; Glory John); Ch I p.31", status: explicit}
 - {id: pent.lit.apolytikia.john_myrrhbearers, slot: liturgy.apolytikia, tier: -1,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [14, 14]}, {pred: date_in, args: ["05-08"]}],
-   fill: {res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone 2", "The two troparia of Joseph and the Myrrhbearers — Pentecostarion", "Apolytikion of St John the Theologian — Menaion 05-08", "Apolytikion of the patron saint or feast of the temple"]},
+   fill: {hymns: ["oct/t{tone}/sun/apolytikion", "mov/14/apolytikion", "mov/14/apolytikion2", "men/05-08/apolytikion"], res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone 2", "The two troparia of Joseph and the Myrrhbearers — Pentecostarion", "Apolytikion of St John the Theologian — Menaion 05-08", "Apolytikion of the patron saint or feast of the temple"]},
    source: typikon, locator: "Ch V p.365 (Liturgy: Resurrection, Myrrhbearers' troparia, St John, patron)", status: explicit}
 - {id: pent.lit.dismissal.john_myrrhbearers, slot: liturgy.dismissal, tier: -1,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [14, 14]}, {pred: date_in, args: ["05-08"]}],
@@ -310,7 +310,7 @@
    source: typikon, locator: "Ch V p.390 (praises: 3 Res + 3 Constantine and Helen + Paschals); Ch I p.31", status: explicit}
 - {id: pent.lit.apolytikia.constantine_blind, slot: liturgy.apolytikia, tier: -1,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [35, 35]}, {pred: date_in, args: ["05-21"]}],
-   fill: {res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone 5", "Apolytikion of Ss Constantine and Helen — Menaion 05-21", "Apolytikion of the patron saint or feast of the temple"]},
+   fill: {hymns: ["oct/t{tone}/sun/apolytikion", "men/05-21/apolytikion"], res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone 5", "Apolytikion of Ss Constantine and Helen — Menaion 05-21", "Apolytikion of the patron saint or feast of the temple"]},
    source: typikon, locator: "Ch V p.390 (Liturgy: Resurrection, Constantine and Helen, patron)", status: explicit}
 - {id: pent.lit.dismissal.constantine_blind, slot: liturgy.dismissal, tier: -1,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [35, 35]}, {pred: date_in, args: ["05-21"]}],
@@ -332,7 +332,7 @@
    source: typikon, locator: "Ch V p.405 ('God is the Lord': as at Vespers)", status: explicit}
 - {id: pent.lit.apolytikia.finding_blind, slot: liturgy.apolytikia, tier: -1,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [35, 35]}, {pred: date_in, args: ["05-25"]}],
-   fill: {res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone 5", "Apolytikion of the 3rd Finding of the Forerunner's Head — Menaion 05-25", "Apolytikion of the patron saint or feast of the temple"]},
+   fill: {hymns: ["oct/t{tone}/sun/apolytikion", "men/05-25/apolytikion"], res_tone: "$tone", saint: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone 5", "Apolytikion of the 3rd Finding of the Forerunner's Head — Menaion 05-25", "Apolytikion of the patron saint or feast of the temple"]},
    source: typikon, locator: "Ch V p.406 (Liturgy: Resurrection, the Finding, patron)", status: explicit}
 - {id: pent.mat.praises.finding_blind, slot: matins.praises, tier: -1,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [35, 35]}, {pred: date_in, args: ["05-25"]}],

@@ -5,6 +5,7 @@ Rule resolves to `missing` (never dropped).
 """
 from __future__ import annotations
 
+import copy
 import fnmatch
 import re
 import glob
@@ -100,15 +101,27 @@ class Resolution:
         return self.rule["id"] if self.rule else None
 
 
+_CACHE: dict = {}
+_Loader = getattr(yaml, "CSafeLoader", yaml.SafeLoader)
+
+
 def load_catalogue(data_dir: str = DATA):
+    """Parsed + validated (rules, sources, slots); cached until a rules file changes. Callers get their own copy."""
     rdir = os.path.join(data_dir, "rules")
-    sources = yaml.safe_load(open(os.path.join(rdir, "sources.yaml"), encoding="utf-8"))
-    slots = yaml.safe_load(open(os.path.join(rdir, "slots.yaml"), encoding="utf-8"))
+    sig = tuple((f, os.path.getmtime(f)) for f in sorted(glob.glob(os.path.join(rdir, "*.yaml"))))
+    if _CACHE.get(data_dir, (None,))[0] != sig:
+        _CACHE[data_dir] = (sig, _load_catalogue(rdir))
+    return copy.deepcopy(_CACHE[data_dir][1])
+
+
+def _load_catalogue(rdir: str):
+    sources = yaml.load(open(os.path.join(rdir, "sources.yaml"), encoding="utf-8"), Loader=_Loader)
+    slots = yaml.load(open(os.path.join(rdir, "slots.yaml"), encoding="utf-8"), Loader=_Loader)
     rules = []
     for f in sorted(glob.glob(os.path.join(rdir, "*.yaml"))):
         if os.path.basename(f) in NON_RULE_FILES:
             continue
-        rules += yaml.safe_load(open(f, encoding="utf-8"))
+        rules += yaml.load(open(f, encoding="utf-8"), Loader=_Loader)
     errs = validate(rules, sources, slots)
     if errs:
         raise RuleError("; ".join(errs))

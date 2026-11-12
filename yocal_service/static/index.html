@@ -89,7 +89,7 @@ async function load(keepScroll){
   try{render(await api(`/api/service?service=${state.service}&date=${state.date}`));if(keepScroll)scrollTo(0,y)}
   catch(e){main.replaceChildren(el('div','note',e.message));if(e.data&&e.data.nearest_sunday){const b=el('button',null,'Go to '+e.data.nearest_sunday);b.onclick=()=>{state.date=e.data.nearest_sunday;load()};main.append(b)}$('#toc').replaceChildren()}
 }
-const srcName={dcs:'GOA DCS',anca:'ANCA',pdf:'parish booklet','pdf+anca':'parish booklet + ANCA',inferred:'inferred',engine:'rules',gap:'gap',parish:'parish translation',yocal:'yocal database',dcs_text:'text from GOA Digital Chant Stand (verify)',anca_pending:'ANCA text – parish translation pending'};
+const srcName={dcs:'GOA DCS',anca:'ANCA',pdf:'parish booklet','pdf+anca':'parish booklet + ANCA',inferred:'inferred',engine:'rules',gap:'gap',parish:'parish translation',yocal:'yocal database',dcs_text:'text from GOA Digital Chant Stand (verify)',anca_pending:'ANCA text – parish translation pending',dcs_pending:'GOA DCS text – parish translation pending','pdf+rules':'parish booklet + rules'};
 function para(role,text){const d=el('div','l'),t=el('div','t '+role);const parts=text.split(/(?<=let us pray to the Lord\.)\s+/);parts.forEach((x,i)=>{if(i)t.append(el('div','pet',''));t.lastChild&&i?t.lastChild.textContent=x:t.append(document.createTextNode(x))});if(parts.length>1){t.replaceChildren(...parts.map(x=>el('div','pet',x)))}d.append(el('div','r '+role,role),t);return d}
 let lastSea=null;
 function renderBlock(b,sec){
@@ -125,7 +125,7 @@ function render(d){
   const day=el('div','day');day.append(el('h2',null,`${d.service_title} – ${d.weekday} ${d.date}`),el('div','sub',d.heading+(d.gospel_designation?' · '+d.gospel_designation:'')));
   if(d.commemorations.length)day.append(el('div','sub','Also: '+d.commemorations.join('; ')));
   (d.notes||[]).forEach(n=>day.append(el('div','note',n)));
-  if((d.translations_pending||[]).length)day.append(el('div','note','Parish translation pending for: '+[...new Set(d.translations_pending.map(x=>x.heading))].join('; ')+' (ANCA wording shown meanwhile).'));
+  if((d.translations_pending||[]).length)day.append(el('div','note','Parish translation pending for: '+[...new Set(d.translations_pending.map(x=>x.heading))].join('; ')+' (GOA DCS / ANCA wording shown meanwhile).'));
   main.append(day);
   if(!d.complete)main.append(el('div','note','Rules incomplete for this date ('+d.incomplete_reasons.join('; ')+'). Variable parts marked below may be missing or guessed.'));
   d.sections.forEach(s=>{

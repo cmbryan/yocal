@@ -1,0 +1,3 @@
+[submodule "yocal_sources"]
+	path = yocal_sources
+	url = https://github.com/cmbryan/yocal_sources.git

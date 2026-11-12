@@ -84,10 +84,10 @@ def create_app() -> Flask:
             music.fetch_asset(con, aid)
         except KeyError:
             abort(404)
-        r = con.execute("SELECT content, mime FROM music_asset WHERE id=?", (aid,)).fetchone()
-        if not r["content"]:
+        data, mime = music.content(con, aid)
+        if not data:
             abort(502, description="could not fetch from source")
-        return Response(r["content"], mimetype=r["mime"] or "application/octet-stream", headers={"Cache-Control": "public, max-age=86400"})
+        return Response(data, mimetype=mime or "application/octet-stream", headers={"Cache-Control": "public, max-age=86400"})
 
     @app.get("/api/music/<int:aid>/pages")
     def music_pages(aid):

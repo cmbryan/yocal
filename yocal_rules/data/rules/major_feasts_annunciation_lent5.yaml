@@ -81,7 +81,7 @@
    source: typikon, locator: "Ch V Mar 25 p.292, p.306 (entrance hymn 'Tell forth from day to day ... who was risen from the dead')", status: explicit}
 - {id: mf.lent5.lit.apolytikia, slot: liturgy.apolytikia, tier: -10,
    when: [{pred: major_feast_is, args: [annunciation]}, {pred: weekday_in, args: [Sunday]}, {pred: pascha_days_between, args: [-14, -14]}],
-   fill: {res_tone: "$tone", saint: true, patron: false, parts: ["Apolytikion of the Annunciation (during the Little Entrance, after the 3rd antiphon) — Menaion 03-25", "Apolytikion of the Resurrection — Octoechos Tone {tone} (after the Entrance, first)", "Not the apolytikion of the patron saint or feast of the temple"]},
+   fill: {hymns: ["oct/t{tone}/sun/apolytikion", "men/03-25/apolytikion"], res_tone: "$tone", saint: true, patron: false, parts: ["Apolytikion of the Annunciation (during the Little Entrance, after the 3rd antiphon) — Menaion 03-25", "Apolytikion of the Resurrection — Octoechos Tone {tone} (after the Entrance, first)", "Not the apolytikion of the patron saint or feast of the temple"]},
    source: anca, locator: "inferred: as mf.sun.lit.apolytikia (Typikon Ch I s6 IV p.35; the Lent 4/5 order names none)", status: inferred,
    evidence: "ANCA Liturgy Variables 2018-03-25: Resurrection and Annunciation apolytikia, 'Do NOT sing the apolytikion of the patron saint or feast of the temple'"}
 - {id: mf.lent5.lit.kontakion, slot: liturgy.kontakion, tier: -10,

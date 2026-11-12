@@ -15,7 +15,7 @@ import tempfile
 import urllib.parse
 import urllib.request
 
-from . import anca_links, dcs_page, db
+from . import anca_links, dcs_page, db, store
 from yocal_rules import dcs as rules_dcs
 
 UA = {"User-Agent": "yocal-service/0.1"}
@@ -105,10 +105,69 @@ def record(con, service: str, date: dt.date, slot_key: str, title: str, cands: l
     return out
 
 
+_EXT = {"application/pdf": ".pdf", "audio/mpeg": ".mp3"}
+INDEX = ("music", "index.jsonl")
+
+
+def file_path(sha: str | None, mime: str | None) -> str | None:
+    """Where an asset's bytes live in the sources store (named by content hash)."""
+    return store.path("music", "files", sha + _EXT.get(mime or "", ".bin")) if sha else None
+
+
+def content(con, aid: int) -> tuple:
+    """-> (bytes | None, mime) from the sources store."""
+    r = con.execute("SELECT sha256, mime FROM music_asset WHERE id=?", (aid,)).fetchone()
+    fp = file_path(r["sha256"], r["mime"]) if r else None
+    return (open(fp, "rb").read(), r["mime"]) if fp and os.path.exists(fp) else (None, r["mime"] if r else None)
+
+
+def _index_put(row: dict):
+    p = store.path(*INDEX)
+    rows = {r["url"]: r for r in store.read_jsonl(p)}
+    rows[row["url"]] = {**rows.get(row["url"], {}), **row}
+    store.write_jsonl(p, list(rows.values()), "url")
+
+
+def sync_index(con) -> int:
+    """Teach the local cache every asset already saved in the sources store (a fresh machine, or after a git pull)."""
+    n = 0
+    for r in store.read_jsonl(store.path(*INDEX)):
+        con.execute("INSERT INTO music_asset(url, source, title, label, form, mime, sha256, size, fetched_at) VALUES(?,?,?,?,?,?,?,?,?) "
+                    "ON CONFLICT(url) DO UPDATE SET mime=excluded.mime, sha256=excluded.sha256, size=excluded.size, fetched_at=excluded.fetched_at, error=NULL",
+                    (r["url"], r["source"], r.get("title", ""), r.get("label", ""), r.get("form", ""), r.get("mime"), r["sha256"], r.get("size"), r.get("fetched_at")))
+        n += 1
+    con.commit()
+    return n
+
+
+def export_db_blobs(con) -> int:
+    """One-off migration: asset bytes kept in SQLite -> files + index in the sources store; the blob column is then cleared."""
+    n = 0
+    for r in con.execute("SELECT id, url, source, title, label, form, mime, sha256, size, fetched_at, content FROM music_asset WHERE content IS NOT NULL").fetchall():
+        _save(r["url"], r["content"], r["mime"], dict(r), r["fetched_at"])
+        con.execute("UPDATE music_asset SET content=NULL WHERE id=?", (r["id"],))
+        n += 1
+    con.commit()
+    con.execute("VACUUM")
+    return n
+
+
+def _save(url: str, data: bytes, mime: str, meta: dict, when: str) -> str:
+    sha = hashlib.sha256(data).hexdigest()
+    fp = file_path(sha, mime)
+    if not os.path.exists(fp):
+        os.makedirs(os.path.dirname(fp), exist_ok=True)
+        open(fp, "wb").write(data)
+    _index_put({"url": url, "file": os.path.basename(fp), "sha256": sha, "mime": mime, "size": len(data), "fetched_at": when,
+                "source": meta["source"], "title": meta.get("title", ""), "label": meta.get("label", ""), "form": meta.get("form", "")})
+    return sha
+
+
 def asset_info(con, aid: int) -> dict:
-    r = con.execute("SELECT id, url, source, title, label, form, mime, size, fetched_at, error, content IS NOT NULL AS cached FROM music_asset WHERE id=?", (aid,)).fetchone()
+    r = con.execute("SELECT id, url, source, title, label, form, mime, size, fetched_at, error, sha256 FROM music_asset WHERE id=?", (aid,)).fetchone()
     d = dict(r)
-    d["cached"] = bool(d["cached"])
+    fp = file_path(d.pop("sha256"), d["mime"])
+    d["cached"] = bool(fp and os.path.exists(fp))
     d["pages"] = con.execute("SELECT COUNT(*) FROM music_page WHERE asset_id=?", (aid,)).fetchone()[0]
     return d
 
@@ -125,10 +184,10 @@ def previous_refs(con, service: str, slot_key: str) -> list:
 # ---------------------------------------------------------------- fetching
 def fetch_asset(con, aid: int, force: bool = False) -> dict:
     """Download an asset into the DB (no-op if cached). -> asset_info."""
-    row = con.execute("SELECT url, content IS NOT NULL AS cached FROM music_asset WHERE id=?", (aid,)).fetchone()
+    row = con.execute("SELECT url, source, title, label, form FROM music_asset WHERE id=?", (aid,)).fetchone()
     if row is None:
         raise KeyError(aid)
-    if row["cached"] and not force:
+    if asset_info(con, aid)["cached"] and not force:
         return asset_info(con, aid)
     try:
         req = urllib.request.Request(row["url"], headers=UA)
@@ -138,8 +197,9 @@ def fetch_asset(con, aid: int, force: bool = False) -> dict:
             mime = "application/pdf"
         elif row["url"].endswith(".mp3"):
             mime = "audio/mpeg"
-        con.execute("UPDATE music_asset SET content=?, mime=?, sha256=?, size=?, fetched_at=?, error=NULL WHERE id=?",
-                    (data, mime, hashlib.sha256(data).hexdigest(), len(data), dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), aid))
+        when = dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")
+        sha = _save(row["url"], data, mime, dict(row), when)  # saved once in the sources store
+        con.execute("UPDATE music_asset SET mime=?, sha256=?, size=?, fetched_at=?, error=NULL WHERE id=?", (mime, sha, len(data), when, aid))
     except Exception as e:
         con.execute("UPDATE music_asset SET error=? WHERE id=?", (f"{type(e).__name__}: {e}", aid))
     con.commit()
@@ -152,12 +212,12 @@ def page_png(con, aid: int, page: int) -> bytes | None:
     if r:
         return r[0]
     fetch_asset(con, aid)
-    row = con.execute("SELECT content, mime FROM music_asset WHERE id=?", (aid,)).fetchone()
-    if not row or not row["content"] or row["mime"] != "application/pdf":
+    data, mime = content(con, aid)
+    if not data or mime != "application/pdf":
         return None
     with tempfile.TemporaryDirectory() as d:
         pdf = os.path.join(d, "a.pdf")
-        open(pdf, "wb").write(row["content"])
+        open(pdf, "wb").write(data)
         subprocess.run(["pdftoppm", "-r", "130", "-png", pdf, os.path.join(d, "p")], check=False, capture_output=True)
         files = sorted(f for f in os.listdir(d) if f.startswith("p") and f.endswith(".png"))
         for i, f in enumerate(files, 1):

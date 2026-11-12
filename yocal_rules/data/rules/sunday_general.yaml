@@ -171,15 +171,15 @@
    fill: {res: 4, other: [6]}, source: typikon, locator: "p.12 (4R+6 for the Three Hierarchs, except on a Triodion Sunday)", status: explicit}
 - {id: ves.apolytikia.named_sunday, slot: vespers.apolytikia, tier: 2,
    when: [{pred: sunday_eve}, {pred: in_slice}, {pred: named_sunday_is, args: [fathers_4th_council, fathers_7th_council, forefathers, before_nativity_18_19, all_saints]}],
-   fill: {res_tone: "$tone", saint: true}, source: typikon,
+   fill: {res_tone: "$tone", saint: true, hymns: ["oct/t{tone}/sun/apolytikion", "named/{named}/apolytikion"]}, source: typikon,
    locator: "named-Sunday sections p.93 / p.126 / p.133 / p.432 / p.540 (troparion of the Sunday's commemoration after the Resurrection)", status: explicit}
 - {id: mat.apolytikia.named_sunday, slot: matins.apolytikia, tier: 2,
    when: [{pred: sunday}, {pred: in_slice}, {pred: named_sunday_is, args: [fathers_4th_council, fathers_7th_council, forefathers, before_nativity_18_19, all_saints]}],
-   fill: {res_tone: "$tone", saint: true}, source: typikon,
+   fill: {res_tone: "$tone", saint: true, hymns: ["oct/t{tone}/sun/apolytikion", "named/{named}/apolytikion"]}, source: typikon,
    locator: "named-Sunday sections p.93 / p.126 / p.133 / p.432 / p.540 (troparion of the Sunday's commemoration after the Resurrection)", status: explicit}
 - {id: lit.apolytikia.named_sunday, slot: liturgy.apolytikia, tier: 2,
    when: [{pred: sunday}, {pred: in_slice}, {pred: named_sunday_is, args: [fathers_4th_council, fathers_7th_council, forefathers, before_nativity_18_19, all_saints]}],
-   fill: {res_tone: "$tone", saint: true}, source: typikon,
+   fill: {res_tone: "$tone", saint: true, hymns: ["oct/t{tone}/sun/apolytikion", "named/{named}/apolytikion"]}, source: typikon,
    locator: "named-Sunday sections p.93 / p.126 / p.133 / p.432 / p.540 (troparion of the Sunday's commemoration after the Resurrection)", status: explicit}
 - {id: ves.apolytikia.before_nativity_24, slot: vespers.apolytikia, tier: 2,
    when: [{pred: sunday_eve}, {pred: named_sunday_is, args: [before_nativity_24]}],

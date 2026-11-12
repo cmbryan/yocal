@@ -1,0 +1,81 @@
+# Hymn identities. The Rules name hymns by these ids (yocal_rules/hymns.py); texts and music are saved per id
+# (yocal_service store), never per date, so a hymn saved once serves every year it is appointed.
+# Keys only, no hymn text (public repo).
+#
+# id grammar
+#   oct/t{N}/sun/<kind>        Octoechos, Sunday of tone N             (apolytikion, kontakion)
+#   men/{MM-DD}/<kind>         Menaion, the day's principal hymn        (apolytikion, kontakion, prokeimenon, alleluia, communion)
+#   mov/{P}/<kind>             Triodion/Pentecostarion day, P = days from Pascha (Publican -70 ... All Saints +56)
+#   lit/<...>                  fixed Liturgy hymns (Sunday prokeimenon/alleluia of the tone, Sunday communion hymn)
+#   hor/<...>                  Horologion (ordinary kontakion of the Theotokos)
+#   named/<named_sunday>/<kind> a named Sunday's own hymn (Forefathers, Sunday before the Nativity, ...)
+#
+# DCS (AGES) text keys `topic|field` holding a hymn: derived by pattern in hymns.dcs_keys(); `dcs:` below overrides
+# (a list = the hymn's parts in order, e.g. refrain then verse; a nested list = one paragraph split over several keys).
+# `*` in a key matches any run of characters.
+
+# liturgy.kontakion fill.kind -> hymn id
+kontakion:
+  ordinary_theotokos: hor/kontakion/protection
+  entrance: men/11-21/kontakion
+  nativity_preparation: men/12-20/kontakion
+  nativity: men/12-25/kontakion
+  circumcision: men/01-01/kontakion
+  forefeast_theophany: men/01-02/kontakion
+  theophany: men/01-06/kontakion
+  forefeast_presentation: men/02-01/kontakion
+  presentation: men/02-02/kontakion
+  forefeast_annunciation: men/03-24/kontakion
+  annunciation: men/03-25/kontakion
+  lent_sunday: men/03-25/kontakion          # "To you, the Champion Leader": the Annunciation kontakion
+  placing_of_robe: men/07-02/kontakion
+  dormition_of_anna: men/07-25/kontakion
+  transfiguration: men/08-06/kontakion
+  forefeast_dormition: men/08-14/kontakion
+  dormition: men/08-15/kontakion
+  placing_of_sash: men/08-31/kontakion
+  indiction: men/09-01/kontakion
+  forefeast_nativity_theotokos: men/09-07/kontakion
+  nativity_theotokos: men/09-08/kontakion
+  dedication_resurrection_church: men/09-13/kontakion
+  holy_cross: men/09-14/kontakion
+  elevation: men/09-14/kontakion
+  conception_of_anna: men/12-09/kontakion
+  pharisee_publican: mov/-70/kontakion
+  prodigal_son: mov/-63/kontakion
+  last_judgment: mov/-56/kontakion
+  forgiveness: mov/-49/kontakion
+  palm_sunday: mov/-7/kontakion
+  pascha: mov/0/kontakion
+  ascension: mov/39/kontakion
+  pentecost: mov/49/kontakion
+  all_saints: mov/56/kontakion
+
+# liturgy.communion fill.kind -> hymn id ('feast' and 'saint' are resolved from the calendar: the feast's / the saint's own)
+communion:
+  praise_the_lord: lit/communion/sunday
+  cup_of_salvation: lit/communion/cup_of_salvation
+  light_of_countenance: mov/-28/communion
+  receive_body: mov/0/communion
+  praise_jerusalem: mov/7/communion
+  righteous: mov/56/communion
+  chosen_zion: men/03-25/communion             # "The Lord has chosen Zion": the Annunciation's
+
+# ids whose DCS key is not the pattern one (seen on DCS pages; reference only)
+dcs:
+  oct/t1/sun/apolytikion: ["he.a.m1|heAU.TouLithouSfragisthentos.text"]   # DCS keys these three by their model melody (automelon)
+  oct/t5/sun/apolytikion: ["he.a.m5|heAU.TonSynanarchonLogon.text"]
+  oct/t6/sun/apolytikion: ["he.a.m6|heAU.AngelikaiDynameis.text"]
+  hor/kontakion/protection: ["ho.*|hoTY.Key0408.text"]
+  men/02-01/kontakion: ["me.m02.d01|me*.Kontakion2.text"]
+  men/09-01/kontakion: ["me.m09.d01|me*.Kontakion3.text"]
+  men/12-09/kontakion: ["me.m12.d09|me*.Kontakion2.text"]
+  men/03-25/kontakion: [["tr.d056|trMA.Kontakion11.text", "tr.d056|trMA.Kontakion12.text", "tr.d056|trMA.Kontakion13.text",
+                         "tr.d056|trMA.Kontakion14.text", "tr.d056|trMA.Kontakion15.text", "tr.d056|trMA.Kontakion16.text"]]
+  mov/-70/kontakion: ["tr.d001|trMA.Kontakion0.text"]
+  lit/communion/sunday: ["liturgical.verses|psLI.sunday.communion.v1.text"]
+  named/before_nativity/apolytikion: ["me.m12.d17|meVE.Apolytikion1.text"]   # "Great are the accomplishments of faith" (DCS 2026-12-20)
+
+# DCS keys printed at every Liturgy that are not a variable hymn (ignored when reading a page's hymns)
+dcs_ignore:
+  - "tr.d069|trLI.CommunionHymn.text"   # "Receive me today, O Son of God" (Holy Thursday's), the pre-communion hymn

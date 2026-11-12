@@ -1,15 +1,15 @@
 # Work package A: Sunday before Theophany (named Sunday) apolytikia, and a Kyriaki (Jul 7) Sunday Epistle exception.
 - {id: ves.apolytikia.before_theophany, slot: vespers.apolytikia, tier: 2,
    when: [{pred: sunday_eve}, {pred: named_sunday_is, args: [before_theophany]}],
-   fill: {res_tone: "$tone", saint: true}, source: typikon,
+   fill: {res_tone: "$tone", saint: true, hymns: ["oct/t{tone}/sun/apolytikion", "men/01-02/apolytikion"]}, source: typikon,
    locator: "Sunday before Theophany pp.167-169 (Vespers troparia: Resurrection, then the Sunday before Epiphany / forefeast)", status: explicit}
 - {id: mat.apolytikia.before_theophany, slot: matins.apolytikia, tier: 2,
    when: [{pred: sunday}, {pred: named_sunday_is, args: [before_theophany]}],
-   fill: {res_tone: "$tone", saint: true}, source: typikon,
+   fill: {res_tone: "$tone", saint: true, hymns: ["oct/t{tone}/sun/apolytikion", "men/01-02/apolytikion"]}, source: typikon,
    locator: "Sunday before Theophany pp.167-169 (Matins 'God is the Lord': Resurrection 2x, forefeast 1x)", status: explicit}
 - {id: lit.apolytikia.before_theophany, slot: liturgy.apolytikia, tier: 2,
    when: [{pred: sunday}, {pred: named_sunday_is, args: [before_theophany]}],
-   fill: {res_tone: "$tone", saint: true}, source: typikon,
+   fill: {res_tone: "$tone", saint: true, hymns: ["oct/t{tone}/sun/apolytikion", "men/01-02/apolytikion"]}, source: typikon,
    locator: "Sunday before Theophany pp.167-169 (Liturgy: Resurrection, then forefeast / Sunday before Epiphany)", status: explicit}
 - {id: lit.epistle.saint_on_antioch_sunday.07-07, slot: liturgy.epistle, tier: 2,
    when: [{pred: sunday}, {pred: menaion_date_is, args: ["07-07"]}],

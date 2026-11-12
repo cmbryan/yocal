@@ -73,11 +73,11 @@
 # ======================= Paschal Divine Liturgy of St John Chrysostom =======================
 - {id: pent.pascha.lit.apolytikia, slot: liturgy.apolytikia, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {res_tone: null, saint: true, parts: ["Troparion of Pascha — Pentecostarion, Tone 5", "Hypakoe of Pascha — Pentecostarion, Tone 4", "Not the apolytikion of the patron saint or feast of the temple"]},
+   fill: {hymns: ["mov/0/troparion", "mov/0/hypakoe"], res_tone: null, saint: true, parts: ["Troparion of Pascha — Pentecostarion, Tone 5", "Hypakoe of Pascha — Pentecostarion, Tone 4", "Not the apolytikion of the patron saint or feast of the temple"]},
    source: typikon, locator: "Ch VII p.521 (after the entrance: troparion and hypakoe of Pascha, then the kontakion)", status: explicit}
 - {id: pascha.lit.prokeimenon, slot: liturgy.prokeimenon, tier: -1,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {owner: sunday, parts: ["Prokeimenon of Pascha: “This is the day which the Lord hath made; let us rejoice and be glad therein” with its verse (Psalm 117) — before the Acts reading"]},
+   fill: {hymns: ["mov/0/prokeimenon"], owner: sunday, parts: ["Prokeimenon of Pascha: “This is the day which the Lord hath made; let us rejoice and be glad therein” with its verse (Psalm 117) — before the Acts reading"]},
    source: anca, locator: "inferred: ANCA READ prints it above the Acts reading; Typikon Ch VII p.521 lists no prokeimenon; Ch I s2 p.13 (Bright Week: prokeimenon from the Pentecostarion)",
    status: inferred, evidence: "ANCA READ 2026-04-12 (single sample): 'This is the day which the Lord hath made …' with the verse 'O give thanks unto the Lord' before The Reading from the Acts of the Apostles (1:1-8)"}
 - {id: pascha.lit.antiphons, slot: liturgy.antiphons, tier: 0,

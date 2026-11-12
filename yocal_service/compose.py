@@ -1,15 +1,15 @@
-"""Compose one service for a date: parish PDF template + rules-engine determinations + day texts + music."""
+"""Compose one service for a date: parish PDF template + Rules -> hymn ids -> saved texts (texts.py) + music.
+
+The Rules alone decide which hymn goes where (yocal_rules.hymns). ANCA/DCS pages are only text/music sources (saved once,
+by hymn id) and answer keys. Not yet converted (still read from the date's ANCA/DCS page): seasonal_hymns, dcs_text, music.
+"""
 from __future__ import annotations
 
 import datetime as dt
-import os
 import re
-import sys
 
-from . import anca_read, booklet_readings, dcs_tones, db, music, template, translations
-from yocal_rules import anca as rules_anca, assemble, calfacts, render
-
-from .harvest import sim as harvest_sim, toks as harvest_toks
+from . import anca_read, db, music, template, texts, translations
+from yocal_rules import anca as rules_anca, assemble, calfacts, hymns, render
 
 SERVICES = {"liturgy": "Divine Liturgy"}
 
@@ -52,29 +52,6 @@ def _nice_heading(h: str) -> str:
     return h[:1].upper() + h[1:]
 
 
-def v_res_apolytikion(day: Day, f: dict, **_):
-    t = day.dfirst(r"^oc\.m\d", r"Apolytikion\.text$")
-    if t:
-        return [_P("Choir", t, "dcs", f"Resurrectional Apolytikion (Tone {f['tone']})")]
-    for b in day.ablocks("RESURRECTIONAL APOLYTIKION"):
-        return [_P("Choir", b["body"][0], "anca", f"Resurrectional Apolytikion (Tone {f['tone']})")]
-    return []
-
-
-def v_apolytikia(day: Day, f: dict, **_):
-    out = v_res_apolytikion(day, f)
-    for b in day.ablocks(r"^APOLYTIKION (FOR|OF)"):
-        out.append(_P("Choir", b["body"][0], "anca", _nice_heading(b["heading"])))
-    if not out:  # no Octoechos/ANCA text (e.g. Sunday after the Nativity): the Menaion apolytikia the DCS page lists at the entrance
-        on = False
-        for r in day.dcs:
-            if r["kind"] == "heading":
-                on = r["text"].upper().startswith("ENTRANCE PRAYER")
-            elif on and r["kind"] == "text" and re.search(r"Apolytikion\d*\.text$", r["field"]) and r["topic"].startswith("me."):
-                m = re.match(r"me\.m(\d+)\.d(\w+)", r["topic"])
-                out.append(_P("Choir", r["text"], "dcs", f"Apolytikion (Menaion {m.group(1)}/{m.group(2)})" if m else "Apolytikion"))
-    return out
-
 
 def dcs_antiphon(day: Day, n: int) -> list:
     """Festal antiphon n from the DCS page (verses that belong to a Menaion date, `psLI.mMM.dDD.antiphonN`), with their refrains; [] if none."""
@@ -104,115 +81,6 @@ def dcs_antiphon(day: Day, n: int) -> list:
     flush()
     return out if festal else []
 
-
-def v_kontakion(day: Day, f: dict, engine: dict, **_):
-    for b in day.ablocks(r"^KONTAKION"):
-        return [_P("Choir", b["body"][0], "anca", _nice_heading(b["heading"]))]
-    t = day.dfirst(r"^me\.", r"Kontakion\d*\.text$")
-    if t:
-        return [_P("Choir", t, "dcs", "Kontakion")]
-    fp = (f.get("feast_period") or "").split(":")  # fore/afterfeast: the feast's own kontakion, from the DCS page of the feast day
-    mmdd = next((k for k, v in calfacts.MAJOR_FIXED.items() if len(fp) == 2 and v[0] == fp[1]), None)
-    if mmdd:
-        feast = dt.date(int(f["date"][:4]), int(mmdd[:2]), int(mmdd[3:]))
-        for back in (0, 7, 14, 21):  # the feast-day page may omit it; the preceding Sundays (prefeast) carry the same kontakion
-            for r in music.dcs_rows(feast - dt.timedelta(days=back), False):
-                if r["kind"] == "text" and r["topic"].startswith("me.") and re.search(r"Kontakion\d*\.text$", r["field"]):
-                    return [_P("Choir", r["text"], "dcs", f"Kontakion of the feast ({feast:%b} {feast.day})")]
-    return []
-
-
-def _epistle_parts(day: Day):
-    for b in day.ablocks(r"^THE EPISTLE"):
-        txt = " ".join(b["body"])
-        m = re.search(r"(The reading (?:is )?from .*?\([\d:,\-– ]+\))\s*(.*)$", txt, re.I)
-        if m:
-            return txt[:m.start()].strip(), m.group(1).strip(), m.group(2).strip()
-    return "", "", ""
-
-
-def _booklet(x: dict, n: int, head: str) -> list:
-    out = []
-    for i, (role, text) in enumerate(x["lines"][:n]):
-        p = {"role": role, "text": text, "source": "parish", "credit": f"parish booklet {x['booklet']}"}
-        if i == 0:
-            p["heading"] = head
-        out.append(p)
-    return out
-
-
-def dcs_proper(day: Day, kind: str) -> dict:
-    """The day's own prokeimenon/Alleluia verses on the DCS readings page (`psLI.mMM.dXX.<kind>.vK`, a saint or feast), {} if it uses the Sunday tone's."""
-    out = {}
-    for r in day.dcs2:
-        m = r["kind"] == "text" and re.match(rf"^psLI\.m\d+\.d\w+\.{kind}\.v(\d)\.text$", r["field"])
-        if m:
-            out[f"v{m.group(1)}"] = r["text"].strip()
-    return out
-
-
-def _pk_paras(refrain: str, verse: str, source: str, head: str, credit: str = "") -> list:
-    mk = lambda role, text, h=None: {"role": role, "text": text, "source": source, **({"heading": h} if h else {}), **({"credit": credit} if credit else {})}
-    out = [_P("Deacon", "Let us attend!", "pdf"), mk("Reader", refrain, head), mk("Choir", refrain)]
-    return out + ([mk("Reader", verse), mk("Choir", refrain)] if verse else [])
-
-
-def anca_prokeimenon(day: Day, f: dict) -> list:
-    """ANCA decides which prokeimenon (the one it prints in the Epistle block, labelled with whose it is). Wording: the parish booklet's or the
-    DCS's text of the same hymn when one matches ANCA's (similar wording), else ANCA's own text flagged as pending a parish translation."""
-    pre, _, _ = _epistle_parts(day)
-    if not pre:
-        return []
-    parts = re.split(r"(?<=[.!?])\s+", pre.strip(), maxsplit=1)
-    a_ref, a_verse = parts[0], parts[1] if len(parts) > 1 else ""
-    label = next((re.sub(r"^\(|\)$", "", x.strip()) for b in day.ablocks(r"^THE EPISTLE") for x in b["sub"][:1]), "")
-    owner = re.sub(r"^For\s+", "", label)
-    head = f"Prokeimenon (Tone {f.get('tone')})" if (not owner or "after Pentecost" in owner) else f"Prokeimenon (of {owner[:1].lower() + owner[1:] if owner.startswith('The ') else owner})"
-    t = harvest_toks(a_ref)
-    cands = []  # (similarity, rank, paragraphs); parish wording ranks before DCS
-    for it in booklet_readings.load():
-        x = it.get("prokeimenon")
-        if x and len(x["lines"]) >= 3:
-            cands.append((harvest_sim(t, harvest_toks(x["lines"][0][1])), 0, _pk_paras(x["lines"][0][1], x["lines"][2][1], "parish", head, f"parish booklet {it['booklet']}")))
-    for tone_v in [dcs_tones.get(f.get("tone")).get("prokeimenon") or {}, dcs_proper(day, "prokeimenon")]:
-        if tone_v.get("v1"):
-            cands.append((harvest_sim(t, harvest_toks(tone_v["v1"])), 1, _pk_paras(tone_v["v1"], tone_v.get("v2", ""), "dcs", head)))
-    ok = [c for c in cands if c[0] >= 0.5]
-    if ok:
-        return max(ok, key=lambda c: (round(c[0], 1), -c[1], c[0]))[2]
-    return _pk_paras(a_ref, a_verse, "anca_pending", head)
-
-
-def v_prokeimenon(day: Day, f: dict, **_):
-    av = anca_prokeimenon(day, f)
-    if av:
-        return av
-    bk = booklet_readings.select("prokeimenon", f)
-    if bk and bk.get("occasion"):  # the parish's own text for the same feast (Forefathers, Sunday before the Nativity)
-        return [_P("Deacon", "Let us attend!", "pdf")] + _booklet(bk, 4, f"Prokeimenon (Tone {bk['tone']})")
-    pr = dcs_proper(day, "prokeimenon")
-    if pr.get("v1"):  # saint/feast prokeimenon (the DCS page uses it when the epistle is the saint's, and on the feast Sundays)
-        a = {"role": "Reader", "text": pr["v1"], "source": "dcs", "heading": "Prokeimenon (of the saint/feast)"}
-        return [_P("Deacon", "Let us attend!", "pdf"), a, _P("Choir", pr["v1"], "dcs"),
-                *([_P("Reader", pr["v2"], "dcs"), _P("Choir", pr["v1"], "dcs")] if pr.get("v2") else [])]
-    if bk:  # the Sunday tone's, parish wording
-        return [_P("Deacon", "Let us attend!", "pdf")] + _booklet(bk, 4, f"Prokeimenon (Tone {bk['tone']})")
-    refrain = day.dfirst(r"^liturgical\.verses", r"sunday\.m\d\.prokeimenon\.v1\.text") or ""
-    verse = day.dfirst(r"^liturgical\.verses", r"sunday\.m\d\.prokeimenon\.v2\.text") or ""
-    src = "dcs"
-    if not refrain:
-        pre, _, _ = _epistle_parts(day)
-        parts = re.split(r"(?<=[.!?])\s+", pre, maxsplit=1)
-        if pre:
-            refrain, verse, src = parts[0], parts[1] if len(parts) > 1 else "", "anca"
-    if not refrain:
-        pv = dcs_tones.get(f.get("tone")).get("prokeimenon") or {}
-        if pv.get("v1"):  # the tone's Sunday prokeimenon from the DCS readings pages
-            refrain, verse, src = pv["v1"], pv.get("v2", ""), "dcs"
-    if not refrain:
-        return []
-    return [_P("Deacon", "Let us attend!", "pdf"), _P("Reader", refrain, src, f"Prokeimenon (Tone {f['tone']})"), _P("Choir", refrain, src),
-            _P("Reader", verse, src), _P("Choir", refrain, src)] if verse else [_P("Reader", refrain, src, f"Prokeimenon (Tone {f['tone']})"), _P("Choir", refrain, src)]
 
 
 _NT = {"Acts": "the Acts of the Apostles", "Romans": "the Epistle of St Paul to the Romans", "Galatians": "the Epistle of St Paul to the Galatians",
@@ -267,57 +135,105 @@ def v_gospel(day: Day, f: dict, **_):
     return [_P("Deacon", p, "yocal") for p in _db_text(f.get("gospel_text"))]
 
 
-def _tone_para(role: str, text: str, tone, what: str, heading: str | None = None) -> dict:
-    p = _P(role, text, "dcs", heading)
-    p["credit"] = dcs_tones.get(tone).get("source", "")
-    return p
+
+# ------------------------------------------------------------------ hymns: Rules -> hymn ids -> saved texts (never "what ANCA/DCS print today")
+SRC = {"parish": "parish", "dcs": "dcs_pending", "anca": "anca_pending"}
+ALLELUIA = "Alleluia! Alleluia! Alleluia!"
 
 
-def v_alleluia(day: Day, f: dict, engine: dict | None = None, **_):
-    """Alleluia and verses in the tone of the week (parish practice; the Typikon says Tone 2: a logged divergence, Rule lit.alleluia.day_tone)."""
-    bk = booklet_readings.select("alleluia", f)
-    if bk:
-        return _booklet(bk, 5, f"The Alleluia (Tone {bk['tone']})")
-    tone = f.get("tone")
-    v = dcs_tones.get(tone).get("alleluia") or {}
-    if v.get("v1"):
-        a = "Alleluia! Alleluia! Alleluia!"
-        return [_tone_para("Choir", a, tone, "alleluia", f"The Alleluia (Tone {tone})"), _tone_para("Reader", v["v1"], tone, "alleluia"), _tone_para("Choir", a, tone, "alleluia"),
-                *([_tone_para("Reader", v["v2"], tone, "alleluia"), _tone_para("Choir", a, tone, "alleluia")] if v.get("v2") else [])]
-    return [_P("", f"The Alleluia (Tone {tone})", "engine", "The Alleluia"), _P("Choir", "Alleluia! Alleluia! Alleluia!", "pdf"),
-            _P("", "Verses of the day: not available from any source yet", "gap")]
+def hymn_paras(h: hymns.Hymn, t: dict | None, role: str = "Choir") -> list:
+    """One hymn's paragraphs from its saved text t (texts.get); a visible gap when the text is not saved yet."""
+    if not t:
+        return [{"role": "", "text": f"{h.label}: text not saved yet", "source": "gap", "heading": h.label, "hymn": h.id}]
+    src = SRC[t["source"]]
+    mk = lambda r, text, head=None: {"role": r, "text": text, "source": src, "credit": t["credit"], "hymn": h.id, **({"heading": head} if head else {})}
+    ps = t["parts"]
+    if h.kind == "prokeimenon":
+        out = [_P("Deacon", "Let us attend!", "pdf"), mk("Reader", ps[0], h.label), mk("Choir", ps[0])]
+        return out + ([mk("Reader", ps[1]), mk("Choir", ps[0])] if len(ps) > 1 else [])
+    if h.kind == "alleluia":
+        out = [mk("Choir", ALLELUIA, h.label)]
+        for v in ps:
+            out += [mk("Reader", v), mk("Choir", ALLELUIA)]
+        return out
+    if h.kind == "communion":
+        return [mk("Choir", " ".join(ps).rstrip(".") + ". Alleluia, alleluia, alleluia.", h.label)]
+    return [mk(role, p, h.label if i == 0 else None) for i, p in enumerate(ps)]
 
 
-def v_communion_hymn(day: Day, f: dict, engine: dict | None = None, **_):
-    """Sunday hymn only when the rules say 'praise_the_lord' (Typikon Ch I s6 XI p.39); any other kind comes from ANCA's Koinonikon (seasonal_hymns)."""
-    kind = ((engine or {}).get("liturgy.communion") or {}).get("fill", {}).get("kind")
-    anca_silent = bool(day.anca) and not day.ablocks(r"^KOINONIKON")  # ANCA lists a heading only when it is not the Sunday hymn (project default: follow ANCA)
-    if kind not in (None, "praise_the_lord") and not anca_silent:
+def slot_paras(ctx: dict, slot: str, pick=None) -> list:
+    """Paragraphs for the hymns the Rules give a rules-engine slot; a gap paragraph if the Rule names no hymns yet."""
+    hs = ctx["hymns"].get(slot)
+    if hs is None:
         return []
-    v = day.dfirst(r"^liturgical\.verses", r"sunday\.communion\.v1\.text")
-    txt = (v or "Praise the Lord from the heavens, praise him in the highest.").rstrip(".") + ". Alleluia, alleluia, alleluia."
-    return [_P("Choir", txt, "dcs" if v else "inferred", "Communion hymn (Sunday)")]
+    hs = pick(hs) if pick else hs
+    out = []
+    for h in hs:
+        t = texts.get(ctx["con"], h.id, ctx["parish"])
+        if t and t["pending"] and all(p["key"] != h.id for p in ctx["pending"]):
+            ctx["pending"].append({"section": slot, "key": h.id, "heading": h.label, "source": t["source"]})
+        out += hymn_paras(h, t)
+    return out
 
 
-def v_dismissal(day: Day, f: dict, template_text: str = "", **_):
-    """Parish template text with the day's phrase and saint(s) substituted; ANCA's dismissal supplies both."""
+def v_res_apolytikion(day, f, ctx, **_):
+    """Sung with the 3rd antiphon: the resurrectional apolytikion of the Rules' apolytikia."""
+    return slot_paras(ctx, "liturgy.apolytikia", lambda hs: [h for h in hs if h.id.startswith("oct/")][:1])
+
+
+def v_apolytikia(day, f, ctx, **_):
+    return slot_paras(ctx, "liturgy.apolytikia")
+
+
+def v_kontakion(day, f, ctx, **_):
+    return slot_paras(ctx, "liturgy.kontakion")
+
+
+def v_prokeimenon(day, f, ctx, **_):
+    return slot_paras(ctx, "liturgy.prokeimenon")
+
+
+def v_alleluia(day, f, ctx, **_):
+    """Tone of the week (parish practice; Typikon Tone 2 is the shadowed Rule lit.alleluia.t2)."""
+    return slot_paras(ctx, "liturgy.alleluia")
+
+
+def v_communion_hymn(day, f, ctx, **_):
+    return slot_paras(ctx, "liturgy.communion")
+
+
+_YEARS = re.compile(r"\s*\((?:\d[^)]*|[^)]*\b(?:c\.|C)\b[^)]*)\)")  # '(299)', '(4th C)', '(c. 1000)'
+
+
+_TITLES = "Holy|Righteous|Venerable|Great|Blessed|Glorious|Hiero-?martyrs?|Great-?martyrs?|Martyrs?|Confessors?|Apostles?|Prophets?|Monk-?martyrs?"
+
+
+def dismissal_names(name: str) -> str:
+    """Calendar commemoration -> dismissal wording: dates dropped, 'Holy Martyr X' -> 'the holy martyr X'."""
+    n = _YEARS.sub("", name or "").strip(" .")
+    m = re.match(rf"^((?:{_TITLES})(?:\s+(?:and\s+)?(?:{_TITLES}))*)\b(.*)$", n)
+    return f"the {m.group(1).lower()}{m.group(2)}" if m else n
+
+
+def v_dismissal(day, f, ctx, template_text: str = "", **_):
+    """Parish template with the Rules' characteristic phrase, Liturgy author and saint(s) of the day (calendar)."""
+    d = ctx["dismissal"]
     txt = template_text
-    anca_txt = ""
-    for b in day.ablocks(r"^THE (GREAT )?DISMISSAL"):
-        anca_txt = b["body"][0] if b["body"] else ""
     if not txt:
-        return [_P("Priest", anca_txt, "anca")] if anca_txt else []
-    phrase = (re.match(r"Priest:\s*May (.*?), Christ our true God", anca_txt) or [None, "he who rose from the dead"])[1]
-    saints = (re.search(r"Joachim and Anna;\s*(?:of )?(.*?),?\s*whose memory we celebrate", anca_txt) or [None, None])[1]
+        return []
+    phrase = d["phrase"] or f"[characteristic phrase: {d['phrase_kind'] or 'to be determined'}]"
     txt = re.sub(r"May \[insert the appointed characteristic phrase\]", f"May {phrase}", txt)
-    if saints:
-        txt = re.sub(r"of N\., \[the saint\(s\) of the day\] whose memory we celebrate", f"of {saints}, whose memory we celebrate", txt)
+    if d["saints"]:
+        txt = re.sub(r"of N\., \[the saint\(s\) of the day\] whose memory we celebrate", f"of {dismissal_names(d['saints'])}, whose memory we celebrate", txt)
     else:
-        txt = re.sub(r"of N\., \[the saint\(s\) of the day\]", f"of {f.get('principal_name') or 'the saint of the day'}", txt)
-    saint = ("Basil the Great, archbishop of Cæsarea, whose Liturgy we have celebrated;" if f.get("liturgy_author") == "Basil the Great"
+        txt = re.sub(r"of N\., \[the saint\(s\) of the day\] whose memory we celebrate and ", "and ", txt)
+    saint = ("Basil the Great, archbishop of Cæsarea, whose Liturgy we have celebrated;" if d["author"] == "Basil the Great"
              else "John Chrysostom, archbishop of Constantinople, whose Liturgy we have celebrated;")
     txt = re.sub(r"John Chrysostom, archbishop of Constantinople; or Basil the Great,.*?we have celebrated;", saint, txt)
-    return [_P("Priest", txt, "pdf+anca")]
+    out = [_P("Priest", txt, "pdf+rules")]
+    if d["clause"]:
+        out.append(_P("", f"Also name the feast in the {d['clause']} clause (Rule liturgy.dismissal_phrase).", "gap"))
+    return out
 
 
 RESOLVERS = {
@@ -434,6 +350,10 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
     con = db.connect(db_path)
     ctx = dict(f)
     seasonal, pending = [], []
+    res = {s: x for s, _, x in result.slots}
+    hctx = {"con": texts.load(), "parish": texts.parish_texts(), "pending": pending,
+            "hymns": {s: hymns.for_slot(s, x, f) for s, x in res.items()},
+            "dismissal": hymns.dismissal(res.get("liturgy.dismissal"), res.get("liturgy.dismissal_phrase"), f)}
     store = translations.load()
     hymn_cfgs = template.config().get("seasonal_hymns", [])
     sections = []
@@ -452,7 +372,7 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
                 blocks.append(b)
                 continue
             fn = RESOLVERS.get(b["slot"])
-            paras = fn(day, f, engine=engine, template_text=b.get("template", "")) if fn else []
+            paras = fn(day, f, ctx=hctx, engine=engine, template_text=b.get("template", "")) if fn else []
             cap = [c.lstrip("- ").strip() for c in engine.get(ENGINE_SLOT.get(b["slot"], ""), {}).get("lines", [])]
             blocks.append({"t": "variable", "slot": b["slot"], "caption": cap, "paragraphs": paras, "missing": not paras})
         blocks = seasonal_hymns(day, sec["id"], blocks, hymn_cfgs, store, pending)
@@ -474,7 +394,8 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
         "heading": f"{f['desig']}" + (f" · Tone {f['tone']}" if f["tone"] else "") + (f" · Eothinon {f['eothinon']}" if f["eothinon"] else ""),
         "gospel_designation": f.get("desig_g") or "", "principal": f.get("principal_name") or "", "commemorations": names, "uk_commemorations": f.get("uk_commem") or "",
         "tone": f["tone"], "template_source": tpl["source"], "complete": bool(f["in_slice"]), "incomplete_reasons": f.get("slice_reasons") or [],
-        "engine": engine, "sections": sections, "seasonal": seasonal, "translations_pending": pending, "liturgy_author": f.get("liturgy_author"),
+        "engine": engine, "sections": sections, "seasonal": seasonal, "translations_pending": pending,
+        "hymns": {s: [{"id": h.id, "label": h.label} for h in hs] for s, hs in hctx["hymns"].items() if hs}, "liturgy_author": f.get("liturgy_author"),
         "notes": ([f"Liturgy of St. {f['liturgy_author']}: the booklet text is St. John Chrysostom's. The priest's prayers differ; the Cherubic Hymn and the rest of the choir text are unchanged (Typikon, general rules IX)."] if f.get("liturgy_author") == "Basil the Great" else []),
-        "sources": {"template": "Parish choir booklet (PDF)", "variable_text": "ANCA Liturgy Variables, GOA Digital Chant Stand", "music": "ANCA service-text links, GOA Digital Chant Stand"},
+        "sources": {"template": "Parish choir booklet (PDF)", "variable_text": "Rules -> hymn ids -> saved texts (parish, else GOA DCS / ANCA wording pending a parish translation)", "music": "ANCA service-text links, GOA Digital Chant Stand"},
     }

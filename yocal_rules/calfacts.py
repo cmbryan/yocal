@@ -346,6 +346,7 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         all_saints_sunday="Sunday of All Saints" in f"{r['desig_a']} {r['desig_g']}",
         leavetaking=(_basil().get(mmdd, {}).get("rank") == "LEAVETAKING"),
         saint_in_calendar=bool(major), principal_name=major,
+        menaion_key=key,  # Menaion date of the principal commemoration (DB c_code when it is a date, e.g. a transferred saint), else mmdd
         saint_has_glory=glory, glory_source=gsrc,
         dismissal_saint=major or re.split(r"\)\.\s+(?=[A-Z])", (r["class_5"] or "").strip())[0].strip(" ."),
         named_sunday=named_sunday(ld),

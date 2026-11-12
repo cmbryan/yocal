@@ -93,7 +93,7 @@
    source: typikon, locator: "Ch I s6 III p.34; Feb 2 p.220", status: explicit}
 - {id: mf.sun.lit.apolytikia, slot: liturgy.apolytikia, tier: -10,
    when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
-   fill: {res_tone: "$tone", saint: true, patron: false, parts: ["Apolytikion of the feast (during the Little Entrance, after the 3rd antiphon) — Menaion {mmdd}", "Apolytikion of the Resurrection — Octoechos Tone {tone} (after the Entrance, first)", "Not the apolytikion of the patron saint or feast of the temple"]},
+   fill: {hymns: ["oct/t{tone}/sun/apolytikion", "men/{mmdd}/apolytikion"], res_tone: "$tone", saint: true, patron: false, parts: ["Apolytikion of the feast (during the Little Entrance, after the 3rd antiphon) — Menaion {mmdd}", "Apolytikion of the Resurrection — Octoechos Tone {tone} (after the Entrance, first)", "Not the apolytikion of the patron saint or feast of the temple"]},
    source: anca, locator: "inferred: Typikon Sep 8 p.68, Feb 2 p.220, Nov 21 p.114, Aug 15 p.458 name Resurrection and feast troparia (patron only at Nov 21 weekday p.112); Ch I s6 IV p.35", status: inferred,
    evidence: "ANCA Liturgy Variables 2019-09-08, 2024-09-08, 2020-02-02, 2025-02-02, 2021-11-21, 2021-08-15: Resurrection and feast apolytikia, 'Do NOT sing the apolytikion of the patron saint or feast of the temple'"}
 - {id: mf.sun.lit.kontakion, slot: liturgy.kontakion, tier: -10,
@@ -106,7 +106,8 @@
    source: typikon, locator: "Ch I s6 VI p.37 (Trisagion at every Liturgy except the listed feasts)", status: explicit}
 - {id: mf.sun.lit.prokeimenon.sunday, slot: liturgy.prokeimenon, tier: -10,
    when: [{pred: sunday_feast_order, args: [nativity_theotokos]}],
-   fill: {owner: sunday, parts: ["Prokeimenon of the Sunday before the Elevation of the Cross (with the Epistle)"]},
+   fill: {owner: sunday, parts: ["Prokeimenon of the Sunday before the Elevation of the Cross (with the Epistle)"],
+          hymns: [{id: named/before_elevation/prokeimenon, label: "Prokeimenon of the Sunday before the Elevation"}]},
    source: typikon, locator: "Sep 8 p.68; Ch I s6 VII p.38 (Epistle and Gospel of the Sunday before the Elevation)", status: explicit}
 - {id: mf.sun.lit.prokeimenon.feast, slot: liturgy.prokeimenon, tier: -10,
    when: [{pred: sunday_feast_order, args: [presentation, entrance, dormition]}],

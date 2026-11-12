@@ -79,6 +79,28 @@ def _chapverse(html: str, topic_re: str):
     return m.group(2).strip() if m else None
 
 
+def hymn_ids(ks) -> dict:
+    """Liturgy page keys (in order) -> {slot: [hymn ids]}: apolytikia/kontakion between the Entrance hymn and the Trisagion,
+    prokeimenon/alleluia/communion wherever printed. Ids from yocal_rules.hymns.id_from_dcs (no text)."""
+    from .hymns import id_from_dcs
+    out, region = {}, False
+    for t, f in ks:
+        if f.endswith("EntranceHymn.text") or f == "ti.EntranceHymn" or re.search(r"\.entrance\.v\d+\.text$", f):
+            region = True
+        elif "Trisagios" in f or f in ("ti.Prokeimenon", "ti.Epistle"):
+            region = False
+        hid = id_from_dcs(t, f)
+        if not hid:
+            continue
+        kind = re.sub(r"\d+$", "", hid.rsplit("/", 1)[-1])
+        slot = {"apolytikion": "liturgy.apolytikia", "troparion": "liturgy.apolytikia", "hypakoe": "liturgy.apolytikia",
+                "kontakion": "liturgy.kontakion"}.get(kind) if region else None
+        slot = slot or {"prokeimenon": "liturgy.prokeimenon", "alleluia": "liturgy.alleluia", "communion": "liturgy.communion"}.get(kind)
+        if slot and hid not in out.setdefault(slot, []):
+            out[slot].append(hid)
+    return {s: v for s, v in out.items() if v}
+
+
 def parse(service: str, pages: dict):
     """pages: code -> html. -> (key dict slot->attrs, notes)."""
     k, notes = {}, []
@@ -130,6 +152,8 @@ def parse(service: str, pages: dict):
         gref = _chapverse(pages["li"], r"le\.go\.(?:lu|mt|mk|jn|mc)[\w.]*")
         if gref:
             k["liturgy.gospel"] = dict(ref=gref)
+        for slot, ids in hymn_ids(ks).items():  # which hymns the page prints (keys name them): compared with the Rules' hymn ids
+            k.setdefault(slot, {})["hymns"] = ids
         if _first(ks, r"menaion\.verses", r"psLI\.m\d\d\.d\d\d\.prokeimenon"):
             k["liturgy.prokeimenon"] = dict(owner="saint")
         elif _first(ks, r"liturgical\.verses", r"psLI\.sunday\.m\d\.prokeimenon"):

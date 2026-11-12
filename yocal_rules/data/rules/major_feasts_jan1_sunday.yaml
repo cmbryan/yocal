@@ -74,7 +74,7 @@
    source: typikon, locator: "Jan 1 on Sunday p.166 (entrance hymn 'Come let us worship … who wast risen')", status: explicit}
 - {id: mf.jan1.sun.lit.apolytikia, slot: liturgy.apolytikia, tier: -10,
    when: [{pred: sunday_feast_order, args: [circumcision]}],
-   fill: {res_tone: "$tone", saint: true, patron: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Circumcision — Menaion 01-01", "Apolytikion of St Basil the Great — Menaion 01-01", "Apolytikion of the patron saint or feast of the temple"]},
+   fill: {hymns: ["oct/t{tone}/sun/apolytikion", "men/01-01/apolytikion", "men/01-01/apolytikion2"], res_tone: "$tone", saint: true, patron: true, parts: ["Apolytikion of the Resurrection — Octoechos Tone {tone}", "Apolytikion of the Circumcision — Menaion 01-01", "Apolytikion of St Basil the Great — Menaion 01-01", "Apolytikion of the patron saint or feast of the temple"]},
    source: anca, locator: "inferred: Jan 1 on Sunday p.166 (troparia: Resurrection, Circumcision, St Basil)", status: inferred,
    evidence: "ANCA Liturgy Variables 2023-01-01: Resurrection, Circumcision, St Basil, then 'Now sing the apolytikion of the patron saint or feast of the temple'",
    conflict: {with: ["Typikon Jan 1 on Sunday p.166 (lists Resurrection, Circumcision, St Basil only; no patron saint)"], status: open,

@@ -13,6 +13,7 @@ from dataclasses import dataclass, field
 
 import yaml
 
+from . import hymns
 from .refs import norm_ref
 from .rules import DATA
 
@@ -82,11 +83,16 @@ def compare(res, key: dict | None, source: str, facts, service, log):
         return Cmp(source, "not_in_key")
     diffs, compared = [], 0
     for a, v in res.fill.items():
-        if v in (None, "?") or a not in kv or kv[a] is None:
+        if a == "hymns" or v in (None, "?") or a not in kv or kv[a] is None:
             continue
         compared += 1
         if not _val_eq(a, v, kv[a]):
             diffs.append(f"{a}: ours {v} / {source.upper()} {kv[a]}")
+    ours_h = [h.id for h in (hymns.for_slot(res.slot, res, facts) or [])]
+    if kv.get("hymns") and ours_h:  # the hymns themselves (DCS keys name them): ids, order ignored
+        compared += 1
+        if set(ours_h) != set(kv["hymns"]):
+            diffs.append(f"hymns: ours {ours_h} / {source.upper()} {kv['hymns']}")
     if not compared:
         return Cmp(source, "not_in_key", kv)
     if not diffs:

@@ -35,17 +35,16 @@ seasonal:
 #   anca:       heading regex     unless_anca: skip when ANCA also has this heading (ordinary Sunday logic stays in force)
 #   section:    section id        drop: [{role, text, slot}] blocks removed; the hymn takes the first one's place
 #   lead:       block inserted before the hymn      after: {slot}  no drop: the hymn is added after that block
+# TRANSITIONAL: still decided by the date's ANCA/DCS page. To be replaced by Rules (liturgy.antiphons, eisodikon, trisagion,
+# megalynarion on every day). Apolytikia/kontakion/communion hymn are no longer here: the Rules name them (yocal_rules/hymns.py).
 seasonal_hymns:
   - {anca: '^THE FIRST ANTIPHON', dcs_antiphon: 1, section: first_antiphon, drop: [{role: '^(Verse|Refrain)$'}]}
   - {anca: '^THE SECOND ANTIPHON', dcs_antiphon: 2, section: second_antiphon, drop: [{role: '^(Verse|Refrain)$'}]}
   - {anca: '^THE THIRD ANTIPHON', dcs_antiphon: 3, section: third_antiphon, drop: [{role: '^(Verse|Refrain)$'}, {slot: '^res_apolytikion$'}]}
   - {anca: '^THE EISODIKON', section: eisodikon, drop: [{role: '^Choir$'}]}
-  - {anca: '^(PASCHAL APOLYTIKION|APOLYTIKION|THE HYPAKOE|HYPAKOE|THE KONTAKION|KONTAKION)', unless_anca: '^RESURRECTIONAL APOLYTIKION',
-     section: apolytikia, drop: [{slot: '^(res_apolytikion|apolytikia|kontakion)$'}]}
   - {anca: '^THE ANTI-TRISAGION', section: trisagion, lead: {role: Choir, text: 'Amen.'},
      drop: [{text: '^Amen\. Holy God'}, {text: '^With strength'}, {text: '^Holy God, Holy Mighty'}, {role: '^Choir$', text: '^$'}]}
   - {anca: 'MEGALYNARION', section: megalynarion, drop: [{text: '^It is truly right'}, {text: '^Moth'}]}
-  - {anca: '^KOINONIKON', section: communion_clergy, drop: [{slot: '^communion_hymn$'}]}
 
 sections:
   - {id: enarxis, start: '^The Enarxis$', title: The Enarxis}

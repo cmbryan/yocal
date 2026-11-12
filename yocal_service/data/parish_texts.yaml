@@ -1,0 +1,6 @@
+# Parish texts by hymn id (yocal_rules/data/hymns.yaml grammar). Our own translations only: this file is public.
+# Takes precedence over every downloaded text (booklet, GOA DCS, ANCA). Blank line in `text` = new part/paragraph
+# (prokeimenon: refrain, then verse; alleluia: verse 1, verse 2).
+#   texts:
+#     men/11-21/kontakion: {text: "...", credit: "parish translation, 2026"}
+texts: {}

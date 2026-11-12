@@ -1,4 +1,4 @@
-"""SQLite cache of music (and later other fetched) assets, with the source each came from."""
+"""Local SQLite cache for music: asset ids, per-date refs, rendered PNG pages. Bytes live in the sources store (store.py)."""
 from __future__ import annotations
 
 import os
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS music_asset (
   label TEXT NOT NULL DEFAULT '',   -- composer / arrangement
   form TEXT NOT NULL DEFAULT '',    -- 'score' | 'byzantine' | 'western' | 'audio'
   mime TEXT,
-  content BLOB,                     -- NULL until fetched
+  content BLOB,                     -- legacy (bytes now live in the sources store, music.file_path); always NULL
   sha256 TEXT,
   size INTEGER,
   fetched_at TEXT,
@@ -37,10 +37,17 @@ CREATE TABLE IF NOT EXISTS music_ref (      -- which assets belong to which slot
   PRIMARY KEY (service, date, slot_key, asset_id)
 );
 CREATE INDEX IF NOT EXISTS music_ref_slot ON music_ref(service, slot_key, date);
+CREATE TABLE IF NOT EXISTS hymn_music (     -- music assets per hymn id (yocal_rules.hymns), not per date
+  hymn_id TEXT NOT NULL,
+  asset_id INTEGER NOT NULL REFERENCES music_asset(id) ON DELETE CASCADE,
+  rank INTEGER NOT NULL,
+  PRIMARY KEY (hymn_id, asset_id)
+);
 """
 
 
 def path() -> str:
+    """Local cache only (asset ids, rendered pages): safe to delete; rebuilt from the sources store (store.py)."""
     return os.environ.get("YOCAL_MUSIC_DB", DEFAULT)
 
 
@@ -51,4 +58,11 @@ def connect(db_path: str | None = None) -> sqlite3.Connection:
     con.row_factory = sqlite3.Row
     con.execute("PRAGMA foreign_keys=ON")
     con.executescript(SCHEMA)
+    if p not in _SYNCED:  # once per process: learn the assets already saved in the sources store
+        _SYNCED.add(p)
+        from . import music
+        music.sync_index(con)
     return con
+
+
+_SYNCED: set = set()

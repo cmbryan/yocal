@@ -119,20 +119,6 @@ def test_anca_read_wrapped_heading():
     assert len(b) == 1 and b[0]["body"] == ["To thee, the Champion."]
 
 
-def test_communion_hymn_follows_rule_then_anca():
-    from yocal_service import compose as c, anca_read
-    class D:
-        def __init__(s, anca): s.anca = anca; s.dcs = []
-        def ablocks(s, rx): return anca_read.find(s.anca, rx)
-        def dfirst(s, *a): return None
-    eng = lambda k: {"liturgy.communion": {"fill": {"kind": k}}}
-    # ANCA file with no Koinonikon heading -> Sunday hymn even if the Rule says saint (project default: follow ANCA)
-    anca = [{"heading": "THE EPISTLE", "sub": [], "body": ["x"]}]
-    assert c.v_communion_hymn(D(anca), {}, engine=eng("saint"))
-    assert c.v_communion_hymn(D([]), {}, engine=eng("saint")) == []  # no ANCA file: the saint's hymn has no text here
-    assert c.v_communion_hymn(D([]), {}, engine=eng("praise_the_lord"))
-
-
 def test_translation_applies_to_other_headings():
     from yocal_service import translations as t
     store = {"koinonikon-for-st-luke:aaaa": {"text": "Our hymn.", "applies_to": ["^koinonikon-(for|of)-(st-)?(luke|mark)"]}}
@@ -156,10 +142,107 @@ def test_booklet_readings_selection(monkeypatch):
     assert b.select("alleluia", {"tone": 3, "desig": "x", "desig_g": ""}) is None
 
 
-def test_alleluia_uses_tone_of_week_from_dcs_table(monkeypatch):
-    from yocal_service import compose as c, dcs_tones, booklet_readings
-    monkeypatch.setattr(booklet_readings, "select", lambda kind, f: None)
-    monkeypatch.setattr(dcs_tones, "get", lambda tone: {"source": "S", "alleluia": {"v1": "verse one", "v2": "verse two"}} if tone == 3 else {})
-    ps = c.v_alleluia(None, {"tone": 3})
-    assert [p["role"] for p in ps] == ["Choir", "Reader", "Choir", "Reader", "Choir"] and ps[0]["heading"] == "The Alleluia (Tone 3)" and ps[1]["credit"] == "S"
-    assert c.v_alleluia(None, {"tone": 5})[-1]["source"] == "gap"  # no verses for that tone: flagged, not invented
+def _store(tmp_path):
+    from yocal_service import texts
+    tx = texts.Texts(str(tmp_path / "sources"))
+    texts.put(tx, "dcs", "oc.m3.d1|ocVE.Apolytikion.text", "Let the heavens * rejoice.", "GOA DCS 2026-12-06 li", "2026-12-06")
+    texts.put(tx, "dcs", "liturgical.verses|psLI.sunday.m3.alleluia.v1.text", "DCS verse one", "GOA DCS x", "2026-12-06")
+    texts.put(tx, "parish", "lit/sun/t3/alleluia", "verse one\n\nverse two", "parish booklet B", "2025-12-21")
+    texts.put(tx, "anca", "men/12-06/apolytikion", "A rule of faith.", "ANCA 2025-12-06", "2025-12-06")
+    tx.save()
+    return tx
+
+
+@pytest.fixture(autouse=True)
+def _isolated_sources(tmp_path, monkeypatch):
+    """Never write test data into the real sources store."""
+    monkeypatch.setenv("YOCAL_SOURCES", str(tmp_path / "sources"))
+
+
+def test_texts_saved_as_sorted_jsonl_and_reloaded(tmp_path):
+    from yocal_service import texts
+    _store(tmp_path)
+    lines = open(tmp_path / "sources" / "texts" / "dcs.jsonl", encoding="utf-8").read().splitlines()
+    assert [l.split('"key": ')[1][:12] for l in lines] == sorted(l.split('"key": ')[1][:12] for l in lines)
+    assert texts.get(texts.Texts(str(tmp_path / "sources")), "lit/sun/t3/alleluia", parish={})["parts"] == ["verse one", "verse two"]
+
+
+def test_music_bytes_live_in_sources_store(tmp_path):
+    from yocal_service import music
+    con = db.connect(str(tmp_path / "m.db"))
+    aid = music.upsert_asset(con, {"url": "https://x/a.pdf", "source": "dcs", "label": "L", "form": "western"}, "T")
+    con.execute("UPDATE music_asset SET content=? WHERE id=?", (b"%PDF-1 test", aid))
+    assert music.export_db_blobs(con) == 1
+    data, mime = music.content(con, aid)
+    assert data is None  # mime unknown in legacy row -> .bin name; fix up through the index on a fresh cache:
+    con2 = db.connect(str(tmp_path / "m2.db"))
+    a2 = con2.execute("select id from music_asset where url='https://x/a.pdf'").fetchone()[0]
+    assert music.content(con2, a2)[0] == b"%PDF-1 test" and music.asset_info(con2, a2)["cached"]
+
+
+def test_text_precedence_parish_dcs_anca(tmp_path):
+    from yocal_service import texts
+    con = _store(tmp_path)
+    t = texts.get(con, "lit/sun/t3/alleluia", parish={})
+    assert t["source"] == "parish" and t["parts"] == ["verse one", "verse two"] and not t["pending"]
+    t = texts.get(con, "oct/t3/sun/apolytikion", parish={})
+    assert t["source"] == "dcs" and t["pending"] and t["parts"] == ["Let the heavens rejoice."]  # phrase marker dropped
+    assert texts.get(con, "men/12-06/apolytikion", parish={})["source"] == "anca"
+    assert texts.get(con, "oct/t3/sun/apolytikion", parish={"oct/t3/sun/apolytikion": {"text": "Ours."}})["parts"] == ["Ours."]
+    assert texts.get(con, "men/12-07/apolytikion", parish={}) is None  # not saved: a gap, no per-date fallback
+
+
+def test_newer_copy_replaces_older(tmp_path):
+    from yocal_service import texts
+    con = _store(tmp_path)
+    texts.put(con, "dcs", "oc.m3.d1|ocVE.Apolytikion.text", "old", "x", "2025-01-01")  # older copy: ignored
+    assert texts.get(con, "oct/t3/sun/apolytikion", parish={})["parts"] == ["Let the heavens rejoice."]
+    texts.put(con, "dcs", "oc.m3.d1|ocVE.Apolytikion.text", "new", "y", "2027-01-01")
+    assert texts.get(con, "oct/t3/sun/apolytikion", parish={})["parts"] == ["new"]
+
+
+def test_slots_render_rules_hymns_from_store(tmp_path):
+    from yocal_service import compose as c
+    from yocal_rules import hymns
+    ctx = {"con": _store(tmp_path), "parish": {}, "pending": [],
+           "hymns": {"liturgy.apolytikia": [hymns.Hymn("oct/t3/sun/apolytikion", "Resurrectional Apolytikion (Tone 3)", 3, "apolytikion"),
+                                            hymns.Hymn("men/12-07/apolytikion", "Apolytikion of St Ambrose", None, "apolytikion")],
+                     "liturgy.alleluia": [hymns.Hymn("lit/sun/t3/alleluia", "The Alleluia (Tone 3)", 3, "alleluia")],
+                     "liturgy.kontakion": None}}
+    ps = c.v_apolytikia(None, {}, ctx)
+    assert [p["source"] for p in ps] == ["dcs_pending", "gap"] and ps[0]["hymn"] == "oct/t3/sun/apolytikion"
+    assert [p["role"] for p in c.v_alleluia(None, {}, ctx)] == ["Choir", "Reader", "Choir", "Reader", "Choir"]
+    assert c.v_kontakion(None, {}, ctx) == []  # the Rule names no hymn yet: the slot shows as missing
+    assert [x["key"] for x in ctx["pending"]] == ["oct/t3/sun/apolytikion"]
+    assert c.v_res_apolytikion(None, {}, ctx)[0]["text"] == "Let the heavens rejoice."
+
+
+def test_dismissal_from_rules_and_calendar():
+    from yocal_service import compose as c
+    tpl = ("May [insert the appointed characteristic phrase], Christ our true God, of our father among the saints, John Chrysostom, archbishop of Constantinople; "
+           "or Basil the Great, archbishop of Cæsarea whose Liturgy we have celebrated; of the holy and righteous ancestors of God, Joachim and Anna; "
+           "of N., [the saint(s) of the day] whose memory we celebrate and of all the Saints")
+    d = {"phrase": "he who rose from the dead", "phrase_kind": "resurrection", "clause": None, "author": "Basil the Great",
+         "saints": "Holy Martyrs and Confessors Gurias (299), Samonas (306), and Abibus (Habib) (322), of Edessa"}
+    t = c.v_dismissal(None, {}, {"dismissal": d}, template_text=tpl)[0]["text"]
+    assert t.startswith("May he who rose from the dead,") and "Basil the Great, archbishop of Cæsarea, whose Liturgy" and "Chrysostom" not in t
+    assert "of the holy martyrs and confessors Gurias, Samonas, and Abibus (Habib), of Edessa, whose memory" in t
+    t = c.v_dismissal(None, {}, {"dismissal": dict(d, saints=None)}, template_text=tpl)[0]["text"]
+    assert "Joachim and Anna; and of all the Saints" in t
+
+
+@pytest.mark.skipif(not os.path.exists(template.TEMPLATE) or not os.path.exists("db/yocal/YOCal_Master.db"), reason="needs local template + calendar DB")
+@pytest.mark.parametrize("date", ["2026-11-15", "2027-03-28", "2027-05-16", "2027-05-02",
+                                  pytest.param("2026-11-22", marks=pytest.mark.xfail(strict=True, reason="festal antiphons still taken from the ANCA/DCS page (seasonal_hymns): needs Rules"))])
+def test_rule_slots_do_not_depend_on_anca_or_dcs(tmp_path, monkeypatch, date):
+    """Guard: the converted slots come from Rules + store only; with no ANCA/DCS page at all they are identical."""
+    from yocal_service import compose as c
+    monkeypatch.setenv("YOCAL_SOURCES", _store(tmp_path).root)
+    run = lambda: {b["slot"]: b["paragraphs"] for s in c.compose(dt.date.fromisoformat(date), offline=True, fetch_music=False)["sections"]
+                   for b in s["blocks"] if b["t"] == "variable" and b["slot"] in c.RESOLVERS}
+    with_pages = run()
+
+    def blank(self, date, offline):
+        self.date, self.anca, self.dcs, self.dcs2 = date, [], [], []
+    monkeypatch.setattr(c.Day, "__init__", blank)
+    assert run() == with_pages

@@ -219,12 +219,12 @@
    status: inferred, evidence: "Typikon names the weekday entrance hymn for saints and weekdays; ANCA Liturgy Variables Aug 15 and Nov 21 (2025-26): 'Eisodikon of ordinary weekdays'"}
 - {id: mf.lit.apolytikia.feast, slot: liturgy.apolytikia, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition]}],
-   fill: {res_tone: null, saint: true, patron: false, parts: ["Apolytikion of the feast — Menaion {mmdd} (not the apolytikion of the patron of the temple)"]},
+   fill: {hymns: ["men/{mmdd}/apolytikion"], res_tone: null, saint: true, patron: false, parts: ["Apolytikion of the feast — Menaion {mmdd} (not the apolytikion of the patron of the temple)"]},
    source: anca, locator: "inferred: Typikon Ch I s6 IV p.35 gives feast + patron only for the days between a feast and its leavetaking", status: inferred,
    evidence: "ANCA Liturgy Variables 2025-26, all 7 feasts: 'Do NOT sing the apolytikion of the patron saint or feast of the temple'"}
 - {id: mf.lit.apolytikia.circumcision, slot: liturgy.apolytikia, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [circumcision]}],
-   fill: {res_tone: null, saint: true, patron: true, parts: ["Apolytikion of the Circumcision — Menaion 01-01", "Apolytikion of St Basil the Great — Menaion 01-01", "Apolytikion of the patron saint or feast of the temple"]},
+   fill: {hymns: ["men/01-01/apolytikion", "men/01-01/apolytikion2"], res_tone: null, saint: true, patron: true, parts: ["Apolytikion of the Circumcision — Menaion 01-01", "Apolytikion of St Basil the Great — Menaion 01-01", "Apolytikion of the patron saint or feast of the temple"]},
    source: typikon, locator: "Jan 1 p.166 (troparia of the Circumcision and St Basil)", status: explicit}
 - {id: mf.lit.kontakion.feast, slot: liturgy.kontakion, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
@@ -366,7 +366,7 @@
 - {id: mf.asc.lit.eisodikon, slot: liturgy.eisodikon, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
    fill: {kind: feast, parts: ["Entrance hymn of the Ascension"]}, source: typikon, locator: "p.536", status: explicit}
 - {id: mf.asc.lit.apolytikia, slot: liturgy.apolytikia, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
-   fill: {res_tone: null, saint: true, patron: false, parts: ["Apolytikion of the Ascension, Tone 4 (not the apolytikion of the patron of the temple)"]},
+   fill: {hymns: ["mov/39/apolytikion"], res_tone: null, saint: true, patron: false, parts: ["Apolytikion of the Ascension, Tone 4 (not the apolytikion of the patron of the temple)"]},
    source: typikon, locator: "p.536 (after the Little Entrance: the troparion of the Ascension)", status: explicit}
 - {id: mf.asc.lit.kontakion, slot: liturgy.kontakion, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
    fill: {kind: ascension, tone: 6, parts: ["Kontakion of the Ascension (“When Thou hadst fulfilled the dispensation”), Tone 6"]}, source: anca,
@@ -440,7 +440,7 @@
 - {id: mf.nat.lit.eisodikon, slot: liturgy.eisodikon, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity]}],
    fill: {kind: feast, parts: ["Entrance hymn of the Nativity (“From the womb before the morning star”)"]}, source: typikon, locator: "p.143; Monday: p.144-145, p.148 (Sunday order p.143-145 for the feast itself)", status: explicit}
 - {id: mf.nat.lit.apolytikia, slot: liturgy.apolytikia, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity]}],
-   fill: {res_tone: null, saint: true, patron: false, parts: ["Apolytikion of the Nativity (“Thy Nativity, O Christ our God”)"]}, source: typikon, locator: "p.143; Monday: p.144-145, p.148 (Sunday order p.143-145 for the feast itself)", status: explicit}
+   fill: {hymns: ["men/12-25/apolytikion"], res_tone: null, saint: true, patron: false, parts: ["Apolytikion of the Nativity (“Thy Nativity, O Christ our God”)"]}, source: typikon, locator: "p.143; Monday: p.144-145, p.148 (Sunday order p.143-145 for the feast itself)", status: explicit}
 - {id: mf.nat.lit.kontakion, slot: liturgy.kontakion, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity]}],
    fill: {kind: nativity, parts: ["Kontakion of the Nativity (“Today the Virgin giveth birth”)"]}, source: typikon, locator: "p.143; Ch I s6 V p.36; Monday: p.144-145, p.148 (Sunday order p.143-145 for the feast itself)", status: explicit}
 - {id: mf.lit.trisagion.baptized, slot: liturgy.trisagion, tier: -10, when: [{pred: major_feast_is, args: [nativity, theophany]}],
@@ -518,7 +518,7 @@
 - {id: mf.thy.lit.eisodikon, slot: liturgy.eisodikon, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [theophany]}],
    fill: {kind: feast, parts: ["Entrance hymn of Theophany (“Blessed is He that cometh in the name of the Lord”)"]}, source: typikon, locator: "p.173; Monday: p.176 ('the whole service for the feast')", status: explicit}
 - {id: mf.thy.lit.apolytikia, slot: liturgy.apolytikia, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [theophany]}],
-   fill: {res_tone: null, saint: true, patron: false, parts: ["Apolytikion of Theophany"]}, source: typikon, locator: "p.173; Monday: p.176 ('the whole service for the feast')", status: explicit}
+   fill: {hymns: ["men/01-06/apolytikion"], res_tone: null, saint: true, patron: false, parts: ["Apolytikion of Theophany"]}, source: typikon, locator: "p.173; Monday: p.176 ('the whole service for the feast')", status: explicit}
 - {id: mf.thy.lit.kontakion, slot: liturgy.kontakion, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [theophany]}],
    fill: {kind: theophany, parts: ["Kontakion of Theophany (“Today Thou hast appeared to the world”)"]}, source: typikon, locator: "p.173; Ch I s6 V p.36; Monday: p.176 ('the whole service for the feast')", status: explicit}
 - {id: mf.thy.lit.communion, slot: liturgy.communion, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [theophany]}],
