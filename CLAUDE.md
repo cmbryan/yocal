@@ -3,6 +3,9 @@
 ## Rules decide, sources supply
 Services are built from our Rules alone (`yocal_rules/`): Rules -> hymn ids (`yocal_rules/hymns.py`) -> saved text/music. ANCA and the GOA Digital Chant Stand (DCS) are text/music sources and answer keys, never the decider of which hymn is sung. A text not yet saved shows as a gap. Details: `yocal_rules/README.md`, `yocal_service/README.md`.
 
+## YOCal DB is authoritative
+Anything `db/yocal/YOCal_Master.db` encodes (readings and which lection is used, Liturgy author `basil`, tone, eothinon, designations, fore/after-feasts, commemorations, notes) is consumed as-is: Rules and `calfacts.py` never override, re-derive or ignore it. If it is wrong, fix the scripts/data that build it (`db/`), not the Rules. ANCA disagreeing with the DB is a Divergence-log entry.
+
 ## `yocal_sources/` submodule (private, copyrighted)
 Downloaded texts and music, saved once and shared between machines: private repo `cmbryan/yocal_sources`, checked out at `yocal_sources/` (`store.py`; override with `YOCAL_SOURCES`). Third-party copyright: that content lives only in the submodule; this repo is public.
 

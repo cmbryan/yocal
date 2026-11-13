@@ -160,12 +160,3 @@
    fill: {kind: holy_cross, tone: 4}, source: typikon, locator: "Ch I s6 p.35", status: explicit}
 
 # ================= Liturgy author (#19): Basil per the DB flag; Annunciation on a Lent Sunday is Chrysostom =================
-- {id: lit.author.annunciation_lent_sunday, slot: liturgy.author, tier: 1,
-   when: [{pred: sunday}, {pred: date_in, args: ["03-25"]}],
-   fill: {author: "John Chrysostom"}, source: typikon, locator: "Ch V Mar 25 on Lent 3 p.283 (Chrysostom); ANCA READ 2018-03-25 (Lent 5) agrees; #19",
-   status: explicit,
-   conflict: {with: [lit.author.basil], status: open, note: "The yocal DB basil flag marks Annunciation on a Lent Sunday as Basil (15 dates 2000-2099, #19); Typikon p.283 and ANCA say Chrysostom. Not in the 2022-26 range, so untested against ANCA here."}}
-- {id: lit.author.basil, slot: liturgy.author, tier: 3, when: [{pred: sunday}, {pred: basil}],
-   fill: {author: "Basil the Great"}, source: typikon, locator: "Mar 9 section p.267 (Lent 1-5), Jan 1, eves of Nativity/Theophany; #19 (Lent 2 and 5 settled by ANCA READ 2018-26)", status: explicit}
-- {id: lit.author.chrysostom, slot: liturgy.author, tier: 4, when: [{pred: sunday}, {pred: not_basil}],
-   fill: {author: "John Chrysostom"}, source: typikon, locator: "Ch I s6 (default Liturgy); Palm Sunday and Lazarus Saturday are Chrysostom (#19)", status: explicit}

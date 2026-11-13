@@ -435,7 +435,8 @@ def parse_communion(f: str) -> dict:
                                       else "light_of_countenance" if re.search(r"light of Thy countenance", t, re.I)
                                       else "righteous" if re.search(r"Rejoice in the Lord, O ye righteous", t)
                                       else "praise_jerusalem" if re.search(r"Praise the Lord, O Jerusalem", t)
-                                      else "saint" if re.search(r"\b(?:FOR|OF) (?:ST\.|SS\.|THE ARCHANGELS|THE EVANGELIST|THE APOSTLE)", h) else "feast")
+                                      else "saint" if re.search(r"\b(?:FOR|OF) (?:ST\.|SS\.|THE ARCHANGELS|THE EVANGELIST|THE APOSTLE)", h)
+                                      or re.search(r"Their sound hath gone forth", t) else "feast")  # apostles' common; 2019-06-30 heads it 'FOR THE SYNAXIS'
     elif re.search(r"Liturgy Variables", f):
         k["liturgy.communion"] = dict(kind="praise_the_lord")
     return k

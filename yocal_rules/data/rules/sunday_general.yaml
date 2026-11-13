@@ -36,8 +36,6 @@
    fill: {tone: "$tone"}, source: typikon, locator: "Ch I s5 p.21-22; Ch III p.50", status: explicit}
 - {id: mat.prokeimenon.res, slot: matins.prokeimenon, tier: 4, when: [{pred: sunday}],
    fill: {kind: resurrectional, tone: "$tone"}, source: typikon, locator: "Ch I s5 p.25", status: explicit}
-- {id: mat.eothinon.calendar, slot: matins.eothinon_gospel, tier: 4, when: [{pred: sunday}],
-   fill: {number: "$eothinon"}, source: typikon, locator: "Ch I s5 p.29 fn21 (rotation deferred to calendar)", status: explicit}
 - {id: mat.kontakion.undecided, slot: matins.kontakion, tier: 4, when: [{pred: sunday}], fill: {},
    source: typikon, locator: "Matins kontakion Rules are in kontakion.yaml; fallback for days they do not cover (Palm Sunday; Pascha has pent.pascha.mat.kontakion)", status: missing, ticket: "#27"}
 - {id: mat.praises.plain, slot: matins.praises, tier: 4,
@@ -58,31 +56,6 @@
    when: [{pred: sunday}], fill: {},
    source: typikon, locator: "Liturgy kontakion windows are in kontakion.yaml; fallback for days they do not cover (Palm Sunday, ...; Pascha is lit.kontakion.pascha_cycle)", status: missing,
    ticket: "#25 (kontakion windows)"}
-- {id: lit.epistle.owner, slot: liturgy.epistle, tier: 4, when: [{pred: sunday}],
-   fill: {owner: "$epistle_owner", ref: "$epistle_ref"}, source: typikon,
-   locator: "Ch I s6 p.37-38 (great saint on Sunday: saint's Epistle)", status: explicit}
-- {id: lit.epistle.anca_sunday, slot: liturgy.epistle, tier: 3,
-   when: [{pred: sunday}, {pred: anca_sunday_epistle}],
-   fill: {owner: sunday, ref: "$sunday_epistle_ref"},
-   source: anca, locator: "inferred: ANCA reads the Sunday's own Epistle on All Saints / Triodion Sundays and leavetakings",
-   status: inferred, evidence: "ANCA READ 2022-2026: 7 Sundays where the calendar flag said saint (All Saints of Antioch 2022 and 2023 only; 2025+ is lit.epistle.antioch_own.2025, Apostles synaxis 2024-06-30, Theophany leavetaking 2024-01-14, Tryphon on Triodion 2026-02-01); ANCA's reading equals the DB a_code lection each time",
-   conflict: {with: [lit.epistle.owner], status: open,
-              note: "Calendar flag (is_comm_apos) and Typikon p.37-38 give the saint's Epistle on a great saint's Sunday. ANCA reads the Sunday's own Epistle on All Saints Sundays (incl. All Saints of Antioch), Triodion Sundays and leavetakings: calendar flag right on 173/182 Sundays, this rule 180/182. The Leavetaking and Triodion clauses each rest on one date with a counterexample (2026-01-11, 2025-03-09): low confidence. Project default: follow ANCA."}}
-- {id: lit.epistle.antioch_own.2025, slot: liturgy.epistle, tier: 2,
-   when: [{pred: sunday}, {pred: desig_contains, args: ["All Saints of Antioch"]}, {pred: year_at_least, args: [2025]}, {pred: not_date_in, args: ["07-07"]}],
-   fill: {owner: sunday, ref: "$epistle_ref"},
-   source: anca, locator: "inferred: from 2025 ANCA reads the Sunday of All Saints of Antioch's own Epistle (Acts 11:19-30, 'For Sunday of All Saints of Antioch'), the DB's xM2Sun lection",
-   status: inferred, evidence: "ANCA READ 2025-06-22 and 2026-06-14 (both Acts 11:19-30 = DB c_code xM2Sun, subtitled for the Sunday itself); 2022-06-26 and 2023-06-18 read the 2nd Sunday's Romans 2:10-16 (commemoration not yet kept, as in lit.kontakion antioch year clause)",
-   conflict: {with: [lit.epistle.owner], status: open,
-              note: "Typikon p.37-38 gives the saint's Epistle on a great saint's Sunday; the DB lection is the commemoration's own, so the reading agrees but ANCA labels it the Sunday's own. Project default: follow ANCA (the Church's own saints get preference). The 2022-23 Sundays stay on lit.epistle.anca_sunday."}}
-- {id: lit.prokeimenon.anca_sunday, slot: liturgy.prokeimenon, tier: 3,
-   when: [{pred: sunday}, {pred: anca_sunday_epistle}],
-   fill: {owner: sunday},
-   source: anca, locator: "inferred: the prokeimenon follows the Epistle owner",
-   status: inferred, evidence: "as lit.epistle.anca_sunday; ANCA shows the owner only via the Epistle subtitle (circular check)",
-   conflict: {with: [lit.prokeimenon.follows_epistle], status: open, note: "see lit.epistle.anca_sunday"}}
-- {id: lit.gospel.calendar, slot: liturgy.gospel, tier: 4, when: [{pred: sunday}],
-   fill: {ref: "$gospel_ref"}, source: typikon, locator: "Ch I s6 p.37 (lectionary deferred to calendar)", status: explicit}
 - {id: lit.prokeimenon.follows_epistle, slot: liturgy.prokeimenon, tier: 4, when: [{pred: sunday}],
    fill: {owner: "$epistle_owner"}, source: anca, locator: "inferred, issue 'Prokeimenon and alleluia verse rules'",
    status: inferred, evidence: "ANCA READ 16 dates, DCS 5; Violakis p.58 says 'the Prokeimena' only"}

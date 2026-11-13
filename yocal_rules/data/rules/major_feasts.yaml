@@ -152,11 +152,11 @@
    evidence: "ANCA Festal Orthros Jan 01 (2026): festal anabathmoi Tone 4, prokeimenon for St Basil Tone 4"}
 - {id: mf.mat.gospel.feast, slot: matins.eothinon_gospel, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition]}],
-   fill: {number: null, ref: "$feast_matins_gospel_ref", parts: ["No eothinon: the Matins Gospel of the feast ({feast_matins_gospel_ref})"]},
+   fill: {number: null, parts: ["No eothinon: the Matins Gospel of the feast ({feast_matins_gospel_ref})"]},
    source: typikon, locator: "Matins Gospel of the feast: Sep 8 p.65, Sep 14 p.75, Aug 15 p.455 (reference from the calendar lectionary, code m-<mm-dd>)", status: explicit}
 - {id: mf.mat.gospel.circumcision, slot: matins.eothinon_gospel, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [circumcision]}],
-   fill: {number: null, ref: "John 10:1-9", parts: ["No eothinon: the Matins Gospel of St Basil (John 10:1-9) — Menaion 01-01"]},
+   fill: {number: null, parts: ["No eothinon: the Matins Gospel of St Basil (John 10:1-9) — Menaion 01-01"]},
    source: anca, locator: "inferred: Typikon p.164 defers to the Menaion; the calendar lectionary has no Matins Gospel for Jan 1",
    status: inferred, evidence: "ANCA Festal Orthros Jan 01 (2026): John 10:1-9 (the hierarch's Gospel, calendar lection #3-Hier)"}
 - {id: mf.mat.kontakion.feast, slot: matins.kontakion, tier: -10,
@@ -248,7 +248,7 @@
    source: typikon, locator: "Ch I s6 VII p.37-38 (Epistle of the feast; its prokeimenon goes with it)", status: explicit}
 - {id: mf.lit.epistle.feast, slot: liturgy.epistle, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
-   fill: {owner: feast, ref: "$epistle_ref", parts: ["{epistle_ref} — for the feast"]},
+   fill: {owner: feast, parts: ["{epistle_ref} — for the feast"]},
    source: typikon, locator: "Ch I s6 VII p.37-38 (Epistle and Gospel of the feast on a weekday; references from the calendar lectionary)", status: explicit}
 - {id: mf.lit.alleluia, slot: liturgy.alleluia, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
@@ -256,7 +256,7 @@
    source: typikon, locator: "Ch I s6 VIII p.38 (Alleluia thrice in Tone 2 at every Liturgy)", status: explicit}
 - {id: mf.lit.gospel.feast, slot: liturgy.gospel, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
-   fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the feast"]},
+   fill: {parts: ["{gospel_ref} — for the feast"]},
    source: typikon, locator: "Ch I s6 VII p.37-38 (references from the calendar lectionary)", status: explicit}
 - {id: mf.lit.megalynarion.feast, slot: liturgy.megalynarion, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [elevation, presentation, entrance, annunciation, nativity_theotokos, dormition]}],
@@ -317,7 +317,7 @@
    source: typikon, locator: "Ch I s4 p.17-18 (weekday Great Dismissal; only the Annunciation and the Presentation among Theotokos feasts have a phrase)", status: explicit}
 - {id: mf.lit.author, slot: liturgy.author, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
-   fill: {author: "$liturgy_author", parts: ["Divine Liturgy of St {liturgy_author}"]},
+   fill: {parts: ["Divine Liturgy of St {liturgy_author}"]},
    source: typikon, locator: "Ch I s4 p.17 (Liturgy author); Jan 1 p.164 (Liturgy of St Basil); DB calendar Basil flag", status: explicit}
 
 # ================= Ascension (Thursday, Pascha+39): Typikon p.535-536 gives the full order =================
@@ -349,7 +349,7 @@
    fill: {kind: other, tone: 4, parts: ["Anabathmoi of Tone 4 (“From my youth”), then the prokeimenon of the Ascension, Tone 4"]},
    source: typikon, locator: "p.536", status: explicit}
 - {id: mf.asc.mat.gospel, slot: matins.eothinon_gospel, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
-   fill: {number: null, ref: "$feast_matins_gospel_ref", parts: ["Matins Gospel of the Ascension = the 3rd eothinon ({feast_matins_gospel_ref}); then “In that we have beheld”"]},
+   fill: {number: null, parts: ["Matins Gospel of the Ascension = the 3rd eothinon ({feast_matins_gospel_ref}); then “In that we have beheld”"]},
    source: typikon, locator: "p.536 (the Matins Gospel of the 3rd eothinon)", status: explicit}
 - {id: mf.asc.mat.kontakion, slot: matins.kontakion, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
    fill: {kind: feast, parts: ["Kontakion and oikos of the Ascension — Pentecostarion"]},
@@ -377,11 +377,11 @@
 - {id: mf.asc.lit.prokeimenon, slot: liturgy.prokeimenon, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
    fill: {owner: feast, parts: ["Prokeimenon of the Ascension — Pentecostarion"]}, source: typikon, locator: "p.536 (Epistle of the Ascension)", status: explicit}
 - {id: mf.asc.lit.epistle, slot: liturgy.epistle, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
-   fill: {owner: feast, ref: "$epistle_ref", parts: ["{epistle_ref} — for the Ascension"]}, source: typikon, locator: "p.536 (Acts 1:1-12)", status: explicit}
+   fill: {owner: feast, parts: ["{epistle_ref} — for the Ascension"]}, source: typikon, locator: "p.536 (Acts 1:1-12)", status: explicit}
 - {id: mf.asc.lit.alleluia, slot: liturgy.alleluia, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
    fill: {tone: 2, parts: ["Alleluia — Tone 2, with the verses of the Ascension"]}, source: typikon, locator: "Ch I s6 VIII p.38", status: explicit}
 - {id: mf.asc.lit.gospel, slot: liturgy.gospel, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
-   fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the Ascension"]}, source: typikon, locator: "p.536 (Luke 24:36-53)", status: explicit}
+   fill: {parts: ["{gospel_ref} — for the Ascension"]}, source: typikon, locator: "p.536 (Luke 24:36-53)", status: explicit}
 - {id: mf.asc.lit.megalynarion, slot: liturgy.megalynarion, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
    fill: {kind: feast, parts: ["Megalynarion of the Ascension (“In unison do we magnify thee”)"]}, source: typikon, locator: "p.536", status: explicit}
 - {id: mf.asc.lit.communion, slot: liturgy.communion, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
@@ -396,7 +396,7 @@
    fill: {phrase: feast, clause: none, parts: ["Opening: “May He Who in glory ascended from us into heaven and sat at the right hand of God the Father …”"]},
    source: typikon, locator: "p.536; Ch I s4 p.17", status: explicit}
 - {id: mf.asc.lit.author, slot: liturgy.author, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
-   fill: {author: "$liturgy_author", parts: ["Divine Liturgy of St {liturgy_author}"]}, source: typikon, locator: "Ch I s4 p.17", status: explicit}
+   fill: {parts: ["Divine Liturgy of St {liturgy_author}"]}, source: typikon, locator: "Ch I s4 p.17", status: explicit}
 
 # ================= Nativity of Christ (Tuesday-Saturday): Typikon p.138-143 =================
 # Eve (Dec 24): Royal Hours, then Great Vespers with the Liturgy of St Basil (p.140). Sunday feast (p.143-145): not covered.
@@ -428,7 +428,7 @@
    fill: {kind: other, tone: null, parts: ["Anabathmoi of Tone 4, then the prokeimenon “From the womb before the morning star have I begotten Thee” — Menaion 12-25"]},
    source: typikon, locator: "p.141 (tone not printed); Monday: p.144-145, p.148 (Sunday order p.143-145 for the feast itself)", status: explicit}
 - {id: mf.nat.mat.gospel, slot: matins.eothinon_gospel, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity]}],
-   fill: {number: null, ref: "$feast_matins_gospel_ref", parts: ["No eothinon: the Matins Gospel of the Nativity ({feast_matins_gospel_ref})"]}, source: typikon, locator: "p.141; Monday: p.144-145, p.148 (Sunday order p.143-145 for the feast itself)", status: explicit}
+   fill: {number: null, parts: ["No eothinon: the Matins Gospel of the Nativity ({feast_matins_gospel_ref})"]}, source: typikon, locator: "p.141; Monday: p.144-145, p.148 (Sunday order p.143-145 for the feast itself)", status: explicit}
 - {id: mf.nat.mat.kontakion, slot: matins.kontakion, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity]}],
    fill: {kind: feast, parts: ["Kontakion and oikos of the Nativity after the 6th ode"]}, source: typikon, locator: "p.141; Monday: p.144-145, p.148 (Sunday order p.143-145 for the feast itself)", status: explicit}
 - {id: mf.nat.mat.katavasia, slot: matins.katavasia, tier: -10, when: [{pred: major_feast_is, args: [nativity]}],
@@ -448,11 +448,11 @@
 - {id: mf.nat.lit.prokeimenon, slot: liturgy.prokeimenon, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity, theophany]}],
    fill: {owner: feast, parts: ["Prokeimenon of the feast — Menaion {mmdd}"]}, source: typikon, locator: "p.143, p.173 (Epistle of the feast); Monday: Nativity p.144-145, p.148; Theophany p.176", status: explicit}
 - {id: mf.nat.lit.epistle, slot: liturgy.epistle, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity, theophany]}],
-   fill: {owner: feast, ref: "$epistle_ref", parts: ["{epistle_ref} — for the feast"]}, source: typikon, locator: "p.143, p.173 (references from the calendar lectionary); Monday: Nativity p.144-145, p.148; Theophany p.176", status: explicit}
+   fill: {owner: feast, parts: ["{epistle_ref} — for the feast"]}, source: typikon, locator: "p.143, p.173 (references from the calendar lectionary); Monday: Nativity p.144-145, p.148; Theophany p.176", status: explicit}
 - {id: mf.nat.lit.alleluia, slot: liturgy.alleluia, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity, theophany]}],
    fill: {tone: 2, parts: ["Alleluia — Tone 2, with the verses of the feast"]}, source: typikon, locator: "Ch I s6 VIII p.38; Monday: Nativity p.144-145, p.148; Theophany p.176", status: explicit}
 - {id: mf.nat.lit.gospel, slot: liturgy.gospel, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity, theophany]}],
-   fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the feast"]}, source: typikon, locator: "p.143, p.173 (references from the calendar lectionary); Monday: Nativity p.144-145, p.148; Theophany p.176", status: explicit}
+   fill: {parts: ["{gospel_ref} — for the feast"]}, source: typikon, locator: "p.143, p.173 (references from the calendar lectionary); Monday: Nativity p.144-145, p.148; Theophany p.176", status: explicit}
 - {id: mf.nat.lit.megalynarion, slot: liturgy.megalynarion, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity, theophany]}],
    fill: {kind: feast, parts: ["Megalynarion and heirmos of the 9th ode of the 1st canon of the feast"]}, source: typikon, locator: "p.143, p.173; Monday: Nativity p.144-145, p.148; Theophany p.176", status: explicit}
 - {id: mf.nat.lit.communion, slot: liturgy.communion, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity]}],
@@ -467,7 +467,7 @@
    fill: {phrase: feast, clause: none, parts: ["Opening: “May He Who …” with the characteristic phrase of the feast (no “rose from the dead”)"]},
    source: typikon, locator: "Ch I s4 p.18 (Nativity: 'born in a cave'); p.141, p.171; Monday: Nativity p.144-145, p.148; Theophany p.176", status: explicit}
 - {id: mf.nat.lit.author, slot: liturgy.author, tier: -10, when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity, theophany]}],
-   fill: {author: "John Chrysostom", parts: ["Divine Liturgy of St John Chrysostom"]}, source: typikon, locator: "p.142 (Liturgy of St John Chrysostom on the feast; St Basil on the eve)", status: explicit}
+   fill: {parts: ["Divine Liturgy of St John Chrysostom"]}, source: typikon, locator: "p.142 (Liturgy of St John Chrysostom on the feast; St Basil on the eve)", status: explicit}
 
 # ================= Theophany (Tuesday-Saturday): Typikon p.170-173; Monday p.174-176 (widened rules, rest in major_feasts_nat_thy_monday.yaml) =================
 - {id: mf.thy.ves.lihc, slot: vespers.lihc.stichera, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [theophany]}],
@@ -504,7 +504,7 @@
    fill: {kind: other, tone: 4, parts: ["Festal anabathmoi and the prokeimenon of Theophany — Menaion 01-06, Tone 4"]},
    source: anca, locator: "inferred: Typikon p.171 does not list the prokeimenon; Monday: p.176 ('the whole service for the feast')", status: inferred, evidence: "ANCA Festal Orthros January 06 (2026): Tone 4"}
 - {id: mf.thy.mat.gospel, slot: matins.eothinon_gospel, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [theophany]}],
-   fill: {number: null, ref: "$feast_matins_gospel_ref", parts: ["No eothinon: the Matins Gospel of Theophany ({feast_matins_gospel_ref})"]},
+   fill: {number: null, parts: ["No eothinon: the Matins Gospel of Theophany ({feast_matins_gospel_ref})"]},
    source: anca, locator: "inferred: Typikon p.171 does not list the Matins Gospel; reference from the calendar lectionary (m-01-06); Monday: p.176 ('the whole service for the feast')", status: inferred,
    evidence: "ANCA Abbreviated Rubrics and Festal Orthros January 06 (2026): Mark 1:9-11"}
 - {id: mf.thy.mat.kontakion, slot: matins.kontakion, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [theophany]}],

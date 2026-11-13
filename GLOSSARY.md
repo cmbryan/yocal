@@ -36,6 +36,10 @@ _Avoid_: UK override, local variation
 A published work a Rule is drawn from. Authority order: Antiochian Typikon, then Antiochian Archdiocese of North America, then Digital Chant Stand, then other Typika found.
 _Avoid_: Reference, citation
 
+**DB-sourced slot**:
+A slot whose attributes the YOCal DB decides by construction (`db:` in `slots.yaml`; applied by `rules.apply_db` for every day, with or without a Rule): Epistle owner/reference, Gospel reference, eothinon number (or the DB's Matins Gospel of the feast), Liturgy author, Agape Gospel. A Rule may not fill these attributes (`validate` rejects it); it adds only what the DB lacks. ANCA disagreeing with the DB is a Divergence-log entry.
+_Avoid_: a Rule that "chooses" `$epistle_ref`, re-deriving what the DB encodes
+
 **Major feast**:
 Pascha, the Twelve Great Feasts (including the Circumcision/Basil's day) and the movable Paschal-cycle feasts (Palm Sunday, Ascension, Pentecost), in first-target scope with their preceding Vespers. The Triodion Sundays and Saturdays are in scope as Sunday-cycle days, not as Major feasts.
 _Avoid_: Great feast (a narrower subset)

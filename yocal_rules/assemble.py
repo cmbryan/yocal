@@ -5,7 +5,7 @@ import datetime as dt
 from dataclasses import dataclass, field
 
 from . import anca, calfacts, compare as cmp, dcs
-from .rules import evaluate, load_catalogue
+from .rules import apply_db, evaluate, load_catalogue
 
 SERVICES = ("vespers", "matins", "liturgy", "agape")  # agape = Agape Vespers, Sunday evening of Pascha only
 
@@ -56,6 +56,7 @@ def build(service: str, date: dt.date, db_path: str = calfacts.DEFAULT_DB, strip
             a = slots[s].get("after_or", a)  # anchor slot absent (feast-only): fall back
         ids.insert(0 if a == "^" else ids.index(a) + 1 if a in ids else len(ids), s)
     res = evaluate(rules, facts, ids)
+    apply_db(res, facts, slots)
     ordered = [(s, slots[s], res[s]) for s in ids]
     return Result(service, date, facts, ordered, catalogue=(rules, sources, slots))
 

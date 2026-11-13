@@ -57,7 +57,7 @@ def test_coincidence_orders_and_withheld_dates():
 @needs_db
 def test_pascha_matins():
     _, m = slots("matins", dt.date(2026, 4, 12))
-    assert m["matins.eothinon_gospel"].fill["number"] == 2
+    assert m["matins.eothinon_gospel"].fill["ref"] == "Mark 16:1-8"  # DB m-J1Sun (eothinon 2)
     assert m["matins.kontakion"].fill["kind"] == "feast"
 
 

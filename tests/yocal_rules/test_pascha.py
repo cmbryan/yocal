@@ -93,7 +93,7 @@ def test_agape_plain_vs_st_george(date, george):
     assert a["agape.apolytikia"].fill["saint"] is george and a["agape.dismissal"].fill["saint_named"] is george
     assert a["agape.aposticha"].fill["glory"] == ("saint" if george else "pascha")
     assert (a["agape.prokeimenon"].fill["kind"], a["agape.prokeimenon"].fill["tone"]) == ("great", 7)
-    assert a["agape.gospel"].fill["ref"] == "John 20:19-25"
+    assert a["agape.gospel"].fill["ref"] == "John 20:19-20; John 20:21-23; John 20:24-25"  # DB lection (three Gospel readings)
     assert bool(st.rule.get("conflict")) is george and (not george or st.rule["conflict"]["status"] == "open")
 
 

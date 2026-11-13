@@ -1,3 +1,4 @@
+yocal_db: {title: "YOCal master DB (authoritative calendar/lectionary)", authority: 0}
 typikon: {title: "Antiochian Typikon (Khoury/Morris 2011)", authority: 1}
 anca:    {title: "AOCANA service texts (answer key)", authority: 2}
 dcs:     {title: "GOA Digital Chant Stand", authority: 3}

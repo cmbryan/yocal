@@ -18,8 +18,24 @@ DEFAULT_DB = os.path.join(REPO, "db", "yocal", "YOCal_Master.db")
 FIXED_MAJOR = {"01-01", "01-06", "02-02", "03-25", "08-06", "08-15", "09-08", "09-14", "11-21", "12-25"}
 
 
+_PASCHA: dict = {}
+
+
 def pascha(y: int) -> dt.date:
-    """Orthodox Pascha, Gregorian date (Julian computus + 13 days; valid 1900-2099)."""
+    """Orthodox Pascha: the YOCal DB row designated Pascha (authoritative); computus only outside the DB's years."""
+    if y not in _PASCHA:
+        d = None
+        if os.path.exists(DEFAULT_DB):
+            con = sqlite3.connect(DEFAULT_DB)
+            r = con.execute("select date from yocal_main where date between ? and ? and g_code='J1Sun'", (f"{y}-03-01", f"{y}-05-31")).fetchone()
+            con.close()
+            d = dt.date.fromisoformat(r[0]) if r else None
+        _PASCHA[y] = d or _computus(y)
+    return _PASCHA[y]
+
+
+def _computus(y: int) -> dt.date:
+    """Julian computus + 13 days (valid 1900-2099): fallback for years the DB lacks."""
     a, b, c = y % 4, y % 7, y % 19
     d = (19 * c + 15) % 30
     e = (2 * a + 4 * b - d + 34) % 7
@@ -279,7 +295,6 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
     ep_text = text(r["c_code"], 1) if r["is_comm_apos"] else text(r["a_code"], 1)
     gp_text = text(r["c_code"], 2) if r["is_comm_gosp"] else text(r["g_code"], 2)
     ep = lect(r["c_code"])[0] if r["is_comm_apos"] else lect(r["a_code"])[0]
-    sunday_ep = lect(r["a_code"])[0]
     gp = lect(r["c_code"])[1] if r["is_comm_gosp"] else lect(r["g_code"])[1]
     major = (r["major_commem"] or "").strip()
     mmdd = ld.strftime("%m-%d")
@@ -342,9 +357,9 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         tone=_num(r["tone"]), eothinon=_num(r["eothinon"]), desig=r["desig_a"], desig_g=r["desig_g"],
         epistle_owner="saint" if r["is_comm_apos"] else "sunday",
         gospel_owner="saint" if r["is_comm_gosp"] else "sunday",
-        epistle_ref=ep, sunday_epistle_ref=sunday_ep, gospel_ref=gp, epistle_text=ep_text, gospel_text=gp_text,
+        epistle_ref=ep, gospel_ref=gp, epistle_text=ep_text, gospel_text=gp_text,
         all_saints_sunday="Sunday of All Saints" in f"{r['desig_a']} {r['desig_g']}",
-        leavetaking=(_basil().get(mmdd, {}).get("rank") == "LEAVETAKING"),
+        leavetaking=fp.startswith("leavetaking:"),  # DB fore_after / commemoration
         saint_in_calendar=bool(major), principal_name=major,
         menaion_key=key,  # Menaion date of the principal commemoration (DB c_code when it is a date, e.g. a transferred saint), else mmdd
         saint_has_glory=glory, glory_source=gsrc,
@@ -357,8 +372,7 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         other_commem=(r["class_5"] or "").strip(),
         uk_commem=(r["british"] or "").strip(),
         basil=bool((r["basil"] or "").strip()),
-        # Annunciation on a Lent Sunday: Chrysostom (Typikon Lent 3 p.283; ANCA Lent 5 2018); the DB flag says Basil (#19)
-        liturgy_author="Basil the Great" if (r["basil"] or "").strip() and not (ld.weekday() == 6 and mmdd == "03-25") else "John Chrysostom",
+        liturgy_author="Basil the Great" if (r["basil"] or "").strip() else "John Chrysostom",  # DB flag, authoritative
         pascha_days=(ld - pascha(ld.year)).days,
         fore_after=fa,  # DB fore_after text (forefeast/afterfeast/leavetaking), '' if none
         season=ssn, in_slice=not reasons, slice_reasons=reasons,
@@ -366,7 +380,9 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         # Major feast (work package I): id ('' if none), class lord|theotokos, movable flag; feast_slots gates the feast-only slots
         major_feast=mf, major_feast_class=mf_cls, major_feast_movable=mf_mov, major_feast_slots=mf in FEAST_SLOT_FEASTS, major_feast_sunday=mf in FEAST_SLOT_FEASTS and mf != "pascha" and ld.weekday() == 6,
         # the feast's Matins Gospel (DB lection code m-<mm-dd>, m-<g_code> for movable feasts), '' if the DB has none
-        feast_matins_gospel_ref=(lect(f"m-{mmdd}")[1] or lect(f"m-{r['g_code']}")[1] or "").strip() if mf else "",
+        feast_matins_gospel_ref=(lect(f"m-{mmdd}")[1] or lect(f"m-{r['g_code']}")[1] or "").strip() if (mf or _num(r["eothinon"]) is None) else "",
+        agape_gospel_ref=(lect("v-J1Sun")[1] or "").strip() if service == "agape" else "",
+        explanatory_notes=(r.get("explanatory_notes") or "").strip(),
         # the eve's own calendar row (Vespers is served on the eve): DB Liturgy-of-St-Basil flag (Vesperal Liturgy)
         # Agape Vespers (Pascha evening): St George transferred to Bright Monday is commemorated at it (Typikon Apr 23 p.325)
         bright_monday_george=bool(service == "agape" and re.search(r"Great Martyr, Trophybearer and Wonderworker George \(Transferred from April 23", (con.execute("select major_commem from yocal_main where date=?", ((ld + dt.timedelta(days=1)).isoformat(),)).fetchone() or [""])[0] or "")),

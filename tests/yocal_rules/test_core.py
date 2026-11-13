@@ -159,8 +159,8 @@ def test_service_document_has_no_provenance(tmp_path):
     assert cli.main(["2026-11-01", "liturgy", "--no-compare", "--out", str(tmp_path)]) == 0
     doc = (tmp_path / "2026-11-01-liturgy.md").read_text()
     sup = (tmp_path / "2026-11-01-liturgy-supplement.md").read_text()
-    assert "Typikon" not in doc and "explicit" not in doc and "lit.epistle.owner" not in doc
-    assert "lit.epistle.owner" in sup and "Typikon" in sup.replace("typikon", "Typikon")
+    assert "Typikon" not in doc and "explicit" not in doc and "db.liturgy.epistle" not in doc
+    assert "db.liturgy.epistle" in sup and "Typikon" in sup.replace("typikon", "Typikon")
 
 
 # ---- glory evidence (#28/#31) and inferred 4R+6 (#32)
@@ -246,12 +246,11 @@ def test_luke_8_8_acclamation_is_optional():
 
 
 @needs_db
-def test_anca_sunday_epistle_overrides_flag_with_open_conflict():
+def test_antioch_sunday_epistle_follows_db_not_anca():
     got = lambda d: {s: x for s, _, x in assemble.build("liturgy", d).slots}
-    g = got(dt.date(2023, 6, 18))  # All Saints of Antioch 2022-23: flag says saint, ANCA reads the Sunday's
-    assert g["liturgy.epistle"].rule_id == "lit.epistle.anca_sunday" and g["liturgy.epistle"].fill["owner"] == "sunday"
-    assert g["liturgy.prokeimenon"].fill["owner"] == "sunday"
-    assert g["liturgy.epistle"].rule["conflict"]["status"] == "open" and "lit.epistle.owner" in g["liturgy.epistle"].shadowed
+    g = got(dt.date(2023, 6, 18))  # All Saints of Antioch: the DB gives its own Epistle (ANCA 2022-23 differs: Divergence log)
+    assert g["liturgy.epistle"].rule_id == "db.liturgy.epistle" and g["liturgy.epistle"].fill["ref"] == "Acts 11:19-30"
+    assert g["liturgy.epistle"].fill["owner"] == "saint" and g["liturgy.prokeimenon"].fill["owner"] == "saint"
     n = got(dt.date(2026, 11, 1))  # ordinary saint's Epistle on a Sunday stays the saint's
     assert n["liturgy.epistle"].fill["owner"] == "saint"
 

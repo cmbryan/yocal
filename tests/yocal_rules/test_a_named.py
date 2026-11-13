@@ -22,12 +22,12 @@ def test_kyriaki_sunday_epistle_owner_saint():
 
 # ---- regression: 2022-26 ANCA sweep diffs on general Sunday Rules
 @needs_db
-@pytest.mark.parametrize("d,ref,rid", [(dt.date(2025, 6, 22), "Acts 11:19-30", "lit.epistle.antioch_own.2025"),
-                                       (dt.date(2026, 6, 14), "Acts 11:19-30", "lit.epistle.antioch_own.2025"),
-                                       (dt.date(2023, 6, 18), "Romans 2:10-16", "lit.epistle.anca_sunday")])
-def test_all_saints_of_antioch_epistle_follows_anca_by_year(d, ref, rid):
+@pytest.mark.parametrize("d,ref,rid", [(dt.date(2025, 6, 22), "Acts 11:19-30", "db.liturgy.epistle"),
+                                       (dt.date(2026, 6, 14), "Acts 11:19-30", "db.liturgy.epistle"),
+                                       (dt.date(2023, 6, 18), "Acts 11:19-30", "db.liturgy.epistle")])
+def test_all_saints_of_antioch_epistle_follows_db_every_year(d, ref, rid):
     x = {s: v for s, _, v in assemble.build("liturgy", d).slots}["liturgy.epistle"]
-    assert x.fill["owner"] == "sunday" and x.fill["ref"] == ref and x.rule_id == rid
+    assert x.fill["owner"] == "saint" and x.fill["ref"] == ref and x.rule_id == rid
 
 
 def test_anca_typo_dismissal_phrase_2024_02_11_is_logged_divergence():

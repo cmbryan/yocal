@@ -36,8 +36,6 @@ PREDS = {
     "desig_contains": lambda f, a: any(x in f"{f['desig']} {f['desig_g']}" for x in a),
     "not_desig_contains": lambda f, a: not any(x in f"{f['desig']} {f['desig_g']}" for x in a),
     "archangel_feast": lambda f, a: f["archangel_feast"],
-    # ANCA reads the Sunday's own Epistle/prokeimenon (not the saint's) on these Sundays
-    "anca_sunday_epistle": lambda f, a: f["all_saints_sunday"] or f["season"] == "triodion" or f["leavetaking"],
     "named_sunday_is": lambda f, a: f["named_sunday"] in a,
     "two_sets_of_3": lambda f, a: f["two_sets_of_3"],
     "bb_rank_in": lambda f, a: f["bb_rank"] in a,          # Bp Basil rank of the Menaion date (POLYELEOS, DOXOLOGY, VIGIL, ...)
@@ -142,6 +140,9 @@ def validate(rules, sources, slots):
         for w in r.get("when", []):
             if w["pred"] not in PREDS:
                 errs.append(f"{rid}: unknown predicate {w['pred']}")
+        for a, v in r.get("fill", {}).items():  # DB-sourced slot: the DB decides these attributes, a Rule may not
+            if a in slots.get(r["slot"], {}).get("db", {}) and v is not None and not (a == "owner" and v not in ("sunday", "saint")):
+                errs.append(f"{rid}: fills DB-sourced attribute {r['slot']}.{a} (the YOCal DB decides it)")
         st = r["status"]
         if st not in STATUSES:
             errs.append(f"{rid}: bad status {st}")
@@ -177,3 +178,33 @@ def evaluate(rules, facts, slot_ids):
         out[slot] = Resolution(slot, w["status"], w, _resolve(w["fill"], facts),
                                [r["id"] for r in rs if r is not w])
     return out
+
+
+DB_SOURCE = {"id": "", "tier": 99, "source": "yocal_db", "status": "explicit", "fill": {},
+             "locator": "YOCal master DB (authoritative; not chosen by a Rule)"}
+
+
+def apply_db(res: dict, facts: dict, slots: dict):
+    """DB-sourced slots (slots.yaml `db: {attr: fact}`): the YOCal DB decides these attributes, by construction, for
+    every day, with or without a Rule. A Rule adds only what the DB lacks (and may not fill these attributes: validate)."""
+    for slot, r in res.items():
+        db = slots[slot].get("db")
+        if not db:
+            continue
+        if r.rule is None or r.status == "missing":
+            r.rule = {**DB_SOURCE, "id": f"db.{slot}", "slot": slot}
+            r.status, r.note = "explicit", ""
+        for attr, fact in db.items():
+            v = facts.get(fact)
+            if attr == "owner" and r.fill.get("owner") not in (None, "sunday", "saint"):
+                continue  # feast / other owners are Rule-chosen (the DB only knows Sunday vs saint)
+            if attr == "number":  # DB eothinon number; 'of the feast' (no number) -> the DB's Matins Gospel lection of the feast
+                if v is not None and r.fill.get("number", 0) is not None:
+                    r.fill["number"] = v
+                elif r.fill.get("number", 0) is None or v is None:
+                    r.fill["number"] = None
+                    if facts.get("feast_matins_gospel_ref"):
+                        r.fill["ref"] = facts["feast_matins_gospel_ref"]
+                continue
+            if v not in (None, ""):
+                r.fill[attr] = v

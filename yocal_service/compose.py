@@ -86,7 +86,9 @@ def v_gospel_intro(day: Day, f: dict, **_):
     book, loc = _ref(f.get("gospel_ref"))
     if not book:
         return []
-    return [_P("Deacon", f"The reading is from the Holy Gospel according to {_GOSPEL.get(book, book)}. [{loc}]", "yocal")]
+    n = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", f.get("explanatory_notes") or "")).strip()  # DB explanatory note on the reading (rubric)
+    note = [_P("", n, "yocal")] if n else []
+    return note + [_P("Deacon", f"The reading is from the Holy Gospel according to {_GOSPEL.get(book, book)}. [{loc}]", "yocal")]
 
 
 def v_gospel(day: Day, f: dict, **_):

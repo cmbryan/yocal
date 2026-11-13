@@ -96,14 +96,14 @@
               note: "Accepted (explained, non-blocking), same class as mf.jan1.sun.lit.epistle: the Typikon names no wording for the prokeimenon, only ties it to the Epistle, which it labels 'for St. Basil' and names no reference. The prokeimenon text follows ANCA 2023-01-01 and 2026-01-01 (both read Psalm 48 before Colossians 2:8-12). Re-open only if a lectionary printing a different Epistle/prokeimenon for Basil on Jan 1 is found."}}
 - {id: mf.jan1.sun.lit.epistle, slot: liturgy.epistle, tier: -10,
    when: [{pred: sunday_feast_order, args: [circumcision]}],
-   fill: {owner: saint, ref: "$epistle_ref", parts: ["{epistle_ref}"]},
+   fill: {parts: ["{epistle_ref}"]},
    source: anca, locator: "inferred: reference from the calendar lectionary (DB lection 01-01, saint flag), as read by ANCA", status: inferred,
    evidence: "ANCA Liturgy Variables 2023-01-01: Epistle Colossians 2:8-12 (the calendar's single Jan 1 Epistle)",
    conflict: {with: ["Typikon Jan 1 on Sunday p.166 ('The Epistle for St. Basil', 'The Gospel for the Circumcision': two separate readings)"], status: accepted,
               note: "Accepted (explained, non-blocking). DB yocal_lections 01-01 = Colossians 2:8-12 + Luke 2:20-21,40-52 (one Epistle, one Gospel); ANCA 2023-01-01 (Sunday) and 2026-01-01 (weekday) read Colossians 2:8-12 only; the Typikon p.166 'Epistle for St. Basil' is a Liturgy-of-Basil label naming no reference. Re-open only if a lectionary printing a different Epistle for Basil on Jan 1 is found."}}
 - {id: mf.jan1.sun.lit.gospel, slot: liturgy.gospel, tier: -10,
    when: [{pred: sunday_feast_order, args: [circumcision]}],
-   fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the Circumcision"]},
+   fill: {parts: ["{gospel_ref} — for the Circumcision"]},
    source: typikon, locator: "Jan 1 on Sunday p.166 ('The Gospel for the Circumcision'; reference from the calendar lectionary)", status: explicit}
 - {id: mf.jan1.sun.lit.megalynarion, slot: liturgy.megalynarion, tier: -10,
    when: [{pred: sunday_feast_order, args: [circumcision]}],
