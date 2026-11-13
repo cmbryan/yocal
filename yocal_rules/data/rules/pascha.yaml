@@ -55,7 +55,7 @@
    source: typikon, locator: "Ch VII Pascha Matins pp.518-520 (no prokeimenon in the order)", status: explicit}
 - {id: pent.pascha.mat.gospel, slot: matins.eothinon_gospel, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
-   fill: {number: 2, parts: ["Eothinon Gospel no. 2 (Mark 16:1-8), read outside at the procession before Matins"]},
+   fill: {parts: ["Eothinon Gospel no. 2 (Mark 16:1-8), read outside at the procession before Matins"]},
    source: typikon, locator: "Ch VII p.518 (Rush procession: the Gospel of the 2nd eothinon, Mark 16:1-8)", status: explicit}
 - {id: pent.pascha.mat.kontakion, slot: matins.kontakion, tier: 0,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [0, 0]}],
@@ -134,7 +134,7 @@
    source: typikon, locator: "Ch VII p.523 (The Great Prokeimenon 'Who is so great a God as our God' in tone 7); Ch V p.325", status: explicit}
 - {id: agape.gospel, slot: agape.gospel, tier: 0,
    when: [{pred: pascha_days_between, args: [0, 0]}],
-   fill: {ref: "John 20:19-25", parts: ["John 20:19-25, read in several languages"]},
+   fill: {parts: ["John 20:19-25, read in several languages"]},
    source: typikon, locator: "Ch VII p.523 (the Holy Gospel, St John 20:19-25, in several languages); Ch V p.325", status: explicit}
 - {id: agape.aposticha, slot: agape.aposticha, tier: 0,
    when: [{pred: pascha_days_between, args: [0, 0]}],

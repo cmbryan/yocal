@@ -271,3 +271,11 @@ def test_rule_slots_do_not_depend_on_anca_or_dcs(tmp_path, monkeypatch, date):
         self.date, self.anca, self.dcs, self.dcs2 = date, [], [], []
     monkeypatch.setattr(c.Day, "__init__", blank)
     assert run() == with_pages
+
+
+def test_gospel_intro_shows_db_explanatory_note():
+    from yocal_service import compose
+    f = {"gospel_ref": "Luke 5:1-11", "explanatory_notes": "<em>Note text.</em><br>"}
+    ps = compose.v_gospel_intro(None, f)
+    assert ps[0]["text"] == "Note text." and ps[-1]["role"] == "Deacon"
+    assert len(compose.v_gospel_intro(None, {"gospel_ref": "Luke 5:1-11"})) == 1

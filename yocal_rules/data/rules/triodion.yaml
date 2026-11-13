@@ -247,25 +247,11 @@
    evidence: "ANCA READ 2026-04-05: kontakion of Palm Sunday in tone 6"}
 
 # ================= Liturgy: readings (calendar-driven Rules in sunday_general.yaml; documented exceptions) =================
-- {id: tri.lit.epistle.mar09_lent, slot: liturgy.epistle, tier: -3,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -14]}, {pred: date_in, args: ["03-09"]}],
-   fill: {owner: "$epistle_owner", ref: "$epistle_ref"}, source: anca,
-   locator: "inferred: the calendar flag (Forty Martyrs' Epistle) as ANCA reads it", status: inferred,
-   evidence: "ANCA READ 2025-03-09 (Lent 1): 'For the Forty Martyrs of Sebastia', Heb 12:1-10; DB is_comm_apos=1",
-   conflict: {with: ["Typikon Ch V Mar 9 p.267 (Epistle and Gospel for the Sunday)"], status: open, note: "Typikon p.267 reads the Sunday's Epistle when the Forty Martyrs fall on a Lent Sunday; ANCA (1 sample) and the yocal calendar read the Martyrs' Epistle. Project default: follow ANCA + calendar."}}
 - {id: tri.lit.prokeimenon.mar09_lent, slot: liturgy.prokeimenon, tier: -3,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -14]}, {pred: date_in, args: ["03-09"]}],
    fill: {owner: "$epistle_owner"}, source: anca, locator: "inferred: the prokeimenon follows the Epistle owner", status: inferred,
    evidence: "as tri.lit.epistle.mar09_lent (ANCA READ 2025-03-09)",
    conflict: {with: ["Typikon Ch V Mar 9 p.267"], status: open, note: "see tri.lit.epistle.mar09_lent"}}
-- {id: tri.lit.epistle.feb02, slot: liturgy.epistle, tier: -3,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-02"]}], fill: {},
-   source: typikon, locator: "Ch I p.37, Ch V p.222 (Epistle of the Presentation, Gospel of the Sunday)", status: missing,
-   ticket: "WP-F: Presentation on a Triodion Sunday: calendar gives the feast's Gospel, Typikon the Sunday's; no ANCA sample"}
-- {id: tri.lit.gospel.feb02, slot: liturgy.gospel, tier: -3,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-02"]}], fill: {},
-   source: typikon, locator: "Ch I p.37, Ch V p.222 (Gospel of the Sunday)", status: missing,
-   ticket: "WP-F: Presentation on a Triodion Sunday: calendar gives the feast's Gospel, Typikon the Sunday's; no ANCA sample"}
 - {id: tri.lit.prokeimenon.feb02, slot: liturgy.prokeimenon, tier: -3,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -63]}, {pred: date_in, args: ["02-02"]}], fill: {owner: saint},
    source: typikon, locator: "Ch V p.222 (Epistle, hence prokeimenon, of the Presentation)", status: explicit}
@@ -275,17 +261,6 @@
    when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -7]}, {pred: date_in, args: ["03-25"]}], fill: {},
    source: typikon, locator: "Ch V Mar 25 on Lent 3 p.280, Lent 4 p.290, Lent 5 p.303, Palm Sunday p.310", status: missing,
    ticket: "WP-F / major feasts: Annunciation on a Lent Sunday or Palm Sunday"}
-- {id: tri.annunciation.mat.eothinon, slot: matins.eothinon_gospel, tier: -3,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -7]}, {pred: date_in, args: ["03-25"]}], fill: {},
-   source: typikon, locator: "Ch V Mar 25 on Lent 3 p.280, Lent 4 p.290, Lent 5 p.303, Palm Sunday p.310; Ch I p.37", status: missing,
-   ticket: "WP-F / major feasts: Annunciation on a Lent Sunday or Palm Sunday"}
-- {id: tri.annunciation.lit.epistle, slot: liturgy.epistle, tier: -3,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -7]}, {pred: date_in, args: ["03-25"]}], fill: {},
-   source: typikon, locator: "Ch I p.37-38 (Lent 3: Sunday Epistle + feast Gospel; Lent 4/5: feast's; Palm: feast Epistle + Sunday Gospel)", status: missing,
-   ticket: "WP-F / major feasts: Annunciation on a Lent Sunday or Palm Sunday"}
-- {id: tri.annunciation.lit.gospel, slot: liturgy.gospel, tier: -3,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -7]}, {pred: date_in, args: ["03-25"]}], fill: {},
-   source: typikon, locator: "Ch I p.37-38", status: missing, ticket: "WP-F / major feasts: Annunciation on a Lent Sunday or Palm Sunday"}
 - {id: tri.annunciation.lit.prokeimenon, slot: liturgy.prokeimenon, tier: -3,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [-42, -7]}, {pred: date_in, args: ["03-25"]}], fill: {},
    source: typikon, locator: "Ch I p.37-38", status: missing, ticket: "WP-F / major feasts: Annunciation on a Lent Sunday or Palm Sunday"}
@@ -387,11 +362,6 @@
    evidence: "ANCA READ Lent 3 2022-2026 5/5: 'O Lord, save Thy people and bless Thine inheritance' (For the Third Sunday of Great Lent) whatever the tone of the week"}
 
 # ================= Coincidences with their own readings / kontakion =================
-- {id: tri.lit.epistle.feb24, slot: liturgy.epistle, tier: -3,
-   when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -42]}, {pred: date_in, args: ["02-24"]}],
-   fill: {owner: "$epistle_owner", ref: "$epistle_ref"}, source: anca,
-   locator: "inferred: Finding of the Forerunner's Head on a Triodion Sunday: the calendar flag (feast's Epistle)", status: inferred,
-   evidence: "ANCA READ 2019-02-24 (Prodigal): Epistle 2 Cor 4:6-15 for the Forerunner; DB is_comm_apos=1. Overrides lit.epistle.anca_sunday (Triodion clause)."}
 - {id: tri.lit.prokeimenon.feb24, slot: liturgy.prokeimenon, tier: -3,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -42]}, {pred: date_in, args: ["02-24"]}],
    fill: {owner: "$epistle_owner"}, source: anca, locator: "inferred: the prokeimenon follows the Epistle owner", status: inferred,

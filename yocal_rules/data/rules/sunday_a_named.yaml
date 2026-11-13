@@ -11,14 +11,3 @@
    when: [{pred: sunday}, {pred: named_sunday_is, args: [before_theophany]}],
    fill: {res_tone: "$tone", saint: true, hymns: ["oct/t{tone}/sun/apolytikion", "men/01-02/apolytikion"]}, source: typikon,
    locator: "Sunday before Theophany pp.167-169 (Liturgy: Resurrection, then forefeast / Sunday before Epiphany)", status: explicit}
-- {id: lit.epistle.saint_on_antioch_sunday.07-07, slot: liturgy.epistle, tier: 2,
-   when: [{pred: sunday}, {pred: menaion_date_is, args: ["07-07"]}],
-   fill: {owner: saint, ref: "$epistle_ref"}, source: anca,
-   locator: "inferred: when the Sunday of All Saints of Antioch falls on Jul 7, ANCA reads St Kyriaki's Epistle (the calendar flag agrees)",
-   status: inferred, evidence: "ANCA READ 2024-07-07 ('For St. Kyriaki', Gal 3:23-4:5); one sample, calendar flag is_comm_apos=1",
-   conflict: {with: [lit.epistle.anca_sunday], status: open, note: "anca_sunday_epistle (All Saints of Antioch Sunday) would read the Sunday's own Epistle; ANCA 2022-23 did so when no saint is on the date; 2025+ reads the Sunday's own Acts 11:19-30 (lit.epistle.antioch_own.2025). Single-sample exception."}}
-- {id: lit.prokeimenon.saint_on_antioch_sunday.07-07, slot: liturgy.prokeimenon, tier: 2,
-   when: [{pred: sunday}, {pred: menaion_date_is, args: ["07-07"]}],
-   fill: {owner: saint}, source: anca, locator: "inferred: the prokeimenon follows the Epistle owner",
-   status: inferred, evidence: "as lit.epistle.saint_on_antioch_sunday.07-07 (ANCA READ 2024-07-07)",
-   conflict: {with: [lit.prokeimenon.anca_sunday], status: open, note: "see lit.epistle.saint_on_antioch_sunday.07-07"}}

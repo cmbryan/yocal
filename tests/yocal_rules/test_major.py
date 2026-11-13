@@ -320,7 +320,7 @@ def test_annunciation_lent5_matins_liturgy_parts_and_conflicts():
     _, l = slots("liturgy", "2018-03-25")
     assert (l["liturgy.kontakion"].fill["kind"], l["liturgy.kontakion"].fill["tone"]) == ("annunciation", 8)
     assert l["liturgy.antiphons"].fill["refrain2"] == "feast" and l["liturgy.eisodikon"].fill["kind"] == "feast"
-    assert l["liturgy.dismissal_phrase"].fill["phrase"] == "feast_and_resurrection" and l["liturgy.author"].fill["author"] == "John Chrysostom"
+    assert l["liturgy.dismissal_phrase"].fill["phrase"] == "feast_and_resurrection" and l["liturgy.author"].fill["author"] == "Basil the Great"  # DB basil flag (ANCA Chrysostom: logged divergence)
     assert l["liturgy.apolytikia"].fill["patron"] is False and l["liturgy.dismissal"].fill["saint_named"] is False
 
 

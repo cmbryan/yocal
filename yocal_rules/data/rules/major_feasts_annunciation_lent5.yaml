@@ -3,7 +3,7 @@
 # Palm Sunday coincidences stay disabled (no ANCA text). Rules below shadow the 'missing' placeholders tri.annunciation.* and tri.*.coincidence.
 # Typikon Ch V Mar 25 on Lent 5 p.302-306 says 'we celebrate the order for the 4th Sunday' (printed p.305-306 and, identically, p.291-292).
 # Ticket #42 verdict: Sat Vespers 4 Resurrection + 6 Annunciation (4th-Sunday order p.291; ANCA 2018); p.305 prints 6R+4 under the same heading (accepted conflict).
-# Matins/Liturgy details: p.292 / p.305-306 (the same text); the Divine Liturgy author is lit.author.annunciation_lent_sunday (Chrysostom; #19).
+# Matins/Liturgy details: p.292 / p.305-306 (the same text); the Divine Liturgy author follows the DB basil flag (Basil; ANCA 2018 Chrysostom is a logged divergence).
 
 # ================= Great Vespers (Saturday evening) =================
 - {id: mf.lent5.ves.lihc, slot: vespers.lihc.stichera, tier: -10,
@@ -57,7 +57,7 @@
               note: "Accepted (explained, non-blocking): the Typikon's Annunciation hypakoe/anabathmoi contradict its own Ch I s5 VI p.26 and ANCA 2018-2025 for the other Theotokos feasts on Sunday. The Lent 4/5 order names hypakoe, anabathmoi (and prokeimenon) of the Annunciation; Ch I s5 VI p.26 and ANCA 2018 (and the Sunday orders of the other Theotokos feasts, ANCA 2019-2025) give the Resurrection's hypakoe and anabathmoi. Project default: follow ANCA."}}
 - {id: mf.lent5.mat.gospel, slot: matins.eothinon_gospel, tier: -10,
    when: [{pred: major_feast_is, args: [annunciation]}, {pred: weekday_in, args: [Sunday]}, {pred: pascha_days_between, args: [-14, -14]}],
-   fill: {number: null, ref: "$feast_matins_gospel_ref", parts: ["No eothinon Gospel: the Matins Gospel of the Annunciation ({feast_matins_gospel_ref}), then “In that we have beheld the Resurrection”"]},
+   fill: {number: null, parts: ["No eothinon Gospel: the Matins Gospel of the Annunciation ({feast_matins_gospel_ref}), then “In that we have beheld the Resurrection”"]},
    source: typikon, locator: "Ch V Mar 25 p.292, p.305 (Matins Gospel for the Annunciation; reference from the calendar lectionary, code m-03-25)", status: explicit}
 - {id: mf.lent5.mat.kontakion, slot: matins.kontakion, tier: -10,
    when: [{pred: major_feast_is, args: [annunciation]}, {pred: weekday_in, args: [Sunday]}, {pred: pascha_days_between, args: [-14, -14]}],
@@ -98,11 +98,11 @@
    source: typikon, locator: "Ch I s6 VII p.37-38 (Lent 4/5: Epistle and Gospel of the feast; the prokeimenon goes with the Epistle); Ch V Mar 25 p.292", status: explicit}
 - {id: mf.lent5.lit.epistle, slot: liturgy.epistle, tier: -10,
    when: [{pred: major_feast_is, args: [annunciation]}, {pred: weekday_in, args: [Sunday]}, {pred: pascha_days_between, args: [-14, -14]}],
-   fill: {owner: feast, ref: "$epistle_ref", parts: ["{epistle_ref} — for the Annunciation"]},
+   fill: {owner: feast, parts: ["{epistle_ref} — for the Annunciation"]},
    source: typikon, locator: "Ch I s6 VII p.37-38; Ch V Mar 25 p.292, p.306 (Epistle and Gospel for the Annunciation; reference from the calendar lectionary)", status: explicit}
 - {id: mf.lent5.lit.gospel, slot: liturgy.gospel, tier: -10,
    when: [{pred: major_feast_is, args: [annunciation]}, {pred: weekday_in, args: [Sunday]}, {pred: pascha_days_between, args: [-14, -14]}],
-   fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the Annunciation"]},
+   fill: {parts: ["{gospel_ref} — for the Annunciation"]},
    source: typikon, locator: "Ch I s6 VII p.37-38; Ch V Mar 25 p.292, p.306 (reference from the calendar lectionary)", status: explicit}
 - {id: mf.lent5.lit.megalynarion, slot: liturgy.megalynarion, tier: -10,
    when: [{pred: major_feast_is, args: [annunciation]}, {pred: weekday_in, args: [Sunday]}, {pred: pascha_days_between, args: [-14, -14]}],

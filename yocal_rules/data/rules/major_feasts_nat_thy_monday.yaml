@@ -32,7 +32,7 @@
 
 # ================= Nativity: Monday Liturgy (St Basil) =================
 - {id: mf.nat.mon.lit.author, slot: liturgy.author, tier: -10, when: [{pred: feast_on_monday_order}, {pred: major_feast_is, args: [nativity]}],
-   fill: {author: "Basil the Great", parts: ["Divine Liturgy of St Basil the Great"]},
+   fill: {parts: ["Divine Liturgy of St Basil the Great"]},
    source: typikon, locator: "p.148 ('On Monday morning ... with the Divine Liturgy of Saint Basil the Great'; p.145 same for the Sunday feast)", status: explicit}
 
 # ================= Theophany: eve = Sunday-evening Great Vespers (Jan 5) =================
@@ -51,5 +51,5 @@
 
 # ================= Theophany: Monday Liturgy (St Basil) =================
 - {id: mf.thy.mon.lit.author, slot: liturgy.author, tier: -10, when: [{pred: feast_on_monday_order}, {pred: major_feast_is, args: [theophany]}],
-   fill: {author: "Basil the Great", parts: ["Divine Liturgy of St Basil the Great"]},
+   fill: {parts: ["Divine Liturgy of St Basil the Great"]},
    source: typikon, locator: "p.176 ('Monday morning ... the rest of the Divine Liturgy of St. Basil the Great'; p.174 same for the Sunday feast)", status: explicit}

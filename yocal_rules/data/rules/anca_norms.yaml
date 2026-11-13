@@ -8,7 +8,7 @@
    fill: {owner: feast}, source: anca,
    locator: "inferred: at the leavetaking of the Presentation (Feb 9) on a Sunday ANCA prints the feast's prokeimenon ('My soul doth magnify the Lord')",
    status: inferred, evidence: "ANCA READ 2020-02-09 and 2025-02-09 (both the Sunday of the Publican and Pharisee): 2/2 the feast's. Other leavetakings on a Sunday 2018-26 (Dormition, Transfiguration, Beheading, Nativity of the Forerunner): 6/6 the tone's.",
-   conflict: {with: [lit.prokeimenon.anca_sunday], status: accepted, note: "anca_sunday gives the Sunday's own on leavetakings and Triodion Sundays; ANCA itself prints the feast's on this leavetaking."}}
+   conflict: {with: [lit.prokeimenon.follows_epistle], status: accepted, note: "ANCA itself prints the feast's on this leavetaking."}}
 - {id: lit.prokeimenon.after_elevation_tone.2024, slot: liturgy.prokeimenon, tier: 0,
    when: [{pred: sunday}, {pred: desig_contains, args: ["after the Elevation"]}, {pred: year_at_least, args: [2024]}],
    fill: {owner: sunday, proper: false}, source: anca,

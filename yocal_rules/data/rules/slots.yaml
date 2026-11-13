@@ -5,17 +5,17 @@ vespers.apolytikia:      {service: vespers, label: "Apolytikia", attrs: [res_ton
 matins.apolytikia:       {service: matins, label: "Apolytikia (God is the Lord)", attrs: [res_tone, saint]}
 matins.kathismata:       {service: matins, label: "Kathismata hymns", attrs: [tone]}
 matins.prokeimenon:      {service: matins, label: "Prokeimenon", attrs: [kind, tone]}
-matins.eothinon_gospel:  {service: matins, label: "Eothinon Gospel", attrs: [number]}
+matins.eothinon_gospel:  {service: matins, label: "Eothinon Gospel", attrs: [number], db: {number: eothinon}}
 matins.kontakion:        {service: matins, label: "Kontakion and oikos", attrs: [kind, tone, owner]}
 matins.praises:          {service: matins, label: "The Praises", attrs: [total, res, other, glory]}
 liturgy.apolytikia:      {service: liturgy, label: "Apolytikia (after the little entrance)", attrs: [res_tone, saint]}
 liturgy.kontakion:       {service: liturgy, label: "Kontakion", attrs: [kind, tone]}
 liturgy.prokeimenon:     {service: liturgy, label: "Prokeimenon", attrs: [owner, proper]}
-liturgy.epistle:         {service: liturgy, label: "Epistle", attrs: [owner, ref]}
+liturgy.epistle:         {service: liturgy, label: "Epistle", attrs: [owner, ref], db: {owner: epistle_owner, ref: epistle_ref}}
 liturgy.alleluia:        {service: liturgy, label: "Alleluia", attrs: [tone]}
-liturgy.gospel:          {service: liturgy, label: "Gospel", attrs: [ref]}
+liturgy.gospel:          {service: liturgy, label: "Gospel", attrs: [ref], db: {ref: gospel_ref}}
 liturgy.dismissal:       {service: liturgy, label: "Dismissal", attrs: [author, saint_named]}
-liturgy.author:          {service: liturgy, label: "Liturgy", attrs: [author]}
+liturgy.author:          {service: liturgy, label: "Liturgy", attrs: [author], db: {author: liturgy_author}}
 liturgy.dismissal_phrase: {service: liturgy, label: "Dismissal: characteristic phrase", attrs: [phrase, clause]}
 # Major feasts (work package I): feast-only slots, built only when the fact named by `only` is true; `after` places the slot in the document
 vespers.readings:      {service: vespers, label: "Old Testament readings", attrs: [count], only: major_feast_slots, after: vespers.prokeimenon}
@@ -33,7 +33,7 @@ matins.evlogetaria:    {service: matins, label: "Evlogetaria", attrs: [kind], on
 # Agape Vespers (Sunday evening of Pascha; data/rules/pascha.yaml): its own service, built only on Pascha day
 agape.lihc.stichera:   {service: agape, label: "Lord, I have cried: stichera", attrs: [res, other]}
 agape.prokeimenon:     {service: agape, label: "Great prokeimenon", attrs: [kind, tone]}
-agape.gospel:          {service: agape, label: "Paschal Agape Gospel", attrs: [ref]}
+agape.gospel:          {service: agape, label: "Paschal Agape Gospel", attrs: [ref], db: {ref: agape_gospel_ref}}
 agape.aposticha:       {service: agape, label: "Aposticha and Paschal stichera", attrs: [kind, glory]}
 agape.apolytikia:      {service: agape, label: "Apolytikia", attrs: [saint]}
 agape.dismissal:       {service: agape, label: "Dismissal", attrs: [saint_named]}

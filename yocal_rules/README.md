@@ -66,6 +66,7 @@ Add to a new or existing `data/rules/*.yaml` (all files globbed except `slots.ya
    fill: {tone: "$tone"}, source: typikon, locator: "Ch I s5 p.21-22", status: explicit}
 ```
 - `slot`: must exist in `slots.yaml` (append new slots there). `when`: predicates from the closed vocabulary `PREDS` in `rules.py` (AND-ed; `args` optional). `fill`: values for the slot attrs; `$name` takes a calendar fact.
+- DB-sourced slots (`db:` in `slots.yaml`: `liturgy.epistle`/`gospel`, `matins.eothinon_gospel`, `liturgy.author`, `agape.gospel`): the YOCal DB fills those attributes for every day (`apply_db`, rule id `db.<slot>` when no Rule exists); a Rule may not set them (`number: null` = "no eothinon, the feast's Matins Gospel" is allowed). Rules there add only structure (`parts`, feast owner).
 - `tier`: specificity; lowest wins; a tie among matching Rules is a build error. Losing Rules are listed as *shadowed*.
 - `source`: key in `sources.yaml` (typikon, anca, dcs, violakis, bpbasil). Authority: Typikon > ANCA > DCS > other. `locator`: printed page/section only, no long quotes.
 - `status`: `explicit` (a Source states it; no `evidence`), `inferred` (needs `evidence`), `missing` (needs `ticket`; renders `[to be determined]`).

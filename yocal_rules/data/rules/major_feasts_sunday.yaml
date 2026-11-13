@@ -63,7 +63,7 @@
    status: inferred, evidence: "tone: ANCA Orthros 2019-09-08, 2024-09-08, 2020-02-02, 2025-02-02, 2021-11-21, 2021-08-15 print the feast's prokeimenon in Tone 4"}
 - {id: mf.sun.mat.gospel, slot: matins.eothinon_gospel, tier: -10,
    when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
-   fill: {number: null, ref: "$feast_matins_gospel_ref", parts: ["No eothinon Gospel: the Matins Gospel of the feast ({feast_matins_gospel_ref}), then “In that we have beheld the Resurrection”"]},
+   fill: {number: null, parts: ["No eothinon Gospel: the Matins Gospel of the feast ({feast_matins_gospel_ref}), then “In that we have beheld the Resurrection”"]},
    source: typikon, locator: "Ch I s5 VI p.26; Sep 8 p.67, Feb 2 p.219, Nov 21 p.113, Aug 15 p.458 (Matins Gospel of the feast, then 'In that we have beheld'; reference from the calendar lectionary, code m-<mm-dd>)", status: explicit}
 - {id: mf.sun.mat.kontakion, slot: matins.kontakion, tier: -10,
    when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
@@ -115,19 +115,19 @@
    source: typikon, locator: "Feb 2 p.220, Nov 21 p.114, Aug 15 p.458 (Epistle and Gospel of the feast; the prokeimenon goes with the Epistle)", status: explicit}
 - {id: mf.sun.lit.epistle.sunday, slot: liturgy.epistle, tier: -10,
    when: [{pred: sunday_feast_order, args: [nativity_theotokos]}],
-   fill: {owner: sunday, ref: "$epistle_ref", parts: ["{epistle_ref} — for the Sunday before the Elevation of the Cross"]},
+   fill: {parts: ["{epistle_ref} — for the Sunday before the Elevation of the Cross"]},
    source: typikon, locator: "Sep 8 p.68; Ch I s6 VII p.38 (reference from the calendar lectionary)", status: explicit}
 - {id: mf.sun.lit.epistle.feast, slot: liturgy.epistle, tier: -10,
    when: [{pred: sunday_feast_order, args: [presentation, entrance, dormition]}],
-   fill: {owner: feast, ref: "$epistle_ref", parts: ["{epistle_ref} — for the feast"]},
+   fill: {owner: feast, parts: ["{epistle_ref} — for the feast"]},
    source: typikon, locator: "Feb 2 p.220, Nov 21 p.114, Aug 15 p.458 (reference from the calendar lectionary)", status: explicit}
 - {id: mf.sun.lit.gospel.sunday, slot: liturgy.gospel, tier: -10,
    when: [{pred: sunday_feast_order, args: [nativity_theotokos]}],
-   fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the Sunday before the Elevation of the Cross"]},
+   fill: {parts: ["{gospel_ref} — for the Sunday before the Elevation of the Cross"]},
    source: typikon, locator: "Sep 8 p.68; Ch I s6 VII p.38 (reference from the calendar lectionary)", status: explicit}
 - {id: mf.sun.lit.gospel.feast, slot: liturgy.gospel, tier: -10,
    when: [{pred: sunday_feast_order, args: [presentation, entrance, dormition]}],
-   fill: {ref: "$gospel_ref", parts: ["{gospel_ref} — for the feast"]},
+   fill: {parts: ["{gospel_ref} — for the feast"]},
    source: typikon, locator: "Feb 2 p.220, Nov 21 p.114, Aug 15 p.458 (reference from the calendar lectionary)", status: explicit}
 - {id: mf.sun.lit.alleluia, slot: liturgy.alleluia, tier: -10,
    when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
@@ -147,7 +147,7 @@
    source: typikon, locator: "Sep 8 p.68, Feb 2 p.220, Nov 21 p.114, Aug 15 p.458; Ch I s6 XII p.40 (troparion only on feasts of the Lord on a weekday)", status: explicit}
 - {id: mf.sun.lit.author, slot: liturgy.author, tier: -10,
    when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
-   fill: {author: "$liturgy_author", parts: ["Divine Liturgy of St {liturgy_author}"]},
+   fill: {parts: ["Divine Liturgy of St {liturgy_author}"]},
    source: typikon, locator: "Ch I s4 p.17 (Liturgy author); DB calendar Basil flag", status: explicit}
 - {id: mf.sun.lit.dismissal, slot: liturgy.dismissal, tier: -10,
    when: [{pred: sunday_feast_order, args: [nativity_theotokos, presentation, entrance, dormition]}],
