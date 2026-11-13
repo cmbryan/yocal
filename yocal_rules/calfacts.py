@@ -265,6 +265,14 @@ def liturgical_date(service: str, date: dt.date) -> dt.date:
     return date + dt.timedelta(days=1) if service == "vespers" else date
 
 
+_ABBREV = r"(?<!\bSt)(?<!\bSs)(?<!\bSts)(?<!\bMt)(?<!\bMts)"
+
+
+def first_commemoration(class_5: str) -> str:
+    """First entry of the DB's '. '-separated commemoration list (not split at 'St.'/'Mt.')."""
+    return re.split(_ABBREV + r"\.\s+(?=[A-Z])", (class_5 or "").strip())[0].strip(" .")
+
+
 def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
     ld = liturgical_date(service, date)
     if not os.path.exists(db_path):
@@ -355,7 +363,7 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         saint_in_calendar=bool(major), principal_name=major,
         menaion_key=key,  # Menaion date of the principal commemoration (DB c_code when it is a date, e.g. a transferred saint), else mmdd
         saint_has_glory=glory, glory_source=gsrc,
-        dismissal_saint=major or re.split(r"\)\.\s+(?=[A-Z])", (r["class_5"] or "").strip())[0].strip(" ."),
+        dismissal_saint=major or first_commemoration(r["class_5"]),
         named_sunday=named_sunday(ld),
         archangel_feast=bool(re.search(r"archangel|bodiless", major, re.I)),
         two_sets_of_3=_basil().get(mmdd, {}).get("two_sets_of_3") == "1",

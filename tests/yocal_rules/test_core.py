@@ -259,3 +259,12 @@ def test_date_scoped_divergence_entries():
     f = dict(date="2022-07-03", mmdd="07-03")
     c = compare.compare(res({"ref": "Romans 5:1-10"}, slot="liturgy.epistle"), {"liturgy.epistle": {"ref": "5:1-11"}}, "anca", f, "liturgy", compare.load_divergence())
     assert c.state == "diff" and c.cls == "divergence:verse_split_difference"
+
+
+def test_first_commemoration_splits_sentences_not_abbreviations():
+    from yocal_rules.calfacts import first_commemoration
+    assert first_commemoration(
+        "Holy Martyrs Gurias (299), and Abibus (Habib) (322), of Edessa. Holy Martyrs Elpidius, who suffered under Julian (4th C). St. Thomas."
+    ) == "Holy Martyrs Gurias (299), and Abibus (Habib) (322), of Edessa"
+    assert first_commemoration("St. Thomas the New (668). St. Paisius.") == "St. Thomas the New (668)"
+    assert first_commemoration("") == ""
