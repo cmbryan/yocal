@@ -22,25 +22,17 @@ _PASCHA: dict = {}
 
 
 def pascha(y: int) -> dt.date:
-    """Orthodox Pascha: the YOCal DB row designated Pascha (authoritative); computus only outside the DB's years."""
+    """Orthodox Pascha: the YOCal DB row designated Pascha (authoritative; no computus fallback)."""
     if y not in _PASCHA:
-        d = None
-        if os.path.exists(DEFAULT_DB):
-            con = sqlite3.connect(DEFAULT_DB)
-            r = con.execute("select date from yocal_main where date between ? and ? and g_code='J1Sun'", (f"{y}-03-01", f"{y}-05-31")).fetchone()
-            con.close()
-            d = dt.date.fromisoformat(r[0]) if r else None
-        _PASCHA[y] = d or _computus(y)
+        if not os.path.exists(DEFAULT_DB):
+            raise FileNotFoundError(f"calendar DB not found: {DEFAULT_DB} (build with db/build.sh)")
+        con = sqlite3.connect(DEFAULT_DB)
+        r = con.execute("select date from yocal_main where date between ? and ? and g_code='J1Sun'", (f"{y}-03-01", f"{y}-05-31")).fetchone()
+        con.close()
+        if r is None:
+            raise LookupError(f"Pascha {y} is not in the calendar DB")
+        _PASCHA[y] = dt.date.fromisoformat(r[0])
     return _PASCHA[y]
-
-
-def _computus(y: int) -> dt.date:
-    """Julian computus + 13 days (valid 1900-2099): fallback for years the DB lacks."""
-    a, b, c = y % 4, y % 7, y % 19
-    d = (19 * c + 15) % 30
-    e = (2 * a + 4 * b - d + 34) % 7
-    m, dd = divmod(d + e + 114, 31)
-    return dt.date(y, m, dd + 1) + dt.timedelta(days=13)
 
 
 def season(d: dt.date) -> str:
