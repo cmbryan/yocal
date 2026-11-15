@@ -290,6 +290,16 @@ def parse_dismissal_phrase(f: str):
     return dict(phrase=phrase, clause=clause)
 
 
+def parse_antiphons(f: str) -> dict:
+    """Second Antiphon refrain (READ): 'Save us, O Son of God, Who art risen from the dead, who sing to Thee' on the Sundays after a
+    feast of the Theotokos (ANCA READ 2024-11-24, 2025-11-23, 2026-11-22)."""
+    m = re.search(r"SECOND ANTIPHON.{0,400}?Refrain: (?:Save us, )?O Son of God, (?:[Ww]ho )?(.{0,80}?)(?:, who sing|Alleluia)", f)
+    if not m:
+        return {}
+    r2 = m.group(1).lower()
+    return {"liturgy.antiphons": dict(refrain2="resurrection" if re.search(r"rose|risen", r2) else "saints" if "wondrous in" in r2 else "feast")}
+
+
 def parse_liturgy(txt):
     k = {}
     f = _flat(txt)
@@ -308,9 +318,11 @@ def parse_liturgy(txt):
          or re.search(r"Reading from (?:the )?Acts of the (?:Holy )?Apostles\.?\s*\((\d+:\d+[-–\d:,; ]*)\)", f, re.I))
     if m:
         k["liturgy.epistle"]["ref"] = m.group(1)
-    m2 = re.search(r"Holy Gospel according to St\.? \w+\.?\s*\((\d+:\d+[-–\d:,; ]*)\)", txt)
+    m2 = re.search(r"[Hh]oly Gospel according to St\.? \w+\.?\s*\((\d+:\d+[-–\d:,; ]*)\)", txt) or \
+        re.search(r"holy Gospel according to St\.? \w+\.?\s*\((\d+:\d+[-–\d:,; ]*)\)", f)
     if m2:
         k["liturgy.gospel"] = dict(ref=m2.group(1).strip())
+    k.update(parse_antiphons(f))
     if owner:  # circular: the key shows the prokeimenon owner only through the Epistle subtitle
         # ANCA labels the Epistle block '(For the Nth Sunday after Pentecost)' when the prokeimenon is the tone of the week's; a named Sunday
         # (Forefathers, before/after Nativity/Theophany/Elevation, Holy Fathers, All Saints...) carries its own name: `proper`
@@ -445,10 +457,7 @@ def parse_communion(f: str) -> dict:
 def parse_feast_liturgy(txt):
     k = {}
     f = _flat(txt)
-    m = re.search(r"SECOND ANTIPHON.{0,400}?Refrain: (?:Save us, )?O Son of God, (?:[Ww]ho )?(.{0,80}?)(?:, who sing|Alleluia)", f)
-    if m:
-        r2 = m.group(1).lower()
-        k["liturgy.antiphons"] = dict(refrain2="resurrection" if re.search(r"rose|risen", r2) else "saints" if "wondrous in" in r2 else "feast")
+    k.update(parse_antiphons(f))
     m = re.search(r"EISODIKON \(ENTRANCE HYMN\) (?:OF|FOR) ([A-Z ’']+)", txt)
     if m:
         g = m.group(1)  # 'OF PALM SUNDAY' is the feast's own entrance hymn, not the Sunday one

@@ -17,7 +17,7 @@ from .rules import DATA
 
 BASE = "https://dcs.goarch.org/goa/dcs/h/s"
 UA = {"User-Agent": "yocal-rules/0.1"}
-CODES = {"vespers": ["ve"], "matins": ["ma"], "liturgy": ["li", "h91"]}
+CODES = {"vespers": ["ve"], "matins": ["ma"], "liturgy": ["li", "h91", "li2"]}
 KV = re.compile(r"<span class='kvp' data-key='([^']*)'>([^<]*)")
 
 
@@ -95,6 +95,8 @@ def hymn_ids(ks) -> dict:
         kind = re.sub(r"\d+$", "", hid.rsplit("/", 1)[-1])
         slot = {"apolytikion": "liturgy.apolytikia", "troparion": "liturgy.apolytikia", "hypakoe": "liturgy.apolytikia",
                 "kontakion": "liturgy.kontakion"}.get(kind) if region else None
+        if "/communion/" in hid:
+            slot = "liturgy.communion"
         slot = slot or {"prokeimenon": "liturgy.prokeimenon", "alleluia": "liturgy.alleluia", "communion": "liturgy.communion",
                         "antiphon": "liturgy.antiphons", "eisodikon": "liturgy.eisodikon", "megalynarion": "liturgy.megalynarion"}.get(kind)
         if hid.startswith("lit/trisagion/"):
@@ -133,6 +135,11 @@ def parse(service: str, pages: dict):
         m = _first(ks, r"oc\.m(\d)\.d1", r"ocMA\.Kontakion")
         if m:
             k["matins.kontakion"] = dict(kind="resurrectional", tone=int(m.group(1)))
+        for t, f in ks:  # Resurrectional prokeimenon of the week: psMA.sunday.mN.prokeimenon (N = tone)
+            m = re.match(r"psMA\.sunday\.m(\d)\.prokeimenon\.", f)
+            if m and t.startswith("liturgical.verses"):
+                k["matins.prokeimenon"] = dict(kind="resurrectional", tone=int(m.group(1)))
+                break
         lauds = len({(t, f) for t, f in ks if re.match(r"oc\.m\d\.d1$", t) and re.match(r"ocMA\.Lauds\d+\.text", f)})
         if lauds:
             k["matins.praises"] = dict(res=lauds)
@@ -157,7 +164,7 @@ def parse(service: str, pages: dict):
         gref = _chapverse(pages["li"], r"le\.go\.(?:lu|mt|mk|jn|mc)[\w.]*")
         if gref:
             k["liturgy.gospel"] = dict(ref=gref)
-        for slot, ids in hymn_ids(ks).items():  # which hymns the page prints (keys name them): compared with the Rules' hymn ids
+        for slot, ids in hymn_ids(ks + (keys(pages["li2"]) if "li2" in pages else [])).items():  # which hymns the page prints (keys name them): compared with the Rules' hymn ids
             k.setdefault(slot, {})["hymns"] = ids
         if _first(ks, r"menaion\.verses", r"psLI\.m\d\d\.d\d\d\.prokeimenon"):
             k["liturgy.prokeimenon"] = dict(owner="saint")
