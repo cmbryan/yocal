@@ -252,7 +252,7 @@
    source: typikon, locator: "Ch I s6 VII p.37-38 (Epistle and Gospel of the feast on a weekday; references from the calendar lectionary)", status: explicit}
 - {id: mf.lit.alleluia, slot: liturgy.alleluia, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
-   fill: {tone: 2, parts: ["Alleluia — Tone 2, with the verses of the feast (Menaion {mmdd})"]},
+   fill: {tone: 2, hymns: ["men/{mmdd}/alleluia"], parts: ["Alleluia — Tone 2, with the verses of the feast (Menaion {mmdd})"]},
    source: typikon, locator: "Ch I s6 VIII p.38 (Alleluia thrice in Tone 2 at every Liturgy)", status: explicit}
 - {id: mf.lit.gospel.feast, slot: liturgy.gospel, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, annunciation, nativity_theotokos, dormition, circumcision]}],
@@ -379,7 +379,7 @@
 - {id: mf.asc.lit.epistle, slot: liturgy.epistle, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
    fill: {owner: feast, parts: ["{epistle_ref} — for the Ascension"]}, source: typikon, locator: "p.536 (Acts 1:1-12)", status: explicit}
 - {id: mf.asc.lit.alleluia, slot: liturgy.alleluia, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
-   fill: {tone: 2, parts: ["Alleluia — Tone 2, with the verses of the Ascension"]}, source: typikon, locator: "Ch I s6 VIII p.38", status: explicit}
+   fill: {tone: 2, hymns: ["mov/39/alleluia"], parts: ["Alleluia — Tone 2, with the verses of the Ascension"]}, source: typikon, locator: "Ch I s6 VIII p.38", status: explicit}
 - {id: mf.asc.lit.gospel, slot: liturgy.gospel, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
    fill: {parts: ["{gospel_ref} — for the Ascension"]}, source: typikon, locator: "p.536 (Luke 24:36-53)", status: explicit}
 - {id: mf.asc.lit.megalynarion, slot: liturgy.megalynarion, tier: -10, when: [{pred: major_feast_is, args: [ascension]}],
@@ -450,7 +450,7 @@
 - {id: mf.nat.lit.epistle, slot: liturgy.epistle, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity, theophany]}],
    fill: {owner: feast, parts: ["{epistle_ref} — for the feast"]}, source: typikon, locator: "p.143, p.173 (references from the calendar lectionary); Monday: Nativity p.144-145, p.148; Theophany p.176", status: explicit}
 - {id: mf.nat.lit.alleluia, slot: liturgy.alleluia, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity, theophany]}],
-   fill: {tone: 2, parts: ["Alleluia — Tone 2, with the verses of the feast"]}, source: typikon, locator: "Ch I s6 VIII p.38; Monday: Nativity p.144-145, p.148; Theophany p.176", status: explicit}
+   fill: {tone: 2, hymns: ["men/{mmdd}/alleluia"], parts: ["Alleluia — Tone 2, with the verses of the feast"]}, source: typikon, locator: "Ch I s6 VIII p.38; Monday: Nativity p.144-145, p.148; Theophany p.176", status: explicit}
 - {id: mf.nat.lit.gospel, slot: liturgy.gospel, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity, theophany]}],
    fill: {parts: ["{gospel_ref} — for the feast"]}, source: typikon, locator: "p.143, p.173 (references from the calendar lectionary); Monday: Nativity p.144-145, p.148; Theophany p.176", status: explicit}
 - {id: mf.nat.lit.megalynarion, slot: liturgy.megalynarion, tier: -10, when: [{pred: feast_not_sunday}, {pred: major_feast_is, args: [nativity, theophany]}],
