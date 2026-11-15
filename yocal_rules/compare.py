@@ -86,6 +86,8 @@ def compare(res, key: dict | None, source: str, facts, service, log):
         if a == "hymns" or v in (None, "?") or a not in kv or kv[a] is None:
             continue
         compared += 1
+        if source == "dcs" and a == "owner" and (v, kv[a]) == ("feast", "saint"):
+            continue  # DCS's Menaion key for the date can't tell a feast from a saint; on a feast day it is the feast's
         if not _val_eq(a, v, kv[a]):
             diffs.append(f"{a}: ours {v} / {source.upper()} {kv[a]}")
     ours = hymns.for_slot(res.slot, res, facts)  # None = no structured hymns; [] = the booklet's ordinary text

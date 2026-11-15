@@ -108,6 +108,45 @@ def hymn_ids(ks) -> dict:
     return {s: v for s, v in out.items() if v}
 
 
+def _festal_vespers(ks) -> dict:
+    """Weekday/festal Vespers with no Octoechos stichera: the Menaion's own stichera, aposticha, readings (me.mMM.dDD / le.pr.me.rN keys)."""
+    k = {}
+    n = len({f for t, f in ks if re.match(r"me\.m\d\d\.d\d\d$", t) and re.match(r"meVE\.Stichera\d+\.text", f)})
+    if n:
+        k["vespers.lihc.stichera"] = dict(res=0, other=[n], total=n)
+    days = {m.group(1) for t, f in ks if (m := re.match(r"psVE\.prokeimenon\.(\w+)\.v\d", f))}
+    if days == {"saturday"}:
+        k["vespers.prokeimenon"] = dict(kind="lord_is_king")
+    elif len(days) == 1:
+        k["vespers.prokeimenon"] = dict(kind="daily")
+    r = len({t for t, f in ks if re.match(r"le\.pr\.me\.r\d+$", t) and f == "leprVE.reading.text"})
+    if r:
+        k["vespers.readings"] = dict(count=r)
+    if any(re.match(r"meVE\.Aposticha\d", f) for t, f in ks):
+        k["vespers.aposticha"] = dict(owner="feast")
+    if any(re.match(r"meVE\.Apolytikion1", f) for t, f in ks):
+        k["vespers.apolytikia"] = dict(saint=True)
+    return k
+
+
+def _festal_matins(ks, html) -> dict:
+    """Weekday/festal Matins with no Octoechos kontakion: the Menaion's own parts (me.mMM.dDD / le.go.ge.* keys)."""
+    k = {}
+    if any(re.match(r"meVE\.Apolytikion1", f) for t, f in ks):  # the festal Matins page prints the feast's apolytikion under the VE key
+        k["matins.apolytikia"] = dict(saint=True)
+    if any(re.match(r"meMA\.Kontakion\d", f) for t, f in ks):
+        k["matins.kontakion"] = dict(kind="feast")
+    n = len({f for t, f in ks if re.match(r"me\.m\d\d\.d\d\d$", t) and re.fullmatch(r"meMA\.Lauds\d+\.text", f)})
+    if n:
+        k["matins.praises"] = dict(res=0, other=[n], total=n)
+    if any(f.startswith("ka.MM.Christmas") for t, f in ks):
+        k["matins.katavasia"] = dict(of="nativity")
+    ref = _chapverse(html, r"le\.go\.ge\.\w+")
+    if ref:
+        k["matins.eothinon_gospel"] = dict(ref=ref)  # the feast's Matins Gospel (no eothinon)
+    return k
+
+
 def parse(service: str, pages: dict):
     """pages: code -> html. -> (key dict slot->attrs, notes)."""
     k, notes = {}, []
@@ -121,6 +160,8 @@ def parse(service: str, pages: dict):
             k["vespers.apolytikia"] = a
         if any("prokeimenon.saturday" in f for t, f in ks):
             k["vespers.prokeimenon"] = dict(kind="lord_is_king")
+        if not res:
+            k.update(_festal_vespers(ks))
     elif service == "matins":
         ks = keys(pages["ma"])
         m = _first(ks, r"oc\.m(\d)\.d1", r"ocMA\.Kathisma\d+")
@@ -143,6 +184,8 @@ def parse(service: str, pages: dict):
         lauds = len({(t, f) for t, f in ks if re.match(r"oc\.m\d\.d1$", t) and re.match(r"ocMA\.Lauds\d+\.text", f)})
         if lauds:
             k["matins.praises"] = dict(res=lauds)
+        if "matins.kontakion" not in k:
+            k.update(_festal_matins(ks, pages["ma"]))
     else:
         ks = keys(pages["li"])
         a = _apol(ks)
