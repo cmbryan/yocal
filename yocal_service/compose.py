@@ -12,7 +12,7 @@ import re
 from . import anca_read, db, music, template, texts
 from yocal_rules import anca as rules_anca, assemble, calfacts, hymns, render
 
-SERVICES = {"liturgy": "Divine Liturgy"}
+SERVICES = {"vespers": "Great Vespers", "matins": "Matins", "liturgy": "Divine Liturgy", "agape": "Agape Vespers"}
 
 
 # ------------------------------------------------------------------ day texts
@@ -362,10 +362,7 @@ def inline_seasonal(b: dict) -> list:
 def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None, offline: bool = False, fetch_music: bool = True) -> dict:
     if service not in SERVICES:
         raise ValueError(f"service {service!r} not supported yet; available: {', '.join(SERVICES)}")
-    if date.weekday() != 6:
-        raise assemble.OutOfScope(f"{date}: the Liturgy builder currently covers Sundays")
-    tpl = template.load()
-    result = assemble.build(service, date, calfacts.DEFAULT_DB)
+    result = assemble.build(service, date, calfacts.DEFAULT_DB)  # raises OutOfScope for dates this service is not served
     f = result.facts
     engine = {s: {"label": m["label"], "status": x.status, "lines": render.describe(s, x, f), "fill": x.fill, "rule": (x.rule or {}).get("id")} for s, m, x in result.slots}
     day = Day(date, offline)
@@ -379,6 +376,7 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
     hymn_cfgs = template.config().get("festal_hymns", [])
     captions = {s: [c.lstrip("- ").strip() for c in e["lines"]] for s, e in engine.items()}
     sections = []
+    tpl = template.load() if service == "liturgy" else {"sections": [], "source": ""}  # only the Liturgy has a booklet text template yet
     for sec in tpl["sections"]:
         if sec.get("exclude"):
             continue
@@ -418,6 +416,6 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
         "tone": f["tone"], "template_source": tpl["source"], "complete": bool(f["in_slice"]), "incomplete_reasons": f.get("slice_reasons") or [],
         "engine": engine, "sections": sections, "seasonal": seasonal, "translations_pending": pending,
         "hymns": {s: [{"id": h.id, "label": h.label} for h in hs] for s, hs in hctx["hymns"].items() if hs}, "liturgy_author": f.get("liturgy_author"),
-        "notes": ([f"Liturgy of St. {f['liturgy_author']}: the booklet text is St. John Chrysostom's. The priest's prayers differ; the Cherubic Hymn and the rest of the choir text are unchanged (Typikon, general rules IX)."] if f.get("liturgy_author") == "Basil the Great" else []),
+        "notes": ([f"Full text for {SERVICES[service]} is not built yet: showing the rules resolution (engine) only."] if service != "liturgy" else []) + ([f"Liturgy of St. {f['liturgy_author']}: the booklet text is St. John Chrysostom's. The priest's prayers differ; the Cherubic Hymn and the rest of the choir text are unchanged (Typikon, general rules IX)."] if f.get("liturgy_author") == "Basil the Great" and service == "liturgy" else []),
         "sources": {"template": "Parish choir booklet (PDF)", "variable_text": "Rules -> hymn ids -> saved texts (parish, else GOA DCS / ANCA wording pending a parish translation)", "music": "ANCA service-text links, GOA Digital Chant Stand"},
     }
