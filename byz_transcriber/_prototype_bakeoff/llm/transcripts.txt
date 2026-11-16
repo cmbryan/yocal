@@ -1,0 +1,20 @@
+# PROTOTYPE vision-LLM arm: Claude (in-session) read each line crop. One line per crop line; groups space-separated.
+# codes: see llm_arm.py CODES. pos a/b/l/r. trailing ? = low confidence. M:note/root = martyria.
+C1905-0: pe ap is ol ol+kl@a+yp@b? ap+kl@a ap+dt@b ap+go@a is+va@l ap+go@a ol pe+ol@a? ap+kl@a M:pa/alpha is ap+kl@a+a1@b?
+C1905-1: ol+kk@a? ap+va@l+kl@a ap+go@a? ol+go@a+ap@b? ap is+kl@a M:pa/alpha ol+go@b ol ol+ps@a?+yp@b ap el ap+go@a+dt@b ol+kk@a+go@a ap ap+va@l ap
+C1825-0: pe ap ap+go@a is ol+a1@b? ap+kl@a ap+dt@b? ap+go@a ol+kk@a+go@a ap ap el kk ol+kk@a+kl@a? is+va@l ol ap+go@a ol+kl@a ol+a2@b?
+C1825-1: ol+kl@a ol+go@a+ap@b ap ap ap+va@l ap ap+go@a ol ol+kl@a is+va@l ol ap+go@a ol ol+kk@a ol+kk@a+ap@a ap ap el
+C1845-0: pe+ps@a? ap+kl@a pe+kl@a? ap+go@a+dt@b ol+kk@a+go@a+yp@b? ap ap is+va@l ap+dt@b? is+go@a ol+ys@r? ol+kk@a ol+kl@a ol+ps@a? is+va@l ap+go@a+dt@b is+va@l ap+go@a+dt@b?
+C1845-1: ol+kl@a ol is+va@l is+yp@b? is ap+go@a ap+kl@a ol+ps@a? ap ol+kk@a+yp@b? ap ap+kl@a+ps@a? ap+go@a ol+kk@a+go@a+yp@b? ap ap+kk@a+yp@b? ap
+C1850-0: ol+kk@a+go@a ap ap+go@a ol+kk@a+go@a? ol+kl@a X? ol+go@a ap+dt@b ap+go@a is+va@l ol ap+go@a ol is+va@l ol+kl@a ap+go@a ol+go@a+ap@b ap+go@a? ap ol+kl@a ol+go@b
+C1850-1: is el ol is+va@l is ol+go@a+ap@b ol+kl@a M:di/delta ap+kl@a+a1@b? ap+go@a is+va@l ol is+va@l ol+go@a+ap@b ap+dt@b? ol+kl@a+go@a? M:di/delta va? ap+kl@a+dt@b
+F1820-0: ol ol is ys? ap ap+kl@a pe ol ol ol is ol+kl@a? is? ol ol
+F1820-1: ol is is va ap ol ol is+yp@b? ap+kl@a is ol+kl@a? is yp? ap ol
+F1824-0: ol ol+kk@a+go@a ap+dt@b? ol+kk@a+go@a+dt@b? is ol+go@a ap+yp@b? ol el M:pa/alpha ol+dt@b? ap+go@a is+va@l ap+go@a+dt@b ol+kk@a+go@a ol+go@a ap+go@a+dt@b?
+F1824-1: ol+go@b ol+kl@a ol+kk@a+go@a? ol+kl@a ol+yp@b? ap+go@a? ap+go@a? ap+yp@b? ol+a1@b? pe ap+go@a ol+kl@a ol+go@b pe ap+go@a+dt@b ol+kk@a?
+F1835-0: pe+yp@b? ap+go@a+dt@b ol+kl@a ol+kk@a+go@a ap is+va@l ol+kl@a+dt@b? ol+kl@a+ys@r? ap+kl@a ol+go@a+yp@b? ap ap is+va@l ap+go@a+dt@b ol+kk@a+go@a ol+yp@b+dt@a?
+F1835-1: ap ol+yp@b? ap+kl@a? el ap+ys@a? ol+kl@a X? ol+kk@a+go@b? va? ol ap+go@a ol+dt@b? ol+kk@b? ol+go@a+kk@b? ol+dt@b? ol+yp@b+dt@a?
+F1837-0: is+va@l ol ap+go@a ol+yp@b? ap+go@a ol+ys@r? ol ap+dt@b? M:pa/alpha? ap+kk@a? ol+yp@b ap ap ap+go@a+dt@b? is+va@l ol ap+go@a ol+kl@a ol+kk@a+kl@a ol+kl@a
+F1837-1: ol+go@a+ap@b ap ap is+va@l ol+yp@b ap ap ol+kk@b+kl@a? ap+kl@a ap+kl@a ol+kl@a M:pa/alpha ol+dt@b+ys@a? ol+ap@b ap+kl@a ol+kl@a el
+F1841-0: ol+kk@a+go@a+dt@r? ol is+va@l ol ap+go@a is+va@l ol ap+go@a+dt@b ap ol+kk@a? ol+kk@a+go@a+dt@r? is+va@l ol ap+go@a ol+kl@a is+va@l ol ap+go@a ap+kl@a ol+kk@a ap ol ol+kk@a+go@a+dt@r?
+F1841-1: is+va@l ol ap+go@a is+va@l ol+kl@a ap+go@a ol+go@a+ap@b ap ol+kl@a ol ol ol ol pe? ap+dt@b? is+va@l ap ol+kk@a+go@a ol ap+go@a el+go@a ol+kk@a+yp@b?

@@ -1,0 +1,345 @@
+{
+  "version": "1.1",
+  "appVersion": "0.0.0",
+  "documentProperties": {
+    "title": "CV F1835"
+  },
+  "pageSetup": {
+    "pageSize": "Letter",
+    "pageSizeUnit": "in",
+    "pageWidth": 816,
+    "pageHeight": 1056,
+    "topMargin": 96,
+    "bottomMargin": 96,
+    "leftMargin": 96,
+    "rightMargin": 96,
+    "headerMargin": 48,
+    "footerMargin": 48,
+    "firstPageNumber": 1
+  },
+  "staff": {
+    "lyrics": {
+      "text": ""
+    },
+    "elements": [
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Ison",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Apostrophos",
+        "gorgonNeume": "Gorgon_Top",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? ambiguous_attachment,low_confidence,unmapped_combo"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "OligonPlusKentimaBelow",
+        "timeNeume": "Klasma_Top",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "OligonPlusKentemata",
+        "gorgonNeume": "Gorgon_Top",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Apostrophos"
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "OligonPlusKentimaAbove",
+        "vareia": true,
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Apostrophos",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence,unmapped_combo"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Oligon",
+        "timeNeume": "Klasma_Top",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Apostrophos",
+        "timeNeume": "Klasma_Top",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? ambiguous_attachment,low_confidence,unmapped_combo"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Oligon",
+        "gorgonNeume": "Gorgon_Top"
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Apostrophos"
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Apostrophos"
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Ison",
+        "vareia": true
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Apostrophos",
+        "gorgonNeume": "GorgonDottedLeft",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Oligon",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence,unmapped_combo"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Oligon",
+        "timeNeume": "Klasma_Bottom",
+        "gorgonNeume": "GorgonDottedLeft",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? ambiguous_attachment,low_confidence,unmapped_combo"
+          }
+        ],
+        "lineBreak": true
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "OligonPlusKentimaAbove",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? ambiguous_attachment,low_confidence"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Apostrophos",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence,unmapped_combo"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Elaphron",
+        "timeNeume": "Klasma_Top",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Apostrophos",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? ambiguous_attachment,low_confidence,unmapped_combo"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "OligonPlusKentimaBelow",
+        "timeNeume": "Klasma_Top",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? ambiguous_attachment,low_confidence,unmapped_combo"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Oligon",
+        "vareia": true,
+        "gorgonNeume": "GorgonDottedLeft",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? ambiguous_attachment,low_confidence,unmapped_combo"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Apostrophos",
+        "gorgonNeume": "GorgonDottedLeft",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Oligon",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "OligonPlusKentimaBelow",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? ambiguous_attachment,low_confidence"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Oligon",
+        "gorgonNeume": "GorgonDottedLeft",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence,unmapped_combo"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Oligon",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? low_confidence"
+          }
+        ]
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Oligon",
+        "gorgonNeume": "Gorgon_Top",
+        "annotations": [
+          {
+            "elementType": "Annotation",
+            "x": 0,
+            "y": -30,
+            "text": "? ambiguous_attachment,low_confidence,unmapped_combo"
+          }
+        ]
+      },
+      {
+        "elementType": "Empty"
+      }
+    ]
+  }
+}
