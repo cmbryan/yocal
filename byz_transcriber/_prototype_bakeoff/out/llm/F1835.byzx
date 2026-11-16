@@ -1,27 +1,306 @@
 {
   "version": "1.1",
-  "appVersion": "0.0.0",
-  "documentProperties": {
-    "title": "LLM F1835"
-  },
+  "appVersion": "0.5.53",
   "pageSetup": {
-    "pageSize": "Letter",
+    "pageSize": "A4",
     "pageSizeUnit": "in",
-    "pageWidth": 816,
-    "pageHeight": 1056,
+    "pageWidth": 793.7007874015749,
+    "pageHeight": 1122.5196850393702,
     "topMargin": 96,
     "bottomMargin": 96,
     "leftMargin": 96,
     "rightMargin": 96,
     "headerMargin": 48,
     "footerMargin": 48,
-    "firstPageNumber": 1
+    "firstPageNumber": 1,
+    "lineHeight": 72.96000000000001,
+    "lyricsVerticalOffset": -4.800000000000001,
+    "lyricsMinimumSpacing": 4.800000000000001,
+    "lyricsMelismaCutoffWidth": 6.666666666666667,
+    "neumeDefaultFontFamily": "Neanes",
+    "neumeDefaultFontSize": 26.666666666666668,
+    "neumeDefaultColor": "#000000",
+    "neumeDefaultSpacing": 2.88,
+    "neumeDefaultStrokeWidth": 0,
+    "alternateLineDefaultFontSize": 16,
+    "alternateLineDefaultColor": "#ED0000",
+    "modeKeyDefaultColor": "#ED0000",
+    "modeKeyDefaultStrokeWidth": 0,
+    "modeKeyDefaultFontSize": 26.666666666666668,
+    "modeKeyDefaultHeightAdjustment": 0,
+    "accidentalDefaultColor": "#ED0000",
+    "accidentalDefaultStrokeWidth": 0,
+    "fthoraDefaultColor": "#ED0000",
+    "fthoraDefaultStrokeWidth": 0,
+    "heteronDefaultColor": "#ED0000",
+    "heteronDefaultStrokeWidth": 0,
+    "gorgonDefaultColor": "#ED0000",
+    "gorgonDefaultStrokeWidth": 0,
+    "measureBarDefaultColor": "#ED0000",
+    "measureBarDefaultStrokeWidth": 0,
+    "measureNumberDefaultColor": "#000000",
+    "measureNumberDefaultStrokeWidth": 0,
+    "noteIndicatorDefaultColor": "#ED0000",
+    "noteIndicatorDefaultStrokeWidth": 0,
+    "isonDefaultColor": "#ED0000",
+    "isonDefaultStrokeWidth": 0,
+    "breathDefaultColor": "#000000",
+    "breathDefaultStrokeWidth": 0,
+    "crossDefaultColor": "#000000",
+    "crossDefaultStrokeWidth": 0,
+    "koronisDefaultColor": "#ED0000",
+    "koronisDefaultStrokeWidth": 0,
+    "martyriaDefaultColor": "#ED0000",
+    "martyriaDefaultStrokeWidth": 0,
+    "tempoDefaultColor": "#ED0000",
+    "tempoDefaultStrokeWidth": 0,
+    "dropCapDefaultLineSpan": 1,
+    "hyphenSpacing": 72,
+    "minimumSyllableToHyphenClearance": 19.2,
+    "martyriaVerticalOffset": 4,
+    "chrysanthineAccidentals": true
+  },
+  "paragraphStyles": [
+    {
+      "id": "default-text",
+      "displayName": "Default Text"
+    },
+    {
+      "id": "annotation",
+      "displayName": "Annotation",
+      "parentStyleId": "default-text"
+    },
+    {
+      "id": "title",
+      "displayName": "Title",
+      "parentStyleId": "default-text",
+      "alignment": "center",
+      "fontSize": 37.333333333333336
+    },
+    {
+      "id": "subtitle",
+      "displayName": "Subtitle",
+      "parentStyleId": "default-text",
+      "alignment": "center",
+      "fontSize": 21.333333333333332
+    },
+    {
+      "id": "chapter",
+      "displayName": "Chapter",
+      "parentStyleId": "default-text",
+      "alignment": "center",
+      "fontSize": 32
+    },
+    {
+      "id": "section",
+      "displayName": "Section",
+      "parentStyleId": "default-text",
+      "fontSize": 26.666666666666668
+    },
+    {
+      "id": "header",
+      "displayName": "Header",
+      "parentStyleId": "default-text",
+      "alignment": "center"
+    },
+    {
+      "id": "footer",
+      "displayName": "Footer",
+      "parentStyleId": "default-text",
+      "alignment": "center"
+    },
+    {
+      "id": "lyrics",
+      "displayName": "Lyrics",
+      "parentStyleId": "default-text"
+    },
+    {
+      "id": "drop-cap",
+      "displayName": "Drop Cap",
+      "parentStyleId": "default-text",
+      "fontSize": 80,
+      "color": "#FF0000"
+    }
+  ],
+  "headers": {
+    "default": {
+      "elements": [
+        {
+          "elementType": "TextBox",
+          "content": "",
+          "contentBottom": "",
+          "contentLeft": "",
+          "contentCenter": "",
+          "contentRight": "",
+          "multipanel": true,
+          "height": 20,
+          "marginTop": 0,
+          "marginBottom": 0
+        }
+      ]
+    },
+    "odd": {
+      "elements": [
+        {
+          "elementType": "TextBox",
+          "content": "",
+          "contentBottom": "",
+          "contentLeft": "",
+          "contentCenter": "",
+          "contentRight": "",
+          "multipanel": true,
+          "height": 20,
+          "marginTop": 0,
+          "marginBottom": 0
+        }
+      ]
+    },
+    "even": {
+      "elements": [
+        {
+          "elementType": "TextBox",
+          "content": "",
+          "contentBottom": "",
+          "contentLeft": "",
+          "contentCenter": "",
+          "contentRight": "",
+          "multipanel": true,
+          "height": 20,
+          "marginTop": 0,
+          "marginBottom": 0
+        }
+      ]
+    },
+    "firstPage": {
+      "elements": [
+        {
+          "elementType": "TextBox",
+          "content": "",
+          "contentBottom": "",
+          "contentLeft": "",
+          "contentCenter": "",
+          "contentRight": "",
+          "multipanel": true,
+          "height": 20,
+          "marginTop": 0,
+          "marginBottom": 0
+        }
+      ]
+    },
+    "chapterOpening": {
+      "elements": [
+        {
+          "elementType": "TextBox",
+          "content": "",
+          "contentBottom": "",
+          "contentLeft": "",
+          "contentCenter": "",
+          "contentRight": "",
+          "multipanel": true,
+          "height": 20,
+          "marginTop": 0,
+          "marginBottom": 0
+        }
+      ]
+    }
+  },
+  "footers": {
+    "default": {
+      "elements": [
+        {
+          "elementType": "TextBox",
+          "content": "",
+          "contentBottom": "",
+          "contentLeft": "",
+          "contentCenter": "$p",
+          "contentRight": "",
+          "multipanel": true,
+          "height": 20,
+          "marginTop": 0,
+          "marginBottom": 0
+        }
+      ]
+    },
+    "odd": {
+      "elements": [
+        {
+          "elementType": "TextBox",
+          "content": "",
+          "contentBottom": "",
+          "contentLeft": "",
+          "contentCenter": "$p",
+          "contentRight": "",
+          "multipanel": true,
+          "height": 20,
+          "marginTop": 0,
+          "marginBottom": 0
+        }
+      ]
+    },
+    "even": {
+      "elements": [
+        {
+          "elementType": "TextBox",
+          "content": "",
+          "contentBottom": "",
+          "contentLeft": "",
+          "contentCenter": "$p",
+          "contentRight": "",
+          "multipanel": true,
+          "height": 20,
+          "marginTop": 0,
+          "marginBottom": 0
+        }
+      ]
+    },
+    "firstPage": {
+      "elements": [
+        {
+          "elementType": "TextBox",
+          "content": "",
+          "contentBottom": "",
+          "contentLeft": "",
+          "contentCenter": "$p",
+          "contentRight": "",
+          "multipanel": true,
+          "height": 20,
+          "marginTop": 0,
+          "marginBottom": 0
+        }
+      ]
+    },
+    "chapterOpening": {
+      "elements": [
+        {
+          "elementType": "TextBox",
+          "content": "",
+          "contentBottom": "",
+          "contentLeft": "",
+          "contentCenter": "$p",
+          "contentRight": "",
+          "multipanel": true,
+          "height": 20,
+          "marginTop": 0,
+          "marginBottom": 0
+        }
+      ]
+    }
   },
   "staff": {
-    "lyrics": {
-      "text": ""
-    },
     "elements": [
+      {
+        "id": 1,
+        "elementType": "TextBox",
+        "paragraphStyleId": "title",
+        "content": "LLM F1835",
+        "contentBottom": "",
+        "contentLeft": "",
+        "contentCenter": "",
+        "contentRight": "",
+        "height": 52,
+        "marginTop": 0,
+        "marginBottom": 0
+      },
       {
         "elementType": "Note",
         "quantitativeNeume": "PetastiPlusHyporoe",
@@ -32,31 +311,37 @@
             "y": -30,
             "text": "? low_confidence"
           }
-        ]
+        ],
+        "id": 2
       },
       {
         "elementType": "Note",
         "quantitativeNeume": "Apostrophos",
-        "gorgonNeume": "GorgonDottedLeft"
+        "gorgonNeume": "GorgonDottedLeft",
+        "id": 3
       },
       {
         "elementType": "Note",
         "quantitativeNeume": "Oligon",
-        "timeNeume": "Klasma_Top"
+        "timeNeume": "Klasma_Top",
+        "id": 4
       },
       {
         "elementType": "Note",
         "quantitativeNeume": "OligonPlusKentemata",
-        "gorgonNeume": "Gorgon_Top"
+        "gorgonNeume": "Gorgon_Top",
+        "id": 5
       },
       {
         "elementType": "Note",
-        "quantitativeNeume": "Apostrophos"
+        "quantitativeNeume": "Apostrophos",
+        "id": 6
       },
       {
         "elementType": "Note",
         "quantitativeNeume": "Ison",
-        "vareia": true
+        "vareia": true,
+        "id": 7
       },
       {
         "elementType": "Note",
@@ -69,7 +354,8 @@
             "y": -30,
             "text": "? low_confidence"
           }
-        ]
+        ],
+        "id": 8
       },
       {
         "elementType": "Note",
@@ -82,12 +368,14 @@
             "y": -30,
             "text": "? low_confidence"
           }
-        ]
+        ],
+        "id": 9
       },
       {
         "elementType": "Note",
         "quantitativeNeume": "Apostrophos",
-        "timeNeume": "Klasma_Top"
+        "timeNeume": "Klasma_Top",
+        "id": 10
       },
       {
         "elementType": "Note",
@@ -100,30 +388,36 @@
             "y": -30,
             "text": "? low_confidence"
           }
-        ]
-      },
-      {
-        "elementType": "Note",
-        "quantitativeNeume": "Apostrophos"
-      },
-      {
-        "elementType": "Note",
-        "quantitativeNeume": "Apostrophos"
-      },
-      {
-        "elementType": "Note",
-        "quantitativeNeume": "Ison",
-        "vareia": true
+        ],
+        "id": 11
       },
       {
         "elementType": "Note",
         "quantitativeNeume": "Apostrophos",
-        "gorgonNeume": "GorgonDottedLeft"
+        "id": 12
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Apostrophos",
+        "id": 13
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Ison",
+        "vareia": true,
+        "id": 14
+      },
+      {
+        "elementType": "Note",
+        "quantitativeNeume": "Apostrophos",
+        "gorgonNeume": "GorgonDottedLeft",
+        "id": 15
       },
       {
         "elementType": "Note",
         "quantitativeNeume": "OligonPlusKentemata",
-        "gorgonNeume": "Gorgon_Top"
+        "gorgonNeume": "Gorgon_Top",
+        "id": 16
       },
       {
         "elementType": "Note",
@@ -136,11 +430,13 @@
             "text": "? low_confidence"
           }
         ],
-        "lineBreak": true
+        "lineBreak": true,
+        "id": 17
       },
       {
         "elementType": "Note",
-        "quantitativeNeume": "Apostrophos"
+        "quantitativeNeume": "Apostrophos",
+        "id": 18
       },
       {
         "elementType": "Note",
@@ -152,7 +448,8 @@
             "y": -30,
             "text": "? low_confidence"
           }
-        ]
+        ],
+        "id": 19
       },
       {
         "elementType": "Note",
@@ -165,11 +462,13 @@
             "y": -30,
             "text": "? low_confidence"
           }
-        ]
+        ],
+        "id": 20
       },
       {
         "elementType": "Note",
-        "quantitativeNeume": "Elaphron"
+        "quantitativeNeume": "Elaphron",
+        "id": 21
       },
       {
         "elementType": "Note",
@@ -181,12 +480,14 @@
             "y": -30,
             "text": "? low_confidence,unmapped_combo"
           }
-        ]
+        ],
+        "id": 22
       },
       {
         "elementType": "Note",
         "quantitativeNeume": "Oligon",
-        "timeNeume": "Klasma_Top"
+        "timeNeume": "Klasma_Top",
+        "id": 23
       },
       {
         "elementType": "Note",
@@ -198,7 +499,8 @@
             "y": -30,
             "text": "? low_confidence"
           }
-        ]
+        ],
+        "id": 24
       },
       {
         "elementType": "Note",
@@ -211,7 +513,8 @@
             "y": -30,
             "text": "? low_confidence"
           }
-        ]
+        ],
+        "id": 25
       },
       {
         "elementType": "Note",
@@ -223,16 +526,19 @@
             "y": -30,
             "text": "? low_confidence,unmapped_combo"
           }
-        ]
+        ],
+        "id": 26
       },
       {
         "elementType": "Note",
-        "quantitativeNeume": "Oligon"
+        "quantitativeNeume": "Oligon",
+        "id": 27
       },
       {
         "elementType": "Note",
         "quantitativeNeume": "Apostrophos",
-        "gorgonNeume": "Gorgon_Top"
+        "gorgonNeume": "Gorgon_Top",
+        "id": 28
       },
       {
         "elementType": "Note",
@@ -244,7 +550,8 @@
             "y": -30,
             "text": "? low_confidence"
           }
-        ]
+        ],
+        "id": 29
       },
       {
         "elementType": "Note",
@@ -256,7 +563,8 @@
             "y": -30,
             "text": "? low_confidence,unmapped_combo"
           }
-        ]
+        ],
+        "id": 30
       },
       {
         "elementType": "Note",
@@ -269,7 +577,8 @@
             "y": -30,
             "text": "? low_confidence,unmapped_combo"
           }
-        ]
+        ],
+        "id": 31
       },
       {
         "elementType": "Note",
@@ -281,7 +590,8 @@
             "y": -30,
             "text": "? low_confidence"
           }
-        ]
+        ],
+        "id": 32
       },
       {
         "elementType": "Note",
@@ -293,11 +603,16 @@
             "y": -30,
             "text": "? low_confidence"
           }
-        ]
+        ],
+        "id": 33
       },
       {
-        "elementType": "Empty"
+        "elementType": "Empty",
+        "id": 34
       }
-    ]
+    ],
+    "lyrics": {
+      "text": ""
+    }
   }
 }

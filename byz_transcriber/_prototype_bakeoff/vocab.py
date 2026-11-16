@@ -122,13 +122,11 @@ def group_to_element(g, thr=0.5):
 
 
 def export(groups, path, title, thr=0.5):
-    tpl = {
-        'version': '1.1', 'appVersion': '0.0.0', 'documentProperties': {'title': title},
-        'pageSetup': {'pageSize': 'Letter', 'pageSizeUnit': 'in', 'pageWidth': 816, 'pageHeight': 1056,
-                      'topMargin': 96, 'bottomMargin': 96, 'leftMargin': 96, 'rightMargin': 96,
-                      'headerMargin': 48, 'footerMargin': 48, 'firstPageNumber': 1},
-        'staff': {'lyrics': {'text': ''}, 'elements': []},
-    }
+    import copy, os
+    tpl = copy.deepcopy(json.load(open(os.path.join(os.path.dirname(__file__), 'blank.byzx'), encoding='utf-8')))
+    title_box = next(e for e in tpl['staff']['elements'] if e['elementType'] == 'TextBox')
+    title_box['content'] = title
+    tpl['staff']['elements'] = [title_box]
     els = tpl['staff']['elements']; nflag = 0
     for g in groups:
         if g.get('linebreak') and els:
@@ -140,5 +138,7 @@ def export(groups, path, title, thr=0.5):
             el['annotations'] = [{'elementType': 'Annotation', 'x': 0, 'y': -30, 'text': '? ' + ','.join(sorted(set(flags)))}]
         els.append(el)
     els.append({'elementType': 'Empty'})
+    for i, e in enumerate(els, 1):
+        e['id'] = i
     json.dump(tpl, open(path, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
-    return len([e for e in els if e['elementType'] != 'Empty']), nflag
+    return len([e for e in els if e['elementType'] not in ('Empty', 'TextBox')]), nflag
