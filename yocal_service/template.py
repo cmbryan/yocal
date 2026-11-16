@@ -14,9 +14,11 @@ import sys
 import yaml
 
 HERE = os.path.dirname(__file__)
-CONFIG = os.path.join(HERE, "data", "liturgy_sections.yaml")
 LOCAL = os.path.join(HERE, "local")
-TEMPLATE = os.path.join(LOCAL, "liturgy_template.json")
+# service -> (section map, extracted template, begin/end markers are in the map as `begin:` / `end:`)
+CONFIGS = {"liturgy": os.path.join(HERE, "data", "liturgy_sections.yaml"), "matins": os.path.join(HERE, "data", "matins_sections.yaml")}
+TEMPLATES = {s: os.path.join(LOCAL, f"{s}_template.json") for s in CONFIGS}
+CONFIG, TEMPLATE = CONFIGS["liturgy"], TEMPLATES["liturgy"]
 
 ROLE = re.compile(r"^(Priest|Deacon|Choir|Reader|People|All|Chanter|Cantor|Bishop|Verse|Refrain|Right Choir|Left Choir)(?:/\w+)?:\s*(.*)$")
 LITURGY_START = re.compile(r"THE DIVINE LITURGY OF ST JOHN CHRYSOSTOM")
@@ -53,7 +55,7 @@ def anchor_lines(lines: list, sections: list) -> list:
     for cfg in sections:
         rx = re.compile(cfg["start"])
         for i in range(pos, len(lines)):
-            if rx.search(lines[i].strip()) and not is_noise(lines[i]):
+            if rx.search(lines[i].strip()) and (cfg.get("raw_anchor") or not is_noise(lines[i])):  # raw_anchor: a heading that carries a mode/score tag
                 out.append((cfg, i))
                 pos = i + 1
                 break
@@ -198,11 +200,15 @@ def config() -> dict:
     return _CFG
 
 
-def build(pdf: str, config: str = CONFIG) -> dict:
+def build(pdf: str, config: str = CONFIG, service: str = "liturgy") -> dict:
     cfg = yaml.safe_load(open(config, encoding="utf-8"))
     lines = pdf_text(pdf).split("\n")
-    start = next(i for i, ln in enumerate(lines) if LITURGY_START.search(ln))
+    begin = re.compile(cfg["begin"]) if cfg.get("begin") else LITURGY_START
+    start = next(i for i, ln in enumerate(lines) if begin.search(ln))
     lines = lines[start:]
+    if cfg.get("end"):  # the Matins booklet runs on into the Liturgy: stop at its first heading
+        end_rx = re.compile(cfg["end"])
+        lines = lines[:next((i for i, ln in enumerate(lines) if i and end_rx.search(ln)), len(lines))]
     anchors = anchor_lines(lines, cfg["sections"])
     sections = []
     for k, (sc, i) in enumerate(anchors):
@@ -221,13 +227,14 @@ def build(pdf: str, config: str = CONFIG) -> dict:
                     b["template"] = re.sub(r"^Priest:\s*", "", kept[b["slot"]])
         sections.append({"id": sc["id"], "title": sc["title"], "optional": bool(sc.get("optional")), "exclude": bool(sc.get("exclude")), "blocks": blocks,
                          "music": sc.get("music", []), "dcs_text": sc.get("dcs_text")})
-    return {"source": os.path.basename(pdf), "service": "liturgy", "sections": sections}
+    return {"source": os.path.basename(pdf), "service": service, "sections": sections}
 
 
-def load() -> dict:
-    if not os.path.exists(TEMPLATE):
-        raise FileNotFoundError(f"{TEMPLATE} missing: run `python -m yocal_service.build_template <PDF>`")
-    return json.load(open(TEMPLATE, encoding="utf-8"))
+def load(service: str = "liturgy") -> dict:
+    path = TEMPLATES[service]
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"{path} missing: run `python -m yocal_service.build_template <PDF> --service {service}`")
+    return json.load(open(path, encoding="utf-8"))
 
 
 def main(argv=None):
@@ -235,8 +242,9 @@ def main(argv=None):
     if not argv:
         print("usage: python -m yocal_service.build_template PDF [--out FILE]", file=sys.stderr)
         return 1
-    out = argv[argv.index("--out") + 1] if "--out" in argv else TEMPLATE
-    t = build(argv[0])
+    service = argv[argv.index("--service") + 1] if "--service" in argv else "liturgy"
+    out = argv[argv.index("--out") + 1] if "--out" in argv else TEMPLATES[service]
+    t = build(argv[0], CONFIGS[service], service)
     os.makedirs(os.path.dirname(out), exist_ok=True)
     json.dump(t, open(out, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     n = sum(len(s["blocks"]) for s in t["sections"])

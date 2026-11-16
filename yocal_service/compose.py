@@ -12,7 +12,7 @@ import re
 from . import anca_read, db, music, template, texts
 from yocal_rules import anca as rules_anca, assemble, calfacts, hymns, render
 
-SERVICES = {"liturgy": "Divine Liturgy"}
+SERVICES = {"liturgy": "Divine Liturgy", "matins": "Matins"}
 
 
 # ------------------------------------------------------------------ day texts
@@ -364,7 +364,7 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
         raise ValueError(f"service {service!r} not supported yet; available: {', '.join(SERVICES)}")
     if date.weekday() != 6:
         raise assemble.OutOfScope(f"{date}: the Liturgy builder currently covers Sundays")
-    tpl = template.load()
+    tpl = template.load(service)
     result = assemble.build(service, date, calfacts.DEFAULT_DB)
     f = result.facts
     engine = {s: {"label": m["label"], "status": x.status, "lines": render.describe(s, x, f), "fill": x.fill, "rule": (x.rule or {}).get("id")} for s, m, x in result.slots}

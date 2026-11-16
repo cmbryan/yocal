@@ -68,7 +68,7 @@ def test_api_service_and_date_validation(tmp_path, monkeypatch):
     assert [s["id"] for s in d["sections"]][:2] == ["enarxis", "litany_peace"]
     assert c.get("/api/service?date=2026-11-12").status_code == 422
     assert c.get("/api/service?date=2026-11-15&service=vespers").status_code == 404
-    assert c.get("/api/services").get_json() == [{"id": "liturgy", "title": "Divine Liturgy"}]
+    assert c.get("/api/services").get_json() == [{"id": "liturgy", "title": "Divine Liturgy"}, {"id": "matins", "title": "Matins"}]
 
 
 def test_seasonal_conditions():
