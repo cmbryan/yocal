@@ -227,7 +227,17 @@ def v_matins_canon(day, f, ctx, **_):
     return [_P("", f"Canon of Tone {int(t)}: text not saved yet", "gap")]
 
 
+def v_matins_exapostilaria(day, f, ctx, **_):
+    """Exapostilarion of the week's Eothinon (DCS eo.eNN)."""
+    n = f.get("eothinon")
+    if not n:
+        return []
+    n = int(n)
+    return fixed_paras(ctx, f"eothinon/{n:02d}/exaposteilarion", f"Exapostilarion of Eothinon {n}")
+
+
 MATINS_RESOLVERS = {
+    "matins.exapostilaria": v_matins_exapostilaria,
     "matins.evlogetaria": lambda d, f, ctx, **k: fixed_paras(ctx, "lit/matins/evlogetaria", "Resurrectional Evlogetaria"),
     "matins.canon": v_matins_canon,
     "matins.apolytikia": lambda d, f, ctx, **k: slot_paras(ctx, "matins.apolytikia"),

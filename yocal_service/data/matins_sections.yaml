@@ -35,6 +35,7 @@ sections:
   - {id: little_litany_1, start: '^Little Litany$', title: Little Litany}
   - {id: evlogetaria, start: '^Resurrectional Evlogetaria', title: Resurrectional Evlogetaria, raw_anchor: true, keep_first: true,
      spans: [{start: '^Resurrectional Evlogetaria', until: '^Little Litany$', slot: matins.evlogetaria}]}
+  - {id: little_litany_2, start: '^Little Litany$', title: Little Litany}
   - id: hypakoe
     start: '^Hypakoë \(Tone'
     title: Hypakoë
@@ -50,8 +51,9 @@ sections:
   - {id: canon, start: '^The Canon$', title: The Canon, replace: matins.canon}
   - {id: kontakion, start: '^Resurrectional Kontakion for Tone', title: Kontakion and Oikos, raw_anchor: true, replace: matins.kontakion}
   - {id: megalynarion, start: '^The Song of the Mother of God', title: The Song of the Mother of God}
+  - {id: exapostilaria, start: '^The Exapostilaria$', title: The Exapostilaria, replace: matins.exapostilaria}
   - id: praises
-    start: '^The Exapostilaria$'
-    title: The Exapostilaria and the Praises
+    start: '^The Usual Sunday Praises$'
+    title: The Usual Sunday Praises
     replace: matins.praises
   - {id: great_doxology, start: '^Great Doxology\.$', title: The Great Doxology, replace: matins.doxology}

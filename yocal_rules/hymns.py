@@ -373,6 +373,9 @@ def dcs_keys(hid: str) -> list:
     m = re.fullmatch(r"eothinon/(\d+)/doxastikon", hid)
     if m:
         alts.append([f"eo.e{int(m.group(1)):02d}|eo.Doxasticon.text"])
+    m = re.fullmatch(r"eothinon/(\d+)/exaposteilarion", hid)
+    if m:
+        alts.append([f"eo.e{int(m.group(1)):02d}|eo.Exaposteilarion.text"])
     m = re.fullmatch(r"oct/t(\d)/sun/prokeimenon", hid)
     if m:
         alts.append([f"liturgical.verses|psMA.sunday.m{m.group(1)}.prokeimenon.v{i}.text" for i in (1, 2)])
