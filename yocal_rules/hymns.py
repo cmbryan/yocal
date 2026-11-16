@@ -280,6 +280,7 @@ def matins_praises(fill: dict, f: dict) -> list | None:
     out = [Hymn(f"oct/t{t}/sun/lauds{k}", f"Lauds sticheron {k} (Tone {t})", t, "praises") for k in range(1, n + 1)]
     if f.get("eothinon") and fill.get("glory") == "eothinon":  # Glory: the Doxastikon of the Eothinon (DCS eo.eNN)
         out.append(Hymn(f"eothinon/{int(f['eothinon']):02d}/doxastikon", f"Doxastikon of Eothinon {int(f['eothinon'])}", None, "praises"))
+        out.append(Hymn(f"eothinon/{int(f['eothinon']):02d}/theotokion", f"Theotokion of Eothinon {int(f['eothinon'])}", None, "praises"))
     return out
 
 
@@ -373,6 +374,9 @@ def dcs_keys(hid: str) -> list:
     m = re.fullmatch(r"eothinon/(\d+)/doxastikon", hid)
     if m:
         alts.append([f"eo.e{int(m.group(1)):02d}|eo.Doxasticon.text"])
+    m = re.fullmatch(r"eothinon/(\d+)/theotokion", hid)
+    if m:
+        alts.append([f"eo.e{int(m.group(1)):02d}|eo.Theotokion.text"])
     m = re.fullmatch(r"eothinon/(\d+)/exaposteilarion", hid)
     if m:
         alts.append([f"eo.e{int(m.group(1)):02d}|eo.Exaposteilarion.text"])
