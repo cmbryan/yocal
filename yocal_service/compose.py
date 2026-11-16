@@ -196,8 +196,59 @@ def v_dismissal(day, f, ctx, template_text: str = "", **_):
     return out
 
 
+def fixed_paras(ctx: dict, hid: str, label: str) -> list:
+    """A fixed Matins text (lit/matins/*): saved text by hymn id, no Rules slot; a visible gap until its DCS text is saved."""
+    h = hymns.Hymn(hid, label, None, "fixed")
+    t = texts.get(ctx["con"], hid, ctx["parish"])
+    if t and t["pending"] and all(p["key"] != hid for p in ctx["pending"]):
+        ctx["pending"].append({"section": hid, "key": hid, "heading": label, "source": t["source"]})
+    return hymn_paras(h, t)
+
+
+def v_matins_hypakoe(day, f, ctx, **_):
+    """Hypakoë of the week's tone (calendar tone; the booklet's sample is Tone 6)."""
+    ctx["hymns"]["matins.hypakoe"] = hymns.hypakoe(f) or []
+    return slot_paras(ctx, "matins.hypakoe")
+
+
+def v_matins_doxology(day, f, ctx, **_):
+    return fixed_paras(ctx, "lit/matins/doxology", "Great Doxology")
+
+
+def v_matins_ps50(day, f, ctx, **_):
+    return fixed_paras(ctx, "lit/matins/ps50", "Psalm 50")
+
+
+def v_matins_canon(day, f, ctx, **_):
+    """The Canon of the week's tone: no Resurrection canon in DCS yet (only Menaion feast canons), so a visible gap."""
+    t = f.get("tone")
+    if not t:
+        return []
+    return [_P("", f"Canon of Tone {int(t)}: text not saved yet", "gap")]
+
+
+def v_matins_exapostilaria(day, f, ctx, **_):
+    """Exapostilarion of the week's Eothinon (DCS eo.eNN)."""
+    n = f.get("eothinon")
+    if not n:
+        return []
+    n = int(n)
+    return fixed_paras(ctx, f"eothinon/{n:02d}/exaposteilarion", f"Exapostilarion of Eothinon {n}")
+
+
+MATINS_RESOLVERS = {
+    "matins.exapostilaria": v_matins_exapostilaria,
+    "matins.evlogetaria": lambda d, f, ctx, **k: fixed_paras(ctx, "lit/matins/evlogetaria", "Resurrectional Evlogetaria"),
+    "matins.canon": v_matins_canon,
+    "matins.apolytikia": lambda d, f, ctx, **k: slot_paras(ctx, "matins.apolytikia"),
+    "matins.prokeimenon": lambda d, f, ctx, **k: slot_paras(ctx, "matins.prokeimenon"),
+    "matins.kontakion": lambda d, f, ctx, **k: slot_paras(ctx, "matins.kontakion"),
+    "matins.praises": lambda d, f, ctx, **k: slot_paras(ctx, "matins.praises"),
+    "matins.hypakoe": v_matins_hypakoe, "matins.doxology": v_matins_doxology, "matins.ps50": v_matins_ps50,
+}
+
 RESOLVERS = {
-    "res_apolytikion": v_res_apolytikion, "apolytikia": v_apolytikia, "kontakion": v_kontakion, "prokeimenon": v_prokeimenon,
+    **MATINS_RESOLVERS, "res_apolytikion": v_res_apolytikion, "apolytikia": v_apolytikia, "kontakion": v_kontakion, "prokeimenon": v_prokeimenon,
     "epistle_intro": v_epistle_intro, "epistle": v_epistle, "alleluia": v_alleluia, "gospel_intro": v_gospel_intro, "gospel": v_gospel,
     "communion_hymn": v_communion_hymn, "dismissal": v_dismissal,
 }
@@ -205,7 +256,8 @@ RESOLVERS = {
 ENGINE_SLOT = {"res_apolytikion": "liturgy.apolytikia", "apolytikia": "liturgy.apolytikia", "kontakion": "liturgy.kontakion",
                "prokeimenon": "liturgy.prokeimenon", "epistle_intro": "liturgy.epistle", "epistle": "liturgy.epistle",
                "alleluia": "liturgy.alleluia", "gospel_intro": "liturgy.gospel", "gospel": "liturgy.gospel",
-               "dismissal": "liturgy.dismissal", "communion_hymn": "liturgy.communion"}
+               "dismissal": "liturgy.dismissal", "communion_hymn": "liturgy.communion",
+               **{k: k for k in MATINS_RESOLVERS if k != "matins.canon"}}
 
 
 # ------------------------------------------------------------------ music
@@ -363,6 +415,8 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
     if service not in SERVICES:
         raise ValueError(f"service {service!r} not supported yet; available: {', '.join(SERVICES)}")
     result = assemble.build(service, date, calfacts.DEFAULT_DB)  # raises OutOfScope for dates this service is not served
+    built = service in template.TEMPLATES  # services with a booklet text template; the others show the engine only
+    tpl = template.load(service) if built else {"sections": [], "source": ""}
     f = result.facts
     engine = {s: {"label": m["label"], "status": x.status, "lines": render.describe(s, x, f), "fill": x.fill, "rule": (x.rule or {}).get("id")} for s, m, x in result.slots}
     day = Day(date, offline)
@@ -376,7 +430,6 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
     hymn_cfgs = template.config().get("festal_hymns", [])
     captions = {s: [c.lstrip("- ").strip() for c in e["lines"]] for s, e in engine.items()}
     sections = []
-    tpl = template.load() if service == "liturgy" else {"sections": [], "source": ""}  # only the Liturgy has a booklet text template yet
     for sec in tpl["sections"]:
         if sec.get("exclude"):
             continue
@@ -416,6 +469,6 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
         "tone": f["tone"], "template_source": tpl["source"], "complete": bool(f["in_slice"]), "incomplete_reasons": f.get("slice_reasons") or [],
         "engine": engine, "sections": sections, "seasonal": seasonal, "translations_pending": pending,
         "hymns": {s: [{"id": h.id, "label": h.label} for h in hs] for s, hs in hctx["hymns"].items() if hs}, "liturgy_author": f.get("liturgy_author"),
-        "notes": ([f"Full text for {SERVICES[service]} is not built yet: showing the rules resolution (engine) only."] if service != "liturgy" else []) + ([f"Liturgy of St. {f['liturgy_author']}: the booklet text is St. John Chrysostom's. The priest's prayers differ; the Cherubic Hymn and the rest of the choir text are unchanged (Typikon, general rules IX)."] if f.get("liturgy_author") == "Basil the Great" and service == "liturgy" else []),
+        "notes": ([f"Full text for {SERVICES[service]} is not built yet: showing the rules resolution (engine) only."] if not built else []) + ([f"Liturgy of St. {f['liturgy_author']}: the booklet text is St. John Chrysostom's. The priest's prayers differ; the Cherubic Hymn and the rest of the choir text are unchanged (Typikon, general rules IX)."] if f.get("liturgy_author") == "Basil the Great" and service == "liturgy" else []),
         "sources": {"template": "Parish choir booklet (PDF)", "variable_text": "Rules -> hymn ids -> saved texts (parish, else GOA DCS / ANCA wording pending a parish translation)", "music": "ANCA service-text links, GOA Digital Chant Stand"},
     }

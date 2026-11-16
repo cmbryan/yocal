@@ -1,0 +1,59 @@
+# Sunday Matins section map for the parish choir PDF ("Matins & Liturgy", Parish Matins on Sundays).
+# Structure and rules only -- never PDF text. Extracted locally into yocal_service/local/matins_template.json (git-ignored):
+#   python -m yocal_service.build_template PDF --service matins
+#
+# begin/end: the Matins part of the booklet (end = the Liturgy heading that follows it).
+# replace: the whole section body becomes a variable slot (yocal_rules.matins.* decides it; no text from the booklet).
+#          Only tone/feast-dependent parts the Rules already decide are replaced. Everything else is the booklet's fixed text.
+# God is the Lord verses: fixed psalm text (the tone is music only), kept as booklet text.
+# Matins Gospel Hymns (Eothinon): booklet sample, not yet slotted.
+begin: '^\s*Parish Matins on Sundays\s*$'
+end: 'THE DIVINE LITURGY OF ST JOHN CHRYSOSTOM'
+
+seasonal:
+  - match: '^\[During Bright Week'
+    label: Bright Week / Leave-taking of Pascha
+    when: [{pascha_days: [0, 6]}, {pascha_days: [38, 38]}]
+  - match: '^\[From Thomas Sunday'
+    label: Thomas Sunday to Leave-taking of Pascha
+    when: [{pascha_days: [7, 37]}]
+  - match: '^\[Omitted if a deacon is not serving'
+    label: Deacon serving
+    when: [{}]   # always: a deacon is assumed to serve
+    strip: '^\[?Omitted if a deacon is not serving:\s*'
+
+sections:
+  - {id: opening, start: '^Parish Matins on Sundays$', title: Opening of Matins}
+  - {id: six_psalms, start: '^The Six Psalms$', title: The Six Psalms}
+  - {id: litany_peace, start: '^Litany of Peace$', title: Litany of Peace}
+  - {id: god_is_lord, start: '^God is The Lord$', title: God is the Lord}
+  - id: apolytikia
+    start: '^Apolytikia$'
+    title: Apolytikia
+    replace: matins.apolytikia
+    music: [{key: res_apolytikion, title: 'Resurrectional Apolytikion', dcs: '^apolytikion\.', anca: 'RESURRECTIONAL APOLYTIKION|Resurrection'}]
+  - {id: little_litany_1, start: '^Little Litany$', title: Little Litany}
+  - {id: evlogetaria, start: '^Resurrectional Evlogetaria', title: Resurrectional Evlogetaria, raw_anchor: true, keep_first: true,
+     spans: [{start: '^Resurrectional Evlogetaria', until: '^Little Litany$', slot: matins.evlogetaria}]}
+  - {id: little_litany_2, start: '^Little Litany$', title: Little Litany}
+  - id: hypakoe
+    start: '^Hypakoë \(Tone'
+    title: Hypakoë
+    replace: matins.hypakoe
+  - id: prokeimenon
+    start: '^Prokeimenon \(Tone'
+    title: The Prokeimenon
+    replace: matins.prokeimenon
+    music: [{key: prokeimenon, title: Prokeimenon, anca: 'PROKEIMENON'}]
+  - {id: gospel_hymns, start: '^Matins Gospel Hymns', title: Matins Gospel Hymns, raw_anchor: true}
+  - {id: psalm_50, start: '^Psalm 50\. Mode', title: Psalm 50, raw_anchor: true, replace: matins.ps50}
+  - {id: intercession, start: '^The Intercession$', title: The Intercession}
+  - {id: canon, start: '^The Canon$', title: The Canon, replace: matins.canon}
+  - {id: kontakion, start: '^Resurrectional Kontakion for Tone', title: Kontakion and Oikos, raw_anchor: true, replace: matins.kontakion}
+  - {id: megalynarion, start: '^The Song of the Mother of God', title: The Song of the Mother of God}
+  - {id: exapostilaria, start: '^The Exapostilaria$', title: The Exapostilaria, replace: matins.exapostilaria}
+  - id: praises
+    start: '^The Usual Sunday Praises$'
+    title: The Usual Sunday Praises
+    replace: matins.praises
+  - {id: great_doxology, start: '^Great Doxology\.$', title: The Great Doxology, replace: matins.doxology}

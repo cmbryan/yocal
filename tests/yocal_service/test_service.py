@@ -84,8 +84,8 @@ def test_api_adjacent_dates_per_service(tmp_path, monkeypatch):
     assert c.get("/api/adjacent?service=nope").status_code == 400
     d = c.get("/api/service?date=2026-11-16&service=liturgy").get_json()
     assert d["nearest_date"] == "2026-11-21"
-    m = c.get("/api/service?date=2026-11-15&service=matins&offline=1").get_json()
-    assert m["sections"] == [] and m["engine"] and "not built yet" in m["notes"][0]
+    v = c.get("/api/service?date=2026-11-14&service=vespers&offline=1").get_json()  # no booklet template yet: engine only
+    assert v["sections"] == [] and v["engine"] and "not built yet" in v["notes"][0]
 
 
 def test_seasonal_conditions():
