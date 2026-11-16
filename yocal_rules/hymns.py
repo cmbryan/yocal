@@ -252,9 +252,45 @@ def megalynarion(fill: dict, f: dict) -> list | None:
     return [Hymn(f"{of}/megalynarion", "Megalynarion of the feast (in place of “It is truly meet”)", None, "megalynarion")] if of else None
 
 
+# ---- Sunday Matins (yocal_rules.assemble service "matins"). Tone-dependent parts; the fixed Matins texts are lit/matins/*.
+def matins_prokeimenon(fill: dict, f: dict) -> list | None:
+    """The resurrectional prokeimenon of the week's tone (DCS psMA.sunday.mN.prokeimenon; Matins differs from the Liturgy's psLI key)."""
+    t = fill.get("tone") or f.get("tone")
+    if fill.get("kind") != "resurrectional" or not t:
+        return None
+    return [Hymn(f"oct/t{int(t)}/sun/prokeimenon", f"Prokeimenon (Tone {int(t)})", int(t), "prokeimenon")]
+
+
+def matins_kontakion(fill: dict, f: dict) -> list | None:
+    """Resurrectional kontakion and oikos of the week's tone (Octoechos)."""
+    t = fill.get("tone") or f.get("tone")
+    if fill.get("kind") != "resurrectional" or not t:
+        return None
+    t = int(t)
+    return [Hymn(f"oct/t{t}/sun/kontakion", f"Kontakion (Tone {t})", t, "kontakion"),
+            Hymn(f"oct/t{t}/sun/oikos", f"Oikos (Tone {t})", t, "kontakion")]
+
+
+def matins_praises(fill: dict, f: dict) -> list | None:
+    """Resurrectional stichera of Lauds (Octoechos Lauds1..n, n = `res`); a day's own praises (`other`) are not yet modelled."""
+    t = f.get("tone")
+    if not t or fill.get("other") or not fill.get("res"):
+        return None
+    t, n = int(t), int(fill["res"])
+    return [Hymn(f"oct/t{t}/sun/lauds{k}", f"Lauds sticheron {k} (Tone {t})", t, "praises") for k in range(1, n + 1)]
+
+
+def hypakoe(f: dict) -> list | None:
+    """Resurrectional hypakoe of the week's tone (not a Rules slot: the booklet's Hypakoë is the week's tone, calendar fact)."""
+    t = f.get("tone")
+    return [Hymn(f"oct/t{int(t)}/sun/hypakoe", f"Hypakoë (Tone {int(t)})", int(t), "hypakoe")] if t else None
+
+
 SLOTS = {"liturgy.apolytikia": apolytikia, "liturgy.kontakion": kontakion, "liturgy.prokeimenon": prokeimenon,
          "liturgy.antiphons": antiphons, "liturgy.eisodikon": eisodikon, "liturgy.trisagion": trisagion, "liturgy.megalynarion": megalynarion,
-         "liturgy.alleluia": alleluia, "liturgy.communion": communion}
+         "liturgy.alleluia": alleluia, "liturgy.communion": communion,
+         "matins.apolytikia": apolytikia, "matins.prokeimenon": matins_prokeimenon, "matins.kontakion": matins_kontakion,
+         "matins.praises": matins_praises}
 
 
 def for_slot(slot: str, res, f: dict) -> list | None:
@@ -327,6 +363,13 @@ def dcs_keys(hid: str) -> list:
             alts.append([f"movable.verses|psLI.{b}.d{n:03d}.antiphon{num}.v{i}.text" for i in range(1, 9)])
         elif k == "eisodikon":
             alts.append([f"movable.verses|psLI.{b}.d{n:03d}.entrance.v{i}.text" for i in (1, 2)])
+    m = re.fullmatch(r"oct/t(\d)/sun/(oikos|hypakoe|lauds\d)", hid)
+    if m:  # Octoechos Matins parts of the tone's page (oc.mN.d1 ocMA.<Name>)
+        name = {"oikos": "Oikos", "hypakoe": "Hypakoe"}.get(m.group(2), m.group(2).replace("lauds", "Lauds"))
+        alts.append([f"oc.m{m.group(1)}.d1|ocMA.{name}.text"])
+    m = re.fullmatch(r"oct/t(\d)/sun/prokeimenon", hid)
+    if m:
+        alts.append([f"liturgical.verses|psMA.sunday.m{m.group(1)}.prokeimenon.v{i}.text" for i in (1, 2)])
     m = re.fullmatch(r"lit/sun/t(\d)/(prokeimenon|alleluia)", hid)
     if m:
         alts.append([f"liturgical.verses|psLI.sunday.m{m.group(1)}.{m.group(2)}.v{i}.text" for i in (1, 2, 3)])

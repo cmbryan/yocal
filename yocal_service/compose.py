@@ -196,8 +196,39 @@ def v_dismissal(day, f, ctx, template_text: str = "", **_):
     return out
 
 
+def fixed_paras(ctx: dict, hid: str, label: str) -> list:
+    """A fixed Matins text (lit/matins/*): saved text by hymn id, no Rules slot; a visible gap until its DCS text is saved."""
+    h = hymns.Hymn(hid, label, None, "fixed")
+    t = texts.get(ctx["con"], hid, ctx["parish"])
+    if t and t["pending"] and all(p["key"] != hid for p in ctx["pending"]):
+        ctx["pending"].append({"section": hid, "key": hid, "heading": label, "source": t["source"]})
+    return hymn_paras(h, t)
+
+
+def v_matins_hypakoe(day, f, ctx, **_):
+    """Hypakoë of the week's tone (calendar tone; the booklet's sample is Tone 6)."""
+    ctx["hymns"]["matins.hypakoe"] = hymns.hypakoe(f) or []
+    return slot_paras(ctx, "matins.hypakoe")
+
+
+def v_matins_doxology(day, f, ctx, **_):
+    return fixed_paras(ctx, "lit/matins/doxology", "Great Doxology")
+
+
+def v_matins_ps50(day, f, ctx, **_):
+    return fixed_paras(ctx, "lit/matins/ps50", "Psalm 50")
+
+
+MATINS_RESOLVERS = {
+    "matins.apolytikia": lambda d, f, ctx, **k: slot_paras(ctx, "matins.apolytikia"),
+    "matins.prokeimenon": lambda d, f, ctx, **k: slot_paras(ctx, "matins.prokeimenon"),
+    "matins.kontakion": lambda d, f, ctx, **k: slot_paras(ctx, "matins.kontakion"),
+    "matins.praises": lambda d, f, ctx, **k: slot_paras(ctx, "matins.praises"),
+    "matins.hypakoe": v_matins_hypakoe, "matins.doxology": v_matins_doxology, "matins.ps50": v_matins_ps50,
+}
+
 RESOLVERS = {
-    "res_apolytikion": v_res_apolytikion, "apolytikia": v_apolytikia, "kontakion": v_kontakion, "prokeimenon": v_prokeimenon,
+    **MATINS_RESOLVERS, "res_apolytikion": v_res_apolytikion, "apolytikia": v_apolytikia, "kontakion": v_kontakion, "prokeimenon": v_prokeimenon,
     "epistle_intro": v_epistle_intro, "epistle": v_epistle, "alleluia": v_alleluia, "gospel_intro": v_gospel_intro, "gospel": v_gospel,
     "communion_hymn": v_communion_hymn, "dismissal": v_dismissal,
 }
@@ -205,7 +236,8 @@ RESOLVERS = {
 ENGINE_SLOT = {"res_apolytikion": "liturgy.apolytikia", "apolytikia": "liturgy.apolytikia", "kontakion": "liturgy.kontakion",
                "prokeimenon": "liturgy.prokeimenon", "epistle_intro": "liturgy.epistle", "epistle": "liturgy.epistle",
                "alleluia": "liturgy.alleluia", "gospel_intro": "liturgy.gospel", "gospel": "liturgy.gospel",
-               "dismissal": "liturgy.dismissal", "communion_hymn": "liturgy.communion"}
+               "dismissal": "liturgy.dismissal", "communion_hymn": "liturgy.communion",
+               **{k: k for k in MATINS_RESOLVERS}}
 
 
 # ------------------------------------------------------------------ music
