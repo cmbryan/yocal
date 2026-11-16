@@ -292,6 +292,14 @@ def matins_praises(fill: dict, f: dict) -> list | None:
     return out
 
 
+def matins_canon(fill: dict, f: dict) -> list | None:
+    """The Sunday canon: the week's tone's resurrectional canon (Octoechos; DCS has no text, so a gap until saved)."""
+    t = fill.get("tone") or f.get("tone")
+    if fill.get("kind") != "resurrectional" or not t:
+        return None
+    return [Hymn(f"oct/t{int(t)}/sun/canon", f"Canon (Tone {int(t)})", int(t), "canon")]
+
+
 def hypakoe(f: dict) -> list | None:
     """Resurrectional hypakoe of the week's tone (not a Rules slot: the booklet's Hypakoë is the week's tone, calendar fact)."""
     t = f.get("tone")
@@ -302,7 +310,7 @@ SLOTS = {"liturgy.apolytikia": apolytikia, "liturgy.kontakion": kontakion, "litu
          "liturgy.antiphons": antiphons, "liturgy.eisodikon": eisodikon, "liturgy.trisagion": trisagion, "liturgy.megalynarion": megalynarion,
          "liturgy.alleluia": alleluia, "liturgy.communion": communion,
          "matins.apolytikia": apolytikia, "matins.prokeimenon": matins_prokeimenon, "matins.kontakion": matins_kontakion,
-         "matins.praises": matins_praises}
+         "matins.praises": matins_praises, "matins.canon": matins_canon}
 
 
 def for_slot(slot: str, res, f: dict) -> list | None:

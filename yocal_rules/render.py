@@ -89,6 +89,8 @@ def describe(slot: str, res, f: dict):
             whom = "the feast" if f.get("feast_period") else "the saint / commemoration"
             return [f"- {fl['total']} stichera: {res} resurrectional — Octoechos {_tone(f['tone'])}; {oth} for {whom}"]
         return [f"- {fl['total']} resurrectional stichera — Octoechos {_tone(f['tone'])}"]
+    if slot == "matins.canon":
+        return [f"- Canon of the tone (Octoechos) — {_tone(fl['tone'])}"]
     if slot == "liturgy.kontakion":
         if fl["kind"] == "ordinary_theotokos":
             return [f"- Ordinary kontakion of the Theotokos — {_tone(fl['tone'])}"]
