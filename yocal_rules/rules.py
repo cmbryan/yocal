@@ -78,7 +78,11 @@ PREDS = {
     "feast_period_class_is": lambda f, a: f.get("feast_period_class", "") in a,  # lord | theotokos | saint (fore_after.yaml)
     "all_saints_sunday": lambda f, a: f["all_saints_sunday"],
     "eve_basil": lambda f, a: f.get("eve_basil", False),  # the eve's DB row has the Liturgy of St Basil (Vesperal Liturgy)
+    "on_or_after": lambda f, a: f["date"] >= a[0],         # ISO dates; ANCA practice that starts on a date
+    # late (see evaluate): the kind another slot resolved to without the late Rules; args [slot, kind, ...]
+    "resolved_kind_is": lambda f, a: (f["resolved"].get(a[0]) or {}).get("kind") in a[1:],
 }
+LATE_PREDS = {"resolved_kind_is"}  # Rules using these are decided after the other Rules, whose results they test
 
 
 class RuleError(Exception):
@@ -155,12 +159,35 @@ def validate(rules, sources, slots):
     return errs
 
 
+def _value(v, facts):
+    """`$fact` -> the fact; `$resolved:<slot>:<attr>` -> that attribute of the slot's first-pass fill (late Rules)."""
+    if not (isinstance(v, str) and v.startswith("$")):
+        return v
+    if v.startswith("$resolved:"):
+        _, slot, attr = v.split(":")
+        return (facts["resolved"].get(slot) or {}).get(attr)
+    return facts[v[1:]]
+
+
 def _resolve(fill, facts):
-    return {k: (facts[v[1:]] if isinstance(v, str) and v.startswith("$") else v) for k, v in fill.items()}
+    return {k: _value(v, facts) for k, v in fill.items()}
+
+
+def _is_late(r):
+    return any(w["pred"] in LATE_PREDS for w in r.get("when", []))
 
 
 def evaluate(rules, facts, slot_ids):
-    """-> {slot: Resolution} for every requested slot."""
+    """-> {slot: Resolution} for every requested slot. Rules that test LATE_PREDS are decided in a second pass that
+    sees the first pass's fills (`facts['resolved']`), e.g. ANCA's 'both' kontakion on top of the Typikon's choice."""
+    early = [r for r in rules if not _is_late(r)]
+    out = _decide(early, facts, slot_ids)
+    if len(early) < len(rules):
+        out = _decide(rules, {**facts, "resolved": {s: r.fill for s, r in out.items()}}, slot_ids)
+    return out
+
+
+def _decide(rules, facts, slot_ids):
     by = {s: [] for s in slot_ids}
     for r in rules:
         if r["slot"] in by and all(PREDS[w["pred"]](facts, w.get("args", [])) for w in r.get("when", [])):

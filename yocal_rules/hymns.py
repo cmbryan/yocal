@@ -262,13 +262,21 @@ def matins_prokeimenon(fill: dict, f: dict) -> list | None:
 
 
 def matins_kontakion(fill: dict, f: dict) -> list | None:
-    """Resurrectional kontakion and oikos of the week's tone (Octoechos)."""
+    """Resurrectional kontakion and oikos of the week's tone (Octoechos). `both` (ANCA 2026): those, then the day's feast
+    kontakion (men/MM-DD/kontakion); no feast hymn mapped -> None (a gap, not a silent omission)."""
+    kind = fill.get("kind")
     t = fill.get("tone") or f.get("tone")
-    if fill.get("kind") != "resurrectional" or not t:
+    if kind not in ("resurrectional", "both") or not t:
         return None
     t = int(t)
-    return [Hymn(f"oct/t{t}/sun/kontakion", f"Kontakion (Tone {t})", t, "kontakion"),
-            Hymn(f"oct/t{t}/sun/oikos", f"Oikos (Tone {t})", t, "kontakion")]
+    out = [Hymn(f"oct/t{t}/sun/kontakion", f"Kontakion (Tone {t})", t, "kontakion"),
+           Hymn(f"oct/t{t}/sun/oikos", f"Oikos (Tone {t})", t, "kontakion")]
+    if kind == "both":
+        fb = day_feast(f)
+        if not fb:
+            return None
+        out.append(Hymn(f"{fb}/kontakion", "Kontakion of the feast", None, "kontakion"))
+    return out
 
 
 def matins_praises(fill: dict, f: dict) -> list | None:

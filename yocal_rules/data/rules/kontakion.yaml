@@ -6,6 +6,25 @@
 # ================= Matins kontakion (resurrectional by default; feast's replaces it) =================
 - {id: mat.kontakion.default, slot: matins.kontakion, tier: 3, when: [{pred: sunday}],
    fill: {kind: resurrectional, tone: "$tone"}, source: typikon, locator: "Ch I s10 p.28 (Octoechos kontakion; Violakis §26 p.21)", status: explicit}
+# ANCA 2026 'both' (late Rules: decided on top of the Typikon Rules' choice, see rules.evaluate). tone_known: the DB gives no tone
+# where there is no Resurrection service (Pascha, Thomas, Palm Sunday, Pentecost, Lord's feasts on a Sunday), so those keep the feast's only.
+- {id: mat.kontakion.anca_both.feast, slot: matins.kontakion, tier: 0,
+   when: [{pred: sunday}, {pred: tone_known}, {pred: on_or_after, args: ["2026-06-07"]}, {pred: resolved_kind_is, args: [matins.kontakion, feast]},
+          {pred: not_desig_contains, args: ["All Saints of Antioch"]}],
+   fill: {kind: both, tone: "$tone", owner: "$resolved:matins.kontakion:owner"}, source: anca,
+   locator: "inferred: ANCA ORTHROS 2026 (from 2026-06-07): resurrectional kontakion/oikos AND the feast's on each Sunday where the Typikon gives the feast's (Ch I s10 p.28) instead",
+   status: inferred, evidence: "ANCA ORTHROS 2026-06-07, 07-19, 08-23, 10-11, 11-08 print both; 2019-2026-05 print the feast's only (one year, #27); All Saints of Antioch 2026-06-14 its own only",
+   conflict: {with: [mat.kontakion.triodion, mat.kontakion.lent_1_3, mat.kontakion.lent_3, mat.kontakion.pentecostarion, mat.kontakion.all_saints,
+                     mat.kontakion.forefathers_to_nativity, mat.kontakion.jan_forefeast, mat.kontakion.three_hierarchs, mat.kontakion.theotokos_feast,
+                     mat.kontakion.listed_saints, mat.kontakion.fathers_councils], status: accepted,
+              note: "Parish decision 2026-11-16: follow ANCA practice, assuming it continues (Triodion/Pentecostarion Sundays included by extrapolation: no ANCA print yet). Typikon reading (the feast's only) kept shadowed; dated by the user."}}
+- {id: mat.kontakion.anca_both.afterfeast, slot: matins.kontakion, tier: 0,
+   when: [{pred: sunday}, {pred: tone_known}, {pred: on_or_after, args: ["2026-06-07"]}, {pred: resolved_kind_is, args: [matins.kontakion, resurrectional]},
+          {pred: feast_period_in, args: ["*:*"]}],
+   fill: {kind: both, tone: "$tone"}, source: anca,
+   locator: "inferred: ANCA ORTHROS 2026 (from 2026-06-07): resurrectional kontakion/oikos AND the fore/after-feast's; Typikon Ch V p.80, p.108-117 give the resurrectional only",
+   status: inferred, evidence: "ANCA ORTHROS 2026-09-20, 11-22 print both; 2024-11-24 and 2025-11-23 (Entrance afterfeast) print the resurrectional only (one year, #27)",
+   conflict: {with: [mat.kontakion.default], status: accepted, note: "Parish decision 2026-11-16: Typikon was followed for 2026-11-22 (Entrance afterfeast); changed to ANCA practice, assuming it continues. Typikon reading kept shadowed; dated by the user."}}
 - {id: mat.kontakion.triodion, slot: matins.kontakion, tier: 1,
    when: [{pred: sunday}, {pred: pascha_days_between, args: [-70, -49]}],
    fill: {kind: feast, owner: "the Triodion Sunday's own"}, source: typikon, locator: "Ch I s10 p.28 (Triodion Sundays except Lent 2, 4, 5); Violakis §26", status: explicit}
