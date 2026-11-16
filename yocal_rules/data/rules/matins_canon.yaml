@@ -1,0 +1,5 @@
+# Ordinary-season Sunday Matins canon: the resurrectional canon of the week's tone (Octoechos). Feast Sundays, Pentecostarion
+# and Triodion Sundays have their own canons (not modelled here yet: the Canon is then a gap).
+# Source: parish choir booklets print the feast canon in the Canon section; the ordinary Sunday canon is the tone's (text not yet saved).
+- {id: mat.canon.res, slot: matins.canon, tier: 4, when: [{pred: sunday}],
+   fill: {kind: resurrectional, tone: "$tone"}, source: parish, locator: "parish choir booklets: The Canon (Sunday = the tone's Octoechos canon)", status: explicit}

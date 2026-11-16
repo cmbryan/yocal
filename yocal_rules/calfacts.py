@@ -379,6 +379,7 @@ def load_facts(date: dt.date, service: str, db_path: str = DEFAULT_DB) -> dict:
         slice_verified_years=vy, verified=bool(vy) and ld.year in vy,  # verified: this date's year is one the enabling key was checked against ANCA on
         # Major feast (work package I): id ('' if none), class lord|theotokos, movable flag; feast_slots gates the feast-only slots
         major_feast=mf, major_feast_class=mf_cls, major_feast_movable=mf_mov, major_feast_slots=mf in FEAST_SLOT_FEASTS, major_feast_sunday=mf in FEAST_SLOT_FEASTS and mf != "pascha" and ld.weekday() == 6,
+        ordinary_sunday_canon=ld.weekday() == 6 and ssn == "ordinary" and not mf,  # the Sunday Matins canon of the tone (slots.yaml matins.canon)
         # the feast's Matins Gospel (DB lection code m-<mm-dd>, m-<g_code> for movable feasts), '' if the DB has none
         feast_matins_gospel_ref=(lect(f"m-{mmdd}")[1] or lect(f"m-{r['g_code']}")[1] or "").strip() if (mf or _num(r["eothinon"]) is None) else "",
         agape_gospel_ref=(lect("v-J1Sun")[1] or "").strip() if service == "agape" else "",
