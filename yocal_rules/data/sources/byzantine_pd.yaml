@@ -1,0 +1,129 @@
+# Public-domain Byzantine-notation music sources, indexed by hymn id. Human notes: byzantine_pd.md.
+# books.<key>.offsets: PDF page = printed page + offset, for printed pages >= from (last matching entry wins).
+# hymns: id -> list of locations. id may use {t} (tone 1..8; tone order 1,2,3,4,pl1=5,pl2=6,grave=7,pl4=8) or {n} (eothinon 01..11).
+# status: toc = located from the book's contents list only; page = checked on the page; verify = match uncertain.
+# PDFs are not in git: they sit in the repo root, filenames below.
+
+books:
+  TA1:
+    title: Ταμείον Ανθολογίας, Konstantinos Protopsaltis, vol.1 (Vespers, Matins, Holy Week)
+    year: 1845
+    file: "Ταμείον ανθολογίας Κωνσταντίνου Πρωτοψάλτου 1845.pdf"
+    offsets: [{from: 1, add: 6}]
+  TA2:
+    title: Ταμείον Ανθολογίας, vol.2 (Cherubic, Koinonika, Liturgy); same PDF as TA1
+    year: 1845
+    file: "Ταμείον ανθολογίας Κωνσταντίνου Πρωτοψάλτου 1845.pdf"
+    offsets: [{from: 1, add: 301}]
+  PD2:
+    title: Μουσική Πανδέκτη vol.2 (Matins)
+    year: 1850
+    file: "Μουσική Πανδέκτη Τόμος Β' Κωνσταντινούπολις 1850.pdf"
+    offsets: [{from: 1, add: 0}]
+  HE1:
+    title: Heirmologion of the Katavasiai, Petros Peloponnesios (Chourmouzios ed.)
+    year: 1825
+    file: "Ειρμολόγιον Πέτρου Λαμπαδαρίου και Πέτρου Βυζαντίου (1825).pdf"
+    offsets: [{from: 1, add: 4}]
+  HE2:
+    title: Short Heirmologion, Petros Byzantios; same PDF as HE1
+    year: 1825
+    file: "Ειρμολόγιον Πέτρου Λαμπαδαρίου και Πέτρου Βυζαντίου (1825).pdf"
+    offsets: [{from: 1, add: 300}, {from: 186, add: 290}]  # ~10 pages (Funeral) missing from the scan; boundary approximate
+  AN:
+    title: Anastasimatarion (slow and short), Petros Lambadarios / Ioannis Protopsaltis
+    year: 1905
+    file: anastasimatarion-ioannou-protopsaltou-1905.pdf
+    offsets: [{from: 1, add: 2}]
+
+# AN per-tone section starts (printed): vespers, matins (kathismata/anavathmoi/canons), katavasiai_argai, praises (+eothinon, doxology), katanyktika
+an_tone_sections:
+  1: {vespers: 1, matins: 14, katavasiai: 33, praises: 38, katanyktika: 49}
+  2: {vespers: 53, matins: 65, katavasiai: 82, praises: 86, katanyktika: 97}
+  3: {vespers: 102, matins: 115, katavasiai: 133, praises: 138, katanyktika: 152}
+  4: {vespers: 157, matins: 171, katavasiai: 188, praises: 193, katanyktika: 205}
+  5: {vespers: 209, matins: 223, katavasiai: 239, praises: 243, katanyktika: 258}
+  6: {vespers: 263, matins: 277, katavasiai: 293, praises: 298, katanyktika: 310}
+  7: {vespers: 314, matins: 327, katavasiai: 352, praises: 360, katanyktika: 378}
+  8: {vespers: 382, matins: 394, katavasiai: 414, praises: 420, katanyktika: 431}
+
+hymns:
+  oct/t{t}/sun/apolytikion:
+    - {book: PD2, pages: [5, 16], status: verify, note: "Θεός Κύριος + apolytikia + theotokia, all tones"}
+    - {book: AN, section: vespers, status: verify, note: "end of each tone's Vespers section"}
+  oct/t{t}/sun/canon:
+    - {book: AN, section: matins, status: verify, note: "full canon, heirmoi + troparia"}
+    - {book: HE2, pages: [3, 147], status: toc, note: "heirmoi only, by tone"}
+  oct/t{t}/sun/hypakoe:
+    - {book: AN, section: matins, status: verify}
+  oct/t{t}/sun/kontakion:
+    - {book: AN, section: matins, status: verify}
+  oct/t{t}/sun/oikos:
+    - {book: AN, section: matins, status: verify}
+  oct/t{t}/sun/prokeimenon:
+    - {book: AN, section: matins, status: verify, note: "after the anavathmoi"}
+  oct/t{t}/sun/lauds:  # lauds1..n
+    - {book: AN, section: praises, status: toc}
+    - {book: AN, pages: [441, 538], status: toc, note: "short Anastasimatarion"}
+    - {book: HE2, pages: [195, 229], status: toc, note: "verses of the Praises only, not the stichera"}
+  eothinon/{n}/doxastikon:
+    - {book: PD2, pages: [538, 573], status: toc, note: "all 11, Iakovos"}
+    - {book: AN, section: praises, status: toc, note: "8 within the tone sections; 9-11 at p.436"}
+  lit/matins/evlogetaria:
+    - {book: PD2, pages: [30, 35], status: toc}
+    - {book: HE1, pages: [210, 214], status: toc}
+    - {book: AN, pages: [14, 19], status: toc}
+  lit/matins/doxology:
+    - {book: PD2, pages: [574, 603], status: toc, note: "short, Petros Lambadarios, by tone (best parish fit)"}
+    - {book: PD2, pages: [604, 645], status: toc, note: "short, Gregorios and Manuel"}
+    - {book: PD2, pages: [646, 852], status: toc, note: "slow"}
+    - {book: TA1, pages: [257, 286], status: toc, note: "short, 8 tones"}
+    - {book: AN, section: praises, status: toc, note: "end of each tone's Praises section"}
+  matins.katavasia:  # slot (fill.of = feast); no hymn ids yet. HE1 printed pages by feast:
+    - {book: HE1, pages: [1, 137], status: toc, feasts: {dormition: 1, nativity: 9, cross_veneration: 23, pascha: 28, thomas: 35,
+        theophany: 41, prodigal: 56, presentation: 61, annunciation_entrance: 67, transfiguration: 74, lent1: 78, palm_sunday: 83,
+        pentecost: 88, ascension: 93, publican_cheesefare: 97, meatfare: 102, pentecost_2: 107, grave_tetraphonos: 112, elevation: 117,
+        lazarus: 124, mid_pentecost: 129, annunciation_ode4: 135, elevation_ode7: 137}}
+    - {book: AN, pages: [603, 609], status: toc, note: "Theotokos katavasiai, year-round"}
+  "{feast}/megalynarion":
+    - {book: HE1, pages: [278, 296], status: page, note: "seen: Theophany, Annunciation, Transfiguration, Dormition, Elevation, Lazarus, Palm, Pascha, Thomas, Mid-Pentecost, Ascension, Pentecost; others verify"}
+  lit/megalynarion/basil:
+    - {book: TA2, pages: [99, 103], status: verify, note: "Liturgy of St Basil section"}
+  lit/communion/sunday:
+    - {book: TA2, pages: [127, 262], status: toc, note: "Αἰνεῖτε, tone sections 1:127 2:150 3:163 4:182 pl1:222 grave:230 pl4:249; no pl2"}
+  lit/communion/cup_of_salvation:
+    - {book: TA2, pages: [127, 262], status: toc, note: "tones 1, 2, 3, 4, grave"}
+  lit/communion/common/angels:
+    - {book: TA2, pages: [127, 262], status: toc, note: "tones 1, 3, 4, pl4"}
+  lit/communion/common/remembrance:
+    - {book: TA2, pages: [127, 262], status: toc, note: "tones 1, 2, 4, pl1, grave, pl4"}
+  lit/communion/common/apostles:
+    - {book: TA2, pages: [127, 262], status: toc, note: "tones 1, 2, 4, grave"}
+  mov/56/communion:
+    - {book: TA2, pages: [127, 262], status: toc, note: "Ἀγαλλιᾶσθε; tones 4, pl1, grave"}
+  mov/7/communion:
+    - {book: TA2, pages: [222, 229], status: toc, note: "Thomas; pl1"}
+  mov/0/communion:
+    - {book: TA2, pages: [127, 262], status: verify, note: "'τῆς Ἀναστάσεως' = Σῶμα Χριστοῦ?"}
+  mov/39/communion:
+    - {book: TA2, pages: [182, 221], status: toc, note: "tone 4"}
+  mov/49/communion:
+    - {book: TA2, pages: [127, 262], status: toc, note: "tones 1, 4"}
+  men/12-25/communion:
+    - {book: TA2, pages: [150, 262], status: toc, note: "tones 2, grave, pl4"}
+  men/01-06/communion:
+    - {book: TA2, pages: [150, 162], status: toc, note: "tone 2"}
+  men/03-25/communion:
+    - {book: TA2, pages: [163, 221], status: toc, note: "tones 3, 4"}
+  men/08-06/communion:
+    - {book: TA2, pages: [127, 262], status: toc, note: "tones 1, 2, 3, pl1, pl4"}
+  men/09-14/communion:
+    - {book: TA2, pages: [150, 262], status: toc, note: "tones 2, 3, grave, pl4"}
+  men/09-01/communion:
+    - {book: TA2, pages: [127, 221], status: toc, note: "tones 1, 4"}
+  lit/trisagion/baptized:
+    - {book: TA1, pages: [293, 293], status: toc, note: "Dynamis ending only"}
+  lit/trisagion/cross:
+    - {book: TA1, pages: [287, 293], status: verify}
+  lit/sun/t{t}/alleluia:
+    - {book: TA1, pages: [294, 295], status: toc, note: "generic Gospel alleluia melody"}
