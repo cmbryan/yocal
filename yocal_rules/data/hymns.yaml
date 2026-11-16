@@ -64,6 +64,19 @@ communion:
 
 # ids whose DCS key is not the pattern one (seen on DCS pages; reference only)
 dcs:
+  lit/matins/evlogetaria:   # Resurrectional Evlogetaria (DCS Sunday Matins page, ho03): each verse before its sticheron
+    - ["ho.ho03|hoMA.ResEvlogVerse.text"]
+    - ["ho.ho03|hoMA.ResEvlog1.text"]
+    - ["ho.ho03|hoMA.ResEvlogVerse.text"]
+    - ["ho.ho03|hoMA.ResEvlog2.text"]
+    - ["ho.ho03|hoMA.ResEvlogVerse.text"]
+    - ["ho.ho03|hoMA.ResEvlog3.text"]
+    - ["ho.ho03|hoMA.ResEvlogVerse.text"]
+    - ["ho.ho03|hoMA.ResEvlog4.text"]
+    - ["ho.ho03|hoMA.ResEvlogVerse.text"]
+    - ["ho.ho03|hoMA.ResEvlog5.text"]
+    - ["ho.ho03|hoMA.ResEvlogVerse.text"]
+    - ["ho.ho03|hoMA.ResEvlog6.text"]
   # Sunday Matins fixed texts (DCS Sunday Matins page, ho03 Great Doxology; ps Psalm 50 = LXX 50:3-20 then the psMA end verses 50:21-23)
   lit/matins/doxology:
     - ["ho.ho03|hoMA.DoxologyGreatIntro.text"]

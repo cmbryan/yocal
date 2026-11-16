@@ -5,8 +5,8 @@
 # begin/end: the Matins part of the booklet (end = the Liturgy heading that follows it).
 # replace: the whole section body becomes a variable slot (yocal_rules.matins.* decides it; no text from the booklet).
 #          Only tone/feast-dependent parts the Rules already decide are replaced. Everything else is the booklet's fixed text.
-# Tone-dependent booklet text NOT yet slotted (shows the booklet's sample): God is the Lord verses, Resurrectional Evlogetaria,
-# Matins Gospel Hymns (Eothinon), Canon.
+# God is the Lord verses: fixed psalm text (the tone is music only), kept as booklet text.
+# Matins Gospel Hymns (Eothinon): booklet sample, not yet slotted.
 begin: '^\s*Parish Matins on Sundays\s*$'
 end: 'THE DIVINE LITURGY OF ST JOHN CHRYSOSTOM'
 
@@ -33,7 +33,8 @@ sections:
     replace: matins.apolytikia
     music: [{key: res_apolytikion, title: 'Resurrectional Apolytikion', dcs: '^apolytikion\.', anca: 'RESURRECTIONAL APOLYTIKION|Resurrection'}]
   - {id: little_litany_1, start: '^Little Litany$', title: Little Litany}
-  - {id: evlogetaria, start: '^Resurrectional Evlogetaria', title: Resurrectional Evlogetaria, raw_anchor: true}
+  - {id: evlogetaria, start: '^Resurrectional Evlogetaria', title: Resurrectional Evlogetaria, raw_anchor: true, keep_first: true,
+     spans: [{start: '^Resurrectional Evlogetaria', until: '^Little Litany$', slot: matins.evlogetaria}]}
   - id: hypakoe
     start: '^Hypakoë \(Tone'
     title: Hypakoë
@@ -46,7 +47,7 @@ sections:
   - {id: gospel_hymns, start: '^Matins Gospel Hymns', title: Matins Gospel Hymns, raw_anchor: true}
   - {id: psalm_50, start: '^Psalm 50\. Mode', title: Psalm 50, raw_anchor: true, replace: matins.ps50}
   - {id: intercession, start: '^The Intercession$', title: The Intercession}
-  - {id: canon, start: '^The Canon$', title: The Canon}
+  - {id: canon, start: '^The Canon$', title: The Canon, replace: matins.canon}
   - {id: kontakion, start: '^Resurrectional Kontakion for Tone', title: Kontakion and Oikos, raw_anchor: true, replace: matins.kontakion}
   - {id: megalynarion, start: '^The Song of the Mother of God', title: The Song of the Mother of God}
   - id: praises

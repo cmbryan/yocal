@@ -277,7 +277,10 @@ def matins_praises(fill: dict, f: dict) -> list | None:
     if not t or fill.get("other") or not fill.get("res"):
         return None
     t, n = int(t), int(fill["res"])
-    return [Hymn(f"oct/t{t}/sun/lauds{k}", f"Lauds sticheron {k} (Tone {t})", t, "praises") for k in range(1, n + 1)]
+    out = [Hymn(f"oct/t{t}/sun/lauds{k}", f"Lauds sticheron {k} (Tone {t})", t, "praises") for k in range(1, n + 1)]
+    if f.get("eothinon") and fill.get("glory") == "eothinon":  # Glory: the Doxastikon of the Eothinon (DCS eo.eNN)
+        out.append(Hymn(f"eothinon/{int(f['eothinon']):02d}/doxastikon", f"Doxastikon of Eothinon {int(f['eothinon'])}", None, "praises"))
+    return out
 
 
 def hypakoe(f: dict) -> list | None:
@@ -367,6 +370,9 @@ def dcs_keys(hid: str) -> list:
     if m:  # Octoechos Matins parts of the tone's page (oc.mN.d1 ocMA.<Name>)
         name = {"oikos": "Oikos", "hypakoe": "Hypakoe"}.get(m.group(2), m.group(2).replace("lauds", "Lauds"))
         alts.append([f"oc.m{m.group(1)}.d1|ocMA.{name}.text"])
+    m = re.fullmatch(r"eothinon/(\d+)/doxastikon", hid)
+    if m:
+        alts.append([f"eo.e{int(m.group(1)):02d}|eo.Doxasticon.text"])
     m = re.fullmatch(r"oct/t(\d)/sun/prokeimenon", hid)
     if m:
         alts.append([f"liturgical.verses|psMA.sunday.m{m.group(1)}.prokeimenon.v{i}.text" for i in (1, 2)])

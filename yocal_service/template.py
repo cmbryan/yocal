@@ -77,7 +77,7 @@ def blocks_from(lines: list) -> list:
         cur = None
 
     for raw in lines:
-        mk = re.fullmatch(r"@@SLOT:(\w+)@@", raw.strip())
+        mk = re.fullmatch(r"@@SLOT:([\w.]+)@@", raw.strip())
         if mk:
             flush()
             blocks.append({"t": "slot", "slot": mk.group(1)})

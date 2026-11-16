@@ -219,7 +219,17 @@ def v_matins_ps50(day, f, ctx, **_):
     return fixed_paras(ctx, "lit/matins/ps50", "Psalm 50")
 
 
+def v_matins_canon(day, f, ctx, **_):
+    """The Canon of the week's tone: no Resurrection canon in DCS yet (only Menaion feast canons), so a visible gap."""
+    t = f.get("tone")
+    if not t:
+        return []
+    return [_P("", f"Canon of Tone {int(t)}: text not saved yet", "gap")]
+
+
 MATINS_RESOLVERS = {
+    "matins.evlogetaria": lambda d, f, ctx, **k: fixed_paras(ctx, "lit/matins/evlogetaria", "Resurrectional Evlogetaria"),
+    "matins.canon": v_matins_canon,
     "matins.apolytikia": lambda d, f, ctx, **k: slot_paras(ctx, "matins.apolytikia"),
     "matins.prokeimenon": lambda d, f, ctx, **k: slot_paras(ctx, "matins.prokeimenon"),
     "matins.kontakion": lambda d, f, ctx, **k: slot_paras(ctx, "matins.kontakion"),
@@ -237,7 +247,7 @@ ENGINE_SLOT = {"res_apolytikion": "liturgy.apolytikia", "apolytikia": "liturgy.a
                "prokeimenon": "liturgy.prokeimenon", "epistle_intro": "liturgy.epistle", "epistle": "liturgy.epistle",
                "alleluia": "liturgy.alleluia", "gospel_intro": "liturgy.gospel", "gospel": "liturgy.gospel",
                "dismissal": "liturgy.dismissal", "communion_hymn": "liturgy.communion",
-               **{k: k for k in MATINS_RESOLVERS}}
+               **{k: k for k in MATINS_RESOLVERS if k != "matins.canon"}}
 
 
 # ------------------------------------------------------------------ music
