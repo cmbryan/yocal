@@ -67,8 +67,25 @@ def test_api_service_and_date_validation(tmp_path, monkeypatch):
     assert d["service"] == "liturgy" and d["tone"] == 7 or d["tone"] == "7"
     assert [s["id"] for s in d["sections"]][:2] == ["enarxis", "litany_peace"]
     assert c.get("/api/service?date=2026-11-12").status_code == 422
-    assert c.get("/api/service?date=2026-11-15&service=vespers").status_code == 404
-    assert c.get("/api/services").get_json() == [{"id": "liturgy", "title": "Divine Liturgy"}, {"id": "matins", "title": "Matins"}]
+    assert c.get("/api/service?date=2026-11-15&service=vespers").status_code == 422  # Sunday: Vespers is served Saturdays
+    assert c.get("/api/service?date=2026-11-16&service=matins").status_code == 422
+    assert c.get("/api/service?service=nope&date=2026-11-15").status_code == 404
+    ids = [s["id"] for s in c.get("/api/services").get_json()]
+    assert ids == ["vespers", "matins", "liturgy", "agape"]
+
+
+def test_api_adjacent_dates_per_service(tmp_path, monkeypatch):
+    monkeypatch.setenv("YOCAL_MUSIC_DB", str(tmp_path / "m.db"))
+    from yocal_service.app import create_app
+    c = create_app().test_client()
+    assert c.get("/api/adjacent?service=vespers&date=2026-11-15&dir=next&include=1").get_json()["date"] == "2026-11-20"  # Fri: eve of Presentation
+    assert c.get("/api/adjacent?service=matins&date=2026-11-15&dir=prev").get_json()["date"] == "2026-11-08"
+    assert c.get("/api/adjacent?service=matins&date=2026-11-16&dir=next").get_json()["date"] == "2026-11-21"  # Sat: feast day of the Presentation
+    assert c.get("/api/adjacent?service=nope").status_code == 400
+    d = c.get("/api/service?date=2026-11-16&service=liturgy").get_json()
+    assert d["nearest_date"] == "2026-11-21"
+    v = c.get("/api/service?date=2026-11-14&service=vespers&offline=1").get_json()  # no booklet template yet: engine only
+    assert v["sections"] == [] and v["engine"] and "not built yet" in v["notes"][0]
 
 
 def test_seasonal_conditions():

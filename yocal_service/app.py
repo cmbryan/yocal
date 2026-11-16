@@ -9,6 +9,8 @@ from flask import Flask, Response, abort, jsonify, request, send_from_directory
 from . import compose, db, music
 from yocal_rules import assemble
 
+MAX_SCAN_DAYS = 400  # how far /api/adjacent looks for an in-scope date
+
 STATIC = os.path.join(os.path.dirname(__file__), "static")
 
 
@@ -18,7 +20,7 @@ def create_app() -> Flask:
     def _date(arg: str = "date") -> dt.date:
         v = request.args.get(arg)
         try:
-            return dt.date.fromisoformat(v) if v else next_sunday()
+            return dt.date.fromisoformat(v) if v else dt.date.today()
         except ValueError:
             abort(400, description=f"bad {arg}: expected YYYY-MM-DD")
 
@@ -33,6 +35,21 @@ def create_app() -> Flask:
     @app.get("/api/services")
     def services():
         return jsonify([{"id": k, "title": v} for k, v in compose.SERVICES.items()])
+
+    @app.get("/api/adjacent")
+    def adjacent():
+        """Nearest date the service is served on. ?service= &date= &dir=next|prev &include=1 (accept the date itself)."""
+        sid = request.args.get("service", "liturgy")
+        if sid not in compose.SERVICES:
+            abort(400, description=f"unknown service {sid!r}")
+        d = _date()
+        step = dt.timedelta(days=-1 if request.args.get("dir") == "prev" else 1)
+        cur = d if request.args.get("include") == "1" else d + step
+        for _ in range(MAX_SCAN_DAYS):
+            if in_scope(sid, cur):
+                return jsonify(service=sid, date=cur.isoformat())
+            cur += step
+        return jsonify(error=f"no {compose.SERVICES[sid]} within {MAX_SCAN_DAYS} days"), 404
 
     @app.get("/api/sundays")
     def sundays():
@@ -50,7 +67,7 @@ def create_app() -> Flask:
         except ValueError as e:
             return jsonify(error=str(e)), 404
         except assemble.OutOfScope as e:
-            return jsonify(error=str(e), nearest_sunday=next_sunday(d).isoformat()), 422
+            return jsonify(error=str(e), nearest_date=nearest(sid, d)), 422
         except FileNotFoundError as e:
             return jsonify(error=str(e)), 503
 
@@ -109,6 +126,21 @@ def create_app() -> Flask:
         return Response(png, mimetype="image/png", headers={"Cache-Control": "public, max-age=604800"})
 
     return app
+
+
+def in_scope(sid: str, d: dt.date) -> bool:
+    try:
+        assemble.check_scope(sid, d)
+        return True
+    except assemble.OutOfScope:
+        return False
+
+
+def nearest(sid: str, d: dt.date) -> str | None:
+    for i in range(MAX_SCAN_DAYS):
+        if in_scope(sid, d + dt.timedelta(days=i)):
+            return (d + dt.timedelta(days=i)).isoformat()
+    return None
 
 
 def next_sunday(d: dt.date | None = None) -> dt.date:
