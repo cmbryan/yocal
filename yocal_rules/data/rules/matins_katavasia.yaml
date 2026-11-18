@@ -1,0 +1,83 @@
+# Sunday Matins katavasia by the Typikon's "A Schedule for the Katavasia of the Year" (Gloss., p.576-577), ordinary-season Sundays only
+# (slots.yaml matins.katavasia, fact katavasia_slot): fixed-date ranges. The Triodion / Pentecostarion katavasiae (Pharisee, Prodigal Son,
+# Lent Sundays, Pascha-Ascension-Pentecost) are not written here: those seasons have no katavasia slot yet (gap).
+# Ch I s6 XI p.28 (the Theotokos katavasia "I shall open my mouth" from the Cross leavetaking to Nov 21 and on the Sundays after All Saints to Jul 26),
+# the Presentation katavasia until its leavetaking (Feb 9), the "feast of the Lord/Theotokos" katavasia on Sundays between forefeast and leavetaking.
+# Hymn ids kat/<set> (text: one hymn per set, odes 1,3-9 as parts).
+
+- {id: mat.katavasia.cross_sep, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["09-01", "09-21"]}],
+   fill: {of: cross, parts: ["Katavasia: The Holy Cross"], hymns: [{id: kat/cross, label: "Katavasiae: The Holy Cross", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.theotokos_autumn, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["09-22", "11-07"]}],
+   fill: {of: theotokos, parts: ["Katavasia: The Theotokos (“I shall open my mouth”)"], hymns: [{id: kat/theotokos, label: "Katavasiae: The Theotokos (“I shall open my mouth”)", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.presentation_theotokos, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["11-08", "11-20"]}],
+   fill: {of: presentation_theotokos, parts: ["Katavasia: The Presentation of the Theotokos"], hymns: [{id: kat/presentation_theotokos, label: "Katavasiae: The Presentation of the Theotokos", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.nativity_first, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["11-21", "12-24"]}],
+   fill: {of: nativity1, parts: ["Katavasia: The first katavasia of the Nativity of Christ (“Christ is born, glorify Him”)"], hymns: [{id: kat/nativity1, label: "Katavasiae: The first katavasia of the Nativity of Christ (“Christ is born, glorify Him”)", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.nativity_second, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["12-26", "12-30"]}],
+   fill: {of: nativity2, parts: ["Katavasia: The second katavasia of the Nativity of Christ"], hymns: [{id: kat/nativity2, label: "Katavasiae: The second katavasia of the Nativity of Christ", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.nativity_both, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["12-31", "12-31"]}],
+   fill: {of: nativity1, parts: ["Katavasia: Both katavasiae of the Nativity of Christ"], hymns: [{id: kat/nativity1, label: "Katavasiae: Both katavasiae of the Nativity of Christ", kind: katavasia}, {id: kat/nativity2, label: "Katavasiae: Both katavasiae of the Nativity of Christ", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.theophany_first, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["01-02", "01-05"]}],
+   fill: {of: theophany1, parts: ["Katavasia: The first katavasia of Theophany"], hymns: [{id: kat/theophany1, label: "Katavasiae: The first katavasia of Theophany", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.theophany_both_jan6, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["01-06", "01-06"]}],
+   fill: {of: theophany1, parts: ["Katavasia: Both katavasiae of Theophany"], hymns: [{id: kat/theophany1, label: "Katavasiae: Both katavasiae of Theophany", kind: katavasia}, {id: kat/theophany2, label: "Katavasiae: Both katavasiae of Theophany", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.theophany_second, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["01-07", "01-13"]}],
+   fill: {of: theophany2, parts: ["Katavasia: The second katavasia of Theophany"], hymns: [{id: kat/theophany2, label: "Katavasiae: The second katavasia of Theophany", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.theophany_both_jan14, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["01-14", "01-14"]}],
+   fill: {of: theophany1, parts: ["Katavasia: Both katavasiae of Theophany"], hymns: [{id: kat/theophany1, label: "Katavasiae: Both katavasiae of Theophany", kind: katavasia}, {id: kat/theophany2, label: "Katavasiae: Both katavasiae of Theophany", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.presentation_lord, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["01-15", "02-09"]}],
+   fill: {of: presentation, parts: ["Katavasia: The Presentation of Christ"], hymns: [{id: kat/presentation, label: "Katavasiae: The Presentation of Christ", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.theotokos_summer, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["06-01", "07-26"]}],
+   fill: {of: theotokos, parts: ["Katavasia: The Theotokos (from the Sunday of All Saints to July 26)"], hymns: [{id: kat/theotokos, label: "Katavasiae: The Theotokos (from the Sunday of All Saints to July 26)", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.transfiguration_a, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["07-27", "07-31"]}],
+   fill: {of: transfiguration, parts: ["Katavasia: The Transfiguration"], hymns: [{id: kat/transfiguration, label: "Katavasiae: The Transfiguration", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.cross_aug1, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["08-01", "08-01"]}],
+   fill: {of: cross, parts: ["Katavasia: The Holy Cross"], hymns: [{id: kat/cross, label: "Katavasiae: The Holy Cross", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.transfiguration_b, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["08-02", "08-05"]}],
+   fill: {of: transfiguration, parts: ["Katavasia: The Transfiguration"], hymns: [{id: kat/transfiguration, label: "Katavasiae: The Transfiguration", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.cross_aug, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["08-06", "08-13"]}],
+   fill: {of: cross, parts: ["Katavasia: The Holy Cross"], hymns: [{id: kat/cross, label: "Katavasiae: The Holy Cross", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.dormition_pre, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["08-14", "08-14"]}],
+   fill: {of: dormition_pre, parts: ["Katavasia: The prefeast of the Dormition"], hymns: [{id: kat/dormition_pre, label: "Katavasiae: The prefeast of the Dormition", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.dormition, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["08-15", "08-23"]}],
+   fill: {of: dormition, parts: ["Katavasia: The Dormition of the Theotokos"], hymns: [{id: kat/dormition, label: "Katavasiae: The Dormition of the Theotokos", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}
+- {id: mat.katavasia.cross_late, slot: matins.katavasia, tier: 4,
+   when: [{pred: sunday}, {pred: season_is, args: [ordinary]}, {pred: date_between, args: ["08-24", "08-31"]}],
+   fill: {of: cross, parts: ["Katavasia: The Holy Cross"], hymns: [{id: kat/cross, label: "Katavasiae: The Holy Cross", kind: katavasia}]},
+   source: typikon, locator: "Gloss. A Schedule for the Katavasia of the Year p.576-577", status: explicit}

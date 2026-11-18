@@ -4,10 +4,11 @@ vespers.prokeimenon:     {service: vespers, label: "Prokeimenon", attrs: [kind, 
 vespers.apolytikia:      {service: vespers, label: "Apolytikia", attrs: [res_tone, saint]}
 matins.apolytikia:       {service: matins, label: "Apolytikia (God is the Lord)", attrs: [res_tone, saint]}
 matins.kathismata:       {service: matins, label: "Kathismata hymns", attrs: [tone]}
+matins.hypakoe:          {service: matins, label: "Hypakoe", attrs: [tone], only: ordinary_sunday_canon, after: matins.kathismata}
 matins.prokeimenon:      {service: matins, label: "Prokeimenon", attrs: [kind, tone]}
 matins.eothinon_gospel:  {service: matins, label: "Eothinon Gospel", attrs: [number], db: {number: eothinon}}
 matins.kontakion:        {service: matins, label: "Kontakion and oikos", attrs: [kind, tone, owner]}
-matins.canon:            {service: matins, label: "Canon of the tone (Octoechos)", attrs: [kind, tone], only: ordinary_sunday_canon}
+matins.canon:            {service: matins, label: "Canon", attrs: [kind, tone], only: ordinary_sunday_canon}
 matins.praises:          {service: matins, label: "The Praises", attrs: [total, res, other, glory]}
 liturgy.apolytikia:      {service: liturgy, label: "Apolytikia (after the little entrance)", attrs: [res_tone, saint]}
 liturgy.kontakion:       {service: liturgy, label: "Kontakion", attrs: [kind, tone]}
@@ -22,7 +23,7 @@ liturgy.dismissal_phrase: {service: liturgy, label: "Dismissal: characteristic p
 vespers.readings:      {service: vespers, label: "Old Testament readings", attrs: [count], only: major_feast_slots, after: vespers.prokeimenon}
 vespers.litia:         {service: vespers, label: "Litia and Artoklasia", attrs: [litia], only: major_feast_slots, after: vespers.readings}
 vespers.aposticha:     {service: vespers, label: "Aposticha", attrs: [owner], only: major_feast_slots, after: vespers.litia}
-matins.katavasia:      {service: matins, label: "Katavasia", attrs: [of], only: major_feast_slots, after: matins.kontakion}
+matins.katavasia:      {service: matins, label: "Katavasia", attrs: [of], only: katavasia_slot, after: matins.kontakion}
 liturgy.antiphons:     {service: liturgy, label: "Antiphons", attrs: [kind, of, refrain2, refrain3], after: "^"}
 liturgy.eisodikon:     {service: liturgy, label: "Entrance hymn (eisodikon)", attrs: [kind, of, ending], after: liturgy.antiphons}
 liturgy.trisagion:     {service: liturgy, label: "Trisagion hymn", attrs: [kind], after: liturgy.kontakion}

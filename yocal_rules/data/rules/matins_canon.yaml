@@ -3,3 +3,10 @@
 # Source: parish choir booklets print the feast canon in the Canon section; the ordinary Sunday canon is the tone's (text not yet saved).
 - {id: mat.canon.res, slot: matins.canon, tier: 4, when: [{pred: sunday}],
    fill: {kind: resurrectional, tone: "$tone"}, source: parish, locator: "parish choir booklets: The Canon (Sunday = the tone's Octoechos canon)", status: explicit}
+# Parish and ANCA chant only the katavasiae on Sundays (ANCA ORTHROS prints the katavasiae of the schedule and no troparia of the canon; parish booklets the same):
+# the Typikon's canons (Ch I s5 VI p.25 'the canons') stay as the shadowed alternative.
+- {id: mat.canon.katavasiae_only, slot: matins.canon, tier: 3, when: [{pred: sunday}],
+   fill: {kind: katavasiae_only, tone: "$tone", hymns: [], parts: ["Canon troparia not chanted: the katavasiae only (see Katavasia)"]},
+   source: parish, locator: "parish choir booklets 2025-26 (Odes of the Canon: katavasiae only); ANCA ORTHROS 2026-11-22", status: inferred,
+   evidence: "parish booklet Matins 2026-11-22 and ANCA ORTHROS 2026-11-22 print only the katavasiae under the canon",
+   conflict: {with: [mat.canon.res], status: decided, note: "Parish practice: katavasiae only. Typikon Ch I s5 VI p.25 lists 'the canons'. Typikon reading kept as the shadowed Rule mat.canon.res (its troparia text is not saved anywhere)."}}

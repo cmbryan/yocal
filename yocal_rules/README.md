@@ -85,3 +85,7 @@ Add to a new or existing `data/rules/*.yaml` (all files globbed except `slots.ya
 PYTHONPATH=. python3 -m pytest tests/yocal_rules -q     # DB-dependent tests skip if the DB is absent
 ```
 CLI weekend tests: `tests/yocal_rules/test_cli_weekend.py` (no network). Regression sweep over many dates against cached ANCA files: loop `python -m yocal_rules DATE SERVICE --offline --fail-on-diff --out /tmp/x` over Saturdays/Sundays and count exit-code 2 (unexplained diffs). Prototype harness: `prototypes/rule-spike/`.
+
+## Matins katavasia and Vespers readings
+- `matins.katavasia` (fact `katavasia_slot`: feast days and ordinary-season Sundays): `data/rules/matins_katavasia.yaml` encodes the Typikon's "Schedule for the Katavasia of the Year" (Gloss. p.576-577) as date ranges -> hymn ids `kat/<set>`. Triodion/Pentecostarion katavasiae are not written (no slot there yet). Texts: parish store (`kat/nativity1` saved from the 2026-11-22 booklet); other sets are visible gaps.
+- `vespers.readings` on a Major feast's eve lists the three Old Testament references per feast (`mf.ves.readings.<feast>` in `major_feasts.yaml`, from ANCA festal Vespers; the Typikon gives no verses). Parish booklet verse lists differ for the Entrance (kept as evidence note).

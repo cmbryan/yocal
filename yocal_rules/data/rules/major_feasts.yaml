@@ -97,11 +97,36 @@
    when: [{pred: feast_on_weekday}, {pred: eve_weekday_in, args: [Friday]}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition, circumcision, ascension, nativity]}],
    fill: {kind: daily, tone: 7, parts: ["Prokeimenon of the day (Friday evening, “O God, my helper art Thou”) — Tone 7"]},
    source: typikon, locator: "Sep 8 p.65, Aug 15 p.455, Nativity eve p.140 ('the daily prokeimenon' on the eve)", status: explicit}
-- {id: mf.ves.readings.3, slot: vespers.readings, tier: -10,
-   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition, circumcision]}],
-   fill: {count: 3, parts: ["3 Old Testament readings of the feast — Menaion {mmdd}"]},
-   source: typikon, locator: "readings of the feast at the eve: Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Circumcision p.165; count from the Menaion",
-   status: inferred, evidence: "count: ANCA festal Vespers 2025-26 print 3 readings for all 8 feasts (Aug 5, Aug 14, Sep 7, Sep 13, Nov 20, Dec 31, Feb 1, Mar 24)"}
+- {id: mf.ves.readings.transfiguration, slot: vespers.readings, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration]}],
+   fill: {count: 3, parts: ["Exodus 24:12-18", "Exodus 33:11-23; 34:4-6, 8", "3 Kingdoms 19:3-9, 11-13, 15-16"]},
+   source: anca, locator: "inferred: Typikon defers the eve readings to the Menaion (Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Circumcision p.165: 'the readings of the feast'; no verse references)", status: inferred,
+   evidence: "ANCA Great Vespers Aug 5 (2026): the three Old Testament readings with these references"}
+- {id: mf.ves.readings.theotokos, slot: vespers.readings, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity_theotokos, dormition]}],
+   fill: {count: 3, parts: ["Genesis 28:10-17", "Ezekiel 43:27-44:4", "Proverbs 9:1-11"]},
+   source: anca, locator: "inferred: Typikon defers the eve readings to the Menaion (Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Circumcision p.165: 'the readings of the feast'; no verse references)", status: inferred,
+   evidence: "ANCA Great Vespers Aug 14, Sep 7 (2026): the three Old Testament readings with these references"}
+- {id: mf.ves.readings.elevation, slot: vespers.readings, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [elevation]}],
+   fill: {count: 3, parts: ["Exodus 15:22-16:1", "Proverbs 3:11-18", "Isaiah 60:11-16"]},
+   source: anca, locator: "inferred: Typikon defers the eve readings to the Menaion (Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Circumcision p.165: 'the readings of the feast'; no verse references)", status: inferred,
+   evidence: "ANCA Great Vespers Sep 13 (2026): the three Old Testament readings with these references"}
+- {id: mf.ves.readings.entrance, slot: vespers.readings, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [entrance]}],
+   fill: {count: 3, parts: ["Exodus 40:1-5, 8-9, 14, 28-29", "3 Kingdoms 8:1, 3-7, 9-11", "Ezekiel 43:27-44:4"]},
+   source: anca, locator: "inferred: Typikon defers the eve readings to the Menaion (Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Circumcision p.165: 'the readings of the feast'; no verse references)", status: inferred,
+   evidence: "parish booklet Great Vespers 2026-11-20 (Septuagint numbering, as the YOCal DB and the Orthodox Bible). ANCA Nov 20 (2026) prints the same readings in Masoretic-style numbering: Exodus 40:1-5, 9-11, 16, 34-35; 3 Kingdoms 8:1, 3-4, 5, 6-7, 9, 10-11. Other feasts below carry ANCA numbering (no parish source yet): convert to Septuagint when a parish booklet is available"}
+- {id: mf.ves.readings.circumcision, slot: vespers.readings, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [circumcision]}],
+   fill: {count: 3, parts: ["Genesis 17:1-2, 4-7, 9-14", "Proverbs 8:22-30", "Wisdom of Solomon (Prov. 10:31; 11:2; 10:2; 11:7, 19; 13:2, 9; Sirach 3:18; Prov. 26:11; 15:2; 14:33; 22:11; Eccl. 8:1; Prov. 17:24; Wis. 6:13, 12, 14-16; 7:30; 8:2-3, 7-9, 17-18; 8:21-9:5, 9:10-11, 14)"]},
+   source: anca, locator: "inferred: Typikon defers the eve readings to the Menaion (Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Circumcision p.165: 'the readings of the feast'; no verse references)", status: inferred,
+   evidence: "ANCA Great Vespers Dec 31 (2025): the three Old Testament readings with these references"}
+- {id: mf.ves.readings.presentation, slot: vespers.readings, tier: -10,
+   when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [presentation]}],
+   fill: {count: 3, parts: ["Exodus 12:51, 13:1-2a, 3a, 10a, 11-12a, 14-16a, 22:29b; Leviticus 12:2b, 3, 4a+c, 6a+c, 8a+c; Numbers 8:16a+c, 17b+c", "Isaiah 6:1-12", "Isaiah 19:1, 3-5, 12, 16, 19-21"]},
+   source: anca, locator: "inferred: Typikon defers the eve readings to the Menaion (Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Circumcision p.165: 'the readings of the feast'; no verse references)", status: inferred,
+   evidence: "ANCA Great Vespers Feb 1 (2026): the three Old Testament readings with these references"}
 - {id: mf.ves.litia, slot: vespers.litia, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [transfiguration, elevation, presentation, entrance, nativity_theotokos, dormition, circumcision]}],
    fill: {litia: true, parts: ["Litia and Artoklasia of the feast after the litany of supplication (if the parish serves it) — Menaion {mmdd}"]},
