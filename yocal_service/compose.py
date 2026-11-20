@@ -418,6 +418,19 @@ def applies(when, ctx: dict) -> bool:
     return any(all(_match(c, ctx.get(k)) for k, c in alt.items()) for alt in when)
 
 
+def slot_shown(spec: dict, res: dict) -> bool:
+    """`when_slot` (the Rules resolve that slot) and `when_fill` ({attr: value} the slot's fill must carry, e.g. litia: true)."""
+    sl = spec.get("when_slot")
+    if sl and sl not in res:
+        return False
+    return all((res[sl].fill or {}).get(k) == v for k, v in (spec.get("when_fill") or {}).items()) if sl else True
+
+
+def block_shown(b: dict, ctx: dict, res: dict) -> bool:
+    """Block-level condition (template `block_when:`): slot/fill from the Rules and/or calendar facts (`when`, as for seasonal blocks)."""
+    return slot_shown(b, res) and (applies(b["when"], ctx) if b.get("when") else True)
+
+
 def inline_seasonal(b: dict) -> list:
     """Seasonal block -> plain blocks: outer brackets and any leading condition phrase removed, tagged with its label."""
     bs = [dict(x) for x in b["blocks"]]
@@ -450,10 +463,12 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
     captions = {s: [c.lstrip("- ").strip() for c in e["lines"]] for s, e in engine.items()}
     sections = []
     for sec in tpl["sections"]:
-        if sec.get("exclude") or (sec.get("when_slot") and sec["when_slot"] not in res):  # feast-only part the Rules do not appoint today
+        if sec.get("exclude") or not slot_shown(sec, res):  # feast-only part the Rules do not appoint today
             continue
         blocks = []
         for b in sec["blocks"]:
+            if b["t"] != "seasonal" and not block_shown(b, ctx, res):
+                continue
             if b["t"] == "seasonal" and b.get("when"):
                 ok = applies(b["when"], ctx)
                 seasonal.append({"section": sec["id"], "label": b.get("label", ""), "applied": ok})

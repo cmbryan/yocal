@@ -4,6 +4,9 @@
 # Keys as in liturgy_sections.yaml, plus:
 #   roles:      the booklet's speaker abbreviations ('P: ...') -> role
 #   when_slot:  the section is shown only when the Rules resolve that slot for the date (feast-only parts: readings, Lity)
+#   when_fill:  with when_slot: the slot's fill must also carry these attrs ({litia: true}: Pascha resolves the slot with litia: false)
+#   block_when: [{match, when | when_slot | when_fill}]: the same conditions on single blocks, matched on the block's text
+#               (when: calendar facts as in liturgy_sections.yaml `seasonal:`); a block failing its condition is omitted
 #
 # The booklet is the Nov 21 festal edition: every Nov-21 text (stichera, readings, Lity idiomela, aposticha, apolytikion) is a
 # variable slot (`replace:` / `spans:`), never fixed text. Fixed: everything invariable (opening, Psalm 103, litanies, kekragaria
@@ -52,15 +55,19 @@ sections:
   - {id: litany_supplication, start: '^The Litany of Supplication$', title: Litany of Supplication}
   # starts at the rubric before "Peace to all / Bow your heads to the Lord" (the dialogue belongs to the bowing, not to the litany)
   - {id: bowing_heads, start: '^The deacon moves to stand before the ikon of Christ', title: Bowing of the Heads, keep_first: true}
-  - {id: litia, start: '^Idiomelon at the Lity$', title: The Lity, when_slot: vespers.litia, replace: vespers.litia}
-  - {id: litia_litany, start: '^The Litany$', title: Litany of the Lity, when_slot: vespers.litia}
-  - {id: artoklasia, start: '^D: Let us pray to the Lord\.$', title: Artoklasia, keep_first: true, when_slot: vespers.litia}
+  - {id: litia, start: '^Idiomelon at the Lity$', title: The Lity, when_slot: vespers.litia, when_fill: {litia: true}, replace: vespers.litia}
+  - {id: litia_litany, start: '^The Litany$', title: Litany of the Lity, when_slot: vespers.litia, when_fill: {litia: true}}
+  - {id: artoklasia, start: '^D: Let us pray to the Lord\.$', title: Artoklasia, keep_first: true, when_slot: vespers.litia, when_fill: {litia: true}}
   - id: aposticha
     start: '^Aposticha\b'
     title: Aposticha
     replace: vespers.aposticha
     music: [{key: aposticha, title: Aposticha, dcs: '^(aposticha\d|aposglory)'}]
-  - {id: nunc_dimittis, start: '^Song of Symeon the God-Receiver$', title: Song of Symeon}
+  - id: nunc_dimittis
+    start: '^Song of Symeon the God-Receiver$'
+    title: Song of Symeon
+    # Akathist: Lenten Fridays (Vespers in yocal is Saturday evenings + feast eves, so this normally never applies)
+    block_when: [{match: '^If an Akathist is to be chanted', label: Akathist, when: [{season: lent, weekday: Friday}]}]
   - {id: trisagion, start: '^The Trisagion$', title: Trisagion Prayers}
   - id: apolytikia
     start: '^Apolytikion\b'
@@ -68,4 +75,8 @@ sections:
     replace: vespers.apolytikia
     music: [{key: apolytikion, title: Apolytikion, dcs: '^apolytikion\d*\.'}]
   - {id: closing, start: '^D: Let us pray to the Lord\.$', title: The Blessing, keep_first: true}
-  - {id: dismissal, start: '^The Dismissal$', title: The Dismissal}
+  # Dismissal placeholders ("the appointed characteristic phrase", "N. (the saint of the day)") stay as printed (constant; open question #89).
+  - id: dismissal
+    start: '^The Dismissal$'
+    title: The Dismissal
+    block_when: [{match: '^If there has been an Artoklasia', when_slot: vespers.litia, when_fill: {litia: true}}]

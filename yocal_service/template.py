@@ -230,6 +230,16 @@ def _bracket_blocks(blocks: list, conds: list | None = None) -> list:
     return out
 
 
+def tag_blocks(blocks: list, rules: list | None) -> list:
+    """Section config `block_when:` [{match, when | when_slot | when_fill}]: tags the first-matching plain block (by its text) with the
+    condition under which compose shows it (see compose.block_shown); untagged blocks are always shown."""
+    for b in blocks:
+        r = next((r for r in rules or [] if b["t"] != "slot" and re.search(r["match"], b.get("text", ""))), None)
+        if r:
+            b.update({k: r[k] for k in ("when", "when_slot", "when_fill", "label") if k in r})
+    return blocks
+
+
 _CFG = None
 
 
@@ -262,11 +272,12 @@ def build(pdf: str, config: str = CONFIG, service: str = "liturgy") -> dict:
             kept = {}
             raw = apply_spans(raw, sc.get("spans"), kept)
             blocks = _bracket_blocks(clean_blocks(blocks_from(raw, cfg.get("roles"))), cfg.get("seasonal"))
+            tag_blocks(blocks, sc.get("block_when"))
             for b in blocks:
                 if b["t"] == "slot" and b["slot"] in kept:
                     b["template"] = re.sub(r"^(?:Priest|P):\s*", "", kept[b["slot"]])
         sections.append({"id": sc["id"], "title": sc["title"], "optional": bool(sc.get("optional")), "exclude": bool(sc.get("exclude")), "blocks": blocks,
-                         "music": sc.get("music", []), "dcs_text": sc.get("dcs_text"), **({"when_slot": sc["when_slot"]} if sc.get("when_slot") else {})})
+                         "music": sc.get("music", []), "dcs_text": sc.get("dcs_text"), **({k: sc[k] for k in ("when_slot", "when_fill") if sc.get(k)})})
     return {"source": os.path.basename(pdf), "service": service, "sections": sections}
 
 
