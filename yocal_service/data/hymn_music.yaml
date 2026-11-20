@@ -1,0 +1,29 @@
+# Scores per hymn id (yocal_rules/data/hymns.yaml), not per date: fetched once into the sources store
+# (`python -m yocal_service.music hymns`; yocal_sources/music, sha256-named), the index row lists the hymn ids it sets
+# and what the DCS path says: composer, lang, notation (w = western, b = byzantine), mode (trailing digit, 5 = plagal first).
+# A score item is a URL, or {url, mode, ...} when the path does not say (read from the score's heading).
+# `prefer`: the default selection for the stand (music.hymn_assets ranks matching scores first). URLs only (public repo).
+# Tone / model melody of a hymn is not recorded here (#86).
+
+lit/vespers/theotoke_parthene:   # Artoklasia: "O Virgin Theotokos, rejoice" (DCS skeleton lity)
+  title: "O Virgin Theotokos, rejoice (Artoklasia)"
+  prefer: {lang: en, mode: 5, notation: western}   # parish booklet 2026-11-20 p.52 prints this very score (Dedes, "Mode pl. 1. Pa=D.", staff notation)
+  scores:
+    - https://dcs.goarch.org/media/m/barrett/en/ho/ho10/b/litytheotokeparthene5.pdf
+    - https://dcs.goarch.org/media/m/dedes/en/ho/ho10/w/litytheotokeparthene5.pdf
+    - https://dcs.goarch.org/media/m/barrett/en/ho/ho10/b/litytheotokeparthene1.pdf
+    - https://dcs.goarch.org/media/m/barrett/en/ho/ho10/w/litytheotokeparthene1.pdf
+    - https://dcs.goarch.org/media/m/marinakos/gr/ho/ho10/w/litytheotokeparthene5.pdf
+    - https://dcs.goarch.org/media/m/dedes/gr/ho/ho10/w/litytheotokeparthene7.pdf
+
+lit/vespers/artoklasia_ps33:     # Artoklasia: "Rich men turned poor" (Ps 33:11; DCS skeleton lity, psVE.breadhymn)
+  title: "Rich men turned poor (Artoklasia)"
+  prefer: {lang: en}   # parish booklet 2026-11-20 p.54 prints another setting ("Mode pl. 1. Ke=A.", not on DCS); mode of the hymn: open question (#88)
+  scores:
+    - {url: "https://dcs.goarch.org/media/m/dedes/en/ho/ho10/w/lityartohymn.pdf", mode: 7}   # score heading "Rich men. Grave Mode. G=F." (Grave = pl. 3 = 7; English + Greek)
+
+lit/vespers/lity_kyrie:          # Lity litany: "Lord, have mercy" (parish: x40 in four sets of ten); not a slot hymn, for the fixed text (#85)
+  title: "Lord, have mercy (Lity)"
+  prefer: {lang: en, mode: 5}
+  scores:
+    - https://dcs.goarch.org/media/m/dedes/en/ho/ho10/w/litykyrieeleisonmode5.pdf

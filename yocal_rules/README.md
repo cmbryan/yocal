@@ -46,6 +46,9 @@ ANCA file names come from the committed `data/anca_pages.json`; PDFs are downloa
 Coverage sweep: `tests/yocal_rules/test_hymns.py::test_sundays_to_2099_resolve_without_error` (every in-slice ordinary Sunday to 2099 has hymn ids).
 Festal Liturgy hymns (`liturgy.antiphons/eisodikon/trisagion/megalynarion`) are resolved on every Sunday: `data/rules/festal_hymns.yaml` (defaults = the booklet's ordinary texts, `hymns.for_slot` -> `[]`; Pascha season, Lent 1/3, Palm Sunday, Pentecost, Sundays in a feast period, Lord's feast on a Sunday). Fill attrs: `of` (hymn base, default the day's feast), `refrain2` (resurrection | saints | feast), `refrain3` (hymn id), `ending`. Tests: `tests/yocal_rules/test_festal.py`.
 
+## Vespers: Lity and Artoklasia (#88)
+`vespers.litia` (`litia: true`) -> `hymns.litia`: the feast's Lity idiomela (`<base>/lity1..N` when `hymns.yaml` `lity:` gives the count, else `<base>/lity` = all of them), its Lity Glory (`<base>/doxastikonlity`; `doxastikonlitynow` when `lity:` says Glory and Now are two hymns), then the fixed Artoklasia hymns `lit/vespers/theotoke_parthene` and `lit/vespers/artoklasia_ps33` ("Rich men", meta `{priest: 1, choir: 2}`: Typikon Ch I p.14, DCS skeleton, ANCA). `litia: false` -> no hymns. Tests: `tests/yocal_rules/test_litia.py`. Tones/model melodies: #86. The fixed text (litany, prayers, blessing) is rendered with the Vespers template (#85).
+
 ## Divergence log
 `data/divergence.yaml` (all `data/divergence*.yaml` are read): accepted, class-scoped differences between our output and an answer key. A diff matching no entry is *unexplained*, and for ANCA on an explicit/inferred Rule it blocks the gate. Entry:
 ```yaml

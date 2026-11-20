@@ -5,12 +5,13 @@ Precedence (parish decision): parish > GOA DCS > ANCA. DCS and ANCA wording is s
   dcs:    texts/dcs.jsonl keyed by AGES 'topic|field', found through yocal_rules.hymns.dcs_keys(id)
   anca:   texts/anca.jsonl keyed by hymn id
 Files live in the sources store (store.py: the private yocal_sources submodule). Ingest (re-running only adds/updates):
-    python -m yocal_service.texts ingest [CACHE_DIR]     # every cached DCS page + DCS corpus + parish booklets + ANCA READ files
+    python -m yocal_service.texts ingest [CACHE_DIR]     # every cached DCS page + DCS corpus + parish booklets + ANCA READ and LITART files
     python -m yocal_service.texts get HYMN_ID
     python -m yocal_service.texts verify [REPORT.md]     # issue #64: is each id's text really that hymn? (cross-source, labels)
 """
 from __future__ import annotations
 
+import datetime as dt
 import fnmatch
 import functools
 import glob
@@ -216,10 +217,15 @@ def ingest(cache: str = CACHE, root: str | None = None) -> dict:
     stats = {"dcs_pages": 0, "dcs_texts": 0, "booklet": 0}
     for fn in sorted(glob.glob(os.path.join(cache, "dcs-*.html"))):
         m = re.search(r"dcs-(\d{4}-\d\d-\d\d)-(\w+)\.html$", fn)
+        sk = re.search(r"dcs-skeleton-(\w+)\.html$", fn)  # a service skeleton (crawl skeleton NAME): fixed texts, dated by download
         html = open(fn, encoding="utf-8").read()
-        if not m or not html:
+        if not (m or sk) or not html:
             continue
         stats["dcs_pages"] += 1
+        if sk:
+            day = dt.date.fromtimestamp(os.path.getmtime(fn)).isoformat()
+            stats["dcs_texts"] += ingest_dcs_page(con, html, day, f"GOA DCS skeleton {sk.group(1)}")
+            continue
         stats["dcs_texts"] += ingest_dcs_page(con, html, m.group(1), f"GOA DCS {m.group(1)} {m.group(2)}")
     if os.path.exists(CORPUS):
         for r in json.load(open(CORPUS, encoding="utf-8")):
@@ -229,10 +235,11 @@ def ingest(cache: str = CACHE, root: str | None = None) -> dict:
     stats["booklet"] = ingest_booklets(con)
     old = con.rows["anca"]  # ANCA rows are derived from the cached files: rebuilt, so a corrected heading/text mapping drops stale keys
     con.rows["anca"] = {}
-    stats["anca"] = dict(anca_texts.ingest(con, put, cache, _facts))
+    stats["anca"] = dict(anca_texts.ingest(con, put, cache, _facts) + anca_texts.ingest_litart(con, put, cache, _facts))
     for k, r in old.items():  # keep rows whose source file this machine does not have
         day = re.search(r"(\d{4}-\d\d-\d\d)", r.get("origin", ""))
-        if k not in con.rows["anca"] and not (day and os.path.exists(os.path.join(cache, f"anca-{day.group(1)}-READ.txt"))):
+        kind = "LITART" if "Litia and Artoklasia" in r.get("origin", "") else "READ"
+        if k not in con.rows["anca"] and not (day and os.path.exists(os.path.join(cache, f"anca-{day.group(1)}-{kind}.txt"))):
             con.rows["anca"][k] = r
     if con.rows["anca"] != old:
         con.dirty.add("anca")

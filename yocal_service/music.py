@@ -135,9 +135,83 @@ def sync_index(con) -> int:
         con.execute("INSERT INTO music_asset(url, source, title, label, form, mime, sha256, size, fetched_at) VALUES(?,?,?,?,?,?,?,?,?) "
                     "ON CONFLICT(url) DO UPDATE SET mime=excluded.mime, sha256=excluded.sha256, size=excluded.size, fetched_at=excluded.fetched_at, error=NULL",
                     (r["url"], r["source"], r.get("title", ""), r.get("label", ""), r.get("form", ""), r.get("mime"), r["sha256"], r.get("size"), r.get("fetched_at")))
+        if r.get("hymns"):
+            aid = con.execute("SELECT id FROM music_asset WHERE url=?", (r["url"],)).fetchone()["id"]
+            for hid in r["hymns"]:
+                con.execute("INSERT OR IGNORE INTO hymn_music VALUES(?,?,?)", (hid, aid, 0))
         n += 1
     con.commit()
     return n
+
+
+# ---------------------------------------------------------------- music per hymn id (not per date)
+HYMN_MUSIC = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "hymn_music.yaml")
+_DCS_MEDIA = re.compile(r"/media/m/(?P<composer>[^/]+)/(?P<lang>[a-z]{2})/(?:[^/]+/)*(?P<nt>[wb])/(?P<name>[a-z0-9]+?)(?:mode)?(?P<mode>[1-8])?\.pdf$")
+NOTATION = {"w": "western", "b": "byzantine"}
+
+
+def dcs_media_meta(url: str) -> dict:
+    """DCS score URL '/media/m/<composer>/<lang>/.../<w|b>/<name><mode>.pdf' -> {composer, lang, notation, mode} (what the path says).
+    w = Western staff, b = Byzantine notation; trailing digit = mode 1-8 (5 = plagal first). {} if the URL is not one."""
+    m = _DCS_MEDIA.search(url)
+    if not m:
+        return {}
+    d = {"composer": m["composer"], "lang": m["lang"], "notation": NOTATION[m["nt"]]}
+    if m["mode"]:
+        d["mode"] = int(m["mode"])
+    return d
+
+
+def hymn_music_table(path: str = HYMN_MUSIC) -> dict:
+    """data/hymn_music.yaml: {hymn id: {title, prefer: {lang, mode, notation}, scores: [url, ...]}} (URLs only; bytes in the store)."""
+    import yaml
+    return yaml.safe_load(open(path, encoding="utf-8")) or {}
+
+
+def save_for_hymns(con, url: str, hymns: list, title: str, source: str = "dcs", meta: dict | None = None) -> dict:
+    """Fetch one score into the sources store (once; sha256-named) and record which hymn ids it sets, with its
+    composer/lang/notation/mode in the index row (`meta` adds/overrides what the URL path says). -> asset_info."""
+    meta = {**(dcs_media_meta(url) if source == "dcs" else {}), **(meta or {})}
+    aid = upsert_asset(con, {"url": url, "source": source, "label": meta.get("composer", ""), "form": meta.get("notation", "score")}, title)
+    info = fetch_asset(con, aid)
+    if not info["cached"]:
+        return info
+    rows = {r["url"]: r for r in store.read_jsonl(store.path(*INDEX))}
+    have = rows.get(url, {}).get("hymns", [])
+    _index_put({"url": url, "hymns": sorted(set(have) | set(hymns)), **meta})
+    for hid in hymns:
+        con.execute("INSERT OR IGNORE INTO hymn_music VALUES(?,?,?)", (hid, aid, 0))
+    con.commit()
+    return info
+
+
+def fetch_hymn_music(con, table: dict | None = None, delay: float = 1.0) -> dict:
+    """Every score listed in data/hymn_music.yaml -> sources store + hymn links (rate-limited; already-saved ones skipped)."""
+    import time
+    table = hymn_music_table() if table is None else table
+    saved = {r["url"]: r for r in store.read_jsonl(store.path(*INDEX))}
+    st = {"saved": 0, "skipped": 0, "failed": 0}
+    for hid, ent in table.items():
+        for item in ent.get("scores", []):
+            item = item if isinstance(item, dict) else {"url": item}
+            url, meta = item["url"], {k: v for k, v in item.items() if k != "url"}
+            if hid in saved.get(url, {}).get("hymns", []) and all(saved[url].get(k) == v for k, v in meta.items()):
+                st["skipped"] += 1
+                continue
+            info = save_for_hymns(con, url, [hid], ent.get("title", hid), meta=meta)
+            st["saved" if info["cached"] else "failed"] += 1
+            saved = {r["url"]: r for r in store.read_jsonl(store.path(*INDEX))}
+            time.sleep(delay)
+    return st
+
+
+def hymn_assets(con, hid: str, prefer: dict | None = None) -> list:
+    """Scores saved for a hymn id, best first: the hymn's `prefer` (data/hymn_music.yaml: lang, mode, notation) before the rest."""
+    prefer = prefer if prefer is not None else (hymn_music_table().get(hid) or {}).get("prefer", {})
+    meta = {r["url"]: r for r in store.read_jsonl(store.path(*INDEX))}
+    rows = con.execute("SELECT a.id, a.url FROM hymn_music h JOIN music_asset a ON a.id = h.asset_id WHERE h.hymn_id=? ORDER BY h.rank, a.id", (hid,)).fetchall()
+    miss = lambda m: tuple(int(k in prefer and m.get(k) != prefer[k]) for k in ("lang", "mode", "notation"))
+    return [asset_info(con, r["id"]) for r in sorted(rows, key=lambda r: miss(meta.get(r["url"], {})))]
 
 
 def export_db_blobs(con) -> int:
@@ -225,3 +299,17 @@ def page_png(con, aid: int, page: int) -> bytes | None:
     con.commit()
     r = con.execute("SELECT png FROM music_page WHERE asset_id=? AND page=?", (aid, page)).fetchone()
     return r[0] if r else None
+
+
+def main(argv=None):
+    """python -m yocal_service.music hymns   # fetch the scores of data/hymn_music.yaml into the sources store (~1 req/s)"""
+    import sys
+    a = argv if argv is not None else sys.argv[1:]
+    if a[:1] == ["hymns"]:
+        print(fetch_hymn_music(db.connect()))
+    else:
+        print(main.__doc__)
+
+
+if __name__ == "__main__":
+    main()
