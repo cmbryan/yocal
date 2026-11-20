@@ -142,3 +142,47 @@ def test_api_vespers_service():
     from yocal_service.app import create_app
     d = create_app().test_client().get("/api/service?date=2026-11-20&service=vespers&offline=1").get_json()
     assert d["service"] == "vespers" and "gladsome_light" in [s["id"] for s in d["sections"]]
+
+
+def _texts(sec: dict) -> list:
+    return [b.get("text", "") for b in sec["blocks"] if b["t"] != "variable"]
+
+
+@needs_template
+def test_vespers_closing_order_and_conditional_rubrics():
+    def run(d):
+        r = compose.compose(dt.date.fromisoformat(d), "vespers", offline=True, fetch_music=False)
+        return [s["id"] for s in r["sections"]], {s["id"]: s for s in r["sections"]}
+
+    ids, secs = run("2026-11-20")  # eve of the Entrance: Artoklasia appointed
+    assert ids[ids.index("aposticha"):] == ["aposticha", "nunc_dimittis", "trisagion", "apolytikia", "closing", "dismissal"]
+    assert ids.index("artoklasia") < ids.index("aposticha")
+    assert secs["nunc_dimittis"]["blocks"][0]["text"].startswith("Now, Master")
+    assert "Our Father" in secs["trisagion"]["blocks"][0]["text"] and secs["trisagion"]["blocks"][1]["role"] == "Priest"
+    assert [b["t"] for b in secs["apolytikia"]["blocks"]] == ["variable"]
+    assert secs["closing"]["blocks"][0]["text"] == "Let us pray to the Lord." and secs["closing"]["blocks"][2]["text"].startswith("The blessing of the Lord")
+    assert any(t.startswith("Glory to you, Christ God") for t in _texts(secs["dismissal"]))
+    assert _texts(secs["dismissal"])[-1].startswith("If there has been an Artoklasia")  # last block of the Dismissal
+    assert not any("Akathist" in t for t in _texts(secs["nunc_dimittis"]))  # Lenten Fridays only
+    assert any("the saint of the day" in t for t in _texts(secs["dismissal"]))  # placeholders printed as in the booklet (open question)
+
+    ids, secs = run("2026-11-14")  # ordinary Saturday: no Artoklasia, no Akathist
+    assert not any(t.startswith("If there has been an Artoklasia") for t in _texts(secs["dismissal"]))
+    assert not any("Akathist" in t for t in _texts(secs["nunc_dimittis"]))
+    assert ids[ids.index("nunc_dimittis"):] == ["nunc_dimittis", "trisagion", "apolytikia", "closing", "dismissal"]
+
+
+def test_block_conditions():
+    class X:
+        def __init__(self, fill):
+            self.fill = fill
+
+    akathist = {"t": "rubric", "when": [{"season": "lent", "weekday": "Friday"}]}
+    assert compose.block_shown(akathist, {"season": "lent", "weekday": "Friday"}, {})
+    assert not compose.block_shown(akathist, {"season": "lent", "weekday": "Saturday"}, {})
+    assert not compose.block_shown(akathist, {"season": "ordinary", "weekday": "Friday"}, {})
+    art = {"t": "rubric", "when_slot": "vespers.litia", "when_fill": {"litia": True}}
+    assert compose.block_shown(art, {}, {"vespers.litia": X({"litia": True})})
+    assert not compose.block_shown(art, {}, {"vespers.litia": X({"litia": False})})  # Pascha: slot resolved, no Litia
+    assert not compose.block_shown(art, {}, {})
+    assert compose.block_shown({"t": "line"}, {}, {})
