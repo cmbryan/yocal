@@ -1,4 +1,4 @@
-"""Extract the Divine Liturgy text from the parish choir PDF into a section/block template.
+"""Extract a service's fixed text (Divine Liturgy, Matins, Vespers) from a parish choir PDF into a section/block template.
 
 The PDF mixes text with embedded notation; notation noise is filtered out. Output goes to a local,
 git-ignored JSON (the PDF text is copyrighted and must not be committed).
@@ -16,15 +16,27 @@ import yaml
 HERE = os.path.dirname(__file__)
 LOCAL = os.path.join(HERE, "local")
 # service -> (section map, extracted template, begin/end markers are in the map as `begin:` / `end:`)
-CONFIGS = {"liturgy": os.path.join(HERE, "data", "liturgy_sections.yaml"), "matins": os.path.join(HERE, "data", "matins_sections.yaml")}
+CONFIGS = {s: os.path.join(HERE, "data", f"{s}_sections.yaml") for s in ("liturgy", "matins", "vespers")}
 TEMPLATES = {s: os.path.join(LOCAL, f"{s}_template.json") for s in CONFIGS}
 CONFIG, TEMPLATE = CONFIGS["liturgy"], TEMPLATES["liturgy"]
 
+
+def available(service: str) -> bool:
+    """A booklet template exists for `service` and has been extracted on this machine."""
+    return service in TEMPLATES and os.path.exists(TEMPLATES[service])
+
+
 ROLE = re.compile(r"^(Priest|Deacon|Choir|Reader|People|All|Chanter|Cantor|Bishop|Verse|Refrain|Right Choir|Left Choir)(?:/\w+)?:\s*(.*)$")
 LITURGY_START = re.compile(r"THE DIVINE LITURGY OF ST JOHN CHRYSOSTOM")
-SCORE_TITLE = re.compile(r"(Mode \d|Mode pl|Plagal|Di=|Pa=|Vu=|Ga=|Ke=|Zo=|Soft Chromatic|Diatonic|Chromatic|Enharmonic|©|Copyright|Permission|Translation by|Translation ©|Melody|Text GOA|Used by permission|Musical text|Transcribed|transcribed|Byzantine chant|Arranged by|Fourth Mode|Tone \d+/|Intonation|Adagio|Andante|Largo|Version \d|BACK TO|START HERE|START WITH|RESUME HERE|Right Choir sings|Left Choir|Antiochian Village|Archdiocese of North America|Hieromonk|Greek Orthodox Archdiocese)")
+SCORE_TITLE = re.compile(r"(Mode \d|Translation and score|Score by|Text by|, translator\b|Mode pl|Plagal|Di=|Pa=|Vu=|Ga=|Ke=|Zo=|Soft Chromatic|Diatonic|Chromatic|Enharmonic|©|Copyright|Permission|Translation by|Translation ©|Melody|Text GOA|Used by permission|Musical text|Transcribed|transcribed|Byzantine chant|Arranged by|Fourth Mode|Tone \d+/|Intonation|Adagio|Andante|Largo|Version \d|BACK TO|START HERE|START WITH|RESUME HERE|Right Choir sings|Left Choir|Antiochian Village|Archdiocese of North America|Hieromonk|Greek Orthodox Archdiocese)")
 MUSIC_GLYPH = re.compile(r"[œ˙ŒΛχµϕψ¶º•ˆ˜]|[#!\"$%&]{2,}|(\b[kjnfdeCDGEF]\b ?){3,}")
 SYLLABLES = re.compile(r"\S+ - \S+ - |\w+ - \w+\s{2,}|\w+-\w+ - ")
+# Booklets that abbreviate speakers ('P:', 'D:'; config `roles:`) indent wrapped lines by only 3-4 columns and centre their headings
+ABBR_ROLE = re.compile(r"^([A-Z]):\s*(.*)$")
+STAGE = re.compile(r"^\(([A-Z][\w ]*)\):$")  # '(Loudly):' on its own line: the previous speaker continues
+TERMINAL = re.compile(r"[.!?:;]['’\"”)\]]*$")
+CUE = re.compile(r"(?<=\S)\s+(?:[A-Z]{2,}[!,.]?\s*(?:-\s*)?){2,}$")  # trailing choir cue in capitals ('x3   SETTING NEXT PAGE')
+HEADING_INDENT = 20
 
 
 def pdf_text(pdf: str) -> str:
@@ -64,9 +76,21 @@ def anchor_lines(lines: list, sections: list) -> list:
     return out
 
 
-def blocks_from(lines: list) -> list:
-    """Cleaned lines -> blocks: line (role,text) | rubric | note."""
-    blocks, cur, prev_kept = [], None, False
+def _role(t: str, roles: dict | None):
+    """-> (role, text) when the line opens a speaker's line ('Priest: ...', or 'P: ...' with `roles`), else None."""
+    m = ROLE.match(t)
+    if m:
+        return m.group(1), m.group(2)
+    m = ABBR_ROLE.match(t) if roles else None
+    return (roles[m.group(1)], m.group(2)) if m and m.group(1) in roles else None
+
+
+def blocks_from(lines: list, roles: dict | None = None) -> list:
+    """Cleaned lines -> blocks: line (role,text) | rubric | note.
+    `roles` (config, abbreviation -> role): the booklet writes 'P: ...'; a wrapped speaker line is indented >= 4 columns, or less when
+    the line before stops mid-sentence; centred lines (headings, score titles) are dropped; trailing capitals cues are removed."""
+    blocks, cur, prev_kept, last = [], None, False, ""
+    cont = 4 if roles else 6
 
     def flush():
         nonlocal cur
@@ -91,19 +115,35 @@ def blocks_from(lines: list) -> list:
             prev_kept = False
             flush()
             continue
-        m = ROLE.match(t)
+        ind = _indent(raw)
+        if roles:
+            t = CUE.sub("", t)
+            if ind >= HEADING_INDENT:
+                flush()
+                prev_kept = False
+                continue
+            st = STAGE.match(t)
+            if st and cur and cur["t"] == "line" and prev_kept:
+                role = cur["role"]
+                flush()
+                cur, last = {"t": "line", "role": role, "text": f"({st.group(1)})"}, ""
+                continue
+        m = _role(t, roles)
+        wrapped = prev_kept and cur and cur["t"] == "line" and (
+            ind >= cont if not roles else ind > 0 and (ind >= cont or not TERMINAL.search(last) or not t[0].isupper()))
+        last = t
         if m:
             flush()
-            cur = {"t": "line", "role": m.group(1), "text": m.group(2)}
+            cur = {"t": "line", "role": m[0], "text": m[1]}
             prev_kept = True
-        elif prev_kept and cur and _indent(raw) >= 6 and cur["t"] == "line":
+        elif wrapped:
             cur["text"] += " " + t
-        elif _indent(raw) < 6 or not prev_kept:
-            if cur and cur["t"] == "rubric" and prev_kept and _indent(raw) < 6:
+        elif ind < 6 or not prev_kept:
+            if cur and cur["t"] == "rubric" and prev_kept and ind < 6:
                 cur["text"] += " " + t
             else:
                 flush()
-                cur = {"t": "rubric" if _indent(raw) < 6 else "note", "text": t}
+                cur = {"t": "rubric" if ind < 6 else "note", "text": t}
                 prev_kept = True
         else:
             if cur:
@@ -120,7 +160,7 @@ def _keep(b: dict) -> bool:
     words = t.split()
     if t.startswith("[") and len(words) >= 6:  # bracketed seasonal rubric (may contain " - " dashes)
         return True
-    if b["t"] == "note" or len(words) < 4 or "Translation" in t or len(re.findall(r"[/;\"]", t)) > 1:
+    if b["t"] == "note" or len(words) < 4 or "Translation" in t or len(re.findall(r"[/;\"]", t)) > 1 or t.endswith("-"):  # '-': score lyric cut mid-word
         return False
     if re.search(r"\w - \w|\w -\w|\w- \w| [A-Za-z] [A-Za-z] |[ΔΓκ]", t) or sum(len(w) == 1 and w.isalpha() and w not in "aIA" for w in words) > 1:
         return False
@@ -221,12 +261,12 @@ def build(pdf: str, config: str = CONFIG, service: str = "liturgy") -> dict:
         else:
             kept = {}
             raw = apply_spans(raw, sc.get("spans"), kept)
-            blocks = _bracket_blocks(clean_blocks(blocks_from(raw)), cfg.get("seasonal"))
+            blocks = _bracket_blocks(clean_blocks(blocks_from(raw, cfg.get("roles"))), cfg.get("seasonal"))
             for b in blocks:
                 if b["t"] == "slot" and b["slot"] in kept:
-                    b["template"] = re.sub(r"^Priest:\s*", "", kept[b["slot"]])
+                    b["template"] = re.sub(r"^(?:Priest|P):\s*", "", kept[b["slot"]])
         sections.append({"id": sc["id"], "title": sc["title"], "optional": bool(sc.get("optional")), "exclude": bool(sc.get("exclude")), "blocks": blocks,
-                         "music": sc.get("music", []), "dcs_text": sc.get("dcs_text")})
+                         "music": sc.get("music", []), "dcs_text": sc.get("dcs_text"), **({"when_slot": sc["when_slot"]} if sc.get("when_slot") else {})})
     return {"source": os.path.basename(pdf), "service": service, "sections": sections}
 
 
@@ -240,7 +280,7 @@ def load(service: str = "liturgy") -> dict:
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     if not argv:
-        print("usage: python -m yocal_service.build_template PDF [--out FILE]", file=sys.stderr)
+        print(f"usage: python -m yocal_service.build_template PDF [--service {'|'.join(CONFIGS)}] [--out FILE]", file=sys.stderr)
         return 1
     service = argv[argv.index("--service") + 1] if "--service" in argv else "liturgy"
     out = argv[argv.index("--out") + 1] if "--out" in argv else TEMPLATES[service]
