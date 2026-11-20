@@ -22,7 +22,9 @@ sections:
   - {id: anoixantaria, start: '^Anoixantaria\b', title: Anoixantaria, raw_anchor: true}
   - {id: litany_peace, start: '^Litany of Peace$', title: Litany of Peace}
   - {id: psalter, start: '^Psalter Reading$', title: Psalter Reading, replace: vespers.kathisma}
-  - {id: little_litany, start: '^The Little Litany$', title: Little Litany}
+  # Typikon (Khoury/Morris) 1st Kathisma + weekday Vespers order, Violakis Typikon Order for Sunday, and the booklet all place the Little Litany
+  # "following the Psalms": it closes the Psalter reading, so it is shown only when the Rules appoint vespers.kathisma (#84; until it lands: never).
+  - {id: little_litany, start: '^The Little Litany$', title: Little Litany, when_slot: vespers.kathisma}
   - id: lord_i_have_cried
     start: '^Lord, I have cried$'
     title: Lord, I have cried
@@ -48,7 +50,8 @@ sections:
   - {id: litany_fervent, start: '^Litany of Fervent Supplication$', title: Litany of Fervent Supplication}
   - {id: evening_prayer, start: '^The Evening Prayer$', title: Vouchsafe, O Lord}
   - {id: litany_supplication, start: '^The Litany of Supplication$', title: Litany of Supplication}
-  - {id: bowing_heads, start: '^Prayer at The Bowing of the Heads$', title: Prayer at the Bowing of the Heads}
+  # starts at the rubric before "Peace to all / Bow your heads to the Lord" (the dialogue belongs to the bowing, not to the litany)
+  - {id: bowing_heads, start: '^The deacon moves to stand before the ikon of Christ', title: Bowing of the Heads, keep_first: true}
   - {id: litia, start: '^Idiomelon at the Lity$', title: The Lity, when_slot: vespers.litia, replace: vespers.litia}
   - {id: litia_litany, start: '^The Litany$', title: Litany of the Lity, when_slot: vespers.litia}
   - {id: artoklasia, start: '^D: Let us pray to the Lord\.$', title: Artoklasia, keep_first: true, when_slot: vespers.litia}

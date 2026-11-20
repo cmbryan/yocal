@@ -13,6 +13,7 @@ from yocal_service import compose, template
 SLOT_ORDER = ["vespers.kathisma", "vespers.lihc.stichera", "vespers.prokeimenon", "vespers.readings", "vespers.litia",
               "vespers.aposticha", "vespers.apolytikia"]
 FEAST_ONLY = {"readings", "litia", "litia_litany", "artoklasia"}
+FIXED_ORDER = ["opening", "psalm_103", "anoixantaria", "litany_peace", "little_litany", "litany_fervent", "evening_prayer", "litany_supplication", "bowing_heads"]
 LEAK = re.compile(r"temple|zachari|holies|exodus|ezekiel|tent of|prelude|maiden", re.I)  # words of the booklet's Nov 21 propers
 needs_template = pytest.mark.skipif(not template.available("vespers") or not os.path.exists("db/yocal/YOCal_Master.db"),
                                     reason="needs local vespers template + calendar DB")
@@ -41,7 +42,7 @@ def test_vespers_section_map():
     assert all(s in compose.RESOLVERS and compose.ENGINE_SLOT[s] == s for s in SLOT_ORDER)
     rules_slots = yaml.safe_load(open("yocal_rules/data/rules/slots.yaml", encoding="utf-8"))
     assert {s for s in rules_slots if s.startswith("vespers.")} <= set(SLOT_ORDER)  # every Rules slot has a place in the service
-    assert {s["id"] for s in cfg["sections"] if s.get("when_slot")} == FEAST_ONLY
+    assert {s["id"] for s in cfg["sections"] if s.get("when_slot")} == FEAST_ONLY | {"little_litany"}
     assert ids.index("entrance") + 1 == ids.index("gladsome_light") and not _slots(cfg["sections"][ids.index("gladsome_light")])
 
 
@@ -104,6 +105,36 @@ def test_vespers_feast_eve_and_ordinary_saturday():
     assert not FEAST_ONLY & set(secs)
     assert list(secs)[:3] == ["opening", "psalm_103", "anoixantaria"] and list(secs)[-2:] == ["closing", "dismissal"]
     assert any(p.get("hymn") == "oct/t7/sun/apolytikion" for b in secs["apolytikia"]["blocks"] for p in b["paragraphs"])
+
+
+@needs_template
+def test_vespers_fixed_litanies_and_prayers():
+    tpl = {s["id"]: s for s in template.load("vespers")["sections"]}
+    assert [i for i in tpl if i in FIXED_ORDER] == FIXED_ORDER  # booklet order
+    assert tpl["little_litany"]["when_slot"] == "vespers.kathisma"  # follows the Psalter reading; Rules slot is #84
+    lines = lambda i: [(b["role"], b["text"]) for b in tpl[i]["blocks"] if b["t"] == "line"]
+    assert lines("opening")[0] == ("Priest", "Blessed is our God, always, now and for ever and to the ages of ages.")
+    assert lines("opening")[1][1].count("Come, let us worship") == 3 and lines("opening")[1][0] == "Reader"
+    assert tpl["psalm_103"]["blocks"][0]["role"] == "Reader" and tpl["psalm_103"]["blocks"][0]["text"].startswith("Bless the Lord, my soul")
+    assert not tpl["anoixantaria"]["blocks"]  # score only
+    assert lines("litany_peace")[0] == ("Deacon", "In peace let us pray to the Lord.") and lines("litany_peace")[-2][0] == "Priest"
+    ff = lines("litany_fervent")
+    assert ff[0][1].startswith("Let us all say") and ff[-1] == ("Choir", "Amen.") and any("[and for the servants of God N. & N." in t for _, t in ff)  # bracketed names kept as printed
+    assert lines("evening_prayer")[0][0] == "Reader" and lines("evening_prayer")[0][1].startswith("Grant, Lord, to keep us this evening")
+    assert lines("litany_supplication")[0][1].startswith("Let us complete our evening prayer")
+    bh = lines("bowing_heads")
+    assert [r for r, _ in bh[:4]] == ["Priest", "Choir", "Deacon", "Choir"] and bh[2][1].startswith("Bow your heads")
+    assert bh[-2][1].startswith("(Loudly) May the might of Your kingdom") and bh[-1] == ("Choir", "Amen.")
+    assert not any("Bow your heads" in t for _, t in lines("litany_supplication"))
+
+
+@needs_template
+def test_vespers_fixed_parts_render_in_order_without_slots():
+    for d in ("2026-11-20", "2026-11-14"):  # feast eve; ordinary Saturday (no readings/Lity)
+        ids = [s["id"] for s in compose.compose(dt.date.fromisoformat(d), "vespers", offline=True, fetch_music=False)["sections"]]
+        got = [i for i in ids if i in FIXED_ORDER]
+        assert got == [i for i in FIXED_ORDER if i != "little_litany"], d  # Little Litany waits for the kathisma Rule (#84)
+        assert ids.index("prokeimenon") < ids.index("litany_fervent")  # fervent litany follows the prokeimenon even with no readings
 
 
 @needs_template
