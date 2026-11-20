@@ -1,0 +1,117 @@
+# Pergamos uoadl:168170 — contents (Πίνακες) transcribed from PDF images 182 (vol.1, partly illegible continuation on 183) and 434-435 (vol.2).
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). One PDF holds BOTH volumes; each volume has its own pagination.
+id: "168170"
+key: PG170
+title: Ἡ Μελίφωνος Τερψινόη, ἤτοι Ἀνθολογία τῶν μελῳδικωτέρων ἐκκλησιαστικῶν ἀσμάτων (Lesbian notation system, Georgios Lesbios; ed. Neophytos / St. Anagnostis), 2 vols, Athens
+year: "1847-1848"
+file: "168170 Η Μελίφωνος Τερψινόη, ήτοι ανθολογία των μελωδικοτέρων εκκλησιαστικών ασμάτων των ακολουθι (1847 - 1848).pdf"
+# image = printed // 2 + add, per volume (two-page spreads)
+layout: [{vol: 1, from: 1, div: 2, add: 11}, {vol: 2, from: 1, div: 2, add: 182}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.1 = img 11 (right); p.2-3 = img 12; p.182-183 = img 102; p.294-295 = img 158; p.340-341 = img 181 (ΤΕΛΟΣ ΤΟΥ ΠΡΩΤΟΥ ΤΟΜΟΥ)
+# calibration checks: checked: p.7 = img 185; p.8-9 = img 186; p.24-25 = img 194; p.342-343 = img 353; p.346-347 = img 355; p.504-505 = img 434; p.506-507 = img 435
+vol1_images: [11, 181]       # vol.1 title = img 4 (Τόμος Πρῶτος, 1847); vol.1 Πίναξ = img 182 right page (+ continuation overleaf, img 183 left, only a show-through scan: illegible, doxology pages read approximately)
+vol2_images: [183, 435]      # vol.2 title = img 183 (Τόμος Δεύτερος, 1848)
+toc_images: [182, 183, 434, 435]
+lost_pages: "Image 354 = corrupt-source placeholder = vol.2 printed p.344-345. Per the Πίναξ: p.343 starts 'Ψυχὴ μου, ψυχή μου' / 'Ἀσπόρου Συλλήψεως' (Kontakion of the Great Canon, header seen on p.343) so p.344 is its continuation; p.345 = 'Κύριε τῶν δυνάμεων, κ.τ.λ. εἰς τὸ Ἀπόδειπνον' (Compline) is entirely lost. Neither is parish-relevant for Liturgy/Sunday services."
+summary: >
+  Anthology in Lesbian (Georgios Lesbios) notation, mainly slow/medium settings for Vespers/Orthros (vol.1) and the Divine Liturgy + Great Lent (vol.2).
+  Vol.1: Vespers (Anoixantaria, Makarios aner, Kekragaria, Phos hilaron, Theotoke Parthene), Orthros (Triadika, Evlogitaria, Polyeleoi, Pasapnoaria, Doxologies short by Manuel Protopsaltes and great), Trisagion of the Cross, Makarios aner appendix.
+  Vol.2: Liturgy of Chrysostom (fixed parts p.7-26; Cherubika stases p.27-145; Axion estin p.145; Koinonika p.150-319), Great Lent (p.320-370: Liturgy of Presanctified p.346, Liturgy of Basil p.359, Akathist p.364).
+  LITANY RESPONSES: YES, partly. Seen on page: Κύριε ἐλέησον (Chourmouzios Chartophylax, 8 tones, each a threefold Κύριε ἐλέησον, p.24-27; img 194-195) and Δόξα σοι Κύριε / Εἰς πολλὰ ἔτη (p.23, Pinax only). NOT in the Pinax: Παράσχου Κύριε, Σοὶ Κύριε, Ἀμήν, Καὶ τῷ πνεύματί σου, Ἔλεος εἰρήνης, Εἷς Ἅγιος, Σὲ ὑμνοῦμεν (not individually listed; p.1-6 of vol.2 and the Liturgy text itself not sampled; likely absent).
+  FIXED PARTS found (Pinax, vol.2): Χριστὸς ἀνέστη 7, Antiphons of Despotic/Theomitoric feasts 8 (seen header), Εἰσοδικά 9, Ὅσοι εἰς Χριστόν 11 (seen header), Τὸν Σταυρόν σου 12, Τρισάγιον 14-18, Κύριε σῶσον 19, Ἀλληλούαριον 21, Δόξα σοι Κύριε 23, Κύριε ἐλέησον 24, Cherubika, Ἄξιον ἐστί 145, Koinonika 150-319 (Αἰνεῖτε in 8 tones x 3 stases; feast koinonika), Εἴδομεν τὸ φῶς + Εἴη τὸ ὄνομα Κυρίου 318, Τὸν Δεσπότην καὶ Ἀρχιερέα 319. Εὐλογητὸς ὁ ἐρχόμενος absent from Pinax (maybe within Εἰσοδικά p.9).
+  Resurrectional apolytikia/kontakia/prokeimena: none listed. Tones are by number in headings 'Τρόπος α΄..η΄' (hymns.py: pl1=5, pl2=6, grave=7, pl4=8).
+  Many entries are in Pinax order; page numbers are printed, per volume. Status 'page' = header/content seen.
+entries:   # vol = volume; page = printed in that volume
+  # ---------------- VOL 1 (Vespers, Orthros) ----------------
+  - {vol: 1, page: 1, title: "Ἀνοιξαντάρια", who: Κοσμᾶς Ἱερομόναχος, status: toc, note: "Vespers psalm 103 / Εὐλογητὸς ὁ ἀνήρ; papadic, 8 tones (Τρόπος α΄..)"}
+  - {vol: 1, page: 16, title: "Μακάριος ἀνήρ", who: Γεώργιος ὁ Κρής, status: toc, note: "papadic"}
+  - {vol: 1, page: 23, title: "Κεκραγάρια", who: Ἰάκωβος Πρωτοψάλτης, status: toc, note: "papadic"}
+  - {vol: 1, page: 48, title: "Φῶς Ἱλαρόν", status: toc}
+  - {vol: 1, page: 50, title: "Θεοτόκε Παρθένε", who: Χουρμούζιος Χαρτοφύλαξ, status: toc, note: "Vespers 'Θεοτόκε Παρθένε'; 8 tones? verify"}
+  - {vol: 1, page: 58, title: "Τριαδικά", status: toc}
+  - {vol: 1, page: 61, title: "Εὐλογητάρια", who: Πέτρος Πελοποννήσιος, status: toc, note: "Resurrectional Evlogetaria of Orthros; verify", hymn: lit/matins/evlogetaria}
+  - {vol: 1, page: 65, title: "Ἕτερα (Εὐλογητάρια)", who: Γεώργιος ὁ Λέσβιος, status: toc, hymn: lit/matins/evlogetaria}
+  # Πολυέλεοι (papadic)
+  - {vol: 1, page: 69, title: "Δοῦλοι Κύριον, εἰς τρόπον δ΄", who: Ἰάκωβος Πρωτοψάλτης, status: toc, note: "papadic polyeleos"}
+  - {vol: 1, page: 77, title: "Ἕτερος, εἰς τρόπον ε΄", who: Πέτρος Λαμπαδάριος, status: toc, note: "papadic polyeleos"}
+  - {vol: 1, page: 103, title: "Ἐπὶ τῶν ποταμῶν", who: Χουρμούζιος Χαρτοφύλαξ, status: toc, note: "papadic"}
+  - {vol: 1, page: 117, title: "Λόγον Ἀγαθόν", who: Γεώργιος ὁ Κρής, status: toc, note: "papadic"}
+  # Πασαπνοάρια τοῦ Εὐαγγελίου
+  - {vol: 1, page: 145, title: "Πασαπνοάριον τοῦ Εὐαγγελίου, εἰς τρόπον δ΄", who: Ἰωάννης Πρωτοψάλτης, status: toc, note: "papadic"}
+  - {vol: 1, page: 153, title: "Πασαπνοάριον, εἰς τρόπον ς΄", who: Πέτρος Πελοποννήσιος, status: toc, note: "papadic"}
+  - {vol: 1, page: 159, title: "Ἕτερα σύντομα (Πασαπνοάρια)", status: toc, note: "short; verify tones"}
+  - {vol: 1, page: 160, title: "Ἐλεῆσον με ὁ Θεός, εἰς τὸν ἀσπασμὸν τοῦ Εὐαγγελίου", who: Χουρμούζιος, status: toc, hymn: lit/matins/ps50, note: "Ps 50 at the kissing of the Gospel; verify it is the Orthros Ps 50 setting"}
+  # Πασαπνοάρια τῶν Αἴνων, Ἰάκωβος Πρωτοψάλτης, one per tone
+  - {vol: 1, page: 165, title: "Πασαπνοάριον τῶν Αἴνων, εἰς τρόπον α΄", who: Ἰάκωβος Πρωτοψάλτης, tone: 1, status: toc, note: "papadic; tropoi 2-8 at 168,170,172,174,176,179,181"}
+  # Δοξολογίαι (readable only as show-through on img 183: pages approximate)
+  - {vol: 1, page: 183, title: "Δοξολογίαι σύντομοι, κατὰ τρόπον (Orthros Great Doxology), Μανουὴλ Πρωτοψάλτης", status: page, hymn: lit/matins/doxology, note: "section title seen p.183 (img 102); 'Τρόπος α΄' starts p.184-185; further tones read from show-through only: ~187,190,194,198,201,205,209 [?] verify; short and best parish fit"}
+  - {vol: 1, page: 218, title: "Δοξολογίαι εἰς μέγα μέλος (κατὰ τρόπον), Ἰωάννης Πρωτοψάλτης, Πέτρος Λαμπαδάριος, Χουρμούζιος κ.ἄ.", status: toc, hymn: lit/matins/doxology, note: "slow; page numbers read from faint show-through [?] 218,220,235,238,243,250,262,268,275,281,285 verify; papadic"}
+  - {vol: 1, page: 295, title: "Τρισάγιον τοῦ Σταυροῦ", who: Γεώργιος ὁ Κρής, status: page, hymn: lit/trisagion/cross, note: "header seen p.295 (img 158); text 'Ἅγιος ὁ Θεός... ' in ~8 modes; slow, Georgios Krites; verify tone"}
+  - {vol: 1, page: 297, title: "Τροπάριον τὸ Ἀναστάσιμον [?]", status: toc, note: "illegible show-through; verify"}
+  - {vol: 1, page: 340, title: "Παράρτημα: Μακάριος ἀνὴρ ... (Μανουὴλ Πρωτοψάλτης) and Ἀλληλούϊα endings", status: page, note: "appendix end of vol.1; pp.340-341 seen = Ἀλληλούϊα refrains of Anoixantaria (Κοσμᾶς) and ΤΕΛΟΣ"}
+  # ---------------- VOL 2: Liturgy of Chrysostom ----------------
+  - {vol: 2, page: 7, title: "Χριστὸς ἀνέστη, ἀργὸν καὶ σύντομον", status: toc, note: "Pascha troparion, slow and short, p.7-8"}
+  - {vol: 2, page: 8, title: "Ἀντίφωνα τῶν Δεσποτικῶν καὶ Θεομητορικῶν ἑορτῶν", status: page, note: "header 'Ἀντίφωνα καὶ Εἰσοδικά' seen p.8-9; antiphons of feasts (not the weekday/Sunday 'Εὐλόγει ἡ ψυχή μου')"}
+  - {vol: 2, page: 9, title: "Εἰσοδικὰ τῶν Δεσποτικῶν ἑορτῶν καὶ Κυριακῶν", status: page, note: "Δεῦτε προσκυνήσωμεν... (verify: includes Sunday entrance verse?)"}
+  - {vol: 2, page: 11, title: "Ὅσοι εἰς Χριστόν, ἀντὶ Τρισαγίου, σύντομον καὶ ἀργόν", status: page, hymn: lit/trisagion/baptized, note: "header 'ΟΣΟΙ ΕΙΣ ΧΡΙΣΤΟΝ' seen p.11 (img 187)"}
+  - {vol: 2, page: 12, title: "Τὸν Σταυρόν σου προσκυνοῦμεν, ἀντὶ Τρισαγίου, ἀργὸν καὶ σύντομον", status: toc, hymn: lit/trisagion/cross}
+  - {vol: 2, page: 14, title: "Τρισάγιον πρὸ τοῦ Ἀποστόλου", status: toc}
+  - {vol: 2, page: 15, title: "Ἕτερον τοῦ Βήματος", status: toc, note: "Trisagion variant 'of the Bema'"}
+  - {vol: 2, page: 17, title: "Δύναμις τοῦ συνειθισμένου", status: toc, note: "Trisagion (usual) with 'Δύναμις' ending"}
+  - {vol: 2, page: 18, title: "Ἕτερον Γεωργίου τοῦ Κρητός", status: toc, note: "Trisagion; papadic"}
+  - {vol: 2, page: 19, title: "Κύριε σῶσον τοὺς εὐσεβεῖς, εἰς λειτουργίαν Ἀρχιερέως", status: toc, note: "hierarchical Liturgy only"}
+  - {vol: 2, page: 20, title: "Πολυχρονισμὸς τοῦ Βασιλέως, ὑπὸ Γεωργίου τοῦ Λεσβίου", status: toc, note: "obsolete (king)"}
+  - {vol: 2, page: 20, title: "Τὰ εἰς χειροτονίαν ψαλλόμενα", status: toc, note: "ordination hymns"}
+  - {vol: 2, page: 21, title: "Ἀλληλούαριον, πρὸ τοῦ Εὐαγγελίου", status: toc, hymn: "lit/sun/t{t}/alleluia", note: "verify tones covered"}
+  - {vol: 2, page: 23, title: "Δόξα σοι Κύριε, καὶ Εἰς πολλὰ ἔτη, μετὰ τὸ Εὐαγγέλιον", hymn: "lit/gospel/glory_to_thee", status: toc, note: "litany/Gospel response"}
+  - {vol: 2, page: 24, hymn: "lit/ektenia/kyrie", title: "Κύριε ἐλέησον, κατὰ τρόπους ὀκτώ", who: Χουρμούζιος Χαρτοφύλαξ, status: page, note: "LITANY RESPONSE seen: each tropos = Κύριε ἐλέησον sung 3x (not the single response); p.24 α΄ β΄ γ΄(start), 25 δ΄ ε΄, 26 ς΄ ζ΄ η΄(end p.26-27); imgs 194-195"}
+  # ---------------- Cherubika, Axion, Koinonika ----------------
+  - {vol: 2, page: 27, title: "Χερουβικὰ, Στάσις Α΄ — Κωνσταντῖνος Πρωτοψάλτης, 8 τρόποι", status: page, note: "papadic/medium; header seen p.27; tropoi at 27,35,42,49,57,63,70,76. Cherubic hymn, no id in hymns.py"}
+  - {vol: 2, page: 83, title: "Χερουβικά, Στάσις Β΄ — Γρηγόριος Πρωτοψάλτης, 8 τρόποι", status: toc, note: "83,87,91,96,101,106,110,115"}
+  - {vol: 2, page: 120, title: "Χερουβικά, Στάσις Γ΄ — Πέτρος Πελοποννήσιος & Χουρμούζιος, κατὰ τρόπον ὀκτώ", status: toc}
+  - {vol: 2, page: 139, title: "Τοῦ Δείπνου σου τοῦ Μυστικοῦ, τῇ Ἁγ. καὶ Μ. Πέμπτῃ", status: toc, note: "Great Thursday cherubikon; no id"}
+  - {vol: 2, page: 142, title: "Σιγησάτω πᾶσα σάρξ, τῷ Ἁγ. καὶ Μ. Σαββάτῳ", status: toc, note: "Holy Saturday; no id"}
+  - {vol: 2, page: 144, title: "Ἀγαπήσω σε Κύριε, εἰς τὸν ἀσπασμὸν τῆς συλλειτουργίας", status: toc}
+  - {vol: 2, page: 145, title: "Ἄξιόν ἐστι, κατὰ τρόπους τέσσαρας, διαφόρων", hymn: "lit/axion_estin", status: toc, note: "Axion estin, 4 settings"}
+  - {vol: 2, page: 150, title: "Κοινωνικὰ Αἰνεῖτε, Στάσις Α΄ — Πέτρος Βυζάντιος, 8 τρόποι", status: toc, hymn: lit/communion/sunday, note: "Αἰνεῖτε τὸν Κύριον; tropoi 150,153,157,160,164,167,170,173"}
+  - {vol: 2, page: 176, title: "Κοινωνικὰ Αἰνεῖτε, Στάσις Β΄ — Γρηγόριος Πρωτοψάλτης, 8 τρόποι", status: toc, hymn: lit/communion/sunday, note: "176,180,184,188,192,197,201,205"}
+  - {vol: 2, page: 209, title: "Κοινωνικὰ, Στάσις Γ΄ — Ἰωάννης Λαμπαδάριος, κατὰ τρόπον ὀκτώ", status: toc, hymn: lit/communion/sunday}
+  - {vol: 2, page: 224, title: "Κοινωνικὰ ἐνιαύσια, εἰς διαφόρους Δεσποτικο-Θεομητορικὰς ἑορτάς, καὶ μνήμας Ἁγίων", status: toc, note: "section heading p.224; entries follow"}
+  - {vol: 2, page: 227, date: "09-01", title: "Τῇ α΄ Σεπτεμβρίου, Εὐλόγησον τὸν στέφανον", status: toc, hymn: men/09-01/communion}
+  - {vol: 2, page: 229, title: "Εἰς τὰ Ἐγκαίνια Ναοῦ, Κύριε ἠγάπησα", status: toc}
+  - {vol: 2, page: 231, date: "09-14", title: "Εἰς τὴν Ὕψωσιν τοῦ Σταυροῦ, Ἐσημειώθη", status: toc, hymn: men/09-14/communion}
+  - {vol: 2, page: 235, date: "12-25", title: "Εἰς τὴν Γέννησιν τοῦ Χριστοῦ, Λύτρωσιν", status: toc, hymn: men/12-25/communion}
+  - {vol: 2, page: 238, date: "01-06", title: "Εἰς τὰ Ἅγια Θεοφάνεια, Ἐπεφάνη ἡ χάρις", status: toc, hymn: men/01-06/communion}
+  - {vol: 2, page: 241, date: "03-25", title: "Εἰς τὸν Εὐαγγελισμὸν τῆς Θεοτόκου, Ἐξελέξατο Κύριος", status: toc, hymn: men/03-25/communion}
+  - {vol: 2, page: 245, title: "Ἕτερον, Δανιὴλ Πρωτοψάλτου", status: toc}
+  - {vol: 2, page: 247, moveable: "Lazarus Saturday", title: "Τῷ Σαββάτῳ τοῦ Λαζάρου, Ἐκ στόματος νηπίων", status: toc, hymn: mov/-8/communion, note: "verify id"}
+  - {vol: 2, page: 247, moveable: "Palm Sunday", title: "Τῇ Κυριακῇ τῶν Βαΐων, Εὐλογημένος ὁ ἐρχόμενος", status: toc, hymn: mov/-7/communion, note: "starts at foot of p.247 per Pinax; Εὐλογημένος ὁ ἐρχόμενος as communion verse; verify"}
+  - {vol: 2, page: 250, moveable: "Holy Thursday", title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Πέμπτῃ, Τοῦ Δείπνου σου τοῦ Μυστικοῦ", status: toc, hymn: mov/-3/communion, note: "verify id"}
+  - {vol: 2, page: 254, moveable: "Holy Saturday", title: "Τῷ Ἁγίῳ καὶ Μεγάλῳ Σαββάτῳ, Ἐξηγέρθη ὡς ὁ ὕπνων", status: toc, hymn: mov/-1/communion, note: "verify id"}
+  - {vol: 2, page: 255, moveable: Pascha, title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Κυριακῇ, Σῶμα Χριστοῦ", status: toc, hymn: mov/0/communion}
+  - {vol: 2, page: 259, moveable: "Bright Monday", title: "Τῇ Β΄ τῆς Διακαινησίμου, εἰς τρόπον β΄", who: Πέτρος Βυζάντιος, status: toc, note: "tropoi β΄ 259, γ΄ 261 (Γρ. Πρωτοψ.), δ΄ 264, ε΄ 266 (Π. Πελοπ.)"}
+  - {vol: 2, page: 269, moveable: Thomas, title: "Τῇ Κυριακῇ τοῦ Θωμᾶ, Ἐπαίνει Ἱερουσαλήμ", status: toc, hymn: mov/7/communion}
+  - {vol: 2, page: 273, moveable: "Mid-Pentecost", title: "Τῇ Τετάρτῃ τῆς Μεσοπεντηκοστῆς, Ὁ τρώγων μου τὴν σάρκα", status: toc, hymn: mov/24/communion, note: "verify id"}
+  - {vol: 2, page: 275, moveable: Ascension, title: "Τῇ Πέμπτῃ τῆς Ἀναλήψεως, Ἀνέβη ὁ Θεός", status: toc, hymn: mov/39/communion}
+  - {vol: 2, page: 278, moveable: Pentecost, title: "Τῇ Κυριακῇ τῆς Πεντηκοστῆς, Τὸ Πνεῦμά σου τὸ Ἅγιον", status: toc, hymn: mov/49/communion}
+  - {vol: 2, page: 280, moveable: "Monday of the Spirit", title: "Τῇ Δευτέρᾳ τοῦ Ἁγίου Πνεύματος, Τὸ Πνεῦμά σου τὸ ἀγαθόν", status: toc, hymn: mov/50/communion}
+  - {vol: 2, page: 282, moveable: "All Saints", title: "Τῇ Κυριακῇ τῶν Ἁγίων Πάντων, Ἀγαλλιᾶσθε δίκαιοι", status: toc, hymn: mov/56/communion}
+  - {vol: 2, page: 286, date: "08-06", title: "Εἰς τὴν Μεταμόρφωσιν τοῦ Σωτῆρος, Ἐν τῷ φωτὶ τῆς δόξης", status: toc, hymn: men/08-06/communion}
+  - {vol: 2, page: 289, title: "Εἰς τὰς ἑορτὰς τῆς Θεοτόκου, Ποτήριον σωτηρίου", status: toc, hymn: lit/communion/cup_of_salvation}
+  - {vol: 2, page: 293, title: "Εἰς μνήμας Ἁγίων, Εἰς μνημόσυνον", status: toc, hymn: lit/communion/common/remembrance}
+  - {vol: 2, page: 297, title: "Εἰς μνήμας Ἀποστόλων, Εἰς πᾶσαν τὴν γῆν", status: toc, hymn: lit/communion/common/apostles}
+  - {vol: 2, page: 301, title: "Εἰς τὴν Σύναξιν τῶν Ἀσωμάτων, Ὁ ποιῶν τοὺς ἀγγέλους", status: toc, hymn: lit/communion/common/angels}
+  - {vol: 2, page: 305, title: "Κοινωνικὰ τῆς Ἑβδομάδος", status: toc, note: "weekday koinonika (Mon-Sat), 305-317"}
+  - {vol: 2, page: 318, title: "Εἴδομεν τὸ φῶς τὸ ἀληθινὸν, καὶ Εἴη τὸ ὄνομα Κυρίου", hymn: "lit/eidomen", status: toc, note: "post-communion"}
+  - {vol: 2, page: 319, title: "Τὸν Δεσπότην καὶ Ἀρχιερέα, εἰς τὴν ἀπόλυσιν", status: toc, note: "Εἰς πολλὰ ἔτη at the dismissal"}
+  # ---------------- VOL 2: Great Lent etc. (p.320-370) ----------------
+  - {vol: 2, page: 320, title: "Ἀκολουθία τῆς Μεγάλης Τεσσαρακοστῆς: Τῆς μετανοίας ἄνοιξόν μοι", status: toc, note: "Lenten Orthros"}
+  - {vol: 2, page: 323, title: "Μὴ ἀποστρέψῃς, καὶ Ἔδωκας κληρονομίαν", status: toc}
+  - {vol: 2, page: 325, title: "Ἰδιόμελα τῶν Κυριακῶν τῆς Μ. Τεσσαρακοστῆς, Ἰακώβου: Τῆς Ἀποτυρώσεως Ἔλαμψεν ἡ χάρις σου", status: toc, note: "Sundays of Lent: 325, 328 (α΄), 330, 332, 334, 339"}
+  - {vol: 2, page: 343, title: "Ψυχή μου, ψυχή μου, καὶ Ἀσπόρου Συλλήψεως (Kontakion of Great Canon)", status: page, note: "header 'Κοντάκιον τοῦ Μ. Κανόνος' seen p.343; continues p.344 [LOST]"}
+  - {vol: 2, page: 345, title: "Κύριε τῶν Δυνάμεων, εἰς τὸ Ἀπόδειπνον", status: toc, note: "LOST (corrupt image 354)"}
+  - {vol: 2, page: 346, title: "Ἡ Θεία Λειτουργία τῶν Προηγιασμένων", status: page, note: "header seen p.347"}
+  - {vol: 2, page: 359, title: "Ἡ Θεία Λειτουργία τοῦ Μεγάλου Βασιλείου", status: toc, hymn: lit/megalynarion/basil, note: "verify: Ἐν σοὶ χαίρει location inside; section 359-363"}
+  - {vol: 2, page: 364, title: "Ὁ Ἀκάθιστος Ὕμνος", status: toc, note: "papadic/long"}
+  - {vol: 2, page: 370, title: "Τῇ ὑπερμάχῳ, ἀργόν; Ἕτερον σύντομον", status: toc, note: "Kontakion Τῇ ὑπερμάχῳ; also lit/kontakion not mapped"}
+  - {vol: 2, page: 504, title: "Παροράματα (errata) of vol.2", status: page, note: "errata list; not music"}

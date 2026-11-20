@@ -50,7 +50,10 @@ sections:
   - {id: intercession, start: '^The Intercession$', title: The Intercession}
   - {id: canon, start: '^The Canon$', title: The Canon, replace: matins.canon}
   - {id: kontakion, start: '^Resurrectional Kontakion for Tone', title: Kontakion and Oikos, raw_anchor: true, replace: matins.kontakion}
-  - {id: megalynarion, start: '^The Song of the Mother of God', title: The Song of the Mother of God}
+  - id: megalynarion
+    start: '^The Song of the Mother of God'
+    title: The Song of the Mother of God
+    spans: [{start: '^The choir then chants the katavasia of the 9th Ode', until: '^The canon having been completed', slot: matins.katavasia9}]
   - {id: exapostilaria, start: '^The Exapostilaria$', title: The Exapostilaria, replace: matins.exapostilaria}
   - id: praises
     start: '^The Usual Sunday Praises$'

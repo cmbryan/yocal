@@ -1,0 +1,63 @@
+# Pergamos uoadl:168182 — contents (Πίναξ) transcribed from PDF images 273–274.
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads).
+id: "168182"
+key: PG182
+title: Πανδέκτη τῆς ἱερᾶς ἐκκλησιαστικῆς ὑμνῳδίας, τόμος Γ΄ (Papadike + Mathematarion)
+year: 1851
+file: "168182 Πανδέκτη της ιεράς εκκλησιαστικής υμνωδίας του όλου ενιαυτού, Τόμος 3 (1851).pdf"
+layout: [{from: 1, div: 2, add: 3}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.4-5 = img 5; p.294-295 = img 150
+toc_images: [273, 274]
+summary: Kalophonic mathemata for feasts (Mathematarion). No parish-use hymns; no litany responses.
+entries:   # page = printed; who = composer as printed
+  - {page: 1, title: "Τὸν Δεσπότην καὶ Ἀρχιερέα", who: "μέλος ἀρχαῖον"}
+  - {page: 5, title: "Ἄνωθεν οἱ Προφῆται", who: Ἰωάννης Κουκουζέλης}
+  - {page: 14, title: "Περίζωσαι τὴν ῥομφαίαν σου", who: Γρηγόριος Πρωτοψάλτης}
+  - {page: 21, date: "09-08", title: "Τῇ η΄ Σεπτεμβρίου, ἐν εὐσήμῳ ἡμέρᾳ", who: Βαλάσιος Ἱερεύς}
+  - {page: 33, date: "09-14", title: "Εἰς τὴν Ὕψωσιν τοῦ Σταυροῦ", who: Χρυσάφης}
+  - {page: 45, date: "09-26", title: "Ποταμοὶ Θεολογίας", who: Χρυσάφης ὁ νέος}
+  - {page: 54, date: "10-26", title: "Εἰς τὸν ἅγιον Δημήτριον", who: Μανουὴλ Χρυσάφης}
+  - {page: 65, date: "11-08", title: "Εἰς τοὺς Ταξιάρχας", who: Κωνσταντῖνος Μάγουλας}
+  - {page: 76, date: "11-21", title: "Τῇ κα΄ (Εἰσόδια)", who: Μανουὴλ Χρυσάφης}
+  - {page: 85, date: "12-06", title: "Πανάγιε Νικόλαε", who: Δανιὴλ Πρωτοψάλτης}
+  - {page: 93, title: "Εἰς τὸν Ἀκάθιστον ὕμνον: Σὲ προκατήγγειλε", who: Δανιὴλ Πρωτοψάλτης}
+  - {page: 107, date: "12-25", title: "Χριστὸς γεννᾶται", who: Βαλάσιος Ἱερεύς}
+  - {page: 118, date: "12-25", title: "Μεγάλυνον ψυχή μου", who: Δανιὴλ Πρωτοψάλτης}
+  - {page: 132, date: "12-25", title: "Δόξα ἐν ὑψίστοις Θεῷ", who: Ἰωάννης Κουκουζέλης}
+  - {page: 142, date: "01-01", title: "Ὢ θεία καὶ ἱερά", who: Μανουήλ}
+  - {page: 152, date: "01-06", title: "Τῶν Θεοφανείων", who: Βαλάσιος Ἱερεύς}
+  - {page: 166, date: "01-17", title: "Εἰς τὸν ὅσιον Ἀντώνιον", who: Βαλάσιος Ἱερεύς}
+  - {page: 177, date: "02-02", title: "Τῇ β΄ Φεβρουαρίου", who: Μανουὴλ Χρυσάφης}
+  - {page: 192, date: "03-25", title: "Τοῦ Εὐαγγελισμοῦ", who: Μανουὴλ Χρυσάφης}
+  - {page: 205, date: "04-23", title: "Εἰς τὸν ἅγιον Γεώργιον", who: Μανουὴλ Χρυσάφης}
+  - {page: 218, date: "06-29", title: "Τῶν ἁγίων Ἀποστόλων", who: Μανουὴλ Χρυσάφης}
+  - {page: 229, date: "08-06", title: "Τῇ ς΄ Αὐγούστου", who: Βαλάσιος Ἱερεύς}
+  - {page: 243, date: "08-15", title: "Τῇ ιε΄ Αὐγούστου", who: Γερμανὸς Νέων Πατρῶν}
+  - {page: 254, moveable: "Sunday of Orthodoxy", title: "Τῇ Κυριακῇ τῆς Ὀρθοδοξίας", who: Χρυσάφης ὁ νέος}
+  - {page: 268, title: "Τῆς Ἀκαθίστου", who: Πέτρος Λαμπαδάριος}
+  - {page: 283, moveable: "Palm Sunday", title: "Τῇ Κυριακῇ τῶν Βαΐων", who: Βαλάσιος Ἱερεύς}
+  - {page: 294, moveable: Pascha, title: "Εἰς τὴν Λαμπροφόρον Ἀνάστασιν", who: Χρυσάφης ὁ νέος}
+  - {page: 306, moveable: Pascha, title: "Εἰς τὴν αὐτὴν Ἑορτήν", who: Βαλάσιος Ἱερεύς}
+  - {page: 319, moveable: Ascension, title: "Τῇ Πέμπτῃ τῆς Ἀναλήψεως", who: Βαλάσιος Ἱερεύς}
+  - {page: 329, moveable: Pentecost, title: "Τῇ Κυριακῇ τῆς Πεντηκοστῆς", who: Βαλάσιος Ἱερεύς}
+  - {page: 340, moveable: All Saints, title: "Τῇ Κυριακῇ τῶν Ἁγίων Πάντων"}
+  - {page: 352, moveable: Holy Fathers, title: "Τῇ Κυριακῇ τῶν Ἁγίων Πατέρων"}
+  - {page: 361, date: "11-13", title: "Εἰς τὸν ἅγιον Ἰωάννην τὸν Χρυσόστομον"}
+  - {page: 369, title: "Εἰς τὸν ἅγιον Διονύσιον τὸν ἐν τῷ Ὀλύμπῳ"}
+  - {page: 376, moveable: Bright Friday, title: "Τῇ Παρασκευῇ τῆς Διακαινησίμου"}
+  - {page: 388, title: "Θεοτοκίον ὅπερ ψάλλεται εἰς κάθε Ἑορτὴν τῆς Θεοτόκου"}
+  - {page: 402, title: "Θεοτοκίον: Δέσποινα πρόσδεξαι"}
+  - {page: 410, title: "Θεοτοκίον: Ἄνασσα γηγενής"}
+  - {page: 430, title: "Θεοτοκίον: σὲ μεγαλύνομεν"}
+  - {page: 439, title: "Θεοτοκίον", who: Πέτρος Πελοποννήσιος}
+  - {page: 442, title: "Θεοτοκίον", who: Μελέτιος Σιναΐτης ὁ Κρής}
+  - {page: 449, date: "07-11", title: "Εἰς τὴν ἁγίαν Εὐφημίαν"}
+  - {page: 455, title: "Μάθημα πρὸς τὸν Μακαριώτατον τῶν Ἱεροσολύμων"}
+  - {page: 465, title: "Ἕτερον Μάθημα Θεοτοκίον"}
+  # Μαθήματα νέα, Ἰωάννης Λαμπαδάριος
+  - {page: 474, date: "11-30", title: "Πρὸς τὸν ἅγιον Ἀνδρέα", who: Ἰωάννης Λαμπαδάριος}
+  - {page: 483, date: "12-06", title: "Πρὸς τὸν ἅγιον Νικόλαον", who: Ἰωάννης Λαμπαδάριος}
+  - {page: 495, date: "01-30", title: "Πρὸς τοὺς τρεῖς Ἱεράρχας", who: Ἰωάννης Λαμπαδάριος}
+  - {page: 511, date: "02-10", title: "Πρὸς τὸν ἅγιον Χαράλαμπον", who: Ἰωάννης Λαμπαδάριος}
+  - {page: 524, date: "07-05", title: "Πρὸς τὸν ἅγιον Ἀθανάσιον τὸν ἐν τῷ Ἄθῳ", who: Ἰωάννης Λαμπαδάριος}
+  - {page: 534, moveable: Sunday of the Cross, title: "Τῇ γ΄ Κυριακῇ τῶν Νηστειῶν", who: Ἰωάννης Λαμπαδάριος}

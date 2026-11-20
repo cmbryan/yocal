@@ -1,0 +1,26 @@
+# Pergamos uoadl:143809 — NO contents list. Sampled by page (every ~12 pages) from PDF images 8-132; subscriber list img 134-139, Παραρράματα (parerama table) img 136-137.
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads).
+id: "143809"
+key: PG809
+title: "Νέον Ἀναστασιμάταριον μεταφρασθὲν κατὰ τὴν Νεοφανῆ Μέθοδον τῆς Μουσικῆς (Constantinople teachers, Petros Ephesios ed.; printed Bucharest [?] 1820; Gregorios Balliano patron)"
+year: 1820
+file: "143809 Νέον Αναστασιμάταριον μεταφρασθέν κατά την Νεοφανή Μέθοδον της Μουσικής (1820).pdf"
+layout: [{from: 1, div: 2, add: 7}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.10-11 = img 12; p.22 = img 18; p.34 = img 24; p.46 = img 30; p.58 = img 36; p.70 = img 42; p.82 = img 48; p.94 = img 54; p.106 = img 60; p.118 = img 66; p.130 = img 72; p.154 = img 84; p.190 = img 102
+toc_images: []
+summary: "First printed Chrysanthine-reform (New Method, analytical/syllabic notation, phonetic-spelled text under the notes) Anastasimatarion. Printed pages 1-~246 (imgs 8-130), then Παραρράματα. No Πίναξ, no section titles or running headers (only drop capitals + tone signs in the margin), so it cannot be indexed by hymn id from titles; each hymn must be located by reading the phonetic text. Content by sampling: per tone Vespers Kekragaria (Κύριε ἐκέκραξα), Matins kathismata, anavathmoi, Makarismoi (Μακάριοι ...). Hymn ids unmapped (status page only); expect resurrectional material for all 8 tones in sequence but tone boundaries not located. No litany responses, no Liturgy fixed parts seen in the sampled pages (sample incomplete; the book is the Anastasimatarion proper, so Liturgy parts unlikely)."
+entries:   # sampled only; all need verify
+  - {page: 2, title: "Κύριε ἐκέκραξα ... Θοῦ Κύριε φυλακὴν τῷ στόματί μου (Vespers, first tone of the book)", status: page, note: "verify tone; read at img 8, text phonetic; probably tone 1"}
+  - {page: 10, title: "Vespers stichera 'Δόξα' with doxastikon (tone mark visible)", status: page, note: "unread; verify"}
+  - {page: 34, title: "Κύριε ἐκέκραξα, tone change (stichera with Θεοτοκίον 'Σὲ μεγαλύνομεν'?)", status: page, note: "verify tone and text"}
+  - {page: 46, title: "Stichera with 'καθίσματα μέλος ... ἦχος' heading (Matins kathismata)", status: page, note: "verify tone"}
+  - {page: 58, title: "Μακάριοι (Makarismoi), run of 'Μακαριοι οι ...' troparia", status: page, note: "verify tone"}
+  - {page: 70, title: "'εἰς τὸν στίχον' sticheron (Aposticha) with Θεοτοκίον", status: page, note: "verify tone"}
+  - {page: 82, title: "Matins: 'ἐξ' Ἀναβαθμοί / canon-heirmoi region [?]", status: page, note: "verify"}
+  - {page: 106, title: "Κατεπλάγη Ἰωσήφ ... ἦχος (hypakoe/Theotokion-type) and 'Ἀναβαθμοὶ ἀντίφωνον ἦχος α΄' (p.107)", status: page, note: "Anavathmoi tone 1 at p.107 read; verify. Candidate hymn: oct/t1/sun/hypakoe"}
+  - {page: 118, title: "Μακάριοι ... (Makarismoi) and Εὐλογητάρια-type refrain 'Εὐλογητὸς εἶ Κύριε' [?]", status: page, note: "verify"}
+  - {page: 130, title: "Κύριε ἐκέκραξα region of a later tone", status: page, note: "verify"}
+  - {page: 154, title: "Κύριε ἐκέκραξα, 'Θοῦ Κύριε φυλακὴν ...' (tone with beginning of Vespers)", status: page, note: "second occurrence of the Θοῦ Κύριε incipit; verify tone"}
+  - {page: 166, title: "'εἰς τὸν Ὄρθρον μετὰ τὴν α΄ στιχολογίαν καθίσματα ἦχος ...'", status: page, note: "heading read at img 90; verify tone"}
+  - {page: 178, title: "Μακαρισμοί (run of Μακάριοι ... troparia)", status: page, note: "verify tone"}
+  - {page: 190, title: "Doxastika/Praises region", status: page, note: "verify"}

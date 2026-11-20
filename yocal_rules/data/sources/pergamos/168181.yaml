@@ -1,0 +1,15 @@
+# Pergamos uoadl:168181 — same book as PD2 (byzantine_pd.yaml): Μουσική Πανδέκτη τόμος Β΄ (Orthros/Matins), not re-transcribed.
+# Checked: contents (Πίναξ) on PDF images 430-431 identical to PD2 TOC (Ἄξιον ἐστιν p.1, Θεὸς Κύριος p.5, Πολυέλεοι 36, Λόγον ἀγαθὸν 247-, Πασαπνοάρια 419, Τιμιωτέρα 501/509, Ἕνδεκα Ἐωθινά 538, Δοξολογίαι 574, ἀργαί 646-, ἀσματικά 761-846).
+# Printed pagination identical: PD2 printed page N = same page here. Do not add entries; use PD2 rows in byzantine_pd.yaml.
+id: "168181"
+key: PG181
+title: Πανδέκτη τῆς ἱερᾶς ἐκκλησιαστικῆς ὑμνῳδίας, τόμος Β΄ (Orthros)
+year: 1851   # PD2 file says 1850; same contents
+file: "168181 Πανδέκτη της ιεράς εκκλησιαστικής υμνωδίας του όλου ενιαυτού, Τόμος 2 (1851).pdf"
+same_as: PD2
+layout: [{from: 1, div: 2, add: 3}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.4-5 = img 5; p.194-195 = img 100; p.394-395 = img 200; p.594-595 = img 300; p.794-795 = img 400
+toc_images: [430, 431]
+# PD2 printed page -> 168181 image: image = page // 2 + 3 (e.g. PD2 p.5 -> 5, 36 -> 21, 419 -> 212, 538 -> 272, 574 -> 290, 761 -> 383)
+summary: "Identical to PD2 (Matins). No Vespers/Liturgy material. Litany responses: none in this volume."
+entries: []

@@ -1,0 +1,57 @@
+# Pergamos uoadl:168059 — no contents list (only a subscribers' list, images 262-267). Indexed from running headers (every 6th image) + page checks.
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). Two-page spreads.
+# SAME EDITION as byzantine_pd.yaml HE1/HE2 (1825; Petros Peloponnesios katavasiai + Petros Byzantios short heirmologion): same running headers, HE1 pagination matches
+# (checked here: Nativity katavasiai p.9, Sunday of the Cross p.23, Pascha p.28 as in byzantine_pd.md). This copy is complete (267 images) and has the Funeral service (HE2 p.188-~199 area).
+id: "168059"
+key: PG059
+title: "Εἱρμολόγιον τῶν Καταβασιῶν Πέτρου τοῦ Πελοποννησίου μετὰ τοῦ συντόμου Εἱρμολογίου Πέτρου τοῦ Βυζαντίου"
+year: 1825
+file: "168059 Ειρμολόγιον των Καταβασιών Πέτρου του Πελοποννησίου μετά του συντόμου Ειρμολογίου Πέτρου π (1825).pdf"
+# Part 1 (HE1) printed 1-~294: image = printed // 2 + 4   (checked: p.6-7=img 7; p.8-9=img 8; p.22-23=img 15; p.28-29=img 18; p.42-43=img 25; p.282=img 145)
+# Part 2 (HE2) pagination restarts at 1: image = printed // 2 + 152 for printed <= ~167 (checked p.10=157, 82=193, 130=217, 142=223, 154=229, 166=235);
+#   image = printed // 2 + 147 from ~p.188 (checked p.188=241?, 200=247, 224=259). ~5 images (Funeral service) shift between p.167 and p.188: boundary approximate.
+layout: [{part: HE1, from: 1, div: 2, add: 4}, {part: HE2, from: 1, div: 2, add: 152}, {part: HE2, from: 188, div: 2, add: 147}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+toc_images: []
+summary: "HE1 = katavasiai of the year (long heirmologic) + Holy Week canons + prosomoia/kathismata/apolytikia of Sundays/antiphona/exaposteilaria/megalynaria; HE2 = short heirmologion (Eirmoi by tone, Prosomoia, Kathismata, Funeral, Stichologia of the Aines). No litany responses, no Liturgy fixed parts. Header-sampled, not contents-based."
+sections:   # printed pages; part HE1 unless stated; img = image where header seen
+  - {part: HE1, page: 1, title: "Καταβασίαι τοῦ ἐνιαυτοῦ", end: 137}
+  - {part: HE1, page: 138, title: "Ἀκολουθία τῆς Μ. Ἑβδομάδος (canons, katavasiai)", end: 221}
+  - {part: HE1, page: 222, title: "Προσόμοια (model melodies)"}
+  - {part: HE1, page: 246, title: "Ἀκολουθία (Anavathmoi etc.)"}
+  - {part: HE1, page: 258, title: "Ἀπολυτίκια τῶν Κυριακῶν (Θεὸς Κύριος + apolytikion + kathisma + theotokion)", end: 269}
+  - {part: HE1, page: 270, title: "Ἀντίφωνα / Ἐξαποστειλάρια τῶν Κυριακῶν (Πέτρου Πελοποννησίου)", end: 281}
+  - {part: HE1, page: 282, title: "Καταβασίαι ψαλλόμεναι ἀντὶ τοῦ Ἄξιόν ἐστι (megalynaria)", end: 294}
+  - {part: HE2, page: 1, title: "Εἱρμοὶ τῶν Κανόνων κατ' ἦχον", end: 147}
+  - {part: HE2, page: 148, title: "Προσόμοια"}
+  - {part: HE2, page: 162, title: "Καθίσματα"}
+  - {part: HE2, page: 188, title: "Ἀκολουθία εἰς τεθνεῶτας (Funeral)"}
+  - {part: HE2, page: 195, title: "Στιχολογία τῶν Αἴνων (Chourmouzios)", end: 225}
+entries:   # HE1 katavasiai by feast, printed page (pagination = byzantine_pd.md list; 9/23/28/41-43 checked here)
+  - {page: 1, date: "08-15", title: "Κοίμησις τῆς Θεοτόκου (katavasiai)", status: toc}
+  - {page: 9, date: "12-25", title: "Εἰς τὴν ἑορτὴν τῶν Χριστοῦ Γεννῶν, Πέτρου τοῦ Πελοποννησίου", who: Πέτρος Πελοποννήσιος, status: page}
+  - {page: 23, moveable: "Sunday of the Cross", title: "Τῇ Κυριακῇ τῆς Σταυροπροσκυνήσεως", who: Πέτρος Πελοποννήσιος, status: page}
+  - {page: 28, moveable: Pascha, title: "Τῇ Κυριακῇ τῆς λαμπροφόρου Ἀναστάσεως", who: Πέτρος Λαμπαδάριος, status: page, note: "matins.katavasia slot has no hymn ids yet"}
+  - {page: 35, moveable: Thomas, title: "Katavasiai of Thomas Sunday", status: toc}
+  - {page: 41, date: "01-06", title: "Θεοφάνεια (katavasiai)", status: page}
+  - {page: 56, moveable: Prodigal, title: "Κυριακὴ τοῦ Ἀσώτου", status: toc}
+  - {page: 61, date: "02-02", title: "Ὑπαπαντὴ (katavasiai)", status: toc}
+  - {page: 67, date: "03-25", title: "Εὐαγγελισμός & Εἰσόδια (katavasiai)", status: toc}
+  - {page: 74, date: "08-06", title: "Μεταμόρφωσις (katavasiai)", status: toc}
+  - {page: 78, moveable: "1st Sunday of Lent", title: "Katavasiai", status: toc}
+  - {page: 83, moveable: "Palm Sunday", title: "Katavasiai", status: toc}
+  - {page: 88, moveable: Pentecost, title: "Katavasiai", status: toc}
+  - {page: 93, moveable: Ascension, title: "Katavasiai", status: toc}
+  - {page: 97, moveable: "Publican / Cheesefare", title: "Katavasiai", status: toc}
+  - {page: 102, moveable: Meatfare, title: "Katavasiai", status: toc}
+  - {page: 107, moveable: Pentecost, title: "Katavasiai (2nd)", status: toc}
+  - {page: 112, title: "Katavasiai of the grave tone (tetraphonos)", status: toc}
+  - {page: 117, date: "09-14", title: "Ὕψωσις τοῦ Σταυροῦ (katavasiai)", status: toc}
+  - {page: 124, moveable: "Lazarus Saturday", title: "Katavasiai", status: toc}
+  - {page: 129, moveable: Mid-Pentecost, title: "Katavasiai", status: toc}
+  - {page: 258, title: "Ἀπολυτίκια τῶν Κυριακῶν (Θεὸς Κύριος, apolytikion, kathisma, theotokion; Resurrection, by tone)", hymn: "oct/t{t}/sun/apolytikion", tones: [1, 2, 3, 4, 5, 6, 7, 8], status: page, note: "pp.258-269; short heirmologic setting; tone order per page not verified (p.258 Tone ? with Κάθισμα; p.264 shows Νη tone); verify"}
+  - {page: 270, title: "Ἐξαποστειλάρια τῶν Κυριακῶν (Πέτρου Πελοποννησίου; also 'sung before Anastasima exaposteilaria')", status: page, note: "eothinon exaposteilaria? verify against eothinon/NN/exaposteilarion"}
+  - {page: 1, part: HE2, title: "Εἱρμοὶ τῶν Κανόνων κατ' ἦχον (all 8 tones)", hymn: "oct/t{t}/sun/canon", tones: [1, 2, 3, 4, 5, 6, 7, 8], status: page, note: "pp.3-147 per byzantine_pd; headers 'Εἱρμοὶ / τῶν Κανόνων' seen p.10-143"}
+  - {page: 148, part: HE2, title: "Προσόμοια", status: page}
+  - {page: 162, part: HE2, title: "Καθίσματα", status: page}
+  - {page: 195, part: HE2, title: "Στιχολογία τῶν Αἴνων", hymn: "oct/t{t}/sun/lauds1", status: toc, note: "verses only; per byzantine_pd"}
+  - {page: 210, title: "Εὐλογητάρια (lit/matins/evlogetaria)", hymn: lit/matins/evlogetaria, part: HE1, status: toc, note: "from byzantine_pd, not re-checked in this scan"}

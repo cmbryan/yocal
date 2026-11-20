@@ -1,0 +1,13 @@
+# Pergamos uoadl:168166 — contents (Πίναξ) at PDF image 155 (right page; image 156 = flyleaf). Not re-transcribed.
+# IDENTICAL to TA1 (1845 vol.1: Vespers, Matins, Holy Week; same Πίναξ, same pagination 1-296), see byzantine_pd.md/yaml TA1. Different scan; no new material.
+id: "168166"
+key: PG166
+title: Ταμεῖον Ἀνθολογίας, τόμος α΄ (Κωνσταντῖνος Πρωτοψάλτης), 1845
+year: 1845
+file: "168166 Ταμείον Ανθολογίας περιέχον άπασαν την εκκλησιαστικήν ενιαύσιον ακολουθίαν Εσπερινού, Όρθρ (1845).pdf"
+layout: [{from: 1, div: 2, add: 5}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.10=img10; p.30=20; p.70=40; p.110=60; p.150=80; p.270=140; p.290=150; p.296=153. (TA1 other scan: single pages, printed+6)
+toc_images: [155]
+same_as: TA1
+summary: "Same book as TA1 (1845 vol.1). All items already indexed under TA1 (e.g. doxologies p.183-286, Δύναμις p.290-293, Ἀλληλουάριον p.294, Ἀνοιξαντάρια p.1, Κεκραγάρια p.24, Φῶς ἱλαρόν p.43). Use as a better-quality alternate scan: TA1 printed p -> PG166 img = p//2+5. No litany responses (Κύριε ἐλέησον etc.) in the Πίναξ."
+entries: []

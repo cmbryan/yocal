@@ -1,0 +1,71 @@
+# Pergamos uoadl:168174 — contents (Πίναξ) transcribed from PDF image 6 (right page).
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads).
+id: "168174"
+key: PG174
+title: "Ὕμνοι τῆς Ὀρθοδόξου Ἀνατολικῆς Ἐκκλησίας, Μέρος Γ΄ (Gottfried Preyer, Vienna; 4-part WESTERN-staff harmonizations with Greek text; Liturgy, Communion hymns, Presanctified, wedding, funeral)"
+year: "184x"   # not read; dedicated to King Otto of Greece (printed Vienna)
+file: "168174 Ύμνοι της Ορθοδόξου Ανατολικής Εκκλησίας, Μέρος γ΄.pdf"
+layout: [{from: 1, div: 2, add: 7}, {from: 50, div: 2, add: 8}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.1 = img 7; p.50-51 = img 33; p.108-109 = img 62; p.150-151 = img 83; p.180-181 = img 98; p.204-205 = img 110. Shift of 1 between p.3 and p.50 not located
+toc_images: [6]
+summary: "Congregational/choral hymns in Western staff notation (SATB + pianoforte/physharmonica, Greek text under the staves) - NOT Byzantine notation; usable for melody/harmony only as a Western-notation alternative. Contains Liturgy fixed parts: Trisagion (p.33), Τὸν Σταυρόν σου (35), Ὅσοι εἰς Χριστόν (37), Κύριε σῶσον τοὺς εὐσεβεῖς (40), Cherubic hymn (41, 46), Basil Liturgy hymns (52-72), Εἷς Ἅγιος (73), weekly and annual Communion hymns (75-150), Presanctified (153). No litany responses listed in Πίναξ (Κύριε ἐλέησον only as ordination response p.40; Παράσχου Κύριε / Σοὶ Κύριε / Καὶ τῷ πνεύματί σου not listed; the Liturgy settings pp.52-72 may contain responses, unverified). Hymn ids proposed beyond those already in byzantine_pd.yaml are marked in notes."
+entries:   # page = printed; section = Πίναξ heading
+  - {page: 1, title: "Ἀλλότριον τῶν Μητέρων ἡ παρθενία", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 3, title: "Μυστικὸς ἡ Θεοτόκε Παράδεισος", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 4, title: "Ἄγγελοι τὴν εἴσοδον τῆς Παναγνου [?]", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 7, title: "Μεγάλυνον ψυχή μου ... Μυστήριον ξένον", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 9, title: "Μεγάλυνον ψυχή μου ... Ἀπορεῖ πᾶσα γλῶσσα", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 12, title: "Θεοτόκε ἡ ἐλπὶς πάντων τῶν χριστιανῶν", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 15, title: "Εὐαγγελίζου γῆ χαρὰν μεγάλην", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 17, title: "Ὁ τόκος σου ἄφθορος ἐδείχθη", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 19, title: "Αἱ γενεαὶ πᾶσαι μακαρίζομέν σε", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 22, title: "Τὴν ἁγνὴν ἔνδοξον τιμήσωμεν [?]", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 23, title: "Θεὸς Κύριος καὶ ἐπέφανεν ἡμῖν", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc, note: "Θεὸς Κύριος verse/refrain; verify not the Sunday Matins Theos Kyrios"}
+  - {page: 25, title: "Ὁ Ἄγγελος ἔβόα τῇ κεχαριτωμένῃ", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 27, title: "Ἀλλότριον τῶν Μητέρων ἡ παρθενία (2nd setting)", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 29, title: "Ἄγγελοι τὴν ἔξοδον τοῦ Δεσπότου", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 31, title: "Χαίροις Ἄνασσα μητροπάρθενε κλέος", section: "Εἱρμοὶ τῆς ἐνάτης ᾠδῆς", status: toc}
+  - {page: 33, title: "Ὁ Τρισάγιος Ὕμνος", hymn: "lit/trisagion/standard", status: toc, note: "Ἅγιος ὁ Θεός"}
+  - {page: 35, title: "Τὸν Σταυρόν σου προσκυνοῦμεν Δέσποτα", hymn: "lit/trisagion/cross", status: toc, note: "replaces Trisagion on Cross feasts; verify"}
+  - {page: 37, title: "Ὅσοι εἰς Χριστὸν ἐβαπτίσθητε", hymn: "lit/trisagion/baptized", status: toc}
+  - {page: 39, title: "Ἀνάστα ὁ Θεὸς κρῖνον τὴν γῆν", status: toc, note: "prokeimenon-type (Saturday/Pascha?); verify; no tone given in Πίναξ"}
+  - {page: 40, title: "Κύριε σῶσον τοὺς εὐσεβεῖς", hymn: "lit/entrance/kyrie_soson", status: toc, note: "royal/Σῶσον Κύριε τοὺς εὐσεβεῖς"}
+  - {page: 40, title: "Τὸ τῆς Χειροτονίας, Κύριε ἐλέησον", status: toc, note: "ordination response"}
+  - {page: 41, title: "Τὸ τῆς Χειροτονίας, Ἄξιος", status: toc, note: "Ἄξιος (ordination)"}
+  - {page: 41, title: "Χερουβικὸς Ὕμνος", hymn: "lit/cherubikon/standard", status: toc}
+  - {page: 46, title: "Ἕτερος χερουβικὸς Ὕμνος", status: toc}
+  - {page: 51, title: "Ἀγαπήσω σε Κύριε ἡ ἰσχύς μου", status: toc, note: "Pre-anaphora/Great Entrance antiphon?; verify"}
+  - {page: 52, title: "Ὕμνοι τῆς Λειτουργίας τοῦ Μεγάλου Βασιλείου", hymn: "lit/megalynarion/basil", status: toc, note: "pp.52-65, likely Anaphora responses (Ἔλεος εἰρήνης, Ἄξιον καὶ δίκαιον, Σὲ ὑμνοῦμεν, Ἄξιον ἐστίν/Ἐπὶ σοὶ χαίρει); verify contents; also Basil-specific"}
+  - {page: 66, title: "Ἕτερον συντομώτερον", status: toc, note: "shorter setting of the Liturgy hymns, pp.66-72; verify"}
+  - {page: 73, title: "Εἷς Ἅγιος, εἷς Κύριος Ἰησοῦς Χριστός", hymn: "lit/heis_hagios", status: toc}
+  - {page: 75, title: "Ὁ ποιῶν τοὺς ἀγγέλους αὐτοῦ πνεύματα", section: "Κοινωνικὰ τῆς ἑβδομάδος", hymn: "lit/communion/common/angels", status: toc}
+  - {page: 78, title: "Εἰς μνημόσυνον αἰώνιον", section: "Κοινωνικὰ τῆς ἑβδομάδος", hymn: "lit/communion/common/remembrance", status: toc}
+  - {page: 81, title: "Ποτήριον σωτηρίου λήψομαι", section: "Κοινωνικὰ τῆς ἑβδομάδος", hymn: "lit/communion/cup_of_salvation", status: toc}
+  - {page: 84, title: "Εἰς πᾶσαν τὴν γῆν", section: "Κοινωνικὰ τῆς ἑβδομάδος", hymn: "lit/communion/common/apostles", status: toc}
+  - {page: 88, title: "Σωτηρίαν εἰργάσατο", section: "Κοινωνικὰ τῆς ἑβδομάδος", status: toc, note: "Saturday/Theotokos? verify"}
+  - {page: 91, title: "Μακάριοι οὓς ἐξελέξω", section: "Κοινωνικὰ τῆς ἑβδομάδος", status: toc, note: "saints/reposed; verify"}
+  - {page: 94, title: "Εὐλογήσεις τὸν στέφανον τοῦ ἐνιαυτοῦ [?]", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "men/09-01/communion", status: toc, note: "Indiction communion; verify reading"}
+  - {page: 97, title: "Ἐσημειώθη ἐφ' ἡμᾶς τὸ φῶς τοῦ προσώπου σου", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", status: toc, note: "Cross feasts (Elevation men/09-14 per TA2 note); verify"}
+  - {page: 100, title: "Λύτρωσιν ἀπέστειλε Κύριος", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "men/12-25/communion", status: toc}
+  - {page: 103, title: "Ἐπεφάνη ἡ χάρις τοῦ Θεοῦ", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "men/01-06/communion", status: toc}
+  - {page: 105, title: "Ἐξελέξατο Κύριος τὴν Σιών", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "men/03-25/communion", status: toc, note: "Theotokos feasts; verify"}
+  - {page: 109, title: "Ἐν τῷ φωτὶ [?] τοῦ προσώπου σου", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "men/08-06/communion", status: toc, note: "Transfiguration; verify reading"}
+  - {page: 112, title: "Ἐκ στόματος νηπίων καὶ θηλαζόντων", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", status: toc, note: "Palm Sunday/Lazarus; verify"}
+  - {page: 114, title: "Εὐλογημένος ὁ ἐρχόμενος", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", status: toc, note: "Palm Sunday; verify"}
+  - {page: 117, title: "Τοῦ Δείπνου σου τοῦ μυστικοῦ", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "mov/-3/communion", status: toc, note: "Holy Thursday; 1st of 3 settings (117,120,123)"}
+  - {page: 120, title: "Τοῦ Δείπνου σου τοῦ μυστικοῦ (2nd)", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "mov/-3/communion", status: toc}
+  - {page: 123, title: "Τοῦ Δείπνου σου τοῦ μυστικοῦ (3rd)", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "mov/-3/communion", status: toc}
+  - {page: 125, title: "Σιγησάτω πᾶσα σὰρξ βροτεία", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "mov/-1/communion", status: toc, note: "Holy Saturday; verify"}
+  - {page: 129, title: "Ἐξηγέρθη ὡς ὁ ὑπνῶν Κύριος", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "mov/-1/communion", status: toc, note: "Holy Saturday; verify"}
+  - {page: 132, title: "Μνήσθητι εὔσπλαγχνε καὶ ἡμῶν [?]", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", status: toc, note: "Πίναξ line unclear; verify"}
+  - {page: 132, title: "Σῶμα Χριστοῦ μεταλάβετε", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "mov/0/communion", status: toc, note: "Pascha; same page as previous in Πίναξ, verify"}
+  - {page: 135, title: "Ἐπαίνει Ἱερουσαλὴμ τὸν Κύριον", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", status: toc, note: "verify (Thomas? Elevation?)"}
+  - {page: 137, title: "Ὁ τρώγων μου τὴν σάρκα", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", status: toc, note: "verify"}
+  - {page: 140, title: "Ἀνέβη ὁ Θεὸς ἐν ἀλαλαγμῷ", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "mov/39/communion", status: toc, note: "Ascension, 1st setting"}
+  - {page: 144, title: "Ἀνέβη ὁ Θεὸς ἐν ἀλαλαγμῷ (2nd)", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "mov/39/communion", status: toc}
+  - {page: 148, title: "Τὸ Πνεῦμά σου τὸ Ἅγιον", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "mov/49/communion", status: toc, note: "Pentecost"}
+  - {page: 150, title: "Ἀγαλλιᾶσθε δίκαιοι ἐν Κυρίῳ", section: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", hymn: "mov/56/communion", status: toc, note: "All Saints"}
+  - {page: 153, title: "Λειτουργία τῶν προηγιασμένων", status: toc, note: "Presanctified Liturgy settings, pp.153-168"}
+  - {page: 169, title: "Ἀκολουθία τοῦ Ἀρραβῶνος", status: toc, note: "betrothal"}
+  - {page: 170, title: "Ἀκολουθία τοῦ Στεφανώματος", status: toc, note: "wedding"}
+  - {page: 183, title: "Ἀκολουθία νεκρώσιμος", status: toc, note: "funeral; pages after ~183 (to img ~117) not in Πίναξ (supplement; numbering restarts, Nº 9 at p.205)"}

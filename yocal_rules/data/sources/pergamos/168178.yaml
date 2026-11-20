@@ -1,0 +1,58 @@
+# Pergamos uoadl:168178 — Μουσικὴ Μέλισσα, Τόμος Δεύτερος (printed on title page): (A) Σύντομον Ἀναστασιματάριον, (B) ἀπολυτίκια καὶ ἰδιόμελα τῶν δώδεκα μηνῶν; Galata 1847, ed. Th. P. Phokaeus. PDF title says "Τόμος Β' Τόμος Γ'" but only Τόμος Β΄ is in it (Τόμος Γ΄ = 168177).
+# NO contents list. Part A indexed from per-image left-page headers (img 8-72), Part B from per-image right-page headers (img 73-166). Scans: FETCHED/ (not in git; CC BY-NC-ND).
+# Two paginations: Part A printed p.1-135 (img 3-72); Part B restarts at p.1 (title 'ΜΟΥΣΙΚΗ ΜΕΛΙΣΣΑ' at img 72 right page) and ends p.190 'ΤΕΛΟΣ ΤΩΝ ΔΩΔΕΚΑ ΜΗΝΩΝ' (img 166).
+id: "168178"
+key: PG178
+title: "Μουσικὴ Μέλισσα, Τόμος Δεύτερος: Σύντομον Ἀναστασιματάριον + Ἀπολυτίκια/ἰδιόμελα τῶν δώδεκα μηνῶν"
+year: 1847
+file: "168178 Μουσική Μέλισσα Τόμος Β'   Τόμος Γ' (1847).pdf"
+# image = printed // 2 + add, per part. Part A add 3: p.2 = img 4, p.14 = 10, p.74 = 40, p.134 = 70. Part B add 71: p.4-5 = img 73, p.16-17 = img 79, p.54-55 = img 98, p.178-179 = img 160, p.188-189 = img 165.
+layout: [{part: A, from: 1, div: 2, add: 3}, {part: B, from: 1, div: 2, add: 71}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+toc_images: []
+summary: "Part A: short Anastasimatarion (resurrectional Vespers/Orthros pieces per tone, short style; Orthros Alleluia p.8). Part B: for the major fixed feasts only (not every saint), idiomela + 'Ἀπολυτίκιον' rubric (seen p.55 Nativity, p.165) with the date in the right-page running header. hymn: men/MM-DD/apolytikion is therefore the likely match for Part B but each section also has other items; verify per page. Part A tone sections give oct/t{t}/sun/* material but sub-slots (Kyrie ekekraxa stichera, aposticha, apolytikion, theotokion) not itemised; no ids assigned. Part A tone page ranges +-2. No litany responses (no separate Κύριε ἐλέησον etc. seen), no Liturgy fixed parts, no prokeimena; resurrectional apolytikia/kontakia not located explicitly (probably inside each tone's Vespers/Orthros section)."
+entries:   # part A/B; page = printed in that part; end = last page of section
+  - {part: A, page: 1, end: 8, title: "Ἀναστασιματάριον σύντομον: Ἀκολουθία τοῦ Ἑσπερινοῦ καὶ τοῦ Ὄρθρου", status: page, note: "opening psalmody/Alleluia; headers 'ΑΚΟΛΟΥΘΙΑ ΤΟΥ ΕΣΠΕΡΙΝΟΥ'; sub-items not itemised"}
+  - {part: A, page: 9, end: 25, title: "Ὀκτώηχος: Ἦχος α΄ Πα", tones: [1], status: page, note: "resurrectional Vespers/Orthros pieces of this tone in short style (e.g. p.12-13 t1 has stichera + Δόξα + Dogmatikon-type Theotokion); sub-items not itemised; verify boundaries +-2 pages"}
+  - {part: A, page: 26, end: 39, title: "Ὀκτώηχος: Ἦχος β΄ Δι", tones: [2], status: page, note: "resurrectional Vespers/Orthros pieces of this tone in short style (e.g. p.12-13 t1 has stichera + Δόξα + Dogmatikon-type Theotokion); sub-items not itemised; verify boundaries +-2 pages"}
+  - {part: A, page: 40, end: 55, title: "Ὀκτώηχος: Ἦχος γ΄ Γα", tones: [3], status: page, note: "resurrectional Vespers/Orthros pieces of this tone in short style (e.g. p.12-13 t1 has stichera + Δόξα + Dogmatikon-type Theotokion); sub-items not itemised; verify boundaries +-2 pages"}
+  - {part: A, page: 56, end: 71, title: "Ὀκτώηχος: Ἦχος δ΄ Πα", tones: [4], status: page, note: "resurrectional Vespers/Orthros pieces of this tone in short style (e.g. p.12-13 t1 has stichera + Δόξα + Dogmatikon-type Theotokion); sub-items not itemised; verify boundaries +-2 pages"}
+  - {part: A, page: 72, end: 89, title: "Ὀκτώηχος: Ἦχος πλ. α΄ Πα", tones: [5], status: page, note: "resurrectional Vespers/Orthros pieces of this tone in short style (e.g. p.12-13 t1 has stichera + Δόξα + Dogmatikon-type Theotokion); sub-items not itemised; verify boundaries +-2 pages"}
+  - {part: A, page: 90, end: 103, title: "Ὀκτώηχος: Ἦχος πλ. β΄ Πα", tones: [6], status: page, note: "resurrectional Vespers/Orthros pieces of this tone in short style (e.g. p.12-13 t1 has stichera + Δόξα + Dogmatikon-type Theotokion); sub-items not itemised; verify boundaries +-2 pages"}
+  - {part: A, page: 104, end: 117, title: "Ὀκτώηχος: Ἦχος βαρὺς Γα", tones: [7], status: page, note: "resurrectional Vespers/Orthros pieces of this tone in short style (e.g. p.12-13 t1 has stichera + Δόξα + Dogmatikon-type Theotokion); sub-items not itemised; verify boundaries +-2 pages"}
+  - {part: A, page: 118, end: 135, title: "Ὀκτώηχος: Ἦχος πλ. δ΄ Νη", tones: [8], status: page, note: "resurrectional Vespers/Orthros pieces of this tone in short style (e.g. p.12-13 t1 has stichera + Δόξα + Dogmatikon-type Theotokion); sub-items not itemised; verify boundaries +-2 pages"}
+  - {part: B, page: 1, end: 11, date: "09-01", title: "Σεπτεμβρίου Α΄ (Ἀρχὴ τῆς Ἰνδίκτου)", hymn: men/09-01/apolytikion, status: page, note: "header Α΄ seen pp.5-11; start p.1-3 not checked"}
+  - {part: B, page: 13, end: 19, date: "09-08", title: "Σεπτεμβρίου Η΄ (Γεννέσιον Θεοτόκου)", hymn: men/09-08/apolytikion, status: page, note: "header numeral read as Π'/Η'; verify"}
+  - {part: B, page: 21, end: 21, date: "09-14", title: "Σεπτεμβρίου ΙΔ΄ (Ὕψωσις)", hymn: men/09-14/apolytikion, status: page}
+  - {part: B, page: 23, end: 29, date: "10-26", title: "Ὀκτωβρίου ΚΣΤ΄ (Δημήτριος)", hymn: men/10-26/apolytikion, status: page}
+  - {part: B, page: 31, end: 31, date: "11-13", title: "Νοεμβρίου ΙΓ΄ (Χρυσόστομος)", hymn: men/11-13/apolytikion, status: page}
+  - {part: B, page: 33, end: 33, date: "11-21", title: "Νοεμβρίου ΚΑ΄ (Εἰσόδια)", hymn: men/11-21/apolytikion, status: page}
+  - {part: B, page: 35, end: 37, date: "11-25", title: "Νοεμβρίου ΚΕ΄ (Αἰκατερίνα)", hymn: men/11-25/apolytikion, status: page}
+  - {part: B, page: 39, end: 39, date: "12-04", title: "Δεκεμβρίου Δ΄ (Βαρβάρα)", hymn: men/12-04/apolytikion, status: page}
+  - {part: B, page: 41, end: 41, date: "12-05", title: "Δεκεμβρίου Ε΄ (Σάββας)", hymn: men/12-05/apolytikion, status: page}
+  - {part: B, page: 43, end: 47, date: "12-12", title: "Δεκεμβρίου ΙΒ΄ (Σπυρίδων)", hymn: men/12-12/apolytikion, status: page, note: "ΙΒ΄ seen pp.43,45,47; St Nicholas 12-06 not seen as a separate header"}
+  - {part: B, page: 49, end: 57, date: "12-25", title: "Δεκεμβρίου ΚΕ΄ (Γέννησις Χριστοῦ)", hymn: men/12-25/apolytikion, status: page, note: "'Ἀπολυτίκιον Ἦχος Δι.' (Ἡ γέννησίς σου Χριστὲ ὁ Θεὸς ἡμῶν) seen p.55; section also holds idiomela"}
+  - {part: B, page: 59, end: 59, date: "12-26", title: "Δεκεμβρίου ΚΣΤ΄ (Σύναξις Θεοτόκου)", hymn: men/12-26/apolytikion, status: page}
+  - {part: B, page: 61, end: 63, date: "12-27", title: "Δεκεμβρίου ΚΖ΄ (Στέφανος)", hymn: men/12-27/apolytikion, status: page}
+  - {part: B, page: 65, end: 69, date: "01-01", title: "Ἰανουαρίου Α΄ (Περιτομή / Βασίλειος)", hymn: men/01-01/apolytikion, status: page}
+  - {part: B, page: 71, end: 83, date: "01-06", title: "Ἰανουαρίου ΣΤ΄ (Θεοφάνεια)", hymn: men/01-06/apolytikion, status: page, note: "header ΣΤ΄ pp.71-83"}
+  - {part: B, page: 85, end: 85, date: "01-07", title: "Ἰανουαρίου Ζ΄ (Πρόδρομος)", hymn: men/01-07/apolytikion, status: page}
+  - {part: B, page: 87, end: 91, date: "01-18", title: "Ἰανουαρίου ΙΗ΄ (Ἀθανάσιος καὶ Κύριλλος)", hymn: men/01-18/apolytikion, status: page}
+  - {part: B, page: 93, end: 93, date: "01-25", title: "Ἰανουαρίου ΚΕ΄ (Γρηγόριος Θεολόγος)", hymn: men/01-25/apolytikion, status: page}
+  - {part: B, page: 95, end: 103, date: "02-02", title: "Φεβρουαρίου Β΄ (Ὑπαπαντή)", hymn: men/02-02/apolytikion, status: page}
+  - {part: B, page: 105, end: 107, date: "02-10", title: "Φεβρουαρίου [Ι΄?] (Χαράλαμπος)", hymn: men/02-10/apolytikion, status: page, note: "header read as Γ΄ at low res; verify; saint inferred from contents order of 168177"}
+  - {part: B, page: 109, end: 113, date: "02-23", title: "Φεβρουαρίου ΚΓ΄ (Πολύκαρπος)", hymn: men/02-23/apolytikion, status: page}
+  - {part: B, page: 115, end: 117, date: "03-09", title: "Μαρτίου Θ΄ (Τεσσαράκοντα Μάρτυρες)", hymn: men/03-09/apolytikion, status: page}
+  - {part: B, page: 119, end: 121, date: "03-25", title: "Μαρτίου ΚΕ΄ (Εὐαγγελισμός)", hymn: men/03-25/apolytikion, status: page}
+  - {part: B, page: 123, end: 123, date: "04-23", title: "Ἀπριλίου ΚΓ΄ (Γεώργιος)", hymn: men/04-23/apolytikion, status: page}
+  - {part: B, page: 125, end: 125, date: "05-21", title: "Μαΐου ΚΑ΄ (Κωνσταντῖνος καὶ Ἑλένη)", hymn: men/05-21/apolytikion, status: page}
+  - {part: B, page: 127, end: 135, date: "06-24", title: "Ἰουνίου ΚΔ΄ (Γεννέσιον Προδρόμου)", hymn: men/06-24/apolytikion, status: page, note: "header ΚΔ΄ pp.127-129, read ΚΑ΄ pp.131-135; verify"}
+  - {part: B, page: 137, end: 141, date: "06-29", title: "Ἰουνίου ΚΘ΄ (Πέτρος καὶ Παῦλος)", hymn: men/06-29/apolytikion, status: page}
+  - {part: B, page: 143, end: 147, date: "07-01", title: "Ἰουλίου Α΄ (Ἀνάργυροι)", hymn: men/07-01/apolytikion, status: page}
+  - {part: B, page: 149, end: 149, date: "07-20", title: "Ἰουλίου Κ΄ (Ἠλίας)", hymn: men/07-20/apolytikion, status: page}
+  - {part: B, page: 151, end: 151, date: "07-27", title: "Ἰουλίου ΚΖ΄ (Παντελεήμων)", hymn: men/07-27/apolytikion, status: page}
+  - {part: B, page: 153, end: 155, date: "08-01", title: "Αὐγούστου Α΄ (Μακκαβαῖοι / Πρόοδος Σταυροῦ)", hymn: men/08-01/apolytikion, status: page}
+  - {part: B, page: 157, end: 163, date: "08-06", title: "Αὐγούστου ΣΤ΄ (Μεταμόρφωσις)", hymn: men/08-06/apolytikion, status: page}
+  - {part: B, page: 165, end: 165, date: "08-07", title: "Αὐγούστου Ζ΄ (Ἀπόδοσις / Ἀπολυτίκιον seen)", hymn: men/08-07/apolytikion, status: page, note: "'ἀπολυτίκιον' rubric seen on p.165; day numeral read Z'; verify"}
+  - {part: B, page: 167, end: 179, date: "08-15", title: "Αὐγούστου ΙΕ΄ (Κοίμησις Θεοτόκου)", hymn: men/08-15/apolytikion, status: page}
+  - {part: B, page: 181, end: 183, date: "08-22", title: "Αὐγούστου ΚΒ΄", hymn: men/08-22/apolytikion, status: page, note: "verify numeral; not a Menaion major feast"}
+  - {part: B, page: 185, end: 189, date: "08-29", title: "Αὐγούστου ΚΘ΄ (Ἀποτομὴ Προδρόμου)", hymn: men/08-29/apolytikion, status: page}

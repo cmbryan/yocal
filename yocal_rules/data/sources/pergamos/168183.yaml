@@ -1,0 +1,89 @@
+# Pergamos uoadl:168183 — contents (Πίναξ) transcribed from PDF images 449-450 (printed pp. 892-894).
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads).
+id: "168183"
+key: PG183
+title: "Πανδέκτη τῆς ἱερᾶς ἐκκλησιαστικῆς ὑμνῳδίας, τόμος Δ΄ — Ἀνθολογία πάσης τῆς ἐκκλησιαστικῆς ἐνιαυσίου ἀκολουθίας: Ἀκολουθία τῆς Ἱερᾶς Λειτουργίας (+ Καλοφωνικοὶ Εἱρμοί)"
+year: 1851
+file: "168183 Πανδέκτη της Ιεράς Εκκλησιαστικής Υμνωδίας του όλου ενιαυτού, Τόμος 4 (1851).pdf"
+layout: [{from: 1, div: 2, add: 3}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.4-5 = img 5; p.114-115 = img 60; p.194 = img 100; p.394 = img 200; p.514 = img 260; p.714 = img 360; p.794 = img 400; p.866-867 = img 436. Music starts p.2-3 = img 4.
+toc_images: [449, 450]
+summary: >
+  Divine Liturgy volume. Mostly Petros Lambadarios (Peloponnesios) plus Gregorios, Chourmouzios, Daniel, Petros Byzantios, Ioannis Protopsaltes etc.
+  Pp.3-110 contain the short/parish-usable fixed parts (Christos anesti, typika, festal antiphons, Eisodikon, Trisagion + Dynamis variants, Alleluia, Kyrie eleison, Cherubika of the week).
+  Pp.159-435 are further Cherubika (many tones, long/kalophonic); 437 Liturgy of Basil (Sanctus etc.); Axion estin 442 (TOC misprints 342); Koinonika 456-620 (weekly Aineite by tone, Daniel/Petros/Gregorios); pp.622-848 festal cherubika+koinonika by feast (papadic, one line each); 859-884 kalophonic heirmoi (papadic); 885 explanation of the kratema "tereré" + tables.
+  Litany responses: Kyrie eleison (Chourmouzios, p.58, tones; verified on page, several tones incl. grave); Paraschou Kyrie / Soi Kyrie / Amen / Kai to pneumati sou NOT listed in the TOC (not checked in pp.7-26, 34-54 where they may sit inside "Typika"/"Ἕτερα"). Doxa soi Kyrie at pp.52-54.
+entries:   # page = printed; who = composer as printed
+  - {page: 3, status: page, title: "Χριστὸς ἀνέστη", who: Πέτρος Λαμπαδάριος}
+  - {page: 4, status: page, title: "Τυπικὰ τοῦ αὐτοῦ", who: Πέτρος Λαμπαδάριος}
+  - {page: 11, status: toc, title: "Ἕτερα (Τυπικά)", who: Γρηγόριος Πρωτοψάλτης, note: "tone mark unclear [?]"}
+  - {page: 18, status: toc, title: "Ἕτερα (Τυπικά)", who: Χουρμούζιος Χαρτοφύλαξ}
+  - {page: 26, status: page, title: "Ἀντίφωνα ψαλλόμενα εἰς τὰς Δεσποτικὰς Ἑορτάς", note: "generic festal antiphons; feast ids are <feast>/antiphon{n} in hymns.py; match by feast"}
+  - {page: 27, status: page, title: "Δεῦτε προσκυνήσωμεν, εἰσοδικὸν σύντομον καὶ ἀργόν, μὲ ἕτερα ἀργὰ εἰσοδικά"}
+  - {page: 29, status: toc, title: "Τρισάγιον σύντομον καὶ ἀργόν", who: Πέτρος Λαμπαδάριος}
+  - {page: 31, status: page, title: "Ὅσοι εἰς Χριστόν", who: Πέτρος Λαμπαδάριος, hymn: lit/trisagion/baptized}
+  - {page: 32, status: page, title: "Τὸν Σταυρόν σου προσκυνοῦμεν", who: Πέτρος Λαμπαδάριος, hymn: lit/trisagion/cross}
+  - {page: 33, status: toc, title: "Δύναμις τοῦ βήματος"}
+  - {page: 34, status: page, title: "Δύναμις τὸ συνειθισμένον"}
+  - {page: 35, status: toc, title: "Ἕτερον", who: Γεώργιος ὁ Κρής}
+  - {page: 36, status: toc, title: "Ἕτερον τὸ Ἁγιορείτικον"}
+  - {page: 38, status: toc, title: "Ἕτερον μὲ κράτημα", who: Ξένος ὁ Κορώνης, note: papadic}
+  - {page: 43, status: toc, title: "Ἕτερον τοῦ βήματος"}
+  - {page: 44, status: toc, title: "Δύναμις Ὅσοι εἰς Χριστόν, μέλος ἀρχαῖον", hymn: lit/trisagion/baptized}
+  - {page: 45, status: toc, title: "Ἕτερον", who: Βαλάσιος Ἱερεύς, hymn: lit/trisagion/baptized, note: "verify which text"}
+  - {page: 47, status: toc, title: "Ἕτερον", who: Γεώργιος ὁ Κρής, note: "verify which text"}
+  - {page: 49, status: toc, title: "Δύναμις Τὸν Σταυρόν σου προσκυνοῦμεν", hymn: lit/trisagion/cross}
+  - {page: 50, status: toc, title: "Ἕτερον", who: Βαλάσιος Ἱερεύς, note: "verify which text"}
+  - {page: 52, status: toc, title: "Ἀλληλουάριον τὸ πρὸ τοῦ Εὐαγγελίου", hymn: "lit/sun/t{t}/alleluia", note: "generic melody; verify tones"}
+  - {page: 55, status: page, title: "Κύριε σῶσον τοὺς εὐσεβεῖς (Λειτουργία Ἀρχιερέως)"}
+  - {page: 58, hymn: "lit/ektenia/kyrie", status: page, title: "Κύριε ἐλέησον, κατ' ἦχον", who: Χουρμούζιος, note: "litany response, several tones (1, 2, 3, pl1, grave seen) on pp.58-59"}
+  - {page: 59, status: page, title: "Χερουβικὰ τῆς Ἑβδομάδος", who: Πέτρος Λαμπαδάριος, note: "one per tone p.59-76 (Κυριακῶν ἐν τῷ μέσῳ)"}
+  - {page: 77, status: toc, title: "Ἕτερα Χερουβικά", who: Πέτρος Λαμπαδάριος}
+  - {page: 110, status: toc, title: "Ἕτερα κατ' ἦχον, τὰ λεγόμενα ἀνέκδοτα", who: Πέτρος Λαμπαδάριος}
+  - {page: 159, status: toc, title: "Ἕτερα Χερουβικά", who: Δανιὴλ Πρωτοψάλτης, note: papadic/long}
+  - {page: 189, status: toc, title: "Ἕτερα Χερουβικά", who: Πέτρος Βυζάντιος, note: papadic/long}
+  - {page: 222, status: toc, title: "Ἕτερα Χερουβικά", who: Γρηγόριος Πρωτοψάλτης, note: papadic/long}
+  - {page: 265, status: toc, title: "Ἕτερα τοῦ αὐτοῦ τὰ μέγιστα", who: Γρηγόριος Πρωτοψάλτης, note: papadic}
+  - {page: 320, status: toc, title: "Ἕτερα Χερουβικά", who: Χουρμούζιος, note: papadic/long}
+  - {page: 371, status: toc, title: "Ἕτερα Χερουβικά", who: Κωνσταντῖνος Πρωτοψάλτης, note: papadic/long}
+  - {page: 400, status: page, title: "Ἕτερα Χερουβικά κατ' ἦχον", who: Πέτρος Ἐφέσιος, note: papadic/long}
+  - {page: 431, status: page, title: "Πατέρα Υἱὸν καὶ ἅγιον Πνεῦμα", who: Ἰωάννης Πρωτοψάλτης, note: "Liturgy-of-Basil?? verify; 'Τὸ παρὸν ψάλλεται εἰς τὸν ἐν Χριστῷ ἀσπασμόν' (Creed-time/kiss hymn?)"}
+  - {page: 433, status: toc, title: "Ἀγαπήσω σε Κύριε (Ἀγαπήσω σε Κύριε ἡ ἰσχύς μου)", who: Ἰάκωβος Πρωτοψάλτης, note: "kratema/koinonikon-like; verify"}
+  - {page: 435, status: toc, title: "Ἕτερον", who: Ἰάκωβος Πρωτοψάλτης}
+  - {page: 437, status: page, title: "Ἡ Θεία Λειτουργία τοῦ Μεγάλου Βασιλείου (Ἅγιος Ἅγιος ... )", who: Ἰωάννης Γλυκύς/Πρωτοψάλτης, note: "verify; contains Sanctus. Does it contain Ἐπὶ σοὶ χαίρει? not checked"}
+  - {page: 442, hymn: "lit/axion_estin", status: page, title: "Ἄξιον ἐστιν ἀνὰ δύο εἰς κάθε ἦχον", who: Γρηγόριος Πρωτοψάλτης, note: "TOC prints 342; real page 442 (checked: 'Τὴν τιμιωτέραν τῶν Χερουβείμ'); p.342 is Cherubika. No id (booklet axion)"}
+  - {page: 456, status: page, title: "Κοινωνικὰ Αἰνεῖτε τῶν Κυριακῶν κατ' ἦχον", who: Δανιὴλ Πρωτοψάλτης, hymn: "lit/communion/sunday", note: "Πα first (p.456); other tones follow; verify"}
+  - {page: 476, status: toc, title: "Ἕτερα κατ' ἦχον", who: Πέτρος Λαμπαδάριος, note: "Koinonika, verify"}
+  - {page: 462, status: toc, title: "Ἕτερα κατ' ἦχον σύντομα", who: Πέτρος Λαμπαδάριος, note: "TOC lists 476 before 462: order/numbers unclear; short Koinonika, verify"}
+  - {page: 506, status: toc, title: "Ἕτερα τοῦ αὐτοῦ ἀνέκδοτα δέκα"}
+  - {page: 534, status: toc, title: "Ἕτερα κατ' ἦχον", who: Πέτρος Βυζάντιος}
+  - {page: 557, status: toc, title: "Ἕτερα κατ' ἦχον", who: Γρηγόριος Πρωτοψάλτης}
+  - {page: 587, status: toc, title: "Ἕτερα κατ' ἦχον", who: Ἰωάννης Λαμπαδάριος}
+  - {page: 605, status: toc, title: "Κοινωνικὰ τῆς Ἑβδομάδος", who: Πέτρος Λαμπαδάριος}
+  - {page: 616, status: toc, title: "Κοινωνικὰ τοῦ ἐνιαυτοῦ τῇ α΄ Σεπτεμβρίου", who: Γεώργιος ὁ Κρής, date: "09-01"}
+  - {page: 620, status: toc, title: "Εἰς τὴν μνήμην τῶν Ἐγκαινίων", who: Μανουὴλ Πρωτοψάλτης}
+  # festal Cherubika/Koinonika by feast: all papadic/kalophonic, not mapped
+  - {page: 622, status: page, date: "09-14", title: "Εἰς τὴν ἑορτὴν τοῦ τιμίου Σταυροῦ παρὰ διαφόρων ποιητῶν κατ' ἦχον", note: papadic}
+  - {page: 638, status: toc, date: "12-25", title: "Εἰς τὴν ἑορτὴν τῶν Χριστουγέννων", note: papadic}
+  - {page: 652, status: toc, date: "01-06", title: "Εἰς τὴν ἑορτὴν τῶν Θεοφανείων", note: papadic}
+  - {page: 658, status: page, date: "03-25", title: "Εἰς τὴν ἑορτὴν τοῦ Εὐαγγελισμοῦ", who: Δανιὴλ Πρωτοψάλτης, note: papadic}
+  - {page: 664, status: page, moveable: "Lazarus Saturday", title: "Τῷ Σαββάτῳ τοῦ Λαζάρου", note: "TOC prints 669 (and 664 for Palm Sunday?); on page 664 = Lazarus"}
+  - {page: 669, status: toc, moveable: "Palm Sunday", title: "Τῇ Κυριακῇ τῶν Βαΐων", note: "verify number (TOC order 669, 664)"}
+  - {page: 670, status: page, moveable: "Holy Thursday", title: "Τῇ ἁγίᾳ καὶ μεγάλῃ Πέμπτῃ ἀντὶ Χερουβικοῦ καὶ Κοινωνικοῦ", who: Πέτρος Λαμπαδάριος}
+  - {page: 677, status: toc, moveable: "Holy Saturday", title: "Τῷ μεγάλῳ Σαββάτῳ ἀντὶ Χερουβικοῦ"}
+  - {page: 685, status: toc, moveable: "Holy Saturday", title: "Τῷ αὐτῷ Σαββάτῳ Κοινωνικόν"}
+  - {page: 688, status: toc, moveable: Pascha, title: "Εἰς τὴν λαμπροφόρον Ἀνάστασιν κατ' ἦχον παρὰ διαφόρων", note: papadic}
+  - {page: 714, status: toc, moveable: Thomas Sunday, title: "Τῇ Κυριακῇ τοῦ Θωμᾶ", note: papadic}
+  - {page: 720, status: toc, moveable: Mid-Pentecost, title: "Τῆς Μεσοπεντηκοστῆς", note: papadic}
+  - {page: 725, status: toc, moveable: Ascension, title: "Τῆς Ἀναλήψεως", note: papadic}
+  - {page: 730, status: toc, moveable: Pentecost, title: "Τῇ Κυριακῇ τῆς Πεντηκοστῆς", note: papadic}
+  - {page: 734, status: toc, moveable: Holy Spirit Monday, title: "Τῇ Δευτέρᾳ τοῦ ἁγίου Πνεύματος", note: papadic}
+  - {page: 739, status: toc, moveable: All Saints, title: "Τῇ Κυριακῇ τῶν ἁγίων Πάντων", note: papadic}
+  - {page: 749, status: toc, date: "08-06", title: "Τῆς Μεταμορφώσεως", note: papadic}
+  - {page: 766, status: toc, date: "11-08", title: "Τῶν Ταξιαρχῶν", note: papadic}
+  - {page: 766, status: toc, title: "Εἰς Μνήμην Ἁγίων", note: "TOC number illegible/duplicate [?] (probably 776)"}
+  - {page: 794, status: toc, title: "Εἰς Θεομητορικὰς ἑορτάς", note: papadic}
+  - {page: 823, status: toc, date: "06-29", title: "Εἰς τὰς ἑορτὰς τῶν ἁγίων Ἀποστόλων", note: papadic}
+  - {page: 848, status: toc, moveable: Ascension, title: "Μάθημα ὀκτάηχον εἰς τὴν ἑσπερινὴν τῆς Ἀναλήψεως", who: Ἰωάννης Λαμπαδάριος, note: papadic}
+  - {page: 859, status: page, title: "Εἱρμοὶ Καλοφωνικοί", note: "kalophonic heirmoi, papadic; pp.859-884"}
+  - {page: 885, status: toc, title: "Ἑρμηνεία τοῦ κρατήματος τοῦ τερερέ + Παρορώματα τοῦ α΄ β΄ γ΄ δ΄ τόμου"}

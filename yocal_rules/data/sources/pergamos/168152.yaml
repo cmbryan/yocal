@@ -1,0 +1,78 @@
+# Pergamos uoadl:168152 — Δοξαστάριον, Τόμος Β΄ (Apr 23–Aug Menaion + Triodion/Pentecostarion), Iakovos Protopsaltes / Chourmouzios, 1836.
+# Contents (Πίναξ) transcribed from PDF images 3 (right) – 4 (left). Scans: FETCHED/ (not in git; CC BY-NC-ND).
+# NOT a duplicate of 168149 (that is Τόμος Α΄, Sep–Mar). Same title page, "ΤΟΜΟΣ ΔΕΥΤΕΡΟΣ", Galata 1836.
+id: "168152"
+key: PG152
+title: Δοξαστάριον περιέχον τὰ δοξαστικὰ τῶν δεσποτικῶν καὶ θεομητορικῶν ἑορτῶν τῶν τε ἑορταζομένων ἁγίων τοῦ ὅλου ἐνιαυτοῦ, Τόμος Β΄ (Ἰάκωβος Πρωτοψάλτης, ἐκδ. Χουρμούζιος Χαρτοφύλαξ)
+year: 1836
+file: "168152 Δοξαστάριον περιέχον τα δοξαστικά όλων των δεσποτικών και θεομητορικών εορτών, τών τε εορτ (1836).pdf"
+# image = printed // 2 + add. checked: p.192-193 = img 100; p.202 = img 105; p.212 = img 110 (add 4).
+# IRREGULAR imgs 111-119: p.214-215 = 111; 216 | 225 = 112 (pp.217-224 look absent/misbound in this scan); 226-227 duplicated at 113 and 114; 228-229 = 115; 230-231 = 116; 232 | 225 = 117; 232-233 = 118; 234-235 = 119. Use header sweep near these.
+# from img 120 (p.236): add 2 — checked p.246 = 125, p.276 = 140, p.316 = 160, p.356 = 180, p.376 = 190, p.386 = 195, p.390 = 197, p.396 = 200, p.406 = 205.
+layout: [{from: 1, div: 2, add: 4}, {from: 236, div: 2, add: 2}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+toc_images: [3, 4]
+summary: "Doxastika only. Menaion Apr 23–Aug 31, then Triodion Sundays/Lenten Holy Week (p.173-326), Pentecostarion Sundays/feasts (p.326-379), Dogmatic Theotokia (p.387-412), subscriber list (p.414-427). TOC column is headed Φύλ. but the numbers are printed pages (checked: TOC p.197 'Α΄ Κυριακὴ τῶν Νηστειῶν' matches running header at p.202-203, img 105; p.228 'Πέμπτη τοῦ Μεγάλου Κανόνος' header at img 115). Triodion days use mov/<days from Pascha>. Holy Week items whose day the TOC does not give are left unmapped. No litany responses, no Liturgy fixed parts, no resurrectional apolytikia/prokeimena."
+entries:   # page = printed
+  - {page: 1, date: "04-23", title: "Γεωργίου τοῦ Μεγαλομάρτυρος", hymn: men/04-23/doxastikon, status: toc}
+  - {page: 12, date: "04-25", title: "Μάρκου τοῦ Εὐαγγελιστοῦ", hymn: men/04-25/doxastikon, status: toc}
+  - {page: 13, date: "05-02", title: "Τοῦ ἐν Ἁγίοις Πατρὸς ἡμῶν Ἀθανασίου τοῦ Μεγ.", hymn: men/05-02/doxastikon, status: toc}
+  - {page: 17, date: "05-21", title: "Κωνσταντίνου καὶ Ἑλένης", hymn: men/05-21/doxastikon, status: toc}
+  - {page: 27, date: "06-24", title: "Τὸ Γεννέσιον τοῦ Τιμίου Προδρόμου", hymn: men/06-24/doxastikon, status: toc}
+  - {page: 38, date: "06-29", title: "Τῶν Ἁγ. Ἀποστόλων Πέτρου καὶ Παύλου, Προσόμ. τοῦ Ἑσπερ.", hymn: men/06-29/doxastikon, status: toc, note: "Vespers prosomoia only per TOC; verify full doxastika"}
+  - {page: 52, date: "06-30", title: "Τῶν δώδεκα Ἀποστόλων", hymn: men/06-30/doxastikon, status: toc}
+  - {page: 54, date: "07-01", title: "Μνήμη τῶν Ἁγίων Ἀναργύρων", hymn: men/07-01/doxastikon, status: toc}
+  - {page: 64, date: "07-02", title: "Ἡ Κατάθεσις τῆς Τιμίας ἐσθῆτος τῆς Θεοτόκου ἐν Βλαχέρ.", hymn: men/07-02/doxastikon, status: toc}
+  - {page: 68, date: "07-07", title: "Τῆς Ἁγίας Κυριακῆς", hymn: men/07-07/doxastikon, status: toc}
+  - {page: 77, date: "07-11", title: "Τῆς Ἁγίας Μεγαλομάρτυρος Εὐφημίας", hymn: men/07-11/doxastikon, status: toc}
+  - {page: 86, date: "07-20", title: "Τοῦ Προφήτου Ἠλιοῦ", hymn: men/07-20/doxastikon, status: toc}
+  - {page: 94, date: "07-25", title: "Ἡ Κοίμησις τῆς Ἁγίας Ἄννης", hymn: men/07-25/doxastikon, status: toc}
+  - {page: 104, date: "07-26", title: "Τῆς Ἁγίας Μεγαλομάρτυρος Παρασκευῆς", hymn: men/07-26/doxastikon, status: toc}
+  - {page: 107, date: "07-27", title: "Τοῦ Ἁγίου Μεγαλομάρτυρος Παντελεήμονος", hymn: men/07-27/doxastikon, status: toc}
+  - {page: 117, date: "08-01", title: "Ἡ πρόοδος τοῦ Τιμίου Σταυροῦ καὶ τῶν Μακκαβαίων", hymn: men/08-01/doxastikon, status: toc}
+  - {page: 127, date: "08-02", title: "Ἡ Ἀνακομιδὴ τῶν λειψάνων τοῦ Ἁγίου Στεφάνου", hymn: men/08-02/doxastikon, status: toc}
+  - {page: 133, date: "08-06", title: "Ἡ Θεία Μεταμόρφωσις τοῦ Κυρίου ἡμῶν", hymn: men/08-06/doxastikon, status: toc}
+  - {page: 143, date: "08-15", title: "Ἡ Κοίμησις τῆς Θεοτόκου εἰς τὸν Ἑσπερ. Στιχηρὰ Προσόμ.", hymn: men/08-15/doxastikon, status: toc, note: "Vespers prosomoia per TOC; verify"}
+  - {page: 162, date: "08-29", title: "Ἡ Ἀποτομὴ τῆς Τιμίας Κεφαλῆς τοῦ Προδρόμου", hymn: men/08-29/doxastikon, status: toc}
+  - {page: 170, date: "08-31", title: "Ἡ Κατάθεσις τῆς Τιμίας Ζώνης τῆς Θεοτόκου", hymn: men/08-31/doxastikon, status: toc}
+  - {page: 173, moveable: "Publican", title: "Τῇ Κυριακῇ τοῦ Τελώνου καὶ Φαρισαίου", hymn: mov/-70/doxastikon, status: toc}
+  - {page: 177, moveable: "Prodigal Son", title: "Τῇ Κυριακῇ τοῦ Ἀσώτου", hymn: mov/-63/doxastikon, status: toc}
+  - {page: 182, moveable: "Meatfare", title: "Τῇ Κυριακῇ τῆς Ἀποκρέω", hymn: mov/-56/doxastikon, status: toc}
+  - {page: 189, moveable: "Cheesefare", title: "Τῇ Κυριακῇ τῆς Τυροφάγου", hymn: mov/-49/doxastikon, status: toc}
+  - {page: 194, moveable: "Cheesefare Vespers (Forgiveness)", title: "Τῇ αὐτῇ Κυριακῇ ἑσπέρας Ἰδιόμελον Ἔλαμψεν ἡ χάρις σου Κύριε", hymn: mov/-49/doxastikon, status: toc}
+  - {page: 197, moveable: "1st Sunday of Lent", title: "Τῇ Α΄ Κυριακῇ τῶν Νηστειῶν", hymn: mov/-42/doxastikon, status: toc}
+  - {page: 204, moveable: "1st Sunday of Lent Vespers", title: "Τῇ αὐτῇ Κυριακῇ ἑσπέρας Ἰδιόμελον Δεῦτε ἐκκαθάρωμεν", hymn: mov/-42/doxastikon, status: toc}
+  - {page: 206, moveable: "2nd Sunday of Lent", title: "Τῇ Β΄ Κυριακῇ τῶν Νηστειῶν", hymn: mov/-35/doxastikon, status: toc}
+  - {page: 210, moveable: "2nd Sunday Vespers", title: "Τῇ αὐτῇ Κυριακῇ ἑσπέρας Ἰδιόμελον Χαλινοὺς ἀποπτύσας", hymn: mov/-35/doxastikon, status: toc}
+  - {page: 212, moveable: "3rd Sunday of Lent", title: "Τῇ Γ΄ Κυριακῇ τῶν Νηστειῶν", hymn: mov/-28/doxastikon, status: toc}
+  - {page: 218, moveable: "3rd Sunday Vespers", title: "Τῇ αὐτῇ Κυριακῇ ἑσπέρας Ἰδιόμελον Ἀτενίσαι τὸ ὄμμα εἰς οὐρανόν", hymn: mov/-28/doxastikon, status: toc}
+  - {page: 220, moveable: "4th Sunday of Lent", title: "Τῇ Δ΄ Κυριακῇ τῶν Νηστειῶν", hymn: mov/-21/doxastikon, status: toc}
+  - {page: 223, moveable: "4th Sunday Vespers", title: "Τῇ αὐτῇ Κυριακῇ ἑσπέρας Ἰδιόμελον Ὁ τὸν ἀμπελῶνα φυτεύσας", hymn: mov/-21/doxastikon, status: toc}
+  - {page: 228, moveable: "Thursday of the Great Canon", title: "Τῇ Πέμπτῃ τοῦ Μεγάλου Κανόνος εἰς τὸν Στίχον τὸ Ἰδιόμελον", hymn: mov/-17/doxastikon, status: toc}
+  - {page: 229, moveable: "Saturday of the Akathist", title: "Τῷ Σαββάτῳ τῆς Ἀκαθίστου", hymn: mov/-15/doxastikon, status: toc}
+  - {page: 231, moveable: "5th Sunday of Lent", title: "Τῇ Πέμπτῃ Κυριακῇ τῶν Νηστειῶν", hymn: mov/-14/doxastikon, status: toc}
+  - {page: 238, moveable: "5th Sunday Vespers", title: "Τῇ αὐτῇ Κυριακῇ ἑσπέρας Ἰδιόμελον Θαυμαστὴ τοῦ Σωτῆρος", hymn: mov/-14/doxastikon, status: toc, note: "verify reading of incipit"}
+  - {page: 242, moveable: "Lazarus Saturday", title: "Τῷ Σαββάτῳ τοῦ Δικαίου Λαζάρου", hymn: mov/-8/doxastikon, status: toc}
+  - {page: 244, moveable: "Palm Sunday", title: "Τῇ Κυριακῇ τῶν Βαΐων", hymn: mov/-7/doxastikon, status: toc}
+  - {page: 252, moveable: "Holy Wednesday", title: "Τῇ Ἁγίᾳ καὶ Μ. Τετάρτῃ εἰς τὸν στίχ. τῶν Αἴν. Κύριε ἡ ἐν πολλαῖς ἁμαρτίαις", hymn: mov/-4/doxastikon, status: toc}
+  - {page: 258, moveable: "Holy Thursday", title: "Τῇ Ἁγίᾳ καὶ Μ. Πέμπτῃ Δόξα καὶ Νῦν. Ὃν ἐκήρυξεν ἀμνὸν Ἡσαΐας", hymn: mov/-3/doxastikon, status: toc}
+  - {page: 260, title: "Εἰς τὸν στίχ. Δόξα Ὁ τρόπος σου πολιότητος καὶ Νῦν Μυσταγώγε Κύριε", status: toc, note: "Holy Week day not stated in TOC; verify (Holy Thursday?)"}
+  - {page: 266, title: "Εἰς τὸν ἑσπερινὸν Δόξα καὶ Νῦν Γέννημα ἐχιδνῶν", status: toc, note: "Holy Week day not stated; verify"}
+  - {page: 270, moveable: "Great Friday Matins", title: "Εἰς τοὺς Αἴνους τῶν Ἁγίων Παθῶν Δόξα Ἐξέδυσάν με τὰ ἱμάτιά μου", hymn: mov/-2/doxastikon, status: toc, note: "verify day (Matins of Great Friday)"}
+  - {page: 272, moveable: "Great Friday Matins", title: "Καὶ Νῦν τὸν νῶτόν μου ἔδωκαν εἰς μαστίγωσιν", status: toc, note: "verify"}
+  - {page: 273, moveable: "Great Friday Matins", title: "Εἰς τὸν στίχον τῶν Αἴνων Κύριε ἀναβαίνοντός σου ἐν τῷ Σταυρῷ", status: toc, note: "verify"}
+  - {page: 278, title: "Καὶ Νῦν Ἤδη βάπτεται κάλαμος", status: toc, note: "verify"}
+  - {page: 278, moveable: "Great Friday Hours", title: "Στιχηρὰ τῶν Ὡρῶν τῆς Μεγάλης Παρασκευῆς", hymn: mov/-2/doxastikon, status: toc}
+  - {page: 311, moveable: "Great Friday Vespers", title: "Τῇ Μ. Παρασκευῇ εἰς τὸν ἑσπερ. Δόξα Ὣς πῶς ἡ παράνομος συναγωγή, Καὶ Νῦν Φοβερὸν καὶ παράδοξον", hymn: mov/-2/doxastikon, status: toc}
+  - {page: 320, moveable: "Great Saturday (verify)", title: "Εἰς τὸν στίχον Δόξα καὶ Νῦν Σὲ τὸν Ἀναβαλλόμενον", status: toc, note: "day not stated; verify"}
+  - {page: 326, moveable: "Pascha (+ Bright Friday, mov/5)", title: "Τῇ Κυριακῇ τοῦ Πάσχα Δόξα καὶ Νῦν Ἀναστάσιμον, καὶ τῇ Παρασκευῇ τῆς Διακαινησίμου", hymn: mov/0/doxastikon, status: toc, note: "same section also serves Bright Friday (mov/5)"}
+  - {page: 331, moveable: "Thomas Sunday", title: "Τῇ Κυριακῇ τοῦ Θωμᾶ", hymn: mov/7/doxastikon, status: toc}
+  - {page: 336, moveable: "Myrrhbearers", title: "Τῇ Κυριακῇ τῶν Μυροφόρων", hymn: mov/14/doxastikon, status: toc}
+  - {page: 338, moveable: "Paralytic (+ Mid-Pentecost, mov/24)", title: "Τῇ Κυριακῇ τοῦ Παραλύτου καὶ τῆς Μεσοπεντηκοστῆς", hymn: mov/21/doxastikon, status: toc, note: "covers Mid-Pentecost (mov/24) too; verify"}
+  - {page: 347, moveable: "Samaritan Woman", title: "Τῇ Κυριακῇ τῆς Σαμαρείτιδος", hymn: mov/28/doxastikon, status: toc}
+  - {page: 352, moveable: "Blind Man", title: "Τῇ Κυριακῇ τοῦ Τυφλοῦ", hymn: mov/35/doxastikon, status: toc}
+  - {page: 359, moveable: "Ascension", title: "Τῇ Πέμπτῃ τῆς Ἀναλήψεως", hymn: mov/39/doxastikon, status: toc}
+  - {page: 366, moveable: "Pentecost", title: "Τῇ Κυριακῇ τῆς Πεντηκοστῆς, εἰς τοὺς Αἴνους καὶ ἑσπερινόν", hymn: mov/49/doxastikon, status: toc}
+  - {page: 376, moveable: "Monday of the Holy Spirit", title: "Τῇ Δευτέρᾳ τοῦ Ἁγίου Πνεύματος", hymn: mov/50/doxastikon, status: toc}
+  - {page: 379, moveable: "All Saints", title: "Τῇ Κυριακῇ τῶν Ἁγίων Πάντων", hymn: mov/56/doxastikon, status: toc}
+  - {page: 387, title: "Καὶ τὰ ὀκτὼ Δογματικὰ Θεοτοκία κατ᾽ ἦχον", status: toc, note: "Dogmatic Theotokia by tone, pp.387-412; no hymn id"}
+  - {page: 414, title: "Κατάλογος τῶν Συνδρομητῶν (subscribers list)", status: toc, note: "not music; pp.414-427"}

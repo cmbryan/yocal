@@ -78,6 +78,9 @@ def describe(slot: str, res, f: dict):
         return _apol(f, fl, liturgy=slot.startswith("liturgy"))
     if slot == "matins.kathismata":
         return [f"- Resurrectional kathismata hymns — Octoechos {_tone(fl['tone'])}"]
+    if slot == "matins.kontakion" and fl.get("kind") in ("resurrectional", "both"):
+        out = [f"- Resurrectional kontakion and oikos — Octoechos {_tone(fl['tone'])}"]
+        return out + ([f"- Kontakion of the feast ({_short(f.get('fore_after') or f['principal_name'])}) — Menaion {f['mmdd']}"] if fl["kind"] == "both" else [])
     if slot == "matins.prokeimenon":
         return [f"- Resurrectional prokeimenon — {_tone(fl['tone'])}"]
     if slot == "matins.eothinon_gospel":
@@ -89,7 +92,11 @@ def describe(slot: str, res, f: dict):
             whom = "the feast" if f.get("feast_period") else "the saint / commemoration"
             return [f"- {fl['total']} stichera: {res} resurrectional — Octoechos {_tone(f['tone'])}; {oth} for {whom}"]
         return [f"- {fl['total']} resurrectional stichera — Octoechos {_tone(f['tone'])}"]
+    if slot == "matins.hypakoe":
+        return [f"- Hypakoe — {_tone(fl['tone'])}"]
     if slot == "matins.canon":
+        if fl.get("kind") == "katavasiae_only":
+            return ["- Canon troparia not chanted: katavasiae only (see Katavasia)"]
         return [f"- Canon of the tone (Octoechos) — {_tone(fl['tone'])}"]
     if slot == "liturgy.kontakion":
         if fl["kind"] == "ordinary_theotokos":

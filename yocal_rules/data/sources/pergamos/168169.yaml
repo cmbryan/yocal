@@ -1,0 +1,24 @@
+# Pergamos uoadl:168169 — NO contents list (end of volume, images 364-375 = subscribers' list "συνδρομηταί"; no Πίναξ found). Indexed from running headers (every 4th image) + page checks.
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads).
+# Titles of individual pieces are not printed in a list; the notation is long melismatic (papadic/kalophonic) throughout, so section-level only.
+id: "168169"
+key: PG169
+title: "Ἀνθολογία πάσης τῆς ἐνιαυσίου ἐκκλησιαστικῆς ἀκολουθίας, Ἑσπερινοῦ, Ὄρθρου τε καὶ Λειτουργίας, τῆς τε Μεγάλης Τεσσαρακοστῆς καὶ τοῦ Πάσχα (Ἰωάννης Λαμπαδάριος ed.)"
+year: 1846
+file: "168169 Ανθολογία πάσης της ενιαυσίου εκκλησιαστικής ακολουθίας, Εσπερινού, Όρθρου τε και Λειτουργ (1846).pdf"
+layout: [{from: 1, div: 2, add: 3}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.2-3=img 4, p.4-5=img 5, p.194-195=img 100, p.346-347=img 176, p.348-349=img 177, p.574-575=img 290, p.698-699=img 352
+toc_images: []
+summary: "Papadic/kalophonic anthology of the Vespers, Lenten, Paschal, Matins and Liturgy music (Constantinople 1846, Philippoupolis printer). Not parish-usable as a whole; hymn titles are mostly not printed (only a few \"Τῷ Σαββάτῳ τοῦ Λαζάρου, Πέτρου Λαμπ., Ἦχος …\" attributions inline). Liturgy part = Chrysostom Typika (Petros Ephesios), Cherubika, Trisagion/Alleluia-type melismata, Koinonika per feast/day to p.~699, then Kalophonikoi Eirmoi p.700-720. LITANY RESPONSES: not found as separate settings (sampled; the Liturgy part is all long melismata). Liturgy fixed parts (Ὅσοι εἰς Χριστόν, Ἄξιον ἐστίν, Εἷς Ἅγιος, Εὐλογητὸς ὁ ἐρχόμενος, Εἴδομεν τὸ φῶς): NOT located; only ~35 of ~175 Liturgy images were viewed."
+sections:   # printed pages
+  - {page: 1, title: "Ἀκολουθία τοῦ Ἑσπερινοῦ (Μακάριος ἀνήρ, Κεκραγάρια, Φῶς ἱλαρόν, Ἀπόστιχα ... )", end: 51, status: page, note: "p.1 incipit 'Μακάριος ἀνήρ … Γεωργίου τοῦ Κρητός' [?] verify"}
+  - {page: 52, title: "Ἀκολουθία τῆς Τεσσαρακοστῆς (Lenten Vespers/Matins settings)", end: 99, status: page}
+  - {page: 100, title: "Ἀκολουθία τοῦ Πάσχα (Paschal)", end: 115, status: page}
+  - {page: 116, title: "Ἀκολουθία τοῦ Ὄρθρου (Matins: Θεὸς Κύριος, Ἀναβαθμοί, Ἄξιον ἐστί, Αἶνοι, Δοξολογία ...)", end: 355, status: page, note: "papadic; incl. 'Εἰς τὸν ἐνδυόμενον Ἀρχιερέα' (μέλος ἀρχαῖον, p.~348-349) and 'Ὅταν ἐνδύεται ὁ Ἀρχιερεύς, Γρηγορίου Πρωτ.' (p.~350)"}
+  - {page: 357, title: "Ἀκολουθία τῆς θείας καὶ ἱερᾶς Λειτουργίας τοῦ Χρυσοστόμου (Τυπικὰ Πέτρου Ἐφεσίου: Εὐλόγει ἡ ψυχή μου …)", end: 699, status: page}
+  - {page: 654, title: "Τῷ Σαββάτῳ τοῦ Λαζάρου (koinonikon?), Πέτρου Λαμπαδαρίου", status: page, note: "[?] page digits blurred, ≈p.654-655; Koinonika run to p.699"}
+  - {page: 698, title: "Τῶν ἁγίων Ἀποστόλων (koinonikon 'Εἰς πᾶσαν τὴν γῆν ἐξῆλθεν'), Πέτρου Λαμπαδαρίου", status: page}
+  - {page: 700, title: "Καλοφωνικοὶ Εἱρμοί", end: 719, status: page}
+entries:
+  - {page: 1, title: "Μακάριος ἀνήρ (Vespers psalm 1)", status: page, note: "papadic; verify composer"}
+  - {page: 367, title: "Τυπικά, Εὐλόγει ἡ ψυχή μου", who: Πέτρος Ἐφέσιος, status: page, note: "not mapped: long style"}

@@ -1,0 +1,15 @@
+# Pergamos uoadl:168172 — NO Πίναξ; a single-voice (Soprano) part-book; entries from piece incipits on the first spread only.
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads).
+id: "168172"
+key: PG172
+title: "Ὕμνοι τῆς Ὀρθοδόξου Ἀνατολικῆς Ἐκκλησίας, Μέρος Α΄ (Gottfried Preyer; SOPRANO voice part only, Western staff notation, with Greek text and Latin transliteration)"
+year: "184x"
+file: "168172 Ύμνοι της Ορθοδόξου Ανατολικής Εκκλησίας, Μέρος Α'.pdf"
+layout: [{from: 1, div: 2, add: 1}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: img 2 right page = p.1 (single leaves, spread image 2 = pp. left cover/1)
+toc_images: []
+summary: "Western-notation SOPRANO part-book (cover label Μέρος Πρῶτον), 24 pages, numbered pieces Nº 1-~113 with the SAME numbering and incipits as the apolytikia volume Μέρος Β΄ (168173): Nº1 Ὁ πάσης τῆς κτίσεως Δημιουργός, Nº2 Ὑπομονῆς στῦλος ἐγένου, Nº3 Ἡ γέννησίς σου Θεοτόκε. Only the soprano line + syllabic text; of low value (harmonization in 168173/168174 is fuller). Not Byzantine notation; not congregational unison but choral. No litany responses, no Liturgy parts seen (only first spread read; remaining spreads are soprano lines of the 168173 pieces, not read)."
+entries:
+  - {page: 1, num: 1, title: "Ὁ πάσης τῆς κτίσεως Δημιουργός (Ἀπολυτίκιον τῆς Ἰνδίκτου)", date: "09-01", hymn: "men/09-01/apolytikion", status: page}
+  - {page: 1, num: 2, title: "Ὑπομονῆς στῦλος ἐγένου (Ἀπολυτίκιον Συμεὼν τοῦ Στυλίτου)", date: "09-01", status: page, note: "second apolytikion of 09-01; verify"}
+  - {page: 1, num: 3, title: "Ἡ γέννησίς σου Θεοτόκε", date: "09-08", hymn: "men/09-08/apolytikion", status: page}

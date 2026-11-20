@@ -1,0 +1,90 @@
+# Pergamos uoadl:168160 — contents (Πίναξ) transcribed from PDF images 154-155.
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads).
+id: "168160"
+key: PG160
+title: Ἀναστασιμάταριον Νέον Ἀργοσύντομον (Γρηγόριος Λέσβιος, ἀναστάσιμα Ἑσπερινοῦ, Ὄρθρου, Λειτουργίας; Πέτρος Λαμπαδάριος melodies; Athens 1840)
+year: 1840
+file: "168160 Αναστασιμάταριον Νέον Αργοσύντομον, περιέχον τα Αναστάσιμα του Εσπερινού, Όρθρου και Λειτο.pdf"
+layout: [{from: 4, div: 2, add: 4}, {from: 234, div: 2, add: 3}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.4-5 = img 6; p.112 = img 60; p.192 = img 100 (add 4); p.234 = img 120; p.264 = img 135; p.284 = img 145; p.304 = img 155 (add 3). Change of 1 between p.193 and p.233 not located
+toc_images: [154, 155]
+summary: Chrysanthine-notation (analytical, syllabic) Anastasimatarion, 8 tones x (Hesperia, Aposticha, Apolytikia, Kathismata, Anavathmoi, Timiotera, Ainoi, Makarismoi) + Sunday exapostilaria + 11 Eothina + Typika. Contents list complete (Πίναξ p.303-305). Pages p.1-2 Hesperia of tone 1 start printed p.3. No litany responses, no Liturgy fixed parts (title says Λειτουργίας but Πίναξ lists none; only Makarismoi = Typika-beatitudes). Entries marked toc not individually inspected. Tone labels Α΄..Η΄ = tones 1,2,3,4,pl1,pl2,grave,pl4. Section "Ἀπολυτίκια" probably includes resurrectional apolytikion and its theotokion (unverified). Hymn ids only at section level.
+entries:   # page = printed (start of section)
+  - {page: 3, title: "Τρόπος Α΄: Ἑσπέρια", tone: 1, status: toc}
+  - {page: 14, title: "Τρόπος Α΄: Ἀπόστιχα", tone: 1, status: toc}
+  - {page: 17, title: "Τρόπος Α΄: Ἀπολυτίκια", tone: 1, hymn: "oct/t1/sun/apolytikion", status: toc, note: "section of resurrectional apolytikia (+theotokia?); verify which hymns inside"}
+  - {page: 19, title: "Τρόπος Α΄: Καθίσματα", tone: 1, status: toc}
+  - {page: 22, title: "Τρόπος Α΄: Ἀναβαθμοί", tone: 1, status: toc}
+  - {page: 25, title: "Τρόπος Α΄: Τιμιωτέρα", tone: 1, status: toc}
+  - {page: 25, title: "Τρόπος Α΄: Αἶνοι", tone: 1, hymn: "oct/t1/sun/lauds1", status: toc, note: "Ainoi = Praises stichera; verify; Πίναξ prints same page as Τιμιωτέρα (maybe misread)"}
+  - {page: 30, title: "Τρόπος Α΄: Μακαρισμοί", tone: 1, status: toc}
+  - {page: 30, title: "Τρόπος Β΄: Ἑσπέρια", tone: 2, status: toc}
+  - {page: 41, title: "Τρόπος Β΄: Ἀπόστιχα", tone: 2, status: toc}
+  - {page: 45, title: "Τρόπος Β΄: Ἀπολυτίκια", tone: 2, hymn: "oct/t2/sun/apolytikion", status: toc, note: "section of resurrectional apolytikia (+theotokia?); verify which hymns inside"}
+  - {page: 46, title: "Τρόπος Β΄: Καθίσματα", tone: 2, status: toc}
+  - {page: 49, title: "Τρόπος Β΄: Ἀναβαθμοί", tone: 2, status: toc}
+  - {page: 52, title: "Τρόπος Β΄: Τιμιωτέρα", tone: 2, status: toc}
+  - {page: 52, title: "Τρόπος Β΄: Αἶνοι", tone: 2, hymn: "oct/t2/sun/lauds1", status: toc, note: "Ainoi = Praises stichera; verify; Πίναξ prints same page as Τιμιωτέρα (maybe misread)"}
+  - {page: 57, title: "Τρόπος Β΄: Μακαρισμοί", tone: 2, status: toc}
+  - {page: 57, title: "Τρόπος Γ΄: Ἑσπέρια", tone: 3, status: toc}
+  - {page: 68, title: "Τρόπος Γ΄: Ἀπόστιχα", tone: 3, status: toc}
+  - {page: 71, title: "Τρόπος Γ΄: Ἀπολυτίκια", tone: 3, hymn: "oct/t3/sun/apolytikion", status: toc, note: "section of resurrectional apolytikia (+theotokia?); verify which hymns inside"}
+  - {page: 72, title: "Τρόπος Γ΄: Καθίσματα", tone: 3, status: toc}
+  - {page: 75, title: "Τρόπος Γ΄: Ἀναβαθμοί", tone: 3, status: toc}
+  - {page: 78, title: "Τρόπος Γ΄: Τιμιωτέρα", tone: 3, status: toc}
+  - {page: 79, title: "Τρόπος Γ΄: Αἶνοι", tone: 3, hymn: "oct/t3/sun/lauds1", status: toc, note: "Ainoi = Praises stichera; verify"}
+  - {page: 84, title: "Τρόπος Γ΄: Μακαρισμοί", tone: 3, status: toc}
+  - {page: 85, title: "Τρόπος Δ΄: Ἑσπέρια", tone: 4, status: toc}
+  - {page: 96, title: "Τρόπος Δ΄: Ἀπόστιχα", tone: 4, status: toc}
+  - {page: 100, title: "Τρόπος Δ΄: Ἀπολυτίκια", tone: 4, hymn: "oct/t4/sun/apolytikion", status: toc, note: "section of resurrectional apolytikia (+theotokia?); verify which hymns inside"}
+  - {page: 101, title: "Τρόπος Δ΄: Καθίσματα", tone: 4, status: toc}
+  - {page: 105, title: "Τρόπος Δ΄: Ἀναβαθμοί", tone: 4, status: toc}
+  - {page: 108, title: "Τρόπος Δ΄: Τιμιωτέρα", tone: 4, status: toc}
+  - {page: 108, title: "Τρόπος Δ΄: Αἶνοι", tone: 4, hymn: "oct/t4/sun/lauds1", status: toc, note: "Ainoi = Praises stichera; verify; Πίναξ prints same page as Τιμιωτέρα (maybe misread)"}
+  - {page: 114, title: "Τρόπος Δ΄: Μακαρισμοί", tone: 4, status: toc}
+  - {page: 114, title: "Τρόπος Ε΄: Ἑσπέρια", tone: 5, status: toc}
+  - {page: 126, title: "Τρόπος Ε΄: Ἀπόστιχα", tone: 5, status: toc}
+  - {page: 129, title: "Τρόπος Ε΄: Ἀπολυτίκια", tone: 5, hymn: "oct/t5/sun/apolytikion", status: toc, note: "verify page 129 (smudged in Πίναξ); section of resurrectional apolytikia (+theotokia?); verify which hymns inside"}
+  - {page: 130, title: "Τρόπος Ε΄: Καθίσματα", tone: 5, status: toc}
+  - {page: 134, title: "Τρόπος Ε΄: Ἀναβαθμοί", tone: 5, status: toc}
+  - {page: 136, title: "Τρόπος Ε΄: Τιμιωτέρα", tone: 5, status: toc}
+  - {page: 136, title: "Τρόπος Ε΄: Αἶνοι", tone: 5, hymn: "oct/t5/sun/lauds1", status: toc, note: "Ainoi = Praises stichera; verify; Πίναξ prints same page as Τιμιωτέρα (maybe misread)"}
+  - {page: 144, title: "Τρόπος Ε΄: Μακαρισμοί", tone: 5, status: toc}
+  - {page: 144, title: "Τρόπος Ϛ΄: Ἑσπέρια", tone: 6, status: toc}
+  - {page: 155, title: "Τρόπος Ϛ΄: Ἀπόστιχα", tone: 6, status: toc}
+  - {page: 158, title: "Τρόπος Ϛ΄: Ἀπολυτίκια", tone: 6, hymn: "oct/t6/sun/apolytikion", status: toc, note: "section of resurrectional apolytikia (+theotokia?); verify which hymns inside"}
+  - {page: 160, title: "Τρόπος Ϛ΄: Καθίσματα", tone: 6, status: toc}
+  - {page: 163, title: "Τρόπος Ϛ΄: Ἀναβαθμοί", tone: 6, status: toc}
+  - {page: 165, title: "Τρόπος Ϛ΄: Τιμιωτέρα", tone: 6, status: toc}
+  - {page: 166, title: "Τρόπος Ϛ΄: Αἶνοι", tone: 6, hymn: "oct/t6/sun/lauds1", status: toc, note: "Ainoi = Praises stichera; verify"}
+  - {page: 171, title: "Τρόπος Ϛ΄: Μακαρισμοί", tone: 6, status: toc}
+  - {page: 171, title: "Τρόπος Ζ΄: Ἑσπέρια", tone: 7, status: toc}
+  - {page: 182, title: "Τρόπος Ζ΄: Ἀπόστιχα", tone: 7, status: toc}
+  - {page: 185, title: "Τρόπος Ζ΄: Ἀπολυτίκια", tone: 7, hymn: "oct/t7/sun/apolytikion", status: toc, note: "section of resurrectional apolytikia (+theotokia?); verify which hymns inside"}
+  - {page: 186, title: "Τρόπος Ζ΄: Καθίσματα", tone: 7, status: toc}
+  - {page: 189, title: "Τρόπος Ζ΄: Ἀναβαθμοί", tone: 7, status: toc}
+  - {page: 192, title: "Τρόπος Ζ΄: Τιμιωτέρα", tone: 7, status: toc}
+  - {page: 192, title: "Τρόπος Ζ΄: Αἶνοι", tone: 7, hymn: "oct/t7/sun/lauds1", status: toc, note: "Ainoi = Praises stichera; verify; Πίναξ prints same page as Τιμιωτέρα (maybe misread)"}
+  - {page: 198, title: "Τρόπος Ζ΄: Μακαρισμοί", tone: 7, status: toc}
+  - {page: 199, title: "Τρόπος Η΄: Ἑσπέρια", tone: 8, status: toc}
+  - {page: 210, title: "Τρόπος Η΄: Ἀπόστιχα", tone: 8, status: toc}
+  - {page: 213, title: "Τρόπος Η΄: Ἀπολυτίκια", tone: 8, hymn: "oct/t8/sun/apolytikion", status: toc, note: "section of resurrectional apolytikia (+theotokia?); verify which hymns inside"}
+  - {page: 214, title: "Τρόπος Η΄: Καθίσματα", tone: 8, status: toc}
+  - {page: 219, title: "Τρόπος Η΄: Ἀναβαθμοί", tone: 8, status: toc}
+  - {page: 222, title: "Τρόπος Η΄: Τιμιωτέρα", tone: 8, status: toc}
+  - {page: 223, title: "Τρόπος Η΄: Αἶνοι", tone: 8, hymn: "oct/t8/sun/lauds1", status: toc, note: "Ainoi = Praises stichera; verify"}
+  - {page: 228, title: "Τρόπος Η΄: Μακαρισμοί", tone: 8, status: toc}
+  - {page: 269, title: "Ἐξαποστειλάρια Ἀναστάσιμα (Ἅγιος Κύριος ὁ Θεὸς ἡμῶν ...)", status: page, note: "heading seen p.270 (Σύστημα 3ον, Τρόπος Β΄); start page verify; 8-tone Sunday exapostilaria"}
+  - {page: 271, title: "Ἑωθινὸν 1΄ (Τὰ Ἕνδεκα Ἑωθινά)", hymn: "eothinon/01/doxastikon", status: page, note: "Ἑωθινόν = exapostilarion (α΄ opens Εἰς τὸ ὄρος τοῖς μαθηταῖς, seen p.271)"}
+  - {page: 272, title: "Ἑωθινὸν 2΄ (Τὰ Ἕνδεκα Ἑωθινά)", hymn: "eothinon/02/doxastikon", status: toc, note: "Ἑωθινόν = exapostilarion (α΄ opens Εἰς τὸ ὄρος τοῖς μαθηταῖς, seen p.271)"}
+  - {page: 274, title: "Ἑωθινὸν 3΄ (Τὰ Ἕνδεκα Ἑωθινά)", hymn: "eothinon/03/doxastikon", status: toc, note: "Ἑωθινόν = exapostilarion (α΄ opens Εἰς τὸ ὄρος τοῖς μαθηταῖς, seen p.271)"}
+  - {page: 276, title: "Ἑωθινὸν 4΄ (Τὰ Ἕνδεκα Ἑωθινά)", hymn: "eothinon/04/doxastikon", status: toc, note: "Ἑωθινόν = exapostilarion (α΄ opens Εἰς τὸ ὄρος τοῖς μαθηταῖς, seen p.271)"}
+  - {page: 278, title: "Ἑωθινὸν 5΄ (Τὰ Ἕνδεκα Ἑωθινά)", hymn: "eothinon/05/doxastikon", status: toc, note: "Ἑωθινόν = exapostilarion (α΄ opens Εἰς τὸ ὄρος τοῖς μαθηταῖς, seen p.271)"}
+  - {page: 280, title: "Ἑωθινὸν 6΄ (Τὰ Ἕνδεκα Ἑωθινά)", hymn: "eothinon/06/doxastikon", status: toc, note: "Ἑωθινόν = exapostilarion (α΄ opens Εἰς τὸ ὄρος τοῖς μαθηταῖς, seen p.271)"}
+  - {page: 282, title: "Ἑωθινὸν 7΄ (Τὰ Ἕνδεκα Ἑωθινά)", hymn: "eothinon/07/doxastikon", status: toc, note: "Ἑωθινόν = exapostilarion (α΄ opens Εἰς τὸ ὄρος τοῖς μαθηταῖς, seen p.271)"}
+  - {page: 283, title: "Ἑωθινὸν 8΄ (Τὰ Ἕνδεκα Ἑωθινά)", hymn: "eothinon/08/doxastikon", status: toc, note: "Ἑωθινόν = exapostilarion (α΄ opens Εἰς τὸ ὄρος τοῖς μαθηταῖς, seen p.271)"}
+  - {page: 285, title: "Ἑωθινὸν 9΄ (Τὰ Ἕνδεκα Ἑωθινά)", hymn: "eothinon/09/doxastikon", status: toc, note: "Ἑωθινόν = exapostilarion (α΄ opens Εἰς τὸ ὄρος τοῖς μαθηταῖς, seen p.271)"}
+  - {page: 286, title: "Ἑωθινὸν 10΄ (Τὰ Ἕνδεκα Ἑωθινά)", hymn: "eothinon/10/doxastikon", status: toc, note: "Ἑωθινόν = exapostilarion (α΄ opens Εἰς τὸ ὄρος τοῖς μαθηταῖς, seen p.271)"}
+  - {page: 288, title: "Ἑωθινὸν 11΄ (Τὰ Ἕνδεκα Ἑωθινά)", hymn: "eothinon/11/doxastikon", status: toc, note: "Ἑωθινόν = exapostilarion (α΄ opens Εἰς τὸ ὄρος τοῖς μαθηταῖς, seen p.271)"}
+  - {page: 290, title: "Τυπικά", status: toc}
+  - {page: 229, title: "Ἀρχὴ τοῦ Ι΄ Τρόπου (ἐκ τοῦ ἑβδόμου μεταποιηθέντος, Περσιστί / μακὰμ Πεστεγκιάρ; Νεόφυτος Φωκίδος)", status: page, note: "section 229-264: Hesperia 229, Aposticha 244, Apolytikia 247, Kathismata 249, Anavathmoi 252, Timiotera 255, Ainoi 256, Makarismoi 264; Turkish-maqam variant, not a standard tone, no hymn mapping"}

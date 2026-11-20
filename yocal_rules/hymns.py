@@ -306,7 +306,7 @@ def hypakoe(f: dict) -> list | None:
     return [Hymn(f"oct/t{int(t)}/sun/hypakoe", f"Hypakoë (Tone {int(t)})", int(t), "hypakoe")] if t else None
 
 
-SLOTS = {"liturgy.apolytikia": apolytikia, "liturgy.kontakion": kontakion, "liturgy.prokeimenon": prokeimenon,
+SLOTS = {"matins.hypakoe": lambda fill, f: hypakoe({**f, "tone": fill.get("tone") or f.get("tone")}), "liturgy.apolytikia": apolytikia, "liturgy.kontakion": kontakion, "liturgy.prokeimenon": prokeimenon,
          "liturgy.antiphons": antiphons, "liturgy.eisodikon": eisodikon, "liturgy.trisagion": trisagion, "liturgy.megalynarion": megalynarion,
          "liturgy.alleluia": alleluia, "liturgy.communion": communion,
          "matins.apolytikia": apolytikia, "matins.prokeimenon": matins_prokeimenon, "matins.kontakion": matins_kontakion,

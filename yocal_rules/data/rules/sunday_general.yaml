@@ -34,6 +34,8 @@
    source: typikon, locator: "Ch I s3 p.16", status: explicit}
 - {id: mat.kathismata.res, slot: matins.kathismata, tier: 4, when: [{pred: sunday}],
    fill: {tone: "$tone"}, source: typikon, locator: "Ch I s5 p.21-22; Ch III p.50", status: explicit}
+- {id: mat.hypakoe.res, slot: matins.hypakoe, tier: 4, when: [{pred: sunday}, {pred: tone_known}],
+   fill: {tone: "$tone"}, source: typikon, locator: "Ch I s5 VI p.25 (normal Sunday: evlogetaria, little ektenia, hypakoe of the tone of the week, anabathmoi, prokeimenon, canons)", status: explicit}
 - {id: mat.prokeimenon.res, slot: matins.prokeimenon, tier: 4, when: [{pred: sunday}],
    fill: {kind: resurrectional, tone: "$tone"}, source: typikon, locator: "Ch I s5 p.25", status: explicit}
 - {id: mat.kontakion.undecided, slot: matins.kontakion, tier: 4, when: [{pred: sunday}], fill: {},

@@ -188,3 +188,7 @@ prototypes/alwb-menaion/data/
 
 # Parish choir PDF text extracted locally (copyrighted; never committed)
 yocal_service/local/
+
+# Pergamos scans (CC BY-NC-ND, private)
+/pergamos/
+FETCHED/

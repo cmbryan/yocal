@@ -1,0 +1,62 @@
+# Pergamos uoadl:168163 — Δοξαστάριον τοῦ Τριῳδίου καὶ Πεντηκοσταρίου (+ Eothina doxastika), Konstantinos Protopsaltes, Constantinople 1841.
+# NO contents list; running headers per page give the day. Indexed from sweeps of every 3rd image (4-112) + selected images. Scans: FETCHED/ (not in git; CC BY-NC-ND).
+# Title page "ΑΡΧΗ ΣΥΝ ΘΕΩ ΑΓΙΩ ΤΩΝ ΔΟΞΑΣΤΙΚΩΝ ΤΟΥ ΤΡΙΩΔΙΟΥ ΚΑΙ ΠΕΝΤΗΚΟΣΤΑΡΙΟΥ" at img 3. Errata (Παρόραμα) img 116, then subscriber list to the end.
+id: "168163"
+key: PG163
+title: Δοξαστάριον περιέχον τὰ δοξαστικὰ τοῦ Τριῳδίου καὶ Πεντηκοσταρίου (Κωνσταντῖνος Πρωτοψάλτης)
+year: 1841
+file: "168163 Δοξαστάριον περιέχον τα Δοξαστικά του Τριωδίου και Πεντηκοσταρίου μετά προσθήκης του Κανόν (1841).pdf"
+# image = printed // 2 + add. add 3: p.2-3 = img 4, p.74 = img 40, p.116 = img 61, p.122 = img 64 ; add 4 from img ~66: p.126 = 67, p.150 = 79, p.162 = 85, p.164 = 86, p.188 = 98, p.208 = 108, p.224 = 116 (one extra image around img 65-66 not examined).
+layout: [{from: 1, div: 2, add: 3}, {from: 126, div: 2, add: 4}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+toc_images: []
+summary: "Triodion (Publican -70 ... Holy Saturday), Pentecostarion (Pascha 0 ... All Saints 56), funeral doxastika, then the 11 Eothina doxastika (p.209-221+). Doxastika only; day from page header, per-day start pages from header sweep (sampled every 3rd image, so a section may start 1-5 pages earlier than listed). Holy Week sections occur twice (pp.74-125 and 126-163), second series unexplained. Day ids use mov/<days from Pascha>; Eothina map to eothinon/NN/doxastikon. No litany responses, no Liturgy fixed parts, no resurrectional apolytikia/prokeimena."
+entries:   # page = printed
+  - {page: 1, title: "Τῇ Κυριακῇ τοῦ Τελώνου καὶ Φαρισαίου", moveable: "Publican", hymn: mov/-70/doxastikon, status: page}
+  - {page: 4, title: "Τῇ Κυριακῇ τοῦ Ἀσώτου", moveable: "Prodigal Son", hymn: mov/-63/doxastikon, status: page}
+  - {page: 6, title: "Τῇ Κυριακῇ ... τῶν Κεκοιμημένων (header read at low resolution)", status: page, note: "verify header"}
+  - {page: 8, title: "Τῷ Σαββάτῳ τῶν Κεκοιμημένων", moveable: "Saturday of the Departed", hymn: mov/-57/doxastikon, status: page}
+  - {page: 14, title: "Τῇ Κυριακῇ τῆς Ἀποκρέω", moveable: "Meatfare", hymn: mov/-56/doxastikon, status: page}
+  - {page: 20, title: "Τῇ Κυριακῇ τῆς Τυροφάγου", moveable: "Cheesefare", hymn: mov/-49/doxastikon, status: page}
+  - {page: 26, title: "Τῷ Σαββάτῳ τῆς Α΄ ἑβδομάδος (Ἁγίου Θεοδώρου)", moveable: "Saturday week 1 (-43)", status: page, note: "verify"}
+  - {page: 27, title: "Τῇ Α΄ Κυριακῇ τῶν Νηστειῶν", moveable: "1st Sunday of Lent", hymn: mov/-42/doxastikon, status: page}
+  - {page: 32, title: "Τῇ Τετάρτῃ τῆς Β΄ ἑβδομάδος", moveable: "Wed week 2", status: page, note: "verify header"}
+  - {page: 33, title: "Τῇ Β΄ Κυριακῇ τῶν Νηστειῶν", moveable: "2nd Sunday of Lent", hymn: mov/-35/doxastikon, status: page}
+  - {page: 38, title: "Τῇ Γ΄ Κυριακῇ τῶν Νηστειῶν", moveable: "3rd Sunday of Lent", hymn: mov/-28/doxastikon, status: page}
+  - {page: 44, title: "Τῇ Τετάρτῃ τῆς [Δ΄?] ἑβδομάδος", moveable: "Wednesday of a Lent week", status: page, note: "verify week numeral"}
+  - {page: 45, title: "Τῇ Παρασκευῇ τῆς [Δ΄?] ἑβδομάδος", moveable: "Friday of a Lent week", status: page, note: "verify week numeral"}
+  - {page: 50, title: "Τῇ Πέμπτῃ τῆς Ε΄ ἑβδομάδος", moveable: "Thursday of the Great Canon", hymn: mov/-17/doxastikon, status: page, note: "verify (Great Canon Thursday)"}
+  - {page: 51, title: "Τῇ Παρασκευῇ τῆς Ε΄ ἑβδομάδος", moveable: "Friday week 5", status: page}
+  - {page: 56, title: "Τῇ Ε΄ Κυριακῇ τῶν Νηστειῶν", moveable: "5th Sunday of Lent", hymn: mov/-14/doxastikon, status: page}
+  - {page: 62, title: "Τῷ Σαββάτῳ (τοῦ Λαζάρου)", moveable: "Lazarus Saturday", hymn: mov/-8/doxastikon, status: page, note: "verify: header 'Σαββάτῳ' before Palm Sunday"}
+  - {page: 63, title: "Τῇ Κυριακῇ τῶν Βαΐων", moveable: "Palm Sunday", hymn: mov/-7/doxastikon, status: page, note: "section continues to p.73"}
+  - {page: 74, title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Δευτέρᾳ", moveable: "Holy Monday", hymn: mov/-6/doxastikon, status: page}
+  - {page: 80, title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Τρίτῃ", moveable: "Holy Tuesday", hymn: mov/-5/doxastikon, status: page}
+  - {page: 86, title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Τετάρτῃ", moveable: "Holy Wednesday", hymn: mov/-4/doxastikon, status: page}
+  - {page: 92, title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Πέμπτῃ", moveable: "Holy Thursday", hymn: mov/-3/doxastikon, status: page}
+  - {page: 104, title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Παρασκευῇ", moveable: "Holy Friday", hymn: mov/-2/doxastikon, status: page, note: "Holy Week days run twice: pp.74-125 and pp.126-163 (second Δευτέρα p.126, Τετάρτη p.132, Πέμπτη p.138, Παρασκευή?, Σάββατον p.144-163); verify what the second series is (alternate Vespers/Orthros?)"}
+  - {page: 126, title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Δευτέρᾳ (second series)", moveable: "Holy Monday (2nd series)", status: page, note: "verify"}
+  - {page: 132, title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Τετάρτῃ (second series)", moveable: "Holy Wednesday (2nd series)", status: page, note: "verify"}
+  - {page: 138, title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Πέμπτῃ (second series)", moveable: "Holy Thursday (2nd series)", status: page, note: "verify"}
+  - {page: 144, title: "Τῷ Ἁγίῳ καὶ Μεγάλῳ Σαββάτῳ", moveable: "Holy Saturday", hymn: mov/-1/doxastikon, status: page, note: "to p.163"}
+  - {page: 165, title: "Πεντηκοσταρίου: ΑΡΧΗ ΣΥΝ ΘΕΩ ΑΓΙΩ ΤΩΝ ΔΟΞΑΣΤΙΚΩΝ (Pascha)", moveable: "Pascha", hymn: mov/0/doxastikon, status: page, note: "part title at p.165; Pascha doxastikon assumed to start here; verify"}
+  - {page: 166, title: "Τῆς Διακαινησίμου", moveable: "Bright Week", status: page, note: "verify which day"}
+  - {page: 167, title: "Τῇ Κυριακῇ τοῦ Θωμᾶ", moveable: "Thomas Sunday", hymn: mov/7/doxastikon, status: page}
+  - {page: 170, title: "(Κυριακὴ τῶν Μυροφόρων expected here, pp.170-173, not seen)", moveable: "Myrrhbearers (14)", status: verify, note: "not examined; sweep sampled every 3rd image"}
+  - {page: 174, title: "Τῇ Κυριακῇ τοῦ Παραλύτου", moveable: "Paralytic", hymn: mov/21/doxastikon, status: page}
+  - {page: 180, title: "Τῇ Κυριακῇ τῆς Σαμαρείτιδος", moveable: "Samaritan Woman", hymn: mov/28/doxastikon, status: page}
+  - {page: 186, title: "Τῇ Κυριακῇ τοῦ Τυφλοῦ", moveable: "Blind Man", hymn: mov/35/doxastikon, status: page}
+  - {page: 188, title: "Τῇ Πέμπτῃ τῆς Ἀναλήψεως", moveable: "Ascension", hymn: mov/39/doxastikon, status: page}
+  - {page: 192, title: "Τῇ Κυριακῇ τῆς Πεντηκοστῆς", moveable: "Pentecost", hymn: mov/49/doxastikon, status: page, note: "header 'ΤΗΣ ΠΕΝΤΗΚΟΣΤΗΣ' on p.193; verify start"}
+  - {page: 198, title: "Τῇ Κυριακῇ τῶν Ἁγίων Πάντων", moveable: "All Saints", hymn: mov/56/doxastikon, status: page}
+  - {page: 204, title: "Δοξαστικὰ Νεκρώσιμα", status: page, note: "funeral doxastika, pp.204-207; no hymn id"}
+  - {page: 209, title: "Ἑωθινὸν Α΄", hymn: eothinon/01/doxastikon, status: page}
+  - {page: 210, title: "Ἑωθινὸν Β΄", hymn: eothinon/02/doxastikon, status: page}
+  - {page: 211, title: "Ἑωθινὸν Γ΄", hymn: eothinon/03/doxastikon, status: page}
+  - {page: 213, title: "Ἑωθινὸν Δ΄", hymn: eothinon/04/doxastikon, status: page}
+  - {page: 214, title: "Ἑωθινὸν Ε΄", hymn: eothinon/05/doxastikon, status: page}
+  - {page: 216, title: "Ἑωθινὸν Ϛ΄", hymn: eothinon/06/doxastikon, status: page}
+  - {page: 217, title: "Ἑωθινὸν Ζ΄", hymn: eothinon/07/doxastikon, status: page}
+  - {page: 218, title: "Ἑωθινὸν Η΄", hymn: eothinon/08/doxastikon, status: page}
+  - {page: 219, title: "Ἑωθινὸν Θ΄", hymn: eothinon/09/doxastikon, status: page}
+  - {page: 220, title: "Ἑωθινὸν Ι΄", hymn: eothinon/10/doxastikon, status: page, note: "verify start page"}
+  - {page: 221, title: "Ἑωθινὸν ΙΑ΄", hymn: eothinon/11/doxastikon, status: page, note: "verify start page"}

@@ -206,9 +206,23 @@ def fixed_paras(ctx: dict, hid: str, label: str) -> list:
 
 
 def v_matins_hypakoe(day, f, ctx, **_):
-    """Hypakoë of the week's tone (calendar tone; the booklet's sample is Tone 6)."""
-    ctx["hymns"]["matins.hypakoe"] = hymns.hypakoe(f) or []
+    """Hypakoë of the week's tone: the Rules slot (ordinary Sundays); else the calendar tone (the booklet's sample is Tone 6)."""
+    if ctx["hymns"].get("matins.hypakoe") is None:
+        ctx["hymns"]["matins.hypakoe"] = hymns.hypakoe(f) or []
     return slot_paras(ctx, "matins.hypakoe")
+
+
+def katavasia_paras(ctx: dict, ode9: bool) -> list:
+    """The katavasiae the Rules give: odes 1-8 (parts but the last) in the Canon section, the 9th ode's (last part) after the Magnificat."""
+    out = []
+    for h in ctx["hymns"].get("matins.katavasia") or []:
+        t = texts.get(ctx["con"], h.id, ctx["parish"])
+        if t and t["pending"] and all(p["key"] != h.id for p in ctx["pending"]):
+            ctx["pending"].append({"section": "matins.katavasia", "key": h.id, "heading": h.label, "source": t["source"]})
+        if t:
+            t = {**t, "parts": t["parts"][-1:] if ode9 else t["parts"][:-1]}
+        out += hymn_paras(h, t)
+    return out
 
 
 def v_matins_doxology(day, f, ctx, **_):
@@ -217,14 +231,6 @@ def v_matins_doxology(day, f, ctx, **_):
 
 def v_matins_ps50(day, f, ctx, **_):
     return fixed_paras(ctx, "lit/matins/ps50", "Psalm 50")
-
-
-def v_matins_canon(day, f, ctx, **_):
-    """The Canon of the week's tone: no Resurrection canon in DCS yet (only Menaion feast canons), so a visible gap."""
-    t = f.get("tone")
-    if not t:
-        return []
-    return [_P("", f"Canon of Tone {int(t)}: text not saved yet", "gap")]
 
 
 def v_matins_exapostilaria(day, f, ctx, **_):
@@ -239,7 +245,8 @@ def v_matins_exapostilaria(day, f, ctx, **_):
 MATINS_RESOLVERS = {
     "matins.exapostilaria": v_matins_exapostilaria,
     "matins.evlogetaria": lambda d, f, ctx, **k: fixed_paras(ctx, "lit/matins/evlogetaria", "Resurrectional Evlogetaria"),
-    "matins.canon": lambda d, f, ctx, **k: slot_paras(ctx, "matins.canon"),
+    "matins.canon": lambda d, f, ctx, **k: slot_paras(ctx, "matins.canon") + katavasia_paras(ctx, False),  # canon troparia (when the Rules give any), then odes 1-8 of the katavasiae (Typikon schedule)
+    "matins.katavasia9": lambda d, f, ctx, **k: katavasia_paras(ctx, True),
     "matins.apolytikia": lambda d, f, ctx, **k: slot_paras(ctx, "matins.apolytikia"),
     "matins.prokeimenon": lambda d, f, ctx, **k: slot_paras(ctx, "matins.prokeimenon"),
     "matins.kontakion": lambda d, f, ctx, **k: slot_paras(ctx, "matins.kontakion"),
@@ -257,7 +264,7 @@ ENGINE_SLOT = {"res_apolytikion": "liturgy.apolytikia", "apolytikia": "liturgy.a
                "prokeimenon": "liturgy.prokeimenon", "epistle_intro": "liturgy.epistle", "epistle": "liturgy.epistle",
                "alleluia": "liturgy.alleluia", "gospel_intro": "liturgy.gospel", "gospel": "liturgy.gospel",
                "dismissal": "liturgy.dismissal", "communion_hymn": "liturgy.communion",
-               **{k: k for k in MATINS_RESOLVERS}}
+               **{k: k for k in MATINS_RESOLVERS}, "matins.katavasia9": "matins.katavasia"}
 
 
 # ------------------------------------------------------------------ music

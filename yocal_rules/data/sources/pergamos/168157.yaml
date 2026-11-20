@@ -1,0 +1,23 @@
+# Pergamos uoadl:168157 — Παράρτημα Δοξασταρίου (ΙΘ΄ c.), κατ᾿ αἴτησιν τῆς Σεβασμίας Μονῆς Μεγίστης Λαύρας: loose appendix sheets (13 images).
+# No contents list: indexed by reading all 13 images. Scans in FETCHED/ (not in git; CC BY-NC-ND).
+# Hymn-id convention used here (no doxastika ids exist yet in hymns.py; letters-only suffix fits hymns.py regexes men/MM-DD/[a-z]+\d*):
+#   men/MM-DD/doxastikon = all doxastika of the feast (slot not yet read); mov/N/doxastikon likewise (N = days from Pascha).
+#   Where a spread was read: doxastikonvespers (Lord-I-call Δόξα [καὶ νῦν], unlabelled first Δόξα of the feast), doxastikonlity (Εἰς τὴν Λιτήν),
+#   doxastikonaposticha (Εἰς τὸν Στίχον), doxastikonpraises (Εἰς τοὺς Αἴνους); `slots:` lists id@printed-page; "-kainyn" = the Καὶ νῦν after that Δόξα.
+#   No slot label inside a feast = only Δόξα(+Καὶ νῦν); `slots` present only when the page was actually read.
+id: "168157"
+key: PG157
+title: Παράρτημα Δοξασταρίου
+year: "19th c. (undated)"
+file: "168157 Παράρτημα Δοξασταρίου (ΙΘ').pdf"
+layout: [{from: 1, to: 24, div: 1, add: -23}, {from: 25, div: 2, add: -179}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: image 1 = single sheet p.24 (Mην Ἰούλιος, Athanasios of Athos); images 2-13 are spreads: image = printed // 2 - 179 (p.362-363 = img 2; p.376-377 = img 9; p.384 = img 13)
+toc_images: []
+summary: >
+  Appendix of additional doxastika (Μεγίστη Λαύρα request): 5 Jul Athanasios of Athos Vespers Δόξα (p.24); an unidentified feast pp.361?-376 (Lity Δόξα, Στίχον Δόξα, Αἴνοι ref. to 17 Jan); 9 Dec Σύλληψις τῆς ἁγίας Ἄννης by Theophilos Madytinos (pp.376-381);
+  Holy Saturday Αἴνοι Δόξα pl.1 (pp.381-384). Pages 362-384 are a continuation fragment (starts mid-hymn). No litany responses, no Liturgy fixed parts, no resurrectional hymns.
+entries:
+  - {page: 24, date: "07-05", title: "Εἰς τὴν Ε΄. Τοῦ ὁσίου Πατρὸς ἡμῶν Ἀθανασίου ἐν τῷ Ἄθῳ: Δόξα τοῦ Ἑσπερινοῦ, Ἦχος πλ.β΄ Πα", hymn: "men/07-05/doxastikonvespers", status: "page", note: "single sheet at image 1 (p.24); Μονὴ Μεγίστης Λαύρας request; sheet is mid-hymn at its foot, continuation not in this file"}
+  - {pages: [362, 376], title: "[feast heading on p.361, not in file]: Εἰς τὴν Λιτὴν Δόξα (p.365); Εἰς τὸν Στίχον Δόξα Ἦχος πλ.α΄(?) Πα (p.372); Αἴνων Δοξαστικὸν: «ζήτει εἰς τὰς ΙΖ΄ Ἰανουαρίου, Οὐρανοδρόμῳ ἐπιβὰς ὀχήματι» (p.376)", slots: ["doxastikonlity@365", "doxastikonaposticha@372"], status: "page", note: "feast unknown: verify against Μηναῖον/p.361; tone signs not read"}
+  - {page: 377, date: "12-09", title: "Τῇ 9 Δεκεμβρίου. Ἡ Σύλληψις τῆς ἁγίας Ἄννης (Θεοφίλου Μοναχοῦ Μαδυτίνου): Εἰς τὸν ἑσπερινὸν Δόξα καὶ νῦν Ἦχος Δι (p.377); Εἰς τὸν Στίχον Δόξα καὶ νῦν Ἦχος Δι — τὸ αὐτὸ καὶ εἰς τοὺς Αἴνους (p.380)", hymn: "men/12-09/doxastikonvespers", slots: ["men/12-09/doxastikonvespers@377", "men/12-09/doxastikonaposticha@380", "men/12-09/doxastikonpraises@380"], status: "page"}
+  - {page: 381, moveable: "-1", title: "Τῷ ἁγίῳ καὶ μεγάλῳ Σαββάτῳ: Εἰς τοὺς Αἴνους Δόξα Ἦχος πλ.α΄ Πα", hymn: "mov/-1/doxastikonpraises", status: "page"}

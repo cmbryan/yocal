@@ -1,0 +1,114 @@
+# Pergamos uoadl:168050 — Σύντομον Δοξαστάριον τοῦ ἀοιδίμου Πέτρου Λαμπαδαρίου τοῦ Πελοποννησίου (1820): shortened doxastika, Menaion pp.1-239 then Triodion/Pentecostarion pp.243-436.
+# Index from running heads (no Πίναξ); scans in FETCHED/ (not in git; CC BY-NC-ND). Dedication: Alexandros Nikolaou Soutzou, Prince of Wallachia.
+# Hymn-id convention used here (no doxastika ids exist yet in hymns.py; letters-only suffix fits hymns.py regexes men/MM-DD/[a-z]+\d*):
+#   men/MM-DD/doxastikon = all doxastika of the feast (slot not yet read); mov/N/doxastikon likewise (N = days from Pascha).
+#   Where a spread was read: doxastikonvespers (Lord-I-call Δόξα [καὶ νῦν], unlabelled first Δόξα of the feast), doxastikonlity (Εἰς τὴν Λιτήν),
+#   doxastikonaposticha (Εἰς τὸν Στίχον), doxastikonpraises (Εἰς τοὺς Αἴνους); `slots:` lists id@printed-page; "-kainyn" = the Καὶ νῦν after that Δόξα.
+#   No slot label inside a feast = only Δόξα(+Καὶ νῦν); `slots` present only when the page was actually read.
+id: "168050"
+key: PG050
+title: Σύντομον Δοξαστάριον τοῦ ἀοιδίμου Πέτρου Λαμπαδαρίου τοῦ Πελοποννησίου
+year: 1820
+file: "168050 Σύντομον Δοξαστάριον του αοιδίμου Πέτρου λαμπαδαρίου του Πελοποννησίου (1820).pdf"
+layout: [{from: 2, div: 2, add: 6, to: 343}, {from: 346, div: 2, add: 11, to: 436}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: image = printed // 2 + add
+# calibration checks: checked: p.4 = img 8; p.20 = 16; p.132 = 72; p.244 = 128; p.340-341 = img 176; p.342-343 = img 177
+# calibration checks: printed numbers repeat: img 178-183 show 344,335(!),336,337,... i.e. the book reprints 336-345; second run p.346 = img 184, p.362 = 192, p.426 = 224
+toc_images: []
+summary: >
+  No contents list: indexed from running heads of all 233 images (month + day numeral on the right page; Triodion section titles). Menaion feast order and dates match PG052/PG136 Πίναξ (Jan 1,5,6,7,17,18,20,25,27,30; Feb 2; Mar 25; Apr 23; May 21; Jun 24,29; Jul 2,20,25,26,27; Aug 1,6,15,29).
+  Doxastika only (short settings); slot labels (Εἰς τὸν Στίχον / Εἰς τοὺς Αἴνους Δόξα) appear inline but were not read per feast except samples (Sept 5 p.7 'Δόξα'; Jan 25 p.163 Αἴνοι Δόξα pl.4). No litany responses, no Liturgy fixed parts, no resurrectional apolytikia/prokeimena.
+  Last images: Παραγράμματα (errata) and Κατάλογος of subscribers; 'Ἐδῶ ὑποσημειοῦται τὸ Δοξαστικόν, τὸ Ζητούμενον' note at p.436.
+entries:
+  # Σύντομον Δοξαστάριον has NO Πίναξ (only a subscriber Κατάλογος + Παραγράμματα). Index built from running heads (right-hand page: month + day numeral) of every spread; start pages = first page whose head shows the day. Day numerals read from small italic capitals: verify the marked ones.
+  # Μὴν Σεπτέμβριος
+  - {page: 1, date: "09-01", title: "Εἰς τὴν Α΄. Ἀρχὴ τῆς Ἰνδίκτου καὶ Συμεὼν τοῦ Στυλίτου (title: Εἰς τὸν Ἑσπερινόν p.1)", hymn: "men/09-01/doxastikon", status: "page"}
+  - {page: 7, date: "09-05", title: "Τῇ Ε΄ τοῦ ἁγίου Προφήτου Ζαχαρίου: Δόξα (Ἦχος ... Νη)", hymn: "men/09-05/doxastikon", status: "page"}
+  - {page: 11, date: "09-08", title: "Τὸ Γενέσιον τῆς Θεοτόκου (head Η΄)", hymn: "men/09-08/doxastikon", status: "page"}
+  - {page: 15, date: "09-09", title: "Ἰωακεὶμ καὶ Ἄννης (head Θ΄)", hymn: "men/09-09/doxastikon", status: "page"}
+  - {page: 19, date: "09-13", title: "Τὰ Ἐγκαίνια (head ΙΓ΄)", hymn: "men/09-13/doxastikon", status: "page"}
+  - {page: 25, date: "09-14", title: "Ὕψωσις τοῦ Σταυροῦ (head ΙΔ΄)", hymn: "men/09-14/doxastikon", status: "page"}
+  - {page: 31, date: "09-16", title: "Ἁγίας Εὐφημίας (head ΙϚ΄)", hymn: "men/09-16/doxastikon", status: "page"}
+  - {page: 33, date: "09-23", title: "Σύλληψις τοῦ Προδρόμου (head ΚΓ΄)", hymn: "men/09-23/doxastikon", status: "page"}
+  - {page: 37, date: "09-26", title: "Ἰωάννου τοῦ Θεολόγου (head ΚϚ΄)", hymn: "men/09-26/doxastikon", status: "page", note: "verify: p.39 head reads ΚΓ΄ (misprint?)"}
+  - {page: 43, title: "Κυριακὴ μετὰ τὴν ΙΔ΄ (Ὕψωσιν) (head 'ΚΥΡΙΑΚΗ ΜΕΤΑ ΤΗΝ ΙΔ΄')", status: "page", note: "Sunday after Elevation; no fixed id; numeral ΙΔ΄ vs ΙΑ΄ unclear"}
+  # Μὴν Ὀκτώβριος
+  - {page: 47, date: "10-26", title: "Ἁγίου Δημητρίου (head ΚϚ΄)", hymn: "men/10-26/doxastikon", status: "page"}
+  # Μὴν Νοέμβριος
+  - {page: 53, date: "11-08", title: "Ἀρχαγγέλων (head Η΄)", hymn: "men/11-08/doxastikon", status: "page"}
+  - {page: 57, date: "11-13", title: "Ἰωάννου τοῦ Χρυσοστόμου (head ΙΓ΄)", hymn: "men/11-13/doxastikon", status: "page"}
+  - {page: 59, date: "11-21", title: "Εἴσοδος τῆς Θεοτόκου (head ΚΑ΄)", hymn: "men/11-21/doxastikon", status: "page"}
+  - {page: 63, date: "11-25", title: "Ἁγίας Αἰκατερίνης (head ΚΕ΄)", hymn: "men/11-25/doxastikon", status: "page"}
+  - {page: 65, date: "11-30", title: "Ἀνδρέου τοῦ πρωτοκλήτου (head reads Α΄/Λ΄)", hymn: "men/11-30/doxastikon", status: "page", note: "verify numeral Λ΄ (30)"}
+  # Μὴν Δεκέμβριος
+  - {page: 73, date: "12-05", title: "Σάββα (head Ε΄)", hymn: "men/12-05/doxastikon", status: "page"}
+  - {page: 77, date: "12-06", title: "Νικολάου (head ς΄)", hymn: "men/12-06/doxastikon", status: "page"}
+  - {page: 83, date: "12-09", title: "Σύλληψις τῆς ἁγίας Ἄννης (head Θ΄)", hymn: "men/12-09/doxastikon", status: "page"}
+  - {pages: [87, 95], title: "Dec 12 Spyridon / Sundays of Forefathers and before Nativity (heads show month only, no numeral)", status: "page", note: "unlabelled in running head: verify titles inside"}
+  - {page: 97, date: "12-20", title: "Ἰγνατίου (head Κ΄)", hymn: "men/12-20/doxastikon", status: "page"}
+  - {page: 99, date: "12-24", title: "Παραμονὴ Χριστοῦ Γενεθλίων (head 'ΚΑ΄'→ΚΔ΄; pp.99-111 incl. Royal Hours)", hymn: "men/12-24/doxastikon", status: "page", note: "verify numeral ΚΔ΄; hours not mapped"}
+  - {page: 113, date: "12-25", title: "Ἡ Γέννησις τοῦ Χριστοῦ (head ΚΕ΄)", hymn: "men/12-25/doxastikon", status: "page"}
+  - {page: 119, date: "12-26", title: "Σύναξις τῆς Θεοτόκου (head ΚϚ΄)", hymn: "men/12-26/doxastikon", status: "page"}
+  - {page: 125, date: "12-27", title: "Στεφάνου (head ΚΖ΄)", hymn: "men/12-27/doxastikon", status: "page"}
+  # Μὴν Ἰανουάριος
+  - {page: 131, date: "01-01", title: "Περιτομή / Βασιλείου (head Α΄)", hymn: "men/01-01/doxastikon", status: "page"}
+  - {page: 137, title: "Ἰαν. Β΄ (Sunday before/after Theophany?) (head Β΄)", status: "page", note: "verify"}
+  - {page: 139, date: "01-05", title: "Παραμονὴ Θεοφανείων (head Ε΄; pp.139-147 incl. Hours)", hymn: "men/01-05/doxastikon", status: "page", note: "hours not mapped"}
+  - {page: 149, date: "01-06", title: "Τὰ Θεοφάνεια (head ς΄)", hymn: "men/01-06/doxastikon", status: "page"}
+  - {page: 153, date: "01-07", title: "Προδρόμου (head Ζ΄)", hymn: "men/01-07/doxastikon", status: "page"}
+  - {page: 157, date: "01-17", title: "Ἀντωνίου (head ΙΖ΄)", hymn: "men/01-17/doxastikon", status: "page"}
+  - {page: 159, date: "01-18", title: "Ἀθανασίου καὶ Κυρίλλου (head ΙΗ΄)", hymn: "men/01-18/doxastikon", status: "page"}
+  - {page: 161, date: "01-20", title: "Εὐθυμίου (head Κ΄)", hymn: "men/01-20/doxastikon", status: "page"}
+  - {page: 163, date: "01-25", title: "Γρηγορίου τοῦ Θεολόγου (head ΚΕ΄); p.163 has Εἰς τοὺς Αἴνους Δόξα ἦχος πλ.δ΄", hymn: "men/01-25/doxastikon", status: "page"}
+  - {page: 167, date: "01-27", title: "Μετακομιδὴ Χρυσοστόμου (head ΚΖ΄)", hymn: "men/01-27/doxastikon", status: "page"}
+  - {page: 169, date: "01-30", title: "Τριῶν Ἱεραρχῶν (head Λ΄)", hymn: "men/01-30/doxastikon", status: "page"}
+  # Μὴν Φεβρουάριος
+  - {page: 171, date: "02-02", title: "Ὑπαπαντή (head Β΄)", hymn: "men/02-02/doxastikon", status: "page"}
+  # Μὴν Μάρτιος
+  - {page: 175, date: "03-25", title: "Εὐαγγελισμός (head ΚΕ΄)", hymn: "men/03-25/doxastikon", status: "page"}
+  # Μὴν Ἀπρίλιος
+  - {page: 181, date: "04-23", title: "Γεωργίου (head ΚΓ΄)", hymn: "men/04-23/doxastikon", status: "page"}
+  # Μὴν Μάιος
+  - {page: 187, date: "05-21", title: "Κωνσταντίνου καὶ Ἑλένης (head ΚΑ΄)", hymn: "men/05-21/doxastikon", status: "page"}
+  # Μὴν Ἰούνιος
+  - {page: 191, date: "06-24", title: "Γενέσιον Προδρόμου (head ΚΔ΄)", hymn: "men/06-24/doxastikon", status: "page"}
+  - {page: 197, date: "06-29", title: "Πέτρου καὶ Παύλου (head ΚΘ΄)", hymn: "men/06-29/doxastikon", status: "page"}
+  # Μὴν Ἰούλιος
+  - {page: 201, date: "07-02", title: "Καταθέσις Ἐσθῆτος (head Β΄)", hymn: "men/07-02/doxastikon", status: "page"}
+  - {page: 205, date: "07-20", title: "Ἠλίου (head Κ΄)", hymn: "men/07-20/doxastikon", status: "page"}
+  - {page: 209, date: "07-25", title: "Κοίμησις Ἄννης (head ΚΕ΄)", hymn: "men/07-25/doxastikon", status: "page"}
+  - {page: 211, date: "07-26", title: "Παρασκευῆς (head ΚϚ΄)", hymn: "men/07-26/doxastikon", status: "page"}
+  - {page: 215, date: "07-27", title: "Παντελεήμονος (head ΚΖ΄)", hymn: "men/07-27/doxastikon", status: "page"}
+  # Μὴν Αὔγουστος
+  - {page: 219, date: "08-01", title: "Πρόοδος τοῦ Σταυροῦ (head Α΄)", hymn: "men/08-01/doxastikon", status: "page"}
+  - {page: 223, date: "08-06", title: "Μεταμόρφωσις (head ς΄)", hymn: "men/08-06/doxastikon", status: "page"}
+  - {page: 227, date: "08-15", title: "Κοίμησις τῆς Θεοτόκου (head ΙΕ΄; pp.227-235)", hymn: "men/08-15/doxastikon", status: "page"}
+  - {page: 237, date: "08-29", title: "Ἀποτομὴ τῆς Κεφαλῆς τοῦ Προδρόμου (head ΚΘ΄)", hymn: "men/08-29/doxastikon", status: "page"}
+  # Τριῴδιον / Πεντηκοστάριον (running heads, no Πίναξ). Start pages = first page showing the head; days-from-Pascha ids per feast; weekday entries not split (heads only say Τετάρτη/Παρασκευὴ/Σάββατον).
+  - {page: 243, title: "Ἀρχὴ τῶν Κυριακῶν (Τριῳδίου)", status: "page"}
+  - {page: 245, moveable: "-70", title: "Τῇ Κυριακῇ τοῦ Τελώνου καὶ Φαρισαίου", hymn: "mov/-70/doxastikon", status: "page"}
+  - {page: 247, moveable: "-63", title: "Τῇ Κυριακῇ τοῦ Ἀσώτου", hymn: "mov/-63/doxastikon", status: "page"}
+  - {page: 249, moveable: "-57", title: "Τῶν Κεκοιμημένων (Σάββατον)", hymn: "mov/-57/doxastikon", status: "page"}
+  - {page: 253, moveable: "-56", title: "Τῆς Ἀπόκρεω", hymn: "mov/-56/doxastikon", status: "page"}
+  - {page: 257, moveable: "-49", title: "Τῆς Τυροφάγου", hymn: "mov/-49/doxastikon", status: "page"}
+  - {pages: [260, 277], title: "Τετάρτη/Παρασκευὴ τῆς Α΄–Δ΄ ἑβδομάδος, Κυριακαὶ Α΄–Δ΄ τῶν Νηστειῶν (pp.260-281)", status: "page", note: "Sunday of Orthodoxy (-42), Lent Sundays -35,-28,-21 inside; not split"}
+  - {page: 285, moveable: "-15", title: "Σάββατον τοῦ Ἀκαθίστου", hymn: "mov/-15/doxastikon", status: "page"}
+  - {page: 286, moveable: "-14", title: "Κυριακὴ Ε΄ (Ὁσίας Μαρίας)", hymn: "mov/-14/doxastikon", status: "page"}
+  - {page: 293, moveable: "-8", title: "Τῷ Σαββάτῳ τοῦ Λαζάρου", hymn: "mov/-8/doxastikon", status: "page"}
+  - {page: 295, moveable: "-7", title: "Τῶν Βαΐων", hymn: "mov/-7/doxastikon", status: "page"}
+  - {page: 301, moveable: "-6", title: "Ἁγία καὶ Μεγάλη Δευτέρα (pp.301-305)", hymn: "mov/-6/doxastikon", status: "page"}
+  - {page: 307, moveable: "-5", title: "Ἁγία καὶ Μεγάλη Τρίτη (pp.306-313)", hymn: "mov/-5/doxastikon", status: "page"}
+  - {page: 315, moveable: "-4", title: "Ἁγία καὶ Μεγάλη Τετάρτη (pp.314-323)", hymn: "mov/-4/doxastikon", status: "page"}
+  - {page: 325, moveable: "-3", title: "Ἁγία καὶ Μεγάλη Πέμπτη (pp.324-377)", hymn: "mov/-3/doxastikon", status: "page"}
+  - {page: 379, moveable: "-2", title: "Ἁγία καὶ Μεγάλη Παρασκευή (pp.378-397)", hymn: "mov/-2/doxastikon", status: "page"}
+  - {page: 398, moveable: "-1", title: "Τῷ Ἁγίῳ καὶ Μεγάλῳ Σαββάτῳ (pp.398-403)", hymn: "mov/-1/doxastikon", status: "page"}
+  - {page: 404, moveable: "0", title: "Τῇ Κυριακῇ τοῦ Πάσχα", hymn: "mov/0/doxastikon", status: "page"}
+  - {page: 405, moveable: "7", title: "Κυριακὴ τοῦ Θωμᾶ", hymn: "mov/7/doxastikon", status: "page"}
+  - {page: 409, moveable: "14", title: "Κυριακὴ τῶν Μυροφόρων", hymn: "mov/14/doxastikon", status: "page", note: "verify start page"}
+  - {page: 411, moveable: "21", title: "Τοῦ Παραλύτου", hymn: "mov/21/doxastikon", status: "page"}
+  - {page: 415, moveable: "24", title: "Τῆς Μεσοπεντηκοστῆς", hymn: "mov/24/doxastikon", status: "page"}
+  - {page: 419, moveable: "28", title: "Τῆς Σαμαρείτιδος", hymn: "mov/28/doxastikon", status: "page"}
+  - {page: 421, moveable: "35", title: "Τοῦ Τυφλοῦ", hymn: "mov/35/doxastikon", status: "page"}
+  - {page: 424, moveable: "39", title: "Τῇ Πέμπτῃ (τῆς Ἀναλήψεως) pp.424-427", hymn: "mov/39/doxastikon", status: "page"}
+  - {page: 428, moveable: "49", title: "Τῇ Κυριακῇ τῆς Πεντηκοστῆς (pp.428-431)", hymn: "mov/49/doxastikon", status: "page"}
+  - {page: 432, moveable: "56", title: "Τῇ Κυριακῇ τῶν Ἁγίων Πάντων (pp.432-436)", hymn: "mov/56/doxastikon", status: "page"}
