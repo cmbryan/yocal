@@ -1,0 +1,37 @@
+# Pergamos uoadl:168168 — contents (Πίναξ) transcribed from PDF images 150–151 (left+right spreads). 
+# IDENTICAL Πίναξ and pagination to TA2 (1845 vol.2: Cherubika, Koinonika, Liturgy) = byzantine_pd TA2; this is the separate 1846 volume (Τόμος δεύτερος, title page "χερουβικὰ καὶ κοινωνικά ... μαθημάτων καὶ δέκα καλοφωνικῶν εἱρμῶν").
+# Extra vs TA2: "Παρορράματα τοῦ Α΄ τόμου" (errata, img 151 right) and subscriber list (imgs 152-161).
+id: "168168"
+key: PG168
+title: Ταμεῖον Ἀνθολογίας, τόμος β΄ (Χερουβικὰ καὶ Κοινωνικά), Κωνσταντῖνος Πρωτοψάλτης
+year: 1846
+file: "168168 Ταμείον Ανθολογίας περιέχον τά τε χερουβικά και κοινωνικά απάσης της ενιαυσίου ακολουθίας (1846).pdf"
+layout: [{from: 1, div: 2, add: 3}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.3=img4; p.55=30; p.275=140; p.293=149; p.294=150
+toc_images: [150, 151]
+same_as: TA2
+summary: "Same content as TA2 (TA2 printed p -> PG168 img = p//2+3). Entries below = TOC, one line per section, no detail. Nothing new for hymn mapping except the errata page. Litany responses: not present in the Πίναξ (no Κύριε ἐλέησον)."
+entries:
+  - {page: 1, title: "Χερουβικά, 8 tone sections starting pp.1, 13, 23, 35, 46, 57, 68, 78 (3 per tone as in TA2)", who: Κωνσταντῖνος Πρωτοψάλτης, status: toc, note: "tone order 1,2,3,4,pl1,pl2?,grave,pl4 per TA2; glyph tone labels not read"}
+  - {page: 89, title: "Χερουβικὰ τῆς Ἑβδομάδος", who: Πέτρος Λαμπαδάριος, status: toc}
+  - {page: 98, title: "Ἀγαπήσωσε Κύριε", who: Ἰάκωβος Πρωτοψάλτης, status: toc}
+  - {page: 99, title: "Ἕτερον σύντομον", status: toc}
+  - {page: 99, title: "Λειτουργία τοῦ Μ. Βασιλείου", status: toc, hymn: lit/megalynarion/basil, note: "verify; see TA2"}
+  - {page: 104, title: "Λειτουργία τῶν προηγιασμένων", status: toc}
+  - {page: 105, title: "Νῦν αἱ Δυνάμεις, ἦχος pl1", status: toc}
+  - {page: 109, title: "Ἕτερα (ἦχος β΄ καὶ γ΄ καὶ ἄλλος)", who: Κωνσταντῖνος Πρωτοψάλτης, status: toc}
+  - {page: 111, title: "Γεύσασθε", who: Ἰωάννης Πρωτοψάλτης, status: toc}
+  - {page: 112, title: "Ἕτερα εἰς ἦχον", who: Κωνσταντῖνος Πρωτοψάλτης, status: toc}
+  - {page: 116, title: "Ἕτερον", who: Γεώργιος ὁ Κρής, status: toc}
+  - {page: 117, title: "Κοινωνικὰ τῆς ἑβδομάδος", who: Πέτρος Λαμπαδάριος, status: toc}
+  - {page: 127, title: "Κοινωνικά ἦχος α΄ (Αἰνεῖτε, Ἰνδίκτου, Ἐγκαίνια, Ἀναστάσεως, Ἁγίου Πνεύματος, Μεταμορφώσεως, Ὁ ποιῶν τοὺς Ἀγγέλους, Εἰς μνημόσυνον, Ποτήριον, Εἰς πᾶσαν τὴν γῆν)", who: Κωνσταντῖνος Πρωτοψάλτης, tones: [1], hymn: lit/communion/sunday, status: toc}
+  - {page: 150, title: "Κοινωνικά ἦχος β΄", tones: [2], hymn: lit/communion/sunday, status: toc}
+  - {page: 168, title: "Κοινωνικά ἦχος γ΄", tones: [3], hymn: lit/communion/sunday, status: toc}
+  - {page: 182, title: "Κοινωνικά ἦχος δ΄", tones: [4], hymn: lit/communion/sunday, status: toc}
+  - {page: 222, title: "Κοινωνικά ἦχος πλ. α΄ (Αἰνεῖται Ἐξηγέρθη, Ἀναστάσεως, Θωμᾶ, Μεταμορφώσεως, Ἀγαλλιᾶσθε)", tones: [5], hymn: lit/communion/sunday, status: toc}
+  - {page: 230, title: "Κοινωνικά ἦχος βαρύς", tones: [7], hymn: lit/communion/sunday, status: toc, note: "tone sections 1,2,3,4,pl1,grave,pl4 only; pl2 absent in TOC"}
+  - {page: 249, title: "Κοινωνικά ἦχος πλ. δ΄", tones: [8], hymn: lit/communion/sunday, status: toc}
+  - {page: 263, title: "Ἄνωθεν οἱ Προφῆται", who: Κουκουζέλης (συνετμήθη παρὰ Κ. Π.), status: toc}
+  - {page: 266, title: "Περίζωσαι τὴν ῥομφαίαν σου", who: Γρηγόριος Πρωτοψάλτης, status: toc}
+  - {page: 272, title: "Τὴν σὴν εἰρήνην / Ἐν βυθῷ κατέστρωσε / Λατρεύειν ζῶντι / Ἐσείσθησαν λαοί", who: Περεκέτης, status: toc, note: "pp.272,274,276,278"}
+  - {page: 280, title: "Πρόβατον εἰμί / Ἡ ἐν Οὐρανοῖς / Πᾶσαν τὴν ἐλπίδα μου / Κύκλῳ τῆς τραπέζης σου / Τὴν δέησίν μου / Χαρᾶς μου τὴν καρδίαν", status: toc, note: "kalophonic heirmoi pp.280-293 (Perekhetes, K.P., Cretan)"}

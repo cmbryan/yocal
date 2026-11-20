@@ -1,0 +1,65 @@
+# Pergamos uoadl:168179 — contents (Πίναξ) transcribed from PDF images 170-171 (printed p.335-336).
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads; p.1 alone = image 3).
+id: "168179"
+key: PG179
+title: Ἀναστασιματάριον ἀργόν (Petros Lambadarios; ed. Konstantinos Protopsaltis; 3rd ed. Theodoros Papa Paraschou Phokeus), Constantinople 1839
+year: 1839
+file: "168179 Αναστασιματάριον αργόν, περιέχον τα αναστάσιμα του Εσπερινού, Όρθρου και Λειτουργίας μετά (1839).pdf"
+layout: [{from: 1, div: 2, add: 3}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.1 = img 3; p.10-11 = img 8; p.30-31 = img 18; p.114-115 = img 60; p.118-119 = img 62; p.334-335 = img 170; p.336 = img 171
+toc_images: [170, 171]
+lost_pages: "Image 61 is a corrupt-source placeholder = printed p.116-117 (inside tone 3 'Κατανυκτικὰ καὶ Μαρτυρικὰ μὲ τὸ Νεκρώσιμον', which starts p.116; p.115 is the tone 3 header page, p.118 still tone 3 katanyktika, tone 4 Vespers starts p.119)."
+summary: >
+  Slow Anastasimatarion only: Sunday Vespers (stichera, apostixa, apolytikia), Orthros (kathismata, antiphona, canons, katavasiai, Aines, katanyktika/martyrika) for the 8 tones, plus the 11 Eothina (p.322-334, end ΤΕΛΟΣ).
+  NO Liturgy section despite the title-page mention in the catalogue: the Pinax has none and the book ends at p.334 with the Eothina. NO litany responses (Κύριε ἐλέησον, Παράσχου, Σοὶ Κύριε, Ἀμήν) and no Liturgy fixed parts: sampled p.1, 10-15, 30-31, 114-119 are all melismatic papadic text, no responses. Slow (argon) settings: low parish value; the short settings are in AN/PD2 (byzantine_pd.yaml).
+  Order of tones in book: 1, 2, 3, 4, pl1, pl2, grave, pl4 (tone numbers below: pl1=5, pl2=6, grave=7, pl4=8). Tone 2 and plagal 1/2 sections give no separate apostixa line.
+entries:   # page = printed; tone as in hymns.py (pl1=5 pl2=6 grave=7 pl4=8)
+  # Ἦχος α΄ Πα
+  - {page: 1, tone: 1, title: "Ἀναστάσιμα τοῦ Ἑσπερινοῦ (μετὰ τῶν Ἀποστίχων καὶ Ἀπολυτικίων)", status: toc, note: "Vespers resurrectional stichera + apostixa + apolytikia; the Resurrection apolytikion (Θεὸς Κύριος + apolytikion) is on the last page(s) of this section (tone 1: p.12-13, seen); verify per tone"}
+  - {page: 13, tone: 1, title: "Καθίσματα τοῦ Ὄρθρου, Ἀντίφωνα καὶ Κανόνες (μετὰ τῶν Ἀπολυτικίων)", status: toc, hymn: oct/t1/sun/canon, note: "contents of section not checked beyond the Pinax title; verify canon/hypakoe/kontakion placement"}
+  - {page: 28, tone: 1, title: "Καταβασίαι ἀργαὶ μετὰ τῆς Τιμιωτέρας", status: toc}
+  - {page: 32, tone: 1, title: "Ἀναστάσιμα τῶν Αἴνων", status: toc, hymn: oct/t1/sun/lauds1}
+  # Ἦχος β΄ Δι
+  - {page: 40, tone: 2, title: "Ἀναστάσιμα τοῦ Ἑσπερινοῦ (μετὰ τῶν Ἀποστίχων καὶ Ἀπολυτικίων)", status: toc, note: "Vespers resurrectional stichera + apostixa + apolytikia; the Resurrection apolytikion (Θεὸς Κύριος + apolytikion) is on the last page(s) of this section (tone 1: p.12-13, seen); verify per tone"}
+  - {page: 63, tone: 2, title: "Καθίσματα τοῦ Ὄρθρου, Ἀντίφωνα καὶ Κανόνες (μετὰ τῶν Ἀπολυτικίων)", status: toc, hymn: oct/t2/sun/canon, note: "contents of section not checked beyond the Pinax title; verify canon/hypakoe/kontakion placement"}
+  - {page: 66, tone: 2, title: "Καταβασίαι ἀργαὶ μετὰ τῆς Τιμιωτέρας", status: toc}
+  - {page: 70, tone: 2, title: "Ἀναστάσιμα τῶν Αἴνων", status: toc, hymn: oct/t2/sun/lauds1}
+  # Ἦχος γ΄ Γα
+  - {page: 78, tone: 3, title: "Ἀναστάσιμα τοῦ Ἑσπερινοῦ (μετὰ τῶν Ἀποστίχων καὶ Ἀπολυτικίων)", status: toc, note: "Vespers resurrectional stichera + apostixa + apolytikia; the Resurrection apolytikion (Θεὸς Κύριος + apolytikion) is on the last page(s) of this section (tone 1: p.12-13, seen); verify per tone"}
+  - {page: 86, tone: 3, title: "Ἀπόστιχα, ἅτινα ἐμελοποιήθησαν παρὰ Θεοδώρῳ Φωκέως", status: toc}
+  - {page: 89, tone: 3, title: "Καθίσματα τοῦ Ὄρθρου, Ἀντίφωνα καὶ Κανόνες (μετὰ τῶν Ἀπολυτικίων)", status: toc, hymn: oct/t3/sun/canon, note: "contents of section not checked beyond the Pinax title; verify canon/hypakoe/kontakion placement"}
+  - {page: 105, tone: 3, title: "Καταβασίαι ἀργαὶ μετὰ τῆς Τιμιωτέρας", status: toc}
+  - {page: 109, tone: 3, title: "Ἀναστάσιμα τῶν Αἴνων", status: toc, hymn: oct/t3/sun/lauds1}
+  - {page: 116, tone: 3, title: "Κατανυκτικά, καὶ Μαρτυρικὰ μὲ τὸ Νεκρώσιμον", status: toc}
+  # Ἦχος δ΄ Πα
+  - {page: 119, tone: 4, title: "Ἀναστάσιμα τοῦ Ἑσπερινοῦ (μετὰ τῶν Ἀποστίχων καὶ Ἀπολυτικίων)", status: toc, note: "Vespers resurrectional stichera + apostixa + apolytikia; the Resurrection apolytikion (Θεὸς Κύριος + apolytikion) is on the last page(s) of this section (tone 1: p.12-13, seen); verify per tone"}
+  - {page: 129, tone: 4, title: "Ἀπόστιχα, ἅτινα ἐμελοποιήθησαν παρὰ Θεοδώρῳ Φωκέως", status: toc}
+  - {page: 132, tone: 4, title: "Καθίσματα τοῦ Ὄρθρου, Ἀντίφωνα καὶ Κανόνες (μετὰ τῶν Ἀπολυτικίων)", status: toc, hymn: oct/t4/sun/canon, note: "contents of section not checked beyond the Pinax title; verify canon/hypakoe/kontakion placement"}
+  - {page: 147, tone: 4, title: "Καταβασίαι ἀργαὶ μετὰ τῆς Τιμιωτέρας", status: toc}
+  - {page: 152, tone: 4, title: "Ἀναστάσιμα τῶν Αἴνων", status: toc, hymn: oct/t4/sun/lauds1}
+  # Ἦχος πλ. α΄ Πα
+  - {page: 159, tone: 5, title: "Ἀναστάσιμα τοῦ Ἑσπερινοῦ (μετὰ τῶν Ἀποστίχων καὶ Ἀπολυτικίων)", status: toc, note: "Vespers resurrectional stichera + apostixa + apolytikia; the Resurrection apolytikion (Θεὸς Κύριος + apolytikion) is on the last page(s) of this section (tone 1: p.12-13, seen); verify per tone"}
+  - {page: 172, tone: 5, title: "Καθίσματα τοῦ Ὄρθρου, Ἀντίφωνα καὶ Κανόνες (μετὰ τῶν Ἀπολυτικίων)", status: toc, hymn: oct/t5/sun/canon, note: "contents of section not checked beyond the Pinax title; verify canon/hypakoe/kontakion placement"}
+  - {page: 185, tone: 5, title: "Καταβασίαι ἀργαὶ μετὰ τῆς Τιμιωτέρας", status: toc}
+  - {page: 189, tone: 5, title: "Ἀναστάσιμα τῶν Αἴνων", status: toc, hymn: oct/t5/sun/lauds1}
+  # Ἦχος πλ. β΄ Πα
+  - {page: 200, tone: 6, title: "Ἀναστάσιμα τοῦ Ἑσπερινοῦ (μετὰ τῶν Ἀποστίχων καὶ Ἀπολυτικίων)", status: toc, note: "Vespers resurrectional stichera + apostixa + apolytikia; the Resurrection apolytikion (Θεὸς Κύριος + apolytikion) is on the last page(s) of this section (tone 1: p.12-13, seen); verify per tone"}
+  - {page: 211, tone: 6, title: "Καθίσματα τοῦ Ὄρθρου, Ἀντίφωνα καὶ Κανόνες (μετὰ τῶν Ἀπολυτικίων)", status: toc, hymn: oct/t6/sun/canon, note: "contents of section not checked beyond the Pinax title; verify canon/hypakoe/kontakion placement"}
+  - {page: 225, tone: 6, title: "Καταβασίαι ἀργαὶ μετὰ τῆς Τιμιωτέρας", status: toc}
+  - {page: 229, tone: 6, title: "Ἀναστάσιμα τῶν Αἴνων", status: toc, hymn: oct/t6/sun/lauds1}
+  # Ἦχος βαρὺς Γα
+  - {page: 238, tone: 7, title: "Ἀναστάσιμα τοῦ Ἑσπερινοῦ (μετὰ τῶν Ἀποστίχων καὶ Ἀπολυτικίων)", status: toc, note: "Vespers resurrectional stichera + apostixa + apolytikia; the Resurrection apolytikion (Θεὸς Κύριος + apolytikion) is on the last page(s) of this section (tone 1: p.12-13, seen); verify per tone"}
+  - {page: 246, tone: 7, title: "Ἀπόστιχα, ἅτινα ἐμελοποιήθησαν παρὰ Θεοδώρῳ Φωκέως", status: toc}
+  - {page: 248, tone: 7, title: "Καθίσματα τοῦ Ὄρθρου, Ἀντίφωνα καὶ Κανόνες (μετὰ τῶν Ἀπολυτικίων)", status: toc, hymn: oct/t7/sun/canon, note: "contents of section not checked beyond the Pinax title; verify canon/hypakoe/kontakion placement"}
+  - {page: 263, tone: 7, title: "Καταβασίαι ἀργαὶ μετὰ τῆς Τιμιωτέρας", status: toc}
+  - {page: 268, tone: 7, title: "Ἀναστάσιμα τῶν Αἴνων", status: toc, hymn: oct/t7/sun/lauds1}
+  - {page: 273, tone: 7, title: "Κατανυκτικά, καὶ Μαρτυρικὰ μὲ τὸ Νεκρώσιμον", status: toc}
+  # Ἦχος πλ. δ΄ Νη
+  - {page: 279, tone: 8, title: "Ἀναστάσιμα τοῦ Ἑσπερινοῦ (μετὰ τῶν Ἀποστίχων καὶ Ἀπολυτικίων)", status: toc, note: "Vespers resurrectional stichera + apostixa + apolytikia; the Resurrection apolytikion (Θεὸς Κύριος + apolytikion) is on the last page(s) of this section (tone 1: p.12-13, seen); verify per tone"}
+  - {page: 287, tone: 8, title: "Ἀπόστιχα, ἅτινα ἐμελοποιήθησαν παρὰ Θεοδώρῳ Φωκέως", status: toc}
+  - {page: 291, tone: 8, title: "Καθίσματα τοῦ Ὄρθρου, Ἀντίφωνα καὶ Κανόνες (μετὰ τῶν Ἀπολυτικίων)", status: toc, hymn: oct/t8/sun/canon, note: "contents of section not checked beyond the Pinax title; verify canon/hypakoe/kontakion placement"}
+  - {page: 309, tone: 8, title: "Καταβασίαι ἀργαὶ μετὰ τῆς Τιμιωτέρας", status: toc}
+  - {page: 313, tone: 8, title: "Ἀναστάσιμα τῶν Αἴνων", status: toc, hymn: oct/t8/sun/lauds1}
+  - {page: 318, tone: 8, title: "Κατανυκτικά, καὶ Μαρτυρικὰ μὲ τὸ Νεκρώσιμον", status: toc}
+  # Eothina
+  - {page: 322, title: "Τὰ Ἕνδεκα Ἑωθινά", status: toc, hymn: "eothinon/{n}/doxastikon", note: "p.322-334; the 11 Eothina (Gospel-cycle doxastika); verify they are the doxastika and not just heirmoi"}

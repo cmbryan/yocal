@@ -1,0 +1,81 @@
+# Pergamos uoadl:168175 — contents (Πίναξ) read from PDF images 178-179 (printed p.? unnumbered; Πίναξ torn at foot).
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads).
+id: "168175"
+key: PG175
+title: Μουσικὴ Μέλισσα, περιέχουσα τὸ Ἀργὸν καὶ Σύντομον Ἀναστασιματάριον (Θεόδωρος Π. Π. Φωκαεύς; Constantinople-Galata 1847)
+year: 1847
+file: "168175 Μουσική Μέλισσα περιέχουσα το Αργόν και Σύντομον Αναστασιματάριον (1847).pdf"
+layout: [{from: 1, div: 2, add: 5}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.2-3 = img 6; p.18 = img 14; p.90 = img 50; p.170 = img 90; p.250 = img 130; p.330 = img 170; p.344 = img 177; p.346 = img 178
+toc_images: [178, 179]
+summary: Chrysanthine-notation Anastasimatarion, argon (Theodore Phokaeus = Θ.Π.Π.Φ., kekragaria, dogmatika, aposticha) + syntomon (Petros Peloponnesios, "Π. Πελοπ.", with stichoi by Manuel Protopsaltes "Μ. Πρωτ."), by tone, plus Matins (Θεὸς Κύριος apolytikia, kathismata, antiphons, heirmoi, timiotera, Ainoi, Makarismoi) and 11 Eothina. Abbreviation expansions Θ.Π.Π.Φ. and Μ. Πρωτ. are inferred; verify. Tones 1-3 and 5-7 Πίναξ complete; tone 4 partly illegible and pl.4 truncated by tear (Πίναξ img 178-179). No litany responses, no Liturgy fixed parts (Vespers/Matins only); no prokeimena. Resurrectional apolytikion lies in the Matins Θεὸς Κύριος sections (hymn ids at section level).
+entries:   # page = printed (start of section); who = composer abbreviations as printed
+  - {page: 4, title: "Ἀνοιξαντάρια σύντομα πλ. Δ΄", who: Θ.Π.Π.Φ., status: toc}
+  - {page: 9, title: "Μακάριος ἀνὴρ εἰς ἦχον Βαρύν, τοῦ αὐτοῦ", who: Θ.Π.Π.Φ., status: toc, note: "Polyeleos-type Sunday Makarios aner; verify"}
+  - {page: 21, title: "Ἦχος α΄: Κεκραγάριον ἀργόν", tone: 1, status: toc}
+  - {page: 25, title: "Ἦχος α΄: Ἕτερον σύντομον (Π. Πελοπ., μετὰ τῶν στίχων Μ. Πρωτ.)", tone: 1, status: toc}
+  - {page: 30, title: "Ἦχος α΄: Στιχηρὰ ἰδιόμελα τοῦ ἑσπερινοῦ καὶ δογματικόν (Π. Πελοπ.)", tone: 1, status: toc}
+  - {page: 35, title: "Ἦχος α΄: Ἕτερον δογματικόν (Θ.Π.Π.Φ.)", tone: 1, status: toc}
+  - {page: 37, title: "Ἦχος α΄: Ἀπόστιχα καὶ δοξαστικόν (Π. Πελοπ.)", tone: 1, status: toc}
+  - {page: 40, title: "Ἦχος α΄: Εἰς τὸν ὄρθρον τὸ Θεὸς Κύριος, ἀπολυτίκια, καθίσματα καὶ ἀντίφωνα (Π. Π.)", tone: 1, hymn: "oct/t1/sun/apolytikion", status: toc, note: "Θεὸς Κύριος + apolytikia + kathismata + antiphons (Petros Peloponnesios); verify resurrectional apolytikion inside"}
+  - {page: 47, title: "Ἦχος α΄: Εἰρμοὶ τοῦ κανόνος· τιμιωτέρα· δύο εἰρμοὶ τῆς Θ΄ ᾠδῆς· Αἶνοι καὶ μακαρισμός (Π. Πελοπ.)", tone: 1, status: toc}
+  - {page: 56, title: "Ἦχος β΄: Κεκραγάριον ἀργόν", tone: 2, status: toc}
+  - {page: 59, title: "Ἦχος β΄: Ἕτερον σύντομον (Π. Πελοπ., μετὰ τῶν στίχων Μ. Πρωτ.)", tone: 2, status: toc}
+  - {page: 64, title: "Ἦχος β΄: Στιχηρὰ ἰδιόμελα τοῦ ἑσπερινοῦ καὶ δογματικόν (Π. Πελοπ.)", tone: 2, status: toc}
+  - {page: 69, title: "Ἦχος β΄: Ἕτερον δογματικόν (Θ.Π.Π.Φ.)", tone: 2, status: toc}
+  - {page: 70, title: "Ἦχος β΄: Ἀπόστιχα καὶ δοξαστικόν (Π. Πελοπ.)", tone: 2, status: toc}
+  - {page: 74, title: "Ἦχος β΄: Εἰς τὸν ὄρθρον τὸ Θεὸς Κύριος, ἀπολυτίκια, καθίσματα καὶ ἀντίφωνα (Π. Π.)", tone: 2, hymn: "oct/t2/sun/apolytikion", status: toc, note: "Θεὸς Κύριος + apolytikia + kathismata + antiphons (Petros Peloponnesios); verify resurrectional apolytikion inside"}
+  - {page: 81, title: "Ἦχος β΄: Εἰρμοὶ τοῦ κανόνος· τιμιωτέρα· δύο εἰρμοὶ τῆς Θ΄ ᾠδῆς· Αἶνοι καὶ μακαρισμός (Π. Πελοπ.)", tone: 2, status: toc}
+  - {page: 91, title: "Ἦχος γ΄: Κεκραγάριον ἀργόν", tone: 3, status: toc}
+  - {page: 93, title: "Ἦχος γ΄: Ἕτερον σύντομον (Π. Πελοπ., μετὰ τῶν στίχων Μ. Πρωτ.)", tone: 3, status: toc}
+  - {page: 98, title: "Ἦχος γ΄: Στιχηρὰ ἰδιόμελα μετὰ τοῦ δογματικοῦ (Π. Πελοπ.)", tone: 3, status: toc}
+  - {page: 103, title: "Ἦχος γ΄: Ἕτερον δογματικὸν καὶ ἀπόστιχα (Θ.Π.Π.Φ.)", tone: 3, status: toc}
+  - {page: 108, title: "Ἦχος γ΄: Εἰς τὸν ὄρθρον τὸ Θεὸς Κύριος, ἀπολυτίκια, καθίσματα καὶ ἀντίφωνα (Π. Π.)", tone: 3, hymn: "oct/t3/sun/apolytikion", status: toc, note: "Θεὸς Κύριος + apolytikia + kathismata + antiphons (Petros Peloponnesios); verify resurrectional apolytikion inside"}
+  - {page: 115, title: "Ἦχος γ΄: Εἰρμοὶ τοῦ κανόνος· τιμιωτέρα· δύο εἰρμοὶ τῆς Θ΄ ᾠδῆς· Αἶνοι καὶ μακαρισμός (Π. Π.)", tone: 3, status: toc}
+  - {page: 127, title: "Ἦχος δ΄: Κεκραγάριον ἀργόν", tone: 4, status: toc, note: "Πίναξ img 178 right page partly illegible; verify (134 read as 154?). Entries after p.148 not visible: Theos Kyrios/apolytikia etc. lie roughly pp.150-164"}
+  - {page: 129, title: "Ἦχος δ΄: Ἕτερον σύντομον (μετὰ τῶν στίχων Μ. Πρωτ.)", tone: 4, status: toc, note: "Πίναξ img 178 right page partly illegible; verify (134 read as 154?). Entries after p.148 not visible: Theos Kyrios/apolytikia etc. lie roughly pp.150-164"}
+  - {page: 134, title: "Ἦχος δ΄: Ἰδιόμελα καὶ δογματικὸν (Π. Πελοπ.)", tone: 4, status: toc, note: "Πίναξ img 178 right page partly illegible; verify (134 read as 154?). Entries after p.148 not visible: Theos Kyrios/apolytikia etc. lie roughly pp.150-164"}
+  - {page: 140, title: "Ἦχος δ΄: Ἕτερον δογματικὸν καὶ ἀπόστιχα (Θ.Π.Π.Φ.)", tone: 4, status: toc, note: "Πίναξ img 178 right page partly illegible; verify (134 read as 154?). Entries after p.148 not visible: Theos Kyrios/apolytikia etc. lie roughly pp.150-164"}
+  - {page: 147, title: "Ἦχος δ΄: [row hidden by tear/overlap; verify]", tone: 4, status: toc, note: "Πίναξ img 178 right page partly illegible; verify (134 read as 154?). Entries after p.148 not visible: Theos Kyrios/apolytikia etc. lie roughly pp.150-164"}
+  - {page: 148, title: "Ἦχος δ΄: [row hidden by tear/overlap; verify]", tone: 4, status: toc, note: "Πίναξ img 178 right page partly illegible; verify (134 read as 154?). Entries after p.148 not visible: Theos Kyrios/apolytikia etc. lie roughly pp.150-164"}
+  - {page: 165, title: "Ἦχος πλ. α΄: Κεκραγάριον ἀργόν", tone: 5, status: toc}
+  - {page: 167, title: "Ἦχος πλ. α΄: Ἕτερον σύντομον (Π. Πελοπ.)", tone: 5, status: toc}
+  - {page: 172, title: "Ἦχος πλ. α΄: Ἰδιόμελα τοῦ ἑσπερινοῦ καὶ δογματικόν", tone: 5, status: toc}
+  - {page: 179, title: "Ἦχος πλ. α΄: Ἕτερον δογματικὸν καὶ ἀπόστιχα (Θ.Π.Π.Φ.)", tone: 5, status: toc}
+  - {page: 183, title: "Ἦχος πλ. α΄: Δοξαστικὸν τῶν ἀποστίχων (Π. Πελοπ.)", tone: 5, status: toc}
+  - {page: 184, title: "Ἦχος πλ. α΄: Εἰς τὸν ὄρθρον τὸ Θεὸς Κύριος, ἀπολυτίκια καὶ καθίσματα (Π. Π.)", tone: 5, hymn: "oct/t5/sun/apolytikion", status: toc, note: "Θεὸς Κύριος + apolytikia + kathismata + antiphons (Petros Peloponnesios); verify resurrectional apolytikion inside"}
+  - {page: 189, title: "Ἦχος πλ. α΄: Εὐλογητάρια σύντομα (Θ.Π.Π.Φ.)", tone: 5, status: toc, note: "Resurrectional evlogetaria; verify"}
+  - {page: 192, title: "Ἦχος πλ. α΄: Ἀντίφωνα· εἰρμοί· τιμιωτέρα· εἰρμοὶ τῆς Θ΄ ᾠδῆς, Αἶνοι καὶ μακαρισμοί (Π. Π.)", tone: 5, status: toc}
+  - {page: 206, title: "Ἦχος πλ. β΄: Κεκραγάριον ἀργόν", tone: 6, status: toc}
+  - {page: 209, title: "Ἦχος πλ. β΄: Ἕτερον σύντομον (Π. Πελοπ.)", tone: 6, status: toc}
+  - {page: 213, title: "Ἦχος πλ. β΄: Ἰδιόμελα τοῦ ἑσπερινοῦ καὶ δογματικόν (Π. Πελοπ.)", tone: 6, status: toc}
+  - {page: 218, title: "Ἦχος πλ. β΄: Ἕτερον δογματικόν, ἀπόστιχα καὶ Φῶς ἱλαρόν (Θ.Π.Π.Φ.)", tone: 6, status: toc, note: "page digit smudged in Πίναξ (218?); verify"}
+  - {page: 225, title: "Ἦχος πλ. β΄: Δοξαστικὸν τῶν ἀποστίχων (Π. Πελοπ.)", tone: 6, status: toc}
+  - {page: 226, title: "Ἦχος πλ. β΄: Εἰς τὸν ὄρθρον τὸ Θεὸς Κύριος, ἀπολυτίκια, καθίσματα καὶ ἀντίφωνα (Π. Π.)", tone: 6, hymn: "oct/t6/sun/apolytikion", status: toc, note: "Θεὸς Κύριος + apolytikia + kathismata + antiphons (Petros Peloponnesios); verify resurrectional apolytikion inside"}
+  - {page: 232, title: "Ἦχος πλ. β΄: Εἰρμοὶ τοῦ κανόνος, τιμιωτέρα, δύο εἰρμοὶ τῆς Θ΄ ᾠδῆς, Αἶνοι καὶ μακαρισμός (Π. Πελοπ.)", tone: 6, status: toc}
+  - {page: 242, title: "Ἦχος βαρύς: Κεκραγάριον ἀργόν", tone: 7, status: toc}
+  - {page: 245, title: "Ἦχος βαρύς: Ἕτερον σύντομον (Π. Πελοπ.)", tone: 7, status: toc}
+  - {page: 250, title: "Ἦχος βαρύς: Ἰδιόμελα τοῦ ἑσπερινοῦ καὶ δογματικόν (Π. Πελοπ.)", tone: 7, status: toc}
+  - {page: 255, title: "Ἦχος βαρύς: Ἕτερον δογματικὸν διατονικόν (Θ.Π.Π.Φ.)", tone: 7, status: toc}
+  - {page: 256, title: "Ἦχος βαρύς: Ἕτερον ὅμοιον (Γεώργιος Ῥυσσίου)", tone: 7, status: toc}
+  - {page: 258, title: "Ἦχος βαρύς: Ἀπόστιχα (Θ.Π.Π.Φ.)", tone: 7, status: toc}
+  - {page: 260, title: "Ἦχος βαρύς: Δοξαστικὸν τῶν ἀποστίχων (Π. Πελοπ.) καὶ ἕτερον διατονικὸν (Γ. Ῥυσ.)", tone: 7, status: toc}
+  - {page: 261, title: "Ἦχος βαρύς: Εἰς τὸν ὄρθρον τὸ Θεὸς Κύριος, ἀπολυτίκια, καθίσματα, ἀντίφωνα καὶ εἰρμοί", tone: 7, hymn: "oct/t7/sun/apolytikion", status: toc, note: "Θεὸς Κύριος + apolytikia + kathismata + antiphons (Petros Peloponnesios); verify resurrectional apolytikion inside"}
+  - {page: 270, title: "Ἦχος βαρύς: Ἐλέησόν με ὁ Θεός (Θ.Π.Π.Φ.), δύο εἰρμοὶ τῆς Θ΄, τιμιωτέρα καὶ μακαρισμοὶ (Π. Πελοπ.)", tone: 7, status: toc}
+  - {page: 278, title: "Ἦχος βαρύς: Αἶνοι (Θ.Π.Π.Φ.)", tone: 7, status: toc}
+  - {page: 288, title: "Ἦχος πλ. δ΄: Κεκραγάριον ἀργόν", tone: 8, status: toc, note: "tail of Πίναξ torn: rows below p.300 lost"}
+  - {page: 290, title: "Ἦχος πλ. δ΄: Ἕτερον σύντομον (Π. Πελοπ., στίχοι Μ. Πρωτ.)", tone: 8, status: toc}
+  - {page: 295, title: "Ἦχος πλ. δ΄: Ἰδιόμελα τοῦ ἑσπερινοῦ μετὰ τοῦ δογματικοῦ (Π. Πελοπ.)", tone: 8, status: toc}
+  - {page: 300, title: "Ἦχος πλ. δ΄: Ἕτερον δογματικὸν μετὰ τῶν ἀποστίχων (Θ.Π.Π.Φ.)", tone: 8, status: toc}
+  - {page: 330, title: "Ἑωθινὸν Α", hymn: "eothinon/01/doxastikon", status: page, note: "page = running header seen; may start a page earlier; doxastikon confirmed on p.331 (Eothinon 1 text)"}
+  - {page: 331, title: "Ἑωθινὸν Β", hymn: "eothinon/02/doxastikon", status: page, note: "page = running header seen; may start a page earlier; doxastikon confirmed on p.331 (Eothinon 1 text)"}
+  - {page: 333, title: "Ἑωθινὸν Γ", hymn: "eothinon/03/doxastikon", status: page, note: "page = running header seen; may start a page earlier; doxastikon confirmed on p.331 (Eothinon 1 text)"}
+  - {page: 335, title: "Ἑωθινὸν Δ", hymn: "eothinon/04/doxastikon", status: page, note: "page = running header seen; may start a page earlier; doxastikon confirmed on p.331 (Eothinon 1 text)"}
+  - {page: 336, title: "Ἑωθινὸν Ε", hymn: "eothinon/05/doxastikon", status: page, note: "page = running header seen; may start a page earlier; doxastikon confirmed on p.331 (Eothinon 1 text)"}
+  - {page: 338, title: "Ἑωθινὸν ϛ", hymn: "eothinon/06/doxastikon", status: page, note: "page = running header seen; may start a page earlier; doxastikon confirmed on p.331 (Eothinon 1 text)"}
+  - {page: 340, title: "Ἑωθινὸν Ζ", hymn: "eothinon/07/doxastikon", status: page, note: "page = running header seen; may start a page earlier; doxastikon confirmed on p.331 (Eothinon 1 text)"}
+  - {page: 341, title: "Ἑωθινὸν Η", hymn: "eothinon/08/doxastikon", status: page, note: "page = running header seen; may start a page earlier; doxastikon confirmed on p.331 (Eothinon 1 text)"}
+  - {page: 342, title: "Ἑωθινὸν Θ", hymn: "eothinon/09/doxastikon", status: page, note: "page = running header seen; may start a page earlier; doxastikon confirmed on p.331 (Eothinon 1 text)"}
+  - {page: 343, title: "Ἑωθινὸν Ι", hymn: "eothinon/10/doxastikon", status: page, note: "page = running header seen; may start a page earlier; doxastikon confirmed on p.331 (Eothinon 1 text)"}
+  - {page: 345, title: "Ἑωθινὸν ΙΑ", hymn: "eothinon/11/doxastikon", status: page, note: "page = running header seen; may start a page earlier; doxastikon confirmed on p.331 (Eothinon 1 text)"}
+  - {page: 346, title: "Τέλος", status: page}

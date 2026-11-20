@@ -1,0 +1,65 @@
+# Pergamos uoadl:168154 — contents (Πίναξ) transcribed from PDF images 235–236 (end of book). Pages 4-5, 106-107 looked at.
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads).
+# Differs from TA1 (1845): Gregorios Protopsaltes edition (publ. Theodoros Papa Paraschou Phokeus, 1837, 3rd printing), tome 1 = Vespers, Matins, Great Lent, Holy Week, Pascha.
+#   Mostly ARGON/papadic settings (Koukouzelis anoixantaria, Petros argo kekragaria, long polyeleoi). TA1 has the short Konstantinos versions. Only overlap-by-slot items are mapped.
+id: "168154"
+key: PG154
+title: Ταμεῖον Ἀνθολογίας, τόμος α΄ (Γρηγόριος Πρωτοψάλτης; ἔκδ. Θεόδωρος Παπᾶ Παράσχου Φωκεύς)
+year: 1837
+file: "168154 Ταμείον Ανθολογίας περιέχον άπασαν την εκκλησιαστικήν ενιαύσιον ακολουθίαν Εσπερινού, Όρθρ (1837).pdf"
+layout: [{from: 1, div: 2, add: 4}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.4=img6; p.52=30; p.112=60; p.172=90; p.232=120; p.292=150; p.352=180; p.392=200; p.442=225; p.460=234
+toc_images: [235, 236]
+summary: Argon/kalophonic tome (Vespers anoixantaria/kekragaria, Lent, Holy Week, Pascha, polyeleoi, antiphons, pasapnoaria, eothina). Little parish-use; indexed in full from TOC (1 line each). Maps only Evlogetaria and the Eothina. No litany responses, no Liturgy fixed parts (liturgy is in tome 2 = 168156).
+entries:
+  - {page: 1, title: "Ἀνοιξαντάρια", who: Ἰωάννης Κουκουζέλης καὶ λοιποὶ, status: toc, note: papadic}
+  - {page: 24, title: "Μακάριος ἀνήρ", who: Πέτρος Πελοποννήσιος (συνετμήθη Μανουὴλ Πρωτοψάλτης), status: toc}
+  - {page: 32, title: "Μακάριος ἀνήρ, ἕτερον", who: Χουρμούζιος Χαρτοφύλαξ, status: toc}
+  - {page: 42, title: "Μακάριος ἀνήρ, ἕτερον σύντομον", who: Γεώργιος ὁ Κρής, status: toc}
+  - {page: 49, title: "Κεκραγάρια κατ᾿ ἦχον ἀργά", who: Πέτρος Πελοποννήσιος, status: toc, note: papadic}
+  - {page: 81, title: "Κεκραγάρια κατ᾿ ἦχον, ἕτερα", who: Ἰάκωβος Πρωτοψάλτης, status: toc}
+  - {page: 99, title: "Στιχηρὰ εἰς τὸν Ἑσπερινὸν τοῦ Πάσχα", who: Γεώργιος ὁ Κρής, status: toc}
+  - {page: 107, title: "Φῶς ἱλαρόν (Εἰς τὴν Εἴσοδον, μέλος ἀρχαῖον)", status: page, note: "archaic/melismatic; p.106-107 seen"}
+  - {page: 109, title: "Θεοτόκε Παρθένε, ὀκτάηχον", who: Πέτρος Μπερεκέτης, status: toc}
+  - {page: 120, title: "Τὰ Μεγάλα Προκείμενα τῆς Τεσσαρακοστῆς", status: toc}
+  - {page: 121, title: "Εἰς τὸν Ἑσπερινὸν τῶν Κυριακῶν τῆς Τεσσαρακοστῆς, Θεοτόκε Παρθένε καὶ λοιπά", status: toc}
+  - {page: 122, title: "Κοντάκιον τοῦ Μεγάλου Κανόνος, καὶ ἕτερον", who: Γρηγόριος Πρωτοψάλτης, status: toc}
+  - {page: 123, title: "Εἰς τὴν Ἐνάτην Ὠδήν: Ἄσπορε Συλλήψεως", who: Πέτρος Βυζάντιος, status: toc}
+  - {page: 124, title: "Κύριε τῶν Δυνάμεων καὶ ἕτερα δύο", who: Πέτρος Λαμπαδάριος, status: toc}
+  - {page: 125, title: "Πανάγια Θεοτόκε τὸν χρόνον τῆς ζωῆς μου, καὶ ἕτερον σύντομον", status: toc}
+  - {page: 125, title: "Τὴν πᾶσαν ἐλπίδα μου", who: Πέτρος Λαμπαδάριος, status: toc}
+  - {page: 126, title: "Ἰδιόμελα τῆς Τεσσαρακοστῆς", who: Ἰάκωβος Πρωτοψάλτης, status: toc}
+  - {page: 137, title: "Ληστεῖς λογισμοῖς", who: Πέτρος Πελοποννήσιος, status: toc}
+  - {page: 142, title: "Τῆς Ἀκαθίστου: Θεὸς Κύριος ἀργὸν καὶ ἕτερα δύο σύντομα", status: toc}
+  - {page: 145, title: "Τὸ προσταχθὲν μυστικῶς, ἀργόν", status: toc}
+  - {page: 146, title: "Τῇ ὑπερμάχῳ, δίχορον ἀργὸν καὶ ἕτερον σύντομον", status: toc}
+  - {page: 152, title: "Τὴν ὡραιότητα τῆς παρθενίας σου καὶ ἕτερα προσόμοια ἀργά", status: toc}
+  - {page: 155, title: "Ἀκολουθία τῆς Μεγάλης Ἑβδομάδος, Ἀλληλουάριον ἀργὸν κ.τ.λ.", status: toc}
+  - {page: 164, title: "Κύριε ἡ ἐν πολλαῖς ἁμαρτίαις", who: Πέτρος Λαμπαδάριος, status: toc}
+  - {page: 168, title: "Κύριε ἀναβαίνοντός σου ἐν τῷ Σταυρῷ", status: toc}
+  - {page: 170, title: "Ἰδοὺ βάπτεται κάλαμος", status: toc, note: "TOC reads Ἠδὴ/Ἰδὴ; verify"}
+  - {page: 172, title: "Σὲ τὸν ἀναβαλλόμενον", status: toc}
+  - {page: 177, title: "Εἰς τὴν Εἴσοδον τοῦ Ἐπιταφίου, Τὸν ἥλιον κρύψαντα", status: toc}
+  - {page: 183, title: "Ἀκολουθία τοῦ Πάσχα", status: toc}
+  - {page: 185, title: "Ἀναστάσεως ἡμέρα", who: Χρυσάφης ὁ νέος (κράτημα Πέτρος Λαμπαδάριος), status: toc, note: "Pascha Canon ode 1 heirmos; not hymn-id mapped"}
+  - {page: 191, title: "Προκείμενον τοῦ Μεγάλου Σαββάτου καὶ ἕτερα τῆς Διακαινησίμου", status: toc}
+  - {page: 193, title: "Τριαδικὰ τοῦ Ὄρθρου", who: Πέτρος Λαμπαδάριος, status: toc}
+  - {page: 196, title: "Εὐλογητάρια", who: Πέτρος Λαμπαδάριος, status: toc, hymn: lit/matins/evlogetaria, note: "verify; PD2 p.30 Petros set already mapped"}
+  - {page: 199, title: "Πολυέλεος, Λόγον ἀγαθόν", who: Χουρμούζιος Χαρτοφύλαξ, status: toc}
+  - {page: 217, title: "Πολυέλεος, Ἐπὶ τὸν ποταμὸν Βαβυλῶνος", who: Γρηγόριος Πρωτοψάλτης, status: toc}
+  - {page: 231, title: "Πολυέλεος ἕτερος", who: Χουρμούζιος Χαρτοφύλαξ, status: toc}
+  - {page: 243, title: "Πολυέλεος ἕτερος", who: Δανιὴλ Πρωτοψάλτης, status: toc}
+  - {page: 264, title: "Πολυέλεος ἕτερος", who: Ἰάκωβος Πρωτοψάλτης, status: toc}
+  - {page: 271, title: "Πολυέλεος ἕτερος", who: Πέτρος Πελοποννήσιος, status: toc}
+  - {page: 293, title: "Πολυέλεος ἕτερος, Λόγον ἀγαθόν", who: Γεώργιος ὁ Κρής, status: toc}
+  - {page: 317, title: "Πολυέλεος ἕτερος κατὰ τριφωνίαν", who: Γρηγόριος Πρωτοψάλτης, status: toc}
+  - {page: 322, title: "Κράτημα αὐτοῦ", status: toc, note: "TOC: Τὸ δὲ κράτημα αὐτοῦ ζήτει (printed 222 sic for 322)"}
+  - {page: 325, title: "Πολυέλεος ἕτερος", who: Χουρμούζιος Χαρτοφύλαξ, status: toc}
+  - {page: 350, title: "Ἀντίφωνα κατ᾿ ἦχον, ἀργά", who: Μανουὴλ Πρωτοψάλτης, status: toc}
+  - {page: 377, title: "Πασαπνοάρια ἀργὰ πέντε μετὰ τῶν Κρατημάτων", who: διάφοροι, status: toc}
+  - {page: 405, title: "Ἕτερα τοῦ Εὐαγγελίου σύντομα", status: toc}
+  - {page: 405, title: "Ἐλέησόν με ὁ Θεός", status: toc, note: "TOC prints 405 twice; verify actual start (~407)"}
+  - {page: 411, title: "Ἰδιόμελα τρία τῆς Τεσσαρακοστῆς", who: Πέτρος Λαμπαδάριος, status: toc}
+  - {page: 413, title: "Τιμιωτέραι ἀργαί", who: Πέτρος Λαμπαδάριος, status: toc}
+  - {page: 417, title: "Πασαπνοάρια τῶν Αἴνων ἀργά", who: Ἰάκωβος Πρωτοψάλτης, status: toc}
+  - {page: 431, title: "Ἑωθινὰ ἕνδεκα", who: Ἰάκωβος Πρωτοψάλτης (τοῦ αὐτοῦ), status: toc, hymn: "eothinon/NN/doxastikon", nn: "01-11", note: "verify same settings as PD2 p.538-573 (Iakovos)"}

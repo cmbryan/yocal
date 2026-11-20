@@ -6,7 +6,16 @@
 #   oct/t{N}/sun/<kind>        Octoechos, Sunday of tone N             (apolytikion, kontakion)
 #   men/{MM-DD}/<kind>         Menaion, the day's principal hymn        (apolytikion, kontakion, prokeimenon, alleluia, communion)
 #   mov/{P}/<kind>             Triodion/Pentecostarion day, P = days from Pascha (Publican -70 ... All Saints +56)
-#   lit/<...>                  fixed Liturgy hymns (Sunday prokeimenon/alleluia of the tone, Sunday communion hymn)
+#   lit/<...>                  fixed hymns (Sunday prokeimenon/alleluia of the tone, Sunday communion hymn, ...):
+#                                Liturgy  lit/trisagion/{standard,baptized,cross}, lit/entrance/kyrie_soson,
+#                                         lit/gospel/glory_to_thee, lit/ektenia/kyrie (threefold, Augmented Litany),
+#                                         lit/cherubikon/standard, lit/axion_estin, lit/heis_hagios, lit/eidomen
+#                                Vespers  lit/vespers/{psalm103,psalm1,kekragaria,phos_hilaron,theotoke_parthene},
+#                                         lit/vespers/prokeimenon/{weekday,lent_sunday,great_feast}
+#                                Matins   lit/matins/{evlogetaria,doxology,ps50}
+#   <base>/doxastikon<slot>    a feast's Doxastikon by slot: vespers (Lord I have cried), lity, aposticha, praises;
+#                                bare `doxastikon` = all the feast's doxastika (slot not yet located)
+#   oct/t{N}/sun/stichera      Sunday resurrectional stichera at Lord I have cried
 #   hor/<...>                  Horologion (ordinary kontakion of the Theotokos)
 #   named/<named_sunday>/<kind> a named Sunday's own hymn (Forefathers, Sunday before the Nativity, ...)
 #

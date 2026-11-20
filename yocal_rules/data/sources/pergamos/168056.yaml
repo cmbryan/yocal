@@ -1,0 +1,53 @@
+# Pergamos uoadl:168056 — contents (Πίναξ) transcribed from PDF images 218–219. Pages 16-17, 26-27, 154-159 looked at.
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads).
+# Differs from TA1/TA2 (1845): older (1824) Liturgy volume (title says Τόμος δεύτερος; the Πίναξ is headed "τοῦ πρώτου τόμου"). Different composers/settings:
+#   Typika, festal antiphons, Kyrie eleison by tone, 4 cherubika sets (Petros Byz, Chourmouzios, Gregorios, week set), koinonika by Daniel/Petros Byz/year. Not in TA2: Kyrie eleison, Typika, Eisodika, Δεῦτε προσκυνήσωμεν.
+id: "168056"
+key: PG056
+title: Ταμεῖον Ἀνθολογίας, τόμος β΄ (Liturgy; Chourmouzios Chartophylax ed.)
+year: 1824
+file: "168056 Ταμείον Ανθολογίας περιέχον άπασαν την εκκλησιαστικήν ενιαύσιον ακολουθίαν Εσπερινού, Όρθρ (1824).pdf"
+layout: [{from: 1, div: 2, add: 4}, {from: 122, div: 2, add: 5}, {from: 268, div: 2, add: 6}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.2=img5; p.32=20; p.112=60; p.122=66; p.260=135; p.268=140; p.348=180; p.398=205; p.422=217
+# calibration checks: to about p.112 (add jumps between p.112 and p.122)
+# calibration checks: p.122-260
+# calibration checks: p.268-424 (jump between p.260 and p.268)
+toc_images: [218, 219]
+summary: Liturgy-only volume, Chrysanthine, 1824. Parish-usable ordinary (Κύριε ἐλέησον by tone p.26-28, Δεῦτε προσκυνήσωμεν p.16, Trisagion p.17-19, Alleluiarion p.24, Basil p.154) plus long cherubika/koinonika sets (one line per set; tone sections not located) and kalophonic heirmoi. Litany response Κύριε ἐλέησον found (p.26-28 by tone); no Παράσχου/Σοὶ Κύριε/Καὶ τῷ πνεύματί σου seen.
+entries:
+  - {page: 1, title: "Τυπικά", who: Πέτρος Λαμπαδάριος, status: toc}
+  - {page: 8, title: "Ὅμοια (Τυπικά)", who: Χουρμούζιος Χαρτοφύλαξ, status: toc}
+  - {page: 15, title: "Ἀντίφωνα τῶν Δεσποτικῶν ἑορτῶν καὶ Εἰσοδικά", status: toc, note: "festal antiphons/eisodika; verify vs Rules antiphon forms"}
+  - {page: 16, title: "Δεῦτε προσκυνήσωμεν (τοῦ Ἀρχιερέως; ἐν πάσαις ταῖς Κυριακαῖς)", status: page}
+  - {page: 17, title: "Ἡ Θεία Λειτουργία τοῦ Χρυσοστόμου: Ἀμήν; Ἅγιος ὁ Θεός (Τρισάγιον)", status: page}
+  - {page: 18, title: "Τρισάγιον τοῦ Βήματος", status: toc}
+  - {page: 19, title: "Τρισάγιον, Δύναμις", status: toc, note: "verify which Dynamis"}
+  - {page: 24, title: "Ἀλληλουάριον τοῦ Εὐαγγελίου", status: toc, hymn: "lit/sun/t{t}/alleluia", tones: [1,2,3,4,5,6,7,8], note: "verify; generic melody?"}
+  - {page: 26, hymn: "lit/ektenia/kyrie", title: "Κύριε σῶσον τοὺς εὐσεβεῖς, καὶ Κύριε ἐλέησον κατ᾿ ἦχον", status: page, note: "LITANY RESPONSE Κύριε ἐλέησον by tone (several composers: Petros Lamp., Chourmouzios p.27); also Δόξα σοι Κύριε after Gospel p.26"}
+  - {page: 29, title: "Χερουβικὰ τῆς ἑβδομάδος κατ᾿ ἦχον", tones: [1,2,3,4,5,6,7,8], status: toc, note: "papadic-lite set, p.29-43; tone sections not located"}
+  - {page: 44, title: "Ὅμοια τῶν Κυριακῶν (Χερουβικά)", who: Πέτρος ὁ Βυζάντιος, status: toc, note: "p.44-73, set of cherubika by tone; sections not located"}
+  - {page: 74, title: "Ὅμοια (Χερουβικά)", who: Χουρμούζιος Χαρτοφύλαξ, status: toc, note: "p.74-116, by tone; sections not located"}
+  - {page: 117, title: "Ὅμοια (Χερουβικά)", who: Γρηγόριος Πρωτοψάλτης, status: toc, note: "p.117-144, by tone; sections not located"}
+  - {page: 145, title: "Τοῦ δείπνου σου τοῦ μυστικοῦ", who: Ἰάκωβος Πρωτοψάλτης, status: toc}
+  - {page: 147, title: "Σιγησάτω πᾶσα σάρξ", who: Ἰάκωβος Πρωτοψάλτης, status: toc}
+  - {page: 149, title: "Πατέρα Υἱόν", who: Χουρμούζιος Χαρτοφύλαξ, status: toc}
+  - {page: 150, title: "Ἀγαπήσω σε Κύριε", who: Ἰάκωβος Πρωτοψάλτης, status: toc}
+  - {page: 151, title: "Ἄξιον ἐστί, κατ᾿ ἦχον", who: Χουρμούζιος Χαρτοφύλαξ, status: toc, note: "by tone"}
+  - {page: 154, title: "Ἡ Θεία Λειτουργία τοῦ μεγάλου Βασιλείου", status: page, hymn: lit/megalynarion/basil, note: "verify: p.154 Ἅγιος ὁ Θεός (Ἰωάννης Πρωτοψάλτης), melismatic Amen / Σὲ ὑμνοῦμεν p.156-158; Ἐπὶ σοὶ χαίρει not positively read"}
+  - {page: 159, title: "Κοινωνικὰ τῆς ἑβδομάδος", who: Πέτρος Λαμπαδάριος ὁ Πελοποννήσιος, status: page, note: "p.159-169, one per weekday; Monday pl1 Ὁ ποιῶν τοὺς ἀγγέλους at p.159; no hymn id (weekday communion)"}
+  - {page: 170, title: "Ὅμοια τῶν Κυριακῶν κατ᾿ ἦχον (Κοινωνικά)", who: Δανιὴλ Πρωτοψάλτης, status: toc, hymn: lit/communion/sunday, tones: [1,2,3,4,5,6,7,8], note: "p.170-187; Αἰνεῖτε per tone presumably; sections not located; verify"}
+  - {page: 188, title: "Ὅμοια (Κοινωνικά)", who: Πέτρος ὁ Βυζάντιος, status: toc, hymn: lit/communion/sunday, tones: [1,2,3,4,5,6,7,8], note: "p.188-211; verify"}
+  - {page: 212, title: "Κοινωνικὰ τοῦ ἐνιαυτοῦ", status: toc, note: "p.212-285 feasts/commons by tone (papadic-lite); sections not located; likely overlaps TA2 communions; not indexed"}
+  - {page: 286, title: "Μαθήματα Θεοτοκία", status: toc, note: "papadic"}
+  - {page: 308, title: "Ἀκολουθία τῆς Τεσσαρακοστῆς", status: toc}
+  - {page: 321, title: "Ἰδιόμελα", who: Ἰάκωβος Πρωτοψάλτης, status: toc}
+  - {page: 328, title: "Ὅτε οἱ ἔνδοξοι Μαθηταί", status: toc}
+  - {page: 336, title: "Θεὸς Κύριος, τῆς Ἀκαθίστου", status: toc}
+  - {page: 340, title: "Τῇ ὑπερμάχῳ", status: toc}
+  - {page: 345, title: "Ἀλληλούια τοῦ Νυμφίου", status: toc}
+  - {page: 350, title: "Τῆς Μετανοίας ἄνοιξόν μοι", status: toc}
+  - {page: 352, title: "Ἡ Θεία Λειτουργία τῶν Προηγιασμένων", status: toc}
+  - {page: 356, title: "Ἀκολουθία τοῦ Πάσχα", status: toc}
+  - {page: 365, title: "Προκείμενα τῆς ἑβδομάδος τῆς Διακαινησίμου", status: toc, note: "prokeimena; Bright Week only"}
+  - {page: 367, title: "Εἱρμοὶ καλοφωνικοί", status: toc, note: "papadic, p.367-423"}
+  - {page: 424, title: "Τὸν Δεσπότην καὶ Ἀρχιερέα, εἰς τὴν ἀπόλυσιν", status: toc}

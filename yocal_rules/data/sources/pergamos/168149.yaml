@@ -1,0 +1,62 @@
+# Pergamos uoadl:168149 — Δοξαστάριον, Τόμος Α΄ (Sep–Mar Menaion doxastika), Iakovos Protopsaltes / Chourmouzios, 1836.
+# Contents (Πίναξ) transcribed from PDF images 191 (right page)–192 (left page). Scans: FETCHED/ (not in git; CC BY-NC-ND).
+# PDF image = printed // 2 + spread.add (two-page spreads). NOT a duplicate of 168152 (that is Τόμος Β΄, Apr–Aug + Triodion/Pentecostarion).
+id: "168149"
+key: PG149
+title: Δοξαστάριον περιέχον τὰ δοξαστικὰ τῶν δεσποτικῶν καὶ θεομητορικῶν ἑορτῶν τῶν τε ἑορταζομένων ἁγίων τοῦ ὅλου ἐνιαυτοῦ, Τόμος Α΄ (Ἰάκωβος Πρωτοψάλτης, ἐκδ. Χουρμούζιος Χαρτοφύλαξ)
+year: 1836
+file: "168149 Δοξαστάριον περιέχον τα δοξαστικά όλων των δεσποτικών και θεομητορικών εορτών, τών τε εορτ (1836).pdf"
+layout: [{from: 1, div: 2, add: 4}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.2-3 = img 5; p.4-5 = img 6; p.52-53 = img 30; p.112-113 = img 60; p.172-173 = img 90; p.232-233 = img 120; p.292-293 = img 150; p.332-333 = img 170; p.376 = img 192
+toc_images: [191, 192]
+summary: "Doxastika only (the Δόξα/Καὶ νῦν idiomela of Lity/Aposticha/Praises for Sep 1 – Mar 25 Menaion feasts + Sundays before/after Nativity + Royal Hours). Page numbers in the Πίναξ column headed Σελίδες are printed pages. Header of each page gives month (and day numeral on right pages). One id per feast: men/MM-DD/doxastikon covers all the feast's doxastika (verify slot split Lity/Aposticha/Praises on page). No litany responses, no Liturgy fixed parts, no resurrectional apolytikia/prokeimena."
+entries:   # page = printed
+  - {page: 1, date: "09-01", title: "Ἀρχὴ τῆς Ἰνδίκτου, τῆς Θεοτόκου τῶν Μυασινῶν καὶ Συμεὼν τοῦ Στυλίτου", hymn: men/09-01/doxastikon, status: toc}
+  - {page: 5, date: "09-03", title: "Ἀνθίμου ἱερομονάχου", hymn: men/09-03/doxastikon, status: toc, note: "verify: not a Menaion major feast; Sept 3 per TOC numeral Γ'"}
+  - {page: 10, date: "09-08", title: "Τὸ Γεννέσιον τῆς Θεοτόκου", hymn: men/09-08/doxastikon, status: toc}
+  - {page: 18, date: "09-14", title: "Ἡ ὕψωσις τοῦ τιμίου Σταυροῦ", hymn: men/09-14/doxastikon, status: toc}
+  - {page: 27, date: "09-26", title: "Ἰωάννου τοῦ Θεολόγου", hymn: men/09-26/doxastikon, status: toc}
+  - {page: 35, moveable: "Sunday after Oct 11 (Fathers of 7th Council)", title: "Μετὰ τὴν ΙΑ΄ τῇ Κυριακῇ τῆς ἐν Νικαίᾳ Ζ΄ Συνόδου", status: toc}
+  - {page: 39, date: "10-20", title: "Τῆς Ὁσίας Ματρώνης", hymn: men/10-20/doxastikon, status: toc, note: "verify printed date numeral Κ΄ (20)"}
+  - {page: 49, date: "10-23", title: "Ἰακώβου Ἀποστόλου τοῦ Ἀδελφοθέου", hymn: men/10-23/doxastikon, status: toc}
+  - {page: 54, date: "10-26", title: "Δημητρίου τοῦ Μεγαλομάρτυρος", hymn: men/10-26/doxastikon, status: toc}
+  - {page: 65, date: "11-08", title: "Ἡ Σύναξις τῶν Ἀρχαγγέλων Μιχαὴλ καὶ Γαβριήλ, καὶ τῶν λοιπῶν Ἀσωμάτων Δυνάμεων", hymn: men/11-08/doxastikon, status: toc}
+  - {page: 74, date: "11-13", title: "Ἰωάννου τοῦ Χρυσοστόμου", hymn: men/11-13/doxastikon, status: toc}
+  - {page: 80, date: "11-14", title: "Φιλίππου τοῦ Ἀποστόλου", hymn: men/11-14/doxastikon, status: toc}
+  - {page: 85, date: "11-21", title: "Τὰ Εἰσόδια τῆς Θεοτόκου", hymn: men/11-21/doxastikon, status: toc}
+  - {page: 96, date: "11-25", title: "Τῆς Ἁγίας Αἰκατερίνης", hymn: men/11-25/doxastikon, status: toc}
+  - {page: 102, date: "11-30", title: "Ἀνδρέου Ἀποστόλου τοῦ Πρωτοκλήτου", hymn: men/11-30/doxastikon, status: toc}
+  - {page: 108, date: "12-04", title: "Τῆς Ἁγίας Ὁσιομάρτυρος Βαρβάρας", hymn: men/12-04/doxastikon, status: toc}
+  - {page: 111, date: "12-05", title: "Σάββα τοῦ Ἡγιασμένου", hymn: men/12-05/doxastikon, status: toc}
+  - {page: 118, date: "12-06", title: "Τοῦ Ἁγίου Νικολάου Ἐπισκόπου Μύρων τῆς Λυκίας", hymn: men/12-06/doxastikon, status: toc}
+  - {page: 128, date: "12-12", title: "Τοῦ Ἁγίου Σπυρίδωνος", hymn: men/12-12/doxastikon, status: toc}
+  - {page: 135, moveable: "Sunday of the Forefathers", title: "Κυριακὴ τῶν Ἁγίων Προπατόρων", hymn: named/forefathers/doxastikon, status: toc}
+  - {page: 140, moveable: "Sunday before Nativity", title: "Κυριακὴ πρὸ τῆς Χριστοῦ γεννήσεως καὶ τῶν Ἁγ. Πατέρων", hymn: named/before_nativity/doxastikon, status: toc}
+  - {page: 144, date: "12-24", title: "Αἱ Ὧραι τῶν Χριστοῦ Γεννῶν (Ὥρα α΄)", status: toc, note: "Royal Hours; no hymn id"}
+  - {page: 152, date: "12-24", title: "Ὥρα Τρίτη (Χριστοῦ Γεννῶν)", status: toc}
+  - {page: 159, date: "12-24", title: "Ὥρα Ἕκτη (Χριστοῦ Γεννῶν)", status: toc}
+  - {page: 169, date: "12-24", title: "Ὥρα Ἐννάτη (Χριστοῦ Γεννῶν)", status: toc}
+  - {page: 181, date: "12-25", title: "Ἡ κατὰ Σάρκα Γέννησις τοῦ Κυρίου", hymn: men/12-25/doxastikon, status: toc}
+  - {page: 193, date: "12-27", title: "Στεφάνου τοῦ Πρωτομάρτυρος", hymn: men/12-27/doxastikon, status: toc}
+  - {page: 197, moveable: "Sunday after Nativity", title: "Κυριακὴ μετὰ τὴν Χριστοῦ Γέννησιν", hymn: named/after_nativity/doxastikon, status: toc}
+  - {page: 201, date: "01-01", title: "Ἡ Περιτομὴ τοῦ Κυρίου ἡμῶν Ἰησοῦ Χριστοῦ καὶ Βασιλείου τοῦ Μεγάλου", hymn: men/01-01/doxastikon, status: toc}
+  - {page: 207, date: "01-05", title: "Ὧραι τῶν Θεοφανείων (Ὥρα α΄)", status: toc, note: "Royal Hours; no hymn id"}
+  - {page: 212, date: "01-05", title: "Ὥρα Τρίτη (Θεοφανείων)", status: toc}
+  - {page: 221, date: "01-05", title: "Ὥρα Ἕκτη (Θεοφανείων)", status: toc}
+  - {page: 231, date: "01-05", title: "Ὥρα Ἐννάτη (Θεοφανείων)", status: toc}
+  - {page: 242, date: "01-06", title: "Τὰ Ἅγια Θεοφάνεια", hymn: men/01-06/doxastikon, status: toc}
+  - {page: 254, date: "01-06", title: "Ἰδιόμελον τοῦ Μεγάλου Ἁγιασμοῦ", status: toc, note: "Great Blessing of Waters idiomelon; no hymn id"}
+  - {page: 258, date: "01-07", title: "Ἡ Σύναξις τοῦ Τιμίου Προφήτου Προδρόμου", hymn: men/01-07/doxastikon, status: toc}
+  - {page: 266, date: "01-17", title: "Ἀντωνίου τοῦ Μεγάλου", hymn: men/01-17/doxastikon, status: toc}
+  - {page: 272, date: "01-18", title: "Ἀθανασίου καὶ Κυρίλλου", hymn: men/01-18/doxastikon, status: toc}
+  - {page: 277, date: "01-20", title: "Εὐθυμίου τοῦ Μεγάλου", hymn: men/01-20/doxastikon, status: toc}
+  - {page: 282, date: "01-21", title: "Νεοφύτου Μεγαλομάρτυρος", hymn: men/01-21/doxastikon, status: toc}
+  - {page: 295, date: "01-25", title: "Γρηγορίου τοῦ Θεολόγου", hymn: men/01-25/doxastikon, status: toc}
+  - {page: 302, date: "01-27", title: "Ἰωάννου τοῦ Χρυσοστόμου", hymn: men/01-27/doxastikon, status: toc}
+  - {page: 309, date: "01-30", title: "Τῶν τριῶν Ἱεραρχῶν", hymn: men/01-30/doxastikon, status: toc}
+  - {page: 320, date: "02-02", title: "Ἡ Ὑπαπαντὴ τοῦ Κυρίου ἡμῶν Ἰησοῦ Χριστοῦ", hymn: men/02-02/doxastikon, status: toc}
+  - {page: 329, date: "02-10", title: "Χαραλάμπους τοῦ Ἱερομάρτυρος", hymn: men/02-10/doxastikon, status: toc}
+  - {page: 342, date: "02-24", title: "Ἡ Εὕρεσις τῆς Τιμίας Κεφαλῆς τοῦ Προδρόμου", hymn: men/02-24/doxastikon, status: toc}
+  - {page: 346, date: "03-01", title: "Γερασίμου τοῦ ἐν Ἰορδάνῃ", hymn: men/03-01/doxastikon, status: toc}
+  - {page: 358, date: "03-09", title: "Τῶν Ἁγίων 40 Μαρτύρων", hymn: men/03-09/doxastikon, status: toc}
+  - {page: 364, date: "03-25", title: "Ὁ Εὐαγγελισμὸς τῆς Θεοτόκου", hymn: men/03-25/doxastikon, status: toc}

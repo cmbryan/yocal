@@ -1,0 +1,90 @@
+# Pergamos uoadl:168138 — contents (Πίναξ) transcribed from PDF image 151 (pp.298-299) and 152 (p.300); images 152+ = subscribers' list.
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). Two-page spreads. Page numbers in the Πίναξ ("Φύλ.") are printed pages.
+id: "168138"
+key: PG138
+title: "Συλλογὴ ἰδιομέλων καὶ ἀπολυτικίων καὶ ἄλλων τινῶν μελῶν τῶν δεσποτικῶν καὶ θεομητορικῶν ἑορτῶν τοῦ ὅλου ἐνιαυτοῦ, Τριῳδίου καὶ Πεντηκοσταρίου (Χουρμούζιος Χαρτοφύλαξ)"
+year: 1831
+file: "168138 Συλλογή ιδιομέλων και απολυτικίων και άλλων τινών μελών των δεσποτικών και θεομητορικών εο (1831).pdf"
+# image = printed // 2 + 3 for printed <= ~110 (checked p.2-3=img 4, p.8-9=img 7, p.48-49=img 27, p.70-71=img 38);
+# image = printed // 2 + 2 from ~p.116 (checked p.120-121=img 62, p.148-149=img 76, p.184-185=img 94, p.298-299=img 151). One-image drift somewhere p.110-120: verify there.
+layout: [{from: 1, div: 2, add: 3}, {from: 116, div: 2, add: 2}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+toc_images: [151, 152]
+summary: "Heirmologic-style idiomela (Vespers/Matins stichera, doxastika) and some apolytikia of the despotic/theotokion feasts, Triodion, Pentecostarion. Apolytikia are inline (\"Ἀπολύτ.\") within each feast, e.g. Prosatoron/Pre-Nativity Sundays p.48; Nativity Vespers idiomela p.49; Theophany p.71. No litany responses, no Liturgy fixed parts, no resurrectional/octoechos pieces. Feast apolytikion/kontakion pages inside each section NOT located individually."
+entries:   # page = printed (Πίναξ gives start of each feast; date = MM-DD, Julian-calendar feast dates as printed)
+  - {page: 1, date: "09-01", title: "Ἡ Σύναξις τῆς Θεοτόκου καὶ Συμεὼν τοῦ Στυλίτου (Ἀρχὴ τῆς Ἰνδίκτου)", status: toc}
+  - {page: 12, date: "09-08", title: "Τὸ γεννέσιον τῆς Θεοτόκου", hymn: men/09-08/apolytikion, status: toc, note: "verify apolytikion in section"}
+  - {page: 20, date: "09-14", title: "Ἡ ὕψωσις τοῦ τιμίου Σταυροῦ", hymn: men/09-14/apolytikion, status: toc, note: "verify"}
+  - {page: 22, date: "09-26", title: "Ἰωάννου τοῦ Θεολόγου", status: toc}
+  - {page: 23, date: "10-26", title: "Ὀκτωβρίῳ. Τοῦ ἁγίου Δημητρίου", status: toc}
+  - {page: 30, date: "11-08", title: "Νοεμβρίῳ. Τῶν Ἀσωμάτων", status: toc}
+  - {page: 31, date: "11-13", title: "Τοῦ Χρυσοστόμου", status: toc}
+  - {page: 32, date: "11-21", title: "Τῶν Εἰσοδίων", hymn: men/11-21/apolytikion, status: toc, note: "verify"}
+  - {page: 34, date: "11-25", title: "Τῆς ἁγίας Αἰκατερίνης", status: toc}
+  - {page: 36, date: "11-30", title: "Ἀνδρέου τοῦ πρωτοκλήτου", status: toc}
+  - {page: 38, date: "12-04", title: "Δεκεμβρίῳ. Τῆς ἁγίας Βαρβάρας καὶ Ἰωάν. τοῦ Δαμασκηνοῦ", status: toc}
+  - {page: 42, date: "12-05", title: "Σάββα τοῦ ἡγιασμένου", status: toc}
+  - {page: 43, date: "12-06", title: "Τοῦ ἁγίου Νικολάου", status: toc}
+  - {page: 44, date: "12-12", title: "Τοῦ ἁγίου Σπυρίδωνος", status: toc}
+  - {page: 48, moveable: "Sunday of the Forefathers", title: "Τῇ Κυριακῇ τῶν Προπατόρων (ἀπολυτίκιον inline p.48)", status: page}
+  - {page: 48, moveable: "Sunday before Nativity", title: "Τῇ Κυριακῇ πρὸ τῆς Χριστοῦ γεννήσεως (ἀπολυτίκιον inline p.48)", status: page}
+  - {page: 49, date: "12-25", title: "Ἡ γέννησις τοῦ Κυρίου (Ἰδιόμελα τοῦ Ἑσπερινοῦ from p.49)", hymn: men/12-25/apolytikion, status: page, note: "page 49 = Vespers idiomela; apolytikion/kontakion page not located"}
+  - {page: 60, date: "12-26", title: "Ἡ σύναξις τῆς Θεοτόκου", status: toc}
+  - {page: 62, moveable: "Sunday after Nativity", title: "Κυριακὴ μετὰ τὴν Χριστοῦ γέννησιν", status: toc}
+  - {page: 62, date: "12-27", title: "Τοῦ ἁγίου Στεφάνου", status: toc}
+  - {page: 67, date: "01-01", title: "Ἰαννουαρίῳ. Ἡ περιτομὴ τοῦ Κυρίου καὶ Βασιλείου τοῦ μεγάλου", status: toc}
+  - {page: 71, date: "01-06", title: "Τῶν Θεοφανείων (Ἰδιόμελα τοῦ ἑσπερινοῦ p.71; τὰ Ἰορδάνεια p.73)", hymn: men/01-06/apolytikion, status: page, note: "apolytikion page not located; verify"}
+  - {page: 87, date: "01-07", title: "Ἡ σύναξις τοῦ Προδρόμου", status: toc}
+  - {page: 88, date: "01-18", title: "Ἀθανασίου καὶ Κυρίλλου", status: toc}
+  - {page: 94, date: "01-20", title: "Εὐθυμίου τοῦ μεγάλου", status: toc}
+  - {page: 95, date: "01-25", title: "Γρηγορίου τοῦ Θεολόγου", status: toc}
+  - {page: 97, date: "01-30", title: "Τῶν τριῶν Ἱεραρχῶν", status: toc}
+  - {page: 98, date: "02-02", title: "Φεβρουαρίῳ. Ἡ Ὑπαπαντὴ τοῦ Κυρίου", hymn: men/02-02/apolytikion, status: toc, note: "verify"}
+  - {page: 109, date: "02-10", title: "Τοῦ ἁγίου Χαραλάμπους", status: toc}
+  - {page: 113, date: "02-23", title: "Πολυκάρπου ἐπισκόπου Σμύρνης", status: toc}
+  - {page: 119, date: "03-09", title: "Μαρτίῳ. Τῶν ἁγίων τεσσαράκοντα Μαρτύρων", status: toc}
+  - {page: 124, date: "03-25", title: "Τοῦ Εὐαγγελισμοῦ", hymn: men/03-25/apolytikion, status: toc, note: "verify"}
+  - {page: 127, date: "04-23", title: "Ἀπριλλίῳ. Τοῦ ἁγίου Γεωργίου", status: toc}
+  - {page: 128, date: "05-02", title: "Μαΐῳ. Ἀθανασίου τοῦ μεγάλου", status: toc}
+  - {page: 129, date: "05-21", title: "Κωνσταντίνου καὶ Ἑλένης", status: toc}
+  - {page: 130, date: "06-24", title: "Ἰουνίῳ. Τὸ γεννέσιον τοῦ Προδρόμου", hymn: men/06-24/apolytikion, status: toc, note: "verify"}
+  - {page: 141, date: "06-29", title: "Τῶν ἁγίων Ἀποστόλων Πέτρου καὶ Παύλου", status: toc}
+  - {page: 146, date: "06-30", title: "Τῶν δώδεκα Ἀποστόλων", status: toc}
+  - {page: 147, date: "07-01", title: "Ἰουλίῳ. Τῶν ἁγίων Ἀναργύρων", status: toc}
+  - {page: 151, date: "07-02", title: "Ἡ κατάθεσις τῆς τιμίας ἐσθῆτος τῆς Θεοτόκου", status: toc}
+  - {page: 152, date: "07-11", title: "Τῆς ἁγίας Εὐφημίας", status: toc}
+  - {page: 153, date: "07-20", title: "Τοῦ Προφήτου Ἠλιοῦ", status: toc}
+  - {page: 154, date: "07-26", title: "Τῆς ἁγίας Παρασκευῆς", status: toc}
+  - {page: 154, date: "07-27", title: "Τοῦ ἁγίου Παντελεήμονος", status: toc}
+  - {page: 155, date: "08-01", title: "Αὐγούστῳ. Τῶν Μακκαβαίων", status: toc}
+  - {page: 161, date: "08-06", title: "Τῆς Μεταμορφώσεως", hymn: men/08-06/apolytikion, status: toc, note: "verify"}
+  - {page: 172, date: "08-15", title: "Ἡ Κοίμησις τῆς Θεοτόκου", hymn: men/08-15/apolytikion, status: toc, note: "verify"}
+  - {page: 178, date: "08-29", title: "Ἡ ἀποτομὴ τοῦ Προδρόμου", status: toc}
+  # Τριῴδιον
+  - {page: 185, moveable: "Sunday of the Publican and Pharisee", title: "Τῇ Κυριακῇ τοῦ Τελώνου καὶ τοῦ Φαρισαίου", status: toc}
+  - {page: 188, moveable: "Sunday of the Prodigal", title: "Τῇ Κυριακῇ τοῦ Ἀσώτου", status: toc}
+  - {page: 194, moveable: Meatfare, title: "Τῇ Κυριακῇ τῆς Ἀπόκρεω", status: toc}
+  - {page: 204, moveable: Cheesefare, title: "Τῇ Κυριακῇ τῆς Τυροφάγου", status: toc}
+  - {page: 207, moveable: "Wed week 1 of Lent", title: "Τῇ τετάρτῃ τῆς α΄ ἑβδομάδος", status: toc}
+  - {page: 210, moveable: "Friday week 1 (St Theodore)", title: "Τῇ Παρασκευῇ τῆς α΄ ἑβδομάδος τοῦ ἁγίου Θεοδώρου", status: toc}
+  - {page: 218, moveable: "Sunday week 2 Vespers", title: "Τῇ Κυριακῇ τῆς β΄ ἑβδομάδος ἑσπέρας", status: toc}
+  - {page: 218, moveable: "Wed week 2", title: "Τῇ τετάρτῃ τῆς β΄ ἑβδομάδος ἑσπέρας", status: toc}
+  - {page: 219, moveable: "Sunday week 3 Vespers", title: "Τῇ Κυριακῇ τῆς γ΄ ἑβδομάδος ἑσπέρας", status: toc}
+  - {page: 221, moveable: "Wed week 3", title: "Τῇ τετάρτῃ τῆς γ΄ ἑβδομάδος ἑσπέρας", status: toc}
+  - {page: 224, moveable: "Sunday week 4 Vespers", title: "Τῇ Κυριακῇ τῆς δ΄ ἑβδομάδος ἑσπέρας", status: toc}
+  - {page: 225, moveable: "Wed week 4", title: "Τῇ τετάρτῃ τῆς δ΄ ἑβδομάδος ἑσπέρας", status: toc}
+  - {page: 228, moveable: "Sunday week 5 Vespers", title: "Τῇ Κυριακῇ τῆς ε΄ ἑβδομάδος ἑσπέρας", status: toc}
+  - {page: 229, moveable: "Thursday week 5", title: "Τῇ πέμπτῃ τῆς ε΄ ἑβδομάδος ἑσπέρας", status: toc}
+  - {page: 230, moveable: "Sunday week 6 Vespers", title: "Τῇ Κυριακῇ τῆς ε΄ ἑβδομάδος ἑσπέρας (sic)", status: toc, note: "printed ε΄ twice in Πίναξ; verify"}
+  - {page: 231, moveable: "Lazarus Saturday", title: "Τῷ σαββάτῳ τοῦ Λαζάρου", status: toc}
+  - {page: 243, moveable: "Palm Sunday", title: "Τῇ Κυριακῇ τῶν Βαΐων", status: toc}
+  # Πεντηκοστάριον
+  - {page: 252, moveable: "Bright Friday", title: "Τῇ παρασκευῇ τῆς Διακαινησίμου", status: toc}
+  - {page: 253, moveable: Thomas, title: "Τῇ Κυριακῇ τοῦ Θωμᾶ", status: toc}
+  - {page: 261, moveable: Myrrhbearers, title: "Τῇ Κυριακῇ τῶν Μυροφόρων", status: toc}
+  - {page: 264, moveable: Paralytic, title: "Τῇ Κυριακῇ τοῦ Παραλύτου", status: toc}
+  - {page: 266, moveable: Mid-Pentecost, title: "Τῆς Μεσοπεντηκοστῆς", status: toc}
+  - {page: 271, moveable: Samaritan, title: "Τῇ Κυριακῇ τῆς Σαμαρείτιδος", status: toc}
+  - {page: 275, moveable: Blind, title: "Τῇ Κυριακῇ τοῦ Τυφλοῦ", status: toc}
+  - {page: 277, moveable: Ascension, title: "Τῇ πέμπτῃ τῆς Ἀναλήψεως", hymn: mov/39/apolytikion, status: toc, note: "verify"}
+  - {page: 286, moveable: Pentecost, title: "Τῇ Πεντηκοστῇ", status: toc}
+  - {page: 295, moveable: "Monday of the Holy Spirit", title: "Τῇ δευτέρᾳ τοῦ ἁγίου Πνεύματος", status: toc}

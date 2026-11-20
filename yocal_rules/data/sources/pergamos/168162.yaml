@@ -1,0 +1,35 @@
+# Pergamos uoadl:168162 — Konstantinos Protopsaltes, Δοξαστάριον / "Ἀνθολογία Στιχηραρίου" Τόμος Α΄ (whole-year Menaion doxastika, one Δόξα per feast), Constantinople 1841.
+# NO contents list (only a Σφαλμάτων διόρθωσις = errata at img 150). Indexed from running headers (month on left page, month on right page) + inline feast headings, sampled every 3rd image (img 43-148) and every image (img 5-40).
+# So this index is COARSE: month sections + the feast headings actually seen. Feast-level index needs a page-by-page pass. Scans: FETCHED/ (not in git; CC BY-NC-ND).
+id: "168162"
+key: PG162
+title: Δοξαστάριον περιέχον τὰ δοξαστικὰ ὅλων τῶν δεσποτικῶν καὶ θεομητορικῶν ἑορτῶν, τῶν τε ἑορταζομένων ἁγίων τοῦ ὅλου ἐνιαυτοῦ (Ἀνθολογία Στιχηραρίου, Κωνσταντῖνος Πρωτοψάλτης), Τόμος Α΄
+year: 1841
+file: "168162 Δοξαστάριον περιέχον τα Δοξαστικά όλων των Δεσποτικών και Θεομητορικών εορτών των τε εορτα (1841).pdf"
+layout: [{from: 1, div: 2, add: 4}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.2-3 = img 5; p.32 = img 20; p.72 = img 40; p.216 = img 112; p.288-289 = img 148
+toc_images: []
+summary: "No contents list; month headers only. Page ranges below are approximate (+-3 pages at month boundaries, sampled). Sep 1 - Aug 31, ~290 pages, much more concise than the Jakovos 1836 Doxastarion (168149/168152). Several feast headings are cross-references (e.g. 'Ζήτει Ἰουλίου ΙΑ΄' = look under July 11), so not every feast is stored in its own month. No Triodion/Pentecostarion (see 168163). No litany responses, no Liturgy fixed parts, no resurrectional apolytikia/prokeimena."
+entries:   # page = printed (start of section); end = last printed page of section
+  - {page: 2, end: 40, title: "Μὴν Σεπτέμβριος", month: "09", status: page}
+  - {page: 7, date: "09-05", title: "Εἰς τὴν Ε΄ τοῦ Ἁγ. Προφήτου Ζαχαρίου", hymn: men/09-05/doxastikon, status: page}
+  - {page: 16, title: "Εἰς τὸν Στίχον Δόξα (feast not read)", status: page, note: "verify which feast (Sept 8 or 14 region)"}
+  - {page: 31, date: "09-16", title: "Εἰς τὰς Ις΄ τῆς Ἁγίας Εὐφημίας: Ζήτει Ἰουλίου ΙΑ΄", status: page, note: "cross-reference only"}
+  - {page: 35, date: "09-26", title: "Εἰς τὴν Κς΄ ἢ Μετάστασις τοῦ Ἁγίου Ἀποστόλου καὶ Εὐαγγελιστοῦ Ἰωάννου τοῦ Θεολόγου", hymn: men/09-26/doxastikon, status: page}
+  - {page: 37, title: "Εἰς τὴν Λιτήν Δόξα (feast not read)", status: page, note: "verify"}
+  - {page: 41, end: 67, title: "Μὴν Ὀκτώβριος", month: "10", status: page}
+  - {page: 43, title: "Τῆς Λιτῆς τὸ Δόξα: Ζήτει τοῦ Ἰουλίου", status: page, note: "cross-reference only"}
+  - {page: 68, end: 91, title: "Μὴν Νοέμβριος", month: "11", status: page}
+  - {page: 68, date: "11-08", title: "Εἰς τὴν Η΄ ἡ Σύναξις τοῦ Ἀρχιστρατήγου Μιχαὴλ καὶ τῶν λοιπῶν Ἀσωμάτων Δυνάμεων", hymn: men/11-08/doxastikon, status: page}
+  - {page: 92, end: 155, title: "Μὴν Δεκέμβριος", month: "12", status: page, note: "Dec first seen on p.97, Nov last seen p.91; boundary 92-96"}
+  - {page: 156, end: 198, title: "Μὴν Ἰανουάριος", month: "01", status: page, note: "first seen p.157; Dec last seen p.151"}
+  - {page: 199, end: 216, title: "Μὴν Φεβρουάριος", month: "02", status: page, note: "Feb seen p.199-211, Jan seen p.193"}
+  - {page: 217, end: 222, title: "Μὴν Μάρτιος", month: "03", status: page}
+  - {page: 223, end: 228, title: "Μὴν Ἀπρίλιος", month: "04", status: page}
+  - {page: 229, end: 234, title: "Μὴν Μάιος", month: "05", status: page}
+  - {page: 235, end: 252, title: "Μὴν Ἰούνιος", month: "06", status: page}
+  - {page: 253, end: 276, title: "Μὴν Ἰούλιος", month: "07", status: page}
+  - {page: 259, title: "Κυριακὴ τῶν Ἁγίων Πατέρων: Ζήτει κατὰ Ὀκτώβριον", status: page, note: "cross-reference only"}
+  - {page: 265, date: "07-25", title: "Εἰς τὴν ΚΕ΄ Ἡ Κοίμησις τῆς Ἁγίας Ἄννης: Ζήτει Σεπτεμβρίου Θ΄", status: page, note: "cross-reference only"}
+  - {page: 277, end: 293, title: "Μὴν Αὔγουστος", month: "08", status: page}
+  - {page: 289, title: "Εἰς τὴν Λιτήν Δόξα (feast not read)", status: page, note: "verify"}

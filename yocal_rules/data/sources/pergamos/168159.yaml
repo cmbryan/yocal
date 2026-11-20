@@ -1,0 +1,18 @@
+# Pergamos uoadl:168159 — damaged copy; Πίναξ (images 2-3) torn and only partly legible (item halves + page-number column lost): not usable for indexing. Scan stops at ~p.259 (132 images): NO Liturgy part. Indexed from running headers (every image 13-20, 44-50; every 4th otherwise).
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). Two-page spreads.
+id: "168159"
+key: PG159
+title: "Ἀνθολογία πάσης τῆς ἐκκλησιαστικῆς ἐνιαυσίου ἀκολουθίας (τῆς τε Μεγάλης Τεσσαρακοστῆς καὶ τοῦ Πάσχα) — earlier/shorter ed. of the same anthology as 168169 (Μακάριος ἀνήρ Πέτρου Λαμπαδαρίου, συντμηθὲν παρὰ Μανουὴλ Πρωτοψάλτου)"
+year: null
+file: "168159 Ανθολογία πάσης της Εκκλησιαστικής ενιαυσίου Ακολουθίας.pdf"
+# image = printed // 2 + 3 up to ~p.130 (checked p.4-5=img 5, p.20-21=img 13, p.34-35=img 20, p.94-95=img 50, p.126-127=img 66); one-image shift then:
+# image = printed // 2 + 2 from ~p.150 (checked p.156-157=img 80, p.196-197=img 100, p.216-217=img 110). Digits 5/6 at low contrast: verify.
+layout: [{from: 1, div: 2, add: 3}, {from: 150, div: 2, add: 2}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+toc_images: [2, 3]
+summary: "Papadic anthology (Vespers, Lent, Pascha, Matins) in a copy truncated at ~p.259; the printed Πίναξ (see images 2-3, torn) lists up to p.~396+ (Liturgy of Chrysostom ~p.300-305, Cherubika of the Week p.311, other cherubika (Petros Byz., Gregorios Prot., Konstantinos Prot.) 323-336, Presanctified ~389, Basil ~396) but those pages are not in this scan. Use 168169 for the same material. No litany responses, no parish-usable fixed Liturgy parts in the scanned range."
+sections:
+  - {page: 1, title: "Ἀκολουθία τοῦ Ἑσπερινοῦ (Μακάριος ἀνήρ Πέτρου Λαμπαδαρίου συντμηθὲν παρὰ Μανουὴλ Πρωτοψάλτου, Ἦχος α΄ …)", end: 33, status: page}
+  - {page: 34, title: "Ἀκολουθία τῆς Τεσσαρακοστῆς", end: 84, status: page}
+  - {page: 85, title: "Ἀκολουθία τοῦ Πάσχα", end: 90, status: page}
+  - {page: 91, title: "Ἀκολουθία τοῦ Ὄρθρου", end: 259, status: page, note: "scan ends mid-Matins ~p.258-259"}
+entries: []

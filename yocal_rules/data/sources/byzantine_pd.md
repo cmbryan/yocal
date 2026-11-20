@@ -106,3 +106,18 @@ Mapping (to confirm page by page while transcribing):
 
 The Octoechos ids are now covered by AN (pending page checks). Still missing: `lit/sun/t*/prokeimenon` (Liturgy), `eothinon/*/theotokion`, every `men/*` and `mov/*` apolytikion/kontakion/antiphon/eisodikon, `lit/communion/common/apostle`, `lit/communion/sunday` in pl2.
 Candidates: Iakovos *Doxastarion* or a Menaion/Doxastarion in music; Pandekti vols 1, 3, 4.
+
+## Pergamos books (PG*)
+
+38 printed books (1820–51) from the University of Athens Psachos collection, downloaded by `scripts/pergamos_fetch.py --out FETCHED` (not in git; scans CC BY-NC-ND). Each indexed book has `pergamos/<id>.yaml`: contents list (Πίναξ) transcribed, `layout` (printed page → PDF image; most scans are two-page spreads), entries mapped to hymn ids where clear. Indexing brief: `pergamos/BRIEF.md`. Skipped as papadic/secular/theory: 168132, 168140, 168146, 168164, 168165, 168176.
+
+**Lookup across all books (this file + Pergamos):**
+- `python scripts/hymn_sources.py men/12-25/apolytikion` (globs work: `'oct/t3/sun/*'`)
+- `python scripts/hymn_sources.py --grep "Ἄξιον ἐστί"` searches titles/notes incl. unmapped entries
+- `python scripts/hymn_sources.py --write` regenerates `hymn_sources.md`
+
+Most useful for the services: PG183 (Pandekti vol 4, Liturgy), PG170 (Melifonos Terpsinoi, Liturgy fixed parts), PG056/PG156 (Tameion Liturgy volumes), PG138 (feast apolytikia/idiomela), PG059 (complete copy of HE1/HE2; HE1 p.258 Sunday apolytikia by tone), PG160/PG175/PG179 (Anastasimataria), PG149/PG152/PG177 (Doxastaria), PG174 (Preyer, Western 4-part Liturgy). Duplicates: PG181 = PD2, PG166 = TA1, PG168 ≈ TA2.
+
+Open id questions (proposed, not in `hymns.py`): doxastikon slot suffixes (`doxastikonvespers/lity/aposticha/praises`), `named/{forefathers,before_nativity,after_nativity}/doxastikon`, Vespers ids (`ves/*`, PG180), Liturgy fixed parts (`lit/heis_hagios`, `lit/cherubikon/standard`, …, PG174/PG170).
+
+Litany responses: only the threefold Κύριε ἐλέησον of the Augmented Litany after the Gospel, in 8 tones (PG056 p.26, PG156 p.145, PG170 vol.2 p.24, PG183 p.58; mostly Chourmouzios). No rubric on which tone is used. No book has the Great Litany responses (single Κύριε ἐλέησον, Παράσχου Κύριε, Σοὶ Κύριε).

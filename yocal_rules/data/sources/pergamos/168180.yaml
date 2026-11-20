@@ -1,0 +1,68 @@
+# Pergamos uoadl:168180 — contents (Πίναξ) transcribed from PDF images 219-220 (printed pp. 1-412 Vespers).
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads).
+id: "168180"
+key: PG180
+title: Πανδέκτη τῆς ἱερᾶς ἐκκλησιαστικῆς ὑμνῳδίας, τόμος Α΄ — Ἀνθολογία τοῦ Ἑσπερινοῦ (Vespers)
+year: 1850
+file: "168180 Πανδέκτη της Ιεράς Εκκλησιαστικής Υμνωδίας του όλου Ενιαυτού, Τόμος 1 (1850).pdf"
+layout: [{from: 1, div: 2, add: 12}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.76-77 = img 50; 176 = 100; 276 = 150; 376 = 200; 408 = 216; 410 = 217; 412 = 218. Music p.1 = img 12 (Ἀνοιξαντάρια).
+toc_images: [219, 220]
+summary: >
+  Vespers (Ἑσπερινός) anthology by various composers. Parish-usable items are a minority: syntomon Ἀνοιξαντάρια (38), the
+  Κεκραγάρια (113-203, by tone: Ioannes Damaskinos / Balasios / Iakovos), Φῶς ἱλαρόν (212, ancient melos, checked), prokeimena of the week/Lent Sundays/feasts (214-218, checked),
+  Θεοτόκε Παρθένε settings (221, 233, 253), Κύριε ἐλέησον τῆς Ἀρτοκλασίας (253), the three Doxastika of the Hours (254), Lenten idiomela, Κύριε ἡ ἐν πολλαῖς (299-322, Holy Wednesday).
+  Pp.325-412 are Holy Week / Triodion / Presanctified / Akathist material. Many items are kalophonic (Makarios aner 65-112, Kratemata 344-350).
+  Vespers fixed parts use lit/vespers/* ids (adopted 2026-11-17).
+  Litany responses (Κύριε ἐλέησον, Παράσχου Κύριε, Σοὶ Κύριε, Ἀμήν): none listed except Κύριε ἐλέησον τῆς Ἀρτοκλασίας, p.253 (Artoklasia litany, checked on page).
+entries:   # page = printed; who = composer as printed
+  - {page: 1, status: page, title: "Ἀνοιξαντάρια παρὰ διαφόρων Ποιητῶν τὰ μέγιστα", who: "Ἰωάννης Κουκουζέλης et al.", note: "Ps 103; long (papadic)", hymn: lit/vespers/psalm103}
+  - {page: 38, status: toc, title: "Ἀνοιξαντάρια συντετμημένα", who: Χουρμούζιος, note: "short; parish-usable", hymn: lit/vespers/psalm103}
+  - {page: 65, status: toc, title: "Μακάριος ἀνήρ", who: Πέτρος Πελοποννήσιος, note: "papadic", hymn: lit/vespers/psalm1}
+  - {page: 85, status: toc, title: "Μακάριος ἀνήρ", who: Γεώργιος ὁ Κρής, note: papadic}
+  - {page: 91, status: toc, title: "Μακάριος ἀνήρ", who: Μανουὴλ Πρωτοψάλτης, note: papadic}
+  - {page: 102, status: toc, title: "Μακάριος ἀνήρ", who: Χουρμούζιος Χαρτοφύλαξ, note: papadic}
+  - {page: 113, status: toc, title: "Κεκραγάρια κατ' ἦχον", who: "Ἰωάννης ὁ Δαμασκηνός (sic: Δαμασκηνός)", note: "Lord I call, by tone", hymn: lit/vespers/kekragaria}
+  - {page: 149, status: toc, title: "Κεκραγάρια κατ' ἦχον", who: Βαλάσιος Ἱερεύς, hymn: lit/vespers/kekragaria}
+  - {page: 183, status: toc, title: "Κεκραγάρια κατ' ἦχον", who: Ἰάκωβος Πρωτοψάλτης, hymn: lit/vespers/kekragaria}
+  - {page: 204, status: toc, title: "Στιχηρὰ Ἀναστάσιμα", who: "Γεώργιος ὁ Κρής", hymn: "oct/t{t}/sun/stichera", note: "verify"}
+  - {page: 212, status: page, title: "Φῶς ἱλαρόν, μέλος ἀρχαῖον", hymn: lit/vespers/phos_hilaron, note: "tone mark Pl.4? [?]; 'Εἰς τὴν Εἴσοδον' heading on p.212"}
+  - {page: 214, status: page, title: "Προκείμενα τῆς Ἑβδομάδος", hymn: lit/vespers/prokeimenon/weekday, note: "p.214 'τῆς Ἑβδομάδος ἑσπέρας ἦχος [grave?]'; verify weekday order"}
+  - {page: 217, status: page, title: "Προκείμενα τῶν Κυριακῶν τῆς Μ. Τεσσαρακοστῆς", hymn: lit/vespers/prokeimenon/lent_sunday}
+  - {page: 218, status: page, title: "Προκείμενα τῶν Δεσποτικῶν Ἑορτῶν", who: Γρηγόριος Πρωτοψάλτης, hymn: lit/vespers/prokeimenon/great_feast}
+  - {page: 221, status: toc, title: "Θεοτόκε Παρθένε ὀκτάηχον", who: Πέτρος Μπερεκέτης, hymn: lit/vespers/theotoke_parthene}
+  - {page: 233, status: toc, title: "Θεοτόκε Παρθένε ὀκτάηχον συντετμημένον", who: Χουρμούζιος Χαρτοφύλαξ, hymn: lit/vespers/theotoke_parthene, note: "short; parish-usable"}
+  - {page: 240, status: toc, title: "Ῥόδον τὸ ἀμάραντον ὀκτάηχον", who: Χουρμούζιος}
+  - {page: 253, status: page, title: "Κύριε ἐλέησον τῆς Ἀρτοκλασίας καὶ σύντομον Θεοτόκε Παρθένε", note: "litany response (Artoklasia) + short Theotoke Parthene"}
+  - {page: 254, status: toc, title: "Τὰ τρία Δοξαστικὰ τῶν Ὡρῶν"}
+  - {page: 268, status: toc, title: "Ἰδιόμελα τῶν Κυριακῶν τῆς Μ. Τεσσαρακοστῆς", who: "Πέτρος et Ἰάκωβος"}
+  - {page: 299, status: toc, title: "Κύριε ἡ ἐν πολλαῖς ἁμαρτίαις", who: Πέτρος Λαμπαδάριος, note: "Holy Wed. (Kassiani)"}
+  - {page: 306, status: toc, title: "Κύριε ἡ ἐν πολλαῖς ἁμαρτίαις", who: Ἰάκωβος Πρωτοψάλτης}
+  - {page: 311, status: toc, title: "Κύριε ἡ ἐν πολλαῖς ἁμαρτίαις", who: Χουρμούζιος}
+  - {page: 317, status: toc, title: "Κύριε ἀναβαίνοντος σου", who: Πέτρος Λαμπαδάριος}
+  - {page: 320, status: toc, title: "Κύριε ἀναβαίνοντος σου", who: Ἰάκωβος Πρωτοψάλτης}
+  - {page: 322, status: toc, title: "Ἤδη βάπτεται κάλαμος", who: Πέτρος Λαμπαδάριος}
+  - {page: 325, status: toc, title: "Σὲ τὸν ἀναβαλλόμενον", who: Ἰάκωβος Πρωτοψάλτης}
+  - {page: 330, status: toc, title: "Τὸν Ἥλιον κρύψαντα", who: Γερμανὸς Νέων Πατρῶν}
+  - {page: 337, status: toc, title: "Ἀναστάσεως ἡμέρα", who: Χρυσάφης ὁ νέος, note: papadic}
+  - {page: 341, status: toc, title: "Ἀναστάσεως ἡμέρα", who: Ἰάκωβος Πρωτοψάλτης, note: papadic}
+  - {page: 344, status: toc, title: "Κράτημα εἰς τὸ Ἀναστάσεως ἡμέρα", who: Χρυσάφης ὁ νέος, note: papadic}
+  - {page: 350, status: toc, title: "Ἕτερον Κράτημα εἰς τὸ Ἀναστάσεως ἡμέρα", note: papadic}
+  - {page: 355, status: toc, title: "Θεοτόκε Παρθένε, Βαπτιστὰ τοῦ Χριστοῦ κ.τ.λ."}
+  - {page: 356, status: toc, title: "Τὴν ὡραιότητα τῆς παρθενίας σου"}
+  - {page: 357, status: toc, title: "Στίχοι εἰς τὰς ὥρας τῆς Μ. Τεσσαρακοστῆς", who: Γρηγόριος Πρωτοψάλτης}
+  - {page: 360, status: toc, title: "Στίχοι εἰς τὸ μέγα Ἀπόδειπνον", who: Πέτρος Λαμπαδάριος}
+  - {page: 367, status: toc, title: "Κύριε τῶν Δυνάμεων, Παναγία Θεοτόκε καὶ Τὴν πᾶσαν ἐλπίδα μου", note: "Great Compline"}
+  - {page: 371, status: toc, title: "Ψυχή μου ψυχή μου", note: "5 settings by various"}
+  - {page: 374, status: toc, title: "Μάθημα τοῦ Μ. Κανόνος μὲ κράτημα", who: Δανιὴλ Πρωτοψάλτης, note: papadic}
+  - {page: 383, status: toc, title: "Ἀσπόρου συλλήψεως. Πάντων προστατεύεις καὶ Σφαγήν σου τὴν ἄδικον", note: "text read from TOC as 'Ἀστόρου'; Akathist-related [?]"}
+  - {page: 384, status: toc, title: "Τῇ ὑπερμάχῳ, διχορον"}
+  - {page: 389, status: toc, title: "Τῇ ὑπερμάχῳ", who: Πέτρος Βυζάντιος}
+  - {page: 392, status: toc, title: "Τῇ ὑπερμάχῳ, σύντομον"}
+  - {page: 392, status: toc, title: "Τῇ ὑπερμάχῳ, Μάθημα μὲ κράτημα", who: Ἰωάννης ὁ Κλαδᾶς, note: papadic}
+  - {page: 406, status: toc, title: "Κατευθυνθήτω, μέλος ἀρχαῖον", note: Presanctified}
+  - {page: 407, status: toc, title: "Ἕτερον σύντομον"}
+  - {page: 407, status: toc, title: "Νῦν αἱ δυνάμεις", who: Ἰωάννης ὁ Κλαδᾶς, note: Presanctified}
+  - {page: 409, status: toc, title: "Ἕτερον", who: Ἰάκωβος Πρωτοψάλτης}
+  - {page: 410, status: toc, title: "Γεύσασθε", who: Ἰωάννης ὁ Κλαδᾶς, note: Presanctified}
+  - {page: 412, status: toc, title: "Ἕτερον", who: Γεώργιος ὁ Κρής}

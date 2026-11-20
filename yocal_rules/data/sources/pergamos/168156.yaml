@@ -1,0 +1,56 @@
+# Pergamos uoadl:168156 — contents (Πίναξ) transcribed from PDF images 2–3 (front). Pages 144-145 looked at.
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads).
+# Differs from TA1/TA2 (1845): Gregorios Protopsaltes ed. 1837, tome 2 = Matins doxologies + the whole Liturgy (Trisagia, Kyrie eleison, cherubika of 5 composers, koinonika of 4 composers + year set, mathemata, kalophonic heirmoi).
+#   NEW vs TA: 17 doxologies, Κύριε ἐλέησον by tone, Τρισάγιον τοῦ Τιμίου Σταυροῦ, funeral Trisagia, Τὸν Δεσπότην, 4 further cherubika sets.
+id: "168156"
+key: PG156
+title: Ταμεῖον Ἀνθολογίας, τόμος β΄ (Γρηγόριος Πρωτοψάλτης; ἔκδ. Θεόδωρος Παπᾶ Παράσχου Φωκεύς)
+year: 1837
+file: "168156 Ταμείον Ανθολογίας περιέχον άπασαν την εκκλησιαστικήν ενιαύσιον ακολουθίαν Εσπερινού, Όρθρ (1837).pdf"
+layout: [{from: 1, div: 2, add: 3}, {from: 124, div: 2, add: 4}, {from: 498, div: 2, add: 3}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.2=img4; p.34=20; p.74=40; p.114=60; p.124=66; p.140=74; p.152=80; p.472=240; p.488=248; p.498=252; p.514=260; p.555=280
+# calibration checks: to about p.114
+# calibration checks: p.124-488 (jump between p.114 and p.124)
+# calibration checks: p.498-555 (jump back between p.488 and p.498)
+toc_images: [2, 3]
+summary: Matins doxologies + Liturgy tome. Litany response Κύριε ἐλέησον by tone found (p.145-149; also Δόξα σοι Κύριε after Gospel p.144-145); Ἀλληλουάριον p.143. Long cherubika/koinonika sets given as one line per set (tone sections not located). No Παράσχου/Σοὶ Κύριε/Καὶ τῷ πνεύματί σου seen. Maps doxologies, Basil megalynarion (verify) and Sunday koinonika sets.
+entries:
+  - {page: 1, title: "Δοξολογίαι παρὰ διαφόρων ποιητῶν δέκα ἑπτά", status: toc, hymn: lit/matins/doxology, tones: [1,2,3,4,5,6,7,8], note: "p.1-98; title page: Δοξολογίαι μελοποιηθεῖσαι παρὰ Πέτρου Λαμπαδαρίου first (ἦχος pl1 ... Πα); settings of various lengths; verify which are short"}
+  - {page: 99, title: "Τρισάγιον τοῦ Τιμίου Σταυροῦ", status: toc, hymn: lit/trisagion/cross, note: verify}
+  - {page: 104, title: "Ἕτερον Τρισάγιον Νεκρόσιμον", status: toc}
+  - {page: 109, title: "Ἕτερον Νεκρόσιμον: Θρηνῶ καὶ ὀδύρομαι", status: toc}
+  - {page: 114, title: "Ἕτερον Νεκρόσιμον: Ὅταν τίθωνται θρόνοι", status: toc}
+  - {page: 120, title: "Τὸν Δεσπότην καὶ Ἀρχιερέα", status: toc}
+  - {page: 121, title: "Μάθημα Ἄνωθεν οἱ Προφῆται", status: toc, note: papadic}
+  - {page: 129, title: "Ἕτερον Περίζωσαι τὴν ῥομφαίαν σου", status: toc, note: papadic}
+  - {page: 136, title: "Ἡ Θεία καὶ Ἱερὰ Λειτουργία τοῦ Χρυσοστόμου", status: toc}
+  - {page: 143, title: "Ἀλληλουάριον τοῦ Εὐαγγελίου", status: page, hymn: "lit/sun/t{t}/alleluia", tones: [1,2,3,4,5,6,7,8], note: "p.143-144 syntomon (Ἀλληλούια; μετὰ τὸ Εὐαγγέλιον Δόξα σοι Κύριε, Πέτρος Πελοποννήσιος); generic?"}
+  - {page: 145, hymn: "lit/ektenia/kyrie", title: "Κύριε ἐλέησον κατ᾿ ἦχον παρὰ διαφόρων ποιητῶν", status: page, note: "LITANY RESPONSE Κύριε ἐλέησον by tone, p.145-149 (Chourmouzios pl1 at p.145; Εἰς πολλὰ ἔτη Δέσποτα p.145)"}
+  - {page: 150, title: "Χερουβικὰ τῆς Ἑβδομάδος σύντομα κατ᾿ ἦχον", who: Πέτρος Λαμπαδάριος, status: toc, note: "p.150-164, by tone, short (compare TA2 p.89 Petros set); tone sections not located"}
+  - {page: 165, title: "Χερουβικὰ κατ᾿ ἦχον, τὰ μέγιστα", who: Γρηγόριος Πρωτοψάλτης, status: toc, note: "papadic, p.165-222"}
+  - {page: 223, title: "Ἕτερα Χερουβικὰ κατ᾿ ἦχον", who: Πέτρος Βυζάντιος, status: toc, note: "p.223-254; tone sections not located"}
+  - {page: 255, title: "Ἕτερα Χερουβικὰ κατ᾿ ἦχον", who: Κωνσταντῖνος Πρωτοψάλτης, status: toc, note: "p.255-283; probably same as TA2 p.1-88; tone sections not located"}
+  - {page: 284, title: "Ἕτερα Χερουβικὰ κατ᾿ ἦχον", who: Γρηγόριος Πρωτοψάλτης, status: toc, note: "p.284-313; tone sections not located"}
+  - {page: 314, title: "Ἡ Θεία καὶ Ἱερὰ Λειτουργία τῶν Προηγιασμένων", status: toc}
+  - {page: 317, title: "Νῦν αἱ Δυνάμεις", who: Ἰωάννης Πρωτοψάλτης, status: toc}
+  - {page: 318, title: "Νῦν αἱ Δυνάμεις, ἕτερον", who: Ἰάκωβος Πρωτοψάλτης, status: toc}
+  - {page: 319, title: "Νῦν αἱ Δυνάμεις, ἕτερον", who: Θεόδωρος Φωκεύς, status: toc, note: "TOC prints 315 (sic)"}
+  - {page: 320, title: "Γεύσασθε", who: Ἰωάννης Κλαδᾶς, status: toc}
+  - {page: 321, title: "Γεύσασθε, ἕτερον", who: Γεώργιος ὁ Κρής, status: toc}
+  - {page: 322, title: "Τοῦ Δείπνου σου τοῦ μυστικοῦ", who: Γεώργιος ὁ Κρής, status: toc}
+  - {page: 325, title: "Σιγησάτω πᾶσα σάρξ", who: Ἰάκωβος Πρωτοψάλτης, status: toc}
+  - {page: 327, title: "Ἀγαπήσω σε Κύριε", who: Ἰάκωβος Πρωτοψάλτης, status: toc}
+  - {page: 328, title: "Ἡ Θεία καὶ Ἱερὰ Λειτουργία τοῦ Μεγάλου Βασιλείου", status: toc, hymn: lit/megalynarion/basil, note: "verify; Ἄξιον ἐστίν p.333"}
+  - {page: 333, hymn: "lit/axion_estin", title: "Ἄξιον ἐστὶν ὡς ἀληθῶς", who: Γρηγόριος Πρωτοψάλτης καὶ Θεόδωρος Φωκεύς, status: toc, note: "Basil Liturgy: check whether this is Ἄξιον ἐστίν (Mary) or Ἐπὶ σοὶ χαίρει"}
+  - {page: 340, title: "Κοινωνικὰ τῆς Ἑβδομάδος", who: Πέτρος Λαμπαδάριος, status: toc, note: "p.340-350, weekday"}
+  - {page: 351, title: "Κοινωνικὰ κατ᾿ ἦχον τῶν Κυριακῶν", who: Δανιὴλ Πρωτοψάλτης, status: toc, hymn: lit/communion/sunday, tones: [1,2,3,4,5,6,7,8], note: "p.351-368; sections not located"}
+  - {page: 369, title: "Κοινωνικὰ κατ᾿ ἦχον", who: Πέτρος Πρωτοψάλτης ὁ Βυζάντιος, status: toc, hymn: lit/communion/sunday, tones: [1,2,3,4,5,6,7,8], note: "p.369-390; sections not located; verify"}
+  - {page: 391, title: "Κοινωνικὰ κατ᾿ ἦχον", who: Γρηγόριος Πρωτοψάλτης, status: toc, hymn: lit/communion/sunday, tones: [1,2,3,4,5,6,7,8], note: "p.391-417; sections not located; verify"}
+  - {page: 418, title: "Ἕτερον ἀνέκδοτον", who: Πέτρος Λαμπαδάριος, status: toc}
+  - {page: 421, title: "Κοινωνικὰ τοῦ ὅλου Ἐνιαυτοῦ παρὰ διαφόρων ποιητῶν", status: toc, note: "p.421-484, feasts/commons; sections not located; overlap TA2 communions; not indexed"}
+  - {page: 485, title: "Κοινωνικὰ τῶν Ἀσωμάτων Ταξιαρχῶν", status: toc}
+  - {page: 491, title: "Κοινωνικὰ εἰς Μνήμας Ἁγίων, εἰς Μνημόσυνα", status: toc}
+  - {page: 513, title: "Κοινωνικὰ Θεοτοκία, Ποτήρια", status: toc}
+  - {page: 520, title: "Κοινωνικὰ τῶν Ἁγίων Ἀποστόλων", status: toc}
+  - {page: 525, title: "Μαθήματα", status: toc, note: papadic}
+  - {page: 542, title: "Εἱρμοὶ Καλοφωνικοὶ μετὰ τῶν Κρατημάτων", status: toc, note: papadic}

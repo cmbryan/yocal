@@ -1,0 +1,74 @@
+# Pergamos uoadl:168141 — Δοξαστικὰ Τριῳδίου καὶ Πεντηκοσταρίου, μελισθέντα παρὰ Πέτρου Λαμπαδαρίου τοῦ Πελοποννησίου, ἐξηγηθέντα κατὰ τὴν νέαν μέθοδον παρὰ Γρηγορίου Πρωτοψάλτου, Τόμος Β΄ (1835).
+# Contents (Πίναξ) transcribed from PDF images 198-199 (first Πίναξ page has no printed number; second page prints 290 [=390?] and 389). Scans in FETCHED/ (not in git; CC BY-NC-ND).
+# Hymn-id convention used here (no doxastika ids exist yet in hymns.py; letters-only suffix fits hymns.py regexes men/MM-DD/[a-z]+\d*):
+#   men/MM-DD/doxastikon = all doxastika of the feast (slot not yet read); mov/N/doxastikon likewise (N = days from Pascha).
+#   Where a spread was read: doxastikonvespers (Lord-I-call Δόξα [καὶ νῦν], unlabelled first Δόξα of the feast), doxastikonlity (Εἰς τὴν Λιτήν),
+#   doxastikonaposticha (Εἰς τὸν Στίχον), doxastikonpraises (Εἰς τοὺς Αἴνους); `slots:` lists id@printed-page; "-kainyn" = the Καὶ νῦν after that Δόξα.
+#   No slot label inside a feast = only Δόξα(+Καὶ νῦν); `slots` present only when the page was actually read.
+#   moveable ids here: mov/N/doxastikon, N = days from Pascha (Publican -70, Prodigal -63, Meatfare Sunday -56, Cheesefare -49, Lent Sundays -42,-35,-28,-21,-14, Palm -7, Pascha 0, Thomas 7, ..., Pentecost 49, All Saints 56).
+#   Contents list gives weekdays/Sundays only; slots inside a service (Vespers Δόξα, Aposticha, Praises) are not stated in the Πίναξ.
+id: "168141"
+key: PG141
+title: Δοξαστικὰ Τριῳδίου καὶ Πεντηκοσταρίου (Τόμος Β΄)
+year: 1835
+file: "168141 Δοξαστικά Τριωδίου και Πεντηκοσταρίου, μελισθέντα παρά Πέτρου λαμπαδαρίου του Πελοποννησίο (1835).pdf"
+layout: [{from: 1, div: 2, add: 4}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: image = printed // 2 + 4; checked p.4 = img 6 .. p.388 = img 198 every 16 pages (pp.2-3 = img 5)
+toc_images: [198, 199]
+summary: >
+  Doxastika (idiomela/doxastika, Δόξα καὶ νῦν settings) for the Triodion and Pentecostarion Sundays and weekday services, Holy Week (Ἰδιόμελα, Hours, Ἀκολουθία τῶν Παθῶν), Pascha to All Saints; then a Παράρτημα of irmologic antiphons (p.289, Gregory Protopsaltes), irmologic Αἶνοι (p.335, Theodore Phokaeus) and 13 kalophonic heirmoi (p.339, Ogourlou).
+  No litany responses, no Liturgy fixed parts, no resurrectional apolytikia/prokeimena listed in the Πίναξ.
+entries:
+  # Τριῴδιον (Πίναξ p.[unnumbered] / 389; Α΄ΣΗΕ΄ numbering = running counts)
+  - {page: 1, moveable: "-70", title: "Τῇ Κυριακῇ τοῦ Τελώνου καὶ Φαρισαίου", hymn: "mov/-70/doxastikon", status: "toc"}
+  - {page: 4, moveable: "-63", title: "Τῇ Κυριακῇ τοῦ Ἀσώτου", hymn: "mov/-63/doxastikon", status: "toc", note: "Πίναξ misprint/blur '1'; running head p.4-5 = Ἀσώτου"}
+  - {page: 9, moveable: "-57", title: "Τῷ Πρώτῳ Σαββάτῳ τῶν Νηστειῶν τῶν ἀπ᾿ αἰῶνος Κεκοιμημένων", hymn: "mov/-57/doxastikon", status: "toc", note: "= Saturday of the Departed before Meatfare (-57); verify"}
+  - {page: 13, moveable: "-56", title: "Τῇ Κυριακῇ τῆς Ἀποκρέω", hymn: "mov/-56/doxastikon", status: "toc"}
+  - {page: 19, moveable: "-49", title: "Τῇ Κυριακῇ τῆς Τυροφάγου", hymn: "mov/-49/doxastikon", status: "toc"}
+  - {page: 25, moveable: "-46", title: "Τῇ Τετάρτῃ τῆς Α΄ Ἑβδομάδος", hymn: "mov/-46/doxastikon", status: "toc"}
+  - {page: 26, moveable: "-44", title: "Τῇ Παρασκευῇ τῆς Α΄ Ἑβδομάδος", hymn: "mov/-44/doxastikon", status: "toc"}
+  - {page: 27, moveable: "-42", title: "Τῇ Κυριακῇ τῆς Ὀρθοδοξίας", hymn: "mov/-42/doxastikon", status: "toc"}
+  - {page: 34, moveable: "-39", title: "Τῇ Τετάρτῃ τῆς Β΄ Ἑβδομάδος", hymn: "mov/-39/doxastikon", status: "toc"}
+  - {page: 35, moveable: "-37", title: "Τῇ Παρασκευῇ τῆς Β΄ Ἑβδομάδος", hymn: "mov/-37/doxastikon", status: "toc"}
+  - {page: 36, moveable: "-35", title: "Κυριακὴ Β΄ τῶν Νηστειῶν", hymn: "mov/-35/doxastikon", status: "toc"}
+  - {page: 39, moveable: "-32", title: "Τῇ Τετάρτῃ τῆς Γ΄ Ἑβδομάδος", hymn: "mov/-32/doxastikon", status: "toc"}
+  - {page: 40, moveable: "-30", title: "Τῇ Παρασκευῇ τῆς Γ΄ Ἑβδομάδος", hymn: "mov/-30/doxastikon", status: "toc"}
+  - {page: 41, moveable: "-28", title: "Κυριακὴ Γ΄ τῶν Νηστειῶν", hymn: "mov/-28/doxastikon", status: "toc"}
+  - {page: 43, moveable: "-25", title: "Τῇ Τετάρτῃ τῆς Δ΄ Ἑβδομάδος", hymn: "mov/-25/doxastikon", status: "toc"}
+  - {page: 49, moveable: "-23", title: "Τῇ Παρασκευῇ τῆς Δ΄ Ἑβδομάδος", hymn: "mov/-23/doxastikon", status: "toc"}
+  - {page: 50, moveable: "-21", title: "Κυριακὴ Δ΄ τῶν Νηστειῶν", hymn: "mov/-21/doxastikon", status: "toc"}
+  - {page: 54, moveable: "-18", title: "Τῇ Τετάρτῃ τῆς Ε΄ Ἑβδομάδος", hymn: "mov/-18/doxastikon", status: "toc"}
+  - {page: 56, moveable: "-16", title: "Τῇ Παρασκευῇ τῆς Ε΄ Ἑβδομάδος", hymn: "mov/-16/doxastikon", status: "toc"}
+  - {page: 58, moveable: "-15", title: "Τῷ Σαββάτῳ τῆς Ἀκαθίστου", hymn: "mov/-15/doxastikon", status: "toc"}
+  - {page: 60, moveable: "-14", title: "Κυριακὴ Πέμπτη τῶν Νηστειῶν", hymn: "mov/-14/doxastikon", status: "toc"}
+  - {page: 64, moveable: "-11", title: "Τῇ Τετάρτῃ τῆς ς΄ Ἑβδομάδος", hymn: "mov/-11/doxastikon", status: "toc"}
+  - {page: 66, moveable: "-9", title: "Τῇ Παρασκευῇ τῆς ς΄ Ἑβδομάδος", hymn: "mov/-9/doxastikon", status: "toc"}
+  - {page: 70, moveable: "-8", title: "Τῷ Σαββάτῳ τοῦ δικαίου Λαζάρου", hymn: "mov/-8/doxastikon", status: "toc"}
+  - {page: 72, moveable: "-7", title: "Τῇ Κυριακῇ τῶν Βαΐων", hymn: "mov/-7/doxastikon", status: "toc"}
+  - {page: 74, moveable: "-7", title: "Τῇ Κυριακῇ τῶν Βαΐων ἑσπέρας", hymn: "mov/-7/doxastikon", status: "toc", note: "Palm Sunday evening = Vespers of Holy Monday/Bridegroom"}
+  - {page: 81, moveable: "-6", title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Δευτέρᾳ: Ἰδιόμελα", hymn: "mov/-6/doxastikon", status: "toc"}
+  - {page: 91, moveable: "-5", title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Τρίτῃ: Ἰδιόμελα", hymn: "mov/-5/doxastikon", status: "toc"}
+  - {page: 100, moveable: "-4", title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Τετάρτῃ: Ἰδιόμελα", hymn: "mov/-4/doxastikon", status: "toc"}
+  - {page: 114, moveable: "-3", title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Πέμπτῃ: Ἰδιόμελα", hymn: "mov/-3/doxastikon", status: "toc"}
+  - {page: 133, moveable: "-2", title: "Ἡ Ἀκολουθία τῶν ἁγίων Παθῶν", status: "toc", note: "Matins of Great Friday (12 Gospels antiphons); papadic length; not mapped"}
+  - {page: 205, moveable: "-2", title: "Αἱ Ὧραι τῆς Ἁγίας καὶ Μεγάλης Παρασκευῆς: Ὥρα Α΄", status: "toc", note: "Hours: Α΄ 205, Γ΄ 208, ς΄ 212, Θ΄ 218"}
+  - {page: 208, moveable: "-2", title: "Μεγάλη Παρασκευὴ: Ὥρα Γ΄", status: "toc"}
+  - {page: 212, moveable: "-2", title: "Μεγάλη Παρασκευὴ: Ὥρα ς΄", status: "toc"}
+  - {page: 218, moveable: "-2", title: "Μεγάλη Παρασκευὴ: Ὥρα Θ΄", status: "toc"}
+  - {page: 223, moveable: "-2", title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Παρασκευῇ (Ἑσπερινός)", hymn: "mov/-2/doxastikon", status: "toc"}
+  - {page: 233, moveable: "-1", title: "Τῷ Ἁγίῳ καὶ Μεγάλῳ Σαββάτῳ", hymn: "mov/-1/doxastikon", status: "toc"}
+  - {page: 239, moveable: "-1", title: "Τῷ Ἁγίῳ καὶ Μεγάλῳ Σαββάτῳ εἰς τὸν Ἑσπερινόν", hymn: "mov/-1/doxastikon", status: "toc", note: "Holy Saturday Vespers (Liturgy of Basil) / Great Saturday evening"}
+  - {page: 244, moveable: "0", title: "Τῇ Ἁγίᾳ καὶ Μεγάλῃ Κυριακῇ τοῦ Πάσχα", hymn: "mov/0/doxastikon", status: "toc"}
+  - {page: 245, moveable: "7", title: "Τῇ Πρώτῃ Κυριακῇ τοῦ Θωμᾶ", hymn: "mov/7/doxastikon", status: "toc"}
+  - {page: 250, moveable: "14", title: "Τῇ Κυριακῇ τῶν Μυροφόρων", hymn: "mov/14/doxastikon", status: "toc"}
+  - {page: 252, moveable: "21", title: "Τῇ Κυριακῇ τοῦ Παραλύτου", hymn: "mov/21/doxastikon", status: "toc"}
+  - {page: 259, moveable: "24", title: "Τῇ Τετάρτῃ τῆς Μεσοπεντηκοστῆς", hymn: "mov/24/doxastikon", status: "toc"}
+  - {page: 262, moveable: "28", title: "Τῇ Κυριακῇ τῆς Σαμαρείτιδος", hymn: "mov/28/doxastikon", status: "toc"}
+  - {page: 267, moveable: "35", title: "Τῇ Κυριακῇ τοῦ τυφλοῦ", hymn: "mov/35/doxastikon", status: "toc"}
+  - {page: 272, moveable: "39", title: "Τῇ Πέμπτῃ τῆς Ἀναλήψεως", hymn: "mov/39/doxastikon", status: "toc"}
+  - {page: 277, moveable: "49", title: "Τῇ Κυριακῇ τῆς Πεντηκοστῆς", hymn: "mov/49/doxastikon", status: "toc"}
+  - {page: 285, moveable: "56", title: "Τῇ Κυριακῇ τῶν Ἁγίων Πάντων", hymn: "mov/56/doxastikon", status: "toc"}
+  # Παράρτημα τοῦ τόμου (papadic / kalophonic; not mapped)
+  - {page: 289, title: "Ἕτερα Ἀντίφωνα Εἰρμολογικὰ Γρηγορίου Πρωτοψάλτου", status: "toc", note: "irmologic antiphons (could include Liturgy antiphons: verify)"}
+  - {page: 335, title: "Αἶνοι Εἰρμολογικοὶ Θεοδώρου Φωκαέως", status: "toc", note: "papadic/irmologic; Sunday Αἶνοι? verify"}
+  - {page: 339, title: "Εἰρμοὶ Καλοφωνικοὶ ΙΓ΄. Ὀγουρλοῦ", status: "toc", note: "papadic (kalophonic heirmoi)"}

@@ -1,0 +1,40 @@
+# Pergamos uoadl:168173 — NO Πίναξ in this volume; entries sampled from running headers and piece titles (every 3rd spread of imgs 5-77 read at piece-title level).
+# Scans: FETCHED/ (not in git; CC BY-NC-ND). PDF image = printed // 2 + spread.add (two-page spreads).
+id: "168173"
+key: PG173
+title: "Ὕμνοι τῆς Ὀρθοδόξου Ἀνατολικῆς Ἐκκλησίας, Μέρος Β΄ (Gottfried Preyer, 4-voice Western-staff harmonizations; apolytikia/kontakia of the feasts)"
+year: "184x"
+file: "168173 Ύμνοι της Ορθοδόξου Ανατολικής Εκκλησίας, Μέρος β΄.pdf"
+layout: [{from: 1, div: 2, add: 5}]   # PDF image = (printed // div) + add, for printed >= from (and <= to); last match wins
+# calibration checks: checked: p.1 = img 5; p.6-7 = img 8; p.90-91 = img 50; p.144-145 = img 77
+toc_images: []
+summary: "Western staff notation (SATB: Antiphonos/Soprano, Oxyphonos/Alto, Mesophonos/Tenore, Baryphonos/Basso + Pianoforte or Physharmonica), Greek text under the notes; Nº 1-113. Οδηγία (img 4) says: this second part contains the apolytikia of the despotic and theometoric feasts and of commemorated saints, the kontakia of the despotic and theometoric feasts only, the eisodika of the year, the Rite of the Cross, the Great Hagiasmos service; appended funeral apolytikion Μνήσθητι Κύριε, martyr kontakion Ὡς ἀπαρχὴ τῆς φύσεως, apolytikion of St Theodore, and Ὁ Μάρτυς σου. The Οδηγία says the resurrectional apolytikion is sung before the entrance on Sundays but is not included here: NO Octoechos resurrectional apolytikia seen. Menaion order Sept-Aug, then Triodion, then Pentecostarion. No litany responses; no Liturgy fixed parts (those are in 168174). Only the pieces seen at the sampled spreads are listed (about 30 of 113)."
+entries:   # no = piece number (Nº); page = printed
+  - {page: 1, num: 1, title: "Μὴν Σεπτέμβριος, 1. Ἀπολυτίκιον τῆς Ἰνδίκτου: Ὁ πάσης τῆς κτίσεως Δημιουργός", date: "09-01", hymn: "men/09-01/apolytikion", status: page}
+  - {page: 6, num: 3, title: "Σεπτέμβριος: Ἡ Γέννησίς σου Θεοτόκε (apolytikion, Nativity of the Theotokos) [?]", date: "09-08", hymn: "men/09-08/apolytikion", note: "no. and title read from the Part 1 soprano book; verify page here", status: page}
+  - {page: 7, num: 5, title: "14. Ἡ παγκόσμιος Ὕψωσις τοῦ τιμίου καὶ ζωοποιοῦ Σταυροῦ; Ἡ τελετὴ τοῦ Σταυροῦ (Adagio)", date: "09-14", note: "no.5 = Rite of the Cross; apolytikion/kontakion of Elevation are probably nos. 4-6; verify", status: page}
+  - {page: 18, num: 12, title: "26. Ἰωάννου τοῦ Θεολόγου, Ἀπολυτίκιον: Ἀπόστολε Χριστῷ τῷ Θεῷ ἠγαπημένε", date: "09-26", hymn: "men/09-26/apolytikion", status: page}
+  - {page: 25, num: 16, title: "13. Τοῦ ἐν ἁγίοις Πατρὸς ἡμῶν Ἰωάννου τοῦ Χρυσοστόμου, Ἀπολυτίκιον: Ἡ τοῦ στόματός σου καθάπερ πυρσός", date: "11-13", hymn: "men/11-13/apolytikion", status: page}
+  - {page: 36, num: 23, title: "6. Τοῦ ἁγίου Νικολάου, Ἀπολυτίκιον: Κανόνα πίστεως", date: "12-06", hymn: "men/12-06/apolytikion", status: page}
+  - {page: 42, num: 26, title: "Κυριακὴ τῶν Προπατόρων, Ἀπολυτίκιον: Ἐν πίστει τοὺς Προπάτορας ἐδικαίωσας", moveable: "Sunday of the Forefathers", status: page}
+  - {page: 49, num: 31, title: "27. Τοῦ ἁγίου Στεφάνου, Ἀπολυτίκιον: Βασιλέως ... [?]", date: "12-27", hymn: "men/12-27/apolytikion", note: "incipit unclear; verify", status: page}
+  - {page: 54, num: 34, title: "Ἰανουάριος, Ἀπολυτίκιον τῆς Ἑορτῆς: Ὁ θρόνῳ πυρίμορφῳ ... [?]", note: "feast not identified; verify", status: page}
+  - {page: 60, num: 37, title: "Ἰανουάριος, Ἕτερον: Ἀπεστράφη ... Ἰορδάνης [?]", note: "verify", status: page}
+  - {page: 64, num: 41, title: "Ἰανουάριος, Κοντάκιον: Ἐπεφάνης σήμερον τῇ οἰκουμένῃ", date: "01-06", hymn: "men/01-06/kontakion", status: page}
+  - {page: 67, num: 42, title: "Ἀκολουθία τοῦ Μεγάλου Ἁγιασμοῦ (Μετὰ τὴν ὀπισθάμβωνον Εὐχὴν ἄρχεται ὁ χορός)", date: "01-06", note: "Great Blessing of Waters, nos. 42-59 approx.", status: page}
+  - {page: 78, num: 59, title: "Ἰανουάριος: Ἐπεφάνης σήμερον ... (second setting)", date: "01-06", note: "verify role", status: page}
+  - {page: 79, num: 60, title: "Μετὰ τὴν Ἀπόλυσιν: Ἀ-μήν (Adagio)", note: "Amen after the dismissal; not a litany response proper; verify", status: page}
+  - {page: 84, num: 65, title: "25. Γρηγορίου τοῦ Θεολόγου, Ἀπολυτίκιον", date: "01-25", hymn: "men/01-25/apolytikion", note: "incipit not read; verify", status: page}
+  - {page: 85, num: 66, title: "30. Τῶν τριῶν Ἱεραρχῶν, Ἀπολυτίκιον: Ὡς τῶν Ἀποστόλων ὁμότροποι", date: "01-30", hymn: "men/01-30/apolytikion", status: page}
+  - {page: 91, num: 70, title: "10. Τοῦ ἁγίου Χαραλάμπους, Ἀπολυτίκιον: Ὡς σὺ ... [?]", date: "02-10", hymn: "men/02-10/apolytikion", note: "incipit unclear; verify", status: page}
+  - {page: 96, num: 73, title: "Μάρτιος, Εἰσοδικόν: Εὐαγγελίζεσθε ἡμέραν ἐξ ἡμέρας τὸ σωτήριον", date: "03-25", note: "entrance verse; verify feast", status: page}
+  - {page: 97, num: 74, title: "Μάρτιος, Κοντάκιον: Τῇ ὑπερμάχῳ στρατηγῷ τὰ νικητήρια", date: "03-25", note: "Akathist kontakion (Θεοτόκε); verify date assignment, no hymn mapping", status: page}
+  - {page: 108, num: 83, title: "6. Ἡ Μεταμόρφωσις τοῦ Σωτῆρος ἡμῶν Ἰησοῦ Χριστοῦ, Ἀπολυτίκιον: Μετεμορφώθης ἐν τῷ ὄρει Χριστὲ ὁ Θεός", date: "08-06", hymn: "men/08-06/apolytikion", status: page}
+  - {page: 109, num: 84, title: "Αὔγουστος, Εἰσοδικόν: Θαβὼρ καὶ Ἑρμὼν τῷ ὀνόματί σου ἀγαλλιάσονται", date: "08-06", note: "eisodikon", status: page}
+  - {page: 114, num: 85-92, title: "Τριῴδιον: apolytikia/kontakia of the Triodion (start of section about p.110-114)", note: "sampled only; verify individual pieces", status: page}
+  - {page: 121, num: 93, title: "Τριῴδιον, Κοντάκιον: Ἡ πάντων χαρά ... [?]", note: "verify feast", status: page}
+  - {page: 126, num: 98, title: "Πεντηκοστάριον, Κοντάκιον: Εἰ καὶ ἐν τάφῳ κατῆλθες Ἀθάνατε", moveable: "Pascha", hymn: "mov/0/kontakion", status: page}
+  - {page: 132, num: 103, title: "Πεντηκοστάριον, Εἰσοδικόν: Ἀνέβη ὁ Θεὸς ἐν ἀλαλαγμῷ, Κύριος ἐν φωνῇ σάλπιγγος", moveable: "Ascension", note: "entrance verse", status: page}
+  - {page: 133, num: 104, title: "Πεντηκοστάριον, Κοντάκιον: Τὴν ὑπὲρ ἡμῶν πληρώσας οἰκονομίαν", moveable: "Ascension", hymn: "mov/39/kontakion", status: page}
+  - {page: 138, num: 105-112, title: "Πεντηκοστάριον: later pieces (p.139 text Ἡ Ἐκκλησία σου ... Χριστὲ seen)", note: "Pentecost/All Saints items likely; not identified; verify", status: page}
+  - {page: 145, num: 113, title: "Ἀπολυτίκιον Μαρτυρικόν: Ὁ Μάρτυς σου Κύριε ἐν τῇ ἀθλήσει αὐτοῦ", note: "end-of-volume appendix pieces per Οδηγία (funeral Μνήσθητι Κύριε, Ὡς ἀπαρχὴ τῆς φύσεως, Μεγάλα τὰ τῆς πίστεως, Ὁ Μάρτυς σου)", status: page}
