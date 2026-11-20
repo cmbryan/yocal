@@ -106,12 +106,12 @@
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [nativity_theotokos, dormition]}],
    fill: {count: 3, parts: ["Genesis 28:10-17", "Ezekiel 43:27-44:4", "Proverbs 9:1-11"]},
    source: anca, locator: "inferred: Typikon defers the eve readings to the Menaion (Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Circumcision p.165: 'the readings of the feast'; no verse references)", status: inferred,
-   evidence: "ANCA Great Vespers Aug 14, Sep 7 (2026): the three Old Testament readings with these references"}
+   evidence: "ANCA Great Vespers Aug 14, Sep 7 (2026): the three Old Testament readings with these references; same set in the General Menaion (Orloff 1899, public domain, ccel.org) ch. II, Of the Holy Virgin"}
 - {id: mf.ves.readings.elevation, slot: vespers.readings, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [elevation]}],
    fill: {count: 3, parts: ["Exodus 15:22-16:1", "Proverbs 3:11-18", "Isaiah 60:11-16"]},
    source: anca, locator: "inferred: Typikon defers the eve readings to the Menaion (Sep 8 p.65, Sep 14 p.75, Aug 15 p.455, Circumcision p.165: 'the readings of the feast'; no verse references)", status: inferred,
-   evidence: "ANCA Great Vespers Sep 13 (2026): the three Old Testament readings with these references"}
+   evidence: "ANCA Great Vespers Sep 13 (2026): the three Old Testament readings with these references; same set in the General Menaion (Orloff 1899, public domain, ccel.org) ch. III, Of the Cross"}
 - {id: mf.ves.readings.entrance, slot: vespers.readings, tier: -10,
    when: [{pred: feast_on_weekday}, {pred: major_feast_is, args: [entrance]}],
    fill: {count: 3, parts: ["Exodus 40:1-5, 8-9, 14, 28-29", "3 Kingdoms 8:1, 3-7, 9-11", "Ezekiel 43:27-44:4"]},
