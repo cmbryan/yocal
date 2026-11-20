@@ -306,7 +306,31 @@ def hypakoe(f: dict) -> list | None:
     return [Hymn(f"oct/t{int(t)}/sun/hypakoe", f"Hypakoë (Tone {int(t)})", int(t), "hypakoe")] if t else None
 
 
-SLOTS = {"matins.hypakoe": lambda fill, f: hypakoe({**f, "tone": fill.get("tone") or f.get("tone")}), "liturgy.apolytikia": apolytikia, "liturgy.kontakion": kontakion, "liturgy.prokeimenon": prokeimenon,
+# ---- Great Vespers: Lity and Artoklasia (issue #88). Order: DCS skeleton 'lity', Typikon Ch I p.14, ANCA LITART.
+def litia(fill: dict, f: dict) -> list | None:
+    """`litia: true` -> the Lity hymns of the feast (idiomela, then Glory/Now) and the two fixed Artoklasia hymns.
+    Idiomela: `<base>/lity1..N` when hymns.yaml `lity:` gives the feast's count, else `<base>/lity` (all of them, count not
+    yet located). `litia: false` -> [] (no Lity at this Vespers)."""
+    if not fill.get("litia"):
+        return []
+    of = fill.get("of") or day_feast(f)
+    if not of:
+        return None
+    ent = (table().get("lity") or {}).get(of) or {}
+    n = ent.get("idiomela")
+    out = ([Hymn(f"{of}/lity{k}", f"Lity idiomelon {k}", None, "lity") for k in range(1, n + 1)] if n
+           else [Hymn(f"{of}/lity", "Lity idiomela of the feast", None, "lity")])
+    if ent.get("now"):  # Glory and Now are two hymns
+        out += [Hymn(f"{of}/doxastikonlity", "Lity: Glory", None, "doxastikon"), Hymn(f"{of}/doxastikonlitynow", "Lity: Both now", None, "doxastikon")]
+    else:
+        out.append(Hymn(f"{of}/doxastikonlity", "Lity: Glory, Both now", None, "doxastikon"))
+    out.append(Hymn("lit/vespers/theotoke_parthene", "“O Virgin Theotokos, rejoice” (censing of the loaves)", None, "artoklasia"))
+    out.append(Hymn("lit/vespers/artoklasia_ps33", "“Rich men turned poor” (after the blessing of the loaves)", None, "artoklasia",
+                    {"priest": 1, "choir": 2}))  # Typikon Ch I p.14, DCS skeleton lity, ANCA LITART: priest once, choir twice
+    return out
+
+
+SLOTS = {"vespers.litia": litia, "matins.hypakoe": lambda fill, f: hypakoe({**f, "tone": fill.get("tone") or f.get("tone")}), "liturgy.apolytikia": apolytikia, "liturgy.kontakion": kontakion, "liturgy.prokeimenon": prokeimenon,
          "liturgy.antiphons": antiphons, "liturgy.eisodikon": eisodikon, "liturgy.trisagion": trisagion, "liturgy.megalynarion": megalynarion,
          "liturgy.alleluia": alleluia, "liturgy.communion": communion,
          "matins.apolytikia": apolytikia, "matins.prokeimenon": matins_prokeimenon, "matins.kontakion": matins_kontakion,
@@ -367,6 +391,10 @@ def dcs_keys(hid: str) -> list:
             alts.append([f"menaion.verses|psLI.m{mm}.d{dd}.antiphon{n}.v{i}.text" for i in range(1, 9)])
         elif k == "eisodikon":
             alts.append([f"menaion.verses|psLI.m{mm}.d{dd}.entrance.v{i}.text" for i in (1, 2)])
+    m = re.fullmatch(r"men/(\d\d)-(\d\d)/doxastikonlity(now)?", hid)
+    if m:  # Lity Glory/Now of the feast (DCS meVE.LityGlory / LityBoth; a feast with one doxastikon has LityBoth only)
+        mm, dd, now = m.groups()
+        alts += [[f"me.m{mm}.d{dd}|meVE.LityBoth.text"]] if now else [[f"me.m{mm}.d{dd}|meVE.LityGlory.text"], [f"me.m{mm}.d{dd}|meVE.LityBoth.text"]]
     m = re.fullmatch(r"mov/(-?\d+)/([a-z]+)(\d*)", hid)
     if m:
         p, k, num = int(m.group(1)), m.group(2), m.group(3)

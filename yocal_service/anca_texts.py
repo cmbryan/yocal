@@ -20,7 +20,7 @@ KIND = {"APOLYTIKION": "apolytikion", "KONTAKION": "kontakion", "KOINONIKON": "c
 TONES = {w: i for i, w in enumerate("ZERO ONE TWO THREE FOUR FIVE SIX SEVEN EIGHT".split())}
 
 # owner phrase (substring of the heading's "OF/FOR ..." part, normalised) -> id base. First match wins: specific before general.
-MOVABLE = [("GREGORY PALAMAS", -35), ("JOHN CLIMACUS", -21), ("JOHN OF THE LADDER", -21), ("MARY OF EGYPT", -14), ("MID-PENTECOST", 24), ("THOMAS SUNDAY", 7), ("JOSEPH OF ARIMATH", 14), ("MYRRH", 14), ("PARALYTIC", 21), ("SAMARITAN", 28),
+MOVABLE = [("GREGORY PALAMAS", -35), ("JOHN CLIMACUS", -21), ("JOHN OF THE LADDER", -21), ("MARY OF EGYPT", -14), ("MID-PENTECOST", 24), ("THOMAS SUNDAY", 7), ("SUNDAY OF THOMAS", 7), ("ANTI-PASCHA", 7), ("JOSEPH OF ARIMATH", 14), ("MYRRH-BEAR", 14), ("MYRRHBEAR", 14), ("PARALYTIC", 21), ("SAMARITAN", 28),
            ("BLIND", 35), ("ASCENSION", 39), ("FATHERS OF THE FIRST", 42), ("PENTECOST", 49), ("PASCHA", 0), ("PALM SUNDAY", -7),
            ("LAZARUS", -8), ("FORGIVENESS", -49), ("LAST JUDGMENT", -56), ("PRODIGAL", -63), ("PUBLICAN", -70),
            ("FIRST SUNDAY OF GREAT LENT", -42), ("SECOND SUNDAY OF GREAT LENT", -35), ("THIRD SUNDAY OF GREAT LENT", -28),
@@ -38,7 +38,8 @@ FIXED = [("PREPARATION OF CHRIST", "12-20"), ("THEOTOKOS' NATIVITY", "09-07"), (
          ("NATIVITY OF THE THEOTOKOS", "09-08"), ("NATIVITY OF JOHN", "06-24"), ("NATIVITY OF THE FORERUNNER", "06-24"),
          ("NATIVITY OF CHRIST", "12-25"), ("ENTRANCE OF THE THEOTOKOS", "11-21"), ("ENTRANCE OF THE MOST HOLY THEOTOKOS", "11-21"),
          ("CIRCUMCISION", "01-01"), ("THEOPHANY", "01-06"), ("MEETING OF", "02-02"), ("PRESENTATION OF CHRIST", "02-02"),
-         ("PRESENTATION OF OUR LORD", "02-02"), ("ANNUNCIATION", "03-25"), ("TRANSFIGURATION", "08-06"), ("DORMITION", "08-15"),
+         ("PRESENTATION OF OUR LORD", "02-02"), ("ANNUNCIATION", "03-25"), ("TRANSFIGURATION", "08-06"),
+         ("DORMITION OF RIGHTEOUS ANNA", "07-25"), ("DORMITION OF ST ANNA", "07-25"), ("DORMITION OF ANNA", "07-25"), ("DORMITION", "08-15"),
          ("ELEVATION", "09-14"), ("EXALTATION", "09-14"), ("PLACING OF THE ROBE", "07-02"), ("PLACING OF THE SASH", "08-31"),
          ("PLACING OF THE BELT", "08-31"), ("PROPHET ELIAS", "07-20"), ("PROPHET ELIJAH", "07-20"), ("ARCHANGEL", "11-08"),
          ("THREE HIERARCHS", "01-30"), ("SYNAXIS OF JOHN THE BAPTIST", "01-07"), ("SYNAXIS OF THE FORERUNNER", "01-07"),
@@ -191,6 +192,129 @@ TONE_SAME = 0.6  # refrain overlap; below it, shared words ('Lord', 'people', 'b
 def common_communion(text: str):
     """Communion hymn text -> 'lit/communion/common/<class>' when it is one of the saints' commons, else None."""
     return next((f"lit/communion/common/{c}" for rx, c in COMMON_TEXT if re.search(rx, text, re.I)), None)
+
+
+# ------------------------------------------------------------------ Litia and Artoklasia (LITART) files (#88)
+# The file's title names whose Lity it is; its headings name the Lity doxastika and the two Artoklasia hymns. File date = the
+# eve, so the owner is looked up on the next day. Several commemorations in the title -> skipped (whose doxastikon is unclear).
+_LITART_FOOT = re.compile(r"Litia/Artoklasia \d|Copyright|Holy Transfiguration|Pentecostarion, The Octoechos|authorization of Holy|may not be|^Monastery,")
+_LITART_NOT_OWNER = re.compile(r"^(?:(?:Mon|Tues|Wednes|Thurs|Fri|Satur|Sun)day, \w+ \d|\w+ \d\d?$|(?:The )?Service of the Litia|The Litia and Artoklasia of|\(served on)", re.I)
+_LITY_HEAD = re.compile(r"^(?:THE )?(?:FIRST |SECOND )?DOXASTIC(?:ON|A)(?: (?:&|AND) THEOTOKION)? (?:AT|OF) (?:THE )?LITIA PROCESSION\b")
+_GLORY = re.compile(r"^Glory to the Father,? and to the Son,? and to the Holy Spirit[;.,]?\s*(both now and ever,? and unto ages of ages[.,]? Amen\.?)?\s*", re.I)
+_NOW = re.compile(r"^Both now and ever,? and unto ages of ages[.,]? Amen\.?\s*", re.I)
+_ROLE = re.compile(r"^(Clergy|Choir|Priest|Deacon|Reader|People):\s*")
+FIXED_LITART = {"THEOTOKION": "lit/vespers/theotoke_parthene", "TROPARION": "lit/vespers/artoklasia_ps33"}
+
+
+def litart_owner(title: list, facts_fn) -> tuple:
+    """Title lines -> (id base, None) when they name one owner; (None, reason) otherwise."""
+    lines = [_norm(l) for l in title if not _LITART_NOT_OWNER.search(l)]
+    if not lines:
+        return None, "litart: no title"
+    base, why = owner_base(" ".join(lines), facts_fn)
+    each = {b for b, _ in (owner_base(l, facts_fn) for l in lines)}
+    if not base or (len(lines) > 1 and each != {base}):  # every title line must name the same owner
+        return None, f"litart: owner unclear ({why or 'several commemorations'})"
+    return base, None
+
+
+def _paras(lines: list) -> list:
+    out, cur = [], []
+    for l in lines + [""]:
+        if l:
+            cur.append(_ROLE.sub("", l))
+        elif cur:
+            out.append(re.sub(r"\s+", " ", " ".join(cur)).strip())
+            cur = []
+    return out
+
+
+def litart_blocks(txt: str, facts_fn) -> tuple:
+    """LITART text -> ([(hymn id, text, heading, tone)], Counter of skips)."""
+    st, out = Counter(), []
+    raw = [l.replace("\uf0b7", "•").rstrip() for l in txt.split("\n") if not _LITART_FOOT.search(l)]  # \uf0b7: Symbol-font bullet
+    strip = [l.strip() for l in raw]
+    first = next((i for i, t in enumerate(strip) if t.startswith("•") or (t and anca_read._is_heading(re.sub(r"\([^)]*\)", "", t)))), len(strip))
+    base, why = litart_owner([t for t in strip[:first] if t], facts_fn)
+    art = next((i for i, t in enumerate(strip) if t.upper() == "THE ARTOKLASIA"), len(strip))
+    lit = next((i for i, t in enumerate(strip) if t.upper() == "THE LITIA"), art)
+    # Lity doxastika: from the first DOXASTICON/A heading to the end of its section (rubric bullet/paragraph or 'The Litia')
+    head = next((i for i in range(first, lit) if _LITY_HEAD.match(strip[i])), None)
+    if head is None:
+        st["litart: no doxastikon heading" if any("LITIA PROCESSION" in t for t in strip[:lit]) else "litart: no Lity hymns printed"] += 1
+    elif not base:
+        st[why] += 1
+    else:
+        tone = _tone(_norm(strip[head]))
+        lines, sub_tone, tones = [], None, {}
+        i = head
+        while i < lit and not strip[i].startswith(("•", "After the Litia")):
+            t = strip[i]
+            i += 1
+            sub = re.fullmatch(r"For .+? in Tone (\w+)\.?", t, re.I)
+            owner_line = re.fullmatch(r"For .{2,70}", t) and len(raw[i - 1]) - len(raw[i - 1].lstrip()) >= 15  # centred 'For St. Nicholas'
+            other_head = t and anca_read._is_heading(re.sub(r"\([^)]*\)", "", t))  # e.g. 'THEOTOKION IN TONE SIX (BP BASIL)'
+            if sub or _LITY_HEAD.match(t) or owner_line or other_head:  # (sub)headings: whose hymn, which tone
+                sub_tone = (TONES.get(sub.group(1).upper()) if sub else _tone(_norm(t)) if _LITY_HEAD.match(t) else None) or sub_tone
+                lines.append("")
+                continue
+            if _GLORY.match(t) or _NOW.match(t):  # a doxology starts a part
+                lines.append("")
+                tones["now" if _NOW.match(t) else ""] = sub_tone or tone
+            lines.append(t)
+        parts, cur = {"": [], "now": []}, ""
+        for para in _paras(lines):
+            if _NOW.match(para):
+                cur = "now"
+            elif _GLORY.match(para):
+                cur = ""
+            para = _NOW.sub("", _GLORY.sub("", para)).strip()
+            if para:
+                parts[cur].append(para)
+        for suffix, part in parts.items():
+            if part:
+                out.append((f"{base}/doxastikonlity{suffix}", "\n\n".join(part), strip[head], tones.get(suffix, tone)))
+    # Artoklasia: 'THEOTOKION IN TONE N' and 'TROPARION IN TONE N' after 'The Artoklasia' (fixed hymns)
+    i = art
+    while i < len(strip):
+        t = re.sub(r"\s*\([^)]*\)", "", strip[i])
+        m = re.fullmatch(r"(THEOTOKION|TROPARION) IN TONE (\w+)", t)
+        if m:
+            body, j = [], i + 1
+            while j < len(strip) and not strip[j].startswith(("•", "Deacon:", "Great Vespers", "The following")) and not anca_read._is_heading(strip[j]):
+                body.append(strip[j])
+                j += 1
+            text = " ".join(_paras(body))
+            if text:
+                out.append((FIXED_LITART[m.group(1)], text, strip[i], TONES.get(m.group(2))))
+            i = j
+            continue
+        if anca_read._is_heading(t) and t.startswith(("THEOTOKION", "TROPARION")):
+            st[f"litart: artoklasia heading not fixed ({t[:40]})"] += 1
+        if t == "THE GREAT DISMISSAL":
+            break
+        i += 1
+    return out, st
+
+
+def ingest_litart(tx, put, cache: str, facts_for) -> Counter:
+    """Every cached LITART file -> tx (source 'anca'): the feast's Lity doxastika and the Artoklasia hymns, keyed by heading."""
+    st = Counter()
+    for fn in sorted(glob.glob(os.path.join(cache, "anca-*-LITART.txt"))):
+        txt = open(fn, encoding="utf-8").read()
+        m = re.search(r"anca-(\d{4}-\d\d-\d\d)-LITART", fn)
+        if not txt or not m:
+            continue
+        day = m.group(1)
+        st["litart files"] += 1
+        cache_f = {}
+        facts_fn = lambda: cache_f.setdefault("f", facts_for(dt.date.fromisoformat(day) + dt.timedelta(days=1)))  # the eve's file: the next day's Lity
+        blocks, skips = litart_blocks(txt, facts_fn)
+        st.update(skips)
+        for hid, text, heading, tone in blocks:
+            put(tx, "anca", hid, text, f"ANCA Litia and Artoklasia {day}", day, label=re.sub(r"\s+", " ", heading), tone=tone)
+            st["litart stored"] += 1
+    return st
 
 
 def ingest(tx, put, cache: str, facts_for) -> Counter:
