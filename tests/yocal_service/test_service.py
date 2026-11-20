@@ -84,7 +84,8 @@ def test_api_adjacent_dates_per_service(tmp_path, monkeypatch):
     assert c.get("/api/adjacent?service=nope").status_code == 400
     d = c.get("/api/service?date=2026-11-16&service=liturgy").get_json()
     assert d["nearest_date"] == "2026-11-21"
-    v = c.get("/api/service?date=2026-11-14&service=vespers&offline=1").get_json()  # no booklet template yet: engine only
+    monkeypatch.setattr(template, "available", lambda service: False)  # no booklet template extracted on this machine: engine only
+    v = c.get("/api/service?date=2026-11-14&service=vespers&offline=1").get_json()
     assert v["sections"] == [] and v["engine"] and "not built yet" in v["notes"][0]
 
 
@@ -284,7 +285,7 @@ def test_rule_slots_do_not_depend_on_anca_or_dcs(tmp_path, monkeypatch, date):
                    for b in s["blocks"] if b["t"] == "variable" and (b["slot"] in c.RESOLVERS or b["slot"].endswith("_festal"))}
     with_pages = run()
 
-    def blank(self, date, offline):
+    def blank(self, date, offline, page="li"):
         self.date, self.anca, self.dcs, self.dcs2 = date, [], [], []
     monkeypatch.setattr(c.Day, "__init__", blank)
     assert run() == with_pages

@@ -13,17 +13,19 @@ from . import anca_read, db, music, template, texts
 from yocal_rules import anca as rules_anca, assemble, calfacts, hymns, render
 
 SERVICES = {"vespers": "Great Vespers", "matins": "Matins", "liturgy": "Divine Liturgy", "agape": "Agape Vespers"}
+DCS_PAGE = {"vespers": "ve"}  # DCS service page read for music (and dcs_text); default the Liturgy page "li"
+ANCA_KIND = {"vespers": "VESP"}  # ANCA document whose links are music candidates; default "READ"
 
 
 # ------------------------------------------------------------------ day texts
 class Day:
     """Texts for the date from ANCA (Liturgy Variables) and the DCS; every lookup says where it came from."""
 
-    def __init__(self, date: dt.date, offline: bool):
+    def __init__(self, date: dt.date, offline: bool, page: str = "li"):
         self.date = date
         txt = rules_anca.fetch(date, "READ", music.CACHE, offline)
         self.anca = anca_read.parse(txt) if txt else []
-        self.dcs = music.dcs_rows(date, offline)
+        self.dcs = music.dcs_rows(date, offline, page)
         self.dcs2 = music.dcs_rows(date, offline, "li2")  # readings half: prokeimenon / Alleluia verses (a Menaion proper when the day has one)
 
     def dtexts(self, topic_rx: str, field_rx: str) -> list:
@@ -254,8 +256,18 @@ MATINS_RESOLVERS = {
     "matins.hypakoe": v_matins_hypakoe, "matins.doxology": v_matins_doxology, "matins.ps50": v_matins_ps50,
 }
 
+
+def _rules_slot(slot: str):
+    return lambda d, f, ctx, **k: slot_paras(ctx, slot)
+
+
+# Vespers slots (vespers_sections.yaml): each is the Rules slot of the same name; hymns from the store by id, a gap until the Rule names
+# hymns. vespers.kathisma has no Rule yet (shown as a gap).
+VESPERS_RESOLVERS = {s: _rules_slot(s) for s in ("vespers.kathisma", "vespers.lihc.stichera", "vespers.prokeimenon", "vespers.readings",
+                                                 "vespers.litia", "vespers.aposticha", "vespers.apolytikia")}
+
 RESOLVERS = {
-    **MATINS_RESOLVERS, "res_apolytikion": v_res_apolytikion, "apolytikia": v_apolytikia, "kontakion": v_kontakion, "prokeimenon": v_prokeimenon,
+    **MATINS_RESOLVERS, **VESPERS_RESOLVERS, "res_apolytikion": v_res_apolytikion, "apolytikia": v_apolytikia, "kontakion": v_kontakion, "prokeimenon": v_prokeimenon,
     "epistle_intro": v_epistle_intro, "epistle": v_epistle, "alleluia": v_alleluia, "gospel_intro": v_gospel_intro, "gospel": v_gospel,
     "communion_hymn": v_communion_hymn, "dismissal": v_dismissal,
 }
@@ -264,12 +276,12 @@ ENGINE_SLOT = {"res_apolytikion": "liturgy.apolytikia", "apolytikia": "liturgy.a
                "prokeimenon": "liturgy.prokeimenon", "epistle_intro": "liturgy.epistle", "epistle": "liturgy.epistle",
                "alleluia": "liturgy.alleluia", "gospel_intro": "liturgy.gospel", "gospel": "liturgy.gospel",
                "dismissal": "liturgy.dismissal", "communion_hymn": "liturgy.communion",
-               **{k: k for k in MATINS_RESOLVERS}, "matins.katavasia9": "matins.katavasia"}
+               **{k: k for k in MATINS_RESOLVERS}, "matins.katavasia9": "matins.katavasia", **{k: k for k in VESPERS_RESOLVERS}}
 
 
 # ------------------------------------------------------------------ music
 def attach_music(con, date, day: Day, sec_cfg: list, service: str, fetch: bool) -> list:
-    anc = music.anca_candidates(date, offline=not fetch) if fetch else music.anca_candidates(date, offline=True)
+    anc = music.anca_candidates(date, (ANCA_KIND.get(service, "READ"),), offline=not fetch)
     dcs = music.dcs_candidates(day.dcs)
     items = []
     for cfg in sec_cfg:
@@ -422,11 +434,11 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
     if service not in SERVICES:
         raise ValueError(f"service {service!r} not supported yet; available: {', '.join(SERVICES)}")
     result = assemble.build(service, date, calfacts.DEFAULT_DB)  # raises OutOfScope for dates this service is not served
-    built = service in template.TEMPLATES  # services with a booklet text template; the others show the engine only
+    built = template.available(service)  # services with an extracted booklet text template; the others show the engine only
     tpl = template.load(service) if built else {"sections": [], "source": ""}
     f = result.facts
     engine = {s: {"label": m["label"], "status": x.status, "lines": render.describe(s, x, f), "fill": x.fill, "rule": (x.rule or {}).get("id")} for s, m, x in result.slots}
-    day = Day(date, offline)
+    day = Day(date, offline, DCS_PAGE.get(service, "li"))
     con = db.connect(db_path)
     ctx = dict(f)
     seasonal, pending = [], []
@@ -438,7 +450,7 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
     captions = {s: [c.lstrip("- ").strip() for c in e["lines"]] for s, e in engine.items()}
     sections = []
     for sec in tpl["sections"]:
-        if sec.get("exclude"):
+        if sec.get("exclude") or (sec.get("when_slot") and sec["when_slot"] not in res):  # feast-only part the Rules do not appoint today
             continue
         blocks = []
         for b in sec["blocks"]:
@@ -454,6 +466,8 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
             fn = RESOLVERS.get(b["slot"])
             paras = fn(day, f, ctx=hctx, engine=engine, template_text=b.get("template", "")) if fn else []
             cap = [c.lstrip("- ").strip() for c in engine.get(ENGINE_SLOT.get(b["slot"], ""), {}).get("lines", [])]
+            if not cap and not paras:
+                cap = ["No Rule decides this part yet."]
             blocks.append({"t": "variable", "slot": b["slot"], "caption": cap, "paragraphs": paras, "missing": not paras})
         blocks = festal_hymns(hctx, sec["id"], blocks, hymn_cfgs, captions)
         if sec.get("dcs_text") and sum(b["t"] == "line" for b in blocks) < 3:

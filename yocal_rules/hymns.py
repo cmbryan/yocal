@@ -310,7 +310,8 @@ SLOTS = {"matins.hypakoe": lambda fill, f: hypakoe({**f, "tone": fill.get("tone"
          "liturgy.antiphons": antiphons, "liturgy.eisodikon": eisodikon, "liturgy.trisagion": trisagion, "liturgy.megalynarion": megalynarion,
          "liturgy.alleluia": alleluia, "liturgy.communion": communion,
          "matins.apolytikia": apolytikia, "matins.prokeimenon": matins_prokeimenon, "matins.kontakion": matins_kontakion,
-         "matins.praises": matins_praises, "matins.canon": matins_canon}
+         "matins.praises": matins_praises, "matins.canon": matins_canon,
+         "vespers.apolytikia": apolytikia}
 
 
 def for_slot(slot: str, res, f: dict) -> list | None:
