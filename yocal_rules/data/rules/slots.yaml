@@ -23,6 +23,7 @@ liturgy.dismissal_phrase: {service: liturgy, label: "Dismissal: characteristic p
 vespers.readings:      {service: vespers, label: "Old Testament readings", attrs: [count], only: major_feast_slots, after: vespers.prokeimenon}
 vespers.litia:         {service: vespers, label: "Litia and Artoklasia", attrs: [litia], only: major_feast_slots, after: vespers.readings}
 vespers.aposticha:     {service: vespers, label: "Aposticha", attrs: [owner], only: major_feast_slots, after: vespers.litia}
+matins.megalynarion:   {service: matins, label: "Ode 9: “More honorable” or the feast's 9th ode", attrs: [kind, of], after: matins.kontakion}
 matins.katavasia:      {service: matins, label: "Katavasia", attrs: [of], only: katavasia_slot, after: matins.kontakion}
 liturgy.antiphons:     {service: liturgy, label: "Antiphons", attrs: [kind, of, refrain2, refrain3], after: "^"}
 liturgy.eisodikon:     {service: liturgy, label: "Entrance hymn (eisodikon)", attrs: [kind, of, ending], after: liturgy.antiphons}

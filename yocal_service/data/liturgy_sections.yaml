@@ -111,6 +111,7 @@ sections:
   - id: fervent
     start: '^Litany of Fervent Supplication$'
     title: Litany of Fervent Supplication
+    cues: ['\.\.\.\)?$', '^Catechumens, pray to the Lord\.$', '^(8\s+)?A\s+men\.$', '^Lord,\s+have\s+mer\s+cy']   # the booklet's cue captions over the music
     music: [{key: litany_responses, title: 'Litany responses (Lord, have mercy / To you, O Lord)', dcs: '^liturgicmode'}]
   - id: cherubic
     start: '^Cherubic Hymn$'
@@ -131,12 +132,14 @@ sections:
     start: '^The Communion of the Clergy$'
     title: Communion Hymn (Koinonikon)
     replace: communion_hymn
+    lead_rubric: 'When the candle has been placed before the Royal Doors, the koinonikon appointed for the day is sung. On a Sunday it is normally:'
     music: [{key: communion_hymn, title: 'Communion hymn (Sunday)', dcs: '^communionhymnsunday'}]
   - {id: pre_communion, start: '^The Pre-Communion Prayers$', title: The Pre-Communion Prayers}
   - {id: communion_faithful, start: '^Communion of The Faithful$', title: Communion of the Faithful}
   - id: post_communion
     start: '^The Post-Communion Hymn$'
     title: The Post-Communion Hymn
+    skip: ['^See Music and Choir Cues']   # pointer to the choir cues, which this service replaces
     music: [{key: true_light, title: 'We have seen the true light', dcs: '^wehaveseenthetruelight'}]
   - {id: thanksgiving_litany, start: '^The Litany of Thanksgiving$', title: The Litany of Thanksgiving}
   - id: ambo

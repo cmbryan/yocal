@@ -1,0 +1,22 @@
+# Sunday Matins Ode 9 (Typikon Ch I s5 XIII, “My Soul doth magnify the Lord… More honorable…”, p.29-30).
+# Default: the Magnificat with “More honorable” between its verses, in the tone of the katavasia. Exceptions: the 9th ode of the feast with its
+# megalynaria (same text as the Liturgy megalynarion, hymn id <feast>/megalynarion; a gap until saved).
+- {id: mat.megalynarion.default, slot: matins.megalynarion, tier: 4, when: [{pred: sunday}], fill: {kind: more_honorable},
+   source: typikon, locator: "Ch I s5 XIII p.29 (“More honorable” at the 9th ode throughout the year)", status: explicit}
+# Great feasts of the Lord and the Mother of God, whatever day they fall on (the Sunday gate is not needed: feast-day Matins too)
+- {id: mat.megalynarion.great_feast, slot: matins.megalynarion, tier: 1, when: [{pred: major_feast_class_is, args: [lord, theotokos]}],
+   fill: {kind: feast_ode9}, source: typikon, locator: "Ch I s5 XIII p.29 (exception: great feasts of the Lord and the Mother of God whatever day it falls on)", status: explicit}
+# Pentecostarion Sundays until the Ascension
+- {id: mat.megalynarion.pentecostarion, slot: matins.megalynarion, tier: 1, when: [{pred: sunday}, {pred: pascha_days_between, args: [7, 35]}],
+   fill: {kind: feast_ode9, of: mov/0}, source: typikon, locator: "Ch I s5 XIII p.29 (exception: Sundays of the Pentecostarion until the Ascension: the 9th ode of the feast with its megalynaria)", status: explicit}
+# Leavetakings falling on a Sunday
+- {id: mat.megalynarion.leavetaking_lord, slot: matins.megalynarion, tier: 2,
+   when: [{pred: sunday}, {pred: feast_period_in, args: ["leavetaking:nativity", "leavetaking:theophany", "leavetaking:presentation"]}],
+   fill: {kind: feast_ode9}, source: typikon, locator: "Ch I s5 XIII p.29-30 (leavetaking of a feast of the Lord, except the Transfiguration and the Elevation: the 9th ode in place of “More honorable”, even on a Sunday)",
+   status: inferred, evidence: "Typikon sentence is ambiguous about which leavetakings the 'except for the Transfiguration and the Elevation' excludes; read as excluding them from the 9th-ode rule (they keep “More honorable”)"}
+- {id: mat.megalynarion.leavetaking_theotokos, slot: matins.megalynarion, tier: 2,
+   when: [{pred: sunday}, {pred: feast_period_in, args: ["leavetaking:nativity_theotokos", "leavetaking:dormition"]}],
+   fill: {kind: more_honorable_then_ode9}, source: typikon, locator: "Ch I s5 XIII p.30 (leavetaking of a feast of the Theotokos on a Sunday: first “More honorable”, then the 9th ode with its megalynaria)", status: explicit}
+- {id: mat.megalynarion.leavetaking_entrance, slot: matins.megalynarion, tier: 2,
+   when: [{pred: sunday}, {pred: feast_period_in, args: ["leavetaking:entrance_theotokos"]}],
+   fill: {kind: feast_ode9}, source: typikon, locator: "Ch I s5 XIII p.30 (leavetaking of the Entrance of the Theotokos on a Sunday: only the 9th ode)", status: explicit}

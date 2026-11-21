@@ -94,6 +94,10 @@ def describe(slot: str, res, f: dict):
         return [f"- {fl['total']} resurrectional stichera — Octoechos {_tone(f['tone'])}"]
     if slot == "matins.hypakoe":
         return [f"- Hypakoe — {_tone(fl['tone'])}"]
+    if slot == "matins.megalynarion":
+        return {"more_honorable": ["- “My soul magnifies the Lord” with “More honorable than the Cherubim”"],
+                "feast_ode9": ["- The feast's 9th ode with its megalynaria, in place of “More honorable”"],
+                "more_honorable_then_ode9": ["- “More honorable”, then the feast's 9th ode with its megalynaria"]}.get(fl["kind"], [f"- {fl['kind']}"])
     if slot == "matins.canon":
         if fl.get("kind") == "katavasiae_only":
             return ["- Canon troparia not chanted: katavasiae only (see Katavasia)"]

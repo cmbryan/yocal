@@ -71,12 +71,18 @@ def blocks_from(lines: list) -> list:
     def flush():
         nonlocal cur
         if cur:
-            cur["text"] = re.sub(r"\s+(?:[A-Z]{3,}(?: [A-Z]{3,})+|After the Gospel Reading\.|The Prayer For The Departed\d?|The troparia for the Departed.*)$", "", re.sub(r"\s+", " ", cur["text"])).strip()
+            cur["text"] = re.sub(r"\bmer cy\b", "mercy", re.sub(r"\s+(?:[A-Z]{3,}(?: [A-Z]{3,})+|Ode ix\.|After the Gospel Reading\.|The Prayer For The Departed\d?|The troparia for the Departed.*)$", "", re.sub(r"\s+", " ", cur["text"].replace("ﬁ", "fi")))).strip()
             if cur["text"] or cur.get("role"):
                 blocks.append(cur)
         cur = None
 
     for raw in lines:
+        cue = re.fullmatch(r"@@CUE@@(.+)", raw.strip())
+        if cue:  # a choir cue printed over the music ("Let us say with our whole soul..."), kept as a role-less line
+            flush()
+            blocks.append({"t": "line", "role": "", "text": cue.group(1)})
+            prev_kept = False
+            continue
         mk = re.fullmatch(r"@@SLOT:([\w.]+)@@", raw.strip())
         if mk:
             flush()
@@ -135,6 +141,24 @@ def clean_blocks(blocks: list) -> list:
             out.append({"t": "line", "role": "", "text": b["text"]})
         elif _keep(b):
             out.append(b)
+    return out
+
+
+def mark_cues(raw: list, cues: list | None) -> list:
+    """Section `cues:` (regexes on the stripped line): matching lines are cue text, kept despite the music-noise filter.
+    Several cues on one line (separated by wide gaps) are joined; a split "A men." becomes "Amen."."""
+    if not cues:
+        return raw
+    rxs = [re.compile(c) for c in cues]
+    out = []
+    for ln in raw:
+        t = re.sub(r"[\x00-\x08\x0b-\x1f]", " ", ln).strip()  # stray control glyphs from the notation font
+        if t and not ln.startswith("@@") and any(rx.search(t) for rx in rxs):
+            t = re.sub(r"^\d+\s+", "", t)
+            t = re.sub(r"\bmer\s+cy\b", "mercy", re.sub(r"\bA\s+men\b", "Amen", re.sub(r"\s{3,}", " ", t)))
+            out.append("@@CUE@@" + t)
+        else:
+            out.append(ln)
     return out
 
 
@@ -200,6 +224,19 @@ def config() -> dict:
     return _CFG
 
 
+_MCFG = None
+
+
+def festal_cfgs(service: str) -> list:
+    """`festal_hymns:` placements of a service's section map (the Liturgy's in liturgy_sections.yaml, Matins' in matins_sections.yaml)."""
+    global _MCFG
+    if service == "matins":
+        if _MCFG is None:
+            _MCFG = yaml.safe_load(open(CONFIGS["matins"], encoding="utf-8"))
+        return _MCFG.get("festal_hymns", [])
+    return config().get("festal_hymns", [])
+
+
 def build(pdf: str, config: str = CONFIG, service: str = "liturgy") -> dict:
     cfg = yaml.safe_load(open(config, encoding="utf-8"))
     lines = pdf_text(pdf).split("\n")
@@ -214,13 +251,17 @@ def build(pdf: str, config: str = CONFIG, service: str = "liturgy") -> dict:
     for k, (sc, i) in enumerate(anchors):
         end = anchors[k + 1][1] if k + 1 < len(anchors) else len(lines)
         raw = lines[i + 1:end] if not sc.get("keep_first") else lines[i:end]
-        if sc["start"].startswith("^Deacon:") or sc["start"].startswith("^Priest:"):
+        if sc["start"].startswith(("^Deacon:", "^Priest:", "^Choir:")):
             raw = lines[i:end]  # the anchor line is itself text
         if sc.get("replace"):
             blocks = [{"t": "slot", "slot": sc["replace"]}]
+            if sc.get("lead_rubric"):  # our own wording (the booklet's rubric is not in every week's booklet)
+                blocks.insert(0, {"t": "rubric", "text": sc["lead_rubric"]})
         else:
             kept = {}
-            raw = apply_spans(raw, sc.get("spans"), kept)
+            if sc.get("skip"):  # score lyrics that repeat text printed elsewhere
+                raw = [ln for ln in raw if not any(re.search(rx, ln.strip()) for rx in sc["skip"])]
+            raw = apply_spans(mark_cues(raw, sc.get("cues")), sc.get("spans"), kept)
             blocks = _bracket_blocks(clean_blocks(blocks_from(raw)), cfg.get("seasonal"))
             for b in blocks:
                 if b["t"] == "slot" and b["slot"] in kept:
