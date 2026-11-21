@@ -370,6 +370,8 @@ def festal_hymns(ctx: dict, sec_id: str, blocks: list, cfgs: list, captions: dic
         hs = ctx["hymns"].get(c["slot"]) or []
         if c.get("n"):
             hs = [h for h in hs if h.meta.get("n") == c["n"]]
+        if c.get("meta"):  # e.g. {kind: feast_ode9}: only for the Rule's fill of that kind
+            hs = [h for h in hs if all(h.meta.get(k) == v for k, v in c["meta"].items())]
         if not hs:
             continue
         dropped = [b for b in blocks if any(_bmatch(b, m) for m in c.get("drop", []))]
@@ -388,6 +390,8 @@ def festal_hymns(ctx: dict, sec_id: str, blocks: list, cfgs: list, captions: dic
                 idx = len(out) if idx is None else idx
                 continue
             out.append(b)
+        if idx is None and c.get("before"):  # nothing dropped: insert before the first block matching `before`
+            idx = next((i for i, b in enumerate(out) if _bmatch(b, c["before"])), None)
         idx = len(out) if idx is None else idx
         ins = ([{"t": "line", **c["lead"]}] if c.get("lead") else []) + [new]
         blocks = out[:idx] + ins + out[idx:]
@@ -434,7 +438,7 @@ def compose(date: dt.date, service: str = "liturgy", db_path: str | None = None,
     hctx = {"con": texts.load(), "parish": texts.parish_texts(), "pending": pending,
             "hymns": {s: hymns.for_slot(s, x, f) for s, x in res.items()},
             "dismissal": hymns.dismissal(res.get("liturgy.dismissal"), res.get("liturgy.dismissal_phrase"), f)}
-    hymn_cfgs = template.config().get("festal_hymns", [])
+    hymn_cfgs = template.festal_cfgs(service)
     captions = {s: [c.lstrip("- ").strip() for c in e["lines"]] for s, e in engine.items()}
     sections = []
     for sec in tpl["sections"]:

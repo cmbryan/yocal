@@ -22,6 +22,12 @@ seasonal:
     when: [{}]   # always: a deacon is assumed to serve
     strip: '^\[?Omitted if a deacon is not serving:\s*'
 
+# festal_hymns: where the Rules' Ode 9 (slot matins.megalynarion) replaces/extends the booklet's Magnificat ("More honorable").
+#   meta: only for a Rule fill of that kind; drop: booklet blocks removed (the hymn takes the first one's place); before: insert before this block if none dropped.
+festal_hymns:
+  - {slot: matins.megalynarion, section: megalynarion, meta: {kind: feast_ode9}, drop: [{text: '^My soul magnifies the Lord'}]}
+  - {slot: matins.megalynarion, section: megalynarion, meta: {kind: more_honorable_then_ode9}, before: {slot: '^matins\.katavasia9$'}}
+
 sections:
   - {id: opening, start: '^Parish Matins on Sundays$', title: Opening of Matins}
   - {id: six_psalms, start: '^The Six Psalms$', title: The Six Psalms}
@@ -45,14 +51,18 @@ sections:
     title: The Prokeimenon
     replace: matins.prokeimenon
     music: [{key: prokeimenon, title: Prokeimenon, anca: 'PROKEIMENON'}]
-  - {id: gospel_hymns, start: '^Matins Gospel Hymns', title: Matins Gospel Hymns, raw_anchor: true}
+  - {id: gospel_praise, start: '^Choir: Let everything that has breath', title: Before the Gospel}
+  - {id: gospel_hymns, start: '^Matins Gospel Hymns', title: Matins Gospel Hymns, raw_anchor: true,
+     skip: ['^Praise God in his saints\. Praise him in the$', '^firmament of his power\.$']}   # score lyric, already in gospel_praise
   - {id: psalm_50, start: '^Psalm 50\. Mode', title: Psalm 50, raw_anchor: true, replace: matins.ps50}
   - {id: intercession, start: '^The Intercession$', title: The Intercession}
   - {id: canon, start: '^The Canon$', title: The Canon, replace: matins.canon}
   - {id: kontakion, start: '^Resurrectional Kontakion for Tone', title: Kontakion and Oikos, raw_anchor: true, replace: matins.kontakion}
+  - {id: ode9_intro, start: '^The deacon stands in the Royal Doors', title: Ode 9 Introduction, keep_first: true}
   - id: megalynarion
     start: '^The Song of the Mother of God'
     title: The Song of the Mother of God
+    skip: ['^A different megalynarion is chanted']   # pointer to the choir cues, which this service replaces
     spans: [{start: '^The choir then chants the katavasia of the 9th Ode', until: '^The canon having been completed', slot: matins.katavasia9}]
   - {id: exapostilaria, start: '^The Exapostilaria$', title: The Exapostilaria, replace: matins.exapostilaria}
   - id: praises

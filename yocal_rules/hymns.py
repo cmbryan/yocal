@@ -300,6 +300,18 @@ def matins_canon(fill: dict, f: dict) -> list | None:
     return [Hymn(f"oct/t{int(t)}/sun/canon", f"Canon (Tone {int(t)})", int(t), "canon")]
 
 
+def matins_megalynarion(fill: dict, f: dict) -> list | None:
+    """Matins Ode 9. `more_honorable`: the Magnificat with “More honorable” (the booklet's fixed text) -> []. `feast_ode9` / `more_honorable_then_ode9`:
+    the feast's 9th ode with its magnification (the same text as the Liturgy megalynarion, id <feast>/megalynarion; a gap until saved)."""
+    k = fill.get("kind")
+    if k == "more_honorable":
+        return []
+    if k not in ("feast_ode9", "more_honorable_then_ode9"):
+        return None
+    hs = megalynarion({"kind": "feast", "of": fill.get("of")}, f)
+    return [Hymn(h.id, "9th ode of the feast with its megalynaria", h.tone, h.kind, {**h.meta, "kind": k}) for h in hs] if hs else hs
+
+
 def hypakoe(f: dict) -> list | None:
     """Resurrectional hypakoe of the week's tone (not a Rules slot: the booklet's Hypakoë is the week's tone, calendar fact)."""
     t = f.get("tone")
@@ -310,7 +322,7 @@ SLOTS = {"matins.hypakoe": lambda fill, f: hypakoe({**f, "tone": fill.get("tone"
          "liturgy.antiphons": antiphons, "liturgy.eisodikon": eisodikon, "liturgy.trisagion": trisagion, "liturgy.megalynarion": megalynarion,
          "liturgy.alleluia": alleluia, "liturgy.communion": communion,
          "matins.apolytikia": apolytikia, "matins.prokeimenon": matins_prokeimenon, "matins.kontakion": matins_kontakion,
-         "matins.praises": matins_praises, "matins.canon": matins_canon}
+         "matins.praises": matins_praises, "matins.canon": matins_canon, "matins.megalynarion": matins_megalynarion}
 
 
 def for_slot(slot: str, res, f: dict) -> list | None:
